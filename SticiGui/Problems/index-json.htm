@@ -25,6 +25,7 @@
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cName = "Assignments";
     writeChapterHead('SeEd',cName,'Online Assignments');
+    var theCourse = ["0","s2-x","Statistics 2.1x, Spring 2013, UC Berkeley","stark","Profs P.B. Stark and A. Adhikari","",5,4];
 // -->
 </script>
 </head>
@@ -69,8 +70,8 @@
 	<legend>Login</legend>
 	<p>
 	<script language="JavaScript1.4" type="text/javascript"><!--
-		writeCourseOptions(1);
-	// -->
+	document.writeln('<label><font color="red"><strong>Course:</strong></font> ' +
+                     '<span id="courseSelector">' + theCourse[2] + '</label>');// -->
 	</script>
 	</p>
 
@@ -105,6 +106,13 @@
 	Assignment Schedule
 </h2>
 <script language="JavaScript1.4" type="text/javascript"><!--
+     if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
+          goodColor = 'lightgreen';
+     }
+     if (typeof(nullColor) == 'undefined' || nullColor == null || nullColor.length == 0) {
+          nullColor = '#eeeeee';
+     }
+
      var mapChapterToTitle = new Object;
      for (var j=0; j < chapterTitles.length; j++) {
          mapChapterToTitle[chapterTitles[j][1]] = chapterTitles[j][0];
@@ -147,13 +155,9 @@
     qStr += '</table>';
     document.writeln(qStr);
     $(document).ready(function() {
+            alert('in ready()');
             $.getScript('../../Java/Courses/s21-su13-due.js', function(data) {
-                  if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
-                      goodColor = 'lightgreen';
-                  }
-                  if (typeof(nullColor) == 'undefined' || nullColor == null || nullColor.length == 0) {
-                      nullColor = '#eeeeee';
-                  }
+                  alert('read duefile');
                   for (var j=0; j < assignmentTitles.length; j++) {
                          var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
 	                     var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
@@ -182,7 +186,7 @@
 			                       $(ansDiv).text('yes')
 			                                .css('background-color', goodColor);
 		                      } else {
-			                       $(ansDiv.text('no')
+			                       $(ansDiv).text('no')
 			                               .css('background-color', nullColor);
 		                      }
 	                    } else {

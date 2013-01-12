@@ -24,12 +24,12 @@
 function crypt256() {
     var sid = "12345678";
     var email = "nobody@nowhere.com";
-    var hashed = CryptoJS.SHA256(sid.toLowerCase() + ':' + email.toLowerCase());
-    $('#out').append('<p>Raw: ' + sid + ':' + email + '; hashed: ' + hashed + '</p>');
+    var hashed = CryptoJS.SHA256(sid.toLowerCase() + ',' + email.toLowerCase());
+    $('#out').text('<p>Raw: ' + sid + ',' + email + '; hashed: ' + hashed + '</p>');
 }
 
 $(document).ready(function() {
-           $('#button').click(crypt256());
+           $('#button').click(function() {crypt256();});
 });
 // -->
 </script>
