@@ -1,0 +1,614 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "regressionErrors";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Regression Diagnostics and Pitfalls
+</h2>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var randSign = rand.next();
+    if (randSign > 0.5) {
+        randSign = 1;
+    } else {
+        randSign = -1;
+    }
+    var parms = new Array(1);
+    var examplePoints = 100;
+    var pVals = listOfRandInts(4,-1,1);
+    if (twoNorm(pVals) < 0.1) {
+        pVals = [0, 1, 0, 0];
+    }
+    loRnd = listOfRandInts(1,0,1)[0];
+    parms[0] = [["polynomial", 10*pVals[0], 5*pVals[1]+rand.next(),
+                    2.5*pVals[2], .5*pVals[3]], 1 + 5*loRnd,
+                    1 + 4*Math.floor(rand.next()+0.5)];
+    var data1 = fakeBivariateData(examplePoints,parms[0][0],
+        parms[0][1],parms[0][2]);
+    var yMean = mean(data1[1]);
+    yMnMx = vMinMaxAbs(data1[1]);
+    if (Math.abs(yMean) < 0.07*yMnMx[1] || pVals[0] == 0){
+        for (i=0; i < data1[1].length; i++){
+            data1[1][i] -= yMean;
+        }
+        yMean = 0.0;
+    }
+    var xyCorr = corr(data1[0],data1[1]);
+    var opt = ["residuals have nonzero mean",
+               "residuals have trend",
+               "data have nonlinear association",
+               "data are heteroscedastic",
+               "regression looks fine",
+               "regression is a poor summary of the data",
+               "regression went wrong"
+              ];
+    var aVal = '';
+    if (Math.abs(yMean) > 0.01) {
+        aVal +='a&';
+    }
+    if (Math.abs(xyCorr) > 0.05) {
+        aVal +='b&';
+    }
+    if (pVals[2] != 0 || pVals[3] != 0) {
+        aVal +='c&';
+    }
+    if (parms[0][1] > 1) {
+        aVal +='d&';
+    }
+    if (aVal.indexOf('c') >= 0 || aVal.indexOf('d') >= 0) {
+        aVal +='f&';
+    }
+    if (Math.abs(yMean) > 0.01 || Math.abs(xyCorr) > 0.05 ) {
+        aVal += 'g';
+    }
+    if (Math.max(aVal.indexOf('f'),aVal.indexOf('g')) < 0) {
+        aVal +='e';
+    }
+    if (aVal.lastIndexOf('&') == aVal.length - 1) {
+        aVal = aVal.substring(0,aVal.length - 1);
+    }
+    var qStr = '<span class="qSpan">Select those attributes that can be inferred ' +
+               'from the following residual plot (select all that apply).</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+
+<p align="center">
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600"
+         height="320" name="q1applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="0,3,4">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Problem 1: reading residual plots">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables(data1[0].join(),data1[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var randSign = rand.next();
+  if (randSign > 0.5) {
+      randSign = 1;
+  } else {
+      randSign = -1;
+  }
+  var parms = new Array(1);
+  var examplePoints = 100;
+  var pVals = listOfRandInts(4,-1,1);
+  if (twoNorm(pVals) < 0.1) {
+    pVals = [0, 1, 0, 0];
+  }
+  loRnd = listOfRandInts(1,0,1)[0];
+  parms[0] = [["polynomial", 10*pVals[0], 5*pVals[1],
+                2.5*pVals[2], .5*pVals[3]], 1 + 5*loRnd,
+                1 + 4*Math.floor(rand.next()+0.5)
+             ];
+  var data2 = fakeBivariateData(examplePoints,parms[0][0],
+              parms[0][1],parms[0][2]);
+  var yMean = mean(data2[1]);
+  yMnMx = vMinMaxAbs(data2[1]);
+  if (Math.abs(yMean) < 0.07*yMnMx[1] || pVals[0] == 0){
+    for (i=0; i < data2[1].length; i++){
+        data2[1][i] -= yMean;
+    }
+    yMean = 0.0;
+  }
+  var xyCorr = corr(data2[0],data2[1]);
+  var opt = ["residuals have nonzero mean",
+             "residuals have trend",
+             "data have nonlinear association",
+             "data are heteroscedastic",
+             "regression looks fine",
+             "regression is a poor summary of the data",
+             "regression went wrong"
+            ];
+  var aVal = '';
+  if (Math.abs(yMean) > 0.01) aVal +='a&';
+  if (Math.abs(xyCorr) > 0.05) aVal +='b&';
+  if (pVals[2] != 0 || pVals[3] != 0) aVal +='c&';
+  if (parms[0][1] > 1 ) aVal +='d&';
+  if (aVal.indexOf('c') >= 0 || aVal.indexOf('d') >= 0) aVal +='f&';
+  if (Math.abs(yMean) > 0.01 || Math.abs(xyCorr) > 0.05 ) aVal += 'g';
+  if (Math.max(aVal.indexOf('f'),aVal.indexOf('g')) < 0) aVal +='e';
+  if (aVal.lastIndexOf('&') == aVal.length - 1) aVal = aVal.substring(0,aVal.length - 1);
+  var qStr = '<span class="qSpan">Select those attributes that can be inferred ' +
+             'from the following residual plot (select all that apply).</span>';
+  document.writeln(qStr);
+  writeSelectExercise(true,qCtr++,opt,aVal);
+  document.writeln('</p>');
+// -->
+</script>
+</p>
+
+<p align="center">
+    <applet code="Correlation.class" codebase="../../Java/" align="baseline"
+          width="600" height="320" name="q2applet" archive="PbsGui.zip">
+      <param name="addPoints" value="false">
+      <param name="graphAveButton" value="false">
+      <param name="x" value="1,2,3">
+      <param name="y" value="0,3,4">
+      <param name="regressButtons" value="false">
+      <param name="sdButton" value="false">
+      <param name="sdLineButton" value="false">
+      <param name="showR" value="false">
+      <param name="title" value="Problem 2: reading residual plots">You need Java to see this
+    </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables(data2[0].join(),data2[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+// this exercise tests computing the rms error of regression, and inferring
+// from a scatterplot whether or not it is a good summary of the scatter in vertical strips.
+//
+// Fake price and earnings data. Take mean earnings = $2/share; mean price = $70/share.
+// Slope P/E ratio of 20
+// ratio of SDs $20/$2 = 10.
+//
+    var slope = 20;
+    var avePrice0 = 70;
+    var priceRg0 = 130; // from $5 to $135/share
+    var aveEarn0 = 2;
+    var minPrice0 = 5;
+    var maxPrice0 = 135;
+    var priceNoise = 4;
+    var minEarn0 = -0.5;
+    var maxEarn0 = 20;
+    var pVals = listOfRandInts(2,-1,1);
+    var quadTerm = 10*slope/(maxEarn0 - minEarn0); // give a visible difference
+                                                    //if there is a quadratic term
+    var het = false;
+    var hetFac = 1.0;
+    if (pVals[1] > 0) {
+        het = true;
+        hetFac += 2*pVals[1];
+    }
+    var parms = [["polynomial", minEarn0, slope, quadTerm*Math.abs(pVals[0])],
+                 hetFac, priceNoise, minEarn0, maxEarn0
+                ];
+    var data3 = fakeBivariateData(examplePoints,parms[0],parms[1],parms[2], minEarn0, maxEarn0);
+    var priceMnMx = vMinMax(data3[1]);
+    var loPrice = avePrice0 - priceRg0/2;
+    var priceRg = priceMnMx[1] - priceMnMx[0];
+    for (i=0; i < data3[0].length; i++) {
+        data3[1][i] = Math.max(0.2, loPrice + (data3[1][i] - priceMnMx[0])*priceRg0/priceRg);
+    }
+    var priceMnMx = vMinMax(data3[1]);
+    var earnMnMx = vMinMax(data3[0]);
+    var cc = roundToDig(corr(data3[0],data3[1]),3);
+    var aveEarn = roundToDig(mean(data3[0]),2);
+    var avePrice = roundToDig(mean(data3[1]),2);
+    var sdEarn =  roundToDig(sd(data3[0]),2);
+    var sdPrice =  roundToDig(sd(data3[1]),2);
+    var rmsResid = Math.sqrt(1-cc*cc)*sdPrice;
+    var predFac = Math.round(10*(rand.next() - 0.5));
+    var predEarn = predFac*sdEarn+aveEarn;
+    var interp = true;
+    if (predEarn > earnMnMx[1]) {
+        predEarn += sdEarn;
+        interp = false;
+    } else if ( predEarn < earnMnMx[0]) {
+        predEarn -= sdEarn;
+        interp = false;
+    }
+    predEarn = roundToDig(predEarn, 2);
+    var predPrice = (predEarn - aveEarn)*cc*sdPrice/sdEarn + avePrice;
+// -->
+</script>
+    The scatterplot below shows
+    fabricated data for the price per share versus earnings per share per year of 100 public
+    corporations. The average earnings per share is
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write("$" + aveEarn.toString() + " per year with an SD of $" + sdEarn.toString() +
+        " per year, ");
+// -->
+</script> and the average price per share is
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write("$" + avePrice.toString() + " with an SD of $" + sdPrice.toString() + ". ");
+// -->
+</script>
+    The correlation between price and earnings is
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(cc.toString() + ". ");
+// -->
+</script> (Use this figure in your calculations, not the value of the correlation
+    coefficient in the applet.)</p>
+
+<p align="center">
+  <applet code="Correlation.class" codebase="../../Java/"
+        align="baseline" width="600" height="320" name="q3Applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="title" value="Faux Price per share vs. Earnings Data">
+    <param name="regressButtons" value="true">
+    <param name="showR" value="true">
+    <param name="x" value="1,2,4">
+    <param name="y" value="1,3,5">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString()  +
+                      '].setVariables(data3[0].join(),data3[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+// -->
+</script>
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The regression line estimate of the price ' +
+               'per share of a company whose annual earnings per share is $' + 
+                predEarn.toString() + ' is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(predPrice));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Estimating the price per share of a company whose ' +
+               'annual earnings per share is $' + predEarn.toString() + 
+               ' is</span>';
+    document.writeln(qStr);
+    var opt=["interpolation","extrapolation"];
+    var aVal = 'a';
+    if (!interp) {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The regression estimate of the price per share ' +
+               'of a company whose annual earnings per share is $' + predEarn.toString() + 
+               ' is </span>';
+    document.writeln(qStr);
+    var opt=["reliable","unreliable"];
+    if (!interp || pVals[0] != 0 || het ) {
+        aVal = 'b';
+    } else {
+        aVal = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('<span class="qSpan"> because (select all that apply)</span>');
+    var opt = ["it is extrapolation",
+               "the data show nonlinear association",
+               "the data have outliers",
+               "the data are heteroscedastic",
+               "none of the above"
+              ];
+    var aVal = "";
+    var none = true;
+    if (!interp){
+        aVal = 'a&';
+        none = false;
+    }
+    if (pVals[0] != 0){
+        aVal += 'b&';
+        none=false;
+    }
+    if (het){
+        aVal += 'd&';
+        none=false;
+    }
+    if (none) {
+        aVal = 'e';
+    }
+    if (aVal.lastIndexOf('&') == aVal.length-1) {
+        aVal = aVal.substring(0,aVal.length - 1);
+    }
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The equation of the regression line for ' +
+               'regressing price per share on annual earnings per share is </p><p class="math">';
+    document.writeln(qStr);
+    var slope = cc*sdPrice/sdEarn;
+    document.write("(estimated price per share) =");
+    writeTextExercise(8,qCtr++,numToRange(slope,0.005*slope));
+    document.write("&times; (annual earnings per share) + $");
+    var intcpt = avePrice - cc*aveEarn*sdPrice/sdEarn;
+    writeTextExercise(8,qCtr++,numToRange(intcpt,.005*intcpt));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The rms error of regression for regressing price ' +
+               'against earnings is</span>';
+    document.writeln(qStr);
+    var aVal = 'b|c';
+    writeTextExercise(8,qCtr++,numToRange(rmsResid));
+    var opt = ["(no units)",
+               "$",
+               "$ per year",
+               "years per $",
+               "per year",
+               "per $"
+              ];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">For this scatterplot, the rms error of regression is a</span>';
+    document.writeln(qStr);
+    var opt=["good","poor"];
+    var aVal;
+    if (pVals[0] != 0 || het ) {
+        aVal = 'b';
+    } else {
+        aVal  = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan"> measure of the scatter in a typical vertical strip, because of</span>';
+    document.writeln(qStr);
+    var opt = ["weak association","nonlinear association","heteroscedasticity",
+            "outliers","none of the above"];
+    var aVal = "";
+    var none = true;
+    if (pVals[0] != 0) {
+        aVal += "b&";
+        none = false;
+    }
+    if (het) {
+        aVal += "c&";
+        none = false;
+    }
+    if (none) aVal += "e";
+    if (aVal.lastIndexOf('&') == aVal.length - 1) {
+        aVal = aVal.substring(0, aVal.length - 1);
+    }
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var theInts = listOfRandInts(2,20,50);
+  var xMult = roundToDig(theInts[0]/10,1);
+  var yMult = roundToDig(theInts[1]/10,1);
+  var theInts = listOfDistinctRandInts(2,2,8);
+  var sdX = theInts[0];
+  var sdY = theInts[1];
+  var thePct = 100*(1 - 1/(xMult*xMult) - 1/(yMult*yMult));
+  var theInts = listOfDistinctRandInts(2,-20,20);
+  var aveX = theInts[0];
+  var aveY = theInts[1];
+  var loX = roundToDig(aveX - xMult*sdX,2);
+  var hiX = roundToDig(aveX + xMult*sdX,2);
+  var loY = roundToDig(aveY - yMult*sdY,2);
+  var hiY = roundToDig(aveY + yMult*sdY,2);
+  var aVal = 'c';
+  var qStr = 'The point of averages of a scatterplot of Y against X is (' + aveX.toString() +
+             ', ' + aveY.toString() + ' ).  The SD of X is ' + sdX.toString() +
+             ', and the SD of Y is ' + sdY.toString() + '.<span class="qSpan"> The decimal fraction ' +
+             'of points in the scatterplot whose X coordinates are between ' + loX.toString() +
+             ' and ' + hiX.toString() + ' and whose Y coordinates are between ' +
+             loY.toString() + ' and ' + hiY.toString() + ' is</span> ';
+  document.writeln(qStr);
+  var opt = ["at most","equal to","at least"];
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  writeTextExercise(6,qCtr++,numToRange(thePct/100,.0005*thePct/100));
+  qStr = '(Hint: Use Chebychev\'s inequality twice.)';
+  document.writeln(qStr);
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var ch = randBoolean();
+  var r = roundToDig(1.8*(rand.next()-.5),1);
+  if (r == 0.0) {
+      r = 0.1;
+  }
+  var aVal = 'c';
+  var qStr = '<span class="qSpan">The correlation coefficient of two variables is ' +
+              r.toString() + '. The rms of the residuals from the SD line ';
+  document.writeln(qStr);
+  var opt = ["is less than","could be less than, equal to, or greater than",
+            "is greater than"];
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  qStr = ' the rms of the residuals from the regression line.</span></p>';
+  document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var ch = listOfRandInts(2,0,1);
+  var extWord = ' lowest ';
+  var nextWord = ' tend to have ';
+  if (ch[0] != 0) {
+      extWord = ' highest ';
+  }
+  if (ch[1] != 0) {
+      nextWord = ' have ';
+  }
+  var qStr = 'Consider a group of real estate agents, and the value of the real estate sold ' +
+             'by each agent in each of two consecutive fiscal quarters. Suppose that there ' +
+             'is a positive association between the amounts sold in the two quarters, and that ' +
+             'across agents, the mean and standard deviation of sales is about the same in ' +
+             'the two quarters. <span class="qSpan">Because of the regression effect, the ' +
+             'agent with the ' + extWord + ' sales volume in the present quarter will ' +
+             nextWord;
+  document.writeln(qStr);
+  if (ch[0] == 0) {
+      document.writeln("higher sales volume in the next quarter.");
+  } else {
+      document.writeln("lower sales volume in the next quarter.");
+  }
+  var opt = ["false","true"];
+  var aVal;
+  if (ch[1] == 0) aVal = 'b';
+  else aVal = 'a';
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  document.writeln('</span></p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var ch = listOfRandInts(2,0,1);
+  var qStr = 'Consider a large group of public corporations. Suppose that their earnings ' +
+             'in consecutive quarters are positively associated. <span class="qSpan">Because ' +
+             'of the regression effect, the corporation with the ';
+  document.writeln(qStr);
+  if (ch[0] == 0) {
+      document.writeln(' lowest ');
+  } else {
+      document.writeln(' highest ');
+  }
+  qStr = ' earnings in the present quarter will tend to have ';
+  document.writeln(qStr);
+  var opt = ["lower than average",
+             "nearly average",
+             "higher than average"];
+  var aVal;
+  if (ch[0] == 0) {
+       aVal = 'a';
+  } else {
+       aVal = 'c';
+  }
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  document.writeln(' earnings in the next quarter.</span></p>');
+// -->
+</script>
+</div>
+
+<p>&nbsp;</p>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

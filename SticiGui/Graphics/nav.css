@@ -1,0 +1,61 @@
+#navDiv {
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+#nav, #nav ul { /* all lists */
+        font-family: helvetica, arial, 'sans serif';
+        font-variant: small-caps;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        color: black;
+        opacity:1;
+        clear: both;
+        color: #000099;
+        background-color: #ccccff;
+        border-bottom: solid #000000;
+        border-right: solid #000000;
+        border-width: 2px;
+        list-style: none;
+        line-height: 1;
+}
+
+#nav ul, #nav li ul {
+    margin-left: 0px; /* undo indentation */
+} 
+ 
+#nav a {
+	display: block;
+	width: 12em;
+}
+
+#nav a:hover {
+        color: #000000; 
+        background:silver;
+}
+ 
+#nav li { /* all list items */
+	float: left;
+	width: 12em; /* width needed or else Opera goes nuts */
+}
+ 
+#nav li ul { /* second-level lists */
+	position: absolute;
+	background: #ccccff;
+	width: 12em;
+	left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+}
+ 
+#nav li ul ul { /* third-and-above-level lists */
+	margin: -1em 0 0 11.5em;
+}
+ 
+#nav li:hover ul ul, #nav li.sfhover ul ul {
+	left: -999em;
+}
+ 
+#nav li:hover ul, #nav li li:hover ul, #nav li.sfhover ul, #nav li li.sfhover ul { /* lists nested under hovered list items */
+	left: auto;
+}

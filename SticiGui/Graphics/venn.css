@@ -1,0 +1,505 @@
+/* Venn Diagram style file for SticiGui text.  
+   Copyright 2009 P.B. Stark, statistics.berkeley.edu/~stark 2/28/2009. 
+   All rights reserved.
+*/
+
+/*   CSS for drawing Venn Diagrams   */
+
+div.venn {
+    position:         relative;
+    clear:            right;
+    display:          block;
+    width:            25%;
+    min-height:       14em;
+    height:           auto !important;
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        100%;
+    text-align:       center;
+    margin:           auto;
+}
+
+div.vennCaption {
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        120%;
+    font-weight:      bold;
+    text-align:       center;
+    margin:           auto;
+    margin-bottom:    2em;
+}
+
+div.vennUniverse {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            90%;
+    min-height:       10em;
+    height:           10em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           2%;
+    left:             2%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x30_left_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           13%;
+    left:             20%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x50_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect70x70_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            70%;
+    min-height:       7em;
+    height:           7em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x50_left_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           13%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect11x50_left_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            11%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           13%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect30x40_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            30%;
+    min-height:       4em;
+    height:           4em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect20x30_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            20%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             5%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect15x30_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            15%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             7%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+
+div.rect20x30_center {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            20%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             38%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect20x30_center_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            20%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             22%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x50_center {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left:             28%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+
+
+div.rect40x50_center_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             28%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect30x60_center {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            30%;
+    min-height:       6em;
+    height:           6em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           12%;
+    left:             33%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect60x70_center {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            60%;
+    min-height:       7em;
+    height:           7em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left:             18%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect85x80_center {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            85%;
+    min-height:       8em;
+    height:           8em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           5%;
+    left:             4%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect45x50_right_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            45%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left :            42%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x50_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           10%;
+    left :            50%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect40x50_right_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            40%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             50%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect30x30_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            30%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    text-align:       right;
+    bottom:           15%;
+    left :            60%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect30x30_right_high {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            30%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             55%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect30x40_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            30%;
+    min-height:       4em;
+    height:           4em;
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        100%;
+    bottom:           13%;
+    left:             60%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect25x35_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            25%;
+    min-height:       3.5em;
+    height:           3.5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           13.5%;
+    left:             55%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect28x50_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            28%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             50%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect24x50_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            24%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             50%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+
+div.rect18x40_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            18%;
+    min-height:       4em;
+    height:           4em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           13%;
+    left:             60%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect12x50_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            12%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             66%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect10x30_left {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            10%;
+    min-height:       3em;
+    height:           3em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           18%;
+    left:             5%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+div.rect6x50_right {
+    position:         absolute;
+    padding:          0.2em;
+    display:          block;
+    width:            6%;
+    min-height:       5em;
+    height:           5em;
+    font-family:      helvetica, arial, 'sans serif';
+    bottom:           15%;
+    left:             57%;
+    border-color:     #000000;
+    border-style:     solid;
+    border-width:     3px;
+}
+
+.left {
+    text-align:       left;
+}
+
+.center {
+    text-align:       center;
+}
+
+.right {
+    text-align:       right;
+}
+
+
+
+.blue {
+    background-color: #4444ff;
+}
+
+.yellow {
+    background-color: #cccc00;
+}
+
+.gray {
+    background-color: #cccccc;
+}
+
+.green {
+    background-color: #44ff44;
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+

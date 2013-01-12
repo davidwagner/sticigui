@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "randomVariables";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>Random Variables and Discrete Distributions</h2>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nPositions = listOfRandInts(1,8,12)[0];
+    var nFruit = listOfDistinctRandInts(3,1,nPositions-1);
+    var pPot = nFruit[0]*nFruit[1]*nFruit[2]/(nPositions*nPositions*nPositions);
+    var tries = 5*(listOfRandInts(1,2,4)[0]);
+    var pGeOneByTries = 1 - Math.pow(1-pPot,tries);
+    var pOnTries = Math.pow(1-pPot,tries-1)*pPot;
+    var rep = listOfRandInts(1,3,8)[0];
+    var pRep = negBinomialPmf(pPot,rep,tries);
+    var rawOpt = ['a Binomial distribution',
+                 'a Geometric distribution',
+                 'an Hypergeometric distribution',
+                 'a Negative Binomial distribution'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    egStr = ' eggplants ';
+    grStr = ' grapefruits';
+    if (nFruit[0] == 1) {
+        egStr = ' eggplant ';
+    } else if (nFruit[0] == nPositions - 1) {
+        grStr = ' grapefruit';
+    }
+    var qStr = 'Slot machines have three drums with the same number of positions on ' +
+                ' each drum. Each position contains a symbol. ' +
+                ' When you pull the lever on the machine, the drums spin. ' +
+                ' Assume that each drum is equally likely to stop in any position, and ' +
+                ' that the positions in which the three drums stop are independent of ' +
+                ' each other and independent from spin to spin. Suppose a particular ' +
+                ' slot machine has ' + nPositions.toString() + ' positions on each drum, ' +
+                ' and that each position contains one of two symbols: an eggplant or ' +
+                ' a grapefruit. You win the jackpot if all three drums stop with ' +
+                ' eggplants showing. The first drum has ' + nFruit[0].toString() + egStr +
+                ' and ' + (nPositions-nFruit[0]).toString() + grStr + ', the second has ';
+    egStr = ' eggplants ';
+    grStr = ' grapefruits';
+    if (nFruit[1] == 1) {
+        egStr = ' eggplant ';
+    } else if (nFruit[1] == nPositions - 1) {
+        grStr = ' grapefruit';
+    }
+    qStr += nFruit[1].toString() + egStr + ' and ' + (nPositions-nFruit[1]).toString() +
+                  grStr + ', and the third drum has ';
+    egStr = ' eggplants ';
+    grStr = ' grapefruits';
+    if (nFruit[2] == 1) {
+        egStr = ' eggplant ';
+    } else if (nFruit[2] == nPositions - 1) {
+        grStr = ' grapefruit';
+    }
+    qStr +=  nFruit[2].toString() + egStr + ' and ' + (nPositions-nFruit[2]).toString() +
+             grStr + '. </p><p><span class="qSpan"> In each pull of the lever, the ' +
+             'probability of winning the jackpot is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pPot));
+    qStr = '</p><p><span class="qSpan"> The number of times I win the jackpot in ' +
+           tries.toString() + ' attempts has </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p><span class="qSpan"> The probability of winning the jackpot at ' +
+           ' least once in ' + tries.toString() + ' attempts is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pGeOneByTries));
+    qStr = '</p><p><span class="qSpan">The number of attempts it takes to win the ' +
+           ' first jackpot has </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,alphabet[optPerm[1][1]]);
+    qStr = '</p><p><span class="qSpan">The probability that it takes exactly ' +
+           tries.toString() + ' attempts to win the jackpot the first time is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pOnTries));
+    qStr = '</p><p><span class="qSpan">The number of attempts it takes to win the ' +
+           'jackpot for the ' + ordinals[rep].toString() + ' time has </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,alphabet[optPerm[1][3]]);
+    qStr = '</p><p><span class="qSpan">The chance that I win the jackpot for the ' +
+            ordinals[rep].toString() + ' time on my ' + ordinals[tries].toString() +
+            ' attempt is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pRep,.1*pRep));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+document.writeln(startProblem(pCtr++));
+    var stopLoss = listOfRandInts(1,3,7)[0];
+    var pWin = 9/19;
+    var pLose = 10/19;
+    var pStopLoss = Math.pow(pWin,stopLoss) + Math.pow(pLose,stopLoss);
+    var pStopLossP1 = 0.0;
+    var pStopLossP2 = stopLoss*pStopLoss*pWin*pLose;
+    var aVal = 'e';
+    var qStr = 'A roulette wheel has 38 numbers. Eighteen of the numbers are black, ' +
+               'eighteen are red, and two are green. When the wheel is spun, the ball is ' +
+               'equally likely to land on any of the 38 numbers. Each spin of the wheel is ' +
+               'independent of all other spins of the wheel.  One roulette bet is a bet on ' +
+               'black&mdash;that the ball will stop on one of the black numbers. The payoff ' +
+               'for winning a bet on black is $2 for every $1 one bets; that is, if you ' +
+               'win, you get the dollar ante back and an additional dollar, for a net gain ' +
+               'of $1, while if you lose, you gets nothing back, for a net loss of $1. ' +
+               'Each $1 bet thus results in the gain or loss of $1.  Suppose one repeatedly ' +
+               'places $1 bets on black, and plays until either winning $' + 
+                stopLoss.toString() + ' more than he has lost, or loses $' + 
+                stopLoss.toString() + ' more than he has won. Equivalently, one plays until ' +
+               'the first time that</p><p class="math">| net winnings | = ' +
+               '| $won &minus; $bet | = |$2&times;(#bets won) &minus; $1&times;#bets | = $' +
+                stopLoss.toString() + ',</p><p>where |x| is the absolute value of x.</p>' +
+               '<p><span class="qSpan">If one quits according to that rule, the distribution ' +
+               'of the number of times one plays has a ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</span></p><p><span class="qSpan">The chance that one places exactly ' +
+            (stopLoss-1).toString() + ' bets before stopping is ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(0,1.e-5));
+    qStr = '.</span></p><p><span class="qSpan">The chance that one places exactly ' +
+            stopLoss.toString() + ' bets before stopping is ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(pStopLoss));
+    qStr = '.</span></p><p><span class="qSpan">The chance that one places exactly ' +
+           (stopLoss+1).toString() + ' bets before stopping is ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(pStopLossP1));
+    qStr = '.</span></p><p><span class="qSpan">The chance that one places exactly ' +
+            (stopLoss+2).toString() + ' bets before stopping is ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(pStopLossP2));
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+
+</html>

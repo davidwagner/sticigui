@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "sampling";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>Sample Surveys and Sampling Designs</h2>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var sizes = listOfDistinctRandInts(2,1,10).sort(numberLessThan);
+    for (j=0; j < sizes.length; j++) {
+        sizes[j] *= 1000;
+    }
+    var p = 10*(listOfRandInts(1,1,9)[0]);
+    var pMax = ((p/100)*sizes[0] + (sizes[1]-sizes[0]))/sizes[1];
+    var pMin = ((p/100)*sizes[0])/sizes[1];
+    document.writeln('A researcher sends a questionnaire to ' + commify(sizes[1]) +
+            ' individuals. She gets back ' + commify(sizes[0]) + ' responses.   ' +
+            'The percentage of women among the respondents is ' + p.toString() +
+            '%.</p><p><span class="qSpan">Because of nonresponse, the fraction of women ' +
+            'among recipients of the survey could be anything between (low) ');
+    writeTextExercise(8, qCtr++, numToRange(pMin));
+    document.writeln(' and (high)</span> ');
+    writeTextExercise(8, qCtr++, numToRange(pMax));
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qWords = [' in favor of ', ' opposed to '];
+    var which = listOfRandInts(1, 0, qWords.length-1)[0];
+    var optRaw = [
+                  'Should the U.S. send aid to country X to prevent children from starving ' +
+                        ' in the streets?',
+                  'Should Americans pay higher taxes because the government of country X ' +
+                        'embezzled public funds that should have been spent on food for its ' +
+                        'citizens?'
+                 ];
+    var optPerm = randPermutation(optRaw,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    if (which == 1) {
+        aVal = alphabet[optPerm[1][1]];
+    }
+    var qStr = 'A political pollster is working for a U.S. senator. ' +
+               'She wants to collect data to support the senator\'s position ' +
+               'on granting Federal aid to country X, which is suffering from widespread famine. ' +
+               'The government of country X is corrupt. ' +
+               'The famine might have been averted had the government of ' +
+               'country X allocated its resources differently. The politician is ' +
+               qWords[which] + 'sending Federal aid to country X.</p>' +
+               '<p><span class="qSpan">Which of the following questions would elicit more ' +
+               'responses favorable to the senator's position?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'To defend the Child Online Protection Act (COPA) ' +
+               'against a challenge by the American Civil Liberties Union (ACLU), ' +
+               'the U.S. Department of Justice seeks to ' +
+               'estimate the fraction of minors in the U.S. ' +
+               'who accessed &quot;adult&quot; material on the internet during July, 2000. ' +
+               'The estimate is based on the web-browsing behavior of a sample of minors.</p>' +
+               '<p><span class="qSpan">The fraction of minors in the U.S. who accessed &quot;adult&quot; ' +
+               'material in July, 2000 is a </span>';
+    document.writeln(qStr);
+    var opt = ['parameter','statistic'];
+    var aVal = 'a';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p><span class="qSpan">The fraction of minors in the sample who accessed ' +
+           '&quot;adult&quot; material in July, 2000 is a </span>';
+    document.writeln(qStr);
+    var opt = ['parameter','statistic'];
+    var aVal = 'b';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qText = [
+                'Take a simple random sample of 5 schools in the district.  For each school in the ' +
+                    'sample, list the weights of all the students. Combine the ' +
+                    'lists and average the result.',
+                'Take separate simple random samples of 3 elementary schools, 3 middle schools, ' +
+                    'and 2 high schools.  For each school in the sample, list the weights ' +
+                    'of all the students.  Combine the lists and average ' +
+                    'the results.',
+                'List all the students in the school district.  Average the weights of ' +
+                    'every 50th student on the list.',
+                'List all the students in the school district.  Average the weights ' +
+                    'of the first 200 students on the list.',
+                'List all the students in the school district.  Average the weights ' +
+                    'of every 50th student in the district, starting with a student ' +
+                    'selected at random from the first 50 students.',
+                'Take a simple random sample of 5 schools in the district.  For each school ' +
+                    'in the sample, list all the homerooms.  Take a simple random sample of ' +
+                    '3 homerooms from each school in the sample.  For each homeroom ' +
+                    'in the sample, list the students.  Take a simple random sample of 10 ' +
+                    'students from each homeroom in the sample.  List their ' +
+                    'weights. Combine the lists and average the results.',
+                'Take a simple random sample of 5 schools in the district.  For each school ' +
+                    'in the sample, list all the homerooms.  Take a simple random sample of ' +
+                    '3 homerooms from each school in the sample.  For each homeroom ' +
+                    'in the sample, list the weights of all the students. ' +
+                    'Combine the lists and average the results.',
+                'List all the schools in the school district.  For each school, list all the ' +
+                    'teachers at the school; sort them alphabetically within each school.  ' +
+                    'For each school, list the weights of the students of the teacher ' +
+                    'who is first on that school\'s sorted teacher list. ' +
+                    'Combine the lists and average the results.',
+                'Write the names of all the students in the school district on identical ' +
+                    'slips of paper. Put the slips of paper into a wastebasket.  ' +
+                    'Stir up the slips thoroughly, then draw 100 slips successively without ' +
+                    'looking at the slips.  Average the weights of the students whose ' +
+                    'names are on the slips drawn.'
+                ];
+    var opt = [
+                'a simple random sample',                          // 0
+                'a systematic random sample',                      // 1
+                'a stratified random sample',                      // 2
+                'a random cluster sample',                         // 3
+                'a random stratified cluster sample',              // 4
+                'a multistage random sample',                      // 5
+                'a multistage random cluster sample',              // 6
+                'a random stratified multistage cluster sample',   // 7
+                'a systematic sample',                             // 8
+                'another non-probability sample'                   // 9
+              ];
+    var aV = [
+                3, //random cluster
+                4, //random stratified cluster
+                8, //systematic
+                9, //not probability
+                1, //systematic random
+                5, //multistage random
+                6, //multistage random cluster
+                9, //non probability
+                0 // simple random
+              ];
+    var tV = [
+                1, //random cluster
+                0, //random stratified cluster
+                0, //systematic
+                0, //not probability
+                1, //systematic random
+                0, //multistage random
+                0, //multistage random cluster
+                0, //non probability
+                1  // simple random
+              ];
+    var which = listOfDistinctRandInts(4,0,qText.length-1);
+    var opt2 = ['Probabilities undefined or not necessarily equal','Probabilities equal'];
+    var qStr = 'Suppose we want to estimate the average weight of children ' +
+               'in a particular school district. The district contains 15 elementary ' +
+               'schools, 10 middle schools, and 2 high schools. ' +
+               '<span class="qSpan">For each of the following ' +
+               'approaches, select the best description of the sampling design, and identify ' +
+               'whether the sampling scheme ensures that the probability of being included ' +
+               'is necessarily the same for every student.</span></p>';
+    document.writeln(qStr);
+    for (var i=0; i < which.length; i++) {
+        document.writeln('<p>' + Alphabet[i] + '. <span class="qSpan">' + qText[which[i]] +
+            '</span></p><p>');
+        writeSelectExercise(false,qCtr++,opt,alphabet[aV[which[i]]]);
+        writeSelectExercise(false,qCtr++,opt2,alphabet[tV[which[i]]]);
+        document.writeln('</p>');
+    }
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

@@ -1,0 +1,1328 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 15:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "sets";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<!-- logic problems script -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/logic.js"></script>
+
+<!-- Venn diagram css -->
+<link rel="stylesheet" type="text/css" href="../Graphics/venn.css" />
+
+
+<form method="POST">
+<h1><a id="language"></a>
+  Set Theory: The Language of Probability
+</h1>
+
+<p>
+    The mathematics of probability is expressed most naturally in terms
+    of sets.
+    This chapter lays out the basic terminology and reviews naive set theory: how to define and
+    manipulate sets of things, operations on sets that yield other sets, special
+    relationships among sets, and so on.
+    Translating word problems into the language of set theory is crucial in solving logic and
+    probability problems.
+    Venn diagrams are useful for visualizing the relationships among sets.
+    In addition to its crucial role in probability, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityAxioms') + ', ');
+// -->
+</script>
+    set theory is intimately connected to 
+    categorical logic, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('categoricalLogic') + ', ');
+// -->
+</script> 
+    and to propositional logic, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('logic') + '. ');
+// -->
+</script> 
+
+</p>
+
+<h2><a id="set_theory"></a>
+    Naive Set Theory
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/4-A4gNPBrAw?start=110&end=2316" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+      A <span class="termOfArt">set</span> is a collection of things (called the 
+      <span class="termOfArt">elements</span> of the 
+      set or the <span class="termOfArt">members</span> of the set) 
+      without regard to their order. 
+      We often define sets by
+      listing their contents within curly braces {}. 
+      For example, <span class="math">{1, 2, 3}</span> is the set whose elements are the numbers 1, 2, and 3. 
+      Another way to define a set is to characterize
+      its elements.
+      For example <span class="math">{x : P(x)}</span>
+      is the set of all values of <span class="math">x</span> for which 
+      <span class="math">P(x)</span> is true.
+      (The function <span class="math">P(x)</span> is called the 
+      <span class="termOfArt">predicate function</span> or
+      <span class="termOfArt">membership function</span>. 
+      For more discussion, see
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeChapter('categoricalLogic') + '.) ');
+// -->
+</script>   
+</p>
+
+<p>   
+      Sets usually are defined with respect to a universe of things 
+      that contains everything of interest.
+      The symbol <span class="math"><strong>S</strong></span> denotes the universe.
+</p>
+
+<p>
+      <a id="venn_diagram"></a><span class="termOfArt">Venn diagrams</span>
+      represent sets and the relationships among sets pictorially.
+      A Venn diagram represents the universe <span class="math"><strong>S</strong></span> by a two-dimensional
+      region (usually a rectangle or a circle).
+      Sets within <span class="math"><strong>S</strong></span> are denoted by closed regions
+      within <span class="math"><strong>S</strong></span>.
+      Shading or highlighting is used in Venn diagrams to draw attention
+      to special relationships or sets.
+      Here is a Venn diagram for <span class="math"><strong>S</strong></span>.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math"><strong>S</strong></span></div>
+   <div class="vennUniverse left blue"><span class="math"><strong>S</strong></span></div>
+</div>
+
+<p>
+      If <span class="math">x</span> is in the set <span class="math">A</span> we write 
+      <span class="math">x&isin;A</span>, pronounced &quot;x is an element of
+      A&quot; or &quot;x is a member of A.&quot;
+      Equivalently, we write <span class="math">A&ni;x</span>, pronounced &quot;A contains x.&quot;
+      If <span class="math">x</span> is not an element of <span class="math">A</span> 
+      we write <span class="math">x&notin;A</span>.
+      Here is a Venn diagram showing <span class="math"><strong>S</strong></span>,
+      a set <span class="math">A</span> within <span class="math"><strong>S</strong></span>,
+      and a point <span class="math">x&isin;A</span>.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">x&isin;A</span></div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue left"><span class="math">A</span>
+        <p class="math">&middot;<span class="math">x</span></p>
+   </div>
+</div>
+
+<div class="indent">
+<p class="inline">
+      If the sets <span class="math">A</span> and <span class="math">B</span>
+      have exactly the same elements, we say that the sets are <em>equal</em> and we
+      write <span class="math">A = B</span>.
+      Remember that order does not matter: the set <span class="math">{a, b, c}</span>
+      is equal to the set <span class="math">{c, a, b}</span>, but not to the set 
+      <span class="math">{a, b, d}</span> nor to the set <span class="math">{a, b, c, d}</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Technically, the set <span class="math">{1, 1, 1}</span> is equal to the set ' +
+               '<span class="math">{1}</span>: they both only have one distinct element, ' +
+               '<span class="math">1</span>.  If we want to allow collections with more than one copy ' +
+               'of a thing, we need the notion of a <em>multiset</em> instead of a set.  ' +
+               'A multiset is like a bag of things.  More than one copy of a thing ' +
+               'can be in the bag.  With a set, either a thing is in it or not; it doesn\'t make sense ' +
+               'for a thing to be in the set more than once.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+</p>
+</div>
+
+<p>
+      The <span class="termOfArt">complement</span> of the set <span class="math">A</span> 
+      (with respect to the universe
+      <span class="math"><strong>S</strong></span>), denoted <span class="math">A<sup>c</sup></span>,
+      is the set of all things in <span class="math"><strong>S</strong></span> that are <em>not</em>
+      in <span class="math">A</span>.
+      The complement of the set <span class="math">A</span> is pronounced 
+      &quot;A complement&quot; or &quot;not A.&quot;
+      For instance, if the universe <span class="math"><strong>S</strong></span> is the set of living
+      people and <span class="math">A</span> comprises all living people who are over 6' tall, then
+      <span class="math">A<sup>c</sup></span> comprises all living people who are no more than 6' tall.
+      If <span class="math"><strong>S</strong></span> is the set of all ravens and 
+      <span class="math">A</span> comprises all black ravens, then 
+      <span class="math">A<sup>c</sup></span> is the set of all ravens that are not black.
+      The complement of the complement of a set is the original set: 
+      <span class="math">(A<sup>c</sup>)<sup>c</sup> = A</span>.
+      The set of all ravens that are not (not black) is the set of all ravens that are black.
+      Here is a Venn diagram illustrating the set <span class="math">A<sup>c</sup></span>.
+      The yellow region is <span class="math">A</span> and the blue region is 
+      <span class="math">A<sup>c</sup>.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">A</span> (yellow area) and
+       <span class="math">A<sup>c</sup></span> (blue area)</div>
+   <div class="vennUniverse blue left"><span class="math" class="blue"><strong>S</strong></span>
+     <p align="left"><span class="math" class="blue">A<sup>c</sup></span></p>
+   </div>
+   <div class="rect60x70_center yellow right"><span class="math">A</span></div>
+</div>
+
+<div class="indent">
+<p class="inline">
+    The set that has no elements is called <span class="termOfArt">the empty set</span>. 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Recall that two sets are equal if they have the same elements.' +
+               'If two sets have no elements, they have the same elements. ' +
+               'Hence, in some funny philosophical sense, there is only one empty set.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+    It is denoted <span class="math">{}</span>
+    or <span class="math">&phi;</span>.
+    The empty set is the complement of the universal set <span class="math"><strong>S</strong></span>,
+    and vice versa: <span class="math"><strong>S</strong><sup>c</sup> = {}</span> and
+    <span class="math">{}<sup>c</sup> = <strong>S</strong></span>.
+    Nothing in <span class="math"><strong>S</strong></span> is not in 
+    <span class="math"><strong>S</strong></span>.
+</p>
+</div>       
+
+<p>
+    Suppose we have two sets, <span class="math">A</span> and <span class="math">B</span>.
+    If every element of <span class="math">A</span> is also an element of <span class="math">B</span>,
+    we say that <span class="math">A</span> is a <span class="termOfArt">subset</span> 
+    of <span class="math">B</span>
+    and we write <span class="math">A&sub;B</span> or <span class="math">B&sup;A</span>.
+    For instance,  <span class="math">{1, 2}</span> is a subset of  
+    <span class="math">{1, 2, 3}</span>, but 
+    <span class="math">{1, 4}</span> is not a subset of <span class="math">{1, 2, 3}</span>. 
+    With respect to the universe <span class="math"><strong>S</strong></span> of animals,
+    the set of ravens is a subset of the set of birds, but
+    the set of ravens is not a subset of the set of fish.
+    Nor is the set of black birds a subset of the set of ravens, because some
+    black birds are not ravens.
+    Here is a Venn diagram illustrating <span class="math">A&sub;B</span>.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">A&sub;B</span></div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue right"><span class="math">B</span></div>
+   <div class="rect40x50_center_high yellow left" ><span class="math">A</span>&nbsp;</div>
+</div>
+
+<p>
+    Every set is a subset of itself, and the empty set <span class="math">{}</span> is a subset of
+    every set.
+    If <span class="math">A&sub;B</span> and <span class="math">B&sub;A</span> 
+    then <span class="math">A = B</span>: every element of <span class="math">A</span> is an element
+    of <span class="math">B</span> and vice versa.
+    The subset relation is transitive: if  <span class="math">A&sub;B</span> and 
+    <span class="math">B&sub;C</span> then <span class="math">A&sub;C</span>.
+    For example, all ravens are birds and all birds are animals, so all ravens are animals.
+    The subset relation is reversed by taking complements: if <span class="math">A&sub;B</span> then
+    <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>.
+    For example, all ravens are birds, so all non-birds are non-ravens.
+    If something is not a bird it is not a raven.
+</p>
+
+<p>
+    If <span class="math">A</span> is not a subset of <span class="math">B</span>, we write
+    <span class="math">A&nsub;B</span>.
+    The not-subset relation is also reversed under complements:
+    if <span class="math">A&nsub;B</span> then
+    <span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>.
+    For example, if some birds are not ravens, then some non-ravens are birds (i.e., not non-birds).
+    Here is a Venn diagram illustrating <span class="math">A&nsub;B</span>.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">A&nsub;B</span></div>
+   <div class="vennUniverse"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center yellow left"><span class="math">A</span></div>
+   <div class="rect40x50_right_high blue right"><span class="math">B</span>&nbsp;</div>
+   <div class="rect28x50_right"><p class="math"></div>
+</div>
+
+<p>
+     Be careful not to confuse a set with its elements.
+     For instance, <span class="math">A &ne; {A}</span>&mdash;the former is the thing
+     <span class="math">A</span> while
+     <span class="math">{A}</span> is a set with one element, namely, <span class="math">A</span>.
+     Similarly, while <span class="math">A &isin; {A}</span>, <span class="math">A &nsub; {A}</span>.
+</p>
+
+<p>
+      The <span class="termOfArt">intersection</span> of two or more sets is the collection 
+      of elements they all have in common,
+      that is, the set of things contained in each and every one of the sets.
+      For instance, the intersection of the set <span class="math">{0, 1, 2, 3}</span> and the set
+      <span class="math">{1, 3, 5}</span> is the set <span class="math">{1, 3}</span>.
+      The intersection of the set <span class="math">{0, 1, 2, 3}</span> and the set
+      <span class="math">{4, 5, 6}</span> is the empty set, <span class="math">{}</span>.
+      The intersection of the set <span class="math">A</span> and the set <span class="math">B</span>
+      is sometimes written <span class="math">A&cap;B</span> or <span class="math">AB</span>, and is pronounced
+      &quot;AB&quot;, &quot;A and B,&quot;
+      &quot;A intersect B&quot; or &quot;A meet B.&quot;
+      Here is a Venn diagram illustrating <span class="math">A&cap;B</span>.
+      The set <span class="math">A</span> is shaded yellow and the set <span class="math">B</span>
+      is shaded blue.
+      The overlap between the two sets, <span class="math">A&cap;B</span>, is shaded green.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">A&cap;B</span> (green area)</div>
+   <div class="vennUniverse"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center yellow left"><span class="math">A</span></div>
+   <div class="rect40x50_right_high blue right"><span class="math">B</span>&nbsp;</div>
+   <div class="rect28x50_right green left"><p class="math">A&cap;B</p></div>
+</div>
+
+<div class="indent">
+<p class="inline">
+      The intersection of the empty set and any other set is the empty set: 
+      <span class="math">{}&cap;A = {}</span>.
+      The intersection of the universe <span class="math"><strong>S</strong></span> and any other set is
+      that set: <span class="math"><strong>S</strong>&cap;A=A</span>.
+      Intersections are associative  (<span class="math">A&cap;(B&cap;C) = 
+      (A&cap;B)&cap;C = A&cap;B&cap;C</span>)
+      and commutative (<span class="math">A&cap;B = B&cap;A</span>).
+      If <span class="math">A&sub;B</span> then <span class="math">A&cap;B = A</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The relation goes both ways: we could actually take intersection to be a more ' +
+               'primitive notion than subset, and <em>define</em> what it means for one set to be ' +
+               'a subset of another in terms of intersections (and the definition of ' +
+               '<em>equality</em> for two sets), because ' +
+               '<span class="math">A&sub;B</span> if and only if <span class="math">A&cap;B = A</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+</p>
+</div>
+
+<p>
+      The <span class="termOfArt">union</span> of two or more sets is the collection of 
+      things that are in at least one of the sets. 
+      For instance, the union of the set <span class="math">{0, 1, 2, 3}</span> and the set
+      <span class="math">{1, 3, 5}</span> is the set <span class="math">{0, 1, 2, 3, 5}</span>.
+      The union of the sets <span class="math">{0, 1}</span>, <span class="math">{0, 1, 2}</span>,
+      <span class="math">{0, 1, 2, 3}</span>, and <span class="math">{4, 5, 6}</span> is 
+      <span class="math">{0, 1, 2, 3, 4, 5, 6}</span>.
+      The union of the sets <span class="math">A</span> and <span class="math">B</span> 
+      is sometimes written
+      <span class="math">A&cup;B</span>,
+      <span class="math">A+B</span>, or (<span class="math">A or B</span>), and
+      is pronounced &quot;A union B&quot; or
+      &quot;A or B.&quot;
+      Here is a Venn diagram for <span class="math">A&cup;B</span> (shaded blue).
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">A&cup;B</span> (blue area)</div>
+   <div class="vennUniverse"><span class="math"><strong>S</strong></span></div>
+   <div class ="rect60x70_center blue left"><span class="math">A</span></div>
+   <div class ="rect40x50_right_high blue right"><span class="math">B</span>&nbsp;</div>
+   <div class ="rect28x50_right blue left"><p class="math"><p class="math">A&cup;B</p></div>
+</div>
+
+<div class="indent">
+<p class="inline">
+      The union of the empty set and any other set is that same set: <span class="math">{}&cup;A = A</span>.
+      The union of the universe <span class="math"><strong>S</strong></span> and any other set is
+      the universe: <span class="math"><strong>S</strong>&cup;A=<strong>S</strong></span>.
+      Unions are associative  (<span class="math">A&cup;(B&cup;C) = (A&cup;B)&cup;C = A&cup;B&cup;C</span>)
+      and commutative
+      (<span class="math">A&cup;B = B&cup;A</span>).
+      If <span class="math">A&sub;B</span> then <span class="math">A&cup;B = B</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The relation goes both ways: we could actually take union to be a more primitive notion than ' +
+               'subset, and <em>define</em> what it means for one set to be a subset of another in terms of ' +
+               'unions, because ' +
+               '<span class="math">A&sub;B</span> if and only if <span class="math">A&cup;B = B</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+</p>
+</div>     
+
+<p>
+   <span class="termOfArt">de Morgan's rules</span> are very helpful in untangling complicated 
+   relationships among sets.
+   They characterize complements of unions and intersections:
+</p>
+
+<div class="indent">
+<p class="math" class="inline">
+     (A&cap;B)<sup>c</sup> = A<sup>c</sup>&cup;B<sup>c</sup>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">A</span> be things that are solid white, ' +
+               '<span class="math">B</span> be things that weigh more than a pound. Then ' +
+               '<span class="math">A&cap;B</span> are things that are solid white and weigh more than a pound. ' +
+               '<span class="math">(A&cap;B)<sup>c</sup></span> are things that are not both solid white and ' +
+               'over a pound: things that either are not white, or that weigh a pound or less.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+</p>
+</div>
+
+<div class="indent">
+<p class="math" class="inline">
+     (A&cup;B)<sup>c</sup> = A<sup>c</sup>&cap;B<sup>c</sup>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">A</span> be things that are solid white, ' +
+               '<span class="math">B</span> be things that weigh more than a pound. Then ' +
+               '<span class="math">A&cup;B</span> are things that are solid white or weigh more than a pound. ' +
+               '<span class="math">(A&cup;B)<sup>c</sup></span> are things that are not solid white and ' +
+               'that do not weigh over a pound.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script></p>
+</div>
+
+
+<div class="indent">
+<p class="inline">
+     Unions and intersections are associative and commutative with themselves, but not with
+     each other.
+     For instance, <span class="math">A&cap;(B&cup;C)</span> is not generally equal to 
+     <span class="math">(A&cap;B)&cup;C</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">A</span> be things that are solid white, ' +
+               '<span class="math">B</span> be things that are solid blue, and ' +
+               '<span class="math">C</span> be things that weigh more than a pound.  ' +
+               'Then <span class="math">A&cap;(B&cup;C)</span> is the set of things that are solid white ' +
+               'and are either solid blue or weigh more than a pound.  Nothing can be both solid ' +
+               'white and solid blue, so that is simply everything solid white that weighs more than a pound. ' +
+               'In contrast, <span class="math">(A&cap;B)&cup;C</span> is everything that is both solid ' +
+               'white and solid blue, or that weighs more than a pound.  Since nothing is both solid white ' +
+               'and solid blue, this is just everything that weighs more than a pound, regardless of its color.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>  
+     However, there are rules for combining (distributing) unions and intersections:</p>
+</div>
+
+<div class="indent">
+<p class="math" class="inline">
+     A&cap;(B&cup;C) = (A&cap;B) &cup; (A&cap;C).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">A</span> be things that are solid white, ' +
+               '<span class="math">B</span> be things that are solid blue, and ' +
+               '<span class="math">C</span> be things that weigh more than a pound.  ' +
+               'Then <span class="math">A&cap;(B&cup;C)</span> is the set of things that are solid white ' +
+               'and are either solid blue or weigh more than a pound.  Nothing can be both solid ' +
+               'white and solid blue, so that is simply everything solid white that weighs more than a pound. ' +
+               'The rule says that this is the same as ' +
+               '<span class="math">(A&cap;B) &cup; (A&cap;C)</span> things that are both solid ' +
+               'white and solid blue (the empty set), or things that are solid white and weigh more than a pound.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script> 
+</p>
+</div>
+
+<div class="indent">
+<p class="math" class="inline">
+     A&cup;(B&cap;C) = (A&cup;B) &cap; (A&cup;C).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">A</span> be things that are solid white, ' +
+               '<span class="math">B</span> be things that are solid blue, and ' +
+               '<span class="math">C</span> be things that weigh more than a pound.  ' +
+               'Then <span class="math">A&cup;(B&cap;C)</span> is the set of things that are solid white ' +
+               'or are solid blue and weigh more than a pound. ' +
+               'The rule says that this is the same as ' +
+               '<span class="math">(A&cup;B) &cap; (A&cup;C)</span> things that are solid ' +
+               'white or solid blue and are solid white or weigh more than a pound. That includes everything ' +
+               'solid white, and those things that are solid blue and weigh more than a pound.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script> 
+</p>
+</div>
+
+<p>
+      Two sets are <span class="termOfArt">disjoint</span> or <span class="termOfArt">mutually exclusive</span>
+      if their intersection is the empty set;
+      that is, if the two sets have no elements in common.
+      For instance, the sets <span class="math">{1, 2, 3}</span> and <span class="math">{0, 4}</span>
+      are disjoint.
+      In symbols, <span class="math">A</span> and <span class="math">B</span> are disjoint if 
+      <span class="math">A&cap;B = {}</span>.
+      Here is a Venn diagram illustrating that the sets <span class="math">A</span> and 
+      <span class="math">B</span> are disjoint:
+</p>
+<div class="venn">
+   <div class="vennCaption"> 
+       <span class="math">A</span> and <span class="math">B</span> <span class="termOfArt">disjoint</span>:
+       <span class="math">A&cap;B = {}</span>.
+   </div>
+   <div class="vennUniverse"><span class="math"><strong>S</strong></span></div>
+   <div class="rect40x50_left blue left"><span class="math">A</span></div>
+   <div class="rect40x50_right yellow right"><span class="math">B</span>&nbsp;</div>
+</div>
+   
+<p>
+      A collection of sets <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+      A<sub>3</sub>, &hellip; }</span>
+      is <span class="termOfArt">disjoint</span> if every pair of sets in the collection 
+      is disjoint; that is,
+      the collection is disjoint if
+      <span class="math">A<sub>i</sub>A<sub>j</sub> = {}</span> whenever
+      <span class="math">i&ne;j</span>  (<span class="math">i&ne;j</span> means <span class="math">i</span>
+      is not equal to <span class="math">j</span>).
+      For instance, the sets <span class="math">{1, 2, 3}</span>, <span class="math">{0, 4}</span>,
+      <span class="math">{5}</span>, and <span class="math">{-1, -2, -3, -4}</span> are disjoint, but
+      the sets <span class="math">{1, 2, 3}</span>, <span class="math">{1, 4}</span>,
+      <span class="math">{5}</span>, and <span class="math">{-1, -2, -3, -4}</span> are not.
+      The set of black ravens and the set of white ravens are mutually exclusive.
+      The empty set and any other set are mutually exclusive, because the intersection of the empty set
+      and any other set is the empty set.
+</p>
+
+<p>
+    Sometimes we need to ensure that every element of some set is in at least one set in a collection
+    of sets.
+    This issue arises in counting and in probability when we want to break a complicated set into smaller 
+    pieces and know that we have not lost anything.
+    The corresponding technical term is <span class="termOfArt">exhaust</span>.
+    A collection of sets <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip; }</span> <span class="termOfArt">exhausts</span> a set
+    <span class="math">A</span> (the collection <em>is exhaustive of</em> <span class="math">A</span>) if
+    every element of <span class="math">A</span> is in at least one of the sets
+    <span class="math">A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip;</span>; that is, if
+    <span class="math">A</span> is a subset of 
+    <span class="math">A<sub>1</sub> &cup; A<sub>2</sub> &cup;
+    A<sub>3</sub> &cup; &hellip;</span> .
+    For instance, the sets <span class="math">{1, 2, 3}</span>, <span class="math">{1, 4}</span>
+    <span class="math">{3, 5}</span> and <span class="math">{-1, -2, -3, -4}</span> exhaust
+    the set <span class="math">{2, 3, 4, 5}</span>, but they do not exhaust the set
+    <span class="math">{0, 1, 2}</span>.
+    The set of men, the set of women, and the set of children exhaust the set of people.
+    The set of black ravens and the set of non-black ravens exhaust the set of ravens.
+</p>
+
+<p>
+    Sometimes we need to ensure that every element of some set is in exactly one set in a collection
+    of sets&mdash;and that nothing but members of that set are in the collection.
+    This issue arises in counting and in probability when we want to break a complicated set into
+    smaller parts while avoiding double-counting or counting anything extra.
+    The corresponding technical term is <span class="termOfArt">partition</span>.
+    A collection of sets <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip; }</span> <span class="termOfArt">partitions</span> a set
+    <span class="math">A</span> (the collection <em>is a partition of</em> <span class="math">A</span>) if
+    the collection is disjoint, each element <span class="math">A<sub>1</sub></span>
+    of the collection is a subset of <span class="math">A</span>, 
+    and the collection exhausts <span class="math">A</span>;
+    that is, if each element of <span class="math">A</span> is in exactly one of the sets
+    <span class="math">A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip;</span> and <span class="math">A = A<sub>1</sub> &cup; A<sub>2</sub> &cup;
+    A<sub>3</sub> &cup; &hellip;</span> .
+    For instance, the sets <span class="math">{a}, {b, d},</span> and <span class="math">{c}</span>
+    partition the set <span class="math">{a, b, c, d}</span>.
+    The set of black ravens and the set of non-black ravens partition the set of ravens.
+</p>
+
+<div class="callout"><a id="usefulProperties"></a>
+<p>
+  <span class="calloutCaption">Useful Properties of Subsets, Complements, Unions and Intersections</span>
+</p>
+
+<p class="center">
+   <span class="math">If A&sub;B and B&sub;A then A = B.</span> 
+     (If two sets are subsets of each other, they are the same set.)
+</p>
+
+<p class="center">
+   <span class="math">{}&sub;A.</span> 
+     (The empty set is a subset of every set.)
+</p>
+
+<p class="center">
+   <span class="math">{}&cup;A = A.</span> 
+     (The union of the empty set and any other set is that set.)
+</p>
+
+<p class="center">
+   <span class="math">{}&cap;A = {}.</span> 
+     (The intersection of the empty set and any other set is empty.)
+</p>
+
+<p class="center">
+   <span class="math">If A&sub;B and B&sub;C then A&sub;C.</span> (The subset relation is transitive.)
+</p>
+
+<p class="center">
+   <span class="math">If A&sub;B then B<sup>c</sup>&sub;A<sup>c</sup>.</span> 
+   (Complementation reverses the subset relation.)
+</p>
+
+<p class="center">
+   <span class="math">A&cap;B &sub; A</span>.  Moreover,
+   <span class="math">A&cap;B = A if and only if A&sub;B</span>.
+</p>
+
+<p class="center">
+   <span class="math">A &sub; A&cup;B</span>.   Moreover,
+   <span class="math">A = A&cup;B if and only if B&sub;A</span>.
+</p>
+
+<p class="center">
+   <span class="math">(A&cap;B)<sup>c</sup> = A<sup>c</sup>&cup;B<sup>c</sup>.</span>
+   (de Morgan)
+</p>
+
+<p class="center">
+   <span class="math">(A&cup;B)<sup>c</sup> = A<sup>c</sup>&cap;B<sup>c</sup>.</span>
+   (de Morgan)
+</p>
+
+<p class="center">
+   <span class="math">A&cap;B = B&cap;A.</span>
+   (Intersection is commutative.)
+</p>
+
+<p class="center">
+   <span class="math">A&cup;B = B&cup;A.</span>
+   (Union is commutative.)
+</p>
+
+<p class="center">
+   <span class="math">A&cap;(B&cap;C) = (A&cap;B)&cap;C.</span>
+   (Intersection is associative.)
+</p>
+
+<p class="center">
+   <span class="math">A&cup;(B&cup;C) = (A&cup;B)&cup;C.</span>
+  (Union is associative.)
+</p>
+
+<p class="center">
+   <span class="math">A&cap;(B&cup;C) = (A&cap;B)&cup;(A&cap;C).</span>
+  (Distribution of intersection over union.)
+</p>
+
+<p class="center">
+   <span class="math">A&cup;(B&cap;C) = (A&cup;B)&cap;(A&cup;C).</span>
+   (Distribution of union over intersection.)
+</p>
+</div>
+
+<p>
+   The following exercises check your understanding of set membership, equality of sets, complements,
+   unions, intersections, what it means for two sets to be disjoint, for a one set to be
+   a subset of another, and for a collection of sets to exhaust or partition another set.
+</p>
+
+<p>Examples of Exercises 14-1 to 14-5 (Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)<br />
+	 <iframe width="420" height="315" src="http://www.youtube.com/embed/4-A4gNPBrAw?start=2527&end=4850" frameborder="0" allowfullscreen></iframe>
+</p>
+
+
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var setChoices = [
+                       ['red', 'orange', 'yellow', 'green', 'blue', 'violet'],
+                       ['school bus', 'knife', 'pineapple',  'lightbulb'],
+                       ['dog', 'Fred', 'albatross', 'income tax', 'cancer']
+                     ];
+    var whichSet = listOfRandInts(1, 0, setChoices.length-1)[0];
+    var set1 = setChoices[whichSet];
+    var set2 = new Array();
+    for (var j = 0; j < set1.length; j++) {
+        set2[j] = set1[set1.length-j-1];
+    }
+    var set1Words = '{' + set1.join(', ') + '}';
+    var set2Words = '{' + set2.join(', ') + '}';
+    var qStr = 'Let <span class="math"><strong>A</strong></span> be the set ' + set1Words +
+               ' and let <span class="math"><strong>B</strong></span> be the set ' + set2Words +
+               '. <span class="qSpan">Which of the following are true?</span> (Select all that are.)';
+    document.writeln(qStr);
+    var rawOpt = [
+                  '<span class="math">A&sub;A</span>',
+                  '<span class="math">A&sub;B</span>',
+                  '<span class="math">B&sub;A</span>',
+                  '<span class="math">A=A</span>',
+                  '<span class="math">A=B</span>',
+                  '<span class="math">A<sup>c</sup>&sub;A<sup>c</sup></span>',
+                  '<span class="math">A<sup>c</sup>&sub;B<sup>c</sup></span>',
+                  '<span class="math">A<sup>c</sup>=B<sup>c</sup></span>',
+                  '<span class="math">A&cup;A = A</span>',
+                  '<span class="math">A&cap;A = A</span>',
+                  '<span class="math">A&cap;B = B</span>',
+                  '<span class="math">A&cup;B = A</span>',
+                  '<span class="math">A&ne;B</span>', //
+                  '<span class="math">A&nsub;B</span>',
+                  '<span class="math">A<sup>c</sup>&nsub;A<sup>c</sup></span>',
+                  '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>'
+               ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = '';
+    for (j = 0; j < 12; j++) {
+        aVal += alphabet[optPerm[1][j]] + '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    var ansStr = 'The sets ' + set1Words + ' and ' + set2Words + ' are equal: they have the same elements. ' +
+                 'The order in which the elements of a set does are listed does not matter.  Every set is a ' +
+                 'subset of itself: every element of <span class="math">A</span> is an element of ' +
+                 '<span class="math">A</span>. If two sets are equal, their complements are too. The union of ' +
+                 'a set with itself is the original set (the union doesn\'t add anything not already in the set), ' +
+                 'and so is the intersection of a set with itself (the intersection doesn\'t take anything away).';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following is/are always true?</span> ' +
+               '(Select all that are.)'
+    document.writeln(qStr);
+    var rawOpt = ['If <span class="math">A&sub;B</span> and <span class="math">B&sub;C</span>, ' +
+                     'then <span class="math">A&sub;C</span>',
+                  'If <span class="math">A&cup;B = C</span> and <span class="math">A&cap;C ={}</span>, ' +
+                     'then <span class="math">A = {}</span>',
+                  '<span class="math">A&sub;(A</span>&cup;B)</span>',
+                  '<span class="math">A&cap;B&sub;A</span>',
+                  'If <span class="math">A&cup;B = A</span>, then <span class="math">B&sub;A</span>',
+                  'If <span class="math">A&sub;B</span>, then <span class="math">A&cup;B = B</span>',
+                  '<span class="math">A&cup;B&sub;B</span>',
+                  '<span class="math">A&sub;A&cap;B</span>',
+                  'If <span class="math">A&sub;B</span>, then <span class="math">A&cup;B = A</span>',
+                  'If <span class="math">A&cap;B = {}</span> and <span class="math">B&cap;C = {}</span>, then ' +
+                     '<span class="math">A&cap;C = {}</span>'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (i=0; i < rawOpt.length-4; i++) {
+         aVal = aVal + alphabet[optPerm[1][i]]+ '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var setChoices = [
+                       ['animals', 'birds', 'ravens', 'yellow birds'],
+                       ['spherical objects','balls','ping-pong balls','basketballs'],
+                       ['numbers','integers','even numbers','positive odd numbers'],
+                       ['professions', 'instructors', 'professors', 'kindergarten teachers'],
+                       ['sources of information', 'printed and electronic books', 'paperbacks', 'hard-cover books'],
+                       ['games', 'competitive games', 'racquet sports', 'card games'],
+                       ['musical instruments', 'woodwinds', 'clarinets', 'oboes'],
+                       ['leisure activities','sports','adventure sports','ping-pong games']
+                     ];
+    var whichSet = listOfRandInts(1, 0, setChoices.length-1)[0];
+    var qStr = 'Let the universe <span class="math"><strong>S</strong></span> denote the set of all ' +
+               setChoices[whichSet][0] + '.  Let <span class="math">A</span> be the set of all ' +
+               setChoices[whichSet][1] + '; let <span class="math">B</span> be the set of all ' +
+               setChoices[whichSet][2] + '; and let <span class="math">C</span> be the set of all ' +
+               setChoices[whichSet][3] + '. <span class="qSpan">Which of the following are true?</span> ' +
+               '(Select all that are.)';
+    document.writeln(qStr);
+    var rawOpt = [ 
+                  '<span class="math">B&sub;A</span>',
+                  '<span class="math">C&sub;A</span>',
+                  '<span class="math">A&nsub;B</span>',
+                  '<span class="math">A&nsub;C</span>',
+                  '<span class="math">B&nsub;C</span>',
+                  '<span class="math">B&sub;C<sup>c</sup></span>',
+                  '<span class="math">C&sub;B<sup>c</sup></span>',
+                  '<span class="math">B&cup;C&sub;A</span>',
+                  '<span class="math">A<sup>c</sup>&sub;B<sup>c</sup></span>',
+                  '<span class="math">A&cap;B = B</span>',
+                  '<span class="math">A&cup;B = A</span>',
+                  '<span class="math">B&cap;C = {}</span>', //
+                  '<span class="math">B&nsub;A</span>',
+                  '<span class="math">A&sub;C</span>',
+                  '<span class="math">A&sub;B</span>',
+                  '<span class="math">A&sub;C</span>',
+                  '<span class="math">B&sub;C</span>',
+                  '<span class="math">B&nsub;C<sup>c</sup></span>',
+                  '<span class="math">C&nsub;B<sup>c</sup></span>',
+                  '<span class="math">A&sub; B&cup;C</span>',
+                  '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>',
+                  '<span class="math">A&cap;B = A</span>',
+                  '<span class="math">A&cup;B = B</span>',
+                  '<span class="math">B&cup;C = <strong>S</strong></span>'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = '';
+    for (j = 0; j < 12; j++) {
+        aVal += alphabet[optPerm[1][j]] + '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    var ansStr = 'The set of ' + setChoices[whichSet][0] + ' contains the set of ' + setChoices[whichSet][1] +
+                 ', which contains both the set of ' + setChoices[whichSet][2] + ' and the set of ' +
+                 setChoices[whichSet][3] + '.  However, the set of ' + setChoices[whichSet][2] + 
+                 ' and the set of ' + setChoices[whichSet][3] + ' have no members in common: they are ' +
+                 'disjoint.  Hence, all <span class="math">B</span>s are <span class="math">A</span>s, ' +
+                 'all <span class="math">C</span>s are <span class="math">A</span>s, ' +
+                 'no <span class="math">B</span>s are <span class="math">C</span>s, every ' +
+                 '<span class="math">B</span> is a non-<span class="math">C</span>, and so on.  Therefore, ';
+    for (var j=0; j < 12; j++) {
+       ansStr += rawOpt[j] + ', ';
+    }
+    ansStr = ansStr.substr(0, ansStr.length - 1);    
+    ansStr += '.';            
+    writeSolution(pCtr-1, ansStr);
+
+    var rawOpt = [
+                  'every <span class="math">B</span> is an <span class="math">A</span>',
+                  'no <span class="math">B</span> is a <span class="math">C</span>',
+                  '<span class="math">B</span> and <span class="math">C</span> are disjoint'
+                 ];
+// -->
+</script>
+</p>
+</div>
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qChoices  = [
+                      ['Let <span class="math">E</span> be the set of all English names. ' +
+                       'Let <span class="math">F</span> be the set of all English names that start with ' +
+                       'a vowel.  Let <span class="math">G</span> be the set of all English names that start ' +
+                       'with a consonant.','b','b','b'
+                      ],
+                      ['Let <span class="math">E</span> be the set of all even integers. ' +
+                       'Let <span class="math">F</span> be the set of all integers that are divisible by 2; ' +
+                       'let <span class="math">G</span> be the set of all integers that are divisible by 4.',
+                       'b','a','a'
+                      ],
+                      ['Let <span class="math">E</span> be the set of all animals. ' +
+                       'Let <span class="math">F</span> be the set of all mammals; ' +
+                       'let <span class="math">G</span> be the set of all reptiles',
+                       'a','b','a'
+                      ],
+                      ['Let <span class="math">E</span> be the set of wheeled vehicles. ' +
+                       'Let <span class="math">F</span> be the set of unicycles; ' +
+                       'let <span class="math">G</span> be the set of vehicles with two or ' +
+                       'more wheels.',
+                       'b','b','b'
+                      ],
+                      ['Let <span class="math">E</span> be the set of wheeled vehicles. ' +
+                       'Let <span class="math">F</span> be the set of unicycles; ' +
+                       'let <span class="math">G</span> be the set of bicycles.',
+                       'a','b','a'
+                      ],
+                      ['Let <span class="math">E</span> be the set of musical instruments. ' +
+                       'Let <span class="math">F</span> be the set of wind instruments; ' +
+                       'let <span class="math">G</span> be the set of stringed instruments.',
+                       'a','b','a'
+                      ], 
+                      ['Let <span class="math">E</span> be the set of integers. ' +
+                       'Let <span class="math">F</span> be the set of even integers; ' +
+                       'let <span class="math">G</span> be the set of odd integers.',
+                       'b','b','b'
+                      ],
+                      ['Let <span class="math">E</span> be the set of fabrics. ' +
+                       'Let <span class="math">F</span> be the set of natural fabrics; ' +
+                       'let <span class="math">G</span> be the set of synthetic fabrics.',
+                       'b','b','b'
+                      ],
+             ];
+    var which = listOfRandInts(1, 0, qChoices.length-1)[0];
+    var qStr = qChoices[which][0] +  '</p><p><span class="qSpan">The sets <span class="math">F</span> and ' +
+                 '<span class="math">G</span> exhaust the set <span class="math">E</span></span>.';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = qChoices[which][1];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">The sets <span class="math">F</span> and ' +
+                 '<span class="math">G</span> are disjoint</span>.';
+    document.writeln(qStr);
+    var aVal = qChoices[which][2];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">The sets <span class="math">F</span> and ' +
+                 '<span class="math">G</span> partition the set <span class="math">E</span></span>.';
+    document.writeln(qStr);
+    var aVal = qChoices[which][3];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following are always true?</span> (Select all that ' +
+               'are.)';
+    document.writeln(qStr);
+    var rawOpt = ['If every A is a B then every non-B is a non-A',
+                  'If x is not in A&cap;B then x is not in A or x is not in B',
+                  'If x is not in A&cup;B then x is not in A and x is not in B',
+                  'If x is in A and x is in B&cup;C then x is in A&cap;B or x is in A&cap;C',
+                  'If x is in A or x is in B&cap;C then x is in A&cup;B and x is in A&cup;C',
+                  'If x is in A&cap;B or x is in A&cap;C then x is in A',
+//
+                  'If every A is a B then every non-A is a non-B',
+                  'If x is not in A&cap;B then x is not in A and x is not in B',
+                  'If x is not in A or x is not in B then x is not in A&cup;B',
+                  'If x is in A or x is in B&cup;C then x is in A&cup;B and x is in A&cup;C',
+                  'If x is in A&cap;B or x is in A&cap;C then x is in B&cap;C'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = '';
+    for (j = 0; j < 6; j++) {
+        aVal += alphabet[optPerm[1][j]] + '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+// -->
+</script>
+</div>
+
+
+<h2><a id="connection"></a>
+    Connecting Probability to Set Theory
+</h2>
+
+<p>
+    A <span class="termOfArt">random experiment</span> or <span class="termOfArt">random trial</span> 
+    is basically any
+    situation whose outcome is not perfectly predictable, but for which we
+    can specify all possible outcomes, and that shows long-term regularities.
+    For example, when we toss a coin, we do not know how it will land,
+    but it certainly must land heads, tails, on its edge, or not land at all.
+    There is no other possibility.
+    The set of all possible outcomes of a random experiment is called the
+    <span class="termOfArt">outcome space</span>.
+    The letter <span class="math"><strong>S</strong></span> will denote outcome space.
+    We are free to choose the outcome space to correspond to what we deem
+    relevant for the experiment, as long as it is essentially inevitable that the
+    random experiment will result in some outcome in the outcome space.
+    For example, the outcome space we just described was {heads, tails, edge, doesn't land}.
+    It might be adequate for our purposes for the outcome space to be {heads, not heads}.
+</p>
+
+<p>
+    Often we shall tailor outcome spaces for specific problems.
+    Here is an example: Imagine a box containing tickets that are indistinguishable
+    except that each has written upon it a unique number between 1 and the number
+    of tickets, <span class="math">n</span>.
+    We shake the box, draw a ticket from the box without looking, and record
+    the number written on the ticket we happened to draw.
+    The natural outcome space of this experiment is the set of numbers
+    <span class="math">{1, 2,  &hellip; , n}</span>.
+    However, suppose we are interested only in whether the number on the
+    ticket we draw is even.
+    The outcome space then could be reduced to {even number on ticket, odd number on ticket},
+    or coded even more abstractly as <span class="math">{0, 1}</span>, where the outcome is the number of
+    even-numbered tickets drawn.
+</p>
+
+<p>
+    An <span class="termOfArt">event</span> is a subset of outcome space: a collection of outcomes in the
+    outcome space.
+    <span class="math">A</span> is an event if <span class="math">A&sub;<strong>S</strong></span>.
+    For example, in the experiment of drawing a numbered ticket from the box,
+    suppose there are 10 tickets in all, and that we choose the outcome space 
+    <span class="math"><strong>S</strong></span> to be the numbers 
+    <span class="math">{1, 2, 3,  &hellip; , 9, 10}</span>.
+    Then &quot;we draw the number 1&quot; is the event <span class="math">{1}</span>, and
+    &quot;we draw an even number&quot; is the event <span class="math">{2, 4, 6, 8, 10}</span>, 
+    both of which are subsets of the set of possible outcomes, the outcome space 
+    <span class="math"><strong>S</strong></span>.
+</p>
+
+<p>
+    Two events are <span class="termOfArt">disjoint</span> or 
+    <span class="termOfArt">mutually exclusive</span>
+    if the occurrence of one is incompatible with the occurrence of the other;
+    that is, if they have no outcome in common.
+    This is equivalent to the definition of <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>
+    <a class="glossRef" href="gloss.htm#set">sets</a>, viewing
+    events as sets.
+    The event <span class="math">A</span> <span class="termOfArt">implies</span> the event 
+    <span class="math">B</span> if 
+    <span class="math">A&sub;B</span>: then if <span class="math">A</span> occurs, <span class="math">B</span> must
+    also occur (if the outcome that occurs is in <span class="math">A</span>, the outcome
+    that occurs is also in <span class="math">B</span>, because every element of <span class="math">A</span>
+    is an element of <span class="math">B</span>).
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    contains a Venn diagram that displays
+    the universe <span class="math"><strong>S</strong></span> and two subsets of
+    <span class="math"><strong>S</strong></span>, <span class="math">A</span> and <span class="math">B</span>.
+    The figure has check boxes on the right side.
+    Checking a box highlights the corresponding set;
+    the options are as follows:
+</p>
+
+<ul>
+    <li>
+        <span class="math">A</span>, <span class="math">A<sup>c</sup></span>
+    </li>
+    <li>
+        <span class="math">B</span>, <span class="math">B<sup>c</sup></span>
+    </li>
+    <li>
+        <span class="math">A &cup; B, A&cap;B</span>
+    </li>
+    <li>
+        <span class="math">A&cap;B<sup>c</sup>, A<sup>c</sup>B</span>
+    </li>
+    <li>
+        <span class="math"><strong>S</strong></span>, <span class="math">{}</span>
+    </li>
+</ul>
+
+<p>
+    You can click and drag <span class="math">A</span> and <span class="math">B</span> to change the amount by which
+    they intersect.
+    Scrollbars at the bottom of the figure let you change the sizes of <span class="math">A</span> and
+    <span class="math">B</span>.
+    Usually, Venn diagrams do not have a scale, but because this figure is intended to
+    represent the outcome space <span class="math"><strong>S</strong></span>, it represents the
+    probability of an event by the area of the event.
+    Probability is never greater than 100%, so the area of
+    <span class="math"><strong>S</strong></span> in the diagram is 100%.
+    The area of the subsets of <span class="math"><strong>S</strong></span> represents their probability,
+    so the areas of <span class="math">A</span> and of <span class="math">B</span> are between 0% and 100%;
+    these are denoted P(A) and P(B) at the bottom of the figure.
+    The areas of the events <span class="math">A&cap;B</span> and
+    <span class="math">A&cup;B</span>
+    are listed in the figure as
+    P(AB) and P(A or B),
+    respectively.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Venn Diagram.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+<p class="figure">
+    <applet code="Venn.class" codebase="../../Java/" align="baseline"
+          width="600" height="340" archive="PbsGui.zip">
+          You need Java to see this.
+    </applet>
+</p>
+
+
+<p>
+    The following exercises check your
+    ability to translate word problems into the language of set theory.
+</p>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the experiment of drawing 5 cards without replacement from a ' +
+           'well-shuffled deck. Let <span class="math">A</span> be the event that the 5 cards contain at ' +
+           'least one Ace, and let <span class="math">B</span> be the event that the 5 cards contain at least ' +
+           'one King.</p><p>(a) <span class="qSpan"> What is the event <span class="math">A&cap;B</span> in words? ' +
+           '</p><p>The 5 cards contain</span>';
+    document.writeln(qStr);
+    var opt = ["both at least one King and at least one Ace",
+           "at least one King or at least one Ace",
+           "one King, one Ace, and three cards that are neither Aces nor Kings",
+           "none of the above"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '</p><p>(b) <span class="qSpan"> What is the event ' +
+           '<span class="math">A&cup;B</span> in words?</p><p>The 5 cards contain </span>';
+    document.writeln(qStr);
+    var opt = ["both at least one King and at least one Ace",
+         "at least one King or at least one Ace but not both",
+         "one King, one Ace, and three cards that are neither Aces nor Kings",
+         "one or more Kings or one or more Aces but not both",
+         "one or more Kings or one or more Aces or both",
+         "none of the above"
+           ];
+    writeSelectExercise(false,qCtr++,opt,'e');
+    var qStr = '</p><p><span class="qSpan">(c) Are <span class="math">A</span> and <span class="math">B</span> mutually ' +
+               'exclusive?</span>';
+    document.writeln(qStr);
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    document.writeln('</p>');
+    var ansStr = '(a) <span class="math">A&cap;B</span> is the event that <span class="math">A</span> and ' +
+        '<span class="math">B</span> both occur: the 5 cards contain at least one Ace ' +
+        '<em>and</em> at least one King. Of the five cards, one must be an Ace, one must ' +
+        'be a King, and the other three cards can be any combination of Aces, Kings, or ' +
+        'other kinds. <br />' +
+        '(b) <span class="math">A&cup;B</span> is the event that either ' +
+         '<span class="math">A</span> or <span class="math">B</span> or both ' +
+        'occurs.  Of the five cards, either one is an Ace or one is a King; the other four ' +
+        'cards can be any combination of Aces, Kings, or other kinds.</br> ' +
+        '(c) <span class="math">A</span> and <span class="math">B</span> are mutually exclusive ' +
+         'if they cannot both happen ' +
+        'in the same trial, that ' +
+        'is, if <span class="math">A&cap;B</span> = {}.  In the present case, <span class="math">A</span> ' +
+        'and <span class="math">B</span> are <em>not</em> mutually exclusive: ' +
+        'the same set of five cards <em>can</em> contain both at least one Ace and at least ' +
+        'one King.  For example, the set ' +
+        '{Ace of hearts, Ace of diamonds, King of hearts, 3 of clubs, 5 of diamonds} ' +
+        'is an element of <span class="math">A&cap;B</span>, so <span class="math">A&cap;B</span> is not empty. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the experiment of rolling a fair pair ' +
+           'of dice. Let <span class="math">A</span> be the event that the total number of spots showing on ' +
+           'the two dice is prime, and let <span class="math">B</span> be the event that the total number of ' +
+           'spots showing on the two dice is even. Let <span class="math">C</span> be the event that the total ' +
+           'number of spots showing on the two dice is 7.</p><p>(a)<span class="qSpan">' +
+           'What is the event <span class="math">A&cap;B</span> in words? </span>';
+    document.writeln(qStr);
+    var opt = ["one die shows 2 spots and the other shows a prime number",
+         "exactly one spot shows on each die",
+         "one die shows 2 spots or the other shows a prime number or both",
+         "one die shows 2 spots or the other shows a prime number, but not both",
+         "none of the above"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '</p><p>(b) <span class="qSpan">What is the event ' +
+               '<span class="math">A&cap;B&cap;C</span> in words?</span>';
+    document.writeln(qStr);
+    var opt = ["one die shows 2 and one die shows 5",
+         "one die shows 2 and the other shows 5, or one die shows 7",
+         "the impossible event (empty set)",
+         "one die shows 2 and the other 5, or one die shows 3 and the other 4",
+         "none of the above"
+         ];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+    ansStr = '(a) The event <span class="math">A&cap;B</span> is the event that I roll a number that ' +
+             'is both prime and even.  There is only one even prime, 2, so ' +
+             '<span class="math">A&cap;B</span> is the even that I roll double ones: one spot shows on ' +
+             'each die. </p><p>' +
+             '(b) The event <span class="math">A&cap;BC</span> does not correspond to any possible ' +
+             'roll of the dice: a number cannot be at the same time even, prime, and equal to seven.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the experiment of rolling a fair pair of ' +
+           'dice. Let <span class="math">A</span> be the event that the total number of spots showing on the ' +
+           'two dice is prime, let <span class="math">B</span> be the event that the total number of spots ' +
+           'showing on the two dice is even, and let <span class="math">C</span> be the event that at least ' +
+           'one die shows exactly one spot. <span class="qSpan">Select the true statement ' +
+           '</span>';
+    document.writeln(qStr);
+    var opt = ["The event C is a subset of the event A&cap;B",
+        "The event A&cap;B and the event C are disjoint",
+        "The event C is a subset of the event B",
+        "The event A&cap;B is a subset of the event C",
+        "The event A is a subset of the event C"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'d');
+    document.writeln('</p>');
+    var ansStr = 'The event <span class="math">A&cap;B</span> is the event that double ones are rolled. ' +
+         'For that to occur, at least one die must show exactly one spot: ' +
+         '<span class="math">A&cap;B</span> implies <span class="math">C</span>.  ' +
+         'Thus the event <span class="math">A&cap;B</span> is a subset of the event <span class="math">C</span>.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+<p>
+    Sets are collections of things without regard to their order.
+    Sets can be specified by listing their elements (the things in the set, also called members) or by giving
+    a property satisfied by their members (and nothing else).
+    The empty set, the set with no members, is <span class="math">{}</span>.
+    Set operations turn sets into other sets.
+    If <span class="math">x</span> is in the set <span class="math">A</span> we write 
+    <span class="math">x&isin;A</span> or <span class="math">A&ni;x</span>.
+    The <span class="termOfArt">complement</span> of a set <span class="math">A</span>, 
+    <span class="math">A<sup>c</sup></span>,
+    relative to a &quot;universe&quot; of elements <span class="math"><strong>S</strong></span>,
+    is the set of members of the reference universe
+    <span class="math"><strong>S</strong></span> that are not in <span class="math">A</span>.
+    The set <span class="math">A</span> is a <span class="termOfArt">subset</span> 
+    of the set <span class="math">B</span> (<span class="math">A&sub;B</span>)
+    if every element of <span class="math">A</span> is also an element of <span class="math">B</span>.
+    If <span class="math">A</span> is not a subset of <span class="math">B</span>, we write
+    <span class="math">A&nsub;B</span>.
+</p>
+
+<p>
+    The empty set is a subset of every set.
+    Thus, the statement <span class="math">A&sub;B</span> can be true even if neither <span class="math">A</span>
+    nor <span class="math">B</span> has any members.
+    But for <span class="math">A&nsub;B</span> to be true, <span class="math">A</span> must have at least one
+    member, as must <span class="math">B<sup>c</sup></span>.
+    If <span class="math">A&sub;B</span> then <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>
+    and if <span class="math">A&nsub;B</span> then <span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>.
+</p>
+
+<p>
+    The <span class="termOfArt">intersection</span> of the set 
+    <span class="math">A</span> and the set <span class="math">B</span>,
+    <span class="math">A&cap;B</span> (also written <span class="math">A&cap;B</span>), is the
+    set of things that are in both <span class="math">A</span> and <span class="math">B</span>.
+    If <span class="math">A&cap;B = A</span> then <span class="math">A&sub;B</span>.
+</p>
+
+<p>
+    The <span class="termOfArt">union</span> of the set 
+    <span class="math">A</span> and the set <span class="math">B</span>,
+    <span class="math">A&cup;B</span>,
+    contains every element of <span class="math">A</span>, 
+    every element of <span class="math">B</span>, and nothing else.
+    If <span class="math">A&cup;B = A</span> then <span class="math">B&sub;A</span>.
+</p>
+
+<p>
+    The sets <span class="math">A</span> and <span class="math">B</span> are 
+    <span class="termOfArt">disjoint</span> or 
+    <span class="termOfArt">mutually exclusive</span>
+    if they have no elements in common, that is, if <span class="math">A&cap;B</span> = {}.
+    The collection <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip; }</span> <span class="termOfArt">exhausts</span>
+    <span class="math">A</span> if every element of <span class="math">A</span> is in at least one of the
+    sets in the collection; that is, if <span class="math">A &sub; A<sub>1</sub>
+    &cup; A<sub>2</sub>
+    &cup; A<sub>3</sub>&cup; &hellip;</span> .
+    The collection
+    <span class="math">{A<sub>1</sub>, A<sub>2</sub>, A<sub>3</sub>, &hellip; }</span>
+    is <span class="termOfArt">disjoint</span> if 
+    <span class="math">A<sub>i</sub>A<sub>j</sub> = {}</span>
+    when <span class="math">i &ne; j</span>.
+    The collection
+    <span class="math">{A<sub>1</sub>, A<sub>2</sub>, A<sub>3</sub>, &hellip; }</span> is a
+    <span class="termOfArt">partition</span> of
+    <span class="math">A</span> if every element of <span class="math">A</span> is in
+    exactly one of the sets in the collection and nothing else is; that is, if the collection is
+    disjoint and <span class="math">A = A<sub>1</sub> &cup; A<sub>2</sub>
+    &cup; A<sub>3</sub>&cup; &hellip;</span> .
+</p>
+
+<p>
+    Outcome space <span class="math"><strong>S</strong></span> is the set of all things that
+    could possibly happen in an experiment.
+    Events are subsets of <span class="math"><strong>S</strong></span>.
+    The event <span class="math">A</span> occurs if the outcome of the experiment is an element of
+    <span class="math">A</span>; otherwise, <span class="math">A</span> does not occur.
+    Two events are disjoint or mutually exclusive if they have no outcomes in 
+    common&mdash;if they are disjoint subsets of <span class="math"><strong>S</strong></span>.
+    Disjoint events cannot occur simultaneously.
+    For example, if a coin is tossed, the event that the coin lands &quot;heads&quot;
+    and the event that the coin lands &quot;tails&quot; are disjoint.
+</p>
+
+<p>
+    Set theory forms the basis of the mathematical study of probability,
+    which we begin in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityAxioms') + '. ');
+// -->
+</script>
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>associative</li>
+    <li>complement</li>
+    <li>commutative</li>
+    <li>de Morgan's laws</li>
+    <li>disjoint</li>
+    <li>distributive</li>
+    <li>element (<span class="math">&isin;</span>)</li>
+    <li>empty set <span class="math">{}</span></li>
+    <li>event</li>
+    <li>exhaustive</li>
+    <li>intersection (<span class="math">&cap;</span>)</li>
+    <li>member (<span class="math">&isin;</span>)</li>
+    <li>non-member (<span class="math">&notin;</span>)</li>
+    <li>membership function</li>
+    <li>mutually exclusive</li>
+    <li>non-member (<span class="math">&notin;</span>)</li>
+    <li>not a subset (<span class="math">&nsub;</span>)</li>
+    <li>outcome space</li>
+    <li>partition</li>
+    <li>random experiment</li>
+    <li>set</li>
+    <li>subset (<span class="math">&sub;</span>)</li>
+    <li>union (<span class="math">&cup;</span>)</li>
+    <li>universal set, universe, <span class="math"><strong>S</strong></span></li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

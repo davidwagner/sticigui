@@ -1,0 +1,990 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "2 December 2012 14:24 PST";
+	// copyright 1997-2012 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript"
+  src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "probabilityPhilosophy";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+<h1>
+  Probability: Philosophy and Mathematical Background
+</h1>
+
+<p>
+    Probability is the study of randomness.
+    It has a mathematical aspect and a philosophical aspect.
+    The mathematical aspect is described in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityAxioms') + '. ');
+// -->
+</script>
+    The philosophical aspect, described in this chapter, connects the
+    mathematical theory with the world&mdash;it says what &quot;probability&quot;
+    means when we make statements like
+    &quot;the probability that a fair coin lands heads is 50%.&quot;
+</p>
+
+
+<h2>
+  <a id="theories_of_probability"></a>Theories of Probability
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/0QMTspSJM0g?start=300&end=405" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<h3>
+   <a id="random_events"></a>Random events
+</h3>
+
+<p>
+    What does <em>random</em> mean?
+    In ordinary speech, we use <em>random</em> to
+    denote things that are unpredictable or not deliberate.
+    For instance, we might speak of &quot;a random person off the street,&quot; or
+    quip that &quot;Philip said the most random thing in lecture today!&quot;
+    In this course, we distinguish between
+    <span class="termOfArt">random</span> and <span class="termOfArt">haphazard</span>.
+    Events that are random are not perfectly
+    predictable, but they have long-term regularities that we can
+    describe and quantify using probability.
+    In contrast, haphazard events do not necessarily have long-term regularities.
+    Moreover, we limit the term <span class="termOfArt">probability</span> to events for which we can
+    specify all possible outcomes.
+</p>
+
+<div class="indent">
+<p class="inline">
+  How a fair coin lands when it is tossed vigorously is a canonical
+  example of a random event.
+  One cannot predict perfectly whether the coin will land heads or tails;
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = "Some sleight-of-hand artists can toss a &quot;fair&quot; coin in " +
+           "such a way as to make it land heads a very large fraction of the " +
+           "time (more than 9 times out of 10). It takes a lot of practice.";
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+  however, in repeated tosses, the fraction of times the
+  coin lands heads will tend to settle down to a limit of 50%.
+  The outcome of an individual toss is not perfectly predictable, but the long-run
+  average behavior is predictable.
+  Thus it is reasonable to consider the outcome of tossing a fair coin to be random.
+</p>
+</div>
+
+
+<p>
+    What does it mean to say that a fair coin toss has a 50% chance of landing heads?
+    There are several standard answers, called <span class="termOfArt">Theories of Probability</span>.
+</p>
+
+<p>
+    Theories of Probability assign meaning to statements like
+    &quot;the probability that <span class="math">A</span> occurs is <span class="math">p</span>%.&quot;
+    Theories of probability connect the mathematics of probability to the real world.
+    As you might expect, bridging mathematics to reality is not so easy&mdash;the
+    philosophical problems are deep, and it is hard to be consistent without being
+    circular.
+    We shall examine three theories of probability.
+    The one I find most satisfactory is the Frequency Theory,
+    although the others have their places too.
+    In all three theories, probability is on a scale of 0% to 100%.
+    &quot;Probability&quot; and &quot;chance&quot; are synonymous.
+</p>
+
+
+<h3>
+  <a id="equally_likely_outcomes"></a>
+    Equally Likely Outcomes
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/0QMTspSJM0g?start=405&end=862" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This theory of probability is the oldest.
+    It originated in the study of games of chance, such as dice games and card games.
+    In the Theory of Equally Likely Outcomes, probability assignments depend on the
+    assertion that no particular outcome is preferred over any other by Nature; generally,
+    arguments that Nature should show no preference among the outcomes appeal to the
+    symmetry of the system studied (such as a &quot;fair&quot; coin or die).
+</p>
+
+<p>
+    If a given experiment or trial has <span class="math">n</span> possible outcomes among
+    which&mdash;it is assumed&mdash;Nature should show no preference, this
+    theory defines them to be <span class="termOfArt">equally likely</span>.
+    The probability of each outcome is then <span class="math">100%/n</span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Applying this theory of probability involves arguing that no particular outcome should occur
+    in preference to another, typically by appeal to physical symmetries
+    or other considerations&mdash;e.g., that there is no reason one marble would be predisposed
+    to turn up rather than another in drawing a marble from a well-stirred bowl of marbles.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Laplace\'s <a class="glossRef" href="gloss.htm#principle_of_insufficient_reason">' +
+               '<span class="termOfArt">Principle of Insufficient Reason</span></a> asserts that if there ' +
+               'is no reason to think that a set of outcomes is not equally likely, they should ' +
+               'be taken to be equally likely.  This is poor logic: no evidence of a difference ' +
+               'is not the same as evidence of no difference.  The fallacy is called ' +
+               '<a class="glossRef" href="gloss.htm#appeal_to_ignorance">' +
+               '<span class="termOfArt">Appeal to Ignorance</a></span>. See also ' +
+               '<a href="references.htm">Freedman and Stark, 2003</a>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    For example, if a coin is balanced well, there is no reason for it to
+    land heads in preference to tails when it is tossed vigorously,
+    so according to the Theory of Equally Likely Outcomes,
+    the probability that the coin lands heads is equal to the
+    probability that the coin lands tails, and both are 100%/2 = 50%.
+    (This ignores the nearly impossible outcomes that the coin does not
+    land at all or lands balanced on its edge.)
+    Similarly, if a die is fair
+    (properly balanced) the chance that when it is rolled vigorously
+    it lands with the side with one spot on top (the chance that the die <em>shows</em>
+    one spot) is the same as the chance that it shows two spots or three
+    spots or four spots or five spots or six spots: 100%/6, about 16.7%.
+</p>
+</div>
+
+<p>
+    If an <a class="glossRef" href="gloss.htm#event">event</a> consists of more than one possible
+    outcome, the chance of the event is the number of ways it can occur, divided by the total
+    number of things that could occur.
+    For example, the chance that a die lands showing an even number of spots
+    is the number of ways it could land showing an even number of spots
+    (3, namely, landing showing 2, 4, or 6 spots), divided by the total
+    number of things that could occur
+    (6, namely, landing showing 1, 2, 3, 4, 5, or 6 spots).
+    Since the total number of possible outcomes is <span class="math">n</span>, the maximum possible
+    probability of any event is <span class="math">100%&times;n/n = 100%</span>.
+    Thus, in the Theory of Equally Likely Outcomes, probabilities are between 0%
+    and 100%, as claimed.
+</p>
+
+<h3><a id="frequency_theory"></a>
+    Frequency Theory
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/0QMTspSJM0g?start=862&end=1290" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    In the Frequency Theory of Probability,
+    probability is the limit of the relative frequency
+    with which an event occurs in repeated trials.<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The trials must be <a class="glossRef" ' +
+               'href="gloss.htm#independent">independent</a>&mdash;more about this in ' +
+                citeLinkChapter('probabilityAxioms') + '.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Relative frequencies are always between 0% (the event essentially never happens)
+    and 100% (the event essentially always happens), so in this theory as well, probabilities
+    are between 0% and 100%.
+    According to the Frequency Theory of Probability, what it means to
+    say that &quot;the probability that <span class="math">A</span> occurs is
+    <span class="math">p</span>%&quot; is that
+    if you repeat the experiment over and over again, independently and
+    under essentially identical conditions, the percentage of the time
+    that <span class="math">A</span> occurs will converge to <span class="math">p</span>.
+    For example, under the Frequency Theory, to say that the chance
+    that a coin lands heads is 50% <em>means</em> that if you toss the coin over and over again,
+    independently, the ratio of the number of times the coin lands heads to the
+    total number of tosses approaches a limiting value of 50% as the number
+    of tosses grows.
+    Because the ratio of heads to tosses is always between 0% and 100%, when the
+    probability exists it must be between 0% and 100%.
+</p>
+</div>
+
+<h3><a id="subjective_theory"></a>
+    The Subjective Theory
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/0QMTspSJM0g?start=1290&end=1629" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    In the Subjective Theory of Probability, probability measures the speaker's
+    &quot;degree of belief&quot; that the event will occur, on a scale of 0%
+    (complete disbelief that the event will happen) to 100%
+    (certainty that the event will happen).
+    According to the Subjective Theory, what it means for me to say that
+    &quot;the probability that <span class="math">A</span> occurs is 2/3&quot; is that
+    I believe that <span class="math">A</span> will happen twice as strongly as I believe
+    that <span class="math">A</span> will not happen.
+    The Subjective Theory is particularly useful in assigning meaning to the
+    probability of events that in principle can occur only once.
+    For example, how might one assign meaning to a statement like
+    &quot;there is a 25% chance of an earthquake on the San Andreas fault
+    with magnitude 8 or larger before 2050?&quot;
+    (See <a href="../../Preprints/611.pdf">Freedman and Stark, 2003</a>, for more discussion
+    of theories of probability and their application to earthquakes.)
+    It is very hard to use either the Theory of Equally Likely Outcomes
+    or the Frequency Theory to make sense of the assertion.
+    Can you think of other examples?
+</p>
+
+<p>
+    These three theories of probability assign different meanings to the statement
+    &quot;the chance that <span class="math">A</span> occurs is <span class="math">p%</span>.&quot;
+    Each theory has situations in which it is most natural, and each
+    theory has shortcomings.
+    This book uses the Frequency Theory primarily.
+</p>
+
+<h2>
+    <a id="shortcomings"></a>Shortcomings of the Theories
+</h2>
+
+<div class="indent">
+<p class="inline">
+    While each of the theories has attractive elements, all have shortcomings as well.
+    The shortcomings involve hidden assumptions, limited domains of applicability, and
+    changes of subject.<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The Subjective Theory changes the subject more than the others do, as ' +
+               'elaborated below.  Arguing for a conclusion superficially related to the ' +
+               'desired conclusion and pretending you have established the latter is ' +
+               '<span class="termOfArt">The Red Herring</span> fallacy. In contrast, arguing against ' +
+               'a hypothesis superficially like one you wish to refute then claiming you have ' +
+               'refuted the latter is <span class="termOfArt">The Straw Man</span> fallacy.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<h3>The Theory of Equally Likely Outcomes
+</h3>
+<p>
+    Even when there are only a few possible outcomes, it is not always clear whether
+    they should be deemed equally likely.
+    For example, consider tossing two coins at the same time.
+    The possible outcomes could be {two heads, not two heads} or
+    {two heads, one head and one tail, two tails} or
+    {two heads, head on coin 1 and tail on coin 2, tail on coin 1 and head on
+    coin 2, two tails}.
+</p>
+
+<p>
+    The last of these assigns the same probabilities the
+    Frequency Theory does.
+    For instance, if the equally likely outcomes are taken to be
+    {two heads, head on coin 1 and tail on coin 2, tail on coin 1 and head on
+    coin 2, two tails}, both the Theory of Equally Likely Outcomes and the Frequency Theory
+    would say that the chance of two heads is 25%.
+    If one is using probability to bet on games of chance, long-term relative
+    frequencies&mdash;which the Frequency Theory contemplates&mdash;are perhaps the most
+    important consideration, because they determine how much one wins or loses in
+    the long run.
+    It seems rather artificial to introduce a distinction between two otherwise
+    identical coins in order to make the probabilities calculated using the
+    Theory of Equally Likely Outcomes agree with the probabilities calculated using
+    the Frequency Theory.
+    Perhaps a more serious limitation of the Theory of Equally Likely Outcomes is that
+    many situations do not have natural symmetries to exploit to decide which outcomes
+    are equally likely.
+    For example, what is the chance that a thumbtack lands with its point up when it
+    is tossed vigorously? What is the chance that a die that has been &quot;loaded&quot;
+    (modified to be unbalanced) lands showing one spot?
+    Neither of these problems has a natural symmetry from which to argue that the
+    outcomes are equally likely.
+    Moreover, in many situations there are an infinite number of possible outcomes;
+    dividing 100% by infinity yields zero.
+</p>
+
+<h3>
+    The Frequency Theory
+</h3>
+<p>
+    The Frequency Theory requires an assumption about how the world works:
+    The relative frequency with which an event occurs in repeated trials
+    is <em>assumed</em> to converge to a limit.
+    What is a limit?
+    In the case of coin tossing, the theory says that for any positive
+    number <span class="math">a</span>, no matter how small, there is some number
+    <span class="math">M</span>, which can depend
+    on <span class="math">a</span>, such that
+</p>
+
+<p class="math">
+    | (#heads in n tosses)/n &minus; 50% |
+    &lt; a
+</p>
+
+<p>
+    whenever the number of tosses <span class="math">n &gt; M</span>.
+    Not all sequences of heads and tails satisfy this assumption.
+    For example, suppose the first toss gives a head.
+    The relative frequency of heads is then 100%.
+    Suppose the next 3 tosses give tails.
+    The relative frequency of heads is then 25%.
+    Suppose the next 100 tosses give heads.
+    The relative frequency of heads is then over 97%.
+    Suppose the next 5000 tosses give tails.
+    The relative frequency of heads is then about 20%.
+    If we continue in this way, with ever longer runs of heads and of tails,
+    the relative frequency of heads never approaches a limit.
+</p>
+
+<p>
+    <a id="empirical_law_of_averages"></a>
+    The <a class="glossRef" href="gloss.htm#empirical_law_of_averages">Empirical Law of Averages</a>
+    says this never happens:
+    The world works in such a way that the relative frequency with which a random
+    event occurs in repeated trials always settles down to a limit.
+    This &quot;law&quot; is an <em>assumption</em> about how the world works.
+    It is not a mathematical fact, and it is not an observation because no one can continue
+    tossing coins forever to see whether the relative frequency of heads starts to vary
+    again after, say, 100,000,000,000,000 tosses.
+    The Empirical Law of Averages is essential to the Frequency Theory.
+</p>
+
+<p>
+    The second limitation of the Frequency Theory is that many events to which
+    we might like to assign probabilities are not the outcomes of repeatable experiments.
+    For example, what is the probability that the universe will end in a &quot;big crunch?&quot;
+    What is the probability that my 2015 tax return will be audited?
+    What is the probability that in 2020 more online textbooks than paper
+    textbooks will be sold?
+    What is the probability that the Dow Jones Industrial Average reaches 20,000
+    before the year 2020?
+    Can you think of other examples?
+</p>
+
+<h3>
+    The Subjective Theory
+</h3>
+<p>
+    The principal shortcoming of the Subjective Theory is that colloquially we think
+    of probability as being a property of an event in the external (objective) world,
+    not merely a reflection of our state of mind.
+    When I say &quot;this thumbtack has probability 66% of landing point up when I toss it,&quot;
+    you probably think I am talking about the tack, not about my state of mind with
+    respect to the tack: this theory changes the subject.
+    Similarly, under the Subjective Theory, you and I can disagree about the probability
+    of an event and both be correct, which seems unsatisfactory in many scientific
+    settings.
+</p>
+
+<p>
+    There are a variety of technical difficulties in the Subjective Theory regarding how to
+    measure the probability of an event.
+    One possible resolution is to study the bets you are willing to take.
+    Would you be indifferent between a bet that a coin lands heads and a bet with the
+    same stakes that it lands tails?
+    If so, some theorists would conclude that your subjective probability that the coin
+    lands heads is 50%.
+    Some factors can complicate this approach.
+    For example, even though you know that buying a lottery ticket is almost certainly
+    throwing your money away, you might buy a ticket anyway, reasoning that you would
+    not particularly miss the $1 cost of the ticket, while you would definitely notice
+    winning $20,000,000.
+    In this scenario, the <em>probability</em> of winning is less of an issue than the
+    <em>possibility</em> of winning.
+</p>
+
+<p>
+    Here is another example: I will bet you $1,000,000 against $500 that there will
+    not be a nuclear bomb dropped on Berkeley, California, by the year 2020.
+    Even if I am confident that a nuclear bomb will be dropped, if it is dropped,
+    I won't have to pay off the lost bet (I live in Berkeley), but if it is not dropped,
+    I could use the $500 you would owe me.
+</p>
+
+<p>
+    Another problem with the Subjective Theory has to do with
+    <a class="glossRef" href="gloss.htm#scientific_method">scientific method</a>.
+    Some philosophers of science maintain that unless an hypothesis can,
+    in principle, be shown to be false, it is not scientific.
+    An hypothesis that in principle can be disproved is called <em>falsifiable</em>.
+    In the Frequency Theory, one can collect evidence against the statement that
+    &quot;the probability that <span class="math">A</span> occurs
+    is <span class="math">p</span>%&quot; by repeating an experiment
+    over and over and looking at the fraction of times the event <span class="math">A</span> occurs.
+    In the Subjective Theory, evidence against the hypothesis that
+    &quot;the probability that <span class="math">A</span> occurs is <span class="math">p</span>%&quot;
+    is found by psychological testing to see whether the individual making the
+    statement is telling the truth and is internally consistent in his assignments
+    of probability.
+    Running the real-world experiment over would not be relevant.
+</p>
+
+<p>
+    The following exercises check whether you understand the differences among the
+    Theories of Probability.
+    The examples illustrate using the Fundamental Rule of
+    Counting and the Theories of Probability in more complex settings.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A standard die has six faces: one with one spot ' +
+           'on it, one with two spots, &hellip; , and one ' +
+           'with 6 spots. <span class="qSpan">According to the frequency theory, ' +
+           'what it means to say that the chance is 1/6 that a die lands with the ' +
+           'face with one spot on top (&quot;a one will show&quot;) when you roll ' +
+           'it is </span>';
+    document.writeln(qStr);
+    var opt = ["a one will show in one out of 6 rolls",
+         "a one will show in 1000 out of 6000 rolls",
+         "the fraction of rolls that show one will converge to 1/6",
+         "none of the above"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+    var ansStr = 'See <a class="glossRef" href="gloss.htm#frequency_theory">the definition of the ' +
+         'frequency theory of probability</a>.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">According to the theory of equally likely ' +
+           'outcomes, what it means to say that the chance is 1/6 that a die ' +
+           'lands with the face with one spot on top (&quot;a one will show&quot;) ' +
+           'when you roll it is </span>';
+    document.writeln(qStr);
+    var opt = ["a one will show in one out of 6 rolls",
+         "there is no reason nature should prefer one of the 6 possible outcomes",
+         "there are 6 outcomes so they each have chance 1/6",
+         "the die is symmetrical",
+         "none of the above"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+     'See <a class="glossRef" href="gloss.htm#equally_likely_outcomes">the definition of the theory ' +
+     'of equally likely outcomes</a>.'
+     );
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">According to the subjective theory, what it means ' +
+           'to say that the chance is 1/6 that a die lands with the face with one ' +
+           'spot on top (&quot;a one will show&quot;) when you roll it is </span>';
+    document.writeln(qStr);
+    var opt = [ 'the speaker thinks a one will show in one out of 6 rolls',
+         'the speaker thinks the chance a one will show is 1/6',
+         'the speaker thinks the fraction of rolls that show one will converge to 1/6',
+         'the speaker believes 5 times as strongly that the die won\'t show one ' +
+            'as that it will',
+         'none of the above'
+          ];
+    writeSelectExercise(false,qCtr++,opt,'d');
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+    'See <a class="glossRef" href="gloss.htm#subjective_theory">the definition of the subjective ' +
+    'theory of probability</a>.'
+     );
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">According to the theory of equally likely outcomes, ' +
+           'the chance that a die lands with fewer than 5 spots showing is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(2/3));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+       'There are six equally likely outcomes, of which four (two-thirds) have fewer than 5 ' +
+       'spots, so the chance that the die lands showing fewer than 5 spots is thus 4/6 = 2/3.'
+    );
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A sports commentator says that the chance your ' +
+           'favorite team wins a certain game is 50%. <span class="qSpan">' +
+           'Which theory of probability would be most natural to use to interpret ' +
+           'his/her statement?</span>';
+    document.writeln(qStr);
+    var opt = ["the theory of equally likely outcomes",
+        "the frequency theory",
+        "the subjective theory"];
+    var aVal = "c";
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+      'The most natural theory here is the subjective theory.  The possible outcomes are ' +
+      'win, lose, and tie; there is no reason to think that they are equally likely, so ' +
+      'the theory of equally likely outcomes is not natural here. ' +
+      'The game will be played only once: the weather conditions, injury status of the ' +
+      'players, etc., cannot be duplicated to allow the game to be played repeatedly under ' +
+      'essentially the same circumstances, so the frequency theory is hard to apply.'
+    );
+// -->
+</script>
+</div>
+
+<p>&nbsp;</p>
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Probability of winning the Lotto Jackpot.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+	(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)
+</p>
+<p class="video">
+	<iframe width="420" height="315" src="http://www.youtube.com/embed/0QMTspSJM0g?start=2748&end=3350" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    In Lotto, you pick six numbers
+    between 1 and 53; 6 numbers are drawn &quot;at random&quot; in such a way that every
+    set of 6 distinct numbers between 1 and 53 is equally likely.
+    To win the jackpot, all 6 of
+    the numbers drawn must match the numbers you picked.
+    The total number of combinations of
+    53 numbers taken 6 at a time is \({}_{53}C_6 = 22,957,480\).
+    Only one of those
+    combinations matches your exactly, so the chance of winning the jackpot is \(1/(22,957,480)
+    = 0.0000044\%\).
+</p>
+
+<p>
+    There is a payoff of $5 if you match 3 of the 6 numbers.
+    To match 3, the draw has to
+    result in 3 of your 6 numbers, and in 3 of the 47 numbers you did not pick.
+    You can think of this as a sequence of two experiments:
+    drawing 3 numbers from among your 6 (which can
+    result in
+    \({}_6C_3 = 20\) possible outcomes), and drawing 3 numbers from the 47
+    remaining numbers that are not among your six (which can result in
+    \({}_{47}C_3 = 16,215\) possible outcomes).
+    Because the number of possibilities in the second experiment does not depend on
+    what happened in the first, we can apply the fundamental rule of counting to conclude that
+    the total number of ways of drawing 3 of the 6 numbers you picked, and 3 of the 47 you did
+    not pick, is <span class="math"><sub>6</sub>C<sub>3</sub>&times;<sub>47</sub>C<sub>3</sub></span>.
+    The chance that the numbers drawn will match exactly 3 of your 6 numbers is therefore
+</p>
+
+<p class="math">
+    <sub>6</sub>C<sub>3</sub>&times;<sub>47</sub>C<sub>3</sub>/<sub>53</sub>C<sub>6</sub>
+    = 20&times;16,215/22,957,480
+    = 1.41%.
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var match = [1, 2, 4, 5];
+    var inx = (listOfRandInts(1,0,3))[0];
+    var nMatch = match[inx];
+    var waysMatch = roundToDig(binomialCoef(6,nMatch)*binomialCoef(47,6 - nMatch),0);
+    var pMatch = waysMatch/binomialCoef(53,6);
+    var qStr = '<span class="qSpan">In Lotto, how many ways are there to match exactly ' +
+           nMatch.toString() + ' of the winning numbers?</span>';
+    document.writeln(qStr);
+    writeTextExercise(12,qCtr++,numToRange(waysMatch,1));
+    var qStr = '<span class="qSpan">What is the probability that ' +
+        nMatch.toString() + ' of the winning numbers match a given set of 6 ' +
+        'numbers between 1 and 53?</span>';
+    document.writeln(qStr);
+    writeTextExercise(12,qCtr++,numToRange(pMatch));
+    document.writeln('</p>');
+    var ansStr = 'There are </p><p class="math"><sub>53</sub>C<sub>6</sub> = ' +
+         roundToDig(binomialCoef(53,6),0) + '</p><p>equally likely possibilities for the ' +
+         'entire set of six winning numbers.  There are <span class="math"><sub>6</sub>C<sub>' +
+         roundToDig(nMatch,0) + '</sub></span> ways of selecting exactly ' +  roundToDig(nMatch,0) +
+         ' of the six winning numbers to match. If ' + nMatch.toString() +
+         ' are fixed, we are still free to select the other ' + roundToDig(6-nMatch,1) +
+         ' numbers from the 47 non-winning numbers. Thus there are ' +
+         '</p><p class="math"><sub>6</sub>C<sub>' + roundToDig(nMatch,0) +
+         '</sub>&times;<sub>47</sub>C<sub>' +  roundToDig(6-nMatch,0) +
+         '</sub> = ' + roundToDig(waysMatch,0) +
+         '</p><p>ways to match exactly ' + roundToDig(nMatch,0) + ' of the six winning ' +
+         'numbers.  There are the same number of ways that one\'s chosen 6 numbers ' +
+         'match exactly ' + roundToDig(nMatch,0) + ' of the winning numbers as there ' +
+         'are ways for exactly ' + roundToDig(nMatch,0) + ' of the winning numbers to match ' +
+         'a fixed set of 6 numbers. Because these ways are equally likely, the chance ' +
+         'that exactly ' + roundToDig(nMatch,0) + ' of the winning numbers match a ' +
+         'given set of 6 numbers between 1 and 53 is </p><p class="math">' +
+         '(<sub>6</sub>C<sub>' + roundToDig(nMatch,0) +
+         '</sub>&times;<sub>47</sub>C<sub>' +  roundToDig(6-nMatch,0) +
+         '</sub>)/(<sub>53</sub>C<sub>6</sub>) = ' +
+         roundToDig(100*pMatch,10) + '%. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Probability of one pair in a five-card hand.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    What is the chance of being dealt exactly one pair (two of a kind) in a 5 card hand
+    from a well shuffled deck of cards?
+</p>
+
+<p>
+    <strong>Solution.</strong>
+    How many distinct 5-card hands can one form from a deck of 52 cards?
+    In a hand of cards, the order in which you receive the cards does not matter.
+    The number of 5-card hands is the number of ways of picking a set of 5
+    things from 52 things, which is <span class="math"><sub>52</sub>C<sub>5</sub> = 52!/(5!&nbsp;47!)</span>.
+    Assuming that the deck is well-shuffled, every 5-card hand is equally likely,
+    so the chance of being dealt exactly one pair is the number of hands that contain
+    exactly one pair, divided by the total number of hands (which we just found).
+</p>
+
+<p>
+    To specify a hand containing one pair, we
+    need to specify what <em>kind</em> the pair is of, the two <em>suits</em> of the cards
+    in the pair, and the three remaining cards.
+    Because we can think of this as a sequence of trials, we can invoke the Fundamental Rule
+    of Counting to find the total number of hands that contain exactly one pair by
+    multiplying the number of possible outcomes of each of these trials:
+</p>
+
+<ul>
+    <li>
+      Ways of picking the kind of which to have a pair: There are 13 kinds in the deck, from
+      which we need to pick one.
+      There are <span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways of doing that.
+    </li>
+    <li>
+      Ways of picking the two suits of the cards in the pair: There are 4 suits in the deck,
+      from which we need to pick two.
+      There are <span class="math"><sub>4</sub>C<sub>2</sub> = 6</span> ways of doing
+      this.
+    </li>
+    <li>
+      Ways of picking the kinds of the remaining three cards. There are 12 kinds of cards that
+      are different from the one of which we have the pair. We need to pick three different ones
+      (if two or more of the kinds of the three additional cards were the same, we'd either have
+      two pair or a full house).
+      There are <span class="math"><sub>12</sub>C<sub>3</sub> = 220</span> ways of doing this.
+    </li>
+    <li>
+      Ways of picking the suits of the remaining three cards. For each of the three kinds, we
+      have four choices of suit ( <span class="math"> = <sub>4</sub>C<sub>1</sub></span>),
+      so by the Fundamental Rule of
+      Counting, there are <span class="math">4&times;4&times;4 = 64</span> ways of doing this.
+    </li>
+</ul>
+
+<p>
+    By the
+    <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental Rule of Counting</a>,
+    the total number of distinct 5-card hands that contain exactly one pair is
+</p>
+
+<p class="math">
+    13&times;6&times;220&times;64 = 1,098,240.
+</p>
+
+<p>
+    The probability of being dealt one of those hands from a well-shuffled deck is
+    thus
+</p>
+
+<p class="math">
+    1,098,240/<sub>52</sub>C<sub>5</sub> = 42.3%.
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Probability of two pair in a five-card hand.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    What is the chance of being dealt two pair in a 5-card hand
+    from a well-shuffled deck?
+</p>
+
+<p>
+    <strong>Solution.</strong>
+    We need to specify which two kinds the pairs are of, the suits
+    of those kinds, and the remaining (fifth) card.
+    There are <span class="math"><sub>13</sub>C<sub>2</sub></span> ways
+    of choosing the two kinds. For each of those choices, there are
+    <span class="math"><sub>4</sub>C<sub>2</sub></span>
+    ways of specifying the suits of each of those kinds individually
+    (so there are <span class="math"><sub>4</sub>C<sub>2</sub>
+    &times; <sub>4</sub>C<sub>2</sub></span> ways of specifying the suits of the two cards of the two
+    kinds).
+    There are <span class="math">52&nbsp;-&nbsp;4&nbsp;-&nbsp;4&nbsp;=&nbsp;44</span> cards in the deck that we
+    could use for the fifth card, without making the hand be a full house, so there are
+    <span class="math"><sub>44</sub>C<sub>1</sub>&nbsp;=&nbsp;44</span> ways
+    of choosing the fifth card.
+    By the <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental
+    rule of counting</a>, there are
+</p>
+
+<p class="math">
+    <sub>13</sub>C<sub>2</sub> &times;
+    <sub>4</sub>C<sub>2</sub> &times; <sub>4</sub>C<sub>2</sub>
+      &times; <sub>44</sub>C<sub>1</sub>
+</p>
+
+<p>
+    distinct five-card hands that comprise two pair.
+    If the deck is well shuffled, each of the <span class="math"><sub>52</sub>C<sub>5</sub></span>
+    five-card hands
+    is equally likely, so the chance of being dealt two pair is
+</p>
+
+<p class="math">
+  <sub>13</sub>C<sub>2</sub> &times; <sub>4</sub>C<sub>2</sub> &times; <sub>4</sub>C<sub>2</sub>
+  &times; <sub>44</sub>C<sub>1</sub> / (<sub>52</sub>C<sub>5</sub>).
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Probability of a royal flush in a five-card hand.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    What is the chance of being dealt a royal flush from a well-shuffled
+    deck?
+</p>
+
+<p>
+    <strong>Solution.</strong>
+    A royal flush is {10, J, Q, K, A} of the same suit.
+    The only thing unspecified is the suit.
+    There are 4 ways of picking a suit from the four
+    (<span class="math"><sub>4</sub>C<sub>1</sub> = 4</span>), so there are 4
+    ways of getting a royal flush. Again, assuming the deck is well-shuffled, the chance of a
+    royal flush is <span class="math">4/(<sub>52</sub>C<sub>5</sub>)</span>.
+</p>
+</div>
+
+<p>
+    The following exercise checks that you can calculate the chance of a given poker hand.
+</p>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var hands = ["three of a kind",
+         "four of a kind",
+         "a full house",
+         "a flush",
+         "a straight",
+         "a straight flush",
+         "a royal flush"
+        ];
+    var inx = (listOfRandInts(1,0,6))[0];
+    var totHands = binomialCoef(52,5);
+    var nHands;
+    var ansStr;
+    if (inx == 0){
+       nHands = 13*4*binomialCoef(12,2)*4*4;
+       ansStr = 'To have three of a kind, one needs to select the kind of which to ' +
+       'have three, and two other kinds of which to have one each. There are ' +
+       '<span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways to pick the kind of which to have three, and ' +
+       '<span class="math"><sub>4</sub>C<sub>3</sub> = 4</span> ways to pick their suits; there are ' +
+       '<span class="math"><sub>12</sub>C<sub>2</sub> = 66</span> ways to pick the two remaining kinds of which to ' +
+       'have one, and <span class="math"><sub>4</sub>C<sub>1</sub>&times;<sub>4</sub>C<sub>1</sub> = 16</span> ways ' +
+       'to pick their suits.  Thus there are <span class="math">13&times;4&times;66&times;16 = ' +
+       commify(nHands) + '</span> distinct hands that are three of a kind.  The chance of being ' +
+       'dealt three of a kind from a well-shuffled deck is ' + commify(nHands) +
+       ' divided by ' + commify(totHands) +
+       ', the total number of possible five card hands.';
+    } else if (inx == 1) {
+      nHands = 13*48;
+      ansStr = 'To have four of a kind, one needs to select the kind of which to ' +
+      'have four, and one other kinds of which to have one. There are ' +
+      '<span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways to pick the kind of which to have four, and ' +
+      'only one way to pick their suits; there are ' +
+      '<span class="math"><sub>12</sub>C<sub>1</sub> = 12</span> ways to pick the remaining kind of which to ' +
+      'have one, and <span class="math"><sub>4</sub>C<sub>1</sub> = 4</span> ways ' +
+      'to pick its suits.  Thus there are 13&times;4&times;12 = ' +
+      commify(nHands) + ' distinct hands that are four of a kind.  The chance of being ' +
+      'dealt four of a kind from a well-shuffled deck is ' + commify(nHands) +
+      ' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    } else if (inx == 2) {
+      nHands = 13*4*12*6;
+      ansStr = 'To have a full house, one needs to select the kind of which to ' +
+      'have three, and another kind of which to have a pair.  There are ' +
+      '<span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways to pick the kind of which to have three, and ' +
+      '<span class="math"><sub>4</sub>C<sub>3</sub> = 4</span> ways way to pick their suits; there are ' +
+      '<span class="math"><sub>12</sub>C<sub>1</sub> = 12</span> ways to pick the kind of which to ' +
+      'have a pair, and <span class="math"><sub>4</sub>C<sub>2</sub> = 6</span> ways ' +
+      'to pick its suits.  Thus there are <span class="math">13&times;4&times;12&times;6 = ' +
+      commify(nHands) + '</span> distinct hands that are a full house.  The chance of being ' +
+      'dealt a full house from a well-shuffled deck is ' + commify(nHands) +
+      ' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    } else if (inx == 3) {
+      var cFive = binomialCoef(13,5);
+      nHands = 4*(cFive - 10);
+      ansStr = 'To have a flush, one needs to select the suit of which to ' +
+      'have the five cards; the five cards cannot be consecutive.  There are ' +
+      '<span class="math"><sub>4</sub>C<sub>1</sub> = 4</span> ways to pick the suit, and ' +
+      '<span class="math"><sub>13</sub>C<sub>5</sub>  = ' + (cFive).toString() +
+      '</span> ways to pick five of the 13 kinds of a given suit; ' +
+      '10 of those ways consist of five consecutive cards (straight flushes or a ' +
+      'royal flush). Thus there are 4&times;(' + cFive.toString() + ' - 10) = ' +
+      commify(nHands) + ' distinct hands that are a flush.  The chance of being ' +
+      'dealt a flush from a well-shuffled deck is ' + commify(nHands) +
+      ' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    } else if (inx == 4) {
+      nHands = 10*(Math.pow(4,5)-4);
+      ansStr = 'To have a straight, one needs to select the lowest card; the kinds ' +
+      'of the other cards are then automatically fixed.  There are ten possible ' +
+      'starting cards (A, 2, 3, 4, 5, 6, 7, 8, 9, 10).  For each starting card, ' +
+      'there are 4 choices of the suit for each of the five cards, 4<sup>5</sup> ' +
+      'possibilities in all. However, four of those possibilities correspond to all ' +
+      'five cards having the same suit, which yields either a straight flush or a ' +
+      'royal flush, so one must subtract four from those possible choices of the ' +
+      'suits, which leaves  (4<sup>5</sup> - 4) choices of suits for the five cards. ' +
+      'Thus there are 10&times;(4<sup>5</sup> - 4) = ' +
+      commify(nHands) + ' distinct hands that are straights.  The chance of being ' +
+      'dealt a straight from a well-shuffled deck is ' + commify(nHands) +
+      ' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    } else if (inx == 5) {
+      nHands = 36;
+      ansStr = 'To have a straight flush, one needs to select the lowest card; the kinds ' +
+      'of the other cards are then automatically fixed.  There are nine possible ' +
+      'starting cards (A, 2, 3, 4, 5, 6, 7, 8, 9; starting with a ten gives a ' +
+      'royal flush).  For each starting card, there are 4 choices of the suit for each ' +
+      'of the five cards (all five must have the same suit). Thus there are 9&times;4 = ' +
+      commify(nHands) + ' distinct hands that are straight flushes.  ' +
+      'The chance of being dealt a straight flush from a well-shuffled deck is ' +
+      commify(nHands) +' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    } else if (inx == 6) {
+      nHands = 4;
+      ansStr = 'To have a royal flush, one needs to select the suit; the kinds ' +
+      'of all the cards are automatically fixed (10, J, Q, K, A).  There are ' +
+      'four possible choices of the suit. Thus there are ' +
+      commify(nHands) + ' distinct hands that are royal flushes.  ' +
+      'The chance of being dealt a royal flush from a well-shuffled deck is ' +
+      commify(nHands) +' divided by ' + commify(totHands) +
+      ', the total number of possible five card hands.';
+    }
+    var pHand = nHands/totHands;
+    var qStr = 'Suppose that Aces can be either high or low; that is, that {Ace, 2, 3, 4, 5} ' +
+           'is a straight, and so is {10, Jack, Queen, King, Ace}. <span class="qSpan">' +
+           'The number of ways of getting a five card hand that is ' + hands[inx] +
+           ' from a standard deck of cards is </span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nHands,1));
+    var qStr = '<span class="qSpan">The probability of being dealt a five card hand that is ' +
+        hands[inx] + ' from a well shuffled standard deck of cards is </span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(pHand));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    Theories of Probability assign meaning to probability statements about the world.
+    The Theory of Equally Likely Outcomes says that if an experiment must result
+    in one of n outcomes, and there is no reason Nature should prefer one of
+    the outcomes to another, then the probability of each outcome is
+    <span class="math">100%/n</span>.
+    The Frequency Theory says that the probability of an event is the limit of
+    the relative frequency with which the event occurs in repeated trials under
+    essentially identical conditions.
+    The Subjective Theory says that probability is a measure of strength of
+    belief on a scale of 0 to 100%.
+</p>
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>chance</li>
+    <li>Empirical Law of Averages</li>
+    <li>Frequency Theory</li>
+    <li>Fundamental Rule of Counting</li>
+    <li>haphazard</li>
+    <li>independent</li>
+    <li>probability</li>
+    <li>random event</li>
+    <li>scientific method</li>
+    <li>Subjective Theory</li>
+    <li>Theories of Probability</li>
+    <li>Theory of Equally Likely Outcomes</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

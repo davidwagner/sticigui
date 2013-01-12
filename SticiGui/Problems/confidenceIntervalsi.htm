@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "confidenceIntervals";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Confidence Intervals
+</h2>
+
+<div class="indent">
+<h3>
+    Part I: Percentages
+</h3>
+
+<p class="inline">
+    The tool in the frame below starts with a box with three numbers in it: {1, 1, 0}.
+    We shall look at how frequently intervals of different lengths, centered at the
+    <a class="glossRef" href="../Text/gloss.htm#sample_percentage" target="glossWin">sample
+    percentage</a>,
+    &quot;<a class="glossRef" href="../Text/gloss.htm#cover" target="glossWin">cover</a>&quot;
+    the true percentage of ones in the box (namely, 66.67%).
+    The lengths of the intervals will be multiples of an estimate of the
+    <a class="glossRef" href="../Text/gloss.htm#se" target="glossWin">SE</a>
+    of the sample percentage.
+    The samples are drawn from the box with replacement, so the actual SE of the
+    sample percentage is the SD of the list of numbers in the box, divided by the
+    square-root of the sample size.
+    We shall pretend that we do not know the numbers in the box, so we do not know
+    their SD.
+    We shall estimate the SE of the sample percentage by dividing the
+    <a class="glossRef" href="../Text/gloss.htm#sample_sd">sample standard deviation
+    <em>s</em></a> (an
+    estimate of the SD of the numbers in the box)
+    by the square-root of the sample size.
+    If the sample size is fairly large and the contents of the
+    box are not too pathological, this estimate of the SE of the sample percentage
+    tends to be accurate.
+</p>
+</div>
+
+<p>
+    Because the outcome of each draw is random, the
+    <a class="glossRef" href="../Text/gloss.htm#sample_percentage" target="glossWin">sample
+    percentage</a> is a
+    <a class="glossRef" href="../Text/gloss.htm#random_variable" target="glossWin">random variable</a>:
+    we do not know exactly what it will be.
+    The estimated SE is also random, because it depends on the sample standard
+    deviation <em>s</em>.
+    (The SE of the sample mean is not random, but in realistic
+    situations, we do not know its value, so we have to estimate it
+    from the sample; the estimate is random.)
+    The <a class="glossRef" href="../Text/gloss.htm#sample_percentage" target="glossWin">sample
+    percentage</a> (which is the
+    <a class="glossRef" href="../Text/gloss.htm#sample_mean" target="glossWin">sample mean</a>
+    of a sample that consists of zeros and ones) is likely to fall in
+    an interval of values centered at the population percentage.
+</p>
+<p>
+    In this lab, we turn things around, taking an interval of
+    values around the sample mean, and seeing how frequently that
+    random interval contains the true mean or percentage of the
+    box. We shall explore how that frequency depends on the
+    length of the interval, the contents of the box, and the
+    sample size.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var rawOpt = ["symmetric","skewed left","skewed right"];
+   var optPerm = randPermutation(rawOpt,"inverse");
+   var opt = optPerm[0];
+   var aVal = alphabet[optPerm[1][1]];
+   var qStr = '<span class="qSpan">The distribution of numbers in the box is';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</span></p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    The applet should have started with <span class="appCtrlName">Sample size</span> set to
+    5 and <span class="appCtrlName">Intervals: &plusmn;</span> set to 1;
+    if not, adjust them.
+</p>
+<p>
+    Click <span class="appCtrlName">Take Sample</span>.
+    You should see a blue vertical line and an interval.
+    The blue vertical line is the average of the numbers in
+    the box, the population percentage (66.67% = 2/3).
+    If the interval intersects the line, the interval <em>covers</em> the true
+    percentage, and the interval will be green.
+    Otherwise, it will be red.
+    Push <span class="appCtrlName">Take Sample</span> button a few more times.
+    The vertical spacing between the intervals and the horizontal range of the plot
+    adjusts to keep all the intervals on the plot.
+    The <span class="appCtrlName">% cover</span> display in the lower right corner
+    tells you what percentage of the intervals contain the true
+    population percentage.
+</p>
+<p>
+    Change <span class="appCtrlName">Samples to take</span> to 1000.
+    Click <span class="appCtrlName">Take Sample</span>; this will produce a total of
+    1000 intervals.
+    Note the fraction of these 1000 intervals that cover the true population percentage.
+    Click in the population box, then outside the box, to clear the plotted intervals.
+    Then click <span class="appCtrlName">Take Sample</span> again to draw another 1000
+    samples of size 5, and note the fraction of intervals that cover.
+    Click in the population box, then outside the box, to clear the plot.
+    Then draw another set of 1000 samples of size 5 and note the fraction of
+    intervals that cover.
+    Repeat until you have drawn 1000 samples of size 5 a total of ten times.
+    Average the ten percentages of intervals that covered to find the fraction
+    of the 10,000 intervals that covered the true population percentage.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = numToRange(.68,.32);
+    var qStr = '<span class="qSpan">The fraction of the intervals that cover the ' +
+              'true population percentage is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</span></p>');
+// -->
+</script>
+</div>
+
+<p>
+    The computer is plotting intervals that are centered at the
+    <a class="glossRef" href="../Text/gloss.htm#sample_percentage" target="glossWin">sample percentage</a>,
+    and extend right and left from the sample
+    percentage by the estimated
+    <a class="glossRef" href="../Text/gloss.htm#se" target="glossWin">standard
+    error</a> of the sample percentage.
+    Recall that the SE of the sample percentage of <em>n</em> draws with replacement
+    from a box that contains just zeros and ones is
+    (<em>p</em>&times;(1&minus;<em>p</em>))<sup>&frac12;</sup>/<em>n</em><sup>&frac12;</sup>,
+    where <em>p</em> is the percentage of ones in the box.
+    For this box and this sample size, SE(sample percentage) =
+    (2/3&times;1/3)<sup>&frac12;</sup>/5<sup>&frac12;</sup> = 0.21.
+    In most situations in which we would need Statistics, we would not know the
+    contents of the box, so we could not compute the true SE
+    of the sample percentage.
+    Instead, we would need to estimate the SD of the box&mdash;and thereby the SE of the
+    sample percentage&mdash;from the sample.
+</p>
+
+<p>
+    In fact, if we knew the SD of the box, there would only be two
+    possible values of the population percentage.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var p = roundToDig(0.6+0.3*rand.next(),1);
+    var se = roundToDig(Math.sqrt(p*(1-p)),4); // p*(1-p)  = se^2 --> p^2 - p + se^2 = 0.
+    var radical = Math.sqrt(1 - 4*se*se)/2;
+    var pSmall = 0.5 - radical;
+    var pBig = 0.5 + radical;
+    var aVal1 = numToRange(pSmall);
+    var aVal2 = numToRange(pBig);
+    var qStr = '<span class="qSpan">If the SD of the box were ' + se.toString()   + 
+               ', the two possible values of the population percentage would be ' +
+               '(smaller of the two) </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    qStr = ' <span class="qSpan">and (larger of the two)</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    Recall that the
+    <a class="glossRef" href="../Text/gloss.htm#expectation" target="glossWin">expected value</a>
+    of the sample percentage is the population
+    percentage; that is, the percentage of ones in the box.
+    If the
+    <a class="glossRef" href="../Text/gloss.htm#probability_histogram" target="glossWin">probability
+    histogram</a> of the sample percentage followed the
+    <a class="glossRef" href="../Text/gloss.htm#normal_curve" target="glossWin">normal curve</a>,
+    we would expect the sample percentage to be in the interval
+    (population percentage)&plusmn;21% about 68% of the time.
+    When the sample percentage is in that range, the interval (sample
+    percentage)&plusmn;21% contains the population percentage, so the
+    interval will <a class="glossRef" href="../Text/gloss.htm#cover" target="glossWin">cover</a>.
+    This is a tautology, essentially: if the difference between the
+    sample percentage and the true percentage is less than 1SE,
+    then the difference between the sample percentage and the
+    true percentage is less than 1SE.
+    Note the difference between the percentage of the intervals that covered, and the
+    theoretical approximate value 68%.
+</p>
+
+<p>
+    Change <span class="appCtrlName">Intervals: &plusmn;</span> from 1 to 2 (doubling the lengths of the
+    intervals). 
+    Now the theoretical percentage of intervals that
+    cover the population percentage would be just over 95% if the
+    probability histogram of the sample percentage followed the
+    normal curve (but for the fact that we are estimating the SE instead of using
+    the true SE).
+    Draw 1000 samples of size 5 ten times and average the percentages of intervals
+    that cover the true population percentage to find the fraction of the 10,000 intervals
+    that cover the population percentage.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = numToRange(.65,.35);
+    var qStr = '<span class="qSpan">The fraction of the intervals ' +
+               '(sample percentage)&plusmn;&nbsp;2SE that cover the population ' +
+               'percentage is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ["the number of samples","the number of tickets in the box",
+               "the size of each sample","the SE of the sample percentage"];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    var rawOpt = ["The average of the box","The centers of the intervals",
+                  "The lengths of the intervals","The sample size"];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt2 = optPerm[0];
+    var aVal2 = alphabet[optPerm[1][1]]+ '&' + alphabet[optPerm[1][2]];
+    var qStr = 'The difference between the &quot;theoretical&quot; percentage or intervals that ' +
+               'cover and the actual percentage that did cover has at least two sources:</p>' +
+               '<p><span class="qSpan"> The normal approximation to the probability histogram ' +
+               'is likely to be poor because </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">is small.</span></p><p><span class="qSpan">(Select all that apply.)</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt2,aVal2);
+    qStr = '<span class="qSpan">is/are random, and so we should expect the results to vary.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<p>
+    Now increase the sample size to 50, set the number of samples to take to 1000,
+    and click <span class="appCtrlName">Take Sample</span>.
+    Note the fraction of intervals that cover the population percentage.
+    Repeat until you have drawn 1000 samples of size 50 a total of ten times, and
+    average the ten percentages of intervals that cover the population percentage
+    to find the fraction of the 10,000 intervals that cover the population percentage.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = ["same distance from or closer to","further from"];
+    var aVal = "a|b";
+    var qStr = '<span class="qSpan">The percentage of intervals that cover the population ' +
+               'percentage is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' <span class="qSpan">95% than it was for a sample of size 5.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<p>
+    For this sample size,
+    about 95% of the intervals should cover. This is the meaning
+    of a 95% confidence interval: if you were to repeat the procedure of
+    taking a sample and computing a confidence interval from the
+    sample, in the long run, 95% of the intervals you construct
+    this way would cover the true population parameter. (More technically,
+    the chance that the fraction of intervals that cover differs from
+    95% by more than a given amount <em>e</em>&gt;0 converges to zero.)
+</p>
+
+<!---=========================================================================--->
+<div class="indent">
+<h3>
+  Part II: Means
+</h3>
+
+<p class="inline">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var boxSize = listOfRandInts(1,6,10)[0];
+    var theBox = listOfRandInts(boxSize,0,10);
+    var boxMean = mean(theBox);
+    var boxSd = sd(theBox);
+    var draws = 10*listOfRandInts(1,4,7)[0];
+    var seDraws = boxSd/Math.sqrt(draws);
+// -->
+</script>
+    Now we are going to replace the contents of the box with numbers that are not
+    just zero or one.
+    Leave <span class="appCtrlName">Intervals &plusmn;</span> set to 2.
+    Select and delete the numbers in the box,
+    and type instead the numbers
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( theBox.join(", ") + " ");
+// -->
+</script>
+    into the box, separated by spaces and or returns.
+    Then click anywhere in the figure, outside of the population box.
+    The average of the numbers in the box and
+    the SD of the box will be updated on the left side of the
+    figure, and the computer will draw from the new set of
+    numbers when next we take a sample.
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan"> The average of the numbers in the box is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(boxMean,0.1));
+    qStr = '<span class="qSpan">and their SD is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(boxSd,0.1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    Set <span class="appCtrlName">Sample size</span> to
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(  draws.toString()  + ", ");
+// -->
+</script>
+    and set <span class="appCtrlName">Samples to take</span> to 1.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal1 = numToRange(boxMean,0.1);
+    var aVal2 = numToRange(seDraws,0.1*seDraws);
+    var qStr = '<span class="qSpan">The expected value of the sample mean for a random ' +
+               'sample of ' + draws.toString() + ' tickets drawn with replacement from ' +
+               'this box is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    qStr = '<span class="qSpan">The SE of the sample mean for a sample of size ' +
+           draws.toString() + ' drawn with replacement from this box is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    For a sample size this large, the normal approximation to the
+    distribution of the sample mean should be reasonably accurate, so we would expect the
+    sample mean to be within &plusmn; 2&times;SE(sample mean)
+    of the
+    <a class="glossRef" href="../Text/gloss.htm#expectation" target="glossWin">expected value</a>
+    of the
+    <a class="glossRef" href="../Text/gloss.htm#sample_mean" target="glossWin">sample mean</a>
+    about 95% of the time.
+    Therefore, an interval
+    centered at the sample mean and extending right and left by
+    2SE should cover the population mean about 95% of the time.
+    However, we shall pretend that we do not know what is in the
+    box, so we would not know the SE of the sample mean: we shall
+    use the sample standard deviation <em>s</em> to estimate the SD of the box.
+</p>
+<p>
+    Click <span class="appCtrlName">Take Sample</span> a few times. 
+    The intervals that are plotted will vary somewhat in length.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ["the computations suffer roundoff error",
+                  "the SD of the box is random",
+                  "the sample size is random",
+                  "the sample mean is random",
+                  "the sample standard deviation <em>s</em> is random"
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][4]];
+    var qStr = '<span class="qSpan">This is because (select all that apply)</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Take a total of 1000 samples of size ' +  draws.toString() +
+           '. Note the percentage of intervals that cover the true population mean. ' +
+           ' Click in the population box, then outside the box, to clear the plot. ' +
+           'Then take another set of 1000 samples of size ' + draws.toString() +
+           ' and note the fraction of intervals that cover the population mean. ' +
+           ' Keep drawing sets of 1000 samples of size ' + draws.toString() +
+           ' until you have drawn ten sets of 1000 samples of size ' + draws.toString() +
+           '.  Average the ten ' +
+           'percentages of intervals that cover the true population mean to find the ' +
+           'percentage of the 10&times;1000&nbsp;=&nbsp;10,000 intervals that cover ' +
+           'the true population mean.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = numToRange(.8,.2);
+    qStr = '<span class="qSpan">The fraction of the 10,000 intervals that cover the ' +
+           'true population mean is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    Change <span class="appCtrlName">Sample size</span> to 200, and take 1000 samples.
+    Note the percentage of intervals that cover the true population
+    mean.
+    Repeat until you have drawn 1000 samples of size 200 ten times;
+    average the ten percentages.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The fraction of the 10,000 intervals that cover the ' +
+               'true population mean is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(.85,.15));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = ["same distance from or closer to","further from"];
+    var aVal = "a|b";
+    var qStr = '<span class="qSpan">The percentage of intervals that cover ' +
+               'the true population mean is</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">95% than it was for a sample of size ' +
+            draws.toString() + '.</span>';
+    document.writeln(qStr);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>&nbsp;</p>
+<div class="indent">
+<h3>
+    Part III: Bad Boxes
+</h3>
+
+<p class="inline">
+    In this section you will try to &quot;break&quot; this procedure for making confidence
+    intervals by finding a set of numbers that makes the
+    percentage of intervals that cover the true population mean
+    as small as possible.
+</p>
+</div>
+
+<p>
+    Replace the contents of the box with
+    any combination of up to 20 integers (whole numbers) between 0 and 10 
+    (use at least two distinct numbers).
+    Set <span class="appCtrlName">Sample size</span> 5, and 
+    set <span class="appCtrlName">Samples to take</span> to 1000.
+    Leave <span class="appCtrlName">Intervals: &plusmn;</span> set to 2.
+    Click <span class="appCtrlName">Take Sample</span> and note the percentage of the intervals
+    that covered.
+</p>
+<p>
+    Repeat the steps in the preceeding
+    paragraph, varying the numbers you put into the box, trying to
+    make the percentage of intervals in that cover the population
+    mean as small as possible.
+    Keep track of the worst list of numbers and the percentage
+    of intervals that covered the mean of that list.
+    Try at least 10 different sets of numbers in the box, and see if you can
+    determine what features of the list of numbers in the box
+    tend to make the coverage probability low.
+    You should be able to get the percentage of intervals
+    that cover down to 30% or less pretty easily&mdash;keep trying until you do.
+    Then take ten sets of 1000 samples of size 5 from that box and average the
+    percentage of the 10,000 intervals that covered the true population mean.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = '*';
+    var qStr = '<span class="qSpan">The worst set of numbers was (type in the ' +
+               'numbers separated by commas or spaces)</span>';
+    document.writeln(qStr);
+    writeTextExercise(25, qCtr++, aVal);
+    qStr = '</p><p><span class="qSpan">The fraction of the 10,000 intervals that ' +
+           'covered the population mean of this box was only</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(.25,.25));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    Put the worst set of numbers you found back into the box.
+    Increase the sample size to 200, take 1000 samples ten times, and average the
+    ten percentages of intervals that cover to find the percentage of the 10,000
+    intervals that cover the true population mean.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">For sample size 200, the fraction of the 10,000 ' +
+           'intervals that covered the true population mean was</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(.8,.2));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    I hope you have just
+    discovered that while you can &quot;break&quot; this
+    procedure for finding approximate 95% confidence intervals
+    pretty easily for small sample sizes, it is quite hard to break it
+    for larger sample sizes&mdash;about 95% of the intervals cover the
+    mean of the box, regardless of what numbers you put in the box, <em>provided
+    the sample size is large enough</em>.
+</p>
+
+<p>&nbsp;</p>
+
+<div class="indent">
+<h3>
+    Part IV: Unknown Box Contents
+</h3>
+
+<p class="inline">
+    This part of the assignment
+    mimics the typical situation in statistical inference: we
+    will not know what numbers are in the box. We shall draw a
+    sample, and try to estimate the average of the numbers in the
+    box using the sample mean. Ultimately, we get to pretend to
+    be omniscient, because we can reveal the box contents; rarely
+    in the real world does a statistician get a similar
+    opportunity to check his or her estimates against the
+    &quot;truth.&quot;
+</p>
+</div>
+
+<p>
+    Click <span class="appCtrlName">Hide Box</span>. 
+    The plot of confidence intervals will
+    clear, and there will be no Ave(box) or SD(box) displayed.
+    Set <span class="appCtrlName">Sample size</span> to 200, and set 
+    <span class="appCtrlName">Samples to take</span> to 1.
+    When you clicked <span class="appCtrlName">Hide Box</span>,
+    the computer put a set of numbers in the box; these numbers
+    are not visible to you (yet).
+</p>
+<p>
+    Push <span class="appCtrlName">Take Sample</span>.
+    You will see a yellow interval.
+    This interval either does or does not contain the average of the numbers in the
+    box.
+</p>
+<p>
+    From prior experience
+    in this assignment, we know that <em>before we took the sample</em>,
+    there was about a 95% chance that the interval that resulted
+    would cover the population mean; equivalently, in the long
+    run, about 95% of such intervals contain the truth.
+    Now, however, we have a specific interval.
+    The interval is there, in front of you.
+    The box is hidden, but it has some specific set of numbers in
+    it, and those numbers have some particular average.
+    <em><strong>The &quot;probability&quot; that the interval contains the
+    population mean is not 95%.</strong></em> 
+    There is no probability here at all: either the interval contains the
+    population mean, or it does not; we just do not know which.
+</p>
+<p>
+    Click <span class="appCtrlName">Show Box</span>.
+    This reveals the contents of the box, and
+    whether or not the interval covered the population mean.
+</p>
+<p>
+    Click <span class="appCtrlName">Hide Box</span> and repeat what you just
+    did 49 times, for a total of 50, keeping track manually of the
+    number of intervals and the number of intervals that cover.
+    Sometimes, it is revealed to you that the interval covered,
+    and sometimes it revealed that the interval did not cover the population mean.
+    You should expect to get about 2.5 &quot;misses&quot; in 50
+    trials, because the sample size is large enough for the normal approximation
+    to be very good.
+    (The number of misses is random.
+    Its probability distribution is Binomial with <em>n</em> = 50 trials
+    and <em>p</em> approximately equal to 5%.)
+    Even though the contents of the box change every time you click
+    <span class="appCtrlName">Hide Box</span>, using this procedure gives you
+    confidence intervals that cover the true mean of the box
+    about 95% of the time.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The number of intervals that cover was </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(40,10));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part IV: Mechanics
+</h3>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var cl = 70+ 2*listOfRandInts(1,-5,5)[0];
+    var cl2 = 95;
+    var popSize = listOfRandInts(1,10,20)[0];
+    var samSize = 2*listOfRandInts(1,10,popSize)[0];
+    var popSize = 500*popSize;
+    var popSize2 = listOfRandInts(1,10,20)[0];
+    var samSize2 = 10*listOfRandInts(1,10,popSize2)[0];
+    var popSize2 = 2000*popSize2;
+    var popOvrPct = listOfRandInts(1,3,8)[0];
+    var popUndrPct = listOfRandInts(1,2,7)[0];
+    var samOvrPct = roundToDig(100*Math.floor(samSize*popOvrPct/100)/samSize,1);
+    var samUndrPct = roundToDig(100*Math.ceil(samSize*popUndrPct/100)/samSize,1);
+    var samOffPct = samOvrPct + samUndrPct;
+    var chebFac = Math.sqrt(1.0/(1.0 - cl/100.0));
+    var fpc = Math.sqrt( (popSize - samSize + 0.0)/(popSize-1.0) );
+    var sqtn = Math.sqrt(samSize + 0.0);
+    var seBnd = fpc*.5/sqtn;
+    var consWd = chebFac*seBnd*100;
+    var loEnd = (samOffPct - consWd)/100;
+    var hiEnd = (samOffPct + consWd)/100;
+    var loAns = numToRange(loEnd);
+    if (loEnd < 0) {
+        loAns = numToRange( loEnd/2, -loEnd*(0.5 + 3*fudgeFactor) );
+    }
+    var hiAns = numToRange(hiEnd);
+    if (hiEnd > 1) {
+        hiAns = numToRange( 1 + (hiEnd-1)/2, (hiEnd-1)*(0.5 + 3*fudgeFactor) );
+    }
+    var popMn = 10*listOfRandSigns(1)[0];
+    var popSd = 3;
+    var samMean = roundToDig(popMn + popSd*rNorm(),2);
+    var netWord = 'undercharge';
+    if (samMean > 0) {
+        netWord = 'overcharge';
+    } else if (samMean == 0.0) {
+        netWord = 'correct charge';
+    }
+    var samSd = roundToDig( Math.max(popSd/5.0, popSd + popSd*rNorm()/3.0), 2);
+    var ex4Lim = roundToDig(normInv(1.0- (1.0-cl2/100.0)/2.0),3);
+    var width = samSd*ex4Lim/Math.sqrt(samSize2);
+    var qStr = 'Many retail stores have cash registers with price scanners, which ' +
+               'use lasers to read barcode on packages.  The barcode typically contains ' +
+               'a UPC (uniform product code) number, which the cash register looks up ' +
+               'in a database to find the item price.  The scanners are very reliable, ' +
+               'in the sense that they rarely make errors in reading the barcode. ' +
+               'However, the price databases sometimes contain errors, which can result ' +
+               'in overcharging or undercharging customers.  Many of the pricing errors ' +
+               'are caused by the price database not being ' +
+               '&quot;in synch&quot; with the signs in the store. For example, ' +
+               'prices in the database need to be changed whenever items go on sale.  ' +
+               'Customers are supposed to be charged the lowest marked price, so if sale ' +
+               'signs go up before the database reflects the sale prices, customers ' +
+               'could be overcharged. Similarly, if a sale ends (and all sale signs are ' +
+               'removed) before prices in the database are raised, customers could be ' +
+               'undercharged.</p>' +
+               '<p>A large department store routinely audits the accuracy of its price ' +
+               'scanning system by taking a random sample of products off its shelves ' +
+               'and scanning them.  Each type of product the store stocks is called a ' +
+               '&quot;line item&quot; in the inventory. Every line items corresponds to ' +
+               'exactly one UPC code, and different line items have distinct UPC codes. ' +
+               'However, the store typically stocks many units of each line item. ' +
+               'The store designs the sample to be a simple random sample of UPC codes of ' +
+               'items they stock---that is, line items are sampled without ' +
+               'replacement, with equal probability of selecting each line item, regardless ' +
+               'of how many units of each line item are in stock.  Each product in the sample ' +
+               'will be scanned, and the price the scanner gives will be compared to ' +
+               'the correct price for the product.  We assume that the auditors have a way ' +
+               'to determine the correct price of the product with perfect accuracy. ' +
+               'Each product in the sample will then be classified as correctly priced, ' +
+               'underpriced, or overpriced. Technically, both overpricing and underpricing ' +
+               'are illegal, but law enforcement agents tend to be more concerned with ' +
+               'overcharges than with undercharges. </p>' +
+               '<p>As a first step, the store seeks to estimate the percentage of pricing ' +
+               'errors.  The internal auditors take a simple random sample of ' +
+               samSize.toString() + ' line items from their inventory of ' +
+               commify(popSize) + ' line items. ' +
+               'The percentage of overpriced items in the sample is ' + samOvrPct.toString() +
+               '%, and the percentage of underpriced items in the sample is ' +
+               samUndrPct.toString() + '%. </p><p><span class="qSpan">A conservative ' +
+               cl.toString() + '% confidence interval for the percentage of line items ' +
+               'in the store that are priced incorrectly would extend from ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, loAns);
+    document.writeln(' (low) to ');
+    writeTextExercise(8, qCtr++, hiAns);
+    document.writeln(' (high)</span>.</p>');
+    var qStr = '<p>The store also wants to estimate the average net price error ' +
+               '(overcharges - undercharges) to customers.  Because the net error to ' +
+               'customers depends on the mix of items that customers buy (the items ' +
+               'in customers\' shopping baskets), the store management decides that an ' +
+               'appropriate measure is the average net price error per shopping basket. ' +
+               'Estimating this net error requires sampling customers\' shopping baskets. ' +
+               'The store samples shopping baskets by pulling customers aside at random, ' +
+               'and having them check out in special lines in which the price of every ' +
+               'product in their baskets is scanned and also verified manually. Suppose ' +
+               'that this results essentially in a simple random sample of shopping ' +
+               'baskets. </p><p>' +
+               'In the course of a month, ' + samSize2.toString() +
+               ' shopping baskets are pulled aside; there were ' +
+               commify(popSize2) + ' shopping baskets of goods sold during that month. ' +
+               'The mean net price error per shopping basket in the sample was ' +
+               samMean.toString() + ' cents/basket (a net ' +
+               netWord + '), with a sample standard deviation of ' +
+               samSd.toString() + ' cents per basket. </p>' +
+               '<p><span class="qSpan">An approximate ' +
+               cl2.toString() + '% confidence interval for the net price error per shopping ' +
+               'basket of goods sold during the month would extend from ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(samMean - width));
+    document.writeln(' cents (low) to ');
+    writeTextExercise(8, qCtr++, numToRange(samMean + width));
+    document.writeln(' cents (high)</span>.</p>');
+// -->
+</script>
+</div>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

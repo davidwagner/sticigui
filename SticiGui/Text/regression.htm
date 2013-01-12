@@ -1,0 +1,1277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "27 June 2011 13:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "regression";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+
+<h1>
+   Regression
+</h1>
+
+<p>
+    In 
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(citeChapter("correlation"));
+// -->
+</script>
+    we saw that if the <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a>
+    of Y versus X is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>,
+    it can be summarized well by five numbers: the
+    <a class="glossRef" href="gloss.htm#mean">mean</a> of X, the
+    mean of Y, the <a class="glossRef" href="gloss.htm#sd">standard deviations</a>
+    SD<sub>X</sub> and SD<sub>Y</sub>, and the
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient <em>r</em><sub>XY</sub></a>.
+    Such scatterplots also can be summarized by the regression line,
+    which is introduced in this chapter.
+    The regression line approximates the relationship between X and Y.
+    The slope and intercept of the regression line can be found from the
+    five numbers.
+    The regression line is the line that fits the data best, in a sense made
+    precise in this chapter.
+    Regression is a common statistical tool,
+    better suited to summarizing some scatterplots than to drawing inferences.
+</p>
+
+<h2>
+  <a id="sd_line"></a>The SD Line
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=225&end=327" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sd_line">SD line</a> goes
+    through the <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>, and has slope
+    equal to SD<sub>Y</sub><em>/</em>SD<sub>X</sub> if the
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient <em>r</em></a>
+    is greater
+    than or equal to zero.
+    The SD line has slope &minus;SD<sub>Y</sub><em>/</em>SD<sub>X</sub> if
+    <em>r</em> is negative.
+    That is, the <a class="glossRef" href="gloss.htm#sd_line">SD line</a> climbs (sinks, if <em>r</em>
+    is negative) by SD<sub>Y</sub> when you move to the right by SD<sub>X</sub>.
+    The sign of
+    the slope of the <a class="glossRef" href="gloss.htm#sd_line">SD line</a> is the same as the sign of
+    <a class="glossRef" href="gloss.htm#correlation_coef"><em>r</em></a>, and the size of the slope of the SD line
+    is SD<sub>Y</sub><em>/</em>SD<sub>X</sub>.
+    In <a class="glossRef" href="gloss.htm#standard_units">standard units</a>, the slope of the
+    SD line is one if <em>r</em> is greater than or equal to zero, and equal to minus one if
+    <em>r</em> is negative.
+    If SD<sub>X</sub> is zero, the SD line is not defined.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows a football-shaped scatterplot, with its SD line overlaid.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Football-shaped scatterplot with the SD line superposed.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+      width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false" />
+    <param name="graphAveButton" value="false" />
+    <param name="r" value="0.5" />
+    <param name="regressButtons" value="false" />
+    <param name="sdLineButton" value="true" />
+    <param name="showSdLine" value="true" />
+    <param name="title" value="The SD Line" />You need Java to see this.
+</applet>
+</p>
+</div>
+
+
+<p>
+  The line slopes up to the right, because <em>r</em> is positive (0.5 at first).
+  Change <em>r</em> and the number of points <em>n</em> to see how the SD line
+  changes.
+  Notice that the points in the scatterplot all lie on the SD line if and only if the
+  correlation coefficient <em>r</em> is &plusmn;1 and that the SD line always goes
+  through the <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>,
+  but does not always go through the origin (0,0).
+  If you click the SDs button, you will see that the SD line always goes diagonally
+  through the rectangle defined by the point of averages plus and minus SD<sub>X</sub>
+  horizontally and SD<sub>Y</sub> vertically.
+</p>
+
+<p>
+    The SD line typically does not split the points in the scatterplot evenly.
+    When the correlation coefficient <em>r</em> is positive, in vertical slices to
+    the left of the point of averages, most of the values of Y are above the SD line,
+    and in vertical slices to the right of the point of averages, most of the Y
+    values are below the SD line.
+    When <em>r</em> is negative, in vertical slices to the left of the point of
+    averages, most of the values of Y are below the SD line, and in vertical slices
+    to the right of the point of averages, most of the Y values are above the SD line.
+</p>
+
+
+<h2>
+   <a id="graph_of_averages"></a>
+   The Graph of Averages
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=327&end=735" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    A <a class="glossRef" href="gloss.htm#graph_of_averages">graph of
+    averages</a> divides a scatterplot into <a class="glossRef" href="gloss.htm#class_interval">class intervals</a>
+    of the horizontal (X) variable and plots the averages of the Y values in those
+    intervals against the midpoints of the intervals.
+    That is, it plots a typical value of Y in each interval of values of X.
+    If we wanted to summarize the Y values of points whose X values that fall in
+    some range, the average Y values of those points would be a reasonable summary.
+    That is what the graph of averages displays.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows a scatterplot of the
+    GMAT data, with the <a class="glossRef" href="gloss.htm#sd_line">SD line</a>  and the
+    <a class="glossRef" href="gloss.htm#graph_of_averages">graph of averages</a>.
+    If the figure does not show a scatterplot of Quantitative GMAT versus Verbal GMAT,
+    please change the variables accordingly.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Scatterplot of the GMAT data, with the SD line and the graph of averages superposed.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Bivariate.class" codebase="../../Java/" align="baseline"
+            width="640" height="380" archive="PbsGui.zip">
+        <param name="addPoints" value="false" />
+        <param name="files" value="./Data/gmat.dat" />
+        <param name="graphAveButton" value="true" />
+        <param name="regressButtons" value="false" />
+        <param name="sdButton" value="true" />
+        <param name="sdLineButton" value="true" />
+        <param name="showGraphOfAve" value="true" />
+        <param name="showSdLine" value="true" />
+        <param name="Xinit" value="Verbal GMAT" />
+        <param name="Yinit" value="Quant. GMAT" />You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#graph_of_averages">graph of
+    averages</a>, plotted in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    as yellow squares, lies systematically above the
+    <a class="glossRef" href="gloss.htm#sd_line">SD line</a> when X is to the left of the
+    <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>, and systematically
+    below the <a class="glossRef" href="gloss.htm#sd_line">SD line</a> when X is to the right of the
+    <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>.
+    The slope of the <a class="glossRef" href="gloss.htm#graph_of_averages">graph of averages</a>
+    is less extreme than that of the <a class="glossRef" href="gloss.htm#sd_line">SD line</a>.
+    The graph of averages plots a &quot;typical&quot;
+    value of Y in each class interval of X.
+    The typical value of Y differs systematically from the SD line.
+    The following exercise checks your ability to read the graph of averages.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Look at the scatterplot of Verbal GMAT versus undergraduate GPA. ' +
+               '<span class="qSpan">The association between those two variables is</span>';
+    document.writeln(qStr);
+    var opt = ["strongly negative","weakly negative","weakly positive","strongly positive"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '</p><p><span class="qSpan">The graph of averages has a </span>';
+    document.writeln(qStr);
+    var opt=["strongly negative","weakly negative","weakly positive","strongly positive"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan">trend.</span></p><p><span class="qSpan">For below-average values of ' +
+           'undergraduate GPA, the graph of averages lies </span>';
+    document.writeln(qStr);
+    var opt = ["below","above"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '<span class="qSpan"> the SD line, and for above-average values of the ' +
+           'undergraduate GPA, the graph of averages lies</span>';
+    document.writeln(qStr);
+    var opt = ["below","above"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '<span class="qSpan">the SD line. That is because for this dataset, on ' +
+           'the average, an increase of 1SD of the undergraduate GPA is associated with ' +
+           'a(n)</span>';
+    document.writeln(qStr);
+    var opt = ["decrease of more than",
+           "decrease of less than",
+           "increase of less than",
+           "increase of more than"
+          ];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan">one SD of the Verbal GMAT.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('scatterplots') + ', ');
+// -->
+</script> introduced a tool to
+    look at histograms of slices through scatterplots, in other words,
+    histograms of subsets of the data defined by restricting the values of some
+    of the variables.
+    The graph of averages plots, for a collection of slices through the data, the
+    mean of the values of Y in each slice (on the <em>y</em> axis) against the
+    midpoint of the interval of X that defines the slice (on the <em>x</em> axis).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    allows us to superpose histograms of subsets of the GMAT data with
+    histograms of all the GMAT data.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Histograms of the GMAT data and of subsets of the GMAT data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"
+       width="640" height="380" archive="PbsGui.zip">
+    <param name="binControl" value="false" />
+    <param name="bins" value="15" />
+    <param name="files" value="./Data/gmat.dat" />
+    <param name="nFiles" value="1" />
+    <param name="restrict" value="true" />
+    <param name="univariateStats" value="true" />
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Select Verbal GMAT as the variable to display in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+    document.writeln('. ');
+// -->
+</script>
+    Then restrict attention to individuals whose undergraduate GPA was at least 2.4 and no
+    larger than 2.75.
+    That corresponds to the fourth point in the graph of averages.
+    You will see that the peak of the histogram is at a slightly lower Verbal GMAT score
+    than that of the overall population, and that the mean Verbal GMAT score for those
+    72 individuals is about 34.2, compared with 35.1 for the overall population of 913
+    students.
+    You can check these numbers against the graph of averages in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+// -->
+</script>
+    by putting the cursor over the corresponding yellow square and reading the meter
+    in the bottom-right corner.
+</p>
+
+<p>
+    The SD line rises by SD<sub>Y</sub> for each run of SD<sub>X</sub>.
+    The graph of averages typically rises by less than SD<sub>Y</sub> for each run of
+    SD<sub>X</sub>.
+    In fact, it rises by about <em>r</em>&times;SD<sub>Y</sub> for each run of SD<sub>X</sub>.
+    The average of Y near the average of X is roughly the overall average of Y if the
+    scatterplot is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>,
+    so the <a class="glossRef" href="gloss.htm#point_of_ave">point of averages</a> tends to be close to the
+    <a class="glossRef" href="gloss.htm#graph_of_ave">graph of averages</a> for  football-shaped scatterplots.
+    This suggests that a line that passes through the point of averages and has slope
+    <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub> would fit the graph of averages pretty
+    well, giving a reasonable summary of the scatterplot.
+    The line that passes through the point of averages and has slope
+    <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub> is called the <em>regression line</em>.
+</p>
+
+<h2>
+    <a id="regression_line"></a>The Regression Line
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=735&end=915" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The regression line is a smoothed version of the
+    <a class="glossRef" href="gloss.htm#graph_of_averages">graph of averages</a>.
+    It goes through the <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>, and
+    rises by exactly
+    <a class="glossRef" href="gloss.htm#correlation_coef"><em>r</em></a>&times;SD<sub>Y</sub>
+    for each SD<sub>X</sub>
+    it runs to the right: Its slope is
+    <em>r</em>&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>,
+    compared with SD<sub>Y</sub><em>/</em>SD<sub>X</sub> for the SD line.
+    Because |<em>r</em>| &le;1, the <a class="glossRef" href="gloss.htm#regression">regression line</a>
+    is not as steep as the <a class="glossRef" href="gloss.htm#sd_line">SD line</a>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is a scatterplot of the GMAT data, with the graph of
+    averages, the SD line, and the regression line.
+    If the figure does not show Verbal GMAT versus Quantitative GMAT, please
+    change the variables accordingly.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Scatterplot of the GMAT data with the SD line, graph of averages, and ' +
+               'regression line.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Bivariate.class" codebase="../../Java/" align="baseline"
+      width="640" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false" />
+    <param name="files" value="./Data/gmat.dat" />
+    <param name="graphAveButton" value="true" />
+    <param name="regressButton" value="true" />
+    <param name="regressButtons" value="false" />
+    <param name="residualsButton" value="false" />
+    <param name="sdButton" value="true" />
+    <param name="sdLineButton" value="true" />
+    <param name="showGraphOfAve" value="true" />
+    <param name="showRegress" value="true" />
+    <param name="showSdLine" value="true" />
+    <param name="Xinit" value="Verbal GMAT" />
+    <param name="Yinit" value="Quant. GMAT" />
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The regression line fits the graph of averages much better
+    than the SD line does: The slope of the regression line reflects the average increase of Y
+    associated with a given increase of X.
+    The regression line is not as steep as the SD line;
+    this is true in general unless the correlation coefficient is &plusmn;1, in which case,
+    the SD line and the regression line coincide.
+</p>
+
+<p>
+    The following exercises check your understanding of the relationships
+    among the graph of averages, the SD line, and the regression line
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the scatterplot of Quantitative GMAT versus ' +
+           'Verbal GMAT. <span class="qSpan">A Verbal GMAT score of 45 points is </span>';
+    document.writeln(qStr);
+    var opt = ["below","equal to","above"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan">the average Verbal GMAT score. The height of the ' +
+           'regression line for a Verbal GMAT score of 45 points is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,'38.1:39.5');
+    var qStr = '<span class="qSpan">points. That is </span>';
+    document.writeln(qStr);
+    var opt = ["below","equal to","above"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan">the average Quantitative GMAT score, because the ' +
+           'correlation coefficient is </span>';
+    document.writeln(qStr);
+    var opt = ["negative","nearly zero","positive"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the scatterplot of first-year MBA GPA versus undergraduate GPA. ' +
+               '<span class="qSpan">The regression line fits the graph of averages</span>';
+    document.writeln(qStr);
+    var opt = ["worse than","about the same as","better than"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan">the SD line fits the graph of averages. The regression ' +
+           'line value of first-year MBA GPA for an undergraduate GPA of 3.8 is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,'3.2:3.33');
+    var qStr = '<span class="qSpan">points. That is</span>';
+    document.writeln(qStr);
+    var opt = ["smaller than","about the same as","larger than"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '<span class="qSpan">the SD line value of first-year MBA GPA for an ' +
+           'undergraduate GPA of 3.8, because the 3.8 is above the average ' +
+           'undergraduate GPA and the correlation coefficient is</span>';
+    document.writeln(qStr);
+    var opt = ["positive, but less than 1","not zero","neither +1 nor -1","positive"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    The relationship of the regression line to pairs of variables (bivariate data)
+    is analogous to the relationship of the mean to measurements of one variable
+    (univariate data).
+    Consider a single (unknown) individual in the data set.
+    If we knew nothing about that individual, a good guess of that individual's value of Y
+    would be the mean of Y for the entire data set.
+    If we knew the value of X for that individual, a good guess of the individual's value
+    of Y would be the mean of the values of Y for those individuals with the same value of X:
+    essentially, a point on the graph of averages.
+    For each value of X, the regression line estimates the average value of Y.
+    If the scatterplot is football-shaped, the estimate is sensible; if not,
+    the regression line tends to differ systematically from the graph of averages.
+    The regression line involves the same five numbers we used in the previous chapter
+    to summarize football-shaped scatterplots: the mean of X, the mean of Y, SD<sub>X</sub>,
+    SD<sub>Y</sub>, and <em>r</em><sub>XY</sub>.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#residual">vertical residual</a>
+    of a datum from the regression line is the difference between the
+    value of Y for the datum and the height of the regression line at the value of X of the datum:
+    The residual is the vertical distance by which the regression line misses the datum:
+</p>
+
+<p class="math">
+    vertical residual = (measured value of Y) &minus; (estimated value of Y).
+</p>
+
+<div class="indent">
+<p class="inline">
+    Recall from 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('location') + ', ');
+// -->
+</script>
+    that the mean is
+    the number for which the rms of the deviations is smallest.
+    Similarly, the regression line is the line for which the rms of vertical
+    residuals is smallest.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var ft = '<strong>Derivation of the regression line.</strong>              ' +
+      ' The regression line minimizes the <a class="glossRef" href="gloss.htm#rms">rms</a> ' +
+      ' of the (vertical) residuals among all lines. Let the values of X be ' +
+      ' <em>x</em><sub>1</sub>, <em>x</em><sub>2</sub>, <em>x</em><sub>3</sub>, ' +
+      ' &hellip; , <em>x</em><sub><em>n</em></sub>, and let the corresponding ' +
+      ' values of Y be <em>y</em><sub>1</sub>, <em>y</em><sub>2</sub>, <em>y</em><sub>3</sub>, ' +
+      ' &hellip; , <em>y</em><sub><em>n</em></sub>.  The rms of the residuals ' +
+      ' from the line with slope <em>a</em> and intercept <em>b</em>    ' +
+      ' is the square root of </p> <p class="math"><big>(</big> (<em>y</em><sub>1</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>1</sub> + <em>b</em>))<sup>2</sup> + (<em>y</em><sub>2</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>2</sub> + <em>b</em>))<sup>2</sup> + (<em>y</em><sub>3</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>3</sub> + <em>b</em>))<sup>2</sup> + ' +
+      ' &hellip; + ' +
+      '(<em>y</em><sub><em>n</em></sub> &minus;   ' +
+      ' (<em>a</em>&times;<em>x</em><sub><em>n</em></sub> + ' +
+      ' <em>b</em>))<sup>2</sup><big>)</big>/<em>n</em>. </p><p>This is the average   ' +
+      ' of the squares of the residuals. The square-root function is  ' +
+      ' <a class="glossRef" href="gloss.htm#monotonic">monotonic increasing</a>, so the values of <em>a</em> ' +
+      ' and <em>b</em> that make the rms of the residuals smallest are the same as the values  ' +
+      ' of <em>a</em> and <em>b</em> that make the average of the squares of the residuals ' +
+      ' smallest. The assertion that the regression line is the least-squares line is equivalent to ' +
+      ' the assertion that the average of the squares of the residuals is smallest ' +
+      ' when </p><p class="math"> <em>a</em> = <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub> ' +
+      ' </p><p> and <p class="math"> <em>b</em> = mean(Y) &minus; ' +
+      ' <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(x). </p><p> The sum of the   ' +
+      ' squares of the residuals is a quadratic function of both <em>a</em> and <em>b</em>; the ' +
+      ' leading coefficients are positive, so we can find the minimizing values of  ' +
+      ' <em>a</em> and <em>b</em> by finding a stationary point of the sum of squares of the ' +
+      ' residuals. The derivative of the average of squared residuals with respect ' +
+      ' to <em>b</em> is </p> <p class="math"> &minus;2<em>b</em>&times; <big>(</big> ' +
+      ' (<em>y</em><sub>1</sub> &minus;  ' +
+      ' (<em>a</em>&times;<em>x</em><sub>1</sub> + <em>b</em>))+ (<em>y</em><sub>2</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>2</sub> + <em>b</em>))   ' +
+      ' + (<em>y</em><sub>3</sub> &minus; (<em>a</em>&times;<em>x</em><sub>3</sub> + <em>b</em>)) + ' +
+      ' &hellip; + (<em>y</em><sub><em>n</em></sub> &minus;      ' +
+      ' (<em>a</em>&times;<em>x</em><sub><em>n</em></sub> + <em>b</em>)) ' +
+      ' <big>)</big>/<em>n</em> = </p><p class="math"> mean(y) &minus;  ' +
+      ' <em>a</em>&times;mean(X) &minus; <em>b</em>. </p> <p> Thus the minimizing <em>b</em> ' +
+      ' = mean(Y) &minus; <em>a</em>&times;mean(X). Substituting into the expression for ' +
+      ' the average of the squares of the residuals gives </p> <p class="math"> <big>(</big> ' +
+      ' (<em>y</em><sub>1</sub> &minus; (<em>a</em>&times;<em>x</em><sub>1</sub> + mean(Y) &minus;  ' +
+      ' <em>a</em>&times;mean(X)))<sup>2</sup> + (<em>y</em><sub>2</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>2</sub> +     ' +
+      ' mean(Y) &minus; <em>a</em>&times;mean(X)))<sup>2</sup> + (<em>y</em><sub>3</sub> &minus;  ' +
+      ' (<em>a</em>&times;<em>x</em><sub>3</sub> + mean(Y) &minus; ' +
+      ' <em>a</em>&times;mean(X)))<sup>2</sup> + &hellip; +  ' +
+      ' (<em>y</em><sub><em>n</em></sub> &minus; (<em>a</em>&times;<em>x</em><sub><em>n</em></sub> ' +
+      ' + mean(Y) &minus; <em>a</em>&times;mean(X)))<sup>2</sup> <big>)</big>/<em>n</em>. ' +
+      '</p><p> Differentiating this expression with respect to <em>a</em> gives <p class="math">' +
+      ' 2&times;<big>(</big> (<em>y</em><sub>1</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>1</sub> + mean(Y) &minus;  ' +
+      ' <em>a</em>&times;mean(X)))(<em>x</em><sub>1</sub> &minus; mean(X)) + </p><p class="math"> + ' +
+      ' (<em>y</em><sub>2</sub> &minus;  ' +
+      ' (<em>a</em>&times;<em>x</em><sub>2</sub> + mean(Y) &minus; ' +
+      ' <em>a</em>&times;mean(X)))(<em>x</em><sub>2</sub> &minus;  ' +
+      ' mean(X)) + </p><p class="math"> + (<em>y</em><sub>3</sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub>3</sub> + mean(Y) &minus; ' +
+      ' <em>a</em>&times;mean(X)))(<em>x</em><sub>3</sub> &minus; mean(X)) + ' +
+      ' &hellip; + </p><p class="math"> + ' +
+      ' (<em>y</em><sub><em>n</em></sub> &minus; ' +
+      ' (<em>a</em>&times;<em>x</em><sub><em>n</em></sub> + mean(Y) &minus; ' +
+      ' <em>a</em>&times;mean(X)))(<em>x</em><sub><em>n</em></sub> &minus; ' +
+      ' mean(X)) <big>)</big>/<em>n</em> </p><p class="math"> = ' +
+      ' <big>(</big>(<em>y</em><sub>1</sub> &minus; ' +
+      ' mean(Y))((<em>x</em><sub>1</sub> &minus; mean(X)) &minus; ' +
+      ' <em>a</em>&times;(<em>x</em><sub>1</sub> &minus; ' +
+      ' mean(X))(<em>x</em><sub>1</sub> &minus; mean(X)) + </p><p class="math"> + ' +
+      ' (<em>y</em><sub>2</sub> &minus; ' +
+      ' mean(Y))((<em>x</em><sub>2</sub> &minus; mean(X)) &minus; ' +
+      ' <em>a</em>&times;(<em>x</em><sub>2</sub> &minus; ' +
+      ' mean(X))(<em>x</em><sub>2</sub> &minus; mean(X)) + </p><p class="math"> + ' +
+      ' (<em>y</em><sub>3</sub> &minus;  ' +
+      ' mean(Y))((<em>x</em><sub>3</sub> &minus; mean(X)) &minus; ' +
+      ' <em>a</em>&times;(<em>x</em><sub>3</sub> &minus;  ' +
+      ' mean(X))(<em>x</em><sub>3</sub> &minus; mean(X)) + &hellip; ' +
+      ' + </p><p class="math"> + (<em>y</em><sub>1</sub> &minus; ' +
+      ' mean(Y))((<em>x</em><sub>1</sub> &minus; mean(X)) &minus; ' +
+      ' <em>a</em>&times;(<em>x</em><sub><em>n</em></sub> &minus; ' +
+      ' mean(X))(<em>x</em><sub><em>n</em></sub> &minus; mean(X)) <big>)</big>/<em>n</em>. ' +
+      ' </p><p> Now </p><p class="math"> (<em>y</em><sub>1</sub> &minus; ' +
+      ' mean(Y))((<em>x</em><sub>1</sub> &minus; mean(X)) +  ' +
+      ' (<em>y</em><sub>2</sub> &minus; mean(Y))((<em>x</em><sub>2</sub> &minus; ' +
+      ' mean(X)) + &hellip; + ' +
+      '(<em>y</em><sub><em>n</em></sub> ' +
+      ' &minus; mean(Y))((<em>x</em><sub><em>n</em></sub> &minus; mean(X)) =  ' +
+      ' <em>n</em>&times;<em>r</em>&times;SD<sub>Y</sub>&times;SD<sub>X</sub> </p> ' +
+      ' <p>and </p> <p class="math"> ' +
+      ' (<em>x</em><sub>1</sub> &minus; mean(X))(<em>x</em><sub>1</sub> &minus; mean(X)) +' +
+      ' (<em>x</em><sub>2</sub> &minus; mean(X))(<em>x</em><sub>2</sub> &minus; mean(X)) + ' +
+      ' &hellip; + (<em>x</em><sub><em>n</em></sub> &minus;   ' +
+      ' mean(X))(<em>x</em><sub><em>n</em></sub> &minus; mean(X)) = ' +
+      ' <em>n</em>&times;(SD<sub>X</sub>)<sup>2</sup>,     ' +
+      ' </p> <p> so the derivative is <p class="math"> ' +
+      ' <em>r</em>&times;SD<sub>Y</sub>&times;SD<sub>X</sub> &minus; ' +
+      ' <em>a</em>&times;(SD<sub>X</sub>)<sup>2</sup>. </p> <p>Setting this equal to zero  ' +
+      ' and solving for <em>a</em> gives </p><p class="math"> <em>a</em> =  ' +
+      ' <em>r</em>&times;SD<sub>Y</sub>&times;SD<sub>X</sub>/(SD<sub>X</sub>)<sup>2</sup> =    ' +
+      ' <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>; </p> <p>substituting into the ' +
+      ' expression for the optimal <em>b</em> gives </p><p class="math"> <em>b</em> = mean(Y) &minus; ' +
+      ' <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(X), </p><p>which are the ' +
+      ' slope and intercept of the regression line, as asserted. </p> ';
+    writeFootnote(fCtr++,fCtr,ft);
+// -->
+</script>
+    No line fits the data better than the regression line&mdash;in the sense that the rms of the
+    vertical residuals from the regression line is smaller than the rms of the vertical
+    residuals from any other line.
+    Minimizing the square root of the sum of the squares of the residuals (the rms of the
+    residuals) is
+    equivalent to minimizing the sum of the squares of the residuals.
+    For this reason the regression line is sometimes called the
+    <em>least squares line</em>.
+</p>
+</div>
+
+<p>
+    There are really two regression lines: one for regressing Y on X, and one for regressing
+    X on Y.
+    The regression line for regressing X on Y also passes through the point of averages,
+    but its slope is SD<sub>Y</sub>/(<em>r</em>&times;SD<sub>X</sub>).
+    This line minimizes the sum of the squared horizontal residuals, instead of the
+    sum of squared vertical residuals.
+    It is steeper than the SD line unless <em>r</em> is 1 or &minus;1.
+    Often, the variable that is regressed upon is called the
+    <a class="glossRef" href="gloss.htm#independent_variable">independent variable</a>,
+    and the variable that is being regressed is called the
+    <a class="glossRef" href="gloss.htm#dependent_variable">dependent variable</a>.
+    Usually, the variable plotted on the horizontal (<em>x</em>) axis is the
+    independent variable and the variable plotted on the vertical (<em>y</em>)
+    axis is the dependent one.
+    In this book, the independent variable of the regression line is always
+    plotted on the horizontal axis and the dependent variable is always plotted
+    on the vertical axis.
+</p>
+
+<h2>
+  <a id="estimation_by_regression_line"></a>Estimating
+  using the Regression Line
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=915&end=3025" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    How might we use the regression line?
+    If we knew nothing about an individual, our best guess of his value of Y would be the
+    average of the values of Y for the entire data set.
+    (Here, the <em>best guess</em> is the one that minimizes the average of the squared
+    <a class="glossRef" href="gloss.htm#deviation">deviations</a>.)
+    If we knew the value of X for that individual, our best guess of his value of Y
+    would be the average value of Y for individuals with that value of X.
+    The regression line gives us that, more or less:
+    The regression line (for regressing Y on X, when regression is appropriate)
+    is an estimate of the average value of Y for individuals with a given value of X.
+    If the scatterplot is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>,
+    the average value of Y for individuals with a value of X that is
+    <em>k</em>&times;SD<sub>X</sub> above the overall average of X is about
+    <em>r</em>&times;<em>k</em>&times;SD<sub>Y</sub> above the overall average value of Y.
+    The easiest way to use the regression line is to
+    convert from the original measurement units to
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a> and back again:
+</p>
+
+
+  <a id="equation_of_regression_line"></a>
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Estimating using the Regression Line</span>
+    </p>
+    <p>
+        For regressing Y on X, (estimate of Y in standard units)
+        = <em>r</em>&times;(measured
+        X in standard units)
+    </p>
+    <p>
+        For regressing X on Y, (estimate of X in
+        standard units) =
+        <em>r</em>&times;(measured Y in
+        standard units).
+    </p>
+</div>
+
+<p>
+    Estimating Y from X using regression is reasonable only if the following conditions hold:
+</p>
+
+<ul>
+    <li>
+        The scatterplot of Y versus X is roughly football-shaped.
+    </li>
+    <li>
+        The value of X for which the estimate of Y is sought is within the range
+        of measured values of X.
+    </li>
+</ul>
+
+<h2>
+    <a id="regression_line_eqn"></a>The Equation of the Regression Line
+</h2>
+
+<p>
+    Recall that the equation of a line is
+    <em>y</em> = <em>a</em>&times;<em>x</em> + <em>b</em>, where <em>a</em> is the slope
+    (rise/run, number of units of <em>y</em> the line goes up when <em>x</em>
+    increases by one unit)
+    and <em>b</em> is the <em>y</em>-intercept
+    (the value of <em>y</em> on the line when <em>x</em> = 0, where the line
+    crosses the <em>y</em>-axis).
+    The regression line for regressing Y on X is the unique
+    line that passes through the point of averages and has slope
+    <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>.
+    That lets us solve for the slope and intercept of the regression line:
+</p>
+
+<p>
+    The point of averages is (mean(X), mean(Y)).
+    The slope of the regression line is
+    <em>a</em> = <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>.
+    The point (mean(X), mean(Y)) is on the line, so
+</p>
+
+<p class="math">
+    mean(Y) = <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(X) + <em>b</em>,
+    and thus
+</p>
+
+<p class="math">
+    <em>b</em> = mean(Y) &minus; <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(X).
+</p>
+
+<p>
+    The equation of the regression line is therefore
+</p>
+
+<p class="math">
+    <em>y</em> = <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;<em>x</em> +
+    [mean(Y) &minus; <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(X)].
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Special Cases of the Regression Line</span>
+    </p>
+    <ul>
+        <li>If <em>r</em> = 0, the regression line is horizontal: Its slope is zero.</li>
+        <li>If <em>r</em> = 1, all the points fall on a line with positive slope.
+            The regression line and the SD line are the same.</li>
+        <li>If <em>r</em> = &minus;1, all the points fall on a line with negative slope.
+            The regression line and the SD line are the same.</li>
+    </ul>
+</div>
+
+<p>
+  The equation of the regression line involves only the means of X and Y,
+  the standard deviations of X and Y, and the correlation coefficient of X and Y.
+  It is usually easier and clearer conceptually to work in standard units, rather
+  than use the equation of the regression line.
+  The following exercises check your ability to find and manipulate the
+  equation of the regression line.
+</p>
+
+<p>
+	Example 9-1: Using the Regression Line to Estimate One Variable from Another<br />(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)<br />
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=3025&end=3452" frameborder="0" allowfullscreen></iframe>
+</p>  
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'For the GMAT data, the equation of the regression line for regressing 1st year ' +
+               'MBA GPA against undergraduate GPA is </p>' +
+               '<p class="math"><span class="qSpan">(1st year MBA GPA) = ' ;
+    document.writeln(qStr);
+    var slope = 0.24*0.49/0.4;
+    var intercept = 3.11 - slope*3.23;
+    writeTextExercise(6,qCtr++,'0.29:0.30');
+    var qStr = '&times;(Undergraduate GPA) + ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,'2.1:2.2');
+    qStr = '</span></p><p>(Use Figure&nbsp;5.2-1 to find the solution.)</p>';
+    document.writeln(qStr);
+    writeSolution(pCtr-1,
+        'Let MBAGPA denote first-year MBA GPA, and let UGGPA denote undergraduate GPA. ' +
+        'By pressing the "Univariate Stats" button, we can find that ' +
+        'Ave(MBAGPA) = 3.11, Ave(UGGPA) = 3.23, SD(MBAGPA) = 0.49, and ' +
+        'SD(UGGPA) = 0.4. By plotting the variables MBAGPA and UGGPA in the scatterplot, ' +
+        'we can find that the correlation coefficient of MBAGPA and UGGPA is ' +
+        '<em>r</em> = 0.24. The equation of the regression line for regressing MBAGPA ' +
+        'against UGGPA is of the form </p><p class="math">' +
+        'MBAGPA = <em>a</em>&times;UGGPA + <em>b</em>. </p><p>' +
+        'The slope is</p><p class="math"><em>a </em>= <em>r</em>&times;SD(MBAGPA)/SD(UGGPA) = ' +
+        '0.24&times;0.49/0.4 = ' + roundToDig(slope,2) + '.</p><p>The intercept is</p>' +
+        '<p class="math"> ' +
+        '<em>b</em> = Ave(MBAGPA) &minus; <em>a</em>&times;Ave(UGGPA) = 3.11 &minus; ' + roundToDig(slope,2) +
+        ' &times; 3.23 = ' + roundToDig(intercept,2) + '. '
+        );
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'For the GMAT data, the the equation of the regression line for regressing ' +
+                     'Quantitative GMAT against Verbal GMAT is </p><p><span class="qSpan">(Quantitative GMAT) = ';
+    document.writeln(qStr);
+    var slope = 0.35*6.77/6.22;
+    var intercept = 35 - slope*(35.09);
+    writeTextExercise(6,qCtr++,numToRange(slope));
+     var qStr = '&times;(Verbal GMAT) + ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(intercept));
+    document.writeln('</span></p>');
+    writeSolution(pCtr-1,
+        'Let QGMAT stand for the quantitative GMAT score, and let VGMAT stand for the ' +
+        'verbal GMAT score. The form of the regression line is </p><p class="math">' +
+        'QGMAT = <em>a</em>&times;VGMAT + <em>b</em>. </p><p>' +
+        'The slope is</p><p class="math"><em>a</em> = <em>r</em>&times;SD(QGMAT)/SD(VGMAT) = ' +
+        '0.35&times;6.77/6.22 = ' + roundToDig(slope,2) +
+        '.</p><p> (You can read <em>r</em> from the scatterplot, and ' +
+        'you can find SD(QGMAT) and SD(VGMAT) by pressing the Univariate Stats button.) ' +
+        'The intercept is</p><p class="math"><em>b</em> = Ave(QGMAT) &minus; ' +
+        '<em>a</em>&times;Ave(VGMAT) = 35 &minus; ' +
+        roundToDig(slope,2) +' &times; 35.09 = ' + roundToDig(intercept,2) +
+        '. </p><p>(You can find the means of ' +
+        ' QGMAT and VGMAT by pushing the Univariate Stats button.)'
+      );
+// -->
+</script>
+</div>
+
+<p>
+    Estimating the value of Y associated with a value of X that is larger than any of
+    those observed, or smaller than any of those observed, is called <em>extrapolation</em>.
+    (Estimating the value of X associated with a value of Y larger than any of those
+    observed, or smaller than any of those observed, is also extrapolation.)
+    Estimating the value of Y associated with a value of X that is within the range
+    of the observed values of X but is not equal to any of the observed values of X is
+    called <em>interpolation</em>; so is estimating the value of X associated with a
+    value of Y that is within the range of measured values of Y.
+    Extrapolation is extremely suspect&mdash;without data in the range in which the
+    estimate is wanted, there is no reason to believe that the relationship between
+    X and Y is the same as it is in the region in which there are data.
+    Interpolation is sometimes reasonable when the scatterplot is
+    <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>, especially if there are
+    many data near the value of X or Y at which the estimate is sought.
+</p>
+
+<p>
+  The <a class="glossRef" href="gloss.htm#regression">regression line</a> makes sense as a summary of a
+  <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a> when the
+  <a class="glossRef" href="gloss.htm#correlation_coef">correlation</a>
+  makes sense as a summary of <a class="glossRef" href="gloss.htm#association">association</a>; namely, when
+  the scatterplot is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>:
+  <a class="glossRef" href="gloss.htm#homoscedastic">homoscedastic</a>,
+  without large <a class="glossRef" href="gloss.htm#outlier">outliers</a>, and shows linear association.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+   illustrates using the regression line to estimate one variable from another.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Using the Regression Line to Estimate One Variable from Another.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose we have measured the heights and weights of 1000 individuals, and that the
+    scatterplot of weight versus height is roughly
+    <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>.
+    Say the <a class="glossRef" href="gloss.htm#mean">average</a> weight is 150&nbsp;lbs. with an
+    <a class="glossRef" href="gloss.htm#sd">SD</a>
+    of 20&nbsp;lbs., the average height
+    is 66&quot; with an SD of 3&quot;, and the
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a>
+    between height and weight is 0.6.
+    Use the regression line to estimate the following:
+</p>
+
+<ol>
+    <li>The weight of an individual whose height is 66&quot;.</li>
+    <li>The weight of an individual whose height is 72&quot;.</li>
+    <li>The height of an individual whose weight is 160&nbsp;lbs.</li>
+    <li>The height of an individual whose weight is 2SD below average.</li>
+</ol>
+
+<p>
+    <strong>Solution:</strong>
+</p>
+
+<ol>
+    <li>
+        66&quot; is the average height, so the regression line would estimate that the
+        individual's weight is the average weight, namely, 150&nbsp;lbs.
+    </li>
+    <li>
+        72&quot; is 6&quot; above average, which is 2 SD above average, so 72&quot;
+        is 2 <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+        The regression line would thus estimate that the individual's weight is
+        <em>r</em>&times;2 = 1.2 standard units.
+        The SD of weight is 20&nbsp;lbs., so the individual is estimated to have weight
+        150&nbsp;lbs. + 1.2&times;20&nbsp;lbs. = 150&nbsp;lbs. + 24&nbsp;lbs. = 174&nbsp;lbs.
+    </li>
+    <li>
+        160&nbsp;lbs. is 10&nbsp;lbs. above average, and 10&nbsp;lbs. is  0.5SD, so the individual
+        has weight 0.5 standard units.
+        The regression line estimates that the individual's height to be
+        <em>r</em>&times;0.5  = 0.3 standard units.
+        The SD of height is 3&quot;, so the regression line estimate of
+        estimate the height is 66&quot; + 0.3&times;3&quot; = 66.9&quot;.
+    </li>
+    <li>
+        The individual's weight is &minus;2&nbsp;standard units, so the regression line
+        estimate of the height is <em>r</em>&times;(&minus;2) = &minus;1.2 standard units.
+        This is 66&quot; &minus; 1.2&times;3&quot; = 62.4&quot;.
+    </li>
+</ol>
+</div>
+
+<p>
+    The following exercises check your ability to estimate using the regression line.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var r1 = roundToDig(.1 + .8*rand.next(),1);
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var fac2 = Math.round(7*rand.next()-3.5);
+    var n = 20;
+    var IQsd = 12;
+    var IQXsd = IQsd + 5*(rand.next()-1);
+    var IQYsd = IQsd + 5*(rand.next()-1);
+    var IQmean = 100;
+    var IQXmean = IQmean + 8*rNorm();
+    var IQYmean = IQmean + 8*rNorm();
+    var lists = cNormPoints(n,r1);
+    var husIQ = lists[0];
+    var wifIQ = lists[1];
+    var m1 = mean(husIQ);
+    var m2 = mean(wifIQ);
+    var s1 = sd(husIQ);
+    var s2 = sd(wifIQ);
+    for (i=0; i < husIQ.length; i++) {
+        husIQ[i] = Math.floor(IQXmean + IQXsd*(husIQ[i]-m1)/s1);
+        wifIQ[i] = Math.floor(IQYmean + IQYsd*(wifIQ[i]-m2)/s2);
+    }
+    var cc = roundToDig(corr(husIQ,wifIQ),2);
+    var aveHus = roundToDig(mean(husIQ),2);
+    var aveWif = roundToDig(mean(wifIQ),2);
+    var sdHus =  roundToDig(sd(husIQ),2);
+    var sdWif =  roundToDig(sd(wifIQ),2);
+    var husPredIQ = aveHus + fac1*sdHus;
+    var husPredIQ2 = aveHus + fac2*sdHus*cc;
+    var wifPredIQ = aveWif + fac1*sdWif*cc;
+    var wifPredIQ2 = aveWif + fac2*sdWif;
+    var husMnMx = vMinMax(husIQ);
+    var wifMnMx = vMinMax(wifIQ);
+    var header = new Array("IQ of Husband","IQ of Wife");
+    lists[0] = husIQ;
+    lists[1] = wifIQ;
+    var qStr = 'Here is a table of (fictitious) IQ measurements of married couples. The ' +
+               'data are plotted in a scatterplot below the table. These data will change ' +
+               'whenever you re-visit or reload the page.</p>';
+    document.writeln(qStr);
+    listToTable(header,lists,"standard","center");
+    var qStr = '<p>The point of averages of these data is (' + doubleToStr(aveHus,3) +
+        ', ' + doubleToStr(aveWif,3) + '), the SD of the husbands\' IQs is ' +
+        doubleToStr(sdHus,3) + ', and the SD of the wives\' IQs is ' +
+        doubleToStr(sdWif,3) + '. The correlation coefficient of the IQs of ' +
+        'husbands and wives is <em>r</em> = ' + doubleToStr(cc,4) + '. ';
+    document.writeln(qStr);
+    var qStr = '<span class="qSpan">The value of wife\'s IQ of the regression line ' +
+           '(for regressing the IQs of wives against the IQs of their husbands) at ' +
+           'husband\'s IQ= ' + doubleToStr(husPredIQ,2) + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,doubleToRange(wifPredIQ,.15));
+    document.writeln('</p>');
+    var husSU = (husPredIQ - aveHus)/sdHus;
+    var ansStr = 'A husband\'s IQ of ' + doubleToStr(husPredIQ,2) + ' is ' +
+         roundToDig(husSU,3) + ' in standard units. ' +
+         'The regression line predicts that the corresponding IQ of a wife is ' +
+         '<em>r</em> times as many standard units, namely, ' + roundToDig(cc*husSU,3) +
+         ' standard units. In IQ points, that is </p><p class="math">' +
+         roundToDig(aveWif,3) + ' + ' + roundToDig(cc*husSU,3) + ' &times; ' +
+         roundToDig(sdWif,3) + ' = ' + roundToDig(wifPredIQ,3) + '. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Using the regression line to predict the IQ of the ' +
+           'wife of a man whose IQ is ' + doubleToStr(husPredIQ,2) + ' is </span>';
+    document.writeln(qStr);
+    var opt = ["interpolation","extrapolation"];
+    var inRange = true;
+    if (husPredIQ < husMnMx[0] || husPredIQ > husMnMx[1]) {
+        inRange = false;
+        aVal = 'b';
+    } else {
+        aVal = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '<span class="qSpan">, so the estimate is</span>';
+    document.writeln(qStr);
+    var opt = ["extremely dubious",
+           "possibly justified",
+           "quite reliable"
+          ];
+    if (husPredIQ < husMnMx[0] || husPredIQ > husMnMx[1]) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = 'The IQs of men in the data set range from ' + roundToDig(husMnMx[0],1) +
+     ' to ' + roundToDig(husMnMx[1],1) + '. The value ' + roundToDig(husPredIQ,3) +
+     ' is ';
+    if (!inRange) {
+        ansStr += 'not ';
+    }
+    ansStr += 'in range, so the estimate is ';
+    if (inRange) {
+        ansStr += 'interpolation. Interpolation is possibly justified.';
+    } else {
+        ansStr += 'extrapolation.  Extrapolation is extremely dubious.'
+    }
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the value of husband\'s IQ of the regression ' +
+           'line (for regressing the IQs of husbands against the IQs of their wives) at ' +
+           'wife\'s IQ= ' + doubleToStr(wifPredIQ2,2) + '?</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,doubleToRange(husPredIQ2,.15));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Using the regression line to estimate the IQ of the ' +
+           'husband of a woman whose IQ is ' + doubleToStr(wifPredIQ2,2) + ' is</span>';
+    document.writeln(qStr);
+    var opt = ["interpolation","extrapolation"];
+    var aVal;
+    if (wifPredIQ2 < wifMnMx[0] || wifPredIQ2 > wifMnMx[1]) {
+        aVal = 'b';
+    } else {
+        aVal = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '<span class="qSpan">so the estimate is</span>';
+    document.writeln(qStr);
+    var opt = ["extremely dubious",
+           "possibly justified",
+           "quite reliable"
+          ];
+    if (wifPredIQ2 < wifMnMx[0] || wifPredIQ2 > wifMnMx[1]) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The equation of the regression line for regressing ' +
+           'wives\' IQs against husbands\' IQs is</span> </p><div align="center"><center>' +
+           '<table border="0" cellspacing="1"><tr><td><span class="qSpan">' +
+           '(wife\'s IQ) = ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(cc*sdWif/sdHus,.1));
+    var qStr = ' &times; (husband\'s IQ) + ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(aveWif - aveHus*cc*sdWif/sdHus,.1));
+    var qStr = '.</span></td></tr></table></center></div>';
+    document.writeln(qStr);
+    var slope = cc*sdWif/sdHus;
+    var intercept = aveWif - slope*aveHus;
+    var ansStr = 'The slope of the regression line is </p><p class="math">' +
+         '<em>r</em>&times;SD(wive\'s IQs)/SD(husband\'s IQs) = ' + roundToDig(cc,4) +
+         ' &times; ' + roundToDig(sdWif,4) + '/' + roundToDig(sdHus,4) +
+         ' = ' + roundToDig(slope,4) +
+         '. </p><p>The intercept is </p><p class="math">Ave(wive\'s IQs) &minus; ' +
+         '(slope)&times;Ave(husband\'s IQs) = ' + roundToDig(aveWif,4) + ' &minus; ' +
+         roundToDig(slope,4) + ' &times ' + roundToDig(aveHus,4) + ' = ' +
+         roundToDig(intercept,4) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = '<p class="figure"><applet code="Correlation.class" ' +
+           'codebase="../../Java/" align="baseline" width="600" ' +
+           'height="320" name="randDataApplet" archive="PbsGui.zip">' +
+           '<param name="addPoints" value="false" />' +
+           '<param name="graphAveButton" value="false" />' +
+           '<param name="sdButton" value="false" />' +
+           '<param name="sdLineButton" value="false" />' +
+           '<param name="title" value="Fictitious IQs of Wives vs. Husbands" />' +
+           '<param name="regressButtons" value="false" />' +
+           '<param name="x" value="1,2,3"><param name="y" value="1,2,3" />' +
+           'You need Java to see this.</applet></p>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables((husIQ.join().toString()),wifIQ.join().toString());\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</div>
+
+<p>
+    The best use of the regression line is to interpolate: to estimate the value of
+    Y at a value of X that is within the range of measured values of X, but not equal
+    to any of the measured values, when the scatterplot of X and Y is
+    <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>.
+    The regression line is also useful for estimating the value of one of the variables
+    corresponding to a given value of the other, using just five summary numbers:
+    mean(X), mean(Y), SD<sub>X</sub>, SD<sub>Y</sub>, and <em>r</em>.
+    However, one must be wary: Extrapolation always should be met with suspicion,
+    and if the scatterplot is not football-shaped, the regression
+    line need not summarize the relationship between X and Y well, even within the
+    range of the data.
+</p>
+
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    This chapter presents the <a class="glossRef" href="gloss.htm#SD_line">SD line</a>,
+    the <a class="glossRef" href="gloss.htm#graph_of_averages">graph of averages</a>, and the
+    <a class="glossRef" href="gloss.htm#regression">regression line</a>.
+    The SD line passes through the <a class="glossRef" href="gloss.htm#point_of_ave">point of averages</a>
+    and has slope &plusmn;SD<sub>Y</sub>/SD<sub>X</sub>;
+    the sign of the slope is the same as the sign of the
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient <em>r</em></a>.
+    The SD line is presented only for contrast; it is not itself useful.
+    The graph of averages summarizes a scatterplot by the averages of the
+    data in vertical slices, plotted against the horizontal midpoints of the slices.
+    Each point in the graph of averages summarizes the values of Y for
+    points with values of X that are in a small range.
+    If the scatterplot is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>,
+    the points in the graph of averages fall nearly on a straight line.
+    That line, called the regression line, passes through the
+    <a class="glossRef" href="gloss.htm#point_of_ave">point of averages</a> and has slope
+    <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>, which is smaller than the
+    slope of the SD line.
+</p>
+
+<p>
+    The vertical residual from a datum (<em>x</em>, <em>y</em>) to a line is
+    equal to <em>y</em> minus the
+    height of the line at <em>x</em>.
+    The <a class="glossRef" href="gloss.htm#rms">rms</a> of the vertical residuals from all the
+    data and the regression line is smaller than the rms of the vertical residuals
+    from the data to any other line:
+    In this sense, the regression line is the line that best summarizes a
+    scatterplot.
+</p>
+
+<p>
+    If a scatterplot is football-shaped,
+    the regression line comes close to passing through the graph of averages,
+    and provides a reasonable summary of the scatterplot.
+    If the scatterplot shows nonlinearity, heteroscedasticity, or outliers,
+    the regression line will tend to be systematically above the
+    graph of averages for some values of X and systematically
+    below the graph of averages for other values of X.
+    Then the regression line is not a good summary of the scatterplot.
+    To estimate the value of Y associated with a given value of X
+    using the regression line, it is easiest to work in standard units:
+</p>
+
+<p class="math">
+    (estimate of Y in standard units) = <em>r</em>&times;(measured X in standard units).
+</p>
+
+<p>
+    This is the regression line for regressing Y on X; Y is
+    called the dependent variable in the regression and X is called the
+    independent variable in the regression.
+    There is another regression line for regressing X on Y, as follows:
+</p>
+
+<p class="math">
+    (estimate of X in standard units) = <em>r</em>&times;(measured Y in standard units).
+</p>
+
+<p>
+    In that line, Y is called the independent variable in the
+    regression and X is called the dependent variable in the regression.
+</p>
+
+<p>
+    The equation of the regression line for regressing Y on X is:
+</p>
+
+<p class="math">
+    y = <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;x +
+    [mean(Y) &minus; <em>r</em>&times;SD<sub>Y</sub>/SD<sub>X</sub>&times;mean(X)].
+</p>
+
+<p>
+    The equation of the regression line depends on five measured quantities:
+    the mean of X, the mean of Y, the standard deviation of X, the standard
+    deviation of Y, and the correlation coefficient.
+    Estimating the value of Y at a value of X beyond the range of measured values of
+    X is called <em>extrapolation</em>.
+    Estimating the value of Y at a value of X within the range of measured
+    values of X is called <em>interpolation</em>.
+    Extrapolation is very hard to justify, and should be treated suspiciously: Usually,
+    there is little reason to believe that the observed relationship
+    between X and Y holds where nothing was observed.
+    Interpolation can be reasonable when the scatterplot is
+    <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>.
+    This is the most useful application of the regression line.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>association</li>
+    <li>bivariate</li>
+    <li>class interval</li>
+    <li>correlation</li>
+    <li>correlation coefficient</li>
+    <li>deviation</li>
+    <li>football-shaped</li>
+    <li>heteroscedastic</li>
+    <li>histogram</li>
+    <li>independent variable</li>
+    <li>interpolation</li>
+    <li>linear regression</li>
+    <li>mean</li>
+    <li>monotonic increasing</li>
+    <li>nonlinear</li>
+    <li>outlier</li>
+    <li>regression</li>
+    <li>regression line</li>
+    <li>rms</li>
+    <li>SD line</li>
+    <li>slice</li>
+    <li>univariate</li>
+    <li>variable</li>
+</ul>
+
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

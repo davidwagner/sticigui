@@ -1,0 +1,2216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "27 June 2011 00:05 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "location";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<h1>
+    Measures of Location and Spread
+</h1>
+
+<p>
+    Summarizing data can help us understand them, especially when the number
+    of data is large.
+    This chapter presents several ways to summarize quantitative data by a typical value
+    (a measure of <em>location</em>, such as the mean, median, or mode) and a measure of
+    how well the typical value represents
+    the list (a measure of <em>spread</em>, such as the range, inter-quartile range, or
+    standard deviation).
+    Markov's and Chebychev's inequalities show that these summary measures
+    can contain a surprisingly large amount of information
+    about the data.
+</p>
+
+
+<h2>
+    <a id="location"></a>
+    Measures of Location
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=3275&end=4217" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The farthest one can reduce a set of data, and still retain any
+    information at all, is to summarize the data with a single value.
+    <a class="glossRef" href="gloss.htm#location">Measures of location</a> do just that: They
+    try to capture with a single number what is typical of the data.
+    What single number is most representative of an entire list of numbers?
+    We cannot say without defining &quot;representative&quot; more
+    precisely.
+    We will study three common measures of location: the
+    <a class="glossRef" href="gloss.htm#mean">mean</a>,
+    the <a class="glossRef" href="gloss.htm#median">median</a>, and the <a class="glossRef" href="gloss.htm#mode">mode</a>.
+    The mean, median and mode are all &quot;most representative,&quot;
+    but for different, related notions of representativeness.
+</p>
+
+<ul>
+    <li>
+    We saw the median in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('histograms') + '. ');
+// -->
+</script>
+    The median is the number that divides the (ordered) data in half&mdash;the smallest
+    number that is at least as big as half the data.
+    At least half the data are equal to or smaller than the median, and at least
+    half the data are equal to or greater than the median.
+    </li>
+    <li>
+    The mode of a set of data (as opposed to the mode of a histogram) is the most
+    common value among the data.
+    It is rare that several data coincide exactly, unless the variable is discrete,
+    or the measurements are reported with low precision.
+    </li>
+    <li>
+    The mean (more precisely, the arithmetic mean) is commonly called the average.
+        It is the sum of the data, divided by the number of data:
+    <div align="center">
+    <center>
+        <table border="0" cellspacing="1">
+        <tr>
+        <td></td>
+        <td></td>
+        <td align="center">sum of data</td>
+        <td></td>
+        <td align="center">total </td>
+        </tr>
+        <tr>
+        <td>mean</td>
+        <td>=</td>
+        <td align="center">----------------------</td>
+        <td>=</td>
+        <td align="center">------------------- .</td>
+        </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        <td align="center">number of data</td>
+        <td></td>
+        <td align="center">number of data </td>
+        </tr>
+        </table>
+    </center>
+    </div>
+    </li>
+</ul>
+
+<div class="indent">
+<p class="inline">
+    For <a class="glossRef" href="gloss.htm#qualitative">qualitative</a> and
+    <a class="glossRef" href="gloss.htm#categorical">categorical</a> data, the mode makes sense, but the
+    <a class="glossRef" href="gloss.htm#mean">mean</a> and 
+    <a class="glossRef" href="gloss.htm#median">median</a> do not.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    fStr = 'What would it mean to take the mean or median of the values of a ' +
+       'categorical variable? For example, what is the average of a list of tree ' +
+       'species? It does not make sense.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    It is hard to see the connection between the mean, median, and mode from their
+    definitions.
+</p>
+</div>
+
+<p>
+    <a id="optim_char"></a>
+    However, the mean, the median, and the mode are &quot;as close as possible&quot; to all
+    the data: For each of these three measures of location, the sum of the distances
+    between each datum and the measure of location is as small as it can be.
+    The differences among the three measures of location are in how &quot;distance&quot;
+    is defined.
+</p>
+
+<ul>
+    <li>
+    <div class="indent">
+    <p class="inline">
+    For the mean, the distance between two numbers is defined to be
+    the square of their difference.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    fStr = '<strong>The mean minimizes the sum of squared differences.</strong> ' +
+       'Suppose we have a list of <em>n</em> numbers, {x<sub>1</sub>, ' +
+       'x<sub>2</sub>, ' +
+       'x<sub>3</sub>, &hellip; ,  ' +
+       'x<sub><em>n</em></sub>}. ' +
+       'Consider finding the value of <em>m</em> ' +
+       'that minimizes <p class="math">f(<em>m</em>) = ' +
+       '(x<sub>1</sub> &minus; <em>m</em>)<sup>2</sup> ' +
+       ' + (x<sub>2</sub> &minus; <em>m</em>)<sup>2</sup> + ' +
+       '&hellip; + ' +
+       '(x<sub><em>n</em></sub> &minus; <em>m</em>)<sup>2</sup>. ' +
+       '</p><p>This is a quadratic function of <em>m</em>, with a positive leading ' +
+       'coefficient, so it is a parabola with a minimum but no maximum. ' +
+       'The minimum occurs at ' +
+       'a stationary point, where the derivative of the function f(<em>m</em>) ' +
+       'with respect to <em>m</em> is zero. The derivative is</p><p class="math">' +
+       'f\'(<em>m</em>)  = &minus;2(x<sub>1</sub> &minus; <em>m</em>) &minus; ' +
+       '2(x<sub>2</sub> &minus; <em>m</em>) &minus; ' +
+       '&hellip; &minus; ' +
+       '2(x<sub><em>n</em></sub> &minus; <em>m</em>).</p><p>Setting this to zero and ' +
+       'rearranging terms gives ' +
+       '</p><p class="math">x<sub>1</sub> + x<sub>2</sub> + ' +
+       '&hellip; ' +
+       '+ x<sub><em>n</em></sub> = ' +
+       '<em>m</em> + <em>m</em> + &hellip; + <em>m</em> = ' +
+       '<em>n</em>&times;<em>m</em>.</p>' +
+       '<p>Solving for <em>m</em> gives</p><p class="math">' +
+       '<em>m</em> = (x<sub>1</sub> + x<sub>2</sub> + ' +
+       '&hellip; + ' +
+       'x<sub><em>n</em></sub>)/<em>n</em>,</p><p>so <em>m</em> is ' +
+       'the mean.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    That is, the sum of the squares of the differences between the data and the mean
+    is smaller than the sum of squares of the differences between the data and
+    any other number.
+    (Equivalently,  the <a class="glossRef" href="gloss.htm#rms">rms</a> or <em>root mean square</em>
+    of the differences from the <a class="glossRef" href="gloss.htm#mean">mean</a> is
+    smaller than the rms of the
+    list of differences from any other
+    number&mdash;the rms is defined and discussed <a href="#rms" target="_self">below</a>.)
+   </p>
+   </div>
+    </li>
+    <li>
+    <div class="indent">
+    <p class="inline">
+    For the median, the distance between two numbers is defined to be
+    the absolute value of their difference.
+    That is, the sum of the absolute values of the differences between a median and the data
+    is no larger than the sum of the absolute values of the differences between
+    any other number and the data.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<strong>The median minimizes the sum of absolute values of ' +
+       'differences.</strong> Suppose we have a list of <em>n</em> numbers, ' +
+       '{x<sub>1</sub>, x<sub>2</sub>, ' +
+       'x<sub>3</sub>, &hellip; , ' +
+       'x<sub><em>n</em></sub>}. Consider finding the value of <em>m</em> ' +
+       'that minimizes <p class="math">f(<em>m</em>) = ' +
+       '|x<sub>1</sub> &minus; <em>m</em>|' +
+       ' + |x<sub>2</sub> &minus; <em>m</em>| + &hellip; + ' +
+       '|x<sub><em>n</em></sub> &minus; <em>m</em>|.' +
+       '</p><p>This is a <em>convex</em> function of <em>m</em>, but it is not a ' +
+       'differentiable function of <em>m</em> everywhere (because the ' +
+       'absolute value function is not differentiable at zero). However, we can ' +
+       'define a <em>subgradient</em> of the absolute value function that lets us ' +
+       'solve the problem: </p><p class="math">d(|x|)/dx = ' +
+       '{ &minus;1, x < 0; 0, x = 0; 1, x > 0}.' +
+       '</p><p>The subgradient of the sum of absolute values is then</p><p class="math">' +
+       '&minus;1 &times; (# data < <em>m</em>) + 1 &times; (# data > <em>m</em>).</p><p>' +
+       'Suppose for the moment that no datum in the list is repeated, and that <em>n</em>, ' +
+       'the size of the list, is odd. Then the subgradient vanishes when <em>m</em> is ' +
+       'the median, because the number of values less than the median equals the number of ' +
+       'values greater than the median. There are complications in the derivation ' +
+       'when some data values are repeated, but the median is still the solution to the ' +
+       'optimization problem.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    </p>
+    </div>
+    </li>
+    <li>
+    <div class="indent">
+    <p class="inline">
+    For the mode, the distance between two numbers is defined to be
+    zero if the numbers are equal, and one if they are not equal.
+    That is, the number of data that differ from a mode is no larger than the number
+    of data that differ from any other value.
+    Equivalently, a mode is a number from which the fewest possible data differ:
+    a &quot;most common&quot; value.
+    </p>
+    </div>
+    </li>
+</ul>
+
+<p>
+    All three of these measures of location are examples of
+    <a class="glossRef" href="gloss.htm#statistic">statistics</a> (with a lowercase
+    &quot;s&quot;): numbers computed from data.
+</p>
+
+
+<p>
+    The mean, median, and mode can be related (approximately) to the
+    <a class="glossRef" href="gloss.htm#histogram">histogram</a>:
+    loosely speaking, the <a class="glossRef" href="gloss.htm#mode">mode</a>
+    is the highest bump, the <a class="glossRef" href="gloss.htm#median">median</a> is where
+    half the area is to the right and half is to the left, and the
+    <a class="glossRef" href="gloss.htm#mean">mean</a> is where the
+    <a class="glossRef" href="gloss.htm#histogram">histogram</a> would balance, were it a solid object
+    cut out of a uniform block of metal.
+    (All these heuristics are approximate, and depend on the
+    <a class="glossRef" href="gloss.htm#class_interval">class intervals</a>.)
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Calculating the mean, median and mode of a list.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    For illustration, let's compute the <a class="glossRef" href="gloss.htm#mean">mean</a>,
+    <a class="glossRef" href="gloss.htm#median">median</a> and
+    <a class="glossRef" href="gloss.htm#mode">mode</a>,
+    from the hypothetical data in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeTable();
+// -->
+</script>.
+    These data change when you reload the page, so you can see many examples.
+</p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var list = listOfDistinctRandInts(6,-5,5);
+    var header = "data";
+    var qStr = 'Random data to illustrate calculating measures of location.';
+    writeTableCaption(qStr);
+    listToTable(header,list,"standard","center");
+    meanList = mean(list);
+    var sortList = new Array(list.length);
+    for (i=0; i < list.length; i++) {
+       sortList[i] = list[i];
+    }
+    sortList.sort(numberLessThan);
+    medList = sortList[2];
+    var qStr = '<p>' + citeTable(cNum,false) + ' shows these random ' +
+       'data sorted into increasing order, which makes it easier to calculate ' +
+       'the median.</p>';
+    document.writeln(qStr);
+    var qStr = 'Sorted random data to illustrate calculating measures of location.';
+    writeTableCaption(qStr);
+    header = "sorted data";
+    listToTable(header, sortList, "standard", "center");
+    var qStr = '<p>Half the data are less than or equal to every number between ' +
+       sortList[2] + ' (inclusive) and ' + sortList[3] +
+       ' (exclusive). By our definition, the ' +
+       '<a class="glossRef" href="gloss.htm#median">median</a> is the smallest such number, namely, ' +
+       sortList[2] + '. For these hypothetical data, every value in the list ' +
+       'is a <a class="glossRef" href="gloss.htm#mode">mode</a>: each value occurs exactly once, ' +
+       'so all are &quot;most common.&quot;</p><p>Computing the ' +
+       '<a class="glossRef" href="gloss.htm#mean">mean</a> is familiar:</p><div align="center">' +
+       '<center><table border="0" cellspacing="1"><tr><td align="center">';
+    var listString = new Array(list.length);
+    for (i=0; i < list.length; i++) {
+        if (list[i] >= 0) {
+            listString[i] = list[i].toString();
+        } else {
+            listString[i] = "(" + list[i].toString() + ")";
+        }
+    }
+    for (i=0; i < list.length - 1; i++) {
+        qStr += listString[i] + ' + ';
+    }
+    qStr += listString[list.length - 1] + '</td><td></td><td></td></tr><tr>' +
+    '<td align="center">-------------------------------</td><td>=</td><td>' +
+    roundToDig(meanList,3) + '.</td></tr><tr><td align="center">' +
+    list.length.toString() + '</td><td></td><td></td></tr></table></center></div>';
+    document.writeln(qStr);
+// -->
+</script>
+
+</div>
+
+<p>
+    In general, the <a class="glossRef" href="gloss.htm#mean">mean</a>
+    and the <a class="glossRef" href="gloss.htm#median">median</a> need not be close together.
+    If the data have a <a class="glossRef" href="gloss.htm#symmetric">symmetric</a> distribution,
+    the mean and median are exactly equal, but if the distribution of the data is
+    <a class="glossRef" href="gloss.htm#skewed">skewed</a>, the difference between mean and the median
+    can be large.
+    This is because data in the tails of the distribution
+    have a lot of leverage on the <a class="glossRef" href="gloss.htm#mean">mean</a>, just as a light person
+    can balance a much heavier one on a teeter-totter if she sits much farther from the
+    fulcrum than the heavier person does.
+    The median is smaller than the mean if the data are skewed to the right, and
+    larger than the mean if the data are skewed to the left.
+    Because the <a class="glossRef" href="gloss.htm#mean">mean</a> is
+    (essentially) the balance point of the <a class="glossRef" href="gloss.htm#histogram">histogram</a>, a
+    small number of data can affect it a great deal, if they are very large (positive or
+    negative).
+    Corrupting just one datum can make the mean arbitrarily large or small.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#median">median</a> is affected much less by small subsets of the
+    data.
+    To make the median arbitrarily large or small, one must corrupt half the data.
+    Corrupting just one datum changes the median by a limited amount, and not at all if
+    one of the observations above the median is made larger, or one of the observations
+    below the median is made smaller.
+    Statistics that are not affected too much by small
+    subsets of the data are <a class="glossRef" href="gloss.htm#resistance">resistant</a>.
+    The median is resistant; the mean is not.
+</p>
+
+<p>
+    Which measure of location is the most appropriate depends on the intended use of the
+    summary.
+    If we are interested in a total, the mean tends to be the most relevant, because the
+    mean is equal to the total divided by the number of data.
+    For example, the mean income of the individuals in a family indicates how much the
+    family can spend on each family member's necessities of life.
+    On the other hand, the median can be much more informative in other situations.
+</p>
+
+<p>
+    Suppose we want to know how much money a family can afford to spend on housing.
+    That depends on the total family income, which is the mean income of the family
+    members, times the number of family members.
+    For a family of five, consisting of two parents who work and three children
+    with no income, the mean income, times five, is the total amount of money the
+    family makes each year.
+    The median income of these five family members is zero, because more than half of
+    them make nothing.
+</p>
+
+<p>
+    On the other hand, suppose we want to decide whether a country is affluent.
+    At issue, in some sense, is whether most of the citizens have a high income.
+    The mean family income could be quite high even if most families earn essentially
+    nothing&mdash;if income is highly concentrated in a few very wealthy families.
+    Then the median family income would be a more meaningful measure:
+    At least half the families make no more than the median, and at least half make at
+    least as much as the median.
+</p>
+
+<p>
+    Similarly, suppose you are applying for a job as an architect at several large firms,
+    and you want to get an idea of how much money you might expect to be earning in five
+    years if you join a particular firm.
+    Consider the salaries of architects in each firm five years after they are hired.
+    Just one very high salary could make the mean salary high, so the mean might not
+    reflect what is typical.
+    On the other hand, half the architects make the median salary or less, and half
+    make the median salary or more, so the median would give you a better idea of a
+    typical salary.
+</p>
+
+<p>
+    Choosing a measure of location favorable to one's point of view is a common way
+    to mislead people with statistics.
+    For example, suppose you are the CEO of a company that makes gizmos and gadgets.
+    It might be in your interest to claim to your customers that you have lowered
+    your prices, and to claim to your shareholders that you have raised your prices.
+    Suppose that last year, you sold 100,000 gizmos at $10 each, and 1,000 gadgets at
+    $1000 each.
+    This year, you sold 100,000 gizmos at $8 each, and 1,000 gadgets at $1200 each
+    (see
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeTable();
+// -->
+</script>
+</p>
+
+<div align="center">
+<center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Quantities and Prices for Two Years of Gizmo and Gadget Sales.';
+       writeTableCaption(qStr);
+// -->
+</script>
+
+    <table class="dataTable">
+    <tr>
+    <th align="center" id="col0">Item</th>
+    <th align="center" id="col1">Quantity<br />Each Year</th>
+    <th align="center" id="col2">Price<br />
+      Last Year</th>
+    <th align="center" id="col3">Price <br />
+      This Year</th>
+    </tr>
+    <tr>
+    <td align="center" headers="col0">gizmo</td>
+    <td align="right" headers="col1">100,000</td>
+    <td align="right" headers="col2">$10</td>
+    <td align="right" headers="col3">$8</td>
+    </tr>
+    <tr>
+    <td align="center" headers="col0">gadget</td>
+    <td align="right" headers="col1">1,000</td>
+    <td align="right" headers="col2">$1,000</td>
+    <td align="right" headers="col3">$1,200</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The median price of the 101,000 items sold last year is $10, because
+    more than half of the items sold were gizmos. The median price of the 101,000 items sold
+    this year is $8. The mean price on the price list (without regard for the number of items
+    sold) was $505 last year and $604 this year. The mean price of the 101,000 items sold last
+    year is
+</p>
+
+<p class="math">
+    (100,000 &times; $10 + 1,000 &times; $1,000)/101,000 = $19.80
+</p>
+
+<p>
+    while this year it is
+</p>
+
+<p class="math">
+   (100,000 &times; $8 + 1,000 &times; $1,200)/101,000 = $19.80.
+</p>
+
+<p>
+    The mean price per item sold is the same in both years: the total
+    revenue was the same, and the number of items sold was the same.
+    The moral is that one can make data appear to tell conflicting stories by
+    choosing a measure of location disingenuously.
+</p>
+
+<p>
+    The following exercises check your ability to compute and to use the mean,
+    median, and mode.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=4217&end=4295" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=4295&end=4462" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.write(startProblem(pCtr++));
+    var list = listOfDistinctRandInts(4,-10,10);
+    list[4] = list[3];
+    list[5] = list[3];
+    var modeList = list[3];
+    list = randPermutation(list);
+    var sortList = new Array(list.length);
+    for (i=0; i < list.length; i++) sortList[i] = list[i];
+    sortList.sort(numberLessThan);
+    var sortListStr = '';
+    var sumListStr = '';
+    for (i=0; i < sortList.length-1; i++) {
+        sortListStr += sortList[i] + ', ';
+        sumListStr += sortList[i] + ' + ';
+    }
+    sortListStr += sortList[sortList.length - 1];
+    sumListStr += sortList[sortList.length - 1];
+    var medList = percentile(list,50);
+    var meanList = mean(list);
+    var header = "data";
+    var qStr = 'Consider the following list:';
+    document.writeln(qStr);
+    listToTable(header,list,"standard","center");
+    var qStr = '</p><p><span class="qSpan">The median of the list is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,medList.toString());
+    var qStr = '</p><p><span class="qSpan">The mode of the list is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,modeList.toString());
+    var qStr = '</p><p><span class="qSpan">The mean of the list is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(meanList,.05));
+    document.writeln('</p>');
+    var ansStr = 'The list in sorted order is {' + sortListStr + '}. Half the numbers ' +
+     'are less than or equal to ' + medList.toString() + ', so the median of the ' +
+     'list is ' + medList.toString() + '. The most common number in the list is ' +
+     modeList.toString() + ', which occurs 3 times, so the mode of the list is ' +
+     modeList.toString() + '. The mean of the list is</p><p class="math">(' +
+     sumListStr + ')/' + (list.length).toString() + ' = ' + roundToDig(meanList,3) +
+     '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.write(startProblem(pCtr++));
+    var qStr = 'Homes in a certain area have a mean price of $400,000, but a median price of ' +
+       '&quot;only&quot; $250,000. <span class="qSpan">How might you explain ' +
+       'this best?</span></p><p>';
+    document.writeln(qStr);
+    var opt = ["A small percentage of very inexpensive homes makes the median small, " +
+        "but does not affect the mean much.",
+    "A small percentage of very expensive homes makes the mean large, but " +
+        "does not affect the median much.",
+    "There must be an error in the computation.",
+    "More than half of the home prices are less than $250,000."
+       ];
+    writeRadioExercise(qCtr++,opt,"b");
+    document.writeln('</p>');
+    var ansStr = 'A few very expensive homes can make the mean large without making the median ' +
+     ' large&mdash;the distribution of home prices is skewed to the right in most ' +
+     ' neighborhoods. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Two countries have the same mean per capita personal income. ' +
+       '<span class="qSpan">The total personal income in the larger country is ' +
+       'larger than the total personal income in the smaller country.</span> ';
+    document.writeln(qStr);
+    opt = ["True", "Not necessarily"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    document.writeln('</p>');
+    var ansStr = 'The total personal income is the mean personal income times the number of ' +
+       ' people, so if the means are the same, the total is larger for the larger ' +
+       ' country. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Two countries have the same median per capita personal income. ' +
+       '<span class="qSpan">The total personal income in the larger country is ' +
+       'larger than the total personal income in the smaller country.</span>';
+    document.writeln(qStr);
+    opt = ["True", "Not necessarily"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+    var ansStr = 'The median could be larger or smaller than the mean, so the total could be ' +
+     'larger or smaller than the median times the number of people, and we do ' +
+     'not have enough information in this problem to tell which country has the ' +
+     'larger total personal income.  Typically, income distributions are skewed ' +
+     'to the right, so the mean income is generally larger than the median income; ' +
+     'however, even if that is true for both countries, it need not be larger by the same amount ' +
+     'in both countries.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the following game. You pick a number (not necessarily an integer). ' +
+       'I roll a fair die, and pay you $10, minus the square of the difference ' +
+       'between your guess and the number the die lands on. We play over and over ' +
+       'again. <span class="qSpan">To win the most money in the long run, you should ' +
+       'pick </span>';
+    document.writeln(qStr);
+    opt = ["3", "3 1/2", "4", "5", "it does not matter"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+    var ansStr = 'To make your winnings large, you want to make the average of the squared ' +
+     'difference between your guess and the outcome of the roll small. ' +
+     'The mean minimizes the average of the squared deviations, so you should pick ' +
+     'the mean of the possible outcomes, 3&frac12;. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<p>&nbsp;
+    
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Measures of location</span>
+    </p>
+    <p>
+        Measures of location summarize a list of numbers
+        by a &quot;typical&quot; value.
+    </p>
+    <p>
+        The three most common measures of location are the mean, the median,
+        and the mode.
+    </p>
+    <p>
+        The mean is the sum of the values, divided by the number of values.
+        It has the smallest possible sum of squared differences from
+        members of the list.
+    </p>
+    <p>
+        The median is the middle value in the sorted list.
+        It is the smallest number that is at least as big as at least half the
+        values in the list.
+        It has the smallest possible sum of absolute differences from
+        members of the list.
+    </p>
+    <p>
+        The mode is the most frequent value in the list (or one of the most
+        frequent values, if there are more than one).
+        It differs from the fewest possible members of the list.
+    </p>
+</div>
+
+<h2>
+    <a id="spread"></a>Spread or Variability
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=&end=551" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Measures of location summarize what is typical of elements of a list,
+    but not every element is typical.
+    Are all the elements close to each other?
+    Are most of the elements close to each other?
+    What is the biggest difference between elements?
+    On the average, how far are the elements from each other?
+    <em>Measures of spread or variability</em> tell us.
+</p>
+
+<h3>
+    <a id="importance_of_variability"></a>The Importance of Variability
+</h3>
+
+<p>
+    Consider three mechanical golfers
+    (this example is from <a href="references.htm#hooke">Hooke, 1983</a>).
+    In golf, the object is to get a low score&mdash;to take fewer strokes to complete the course.
+    Suppose the golfers play as shown in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeTable();
+// -->
+</script>
+</p>
+
+<div align="center">
+<center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Performance of mechanical golfers.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+    <table class="dataTable">
+    <tr>
+    <th id="col0">Golfer</th>
+    <th id="col1" align="center">score 1</th>
+    <th id="col2" align="center">frequency 1</th>
+    <th id="col3" align="center">score 2</th>
+    <th id="col4" align="center">frequency 2</th>
+    <th id="col5" align="center">average score</th>
+    </tr>
+    <tr align="center">
+    <td headers="col0" align="center">1</td>
+    <td headers="col1" align="center">72</td>
+    <td headers="col2" align="center">100%</td>
+    <td headers="col3" align="center">&nbsp;</td>
+    <td headers="col4" align="center">&nbsp;</td>
+    <td headers="col5" align="center">72</td>
+    </tr>
+    <tr align="center">
+    <td headers="col0"  align="center">2</td>
+    <td headers="col1"  align="center">69</td>
+    <td headers="col2"  align="center">25%</td>
+    <td headers="col3"  align="center">73</td>
+    <td headers="col4"  align="center">75%</td>
+    <td headers="col5"  align="center">72</td>
+    </tr>
+    <tr align="center">
+    <td headers="col0"  align="center">3</td>
+    <td headers="col1"  align="center">70</td>
+    <td headers="col2"  align="center">50%</td>
+    <td headers="col3"  align="center">74</td>
+    <td headers="col4"  align="center">50%</td>
+    <td headers="col5"  align="center">72</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The golfers' <a class="glossRef" href="gloss.htm#average">average</a> scores are
+    equal&mdash;nominally, they are equally skilled.
+    However, consider what happens when they play each other.
+    Golfer 1 beats golfer 2 when golfer 2 scores 73, which happens 75% of the time.
+    Golfer 2 beats golfer 3 when golfer 3 scores 74, and when golfer 3 scores 70 and
+    golfer 2 scores 69.
+    The first occurs half the time, and, assuming that the players' scores
+    are <a class="glossRef" href="gloss.htm#independent">independent</a> (we'll get to that notion in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityAxioms') + '), ');
+// -->
+</script>
+    the second occurs 50% &times; 25% = 12.5% of the time, so golfer 2 beats golfer 3 62.5% of the
+    time.
+    Finally, golfer 3 beats golfer 1 when golfer 3 scores 70, namely, 50% of the time (they play evenly).
+    Their average scores are equal, but 1 beats 2 more often than not, 2 beats 3
+    more often than not, and 3 plays 1 even.
+    This shows that there is more going on than the average scores indicate:
+    variability matters too.
+</p>
+
+<p>
+    Here is another example of the importance of variability.
+    The average number of children under 18 per family in the US was
+    0.89 according to the 1990 census, so the average family size is about
+    2.9 people (is this logic sound? what is a family?).
+    If you were in the construction business, that might suggest to you that a
+    two-bedroom home is the right size to build for the average American family (two parents
+    sharing a room, and another room for the 0.89 children).
+    However, family sizes vary over quite a large range; indeed, the same report shows
+    that the average number of children for
+    families that have children is 1.86, so families that have children would tend to need a
+    three bedroom home, rather than a two bedroom home, if the children are to have their own
+    rooms.
+</p>
+
+<p>
+    Much information is lost in reducing a list of numbers to a single summary number, such
+    as the mean or median.
+    <a class="glossRef" href="gloss.htm#location">Measures of location</a> alone are not
+    very informative.
+    For example, the <a class="glossRef" href="gloss.htm#histogram">histograms</a> in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Figures&nbsp;' + cNum + '-' + figCtr.toString() + ', ' +
+    cNum + '-' + (figCtr+1).toString() + ', and ' +
+    cNum + '-' + (figCtr+2).toString() + ' ';
+    document.writeln(qStr);
+// -->
+</script>
+    all correspond to sets of data with <a class="glossRef" href="gloss.htm#mean">means</a> and
+    <a class="glossRef" href="gloss.htm#median">medians</a> equal to zero.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       qStr = 'Histogram of data with mean equal to zero.';
+       writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+       align="middle" width="600" height="320" archive="PbsGui.zip">
+    <param name="counts" value="10,2,10,2,10">
+    <param name="bins" value="5">
+    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
+    <param name="title" value="Histogram of data with mean zero">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       qStr = 'Histogram of another set of data with mean equal to zero.';
+       writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+      align="middle" width="600" height="320" archive="PbsGui.zip">
+    <param name="bins" value="5">
+    <param name="counts" value="1,2,3,2,1">
+    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
+    <param name="title" value="Another">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       qStr = 'Histogram of a third set of data with mean equal to zero.';
+       writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+      align="middle" width="600" height="320" archive="PbsGui.zip">
+    <param name="bins" value="5">
+    <param name="counts" value="0,0,1,0,0">
+    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
+    <param name="title" value="And Another">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    We need more than just the mean or median to tell these distributions apart.
+    In
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig(figCtr-3);
+// -->
+</script>
+    the data cluster both in the middle and at the ends.
+    In
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig(figCtr-2);
+// -->
+</script>
+    the data are more concentrated near the middle&mdash;there is much
+    less spread than in the first.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    is extremely concentrated: The data are
+    much closer to each other than in the other two examples.
+    Measures of spread or variability summarize
+    with a single number whether the observations tend to cluster near the center of the
+    distribution, or how spread out they are.
+    If the spread is small, most of the data are nearly equal; if the spread is
+    large, there are large differences among the data.
+</p>
+
+<p>&nbsp;</p>
+
+<h2>
+    <a id="measures_of_spread"></a>
+    The Range, IQR and SD
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=551&end=775" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    <a id="range_IQR_SD"></a>The three most common measures of
+    <a class="glossRef" href="gloss.htm#spread">spread</a> or variability are the
+    <a class="glossRef" href="gloss.htm#range">range</a>,
+    the <a class="glossRef" href="gloss.htm#IQR">interquartile range (IQR)</a>,
+    and the <a class="glossRef" href="gloss.htm#sd">standard
+    deviation (SD)</a>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    <a id="range"></a>The <a class="glossRef" href="gloss.htm#range">range</a> of a list is the largest
+    value minus the smallest value.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Some texts define the range differently when the data have been rounded. ' +
+               'For example, if a ' +
+               '<a class="glossRef" href="gloss.htm#continuous">continuous</a> variable ' +
+               'is recorded only to the nearest whole number, then a listed value of 17 ' +
+               'might be reporting an underlying &quot;real&quot; value as large as ' +
+               '17.49999.&nbsp;.&nbsp;.  Similarly, a listed value of 1 might signify an ' +
+               'underlying value as small as 0.5.  Thus, if 1 is the smallest number in ' +
+               'the list and 17 is the largest number, the range of the underlying data ' +
+               'might be as large as 17.49999.&nbsp;.&nbsp;.&minus;0.5&nbsp;=&nbsp;17, ' +
+               'even though the range of the listed numbers is 17&minus;1&nbsp;=&nbsp;16.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    It is the width of the smallest interval that
+    contains all the data, so it measures spread.
+    It is not <a class="glossRef" href="gloss.htm#resistant">resistant</a>,
+    because changing just one datum can make it arbitrarily large.
+</p>
+</div>
+
+<p>
+    <a id="iqr"></a>The <a class="glossRef" href="gloss.htm#IQR">IQR</a> is the
+    <a class="glossRef" href="gloss.htm#uq">upper quartile</a>
+    (75th <a class="glossRef" href="gloss.htm#percentile">percentile</a>),
+    <em>minus</em> the <a class="glossRef" href="gloss.htm#lq">lower quartile</a>
+    (25th <a class="glossRef" href="gloss.htm#percentile">percentile</a>).
+    It is the width of the interval that
+    contains the middle 50% of the data&mdash;and thus is a measure of spread.
+    It is insensitive to the most extreme values of the data (assuming that there are more
+    than four data).
+    The <a class="glossRef" href="gloss.htm#IQR">IQR</a> is
+    <a class="glossRef" href="gloss.htm#resistant">resistant</a>:
+    changing just one datum has a limited effect on it.
+    Note that neither the <a class="glossRef" href="gloss.htm#range">range</a> nor the
+    <a class="glossRef" href="gloss.htm#IQR">IQR</a> is a range of
+    numbers, despite their names&mdash;each is a single number.
+</p>
+
+<p>
+    <a id="rms"></a>The <a class="glossRef" href="gloss.htm#rms">rms</a> (root mean square) of a list
+    measures the average size of its entries.
+    It is defined as follows:
+</p>
+
+<p class="math">
+    <strong><a class="glossRef" href="gloss.htm#rms">rms</a> = square-root( (sum
+    of the squares of the entries)/(number of entries) )
+</p>
+
+<p class="math">
+    =[ (sum of squares of the entries)/(number of entries) ]<sup>&frac12;</sup>.</strong>
+</p>
+
+<p>
+   (Recall that a number raised to the one-half power is the square-root of
+    the number; this is the notation we shall use from now on.
+    If you need to review exponentiation, see
+    <a href="../Problems/index.htm" target="_self">Assignment 0</a>.)
+</p>
+
+<p>
+   In computing the rms, we divide by the number of entries <em>before</em> taking the square-root.
+   What difference does it make to square the entries?
+   Squaring them makes every term in the sum positive, so positive and negative entries
+   do not cancel.
+   If we ignored the square and the square root, we would just have the mean
+   of the list, which could be zero, even if all the numbers were large in magnitude,
+   because positive and negative entries could cancel.
+   Squaring the entries before averaging them prevents cancellations.
+</p>
+
+<p>
+   The rms is not the only measure of the average size of the elements of a list;
+   for example, the average absolute value of the terms is another measure of the
+   typical size of elements in a list.
+   The rms is used more often.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeExample();
+// -->
+</script>
+   illustrates calculating the rms of a list.
+   The example will change when you reload the page.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Calculating the rms of a list.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    list = listOfRandInts(2,1,5);
+    list[2] = -list[0];
+    list[3] = -list[1];
+    list[4] = 0;
+    list = randPermutation(list);
+    meanList = mean(list);
+    sumList = vSum(list);
+    rmsList = rms(list);
+    header = "data";
+    listToTable(header, list, "standard", "center");
+    var qStr = '<p>The average of this list is</p><div align="center"><center>' +
+       '<table border="0" cellspacing="1"><tr><td align="center">';
+    var listString = new Array(list.length);
+    for (i=0; i < list.length; i++) {
+        if (list[i] >= 0) {
+            listString[i] = list[i].toString();
+        } else {
+            listString[i] = "(" + list[i].toString() + ")";
+        }
+    }
+    for (i=0; i < list.length - 1; i++) {
+        qStr += listString[i] + " + ";
+    }
+    qStr += listString[list.length - 1] +
+       '</td><td align="center"></td><td align="center">' + sumList.toString() +
+       '</td><td align="center"></td><td align="center"></td></tr><tr>' +
+       '<td align="center">--------------------------</td><td align="center"> = </td>' +
+       '<td align="center">------</td><td align="center"> = </td><td align="center">' +
+       meanList.toString() + '</td></tr><tr><td align="center">' +
+       list.length.toString() + '</td><td align="center"></td><td align="center">' +
+       list.length.toString() + '</td><td align="center"></td><td align="center"></td>' +
+       '</tr></table></center></div><p><p>Nonetheless, the typical &quot;size&quot; ' +
+       'of elements of the list is about ' + roundToDig(rmsList,1) + '. </p><p>' +
+       'The <a class="glossRef" href="gloss.htm#rms">rms</a> of the list is</p><p class="math">' +
+       '<big>(</big> (';
+    for (i=0; i < list.length - 1; i++) {
+        qStr += listString[i] + '<sup>2</sup> + ';
+    }
+    qStr += listString[list.length - 1] + '<sup>2</sup>)/' + list.length.toString() +
+        '<big>)</big><sup>&frac12;</sup></p><p class="math"> = <big>(</big> (';
+    for (i=0; i < list.length - 1; i++) {
+        qStr += list[i]*list[i] + ' + ';
+    }
+    qStr += list[list.length-1]*list[list.length-1] + ' )/' +
+    list.length.toString() + '<big>)</big><sup>&frac12;</sup>';
+    var ssqList = 0;
+    for (i=0; i < list.length; i++) {
+        ssqList += list[i]*list[i];
+    }
+    qStr += ' = <big>(</big> (' + ssqList.toString() + ')/' + list.length.toString() +
+        '<big>)</big><sup>&frac12;</sup></p><p>which is approximately ' +
+    roundToDig(rmsList,1).toString() + '. ';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeExample(xCtr-1);
+// -->
+</script>
+    makes it clear that the <a class="glossRef" href="gloss.htm#mean">mean</a> of the squares of
+    the elements of a list is
+    not generally equal to the square of the <a class="glossRef" href="gloss.htm#mean">mean</a> of the elements
+    of the list: the square of the mean is 0, but the mean of the squares is not.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#rms" target="glossWin">rms</a> of a 
+    list is zero if and only if all the entries in the list are zero.
+</p>
+
+<p>
+    <a id="sd"></a>The standard deviation (<a class="glossRef" href="gloss.htm#sd">SD</a>) of a list is
+    the &quot;typical size&quot; of the difference between elements of the
+    list and the <a class="glossRef" href="gloss.htm#mean">mean</a> of the list,
+    measured by the <a class="glossRef" href="gloss.htm#rms">rms</a>.
+    The SD measures how spread out the data are around their mean.
+    To find the SD, we first find the mean of the list, then make a list of
+    <a class="glossRef" href="gloss.htm#deviation">deviations</a> from the
+    <a class="glossRef" href="gloss.htm#mean">mean</a>:
+</p>
+
+<p class="math">
+    deviation of value = value &minus; mean of list,
+</p>
+
+<p>
+    and finally, find the <a class="glossRef" href="gloss.htm#rms">rms</a> of the list of
+    deviations from the mean
+    (the square-root of the average of the squares of the deviations).
+    In the example just given, the mean is zero, so the
+    <a class="glossRef" href="gloss.htm#sd">SD</a> is equal
+    to the <a class="glossRef" href="gloss.htm#rms">rms</a>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeExample();
+// -->
+</script>
+    is slightly more complicated.
+    The data in the example will change when you reload the page.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Calculating the SD of a list';
+    writeExampleCaption(qStr);
+    list = listOfDistinctRandInts(6,0,6);
+    header="data";
+    listToTable(header,list,"standard","center");
+    var meanList = mean(list);
+    var sdList = sd(list);
+    var residList = new Array(list.length);
+    for (i=0; i < list.length; i++) {
+    residList[i] = "(" + list[i].toString() + " &minus; " +
+      roundToDig(meanList,2).toString() + ")";
+    }
+    var qStr = '<p>The <a class="glossRef" href="gloss.htm#mean">mean</a> of the list is </p>' +
+    '<p class="math">( ';
+    for (i=0; i < list.length-1; i++) {
+    qStr += list[i].toString() + ' + ';
+    }
+    qStr += list[list.length-1].toString() + ')/' + list.length.toString() + ' = ' +
+    roundToDig(meanList,2).toString() + '.</p><p>The list of ' +
+    '<a class="glossRef" href="gloss.htm#deviation">deviations</a> from the ' +
+    '<a class="glossRef" href="gloss.htm#mean">mean</a> is</p><p class="math"> {';
+    for (i=0; i < list.length -1; i++) {
+    qStr += residList[i] + ', ';
+    }
+    qStr += residList[list.length-1] + '}.</p><p class="math"> = { ';
+    var netResidual = new Array(list.length);
+    var netResidualString = new Array(list.length);
+    ssqResidual = 0;
+    var res = 0;
+    for (i=0; i < list.length; i++) {
+    res = list[i] - meanList;
+    netResidual[i] = roundToDig(res,2);
+    ssqResidual += res*res;
+    if (netResidual[i] >= 0) {
+    netResidualString[i] = netResidual[i].toString();
+    } else {
+    netResidualString[i] = "(" + netResidual[i].toString() + ")";
+    }
+    }
+    for (i=0; i < list.length -1; i++) {
+    qStr += netResidual[i].toString() + ', ';
+    }
+    qStr += netResidual[list.length-1] + '}.</p><p>The <a class="glossRef" href="gloss.htm#sd">SD</a> ' +
+    'is the <a class="glossRef" href="gloss.htm#rms">rms</a> of this list of deviations from ' +
+    'the mean:</p><p class="math"><a class="glossRef" href="gloss.htm#sd">SD</a> = <big>(</big> (';
+    for (i=0; i < list.length-1; i++) {
+    qStr += netResidualString[i] + '<sup>2</sup> + ';
+    }
+    qStr += netResidualString[list.length-1] + '<sup>2</sup>)/' +
+       list.length.toString() + ')<sup>&frac12;</sup></p><p class="math">' +
+       ' = (' + roundToDig(ssqResidual,2).toString() + '/' + list.length.toString() +
+       ')<sup>&frac12;</sup></p><p class="math"> = ' +
+       roundToDig(Math.sqrt(ssqResidual/list.length),2).toString() + '. ';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The units of the <a class="glossRef" href="gloss.htm#sd">SD</a> are the same as the
+    original units of measurement.
+    For example, if the list is comprised of measurements of
+    heights in inches, the <a class="glossRef" href="gloss.htm#sd">SD</a> has units of inches.
+    Recall that the rms of a list is zero if and only if all the elements in the list are zero.
+    Thus the SD of a list is zero if and only if all the deviations from the mean are
+    zero, that is, if and only if all the elements are equal to each other (and hence
+    equal to their mean).
+    Similarly, the range of a list is zero if and only if all the elements are equal.
+    In contrast, the IQR of a list can be zero even if not all the elements are the
+    same&mdash;only the middle 50% of the observations need to be equal for the IQR to be zero.
+</p>
+
+<p>
+    For reference, the <a class="glossRef" href="gloss.htm#sd">SD</a>s of the data plotted in the three
+    <a class="glossRef" href="gloss.htm#histogram">histograms</a> above are 1.66, 1.15, and 0, respectively.
+    Does that reflect how spread out they appear to be?
+</p>
+
+<p>
+    Some calculators have a button labeled <strong>s</strong>, which computes
+    something related to the <a class="glossRef" href="gloss.htm#sd">SD</a> as we have defined it.
+    In the usual definition of <strong>s</strong>, the sum of squares of residuals from the
+    mean is divided by (number of data &minus;1) rather than by (number of data) before
+    taking the square-root.
+    This is called the <a class="glossRef" href="gloss.htm#sample_sd">sample standard deviation</a>.
+    When the number of data is large, there is not much difference between the
+    standard deviation and the sample standard deviation, but when the number of
+    data is small, the difference can be big.
+</p>
+
+<p>
+    The following exercises check that you can calculate measures of spread,
+    and that you understand what they mean.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=775&end=825" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=825&end=1110" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The range of the <a href="ch1.htm#gravity_data" ' +
+       'target="_self">gravity data</a> (the tabulated numbers, which are ' +
+       '10<sup>8</sup> times the deviations from the reference value) is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(307));
+    var qStr = '.</p><p><span class="qSpan">The IQR of the gravity data is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(68));
+    document.writeln('</p>');
+    var ansStr = 'From the <a href="../histograms.htm#sorted_gravity_data" target="_self">table of ' +
+      'sorted gravity data</a> in ' + citeLinkChapter('histograms') + ', the ' +
+      ' smallest datum is -152 and the largest is 155, so the range is </p> ' +
+      ' <p class="math">155 &minus; (&minus;152) = 307.</p><p>Also from the ' +
+      ' <a href="../ch1.htm#sorted_gravity_data" target="_self">table of sorted ' +
+      'gravity data</a> (or from the exercises in ' + citeLinkChapter('histograms') + 
+      '), the lower quartile ' +
+      'of the gravity data is &minus;80 and the upper quartile is &minus;12, so the ' +
+      'interquartile range is</p> <p class="math">&minus;12 &minus; (&minus;80) = 68. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Two students have taken all the same courses, and ' +
+       'have the same grade point average (GPA), 3.5. <span class="qSpan">Their grades might not have ' +
+       'been the same in each class, but overall they must have the same number of ' +
+       'A grades as each other. </span>';
+    document.writeln(qStr);
+    opt = ["True", "False"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+    var ansStr = ' Two lists can have the same mean without having the same entries. ' +
+     ' For example, the grade lists {3, 3, 4, 4} and {2, 4, 4, 4} both correspond ' +
+     ' to a GPA of 3.5. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Here is a table of fabricated data.</p>';
+    document.writeln(qStr);
+    header = "data";
+    list = listOfRandInts(5,-10,10);
+    meanList = mean(list);
+    rmsList = rms(list);
+    sdList = sd(list);
+    listToTable(header,list,"standard","center");
+    var qStr = '<p><span class="qSpan">The mean of the data is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(meanList,0.01));
+    var qStr = '</p><p><span class="qSpan">The rms of the data is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(rmsList,0.01));
+    var qStr = '</p><p><span class="qSpan">The SD of the data is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(sdList,0.01));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>&nbsp;
+    
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Measures of Spread</span>
+    </p>
+    <p>
+        Measures of spread summarize how much members of a list of numbers
+        differ from each other.
+    </p>
+    <p>
+        The three most common measures of spread are the
+        <a class="glossRef" href="gloss.htm#range">range</a>, the
+        <a class="glossRef" href="gloss.htm#IQR">inter-quartile range</a>,
+        and the
+        <a class="glossRef" href="gloss.htm#sd">standard deviation</a>.
+    </p>
+    <p>
+        The range is the largest element of the list, minus the smallest
+        element of the list: the maximum difference between elements
+        of the list.
+        It is sensitive only to the most extreme values in the list.
+        The range of a list is zero if and only if all the elements of the
+        list are equal.
+    </p>
+    <p>
+        The inter-quartile range (IQR) is the upper quartile of the list
+        (75th percentile) minus the lower quartile of the list (25th percentile).
+        It measures the width of the interval that contains the middle
+        50% of the data.
+        It is not sensitive to the extreme values of the list.
+        The IQR of a list is zero if (at least) the middle 50% of the values
+        are equal.
+    </p>
+    <p>
+        The standard deviation (SD) is the average distance from the data to
+        their mean (the rms of the deviations of the
+        data from their mean).
+        It depends on the values of all the data.
+        The SD of a list is zero if and only if all the elements in the list
+        are equal (to each other, and hence to their mean).
+    </p>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig();
+// -->
+</script>
+    shows the histogram tool again, this time with a new
+    Univariate Stats button.
+    Clicking the button will open a new window that lists the number of data,
+    their mean, standard deviation (SD) , minimum (Min), lower quartile (LQ),
+    Median, upper quartile (UQ) and maximum (Max).
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var qStr = 'Pi&ntilde;on Flat Gravity data, with measures of location and spread. ' +
+        'Click the Univariate Stats button to see the summary statistics. ';
+     writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"
+     width="600" height="300" archive="PbsGui.zip">
+     <param name="binControl" value="false">
+     <param name="bins" value="30">
+     <param name="files" value="./Data/gravity.dat">
+     <param name="nFiles" value="1">
+     <param name="restrict" value="false">
+     <param name="showNormal" value="false">
+     <param name="univariateStats" value="true">
+     You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<h2>
+    <a id="affine"></a>Affine Transformations 
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=1120&end=1425" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Some variables have simple relationships to other variables, for example,
+    measurements of elevation above sea level in feet, and measurements of
+    elevation above sea level in meters: Each elevation in meters above sea level is
+    0.3048 times the corresponding elevation in feet above sea level.
+    When the relationship between variables is simple,
+    so is the relationship between their measures of location and spread.
+    An <em><a class="glossRef" href="gloss.htm#affine">affine</a> transformation</em> or
+    <em>change of variables</em> is particularly simple.
+    Affine transformations have the equation of a line:
+</p>
+
+<p class="math">
+    (transformed value of x) = <em>a</em> &times; (original value of x) + <em>b</em>,
+</p>
+
+<div class="indent">
+<p class="inline">
+    where a and b are constants.
+    (Some books call this a <em>linear transformation</em>, because it has the
+    equation of a straight line.)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'In mathematics, a transformation <em>T</em> is linear if for every ' +
+       'x<sub>1</sub> and x<sub>2</sub> and every number <em>c</em> ' +
+       '</p><ul><li><em>T</em>(x<sub>1</sub> + x<sub>2</sub>) = ' +
+       '<em>T</em>(x<sub>1</sub>) + <em>T</em>(x<sub>2</sub>), and ' +
+       '</li><li><em>T</em>(<em>c</em>&times;x) = ' +
+       '<em>c</em>&times;<em>T</em>(x).</li></ul><p>An affine transformation ' +
+       'is linear in this sense if and only if <em>b</em>&nbsp;=&nbsp;0.  Otherwise, ' +
+       '</p><p class="math"><em>T</em>(x<sub>1</sub> + ' +
+       'x<sub>2</sub>) = <em>T</em>(x<sub>1</sub>) + ' +
+       '<em>T</em>(x<sub>2</sub>) &minus; <em>b</em>, and </p><p class="math">' +
+       '<em>T</em>(<em>c</em>&times;x) = ' +
+       '<em>c</em>&times;<em>T</em>(x) &minus; (<em>c</em>&minus;1)&times;<em>b</em>.</p>' +
+       '<p>I prefer to use the terminology that is consistent with the rest of ' +
+       'mathematics:  an affine transformation is a linear transformation, plus a ' +
+       'constant.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    For example, height in inches is related to height in
+    feet by an affine transformation, with <em>a</em> = 12 and <em>b</em> = 0:
+</p>
+</div>
+
+<p class="math">
+    (height in inches) = 12 &times; (height in feet) + 0.
+</p>
+
+<p>
+    Similarly, temperature in degrees Fahrenheit is related to temperature in degrees
+    Centigrade by an affine transformation with <em>a</em> = 9/5 and <em>b</em> = 32:
+</p>
+
+<p class="math">
+    (temp in <sup>&deg;</sup>F) = 9/5 &times; (temp in <sup>&deg;</sup>C) + 32.
+</p>
+
+<p>
+    Currencies are related to each other by affine transformations as well, with
+    <em>a</em> = (exchange rate) and <em>b</em> = 0.
+</p>
+
+<p>
+    The measures of location and spread introduced in this chapter behave quite
+    regularly when a list is transformed by an affine transformation.
+</p>
+
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">How Measures of Location and Spread behave under Affine Transformations</span>
+    </p>
+    <p>
+        If a list is transformed so that
+    </p>
+    <p class="math">
+        (transformed value) = <em>a</em> &times; (original value) + <em>b</em>,
+    </p>
+    <p>
+        then
+    </p>
+    <div align="center">
+    <center>
+        <table border="0" cellpadding="3" cellspacing="3">
+        <tr>
+        <td align="right">(Mode of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left"><em>a</em> &times;
+            (Mode of original list) + <em>b</em></td>
+        </tr>
+        <tr>
+        <td align="right">(Median of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left"><em>a</em> &times; (Median of original list) +
+            <em>b</em>,
+            if <em>a</em> is positive</td>
+        </tr>
+        <tr>
+        <td align="right">(Mean of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left"><em>a</em> &times; (Mean of original list) +
+            <em>b</em></td>
+        </tr>
+        <tr>
+        <td align="right">(Range of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left">|<em>a</em>| &times; (Range of original list)</td>
+        </tr>
+        <tr>
+        <td align="right">(SD of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left">|<em>a</em>| &times; (SD of original list)</td>
+        </tr>
+        <tr>
+        <td align="right">(IQR of transformed list)</td>
+        <td align="center"> = </td>
+        <td align="left"><em>a</em> &times; (IQR of original list),
+        if <em>a</em> is positive.</td>
+        </tr>
+        </table>
+    </center>
+    </div>
+</div>
+
+<div class="indent">
+<p class="inline">
+    The median of the transformed list can differ slightly from
+    <em>a</em>&nbsp;&times;&nbsp;(median of original list) + <em>b</em>
+    when <em>a</em> is negative; similarly, the IQR of the transformed list can differ
+    slightly from |<em>a</em>|&times;(IQR of original list) if <em>a</em> is negative,
+    because of the definition of percentiles applied to a list with its signs reversed.
+    Some of these relations are derived in a footnote.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    fStr = '<strong>Affine transformations and measures of location and ' +
+       ' spread.</strong> The mode is one of the data values; in the transformed ' +
+       'list, that value is re-labeled. Let the list contain <em>n</em> data: ' +
+       '{x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, &hellip; , ' +
+       'x<sub><em>n</em></sub>}. The mean of the list is </p><p class="math">mean(x) = ' +
+       '(1/<em>n</em>) &times; (x<sub>1</sub> + x<sub>2</sub> + x<sub>3</sub> + ' +
+       '&hellip; + x<sub><em>n</em></sub>). </p><p> The mean of the ' +
+       'new list is </p><p class="math"> mean(<em>a</em>x+<em>b</em>) = (1/<em>n</em>) ' +
+       '&times; (<em>a</em>&times;x<sub>1</sub>+<em>b</em> + ' +
+       '<em>a</em>&times;x<sub>2</sub>+<em>b</em> + <em>a</em>&times;x<sub>3</sub> + ' +
+       '<em>b</em> + &hellip; + ' +
+       '<em>a</em>&times;x<sub><em>n</em></sub>+<em>b</em>)</p><p class="math"> = ' +
+       '(1/<em>n</em>) &times; <em>a</em>&times;(x<sub>1</sub> + ' +
+       'x<sub>2</sub> + x<sub>3</sub> + &hellip; + ' +
+       'x<sub><em>n</em></sub>) + ' +
+       '(1/<em>n</em>) &times; (<em>b</em> + <em>b</em> + <em>b</em> + ' +
+       '&hellip; + ' +
+       '<em>b</em>) </p><p class="math"> = <em>a</em>&times;mean(x) + ' +
+       '(1/<em>n</em>) &times; (<em>n</em>&times;<em>b</em>)</p>' +
+       '<p class="math"> = <em>a</em>&times;mean(x) + <em>b</em>. </p> ' +
+       '<p> If the constant <em>a</em> is ' +
+       'greater than zero, the affine transformation <em>a</em>&times;x + <em>b</em> ' +
+       'preserves the order ' +
+       'of the data (it is a <a class="glossRef" href="gloss.htm#monotonic">monotonically increasing ' +
+       'function</a>), but changes their labels (the smallest ' +
+       'datum in the original list is still the smallest in the transformed ' +
+       'list, the second smallest is still second smallest, <em>etc.</em>). Thus ' +
+       'for <em>a</em> &gt; 0, percentiles are transformed the same way as the data. In ' +
+       'particular, the new median is <em>a</em>&times;(original median) + <em>b</em>, ' +
+       'and the new upper and lower quartiles are ' +
+       '<em>a</em>&times;(original upper quartile) + <em>b</em> and ' +
+       '<em>a</em>&times;(original lower quartile) + <em>b</em>.  The new ' +
+       'interquartile range is </p> <p class="math"> ' +
+       '<em>a</em>&times;(original upper quartile) + <em>b</em> &minus; ( ' +
+       '<em>a</em>&times;(original lower quartile) + <em>b</em>) = ' +
+       '<em>a</em>&times((original upper ' +
+       'quartile) &minus; original lower quartile)) </p><p class="math"> = ' +
+       '<em>a</em>&times(original IQR). </p> ' +
+       '<p> If <em>a</em> is negative, the transformation <em>a</em>&times;x + ' +
+       '<em>b</em> reverses the ' +
+       'order of the data, so the percentiles might shift, by at most one datum. ' +
+       '</p> <p> The SD of the transformed list is</p><p class="math"> ' +
+       'SD(<em>a</em>&times;x + <em>b</em>) = <big>(</big> ' +
+       '(<em>a</em>&times;x<sub>1</sub> + <em>b</em> ' +
+       '&minus; (<em>a</em>&times;mean(x) + <em>b</em>))<sup>2</sup> + ' +
+       '<em>a</em>&times;x<sub>2</sub> + <em>b</em> &minus; ' +
+       '(<em>a</em>&times;mean(x) + <em>b</em>))<sup>2</sup> + ' +
+       '&hellip; + ' +
+       '<em>a</em>&times;x<sub><em>n</em></sub> + <em>b</em> &minus; ' +
+       '(<em>a</em>&times;mean(x) + <em>b</em>))<sup>2</sup> ' +
+       '<big>)</big><sup>&frac12;</sup> ' +
+       '</p><p class="math"> = <big>(</big> <em>a</em><sup>2</sup>(x<sub>1</sub> &minus; ' +
+       'mean(x) )<sup>2</sup> + <em>a</em><sup>2</sup>(x<sub>2</sub> &minus; mean(x) ' +
+       ')<sup>2</sup> + &hellip; + ' +
+       '<em>a</em><sup>2</sup>(x<sub><em>n</em></sub> &minus; mean(x) )<sup>2</sup>  ' +
+       '<big>)</big><sup>&frac12;</sup> </p><p class="math"> = |<em>a</em>| &times; ' +
+       '<big>(</big> (x<sub>1</sub> &minus; mean(x) )<sup>2</sup> + ' +
+       '(x<sub>2</sub> &minus; mean(x) )<sup>2</sup> + &hellip; + ' +
+       '(x<sub><em>n</em></sub> &minus; mean(x) ' +
+       ')<sup>2</sup> <big>)</big><sup>&frac12;</sup></p><p class="math"> = ' +
+       '|<em>a</em>| &times; SD(x).';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Using these relations can simplify calculating measures of location or spread
+    when the units of measurement are changed.
+    The following exercise checks your ability to use these rules.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfDistinctRandInts(6,4,30).sort(numberLessThan);
+    var affFacs = listOfDistinctRandInts(2,2,10);
+    var qStr = 'The mean of a list is ' + theInts[0] + '.  Consider multiplying each element of ' +
+               'the list by ' + affFacs[0].toString() + ' then adding ' + affFacs[1].toString() +
+               ' to get a new list. <span class="qSpan">What is the mean of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[0]*affFacs[0]+affFacs[1],0.00001));
+    var qStr = '</p><p>The mode of a particular list is unique and equal to ' + theInts[1] + 
+               '.  Consider multiplying each element of the list by ' + affFacs[0].toString() + 
+               ' then adding ' + affFacs[1].toString() + ' to get a new list. ' +
+               '<span class="qSpan">What is the mode of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[1]*affFacs[0]+affFacs[1],0.00001));
+    var qStr = '</p><p>The median of a particular list is ' + theInts[2] + 
+               '.  Consider multiplying each element of the list by ' + affFacs[0].toString() + 
+               ' then adding ' + affFacs[1].toString() + ' to get a new list. ' +
+               '<span class="qSpan">What is the median of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[2]*affFacs[0]+affFacs[1],0.00001));
+    var qStr = '</p><p>The SD of a list is ' + theInts[3] + '.  Consider multiplying each element of ' +
+               'the list by ' + affFacs[0].toString() + ' then adding ' + affFacs[1].toString() +
+               ' to get a new list. <span class="qSpan">What is the SD of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[3]*affFacs[0],0.00001));
+    var qStr = '</p><p>The IQR of a list is ' + theInts[4] + '.  Consider multiplying each element of ' +
+               'the list by ' + affFacs[0].toString() + ' then adding ' + affFacs[1].toString() +
+               ' to get a new list. <span class="qSpan">What is the IQR of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[4]*affFacs[0],0.00001));
+    var qStr = '</p><p>The range of a list is ' + theInts[5] + '.  Consider multiplying each element of ' +
+               'the list by ' + affFacs[0].toString() + ' then adding ' + affFacs[1].toString() +
+               ' to get a new list. <span class="qSpan">What is the range of the new list?</span>'; 
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theInts[5]*affFacs[0],0.00001));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="markovChebychev"></a>Markov's
+    Inequality and Chebychev's Inequality
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=3770&end=4400" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Measures of location and spread can tell us a great deal about lists of numbers.
+    For example, for any list, at least half the numbers in the list are no larger
+    than the <a class="glossRef" href="gloss.htm#median">median</a>, and at least half the numbers in the list
+    are at least as large as the median (this is one way of defining the median).
+    The mean and SD also can tell us about the fractions of values in a list in various ranges.
+</p>
+
+<p>
+    Suppose that a list of numbers contains no negative number, and that 10% of the values
+    in the list are greater than or equal to 50.
+    What is the smallest the mean of the list could be?
+    The mean would be smallest if all the values in the list were as small as they could be,
+    subject to the constraints that the values were not negative, and 10% equal or exceed 50.
+    If 90% of the values were equal to zero, and the rest were equal to 50, that would
+    give the smallest mean:
+</p>
+
+<p class="math">
+    0 &times; 0.9 + 50 &times; 0.1 = 5.
+</p>
+
+<p>
+    That is, if a list contains no negative number, and 10% of the numbers in the
+    list are 50 or larger, then the mean of the list must be at least 5.
+    More generally, if any particular fraction of values in a list exceeds a given
+    threshold, and none of the values in the list is negative, then the mean of
+    the list cannot be arbitrarily small.
+    <span class="termOfArt">Markov's inequality</span> turns this idea upside down to limit the fraction
+    of numbers in a list that can exceed any given threshold, provided the list
+    contains no negative number.
+    The limit depends on the mean of the list, and the threshold (see
+<script language="JavaScript1.4" type="text/javascript"> <!--
+      citeExample();
+// -->
+</script>
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Markov's Inequality (for lists)</span>
+    </p>
+    <p>
+        If the mean of a list of numbers is <em>M</em>, and the list contains no negative number then
+    </p>
+    <p class="math">
+          [fraction of numbers in the list that are greater than or equal to
+          x] &le; <em>M</em>/x.
+    </p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    A heuristic derivation of Markov's inequality is in a note.
+<script language="JavaScript1.4" type="text/javascript"><!--
+var fStr = '<strong>Derivation of Markov\'s inequality</strong>. ' +
+       'The basic idea is that of a see-saw or teeter-totter: to ' +
+       'balance a large weight, the other weight should be as far as possible ' +
+       'from the fulcrum. The constraint that none of the elements in the list ' +
+       'is below zero limits how far to the left we can put the balancing ' +
+       'weights. Suppose the average of a list of nonnegative numbers is ' +
+       '<em>M</em>, and that a fraction <em>w</em> of the elements of the list ' +
+       'are at or above some value x. We want to make that fraction as ' +
+       'large as possible, while keeping the average equal to <em>M</em>. To ' +
+       'make the fraction <em>w</em> as large as possible, we should (a) put ' +
+       'the rest of the list at zero, and (b) put the entire fraction ' +
+       '<em>w</em> at the point x (and not partly above x). ' +
+       'The average is then </p> <p class="math"> <em>M</em> = ' +
+       '<em>w&times;x</em> + (100%&minus;<em>w</em>)&times;0 = <em>w&times;x</em>. ' +
+       '</p> <p> Solving for <em>w</em>, we get <em>w</em> = <em>m/x</em> as ' +
+       'the largest possible fraction of numbers in the list that can be equal to ' +
+       'or greater than x. This is Markov\'s inequality.';
+       writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Applying Markov\'s inequality.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    There are 200 students in a class.
+    The average amount of money in their pockets is $15. How many
+    could have $75 or more in their pockets?
+</p>
+<p>
+    <strong>Solution. </strong>No student can have a negative
+    amount of money in his or her pocket, so Markov's inequality applies.
+    Markov's inequality guarantees that
+</p>
+<p class="math">
+    [fraction of students with at least $75 in their pockets] &le; $15/$75 = 0.2 =
+    20%.
+</p>
+<p>
+    Thus at most 20% of the students (40
+    students) could have $75 or more in their pockets.
+</p>
+</div>
+
+<p>
+    If we know the mean of a list and its SD, we know something
+    about how many of the numbers in the list must be in various ranges.
+    Suppose that 25% of the numbers in a list differ from the mean by 30 or more.
+    How small could the SD of the list be?
+    To make the SD smallest, all the numbers should be as close as possible to the mean,
+    subject to the constraint that at least 25% of them differ from the mean by 30 or more.
+    This is achieved by making 75% of the numbers equal to the mean, 12.5% equal to the
+    mean minus 30, and 12.5% equal to the mean plus 30.
+    Thus the SD of the list must be at least
+</p>
+
+<p class="math">
+    ( 0.125 &times; 30<sup>2</sup> + 0.75 &times; 0<sup>2</sup> + 0.125 &times;
+      30<sup>2</sup> )<sup>&frac12;</sup> =  15.
+</p>
+
+<p>
+    More generally, if a particular fraction of the values differ from the mean of the
+    list by at least a given threshold, then the SD of the list cannot be too small.
+    <em>Chebychev's inequality</em> turns this around to find a bound on the fraction of numbers
+    in the list that differ from the mean by more than any given threshold.
+    The bound depends on the SD of the list and the threshold.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Chebychev's inequality (for lists)</span>
+    </p>
+    <p>
+        If the mean of a list of numbers is <em>M</em> and the standard deviation of the
+        list is SD,
+        then for every positive number <em>k</em>,
+    </p>
+    <p class="math">
+        [the fraction of numbers in the list that are
+        <em>k</em>&times;<a class="glossRef" href="gloss.htm#sd">SD</a>
+        or further from <em>M</em>]
+        &le; 1/<em>k</em><sup>2</sup>.
+    </p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    A heuristic derivation of Chebychev's inequality is in a note.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<strong>Derivation of Chebychev\'s inequality.</strong> ' +
+       'Chebychev\'s inequality can be derived from Markov\'s inequality, by ' +
+       'considering the list of squared deviations from the mean. The list of ' +
+       'squared deviations from the mean cannot have negative entries, so </p> ' +
+       '<div align="center"><center><table border="0" cellspacing="2" ' +
+       'cellpadding="2"> <tr> ' +
+       '<td></td> <td></td> <td valign="middle" align="center">average of squared ' +
+       'deviations from the mean</td> </tr> <tr> <td>fraction of squared ' +
+       'deviations that are <em>x </em>or larger</td> <td>&le;</td> <td ' +
+       'valign="middle" ' +
+       'align="center">------------------------------------------------------------ .</td> ' +
+       '</tr> <tr> <td></td> <td></td> <td valign="middle" ' +
+       'align="center">x</td> </tr> </table> </center></div> <p> The ' +
+       'fraction of squared deviations from the mean that are x or ' +
+       'larger is the same as the fraction of data that are ' +
+       'x<sup>&frac12;</sup> or more from the mean. Now substitute ' +
+       'x<sup>&frac12;</sup> = <em>k</em>&times;SD. That gives ' +
+       '</p><p>&nbsp;</p> ' +
+       '<div align="center"><center><table border="0" cellspacing="2" ' +
+       'cellpadding="2"> <tr> ' +
+       '<td></td> <td></td> <td valign="middle" align="center">average of squared ' +
+       'deviations from the mean</td> </tr> <tr> <td>fraction of data&nbsp; that ' +
+       'are <em>k</em>&times;SD or further from the mean</td> <td>&le;</td> <td ' +
+       'valign="middle" ' +
+       'align="center">-------------------------------------------------------- .</td> ' +
+       '</tr> <tr> <td></td> <td></td> <td valign="middle" ' +
+       'align="center">(<em>k</em>&times;SD)<sup>2</sup></td> </tr> </table> ' +
+       '</center></div> <p> Recall that the SD is the square-root of the average ' +
+       'of the squared deviations from the mean, so the numerator on the right ' +
+       'hand side is SD<sup>2</sup>. Substituting into the numerator, and ' +
+       'canceling the factor of SD<sup>2</sup> in the numerator with that in the ' +
+       'denominator, gives </p> <p>&nbsp;</p> <div align="center"><center><table ' +
+       'border="0" cellspacing="2" cellpadding="2"> <tr> <td></td> <td></td> ' +
+       '<td valign="middle" ' +
+       'align="center">1</td> </tr> <tr> <td>fraction of data&nbsp; that are ' +
+       '<em>k</em>&times; SD or further from the mean</td> <td>&le;</td> ' +
+       '<td valign="middle" ' +
+       'align="center">------ ,</td> </tr> <tr> <td></td> <td></td> <td ' +
+       'valign="middle" align="center"><em>k</em><sup>2</sup></td> </tr> </table> ' +
+       '</center></div> <p> which is Chebychev\'s inequality.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Chebychev's inequality says that not too many of the numbers in a list can be
+    far from the mean, where <em>far</em> is measured in standard deviations.
+    Conversely, if a large fraction of the values are far from the mean, the
+    SD of the list must be large.
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeTable();
+// -->
+</script>
+    lists some specific bounds implied by
+    Chebychev's inequality:
+</p>
+
+<div align="center">
+<center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Bounds implied by Chebychev\'s inequality.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+    <table class="dataTable">
+    <tr>
+    <th id="col0" align="center">number of standard deviations</th>
+    <th id="col1" align="center">largest possible fraction of values <br />
+      this far or further from the mean</th>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">1</td>
+    <td headers="col1" align="center">100%</td>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">2</td>
+    <td headers="col1" align="center">25%</td>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">3</td>
+    <td headers="col1" align="center">11.11%</td>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">4</td>
+    <td headers="col1" align="center">6.25%</td>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">5</td>
+    <td headers="col1" align="center">4%</td>
+    </tr>
+    <tr>
+    <td headers="col0" align="center">6</td>
+    <td headers="col1" align="center">2.78%</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+      citeExample();
+// -->
+</script>
+      illustrates applying Chebychev's inequality to find bounds on the fraction
+      of weights in a given range from the
+      mean and SD of a list of weights.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Applying Chebychev\'s inequality.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    The mean weight of
+    students in a certain class of students is 140 lbs., and the SD of their weights is 30
+    lbs. What fraction weighs between 90 lbs. and 190 lbs.?
+</p>
+
+<p>
+    <strong>Solution.</strong> We cannot get an
+    exact answer, but we can get a lower bound using Chebychev's inequality.
+    The range from 90 lbs. to 190 lbs. is the mean, plus or minus 50 lbs.
+    50 lbs. is 1 2/3 times the SD of the
+    weights, so according to Chebychev's inequality, the fraction of students who weigh less
+    than 90 lbs. or more than 190 lbs. is at most
+</p>
+
+<p class="math">
+    1/(1 2/3)<sup>2</sup> = 1/(1.6667)<sup>2</sup>
+     = 0.36 = 36%.
+</p>
+
+<p>
+    Thus the fraction who weigh between 90&nbsp;lbs. and 190&nbsp;lbs.
+    is at least 100% &minus; 36% = 64%.
+</p>
+</div>
+
+<p>
+    In some problems, it is possible to apply both Markov's inequality
+    and Chebychev's inequality.
+    When that happens, use whichever inequality gives the more precise answer&mdash;that
+    is, the inequality that limits the fraction most stringently.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeExample()
+// -->
+</script>
+    illustrates this idea.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Sometimes Markov\'s inequality and Chebychev\'s inequality both apply.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    On the average, it
+    takes 45 minutes to cross the San Francisco Bay Bridge during rush hour.
+    The SD of the
+    time it takes to cross the bridge is 15 minutes.
+    What's the largest fraction of the time it
+    could take more than 2 hours to cross the bridge?
+</p>
+
+<p>
+    <strong>Solution.</strong> Travel time is
+    positive, so we can use Markov's inequality.
+    By Markov's inequality,
+</p>
+<p class="math">
+    [fraction of the time it takes more than 2
+    hours] &le; (45 minutes)/(2 hours)<br />
+    = (45 minutes)/(120 minutes)<br />
+    = 0.375 = 37.5%.
+</p>
+
+<p>
+   On the other hand, we can also apply
+   Chebychev's inequality, as follows.
+</p>
+<p class="math">
+    2 hours = 120 minutes = 45 minutes + 75
+    minutes = mean time + 75 minutes = mean time + 5SD.
+</p>
+<p>
+    That is, two hours is 5SD above the mean. On
+    the other hand, 5SD below the mean is
+</p>
+<p class="math">
+    45 minutes &minus; 5&times;(15 minutes) = &minus;30 minutes.
+</p>
+<p>
+    This is not a possible travel time (it always takes a positive amount of time to cross the bridge).
+    Thus the fraction of the time it takes more than 2 hours or less than &minus;30&nbsp;minutes to
+    cross the bridge must equal the time it takes more than 2 hours to cross the bridge.
+    By Chebychev's inequality,
+</p>
+<p class="math">
+    [fraction of the time it takes less than &minus;30
+    minutes or more than 2 hours] &le; 1/5<sup>2</sup><br />
+    = 1/25 = 4%.
+</p>
+<p>
+    Because the fraction of the time it takes
+    more than 2 hours or less than &minus;30 minutes to cross the bridge is the same as the time it
+    takes more than 2 hours, we have
+</p>
+<p class="math">
+    [fraction of the time it takes more than 2
+    hours] &le; 4%.
+</p>
+<p>
+    This is a more restrictive bound than the one Markov's
+    inequality gives in this problem (Markov's inequality gave 37.5%) so we should use
+    it instead.
+    (Larger lower bounds are better; smaller upper bounds are better.)
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to apply Markov's inequality
+    and Chebychev's inequality.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var cFac = roundToDig(5 + 4*rand.next(), 1);
+    var cheby = numToRange((1.0 - 1.0/(cFac*cFac)),.005);
+    var qStr = '<span class="qSpan">According to Chebychev\'s inequality, at least ' +
+       'what decimal fraction of a list of numbers must be within ' + cFac +
+       ' SD of the mean?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,cheby);
+    document.writeln('</p>');
+    var within = 1/(cFac*cFac);
+    var ansStr = ' By <a class="glossRef" href="gloss.htm#chebychev">Chebychev\'s inequality</a> for lists, ' +
+       ' the fraction of observations beyond ' + cFac +
+       ' SDs of the mean is at most 1/(' + cFac + ')<sup>2</sup> = ' +
+       roundToDig(within,3) +  ' so the fraction within ' +
+       cFac + ' SDs of the mean is at least 1 &minus; ' + roundToDig(within,3) + ' = ' +
+       roundToDig(1-within,3) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A student has a GPA (grade point average) of ';
+    var gradePert = ((listOfRandInts(1,0,19))[0])/10;
+    var gradeMean = 2 + gradePert;
+    var gradeMax = (listOfRandInts(1,3,4))[0];
+    var maxFrac = Math.min(1,gradeMean/gradeMax);
+    qStr += gradeMean.toString() + '. In each course she takes, she gets a grade between ' +
+    '0 (failing) and 4.0 (A+). <span class="qSpan">What is the largest decimal ' +
+    ' fraction of her grades that could be ' + gradeMax.toString() +
+    ' or higher? </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(maxFrac));
+    document.writeln('</p>');
+    var ansStr = ' By <a class="glossRef" href="gloss.htm#markov">Markov\'s inequality</a>, the largest fraction ' +
+     ' of grades greater than or equal to ' + gradeMax.toString() + ' is at most (' +
+     gradeMean + ')/(' + gradeMax + ') = ' + roundToDig(gradeMean/gradeMax,2) + '. ';
+    if (gradeMean > gradeMax) {
+        ansStr += 'This fraction is greater than 1: <em>All</em> her grades could be greater than or ' +
+                  'equal to ' + gradeMax.toString() + '.  Hence, the largest possible fraction is 1.';
+    }
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var meanLightTime = 10000;
+    var sdLight = 500 + 10*((listOfRandInts(1,-5,5))[0]);
+    var lightFac = roundToDig(1 + 5 * rand.next(),1);
+    var lightTime = meanLightTime + lightFac * sdLight;
+    var limit = Math.min(1/(lightFac*lightFac),lightTime/meanLightTime);
+    var ans = numToRange(limit,.001);
+    var qStr = 'A certain type of light bulb has an average lifetime of ' +
+       commify(meanLightTime) + ' hours. The SD of bulb lifetimes is ' +
+    commify(sdLight) +
+    ' hours. <span class="qSpan">What decimal fraction of bulbs ' +
+    'could last more than ' + commify(lightTime) + '  hours?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, ans);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    This chapter introduced several ways to summarize lists of numbers,
+    <a class="glossRef" href="gloss.htm#quantitative">quantitative data</a>.
+    Some summaries, <a class="glossRef" href="gloss.htm#location">measures of location</a>,
+    seek to be as close as
+    possible to every element of the list&mdash;to typify the elements.
+    The <a class="glossRef" href="gloss.htm#mean">mean</a>,
+    <a class="glossRef" href="gloss.htm#median">median</a>, and
+    <a class="glossRef" href="gloss.htm#mode">mode</a> are
+    examples:
+    They represent typical values of the list.
+    The mean, median, and mode each are &quot;as
+    close as possible&quot; to all the elements in the list,
+    for different definitions of the proximity
+    of two numbers: for the mean, the distance between two numbers is the square of their
+    difference; for the median, the distance between two numbers is the absolute value of their
+    difference; and for the mode, the distance between two numbers is 1
+    if the numbers differ, 0 if
+    they are equal.
+    The mean is the sum of the elements, divided by the number of elements.
+    The median is the smallest element that is at least as large as at least half the elements.
+    The mode is the most common value in the list.
+    The mode makes sense for <a class="glossRef" href="gloss.htm#qualitative">qualitative</a> and
+    <a class="glossRef" href="gloss.htm#categorical">categorical</a> data as well as
+    quantitative data, but the mean and median make sense only for quantitative data.
+    The mean, median, and mode differ in their sensitivity to changes to the
+    data, or <a class="glossRef" href="gloss.htm#resistant">resistance</a>.
+    A statistic that can be changed arbitrarily by altering a single datum is
+    not resistant.
+    The median is resistant.
+    The mean is not resistant.
+    The resistance of the mode depends on the distribution of values in the list.
+</p>
+<p>
+    The <a class="glossRef" href="gloss.htm#rms">rms (root mean square)</a> measures the average size of the
+    elements of a list, without regard to their signs.
+    The rms is not resistant.
+    Other summaries, <a class="glossRef" href="gloss.htm#spread">measures of spread</a>,
+    reflect how the values of the list differ from each other.
+    Examples include the <a class="glossRef" href="gloss.htm#range">range</a>, the
+    <a class="glossRef" href="gloss.htm#sd">SD (standard deviation)</a>, and the
+    <a href="#IQR">IQR (inter-quartile range)</a>.
+    The range of a list of numbers is the largest number
+    minus the smallest number.
+    The range is zero if and only if all the numbers in the list are
+    equal.
+    The range is not resistant.
+    The SD measures the average size of the differences between
+    the mean and the elements of the list: It is the rms of the list of deviations from the mean.
+    The SD of a list is zero if and only if all the numbers in the list are equal.
+    The SD is not
+    resistant.  The IQR is the upper quartile minus the lower quartile. It is the width of an
+    interval that contains the middle half of the data&mdash;25% below the median and 25% above the
+    median.  The IQR can be zero even if not all the numbers are equal, but the middle 50% must be
+    equal. The IQR is resistant.
+    If the units of measurement change by an affine transformation,
+    measures of location and spread in the new units of measurement have simple relationships to
+    their values in the old units.
+</p>
+<p>
+    Measures of location and spread contain a surprising amount of
+    information about lists of numbers:
+    <a class="glossRef" href="gloss.htm#markov">Markov's inequality</a> limits the fraction of elements of the
+    list that exceed any given threshold, in terms of the mean of the list and the
+    threshold, provided
+    the list contains no negative number.
+    <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> limits the fraction of elements
+    whose difference from the mean of the list exceeds any given threshold, in terms of the
+    SD of the list and the threshold.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>affine transformation</li>
+    <li>arithmetic mean</li>
+    <li>average</li>
+    <li>categorical</li>
+    <li>Chebychev's inequality</li>
+    <li>class interval</li>
+    <li>deviation</li>
+    <li>discrete</li>
+    <li>histogram</li>
+    <li>independent</li>
+    <li>interquartile range (IRQ)</li>
+    <li>lower quartile</li>
+    <li>Markov's inequality</li>
+    <li>mean</li>
+    <li>measures of location</li>
+    <li>median</li>
+    <li>mode</li>
+    <li>monotonic function</li>
+    <li>percentile</li>
+    <li>qualitative</li>
+    <li>quartile</li>
+    <li>range</li>
+    <li>resistant</li>
+    <li>rms</li>
+    <li>skewed</li>
+    <li>spread</li>
+    <li>standard deviation (SD)</li>
+    <li>statistics</li>
+    <li>symmetric</li>
+    <li>upper quartile</li>
+    <li>variability</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

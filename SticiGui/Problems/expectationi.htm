@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2012 16:43 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "expectation";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>The Long Run and the Expected Value</h2>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nTickets = listOfRandInts(1,6,12)[0];
+    var theTickets = listOfRandInts(nTickets,-10,10).sort(numberLessThan);
+    var nDraws = listOfRandInts(1,2,nTickets-1)[0];
+    var boxMean = mean(theTickets);
+    var aVal = numToRange(nDraws*boxMean,.05);
+    var qStr = 'A box contains ' + nTickets.toString() + ' tickets labeled with numbers. ' +
+               'The number on the tickets are </p><p class="math">' +
+               theTickets.join(', ').toString() + ' .</p><p><span class="qSpan">The expected ' +
+               'value of the sample sum of the ticket labels in ' + nDraws.toString() +
+               ' independent random draws with replacement from the box is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    qStr = '.</span></p><p><span class="qSpan">The expected value of the sample sum of ' +
+           'the ticket labels in a simple random sample (without replacement) of size ' +
+           nDraws.toString() + ' from the box is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nCoins = listOfRandInts(1,5,20)[0];
+    var aVal = numToRange(nCoins/2,.05);
+    var qStr = 'Consider tossing ' + nCoins.toString() + ' fair coins independently. ' +
+               '<span class="qSpan">The expected value of the total number of heads ' +
+               'showing when all the coins land is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var deckSize = 52;
+    var hands = ["aces","face cards","hearts"];
+    var theHand = listOfRandInts(1,0,hands.length - 1)[0];
+    var handSize = listOfRandInts(1,4,10)[0];
+    var nNums = [4,12,13];
+    var eNum = nNums[theHand]*handSize/deckSize;
+    var aVal = numToRange(eNum,.05);
+    var qStr = 'Consider dealing a hand of ' + handSize.toString() + ' cards from a well ' +
+               'shuffled standard deck of playing cards. <span class="qSpan">The expected ' +
+               'value of the number of ' + hands[theHand] + ' in the hand is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var popSize = 100*(listOfRandInts(1,2,10)[0]);
+    var samSize = popSize/10;
+    var demoPct = listOfRandInts(1,45,65)[0];
+    var nDemo = roundToDig(popSize*demoPct/100,0);
+    var indepPct = listOfRandInts(1,1,10)[0];
+    var nIndep = roundToDig(popSize*indepPct/100,0);
+    var nGop = popSize - nDemo - nIndep;
+    var aVal = numToRange(samSize*nGop/popSize,.05);
+    var pNoIndep = hyperGeoPmf(popSize,nIndep,samSize,0);
+    var aVal2 = numToRange(pNoIndep,.05);
+    var aVal3 = numToRange(1/(1-pNoIndep),.05);
+    var qStr = 'A population of ' + popSize.toString() + ' voters contains ' + nGop.toString() +
+               ' Republicans, ' + nDemo.toString() + ' Democrats, and ' + nIndep.toString() +
+               ' independents and members of other parties. A simple random sample of ' +
+               samSize.toString() + ' voters will be drawn from this population. ' +
+              '<span class="qSpan">The expected value of the number of Republicans in the ' +
+              ' sample is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    qStr = '</p><p><span class="qSpan">The chance the sample contains only Republicans and ' +
+           'Democrats is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    qStr = '</p><p>Consider repeatedly drawing simple random samples of size ' + samSize.toString() +
+           ' from the population (taking each simple random sample from the full population of ' +
+           popSize.toString() + ' voters). <span class="qSpan">The expected value of the number ' +
+           'of simple random samples of size ' + samSize.toString() + ' that must be drawn until ' +
+           '(and including) the first sample that contains at least one voter who is ' +
+           'neither a Democrat nor a Republican is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal3);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nCoins = 10*(listOfRandInts(1,2,10)[0]);
+    var dieMult = listOfRandInts(1,3,6)[0];
+    var nDice = nCoins*dieMult;
+    var eHeads = nCoins/2;
+    var eEvens = nDice/2;
+    var aVal2 = numToRange(eHeads);
+    var aVal3 = numToRange(eEvens);
+    var delta = listOfRandInts(1,1,4)[0];
+    var dPct = 10*(listOfRandInts(1,1,3)[0]);
+    var rawOpt = ["less than","equal to","greater than"];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt2 = optPerm[0];
+    var aVal4 = alphabet[optPerm[1][0]];
+    var qStr = nCoins.toString() + ' fair coins are tossed independently, and ' +
+               nDice.toString() + ' fair dice are rolled independently. Let C be the number ' +
+               'of coins that land showing &quot;heads&quot; on top and let D be the number ' +
+               'of dice that land showing an even number of spots on top.<span class="qSpan"> ' +
+               'The expected value of C, E(C), is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    qStr = '.</span></p><p><span class="qSpan">The expected value of D, E(D), is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal3);
+    qStr = '.</span></p><p><span class="qSpan">The chance that C is within &plusmn;2 of E(C) is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' the chance that D is within ± 2 of E(D).</span></p>' +
+           '<p><span class="qSpan">The chance that C/'  + nCoins.toString() +
+           ' is between 40% and 60% is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt2,aVal4);
+    qStr = ' the chance that D/' + nDice.toString() + ' is between 40% and 60%.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nCoins = listOfRandInts(1, 2, 6)[0];
+    var nDice = listOfRandInts(1, 1, 4)[0];
+    var aVal = numToRange(3.5*nDice + .5*nCoins, 0.05);
+    var dieWord = " dice are ";
+    if (nDice < 2) {
+       dieWord = ' die is ';
+    }
+    var qStr = Cardinals[nDice]  + dieWord + ' rolled and ' + cardinals[nCoins] +
+               ' fair coins are tossed.  Let X be the sum of the number of spots that ' +
+               'show on the top ';
+    dieWord = ' faces of the dice ';
+    if (nDice < 2) {
+       dieWord = ' face of the die ';
+    }
+    qStr += dieWord + ' and the number of coins that land heads up. <span class="qSpan">The ' +
+            'expected value of X is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nVals = listOfRandInts(1,4,6)[0];
+    var theVals = listOfDistinctRandInts(nVals,-nVals-2,nVals+2).sort(numberLessThan);
+    var thePs = listOfRandInts(nVals,1,10);
+    var sumP = vSum(thePs);
+    var eX = 0;
+    for (var i=0; i < nVals; i++) {
+        thePs[i] = roundToDig(thePs[i]/sumP,3);
+        eX += theVals[i]*thePs[i];
+    }
+    var aVal = numToRange(eX,0.05);
+    var header = ["<em>x</em>","P(X=<em>x</em>)"];
+    var list = new Array(2);
+    list[0] = theVals;
+    list[1] = thePs;
+    var qStr = 'A random variable X has the following probability distribution:';
+    document.writeln(qStr);
+    listToTable(header,list,"transpose","right");
+    qStr = '</p><p><span class="qSpan">The expected value of X is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('.</span></p>');
+// -->
+</script>
+</div>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

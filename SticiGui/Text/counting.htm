@@ -1,0 +1,2053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 16:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "counting";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+<h1>
+   Counting
+</h1>
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=2822&end=4258" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    Many of the most useful techniques in probability and statistics are based on counting.
+    This chapter presents techniques and shortcuts for counting that are particularly
+    helpful when the number of things to be counted is large.
+    These techniques form the basis of our study of probability and statistics throughout
+    the rest of the book.
+</p>
+
+<h2><a id="counting"></a>Counting Can be Hard</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=2941&end=3059" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    Suppose we want to know the number of ways a coin can land &quot;heads&quot;
+    exactly twice in three tosses.
+    Let &quot;H&quot; stand for &quot;head&quot; and &quot;T&quot; stand for
+    &quot;tail.&quot;
+    The possible outcomes of tossing a coin three times are shown in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Possible Outcomes of Three Tosses of a Coin.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div class="plainTable"><center><table class="dataTable">
+    <tr>
+        <th id="col0" align="center" bgcolor="#FFFF00">Outcome</th>
+        <th id="col1" align="center" bgcolor="#FFFF00">Toss 1</th>
+        <th id="col2" align="center" bgcolor="#FFFF00">Toss 2</th>
+        <th id="col3" align="center" bgcolor="#FFFF00">Toss 3</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row" align="center" bgcolor="#FFFF00">1</th>
+        <td headers="col1,row1" align="center">H</td>
+        <td headers="col2,row1" align="center">H</td>
+        <td headers="col3,row1" align="center">H</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row" align="center" bgcolor="#FFFF00">2</th>
+        <td headers="col1,row2" align="center">T</td>
+        <td headers="col2,row2" align="center">H</td>
+        <td headers="col3,row2" align="center">H</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row" align="center" bgcolor="#FFFF00">3</th>
+        <td headers="col1,row3" align="center">H</td>
+        <td headers="col2,row3" align="center">T</td>
+        <td headers="col3,row3" align="center">H</td>
+    </tr>
+    <tr>
+        <th id="row4" scope="row" align="center" bgcolor="#FFFF00">4</th>
+        <td headers="col1,row4" align="center">T</td>
+        <td headers="col2,row4" align="center">T</td>
+        <td headers="col3,row4" align="center">H</td>
+    </tr>
+    <tr>
+        <th id="row5" scope="row" align="center" bgcolor="#FFFF00">5</th>
+        <td headers="col1,row5" align="center">H</td>
+        <td headers="col2,row5" align="center">H</td>
+        <td headers="col3,row5" align="center">T</td>
+    </tr>
+    <tr>
+        <th id="row6" scope="row" align="center" bgcolor="#FFFF00">6</th>
+        <td headers="col1,row6" align="center">H</td>
+        <td headers="col2,row6" align="center">T</td>
+        <td headers="col3,row6" align="center">T</td>
+    </tr>
+    <tr>
+        <th id="row7" scope="row" align="center" bgcolor="#FFFF00">7</th>
+        <td headers="col1,row7" align="center">T</td>
+        <td headers="col2,row7" align="center">H</td>
+        <td headers="col3,row7" align="center">T</td>
+    </tr>
+    <tr>
+        <th id="row8" scope="row" align="center" bgcolor="#FFFF00">8</th>
+        <td headers="col1,row8" align="center">T</td>
+        <td headers="col2,row8" align="center">T</td>
+        <td headers="col3,row8" align="center">T</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    There are eight possible outcomes of tossing the coin three times,
+    if we keep track of what happened on each toss separately.
+    In three of those eight outcomes (the outcomes labeled 2, 3, and 5),
+    there are exactly two heads.
+</p>
+
+<p>
+    This way of counting becomes overwhelming very quickly as the number of
+    tosses increases.
+    For example, how many ways are there to get exactly 5 heads in 10 tosses of a coin?
+    There are 1,024 possible sequences of heads and tails in 10 tosses of a coin;
+    252 of them contain exactly 5 heads.
+    I would not want to list them all&mdash;it would be both tedious and error prone.
+</p>
+
+<div class="indent">
+<p class="inline">
+    When the number of things to be counted is large,
+    it is essential to approach counting systematically:
+    Enumerating all the possibilities becomes very difficult,
+    and shortcuts and formulae become crucial.
+    For example, <span class="math">2<sup>n</sup></span> different subsets 
+    can be formed from a collection of
+    <span class="math">n</span> elements,
+    so a collection of 10 objects has 2<sup>10</sup> = 1,024 subsets.
+    Similarly, there are <span class="math">2<sup>n</sup></span> possible sequences of heads and tails in
+    <span class="math">n</span> tosses of a coin.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'There is a reason the number of subsets of <span class="math">n</span> objects equals the ' +
+           'number of sequences of heads and tails in <span class="math">n</span> tosses of a coin: ' +
+           'One can think of forming a subset of a collection of <span class="math">n</span> things by ' +
+           'specifying for each of the <span class="math">n</span> things whether it is in the set.  ' +
+           'The number of subsets is thus equal to the number of yes/no ' +
+           'sequences of length <span class="math">n</span>. Similarly, one can think of forming a ' +
+           'sequence of <span class="math">n</span> heads and tails by specifying for each element in the ' +
+           'sequence whether it is a head. The number of sequences is thus the ' +
+           'number of yes/no sequences of length <span class="math">n</span>, ' +
+           'the same as the number of subsets of <span class="math">n</span> things.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Counting large sets by listing all the possibilities is impractical&mdash;mathematical
+    imagination offers advantages over enumeration.
+    The most important fact in this chapter is the Fundamental Rule of Counting,
+    which helps count the possible outcomes of a sequence of choices.
+</p>
+
+<h3><a id="fundamental_rule"></a>
+    The Fundamental Rule of Counting
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=3059&end=3953" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    In the previous example of tossing a coin thrice, each toss results
+    in one of two possible outcomes: heads or tails.
+    For each possible outcome of the first toss, there are two possible
+    outcomes of the second toss, so after the second toss, there are in
+    all four possible outcomes (2 &times; 2 = 4).
+    For each of the four possible
+    outcomes of the first and second tosses, there are two possible outcomes
+    of the third toss, so after the third toss, there are in all eight
+    possible outcomes (2 &times; 2 &times; 2 = 8).
+    Counting the total number of
+    possibilities is like counting the leaves on the following upside-down tree:
+</p>
+
+<div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td align="center">(root)</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">o</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><font color="#FF0000">/</font></td>
+<td align="center"></td>
+<td align="center">\</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">First toss</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><font color="#FF0000">/</font></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">\</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+    align="center"></td> <td align="center"></td> <td align="center"></td> <td
+    align="center"><font color="#FF0000">/</font></td> <td align="center"></td> <td
+    align="center"></td> <td align="center"></td> <td align="center"></td> <td
+    align="center"></td> <td align="center">\</td> <td align="center"></td> <td
+    align="center"></td> <td align="center"></td> <td align="center"></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#FF0000">H</font></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center">T</td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> </tr>
+<tr> <td align="center">Second toss</td> <td align="center"></td> <td align="center"></td>
+<td align="center"></td> <td align="center">/</td> <td align="center"></td> <td
+      align="center"><font color="#FF0000">\</font></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center">/</td> <td align="center"></td> <td
+      align="center">\</td> <td align="center"></td> <td align="center"></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center">H</td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#FF0000">T</font></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center">H</td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center">T</td> <td align="center"></td> </tr>
+<tr> <td align="center">Third toss</td> <td align="center"></td> <td align="center">/</td>
+<td align="center"></td> <td align="center">\</td> <td align="center"></td> <td
+      align="center"><font color="#FF0000">/</font></td> <td align="center"></td> <td
+      align="center">\</td> <td align="center"></td> <td align="center">/</td> <td
+      align="center"></td> <td align="center">\</td> <td align="center"></td> <td
+      align="center">/</td> <td align="center"></td> <td align="center">\</td> </tr>
+<tr> <td align="center">&quot;leaves&quot;</td> <td align="center"></td> <td
+      align="center">H</td> <td align="center"></td> <td align="center">T</td> <td
+      align="center"></td> <td align="center"><font color="#FF0000">H</font></td> <td
+      align="center"></td> <td align="center">T</td> <td align="center"></td> <td
+      align="center">H</td> <td align="center"></td> <td align="center">T</td> <td
+      align="center"></td> <td align="center">H</td> <td align="center"></td> <td
+      align="center">T</td> </tr>
+</table>
+</center></div>
+
+<p>
+    There are eight leaves on the upside-down tree, corresponding to the eight
+    possible sequences of heads and tails.
+    Each path from the root to a leaf is a possible sequence of heads and tails.
+    The red path, which terminates in the third leaf from the left, corresponds
+    to getting heads on the first toss, tails on the second toss, and heads on
+    the third toss.
+    There is no particular reason to draw the tree upside-down: We could just as
+    well have drawn it right-side-up, or sideways.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Forming groups of statisticians.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose there is a group of seven statisticians, three male and four female.
+    The group wants one man and one woman to represent them at a meeting of the
+    American Statistical Association.
+    How many possible pairs of one man and one woman from this group are there?
+</p>
+
+<p>
+    We could consider forming (male, female) pairs by first picking one of
+    the three men, then picking one of the four women.
+    Suppose the men are Erich, Jerzy, and Lucien, and the women are
+    Betty, F.N., Grace, and Juliet.
+    A sideways tree for choosing a pair of names, one male and one female,
+    would look like this:
+</p>
+
+<div align="center"><center><table border="0" cellpadding="0" cellspacing="0">
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#FF0000">-</font></td> <td
+      align="center"><font color="#FF0000">Betty</font></td> <td></td> <td></td> <td></td> <td
+      align="center"><font color="#FF0000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#FF0000">/</font></td> <td align="center"><font
+      color="#FF0000">-</font></td> <td align="center"><font color="#FF0000">F.N.</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#FF0000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#FF0000">Erich</font></td> <td align="center"></td> <td
+      align="center"></td> <td></td> <td></td> <td></td> <td align="center"><font
+      color="#FF0000">4 pairs</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#FF0000">/</font></td> <td align="center"><font color="#FF0000">\</font></td> <td
+      align="center"><font color="#FF0000">-</font></td> <td align="center"><font
+      color="#FF0000">Grace</font></td> <td></td> <td></td> <td></td>
+<td align="center"><font
+      color="#FF0000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#FF0000">/</font></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#FF0000">-</font></td> <td align="center"><font color="#FF0000">Juliet</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#FF0000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#FF0000">/</font></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td></td> <td></td> <td></td> <td align="center"></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#FF0000">/</font></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#008000">-</font></td> <td align="center"><font color="#008000">Betty</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#008000">|</font></td>
+</tr>
+<tr> <td align="center"></td> <td align="center"><font color="#FF0000">/</font></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#008000">/</font></td> <td
+      align="center"><font color="#008000">-</font></td> <td align="center"><font
+      color="#008000">F.N.</font></td> <td></td> <td></td> <td></td> <td align="center"><font
+      color="#008000">|</font></td> </tr>
+<tr> <td align="center">root o</td> <td align="center"><font color="#008000">-</font></td>
+<td align="center"><font color="#008000">-</font></td> <td align="center"><font
+      color="#008000">-</font></td> <td align="center"><font color="#008000">-</font></td> <td
+      align="center"><font color="#008000">-</font></td> <td align="center"><font
+      color="#008000">Jerzy</font></td> <td align="center"></td> <td align="center"></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#008000">4 pairs</font></td>
+</tr>
+<tr> <td align="center"></td> <td align="center"><font color="#800080">\</font></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#008000">\</font></td> <td
+      align="center"><font color="#008000">-</font></td> <td align="center"><font
+      color="#008000">Grace</font></td> <td></td> <td></td> <td></td> <td align="center"><font
+      color="#008000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#800080">\</font></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#008000">-</font></td> <td align="center"><font color="#008000">Juliet</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#008000">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#800080">\</font></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td></td> <td></td> <td></td> <td align="center"></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#800080">\</font></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#800080">-</font></td> <td align="center"><font color="#800080">Betty</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#800080">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"><font
+      color="#800080">\</font></td> <td align="center"><font color="#800080">/</font></td> <td
+      align="center"><font color="#800080">-</font></td> <td align="center"><font
+      color="#800080">F.N.</font></td> <td></td> <td></td> <td></td> <td align="center"><font
+      color="#800080">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#800080">Lucien</font></td> <td align="center"></td> <td
+      align="center"></td> <td></td> <td></td> <td></td> <td align="center"><font
+      color="#800080">4 pairs</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"><font color="#800080">\</font></td> <td align="center"><font
+      color="#800080">-</font></td> <td align="center"><font color="#800080">Grace</font></td>
+<td></td> <td></td> <td></td> <td align="center"><font color="#800080">|</font></td> </tr>
+<tr> <td align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"></td> <td align="center"></td> <td
+      align="center"></td> <td align="center"><font color="#800080">-</font></td> <td
+      align="center"><font color="#800080">Juliet</font></td> <td></td> <td></td> <td></td>
+      <td align="center"><font color="#800080">|</font></td> </tr>
+<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+<td></td> <td></td> <td></td> <td></td> <td align="center"></td> </tr>
+<tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+<td></td> <td></td> <td></td> <td></td> <td align="center">3 &times; 4 = 12 pairs in all</td>
+</tr>
+</table>
+</center></div>
+
+<p>
+    The fourth leaf from the top is the pair (Erich, Juliet);
+    the fifth leaf from the top is (Jerzy, Betty); etc.
+    There are twelve pairs in all: Each of the three men can each be matched with
+    each of the four women&mdash;four possible choices of women for each of three
+    possible choices of men.
+    The total number of leaves is thus 3 &times; 4 = 12.
+    Had there been five men and seven women, there would have been 5 &times; 7 = 35
+    possible male-female pairs.
+    In general, if there are <span class="math">n<sub>1</sub></span> males and 
+    <span class="math">n<sub>2</sub></span>
+    females, there are <span class="math">n<sub>1</sub> &times; n<sub>2</sub></span>
+    possible male-female pairs.
+    Note that if, for instance, Erich and Juliet refused to be on the
+    committee together, the number cannot be found this way:
+    The number of possible choices for women would depend on which man was chosen.
+</p>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental Rule of
+    Counting</a> generalizes the special cases we have just seen.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Fundamental Rule of Counting</span>
+    </p>
+    <p>
+        If a set of choices or trials, <span class="math">T<sub>1</sub>, T<sub>2</sub>, T<sub>3</sub>,
+          &hellip;, T<sub>k</sub></span>, could result, respectively, in
+          <span class="math">n<sub>1</sub>, n<sub>2</sub>,
+          n<sub>3</sub>, &hellip;, n<sub>k</sub></span>
+         possible outcomes, the entire <em>set</em> of <span class="math">k</span> choices or trials has
+    </p>
+    <p class="math">
+        n<sub>1</sub> &times; n<sub>2</sub> &times; n<sub>3</sub> &times; 
+          &hellip;  &times; n<sub>k</sub>
+    </p>
+    <p>
+        possible outcomes.
+    </p>
+    <p>
+        (The numbers <span class="math">n<sub>1</sub>, n<sub>2</sub>,
+        n<sub>3</sub>,
+        &hellip;, n<sub>k</sub></span>
+        cannot depend on which outcomes actually occur.)
+    </p>
+</div>
+
+<p>
+    The Fundamental Rule of Counting leads to very useful formulae for many
+    familiar situations, as we shall see.
+    The following
+    exercises check your ability to use the Fundamental Rule of Counting.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Think about other ways of selecting a male and a ' +
+           'female statistician to represent the group. <span class="qSpan">Would the number of ' +
+           'possible pairs be the same if one first selected one of the four ' +
+           'female statisticians, then one of the three male statisticians? </span>';
+    document.writeln(qStr);
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+    var ansStr = 'Yes. The order in which you multiply the factors does not change ' +
+         'their product: </p><p class="math">3 &times; 4 = 4 &times; 3 = 12.</p>' +
+         '<p>The second way of making the selection would be to assign one of ' +
+         'the three men to each of the four women. There would still be 12 ' +
+         'pairs in all.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A <a class="glossRef" href="gloss.htm#deck_of_cards">deck of cards</a> has 12 ' +
+           'face-cards: 4 Jacks, 4 Queens, and 4 Kings. The other 40 cards are ' +
+           'non-face cards. <span class="qSpan">How many different ways are there ' +
+           'to deal ';
+    var nCards = listOfRandInts(1,2,4)[0];
+    var theInt = (listOfRandInts(1,1,nCards-1))[0];
+    var faceStr = ' face card';
+    if (theInt > 1) {
+       faceStr += 's';
+    }
+    var nonFaceStr = ' non-face card';
+    if (nCards - theInt > 1) {
+       nonFaceStr += 's';
+    }
+    qStr += theInt.toString() + faceStr + ' followed by ' +
+        (nCards-theInt).toString() + nonFaceStr + '?</span>';
+    document.writeln(qStr);
+    var ans = permutations(12,theInt)*permutations(40, nCards-theInt);
+    writeTextExercise(8,qCtr++,ans.toString());
+    document.writeln('</p>');
+    var ansStr = 'There are ';
+    var ways = 12;
+    var prodStr = '';
+    var prod=1;
+    if (theInt > 1) {
+       for (var i=theInt; i > 0; i--) {
+           prod *= ways;
+           ansStr += (ways).toString() + ' choices for the ' + ordinals[theInt - i + 1] +
+                 ' face card, ';
+           prodStr += (ways--).toString() + ' &times; ';
+       }
+       ansStr += ' and ';
+    } else {
+       prod *= ways;
+       ansStr += ways.toString() + ' choices for the face card, and ';
+       prodStr += (ways).toString() + ' &times; ';
+    }
+    var ways = 40;
+    if (nCards - theInt > 1) {
+       ansStr = ansStr.substr(0,ansStr.length - ('and ').length);
+       for (var i=nCards-theInt; i > 1; i--) {
+           prod *= ways;
+           ansStr += (ways).toString() + ' choices for the ' +
+               ordinals[nCards - theInt - i + 1] + ' non-face card, ';
+           prodStr += (ways--).toString() + ' &times; ';
+       }
+       prod *= ways;
+       ansStr += 'and ' + (ways).toString() + ' choices for the ' + ordinals[nCards-theInt] +
+             ' non-face card. ';
+       prodStr += (ways).toString() + ' &times; ';
+    } else {
+       prod *= ways;
+       ansStr += ways.toString() + ' choices for the non-face card. ';
+       prodStr += (ways).toString() + ' &times; ';
+    }
+    ansStr += 'Thus there are ' + prodStr.substr(0,prodStr.length-(' &times; ').length) +
+          ' = ' + commify(prod) + ' distinct ways. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A small company has ';
+    var theInts = (listOfRandInts(3,2,6)).sort(numberLessThan);
+    nVp = theInts[0];
+    nTlm = theInts[1];
+    nMlm = theInts[2];
+    qStr += theInts[0] + ' vice-presidents, ' + theInts[1] + ' top-level managers, and ' +
+        theInts[2] + ' mid-level managers.  A committee is to be formed consisting ' +
+        'of one of each of these three types of management personnel. ' +
+        '<span class="qSpan">How many distinct committees are possible? </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(theInts[0]*theInts[1]*theInts[2]) );
+    document.writeln('</p>');
+    var ansStr = 'There are ' + cardinals[nVp] + ' choices for the VP. For each of those, ' +
+         'there are ' + cardinals[nTlm] + ' choices of the top-level manager. ' +
+         'For each choice of the VP and top-level manager, there are ' +
+         cardinals[nMlm] + ' choices of the mid-level manager. By the fundamental ' +
+         'rule of counting, there are ' + nVp.toString() + ' &times; ' +
+         nTlm.toString() + ' &times; ' + nMlm.toString() + ' = ' +
+         commify(nVp*nTlm*nMlm) +
+         ' possible choices of one person from each management category.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<p>
+    The following exercise illustrates an important strategy for counting the elements
+    of a set: partitioning.
+    Divide the set into smaller subsets that do not overlap,
+    but that together contain every element of the original set.
+    Count the number of elements of the subsets separately, and
+    then add those subtotals to find the number of elements in the original set.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The same company wants to form a committee consisting ' +
+           'of just two people. The two people must be from two different ' +
+           'management groups. <span class="qSpan">How many distinct committees ' +
+           'are possible?</span>';
+    document.writeln(qStr);
+    var num = theInts[0]*theInts[1] + theInts[0]*theInts[2] + theInts[1]*theInts[2];
+    writeTextExercise(8,qCtr++,numToRange(num));
+    document.writeln('</p>');
+    var ansStr = 'To have two different management groups represented, we must either ' +
+         'have a VP and a top-level manager, or a VP and a mid-level manager, or a ' +
+         'top-level manager and a mid-level manager. There are ' +
+         nVp.toString() + ' &times; ' + nTlm.toString() + ' = '   +
+         (nVp*nTlm).toString() + ' ways of selecting a VP and a top-level manager, ' +
+         nVp.toString() + ' &times; ' + nMlm.toString() + ' = '   +
+         (nVp*nMlm).toString() + ' ways of selecting a VP and a mid-level manager, and ' +
+         nTlm.toString() + ' &times; ' + nMlm.toString() + ' = '   +
+         commify(nTlm*nMlm) +
+         ' ways of selecting a top-level manager and a mid-level manager. Note that ' +
+         ' if we pick a top-level manager and a mid-level manager, we did ' +
+         ' not pick a VP and a mid-level manager, nor did we pick a VP and a ' +
+         ' top-level manager; similarly, if we picked a VP and a top-level ' +
+         ' manager, we did not pick a VP and a mid-level manager, nor did we ' +
+         ' pick a top-level manager and a mid-level manager, <em>etc</em>.: ' +
+         ' all the possibilities we enumerated are distinct. Thus the total ' +
+         ' number of possibilities is</p><p class="math">' + commify(nVp*nTlm) + ' + ' +
+         commify(nVp*nMlm) +' + ' + commify(nTlm*nMlm) + ' = ' +
+         commify(nVp*nTlm + nVp*nMlm + nTlm*nMlm) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'An engineer wants to explore the influence of some manufacturing variables ' +
+           'on the quality of semiconductors. There are three factors she wants to study: ' +
+           'temperature, humidity, and material. There are ';
+    var theInts = listOfRandInts(3,2,6);
+    qStr += theInts[0].toString() + ' possible temperature settings, ' +
+        theInts[1].toString() + ' possible humidity settings, and ' +
+        theInts[2].toString() + ' choices of materials. ';
+    var nTemps = theInts[0];
+    var nHums = theInts[1];
+    var nMats = theInts[2];
+    var limits = listOfRandInts(2,2,6);
+    var nDays = limits[0];
+    var nExpers = limits[1];
+    qStr += 'The engineer has ' + limits[0].toString() + ' days in which to investigate her ' +
+        'new manufacturing procedure. She can conduct ' + limits[1].toString() +
+        ' experiments per day, each corresponding to one combination of temperature, ' +
+        'humidity, and material.</p><p><span class="qSpan">How many combinations of ' +
+        'settings are there?</span>';
+    document.writeln(qStr);
+    var num = theInts[0]*theInts[1]*theInts[2];
+    writeTextExercise(8,qCtr++,num.toString());
+    var qStr = '</p><p><span class="qSpan">How many combinations of experimental settings ' +
+           'can she investigate in the allotted time? </span>';
+    document.writeln(qStr);
+    var maxComb = limits[0]*limits[1];
+    writeTextExercise(8,qCtr++,numToRange(maxComb) );
+    var qStr = '</p><p><span class="qSpan">Can she investigate all possible settings in ' +
+        limits[0].toString() + ' days? </span>';
+    document.writeln(qStr);
+    var k;
+    if (num <= maxComb) {
+    	k = "b";
+    } else {
+    	k = "a";
+    }
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,k);
+    document.writeln('</p>');
+    if (nExpers*nDays >= nTemps*nHums*nMats) {
+    	var str ="can";
+    } else {
+   		var str = "cannot";
+    }
+    var ansStr = 'The engineer can test ' + cardinals[nExpers] +
+         ' combinations of settings per day for each of ' +
+         cardinals[nDays] + ' days, a total of ' + commify(nExpers*nDays) +
+         ' combinations of settings. By the fundamental rule of counting, the total ' +
+         'number of combinations of settings is ' + nTemps.toString() +
+         ' &times; ' + nHums.toString() + ' &times; ' + nMats.toString() + ' = ' +
+         commify(nTemps*nHums*nMats) + '. She ' + str +
+         ' test all of these in ' + cardinals[nDays] + ' days.';
+
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var nTosses = (listOfRandInts(1,3,5))[0];
+   var nOfEach = Math.min((listOfRandInts(1,1,Math.floor(nTosses/2)))[0],3);
+   var aVal = 0;
+   for (var i=nOfEach; i <= nTosses-nOfEach; i++ ) {
+     aVal += binomialCoef(nTosses,i);
+   }
+   var headWord = "heads";
+   var tailWord = "tails";
+   if (nOfEach == 1) {
+       headWord = "head";
+       tailWord = "tail";
+   }
+   var qStr = 'A fair coin is tossed ' + cardinals[nTosses]  + ' times in a row. ' +
+          '<span class="qSpan">The number of possible sequences of heads and ' +
+          'tails is</span>';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, (Math.pow(2,nTosses)).toString());
+   qStr = '</p><p><span class="qSpan">The number of sequences with at least ' +
+      cardinals[nOfEach]   + ' ' + headWord + ' and at least ' +
+      cardinals[nOfEach] + ' ' + tailWord + ' is </span>';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, aVal.toString());
+   document.writeln('</p>');
+   var ansStr = 'This is a sequence of ' + cardinals[nTosses] +
+      ' trials, each with two possible ' +
+      'outcomes, regardless of what happens in other trials.  By the fundamental rule ' +
+      'of counting, the total number of outcomes is thus 2<sup>' +
+      nTosses.toString() + '</sup> = ' + commify(Math.pow(2,nTosses)) + '. ' +
+      'Of those, one corresponds to all heads, and one to all tails. ';
+   if ( nOfEach > 1) {
+      ansStr += Cardinals[nTosses] + ' correspond to only one head, and ' +
+        cardinals[nTosses] + ' correspond to only one tail. ';
+   }
+   if ( nOfEach > 2 ) {
+       ansStr += Cardinals[binomialCoef(nTosses,2)] + ' correspond to only two heads, and ' +
+         cardinals[binomialCoef(nTosses,2)] + ' correspond to only two tails. ';
+   }
+   ansStr += ' The remaining ways have at least ' + cardinals[nOfEach] + ' ' + headWord +
+       ' and at least ' + cardinals[nOfEach] + ' ' + tailWord + '. ';
+   writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+   <a id="permutations"></a>Ordered choices
+   (Permutations)
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=3953&end=4726" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    Suppose we are given a collection of five distinct items.
+    How many ways are there of ordering them?
+    We can think of this as a sequence of five choices, each of which results
+    in the selection of one of the remaining things.
+    For the first choice there are five possible outcomes.
+    For the second choice, there will be four possible outcomes because
+    one item has already been chosen.
+    We don't know what the possible outcomes are, because they depend on the
+    outcome of the first selection, but regardless of which item was picked first,
+    four items remain as possibilities for the second choice.
+    Similarly, three items will remain as possible third choices, two
+    as possible fourth choices, and only one item will remain to be the fifth.
+</p>
+
+<p>
+    By the Fundamental Rule of Counting, the total number of possible sequences of
+    choices is 5 &times; 4 &times; 3 &times; 2 &times; 1 = 120 sequences.
+    Each sequence is called a <em>permutation</em> of the five items.
+    A permutation of items is an ordering of the items.
+    More generally, by the Fundamental Rule of Counting,
+    in ordering <span class="math">n</span> things, there are <span class="math">n</span> choices for the first,
+    <span class="math">(n&minus;1)</span> choices for the
+    second, etc., so the total number of ways of ordering a total of <span class="math">n</span> things is
+</p>
+
+<p class="math">
+    n &times; (n&minus;1) &times; (n&minus;2) &times;  &hellip;  &times; 1.
+</p>
+
+<p>
+    This product, 
+    <span class="math">n &times; (n&minus;1) &times; (n&minus;2) &times;   &hellip;   &times; 1</span>,
+    is written <span class="math">n!</span>, which is pronounced &quot;<span class="math">n</span> factorial.&quot;
+    By convention, <span class="math">0! = 1</span>.
+</p>
+
+<p>
+    The following example illustrates counting permutations.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Permutations of a list of songs';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+  var songs = listOfRandInts(1,9,15)[0];
+  var qStr = 'A compact disk (CD) I like has ' + songs.toString() +
+         ' songs on it. I can program my CD player to play them ' +
+         'in any order. How many different orders are there ' +
+         '(without repeating the same song)?</p>' +
+         '<p>There are ' + songs.toString() +
+         ' choices for the first song to play, ' + (songs-1).toString() +
+         ' choices for the second, <em>etc</em>., so the total number ' +
+         ' of orderings is </p><p class="math">';
+  for (i=songs; i>1; i--) {
+      qStr += i.toString() + ' &times; ';
+  }
+  qStr += '1 = ' + songs.toString() + '! = ' + commify(factorial(songs)) + ',' +
+      '</p><p>the number of permutations of ' + songs.toString() + ' items.</p>';
+  document.writeln(qStr);
+  var someSongs = listOfRandInts(1,3,songs-3)[0];
+  qStr = '<p>Suppose I only had time to play ' + someSongs.toString() +
+     ' songs. How many different sequences are there of ' +
+     someSongs.toString() + ' of the ' + songs.toString() + ' songs on the CD (without repeating ' +
+     'the same song)?' +
+     ' There are ' + songs.toString() + ' choices for the first song to play, ' +
+     (songs-1).toString() + ' choices for the second, <em>etc.</em> Therefore, ' +
+     'there are</p><p class="math">';
+  for (i=songs; i> songs-someSongs+1; i--) {
+     qStr += i.toString() + ' &times; ';
+  }
+  qStr += (songs-someSongs+1).toString() + ' = ' + commify(permutations(songs,someSongs)) +
+      '</p><p>orders in which to play ' + someSongs.toString() + ' of ' +
+      songs.toString() + ' songs. Many of these ways correspond to the same ' +
+      cardinals[someSongs]  + ' songs, played in different orders.</p>';
+
+  document.writeln(qStr);
+// -->
+</script>
+
+<p>
+  More generally, suppose we wanted to arrange only <span class="math">k</span> of 
+  <span class="math">n</span> things in some order (without repeating anything). 
+  What is the number of orderings (permutations) of <span class="math">k</span> of 
+  <span class="math">n</span> things? 
+  There are <span class="math">n</span> choices for the first item, 
+  <span class="math">(n&minus;1)</span> choices for the
+  second item, and so on, down to <span class="math">(n&minus;k+1)</span> choices for the 
+  <span class="math">k</span>th item.
+  By the fundamental rule of counting, <span class="math"><sub>n</sub>P<sub>k</sub></span>,
+  the total number of permutations (orderings) of
+  <span class="math">k</span> of <span class="math">n</span> things, is
+</p>
+
+<p class="math">
+  <sub>n</sub>P<sub>k</sub> = n &times;
+ (n&minus;1) &times; (n&minus;2)
+  &times; &hellip; &times; (n&minus;k+1).
+</p>
+<p>
+  This product can be expressed in shorthand using factorials.
+  If we multiplied
+  <span class="math"><sub>n</sub>P<sub>k</sub></span> by
+</p>
+<p class="math">
+  (n&minus;k) &times; (n&minus;k-1)
+  &times; (n&minus;k-2)
+  &times; &hellip; &times; 1 = (n&minus;k)!,
+</p>
+<p>
+  the product would be <span class="math">n!</span>.
+  That is,
+</p>
+<p class="math">
+  <sub>n</sub>P<sub>k</sub> &times;  (n&minus;k)!
+  =<big> [</big> n &times;  (n&minus;1) &times;
+  (n&minus;2) &times; &hellip; &times;
+  (n&minus;k+1)<big>]</big> &times; <big>[</big>(n&minus;k)
+  &times; (n&minus;k-1)
+  &times; (n&minus;k-2) &times; &hellip; &times; 1<big>]</big><br />
+  =
+  n &times; (n&minus;1) &times; (n&minus;2) &times; &hellip; &times; 1<br />
+  = n!.
+</p>
+<p>
+  Therefore, <span class="math"><sub>n</sub>P<sub>k</sub> = n!/(n&minus;k)!</span>.
+</p>
+</div>
+
+<p>&nbsp;</p>
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Permutations</span>
+    </p>
+    <p>
+        The number of possible permutations (orderings) of <span class="math">k</span> 
+        of <span class="math">n</span> things is
+    </p>
+    <p class="math">
+        <sub>n</sub>P<sub>k</sub> =
+      n!/(n&minus;k)!
+    </p>
+    <p>
+        (<span class="math">k</span> must be at least 0 and no larger than <span class="math">n</span>.)
+    </p>
+</div>
+
+<p>
+    The following exercises check your understanding of permutations.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A baseball team fields 9 players. <span class="qSpan">How many ' +
+           'possible batting orders are there for the 9 players?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,factorial(9).toString());
+    document.writeln('</p>');
+    var ansStr = 'The number of possible batting orders of a team of 9 baseball players ' +
+         'is the number of ways of permuting 9 things: </p><p class="math">9! = ' +
+         ' 9 &times; 8 &times; 7 &times; 6 &times; 5 &times; 4 &times; 3 &times; 2 &times; 1 = ' +
+         ' 362,880.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nCities = (listOfRandInts(1,4,10))[0];
+    var aVal = (roundToDig(factorial(nCities),0)).toString();
+    var qStr = 'A traveling salesperson needs to visit ' + cardinals[nCities]   +
+           ' cities in her territory. <span class="qSpan">How many distinct ' +
+           'itineraries are there for visiting each city once?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    var ansStr = 'There are as many itineraries as there are orderings of the ' +
+         cardinals[nCities] + ' cities: ' + nCities.toString() + '! = ' +
+         commify(factorial(nCities)) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'In <a href="http://www.window.state.tx.us/txgovinf/lottery/lotto.html"' +
+           'target="_blank">The Texas Lotto</a>, six of 50 homogeneous balls, ' +
+           'numbered 1, 2, 3, &hellip;, 50, are drawn at random by ' +
+           'a machine. (This is known as random sampling without replacement, or a ' +
+           '<a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>.) ' +
+           'To play the game, you select six different numbers between 1 and 50. You ' +
+           'win if you pick the same six numbers the machine does. While you are ' +
+           'waiting in line to buy a Lotto ticket, a numerologist accosts you and ' +
+           'says, &quot;Theoretically it\'s very hard to win the lotto. After all, ' +
+           'there are <sub>50</sub>P<sub>6</sub> = 11,441,304,000 possibilities for ' +
+           'the winning combination. But, I have a secret! For $1,000 I\'ll show you ' +
+           'how you can GREATLY improve your chances of winning. I\'ll make you ' +
+           ' rich!&quot;</p><p><span class="qSpan"> The number the numerologist ' +
+           'claims for the possibilities of winning combinations is </span>';
+    document.writeln(qStr);
+    var opt = ["too low",
+               "correct",
+               "too high"
+              ];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+    var ansStr = 'There are 50 numbers, from which 6 are chosen. The order in which they are ' +
+         'chosen does not matter. If order <em>did</em> matter, the number of ' +
+         'possibilities would be </p><p class="math"><sub>50</sub>P<sub>6</sub> = ' +
+         '50 &times; 49 &times; 48 &times; 47 &times; 46 &times; 45 = 11,441,304,000.</p><p> ' +
+         'Here, order does not matter, so the numerologist is wrong&mdash;his answer ' +
+         'is much too high. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'I have a collection of ';
+    var theInts = (listOfDistinctRandInts(2,4,12)).sort(numberLessThan);
+    qStr += theInts[1].toString() + ' espresso cups, each with a different design on ' +
+        'it. I have ' + (theInts[0]-1).toString() + ' friends over for coffee. ' +
+        '<span class="qSpan">How many different ways are there of picking cups for ' +
+        'each of the ' + (theInts[0]).toString() + ' of us to use?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,(permutations(theInts[1],theInts[0])).toString());
+    document.writeln('</p>');
+    var nCups = theInts[1];
+    var nPeople = theInts[0];
+    var ansStr = ' Consider the ' + cardinals[nPeople] + ' of us in some order ' +
+         '(say alphabetical, for the sake of argument). Suppose I select one cup ' +
+         'for the first person to use, then another for the second person to use, ' +
+         '<em>etc</em>. There are ' + cardinals[nCups] + ' possible cups for the ' +
+         'first person to use, ' + cardinals[nCups-1] +
+         ' possible for the second, <em>etc</em>. The number of ways of ' +
+         ' assigning a cup to each of the ' + cardinals[nPeople] +
+         ' of us is the number of ways of ordering ' + cardinals[nPeople] +
+         ' of ' + cardinals[nCups] + ' things, which is </p><p class="math"> ' +
+         ' <sub>' + nCups.toString() + '</sub>P<sub>' + nPeople.toString() +
+         '</sub> = ' + commify(permutations(nCups,nPeople)) +
+         '</p><p>It would take a lot of espresso to exhaust the possibilities!';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="combinations"></a>Combinations (Unordered Choices)
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/oOm7OPIGa98?start=265&end=2310" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#permutation">Permutations</a>, which we just discussed,
+    are ways of ordering things.
+    Suppose that instead we are just interested in <em>sets</em> of things,
+    without regard to the order of the things in the set.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Subsets of a list of songs.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose we wanted to play 4 of 11 songs on a CD. Before, we counted (track 1, track 2,
+    track 3, track 4) as a different way of playing four songs than (track 2, track 1, track
+    3, track 4). However, the same <em>set</em> of four songs would be played in both cases.
+</p>
+
+<p>
+    There are 11 &times; 10 &times; 9 &times; 8 = 7,920 different ways to play four of
+    the eleven songs.
+    In a list of all 7,920 of these ways, each <em>set</em> of four songs
+    would appear in 4! = 24 different orders.
+    Thus the number of <em>sets</em> of four of the
+    eleven songs is 7,920/24 = 330.
+</p>
+</div>
+
+<p>
+    Similarly, consider how many pairs of students one could form
+    from 20 students, without regard to the order in which a pair might be picked.
+    That is, (Alice, Carlos), and (Carlos, Alice) constitute the same pair,
+    {Alice, Carlos}.
+    As discussed above, the fundamental rule of counting tells us that there are
+    <span class="math">20 &times; 19 = 380</span> ordered pairs of students.
+    The ordered-pair calculation counts the set {Alice, Carlos} as two distinct
+    ordered pairs.
+    Each pair of people appears as two different ordered pairs among the 380.
+    Therefore the number of sets of two of 20 students is 380/2 = 190.
+    (This is also called <em>the
+    number of combinations of 20 students taken 2 at a time</em>.)
+</p>
+
+<p>
+    Suppose that we were interested in triples of students rather
+    than pairs.
+    How many possible triples of students are there in a class of 20?
+    Order does not matter, so {Jerzy, Ronald, Elizabeth} is the same triple no matter
+    how we order them.
+    There are 6,840 possible <em>ordered</em> triples taken from 20 students:
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+    <td align="center">Choice</td>
+    <td align="center">1st</td>
+    <td align="center"></td>
+    <td align="center">2nd</td>
+    <td align="center"></td>
+    <td align="center">3rd</td>
+    <td align="center"></td>
+    <td align="center">Total</td>
+    </tr>
+    <tr>
+    <td align="center">Possibilities</td>
+    <td align="center">20</td>
+    <td align="center">&times;</td>
+    <td align="center">19</td>
+    <td align="center">&times;</td>
+    <td align="center">18</td>
+    <td align="center">=</td>
+    <td align="center">6,840</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    This ordered-triple calculation, <sub>20</sub>P<sub>3</sub><em>
+    = </em>20!/(20-3)! = 20 &times; 19 &times; 18, counts the single set
+    {Jerzy, Ronald, Elizabeth} as
+    3 &times; 2 &times; 1=6 distinct ordered triples, as shown in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    .
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The Six Distinct Orderings of the Set {Jerzy, Ronald, Elizabeth}.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div class="plainTable">
+<center>
+    <table class="dataTable">
+    <tr>
+    <th scope="row" align="center">1</th>
+    <td align="center">Elizabeth</td>
+    <td align="center">Jerzy</td>
+    <td align="center">Ronald</td>
+    </tr>
+    <tr>
+    <th scope="row" align="center">2</th>
+    <td align="center">Elizabeth</td>
+    <td align="center">Ronald</td>
+    <td align="center">Jerzy</td>
+    </tr>
+    <tr>
+    <th scope="row" align="center">3</th>
+    <td align="center">Jerzy</td>
+    <td align="center">Elizabeth</td>
+    <td align="center">Ronald</td>
+    </tr>
+    <tr>
+    <th scope="row" align="center">4</th>
+    <td align="center">Jerzy</td>
+    <td align="center">Ronald</td>
+    <td align="center">Elizabeth</td>
+    </tr>
+    <tr>
+    <th scope="row" align="center">5</th>
+    <td align="center">Ronald</td>
+    <td align="center">Elizabeth</td>
+    <td align="center">Jerzy</td>
+    </tr>
+    <tr>
+    <th scope="row" align="center">6</th>
+    <td align="center">Ronald</td>
+    <td align="center">Jerzy</td>
+    <td align="center">Elizabeth</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    Similarly, every other distinct triple of people is also represented
+    6 times in the count of 6,840, because there are 3! = 6 ways of ordering each set
+    of three people.
+    Every <em>combination</em> (set) of three individuals thus appears as 6
+    <em>permutations</em> among the ordered triples.
+    Therefore <em>the number of combinations of 20
+    students taken 3 at a time</em> (without regard to order) is 6,840/6 = 1,140.
+</p>
+
+<p>
+    The symbol used to denote the number of combinations of <span class="math">n</span> things
+    taken <span class="math">k</span> at a time is <span class="math"><sub>n</sub>C<sub>k</sub></span>.
+    The general rule is that the number of combinations of <span class="math">n</span>
+    things taken <span class="math">k</span> at a time is the number of permutations of 
+    <span class="math">n</span> things taken
+    <span class="math">k</span> at a time, divided by the number of permutations of 
+    <span class="math">k</span> things (which is <span class="math">k!</span>).
+    Indeed, one can think of generating all permutations of <span class="math">k</span> of
+    <span class="math">n</span> things by first selecting all subsets of <span class="math">k</span> of
+    <span class="math">n</span> things, then permuting each of those sets of
+    <span class="math">k</span> things into all <span class="math">k!</span>
+    orderings:
+</p>
+
+<p class="math">
+    <sub>n</sub>C<sub>k</sub> k! =
+    <sub>n</sub>P<sub>k</sub>,
+</p>
+
+<p>
+   so
+</p>
+
+<div align="center">
+<center>
+    <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td></td>
+    <td></td>
+    <td align="center"><span class="math">n!</span></td>
+    </tr>
+    <tr>
+    <td><span class="math"><sub>n</sub>C<sub>k</sub></span></td>
+    <td>&nbsp;<span class="math">=</span>&nbsp;</td>
+    <td align="center"><span class="math">------------</span></td>
+    <td>&nbsp;.</td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td align="center"><span class="math">k!(n&minus;k)!</span></td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    We just calculated the special case 
+</p>
+
+<p class="math">
+    <sub>20</sub>C<sub>3</sub> = 20!/(3! &times; 17!) = 1,140.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Combinations</span>
+    </p>
+    <p>The number of possible combinations of <span class="math">n</span> things taken <span class="math">k</span>
+      at a time (without regard to order) is
+    </p>
+    <center>
+    <table border="0" cellpadding="0" cellspacing="0">
+    <tr>
+    <td align="center"></td>
+    <td></td>
+    <td align="center"><span class="math">n!</span></td>
+    </tr>
+    <tr>
+    <td align="center"><span class="math"><sub>n</sub>C<sub>k</sub></span></td>
+    <td align="center">&nbsp;<span class="math">=</span>&nbsp;</td>
+    <td align="center"> <span class="math">---------</span> </td> <dt>.</td>
+    </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td align="center"><span class="math">k!(n&minus;k)!</span></td>
+    </tr>
+    </table>
+    </center>
+    <p>
+        (<span class="math">k</span> must be less than or equal to <span class="math">n</span>.)
+    </p>
+</div>
+
+<p>
+    The derivation of the formula for <span class="math"><sub>n</sub>C<sub>k</sub></span>
+    illustrates a useful strategy for counting:
+    Sometimes, it is easier to find the number of elements in a set by counting
+    each element several times, then dividing the count by the
+    <em>multiplicity</em>&mdash;the number of times each element was counted&mdash;than it is
+    to count each item once.
+    (This approach requires that every element be counted the same number of times.)
+    We derived the formula for <span class="math"><sub>n</sub>C<sub>k</sub></span> by counting
+    each combination of <span class="math">k</span> things <span class="math">k!</span> times (which gave the
+    number of permutations of <span class="math">k</span> of <span class="math">n</span> things), 
+    then dividing by <span class="math">k!</span>.
+</p>
+
+<p>
+    The formula for counting combinations has special cases that are worth memorizing:
+</p>
+
+<ul>
+    <li>
+           <p> <span class="math"><sub>n</sub>C<sub>0</sub> =
+        <sub>n</sub>C<sub>n</sub> = 1</span>.
+           </p>
+           <p>
+        (There is only one way to pick no thing and only one way
+        to pick  all <span class="math">n</span> things.)
+           </p>
+    </li>
+    <li>
+        <p>
+            <span class="math"><sub>n</sub>C<sub>1</sub> =
+            <sub>n</sub>C<sub>n&minus;1</sub> =
+            n</span>
+        </p>
+        <p>
+            (there are <span class="math">n</span> ways to pick one thing or to leave one thing out)
+        </p>
+    </li>
+    <li>
+        <p>
+            <span class="math"><sub>n</sub>C<sub>k</sub> =
+            <sub>n</sub>C<sub>n&minus;k</sub></span>
+        </p>
+        <p>
+            (There are the same number of ways of picking <span class="math">k</span> of <span class="math">n</span>
+            things as there are of leaving out <span class="math">k</span> of <span class="math">n</span> things)
+        </p>
+    </li>
+</ul>
+
+<p>
+    The following applet is a calculator that includes buttons for
+    factorials (<span class="math">!</span>) and combinations <span class="math">(<sub>n</sub>C<sub>m</sub>)</span>:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Statistical Calculator.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="StatCalc.class" codebase="../../Java/" align="middle"
+    width="320" height="180" archive="PbsGui.zip">
+    You need Java to see this
+    </applet>
+</p>
+</div>
+
+<p>
+    To find the factorial of a number, type in the number (or use the
+    calculator's keypad to enter the number), then click <span class="appCtrlName">!</span>.
+    To find the number of combinations of n things taken m at a time,
+    type in the value of <span class="math">n</span>, click
+    <span class="appCtrlName"><sub>n</sub>C<sub><em>m</em></sub></span>, type in the
+    value of <em>m</em> (replacing the value of <span class="math">n</span>), and then click
+    <span class="appCtrlName">=</span>.
+    This calculator is available from the
+    <a href="../index.htm" target="_top">SticiGui homepage</a>
+    as well, by following the link to <a href="../../Java/Html/index.htm">Tools</a>, then to
+    Calculator.
+    It is also available from the menu bar at the top of this page.
+</p>
+
+<p>
+    The following exercises check your ability to use factorials and combinations to count.
+    The calculator might be helpful in solving the exercises.
+</p>
+
+<p>&nbsp;</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var theWord = ["burgle","bubble","bumble","abracadabra"];
+   var theInt = (listOfRandInts(1,0,theWord.length-1))[0];
+   var aVal = "";
+   ansStr = "";
+   if (theInt == 0) { // burgle
+       aVal = (factorial(6)).toString();
+       ansStr = 'All the letters in &quot;' + theWord[theInt] + '&quot; are distinct, so there are ' +
+        (theWord[theInt]).length + '! = ' + commify(factorial(6)) + ' possible ' +
+        'distinguishable arrangements of the letters.';
+   } else if (theInt == 1) { // bubble
+       aVal = (6*5*4).toString();
+       ansStr = 'There are four distinct letters in &quot;' + theWord[theInt] + ':&quot; three &quot;b&quot;s, ' +
+        'one &quot;e,&quot; one &quot;l,&quot; and one &quot;u.&quot;  Think of putting the letters down ' +
+        'in reverse-alphabetical sequence.  There are 6 possible places to put ' +
+        'the &quot;u,&quot; 5 possible places to put the &quot;l&quot; after you place the &quot;u,&quot; ' +
+        '4 possible places left to put the &quot;e,&quot; and the remaining 3 places must all ' +
+        'get &quot;b&quot;s.  Thus there are 6 &times; 5 &times; 4 = ' + (6*5*4).toString() +
+        ' distinguishable ways to arrange the letters. ';
+   } else if (theInt == 2) { // bumble
+       aVal = (6*5*4*3).toString();
+       ansStr = 'There are five distinct letters in &quot;' + theWord[theInt] + ':&quot; two &quot;b&quot;s, ' +
+            'one &quot;e,&quot; one &quot;l,&quot; one &quot;m,&quot; and one &quot;u.&quot; ' +
+            'Think of putting the letters down ' +
+            'in reverse-alphabetical sequence.  There are 6 possible places to put ' +
+            'the &quot;u,&quot; 5 possible places to put the &quot;m&quot; after you place the &quot;u,&quot; ' +
+            '4 possible places left to put the &quot;l,&quot; three possible places to put ' +
+            'the &quot;e,&quot; and the remaining 2 places must both ' +
+            'get &quot;b&quot;s.  Thus there are 6 &times; 5 &times; 4 &times; 3 = ' +
+            (6*5*4*3).toString() +
+            ' distinguishable ways to arrange the letters. ';
+   } else if (theInt == 3) { // abracadabra  a(5), b(2), c(1), d(1), r(2)
+       aVal = roundToDig((binomialCoef(11,5)*binomialCoef(6,2)*4*3),0).toString();
+       ansStr = 'There are five distinct letters in &quot;' + theWord[theInt] + ':&quot; five &quot;a&quot;s, ' +
+            'two &quot;b&quot;s, one &quot;c,&quot; one &quot;d,&quot; and two &quot;r&quot;s.  There are ' +
+            '<sub>11</sub>C<sub>5</sub> = ' + (binomialCoef(11,5)).toString() +
+            ' ways to pick where the 5 &quot;a&quot;s go; ' +
+            'once the &quot;a&quot;s are set, there are <sub>6</sub>C<sub>2</sub> = ' +
+            (binomialCoef(6,2)).toString() +
+            ' ways to pick where the &quot;b&quot;s go, then four ways to pick where the ' +
+            '&quot;c&quot; goes, then three ways to pick where the &quot;d&quot; goes, then ' +
+            'the two &quot;r&quot;s must go in the two remaining places.  Thus there are ' +
+            '</p><p align="center">' + binomialCoef(11,5).toString() +
+            ' &times; ' + binomialCoef(6,2).toString() + ' &times; 4 &times; 3 = ' +
+            aVal + ' distinguishable ways to arrange the letters in the word &quot;' +
+            theWord[theInt] + '.&quot; ';
+    }
+    var qStr = '<span class="qSpan">How many distinguishable ways are there to arrange ' +
+           'the letters in the word &quot;' + theWord[theInt]  + '&quot;?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<a href="http://www.window.state.tx.us/txgovinf/lottery/lotto.html">The ' +
+           'Texas Lotto</a> continued: <span class="qSpan">How many possible ' +
+           'combinations of 6 of the 50 numbers are there in the Texas Lotto?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,(roundToDig(binomialCoef(50,6),0)).toString());
+    document.writeln('</p>');
+    var ansStr = 'There are 50 possible numbers, from which 6 are drawn; the order in ' +
+         'which the six are drawn does not matter, so the number of possibilities ' +
+         'is the number of combinations of 50 things taken 6 at a time:</p>' +
+         '<div align="center"><center> ' +
+         '<table border="0" cellpadding="0" cellspacing="0"><tr><td>&nbsp;</td> ' +
+         '<td>&nbsp;</td><td align="center">50!</td><td align="center">&nbsp;</td>' +
+         '<td align="center">50 &times; 49 &times; 48 &times; 47 &times; 46 &times; 45</td>' +
+         '<td>&nbsp;</td><td align="center">&nbsp;</td></tr><tr>' +
+         '<td><sub>50</sub>C<sub>6</sub></td><td> = ' +
+         '</td><td align="center">------</td>' +
+         '<td align="center"> = </td><td align="center">----------------------- </td>' +
+         '<td> = </td><td align="center">15,890,700.</td></tr><tr><td>&nbsp;</td>' +
+         '<td>&nbsp;</td><td align="center">6! &times; 44!</td>' +
+         '<td align="center">&nbsp;</td>' +
+         '<td align="center">' +
+         '6 &times; 5 &times; 4 &times; 3 &times; 2 &times; 1</td><td>&nbsp;</td>' +
+         '<td align="center">&nbsp;</td></tr></table></center></div>';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nNums = (listOfRandInts(1,30,60))[0];
+    var nChoices = (listOfRandInts(1,4,10))[0];
+    var qStr = 'Suppose a Lotto involved picking ' + nChoices.toString() +
+           ' numbers from a set of ' + nNums.toString() +
+           ' numbers. <span class="qSpan">How many possible combinations would ' +
+           'there be?</span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,(roundToDig(binomialCoef(nNums,nChoices),0)).toString());
+    document.writeln('</p>');
+    var ansStr = 'There would be </p><p class="math"><sub>' + nNums.toString() +
+         '</sub>C<sub>' + nChoices.toString() + '</sub> = ' +
+         commify(roundToDig(binomialCoef(nNums,nChoices),0)) + '</p><p>possibilities. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h3><a id="card_hands"></a>
+    Card Hands
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/oOm7OPIGa98?start=2350&end=4600" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    Recall that a deck of cards consists of 52 cards, 13 &quot;kinds&quot; each of four
+    suits (spades, hearts, diamonds, and clubs).
+    The 13 kinds are Ace (A), 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack (J), Queen (Q), King (K).
+    In many poker games, each player is dealt five cards from a well shuffled deck.
+    The following callout lists the different poker hands.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+    document.writeln(', ');
+    citeExample(xCtr+1);
+    document.writeln(', and ');
+    citeExample(xCtr+2);
+// -->
+</script>
+    count the number of distinguishable ways some of those
+    hands can occur.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Possible Poker Hands</span>
+    </p>
+
+<div class="plainTable">
+<center>
+    <table class="dataTable">
+    <tr>
+    <th id="col0" valign="middle" align="center">Name</th>
+    <th id="col1" valign="middle" align="center">Meaning</th>
+    <th id="col2" valign="middle" align="center">Example</th>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Royal Flush</small></td>
+    <td headers="col1" valign="middle" align="left"><small>10, Jack, Queen, King, Ace, all of the same suit</small></td>
+    <td headers="col2" valign="middle" align="left"><small>10 of spades, J of spades, Q of spades, K of
+      spades, A of spades</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Straight Flush</small></td>
+    <td headers="col1" valign="middle" align="left"><small>5 cards are of consecutive kinds, the same suit,
+                   but not a Royal Flush</small></td>
+    <td headers="col2" valign="middle" align="left"><small>3 of hearts, 4 of hearts, 5 of hearts, 6 of hearts,
+      7 of hearts</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Flush</small></td>
+    <td headers="col1" valign="middle" align="left"><small>5 cards all of the same suit, but not consecutive</small></td>
+    <td headers="col2" valign="middle" align="left"><small>3 of&nbsp; of diamonds, 6 of&nbsp; of diamonds, 7
+                      of&nbsp; of diamonds, J of&nbsp; of diamonds, Q of diamonds</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Straight</small></td>
+    <td headers="col1" valign="middle" align="left"><small>all 5 cards consecutive, but not all of the same
+                      suit</small></td>
+    <td headers="col2" valign="middle" align="left"><small>3 of spades, 4 of hearts, 5 of hearts, 6 of
+                       hearts, 7 of clubs</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Four of a kind</small></td>
+    <td headers="col1" valign="middle" align="left"><small>4 of the 5 cards are the same &quot;kind&quot;</small></td>
+    <td headers="col2" valign="middle" align="left"><small>4 of diamonds, 4 of clubs, 4 of hearts, 4 of
+                    spades, 2 of hearts</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Full House</small></td>
+    <td headers="col1" valign="middle" align="left"><small>3 of the cards are of one kind; the other two are
+                   of one (other) kind</small></td>
+    <td headers="col2" valign="middle" align="left"><small>3 of hearts, 3 of diamonds, 3 of clubs, 5 of
+                   hearts, 5 of clubs</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Three of a kind</small></td>
+    <td headers="col1" valign="middle" align="left"><small>3 of the cards are of one kind, the other two are
+                   of two different kinds</small></td>
+    <td headers="col2" valign="middle" align="left"><small>5 of hearts, 5 of diamonds, 5 of spades, 6 of
+                   hearts, 9 of clubs</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>Two pair</small></td>
+    <td headers="col1" valign="middle" align="left"><small>two of the cards are of one kind, two of the
+                  others are of another kind, the fifth card is of a third kind</small></td>
+    <td headers="col2" valign="middle" align="left"><small>5 of hearts, 5 of spades, 9 of hearts, 9 of clubs,
+                  J of clubs</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>One pair</small></td>
+    <td headers="col1" valign="middle" align="left"><small>two of the cards are of one kind, the other three
+                are of three different kinds</small></td>
+    <td headers="col2" valign="middle" align="left"><small>K of hearts, K of clubs, 2 of diamonds, 7 of
+      hearts, 8 of spades</small></td>
+    </tr>
+    <tr>
+    <td headers="col0" valign="middle" align="left"><small>King high</small></td>
+    <td headers="col1" valign="middle" align="left"><small>none of the above, and King is the highest card in
+                the hand. The definition of &quot;___ high&quot; is analogous.</small></td>
+    <td headers="col2" valign="middle" align="left"><small>K of hearts, 7 of clubs, 8 of clubs, 9 of
+                diamonds, J of clubs</small></td>
+    </tr>
+    </table>
+</center>
+</div>
+<p>
+   Notes: Hands are counted as the best hands they can be.  
+   For instance, the hand {K of spades, K of hearts, K of diamonds, K of clubs, 3 of diamonds} is 4 of a kind.  
+   It is not counted as 3 of a kind, nor as two pair, nor as one pair, nor as King-high, 
+   even though it contains 3 of a kind, two pair and one pair and the highest card in the hand is a King.
+   Similarly, a royal flush is not a straight, a flush, nor a straight flush; and
+   a straight flush is neither a straight nor a flush.
+   Straights cannot &quot;wrap around&quot: {Q, K, A, 2, 3} is not a straight.
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Number of distinct one-pair hands.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    How many ways are there to
+    get one pair in a five card hand?
+</p>
+
+<p>
+    <strong>Solution</strong>. There are 13 possible choices for the kind of which
+    to have a pair; for any kind that is chosen, there are <sub>4</sub>C<sub>2</sub> = 6 possible choices
+    of two of the four cards of that kind (2 of the four suits).
+    There are 12 kinds remaining from which to select the other three cards in the hand.
+    We must insist that the kinds be different from each other and from the
+    kind of which we have a pair, or we could end up with a second pair, three or four of a kind,
+    or a full house; thus there are <sub>12</sub>C<sub>3</sub>=220 ways to pick the kinds of the
+    remaining three cards.  There are 4 choices for the suit  of each of those three
+    cards, a total of 4<sup>3</sup> = 64 choices for the suits of all three.
+    By the
+    <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental rule of counting</a>,
+    the number of &quot;one pair&quot; hands is therefore
+</p>
+
+<p class="math">
+    13 &times; 6 &times; 220 &times; 64 = 1,098,240.
+</p>
+</div>
+
+<p>&nbsp;</p>
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Number of distinct four-of-a-kind hands.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    How many ways are there to get four of a kind in a five card hand?
+</p>
+
+<p>
+    <strong>Solution</strong>. There are 13 possible choices for
+    the kind of which to have four, and 52-4=48 choices for the fifth card. Once the kind has
+    been specified, the four are completely determined: you need all four cards of that kind.
+    Thus there are 13 &times; 48=624 ways to get four of a kind.
+</p>
+</div>
+
+<p>&nbsp;</p>
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Number of distinct 10-high hands.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    How many ways are there to get
+      10-high in a five card hand, if Aces can be high or low?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    To have 10-high, one of the cards
+    must be a 10, and the other four cards must be of different kinds, less than ten.
+    However,
+    the cards cannot be consecutive in value, or the hand would be a straight, rather than
+    10-high, and the cards cannot all have the same suit, or the hand would be
+    a flush.
+    Moreover, if we allow aces to be high or low, then no one would count an ace low
+    if it were the best thing in his hand, so the
+    cards less than 10 are 2, 3, 4, 5, 6, 7, 8, 9.
+    Therefore, there are <sub>8</sub>C<sub>4</sub> ways of picking four kinds less than 10.
+    One of those,
+    {6, 7, 8, 9}, would yield a straight {6, 7, 8, 9, 10}, so we need to subtract one from
+    <sub>8</sub>C<sub>4</sub> to get just those choices that give 10-high.
+    We still need to specify the suits of the cards.
+    We have four choices of suit for each of the five cards, a total of 4<sup>5</sup>
+    possibilities.
+    However, we need to exclude the possibilities in which all the cards have
+    the same suit, because then the hand would be a flush, rather than 10-high.
+    There are 4 such possibilities: all the cards are spades, all the cards
+    are hearts, all are diamonds, and all are clubs.
+    Thus the number of acceptable ways to pick the suits is 4<sup>5</sup>-4.
+    Combining that with the number of ways of picking the kinds of the other cards, we get
+</p>
+
+<p class="math">
+    number of ways to get 10-high =
+    (<sub>8</sub>C<sub>4</sub>-1) &times; (4<sup>5</sup>-4).
+</p>
+
+<p>
+    This example illustrates another strategy that can be helpful in counting:
+    Count the elements in a set larger than the one you seek to count,
+    then subtract the number of extras.
+    We used that trick twice in this example&mdash;in subtracting the number of
+    combinations of kinds that would give a straight from the number of
+    ways of picking four cards less than the 10, and in subtracting
+    the four combinations of suits that would give a flush from the
+    total number of combinations of suits of the five cards.
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to find the number of
+    distinguishable ways some events can occur.
+    You can use the calculator to compute combinations and factorials
+    to solve the exercises.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nCards = (listOfRandInts(1,3,8))[0];
+    var qStr = '<span class="qSpan">How many distinct ' + nCards.toString() +
+           '-card hands can one form from a <a class="glossRef" href="gloss.htm#deck_of_cards">deck of ' +
+           'cards</a>?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,(roundToDig(binomialCoef(52,nCards),0)).toString());
+    document.writeln('</p>');
+    var ansStr = 'A ' +cardinals[nCards] + '-card hand is a set of ' + nCards.toString() +
+         ' cards drawn from 52 distinct cards, without regard to the order of the ' +
+         cardinals[nCards] + ' cards. The number of possible ' + cardinals[nCards] +
+         '-card hands is thus</p><p class="math"><sub>52</sub>C<sub>' +
+         nCards.toString() + '</sub> = ' + roundToDig(binomialCoef(52,nCards),0) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many different ways are there to form a ' +
+           'full house from a standard <a class="glossRef" href="gloss.htm#deck_of_cards">deck of ' +
+           'cards</a>?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,(13*4*12*6).toString());
+    document.writeln('</p>');
+    var ansStr = 'A full house is three of one kind and two (a pair) of another kind. ' +
+         'There are <sub>13</sub>C<sub>1</sub> ways of picking the kind for ' +
+         'the triple. For each, there are <sub>12</sub>C<sub>1</sub> ways of ' +
+         'picking the kind for the pair. For each choice of those kinds, ' +
+         'there are <sub>4</sub>C<sub>3</sub> ways of picking the ' +
+         'three suits for the three of a kind and <sub>4</sub>C<sub>2</sub> ' +
+         'ways of picking the two suits for the pair. By the ' +
+         '<a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental rule of ' +
+         'counting</a>, there are </p><p class="math">' +
+         '<sub>13</sub>C<sub>1</sub> &times; <sub>12</sub>C<sub>1</sub> &times; ' +
+         '<sub>4</sub>C<sub>3</sub> &times; <sub>4</sub>C<sub>2</sub>' +
+         ' = (13 &times; 12 &times; 4 &times; 4 &times; 3)/2) = ' + commify(13*12*4*6) +
+         '</p><p>ways of forming a full house. ';
+     writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many different two-pair five-card hands can be dealt ' +
+               'from a standard <a class="glossRef" href="gloss.htm#deck_of_cards">deck of cards</a>?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(13*6*6*6*44));
+    document.writeln('</p>');
+    var ansStr = 'Two pair is two of one kind, two of another kind, and a fifth card of yet a ' +
+         'different kind.  There are <sub>13</sub>C<sub>2</sub> ways of picking the ' +
+         'two kinds ' +
+         'of which to have pairs.  For each, there are <sub>11</sub>C<sub>1</sub> ' +
+         'ways of picking the kind of the fifth card. For each, there are ' +
+         '<sub>4</sub>C<sub>2</sub> ' +
+         'ways of picking the suits in the first pair, <sub>4</sub>C<sub>2</sub> ' +
+         'ways of ' +
+         'picking the suits in the second pair, and <sub>4</sub>C<sub>1</sub> ways ' +
+         'of picking the suit of the fifth card.  By the ' +
+         '<a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental rule of ' +
+         'counting</a>, there are </p><p class="math">' +
+         '<sub>13</sub>C<sub>2</sub> &times; <sub>11</sub>C<sub>1</sub> &times; ' +
+         '<sub>4</sub>C<sub>2</sub> &times; <sub>4</sub>C<sub>2</sub> &times; ' +
+         '<sub>4</sub>C<sub>1</sub> = ' + commify(13*6*6*6*44) +
+         '</p><p>ways of forming two pair.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theHands = [ [
+                       'three pair',
+                       'two each of three kinds of cards',
+                       '{2 of hearts, 2 of clubs, 3 of hearts, 3 of diamonds, 7 of clubs, 7 of clovers}',
+                       13*2*11*1000,
+                       'There are <span class="math"><sub>13</sub>C<sub>3</sub> = 286</span> ways of ' +
+                         'picking the three kinds.  For each of those, there are ' +
+                         '<span class="math"><sub>5</sub>C<sub>2</sub> = 10</span> ways of picking the ' +
+                         'suits of each pair.  By the fundamental rule of counting, there are thus ' +
+                         '<span class="math">286&times;10&times;10&times;10 ' +
+                         ' = 286,000</span> possible <em>three-pair</em> hands.'
+                     ],
+                     [
+                       'tenement house', 
+                       'four of one kind and two of another kind',
+                       '{2 of spades, 2 of hearts, 2 of diamonds, 2 of clubs, 4 of clovers, 4 of hearts}',
+                       13*5*12*10,
+                       'There are <span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways to pick the ' +
+                         'kind of which to have 4, and then ' +
+                         '<span class="math"><sub>12</sub>C<sub>1</sub> = 12</span> ways to ' +
+                         'pick the kind of which to have a pair.  There are ' +
+                         '<span class="math"><sub>5</sub>C<sub>4</sub> = 5</span> ways to pick the suits of ' +
+                         'the four and <span class="math"><sub>5</sub>C<sub>2</sub> = 10</span> ways to pick ' +
+                         'the suits of the pair.  By the fundamental rule of counting, there are thus ' +
+                         '<span class="math">13&times;12&times;5&times;10 = ' + commify(13*12*5*10) + 
+                         '</span> possible <em>tenement house</em> hands.'
+                     ],
+                     [
+                       'house with a vacancy',
+                       'three of one kind, two of another kind, and a sixth card of a third kind',
+                       '{2 of spades, 2 of hearts, 2 of diamonds, 4 of clovers, 4 of hearts, King of spades}',
+                       13*10*12*10*11*5,
+                       'There are <span class="math"><sub>13</sub>C<sub>1</sub> = 13</span> ways to pick the ' +
+                         'kind of which to have 3, and then ' +
+                         '<span class="math"><sub>12</sub>C<sub>1</sub> = 12</span> ways to ' +
+                         'pick the kind of which to have a pair, and then ' +
+                         '<span class="math"><sub>11</sub>C<sub>1</sub> = 11</span> ways to pick the kind of the ' +
+                         'sixth card.  There are <span class="math"><sub>5</sub>C<sub>3</sub> = 10</span> ways ' +
+                         'to pick the suits of the three, ' +
+                         '<span class="math"><sub>5</sub>C<sub>2</sub> = 10</span> ways to pick ' +
+                         'the suits of the pair, and <span class="math"><sub>5</sub>C<sub>1</sub> = 5</span> ' +
+                         'ways to pick the suit of the sixth card.  By the fundamental rule of counting, there are ' +
+                         'thus <span class="math">13&times;12&times;11&times;10&times;10&times;5 = ' + 
+                          commify(13*12*11*10*10*5) + '</span> possible <em>house with a vacancy</em> hands.'
+                     ],
+                     [
+                       'house in the suburbs', 
+                       'three each of two kinds of cards',
+                       '{2 of spades, 2 of hearts, 2 of diamonds, 4 of clovers, 4 of hearts, 4 of spades}',
+                       13*6*100,
+                       'There are <span class="math"><sub>13</sub>C<sub>2</sub> = 78</span> ways to pick the ' +
+                         'two kinds. For each kind, there are ' +
+                         '<span class="math"><sub>5</sub>C<sub>3</sub> = 10</span> ways to ' +
+                         'pick the suits of the three cards of that kind. By the fundamental rule of ' +
+                         'counting, there are thus ' +
+                         '<span class="math">78&times;10&times;10= 7800</span> ' + 
+                         'possible <em>house in the suburbs</em> hands.'
+                     ],
+                     [
+                       'well-suited', 
+                       'at least one card of every suit, no more than one card of any kind (no pairs, etc.), ' +
+                          'and not all cards of consecutive kinds',
+                       '{2 of spades, 4 of hearts, 5 of diamonds, 8 of clubs, 10 of clubs, Jack of clovers}',
+                         (binomialCoef(13,6)-9)*5*factorial(6)/2,
+                       'There are <span class="math"><sub>13</sub>C<sub>6</sub> = 1716</span> ways of picking ' +
+                         'six of the 13 kinds of cards, to avoid having a pair or more of any kind.  Of those, ' +
+                         '9 are straights ({A, 2, 3, 4, 5, 6}, {2, 3, 4, 5, 6, 7}, &hellip; {9, 10, J, Q, K, A}) ' +
+                         'so we need to subtract 9 to avoid counting straights.  We need one card to be from each ' +
+                         'suit, and since there are 6 cards in all, one suit will occur twice.  There are 5 ways ' +
+                         'to pick the suit that occurs twice.  For each of those possibilities, there are ' +
+                         '<span class="math"><sub>6</sub>C<sub>2</sub> = 15</span> ways of picking the two cards ' +
+                         'that have the same suit, and then <span class="math">4! = 24</span> ways of picking which ' +
+                         'of the remaining 4 cards is assigned which of the remaining 4 suits.  By the ' +
+                         'fundamental rule of counting, there are thus ' +
+                         '<span class="math">(1716&minus;9)&times;5&times;15&times;24 = 3,072,600</span> ' +
+                         'possible <em>well-suited</em> hands.'
+                     ]                
+                    ];
+    var which = listOfRandInts(1, 0, theHands.length-1)[0];
+    var qStr = 'A peculiar deck of playing cards is like a regular deck, but has five suits: spades, ' +
+               'hearts, diamonds, clubs, and clovers.  There are 13 cards in each suit: Ace, 2, 3, ' +
+               '&hellip;, 10, Jack, Queen, King.  There are thus 5&times;13 = 65 cards in this deck. ' +
+               'Consider dealing a 6-card hand from this deck.</p> ' +
+               '<p> A <em>' + theHands[which][0] + 
+               '</em> hand contains ' + theHands[which][1] + '.  An example of a <em>' + 
+               theHands[which][0] + '</em> hand is ' + theHands[which][2] + 
+               '.</p><p><span class="qSpan">How many different 6-card hands can be dealt from this deck that are ' +
+               '<em>' + theHands[which][0] + '</em>?</span>';
+    document.writeln(qStr);
+    writeTextExercise(12,qCtr++,numToRange(theHands[which][3],0.5));
+    writeSolution(pCtr-1, theHands[which][4]);
+// -->
+</script>
+</p>
+</div>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nBeads = (listOfRandInts(1,5,10))[0];
+    var qStr = 'I have ' + nBeads.toString() + ' beads of different colors. I plan ' +
+           'to string them into a necklace that has no clasp&mdash;it is a continuous ' +
+           'loop, around which the beads can slide. The necklace can also be ' +
+           'flipped over. <span class="qSpan"> How many distinguishable ways of ' +
+           'arranging all ' + nBeads.toString() + ' beads into a necklace are there? ' +
+           'That is, how many times would I need to restring the beads to get all ' +
+           'possible necklaces?</span>';
+    document.writeln(qStr);
+    var nNeck = (factorial(nBeads - 1))/2;
+    writeTextExercise(10,qCtr++,nNeck.toString());
+    document.writeln('</p>');
+    var ansStr = 'Number the colors from 1 to ' + nBeads.toString() +
+        '. Because the necklace wraps ' +
+        ' around and beads can slide over the knot, it is impossible to tell ' +
+        'the difference ' +
+        ' between the necklace with beads in the order (1, 2, 3, ' +
+        '&hellip; , ' +
+        nBeads.toString() + ') and in the order ' +
+        '(2, 3, 4, &hellip; , '  + nBeads.toString() +
+        ', 1), for example: the starting point of an arrangement is not meaningful. ' +
+        'For a given necklace-arrangement, there are ' +  nBeads.toString() +
+        ' possible starting points that give distinct permutations of ' +
+        '{1, 2, 3, &hellip; , ' + nBeads.toString() +
+        '}. Each of those can be reversed to give a different permutation that ' +
+        'is the same necklace ordering, because the necklace can be turned over ' +
+        'without restringing it to give the reverse permutation. For example, ' +
+        'the necklace with beads in the order ' +
+        ' (1, 2, 3, &hellip; , ' + nBeads.toString() +
+        ') is not distinguishable from the necklace ' +
+        ' with beads in the order (' + nBeads.toString() + ', ' +
+        (nBeads-1).toString() + ', ' + (nBeads-2).toString() +
+        ', &hellip; , 1). Thus each ' +
+        'necklace-arrangement corresponds ' +
+        ' to ' + nBeads.toString() + " &times; 2 = " + (2*nBeads).toString() +
+        ' permutations of {1, 2, 3, &hellip; , ' +
+        nBeads.toString() + '}.  The total number of ' +
+        ' distinguishable necklace-arrangements is thus the total number of ' +
+        'permutations of the ' + cardinals[nBeads] + ' colors (' +
+        nBeads.toString() + '!), divided by ' + (2*nBeads).toString() +
+        ':</p><p class="math">(number of distinguishable ' +
+        ' arrangements of the beads) = ' +  nBeads.toString() + '!/' +
+        (2*nBeads).toString() + ' = ' + roundToDig(factorial(nBeads-1)/2,0) + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    Counting by enumeration is cumbersome, difficult, inefficient, and error prone
+    when the number of items is large.
+    The Fundamental Rule of Counting can make counting easier in many situations.
+    Essentially, the Fundamental Rule of Counting says that the total number of
+    leaves on a tree is the number of leaves per branch times the number of branches,
+    provided every branch has the same number of leaves.
+</p>
+
+<p>
+    The factorial of an integer <em>m</em> &gt; 0 is the product of all
+    the positive integers less than or equal to <em>m</em>:
+</p>
+
+<p class="math">
+    <em>m</em>! = <em>m</em> &times; (<em>m</em>-1) &times;  . . .  &times;  1.
+</p>
+
+<p>
+    By convention, 0! = 1.
+    A <em>permutation</em> of <span class="math">k</span> of <span class="math">n</span> things is a listing of <span class="math">k</span>
+    of the <span class="math">n</span> things in some order.
+    A <em>set</em> or <em>combination</em> of <span class="math">k</span> of <span class="math">n</span> things
+    is a collection of
+    <span class="math">k</span> of the <span class="math">n</span> things without regard to their order.
+    The Fundamental Rule of Counting leads to simple formulae for the number
+    <span class="math"><sub>n</sub>P<sub>k</sub></span> of permutations of <span class="math">k</span>
+    of <span class="math">n</span> things, and the number <span class="math"><sub>n</sub>C<sub>k</sub></span>
+    of combinations of <span class="math">k</span> of <span class="math">n</span> things:
+</p>
+
+<p class="math">
+    <sub>n</sub>P<sub>k</sub> = n!/(n&minus;k)!, and
+</p>
+
+<p class="math">
+    <sub>n</sub>C<sub>k</sub> =
+    <sub>n</sub>P<sub>k</sub>/k! =
+    n!/(k! &times; (n&minus;k)!).
+</p>
+
+<p>
+    In addition to the Fundamental Rule of Counting, there are other strategies that
+    can help in complicated counting problems:
+</p>
+
+<ul>
+    <li>
+        Divide the set to be counted into a collection of non-overlapping
+        sets that contain every element of the original set
+        (find a <a class="glossRef" href="gloss.htm#partition">partition</a> of the set).
+        Count the elements of the smaller sets separately.
+        Add the counts.
+    </li>
+    <li>
+        Count each item several times&mdash;the same number of times for each item.
+        Divide the total by the number of times each item was counted.
+    </li>
+    <li>
+        Count a set that includes the set you want to count and some extra items.
+        Subtract the number of extras.
+    </li>
+</ul>
+
+<p>
+    Most of the mathematical results in this book in both statistics and probability
+    are applications of these simple ideas.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>combination</li>
+    <li>event</li>
+    <li>factorial</li>
+    <li>Fundamental Rule of Counting</li>
+    <li>permutation</li>
+    <li>sequence</li>
+    <li>set</li>
+    <li>subset</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

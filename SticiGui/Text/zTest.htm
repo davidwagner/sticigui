@@ -1,0 +1,2289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 13:07 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "zTest";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<h1>
+    Approximate Hypothesis Tests: the <em>z</em> Test and the <em>t</em> Test
+</h1>
+
+<p>
+    This chapter presents two common tests of the hypothesis that a population mean
+    equals a particular value and of the hypothesis that two population means are equal:
+    the <em>z</em> test and the <em>t</em> test.
+    These tests are <em>approximate</em>:
+    They are based on approximations to the
+    <a class="glossRef" href="gloss.htm#prob_distribution">probability distribution</a> of the
+    <a class="glossRef" href="gloss.htm#test_statistic">test statistic</a> when the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>, so their
+    <a class="glossRef" href="gloss.htm#significance">significance levels</a> are not exactly what
+    they claim to be.
+    If the sample size is reasonably large and the population from which the
+    sample is drawn has a <em>nearly normal distribution</em>&mdash;a notion defined
+    in this chapter&mdash;the nominal significance levels of the tests are close to
+    their actual significance levels.
+    If these conditions are not met, the significance levels of the approximate
+    tests can differ substantially from their nominal values.
+    The <em>z</em> test is based on the
+    <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>; the <em>t</em>
+    test is based on Student's <em>t</em> curve, which approximates some probability
+    histograms better than the normal curve does.
+    The chapter also presents the deep connection between hypothesis tests and
+    confidence intervals, and shows how to compute approximate confidence
+    intervals for the population mean of nearly normal populations using Student's
+    <em>t</em>-curve.
+</p>
+
+<h2>
+    <a id="z_tests"></a>
+    <em>z</em> tests
+</h2>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('percentageTests') + ', ');
+// -->
+</script>
+    we constructed the <em>z</em> test for equality of two percentages using
+    <a class="glossRef" href="gloss.htm#independent">independent</a> random
+    samples from the two <a class="glossRef" href="gloss.htm#population">populations</a>.
+    The original <a class="glossRef" href="gloss.htm#test_statistic">test statistic</a>
+    was the difference <span class="math">&phi;<sup>t&minus;c</sup></span> between the two
+    independent <a class="glossRef" href="gloss.htm#sample_percentage">sample percentages</a>.
+    If the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> that the
+    two population means are equal is true, the expected value of the test statistic,
+    <span class="math">E(&phi;<sup>t&minus;c</sup>)</span>, is zero.
+    If, in addition, the <a class="glossRef" href="gloss.htm#sample_size">sample sizes</a> are large, we can
+    estimate <span class="math">SE(&phi;<sup>t&minus;c</sup>)</span> accurately using the pooled
+    <a class="glossRef" href="gloss.htm#bootstrap">bootstrap</a> estimate of the SD of the
+    &quot;null box:&quot;
+</p>
+
+<p class="math">
+    SD(box)~ <em>s</em><sup>*</sup>=(&phi;&times;(1&minus; &phi;))<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">&phi;</span> is the pooled sample percentage of the two samples.
+    The estimate of <span class="math">SE(&phi;<sup>t&minus;c</sup>)</span>
+    under the null hypothesis is
+</p>
+
+<p class="math">
+    se = <em>s</em><sup>*</sup>&times;(1/<em>n</em><sub><em>t</em></sub> +
+    1/<em>n</em><sub><em>c</em></sub>)<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">n<sub>t</sub></span> and <span class="math">n<sub>c</sub></span> are the
+    sizes of the two samples.
+    If the null hypothesis is true, the <em>Z</em> statistic,
+</p>
+
+<p class="math">
+    <em>Z</em>=&phi;<sup><em>t</em>&minus;<em>c</em></sup>/se,
+</p>
+
+<p>
+    is the original test statistic <span class="math">&phi;<sup>t&minus;c</sup></span> in approximately
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>,
+    and <em>Z</em> has a <a class="glossRef" href="gloss.htm#prob_histogram">probability histogram<a>
+    that is approximated well by the
+    <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>, which allowed us to select the
+    <a class="glossRef" href="gloss.htm#rejection_region">rejection region</a> for the approximate test.
+</p>
+
+<p>
+    This strategy&mdash;transforming a test statistic approximately to standard units under the
+    assumption that the null hypothesisis true, and then using the
+    <a class="glossRef" href="gloss.htm#norm_approx">normal approximation</a> to determine the rejection
+    region for the test&mdash;works to construct approximate hypothesis tests in many other
+    situations, too.
+    The resulting hypothesis test is called a <em><em>z</em> test</em>.
+    Suppose that we are testing a null hypothesis using a test statistic <em>X</em>,
+    and the following conditions hold:
+</p>
+
+<ul>
+    <li>
+        We have a probability model for how the observations arise, assuming the null hypothesis is true.
+        Typically, the model is that under the null hypothesis, the data are like
+        random draws with or without replacement from a box of numbered tickets.
+    </li>
+    <li>
+        Under the null hypothesis, the test statistic <em>X</em>, converted to standard units,
+        has a probability histogram that can be approximated well by the normal curve.
+    </li>
+    <li>
+        Under the null hypothesis, we can find the expected value of the test statistic, E(<em>X</em>).
+    </li>
+    <li>
+        Under the null hypothesis, either we can find the SE of the test statistic, SE(<em>X</em>),
+        or we can estimate SE(<em>X</em>) accurately enough to ignore the error of the estimate of the SE.
+        Let se denote either the exact SE of <em>X</em> under the null hypothesis, or the estimated
+        value of SE(<em>X</em>) under the null hypothesis.
+    </li>
+</ul>
+
+<p>
+    Then, under the null hypothesis, the probability histogram of the <em>Z</em> statistic
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>X</em> &minus; E(<em>X</em>))/se
+</p>
+
+<p>
+    is approximated well by the normal curve, and we can use the normal
+    approximation to select the rejection region for the test using <em>Z</em> as the
+    test statistic.
+    If the null hypothesis is true,
+</p>
+
+<p class="math">
+    P(<em>Z</em>&lt;<em>z</em><sub><em>a</em></sub>) ~ <em>a</em>
+</p>
+
+<p class="math">
+    P(<em>Z</em>&gt;<em>z</em><sub>1&minus;<em>a</em></sub>) ~ <em>a</em>,
+</p>
+
+<p>
+    and
+</p>
+
+<p class="math">
+    P(|<em>Z</em>|&gt;<em>z</em><sub>1&minus;<em>a</em>/2</sub>) ~ <em>a</em>.
+</p>
+
+<p>
+    These three approximations yield three different <em>z</em> tests of the hypothesis that
+    <span class="math">&mu;&nbsp;=&nbsp;&mu;<sub>0</sub></span> at approximate significance level <span class="math">a</span>:
+</p>
+
+<ul>
+    <li>
+        Reject the null hypothesis whenever <span class="math">Z&lt;z<sub>a</sub></span>
+        (left-tail <em>z</em> test)
+    </li>
+    <li>
+        Reject the null hypothesis whenever <em>Z</em>&gt;<em>z</em><sub>1&minus;<em>a</em></sub>
+        (right-tail <em>z</em> test)
+    </li>
+    <li>
+        Reject the null hypothesis whenever |<em>Z</em>|&gt;<span class="math">z<sub>1&minus;a/2</sub></span>
+        (two-tail <em>z</em> test)
+    </li>
+</ul>
+
+<p>
+    The word &quot;tail&quot; refers to the tails of the normal curve: In a left-tail test,
+    the probability of a <a class="glossRef" href="gloss.htm#type_error">Type I error</a> is approximately
+    the area of the left tail of the normal curve, from minus infinity to
+    <span class="math">z<sub>a</sub></span>.
+    In a right-tail test, the probability of a Type I error
+    is approximately the area of the right tail of the normal
+    curve, from <span class="math">z<sub>1&minus;a</sub></span> to infinity.
+    In a two-tail test, the probability of a Type I error is approximately the
+    sum of the areas of both tails of the normal curve, the left tail
+    from minus infinity to <span class="math">z<sub>a/2</sub></span> and the right tail from
+    <span class="math">z<sub>1&minus;a/2</sub></span> to infinity.
+    All three of these tests are called <em>z</em> tests.
+    The observed value of <em>Z</em> is called the <em>z score</em>.
+</p>
+
+<p>
+    Which of these three tests, if any, should one use?
+    The answer depends on the probability distribution of <em>Z</em> when the alternative
+    hypothesis is true.
+    As a rule of thumb, if, under the alternative hypothesis,
+    <span class="math">E(Z)&nbsp;&lt;&nbsp;0</span>, use the left-tail test.
+    If, under the alternative hypothesis, <span class="math">E(Z)&nbsp;&gt;&nbsp;0</span>,
+    use the right-tail test.
+    If, under the alternative hypothesis, it is possible that <span class="math">E(Z)&nbsp;&lt;&nbsp;0</span>
+    and it is possible that <span class="math">E(Z)&nbsp;&gt;&nbsp;0</span>, use the
+    two-tail test.
+    If, under the alternative hypothesis, <span class="math">E(Z)&nbsp;=&nbsp;0</span>, use a different
+    approach: Consult a statistician.
+    Generally (but not always), this rule of thumb selects the test
+    with the most power for a given significance level.
+</p>
+
+
+<h3>
+    <a id="p_values_z_tests"></a><em>P</em> values for <em>z</em> tests
+</h3>
+
+<p>
+    Each of the three <em>z</em> tests gives us a family of procedures for
+    testing the null hypothesis at any (approximate) significance level <span class="math">a</span>
+    between 0 and 100%&mdash;we just use the appropriate quantile of the normal curve.
+    This makes it particularly easy to find the <em>P</em> value for a <em>z</em> test.
+    Recall that the <em>P</em> value is the smallest significance level for which we
+    would reject the null hypothesis, among a family of tests of the null hypothesis
+    at different significance levels.
+</p>
+
+<p>
+    Suppose the <em>z</em> score (the observed value of <em>Z</em>) is <em>x</em>.
+    In a left-tail test, the <em>P</em> value is the area under the normal curve to
+    the left of <em>x</em>: Had we chosen the significance level <span class="math">a</span> so that
+    <span class="math">z<sub>a</sub>=x</span>, we would have rejected the null
+    hypothesis, but we would not have rejected it for any smaller value of <span class="math">a</span>,
+    because for all smaller values of <span class="math">a</span>, <span class="math">z<sub>a</sub>&lt;x</span>.
+    Similarly, for a right-tail <em>z</em> test, the <em>P</em> value is the area
+    under the normal curve to the right of <em>x</em>:
+    If <span class="math">x=z<sub>1&minus;a</sub></span> we would reject the null hypothesis
+    at approximate significance level <span class="math">a</span>, but not at smaller significance levels.
+    For a two-tail <em>z</em> test, the <em>P</em> value is the sum of the area under the
+    normal curve to the left of <span class="math">&minus;|x|</span> and the area under the normal curve to the
+    right of <span class="math">|x|</span>.
+</p>
+
+<p>
+    Finding <em>P</em> values and specifying the rejection region for the <em>z</em>
+    test involves the probability distribution of <em>Z</em> under the assumption that
+    the null hypothesis is true.
+    Rarely is the alternative hypothesis sufficiently detailed to specify the probability
+    distribution of <em>Z</em> completely, but often the alternative does help us
+    choose intelligently among left-tail, right-tail, and two-tail <em>z</em> tests.
+    This is perhaps the most important issue in deciding which hypothesis to take as
+    the null hypothesis and which as the alternative:
+    We calculate the significance level under the null hypothesis, and that calculation
+    must be tractable.
+</p>
+
+<div class="indent">
+<p class="inline">
+    How close the normal approximations to the significance and power are to the true
+    significance level and power depends on how well the normal curve approximates
+    the probability histogram of the test statistic in standard units.
+    If the original test statistic is a <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>
+    or a <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> of draws with replacement
+    (or a sum or difference of independent sample sums or sample means
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Why does a sum or difference of independent sample sums or means ' +
+           'have a probabiity histogram that can be approximated by the normal ' +
+           'curve?  Let us consider the difference ' +
+           '<em>M</em>&nbsp;=&nbsp;<em>M</em><sub>1</sub>&nbsp;&minus;&nbsp;' +
+           '<em>M</em><sub>2</sub> between two independent sample means, ' +
+           '<em>M</em><sub>1</sub> and <em>M</em><sub>2</sub>, each based on a random ' +
+           'sample of size <span class="math">n</span> (from two different populations). Suppose that ' +
+           'the first population contains <span class="math">N<sub>1</sub></span> elements and the second ' +
+           'population contains <span class="math">N<sub>2</sub></span> elements. </p><p>' +
+           'Let the elements of ' +
+           'the first sample be </p><p class="math"><em>X</em><sub>1</sub>, ' +
+           '<em>X</em><sub>2</sub>, &hellip; , ' +
+           '<em>X</em><sub><em>n</em></sub>,</p><p>' +
+           'and let the elements of the second sample be </p><p class="math">' +
+           '<em>Y</em><sub>1</sub>, <em>Y</em><sub>2</sub>, &hellip; , ' +
+           '<em>Y</em><sub><em>n</em></sub>,</p><p>Note that </p><p class="math">' +
+           '<em>M</em> = ( <em>X</em><sub>1</sub> + ' +
+           '<em>X</em><sub>2</sub> + &hellip; + ' +
+           '<em>X</em><sub><em>n</em></sub> )/<em>n</em> ' +
+           '&minus; ( <em>Y</em><sub>1</sub> + <em>Y</em><sub>2</sub> + ' +
+           '&hellip; + ' +
+           '<em>Y</em><sub><em>n</em></sub> )/<em>n</em></p><p class="math"> = ' +
+           '<big>(</big> (<em>X</em><sub>1</sub> &minus; <em>Y</em><sub>1</sub> ) + ' +
+           '(<em>X</em><sub>2</sub> &minus; <em>Y</em><sub>2</sub>) + &hellip; + ' +
+           '(<em>X</em><sub><em>n</em></sub> &minus; <em>Y</em><sub><em>n</em></sub>) ' +
+           '<big>)</big>/<em>n</em>.</p><p>This is the sample mean of differences of ' +
+           'pairs of values, one drawn from the first population and one from the second. ' +
+           'The first element of each pair is equally likely to be any of the ' +
+           '<span class="math">N<sub>1</sub></span> elements of the first population; the second ' +
+           'element of each pair is equally likely to be any of the <span class="math">N<sub>2</sub></span> ' +
+           'elements of the second population; and the two elements are independent. ' +
+           'Thus each difference is equally likely to be any of the ' +
+           '<span class="math">N<sub>1</sub>&nbsp;&times;&nbsp;N<sub>2</sub></span> differences ' +
+           'between an element of the first population and an element of the second ' +
+           'population.  That is, the difference of the two sample means is just the sample ' +
+           'mean of a sample of size <span class="math">n</span> drawn with replacement from the population ' +
+           'of <span class="math">N<sub>1</sub>&nbsp;&times;&nbsp;N<sub>2</sub></span> possible ' +
+           'difference between an element of the first population and an element of the ' +
+           'second population. We already know (from the <a class="glossRef" href="gloss.htm#clt">central ' +
+           'limit theorem</a>) that the probability histogram of the sample mean of ' +
+           '<span class="math">n</span> draws with replacement from a population has a probability ' +
+           'histobgram that can be approximated well by a normal curve if the sample ' +
+           'size is large.</p><p>' +
+           'When the two sample sizes are not equal, this construction does not work, but ' +
+           'the result is still true.  In fact, there is a more general fact: let ' +
+           '<em>X</em> and <em>Y</em> be independent random variables, both with ' +
+           'probability histograms that can be approximated accurately by the normal ' +
+           'curve (after transforming to standard units).  Then the probability histogram ' +
+           'of <em>X</em>&nbsp;+&nbsp;<em>Y</em> also can be approximated accurately by ' +
+           'the normal curve (after transforming to standard units).';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>),
+    its probability histogram can be approximated accurately by a normal curve if
+    the sample size is large; this is a consequence of the
+    <a class="glossRef" href="gloss.htm#clt">central limit theorem</a>.
+</p>
+</div>
+
+<p>
+    However, to construct a <em>z</em> test, we need to know the expected value and SE of
+    the test statistic under the null hypothesis.
+    Usually it is easy to determine the expected value, but often the SE must be estimated
+    from the data.
+    Later in this chapter we shall see what to do if the SE cannot be estimated accurately,
+    but the shape of the distribution of the numbers in the population is known.
+    The next section develops <em>z</em> tests for the
+    population percentage and mean, and for the difference between two population means.
+</p>
+
+<h2>
+    <a id="example_z_tests"></a>
+    Examples of <em>z</em> tests
+</h2>
+
+<p>
+    The central limit theorem assures us that the probability histogram of the sample mean of
+    random draws with replacement from a box of tickets&mdash;transformed to standard units&mdash;can
+    be approximated increasingly well by a normal curve as the number of draws increases.
+    In the previous section, we learned that the probability histogram of a sum or difference
+    of independent sample means of draws with replacement also can be approximated increasingly
+    well by a normal curve as the two sample sizes increase.
+    We shall use these facts to derive <em>z</em> tests for population means and percentages
+    and differences of population means and percentages.
+</p>
+
+
+<h3>
+    <a id="z_for_percentage"></a>
+    <em>z</em> Test for a Population Percentage
+</h3>
+
+<p>
+    Suppose we have a population of <span class="math">N</span> units of which <span class="math">G</span>
+    are labeled &quot;1&quot; and the rest are labeled &quot;0.&quot;
+    Let <span class="math">p&nbsp;=&nbsp;G/N</span> be the population
+    percentage.
+    Consider testing the null hypothesis that
+    <span class="math">p&nbsp;=&nbsp;p<sub>0</sub></span> against the alternative hypothesis
+    that <span class="math">p&nbsp;&ne;&nbsp;p<sub>0</sub></span>, using a
+    random sample of <span class="math">n</span> units drawn with replacement.
+    (We could assume instead that <span class="math">N &gt;&gt; n</span> and allow the
+    draws to be without replacement.)
+</p>
+
+<p>
+    Under the null hypothesis, the sample percentage
+</p>
+
+<p class="math">
+    <em>&phi;</em>&nbsp;=&nbsp;(# tickets labeled &quot;1&quot; in the sample)/<em>n</em>
+</p>
+
+<p>
+    has expected value <span class="math">E(<em>&phi;</em>)&nbsp;=&nbsp;<em>p</em><sub>0</sub></span>
+    and standard error
+</p>
+
+<p class="math">
+    SE(<em>&phi;</em>) = <big>(</big> <em>p</em><sub>0</sub> &times;
+    (1 &minus; <em>p</em><sub>0</sub>)/<em>n</em> <big>)</big><sup>&frac12;</sup>.
+</p>
+
+<p>
+    Let <em>Z</em> be <span class="math">&phi;</span> transformed to
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>:
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>&phi;</em> &minus; <em>p</em><sub>0</sub>)/SE(<em>&phi;</em>).
+</p>
+
+<p>
+    Provided <span class="math">n</span> is large and <em>p</em><sub>0</sub> is not too close to zero or 100%
+    (say <span class="math">n&times;<em>p</em>&nbsp;&gt;&nbsp;30</span> and
+    <span class="math">n&times;(1&minus;p)&nbsp;&gt;&nbsp;30)</span>,
+    the probability histogram of <em>Z</em> will be approximated well by the normal
+    curve, and we can use it as the <em>Z</em> statistic in a <em>z</em> test.
+    For example, if we reject the null hypothesis when <span class="math">|Z|&nbsp;&gt;&nbsp;1.96</span>,
+    the significance level of the test will be about 95%.
+</p>
+
+<h3>
+    <a id="z_for_mean"></a>
+    <em>z</em> Test for a Population Mean
+</h3>
+
+<p>
+    The approach in the previous subsection applies, <em>mutatis mutandis</em>, to testing
+    the hypothesis that the population mean equals a given value, even when the
+    population contains numbers other than just 0 and 1.
+    However, in contrast to the hypothesis that the population percentage
+    equals a given value, the null hypothesis that a more general population
+    mean equals a given value does not specify the SD of the population, which poses
+    difficulties that are surmountable (by approximation and estimation) if the sample
+    size is large.
+</p>
+
+<p>
+    Consider testing the null hypothesis that the population mean <span class="math">&mu;</span> is equal to a
+    specific null value <span class="math">&mu;<sub>0</sub></span>, against the alternative hypothesis that
+    <span class="math">&mu;&lt;&mu;<sub>0</sub></span>, on the basis of a random sample with replacement
+    of size <span class="math">n</span>.
+    Recall that the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> <em>M</em>
+    of <span class="math">n</span> random draws with or without replacement from a box of numbered
+    tickets is an <a class="glossRef" href="gloss.htm#unbiased">unbiased estimator</a> of the
+    <a class="glossRef" href="gloss.htm#population_mean">population mean</a> <span class="math">&mu;</span>:
+    If
+</p>
+
+<p class="math">
+    <em>M</em>&nbsp;=&nbsp;(sum of sample values)/<em>n</em>,
+</p>
+
+<p>
+    then
+</p>
+
+<p class="math">
+    E(<em>M</em>) = &mu; = (sum of population values)/<em>N</em>,
+</p>
+
+<p>
+    where <span class="math">N</span> is the size of the population.
+    The population mean determines the expected value of the sample mean.
+    The SE of the sample mean of a random sample with replacement is
+</p>
+
+<p class="math">
+    SD(box)/<em>n</em><sup>&frac12;</sup>,
+</p>
+
+<p>
+    where SD(box) is the SD of the list of all the numbers in the box, and <span class="math">n</span>
+    is the sample size.
+    As a special case, the sample percentage &phi; of <span class="math">n</span> independent random
+    draws from a <a class="glossRef" href="gloss.htm#0_1_box">0-1 box</a> is an unbiased estimator
+    of the population percentage <em>p</em>, with SE equal to
+</p>
+
+<p class="math">
+    (<em>p</em>&times;(1&minus;<em>p</em>))<sup>&frac12;</sup>/<em>n</em><sup>&frac12;</sup>.
+</p>
+
+<p>
+    In testing the null hypothesis that a population percentage <em>p</em>
+    equals <em>p</em><sub>0</sub>, the null hypothesis specifies not only the
+    expected value of the sample percentage &phi;, it automatically specifies the
+    SE of the sample percentage as well, because the SD of the values in a 0-1 box
+    is determined by the population percentage <em>p</em>:
+</p>
+
+<p class="math">
+    SD(box) = (<em>p</em>&times;(1&minus;<em>p</em>))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    The null hypothesis thus gives us all the information we need to standardize the sample
+    percentage under the null hypothesis.
+    In contrast, the SD of the values in a box of tickets labeled with arbitrary numbers
+    bears no particular relation to the mean of the values, so the null hypothesis
+    that the population mean <span class="math">&mu;</span> of a box of tickets labeled with arbitrary numbers
+    equals a specific value <span class="math">&mu;<sub>0</sub></span> determines the expected value of the
+    sample mean, but not the standard error of the sample mean.
+    To standardize the sample mean to construct a <em>z</em> test for the value of a
+    population mean, we need to estimate the SE of the sample mean under the null hypothesis.
+    When the sample size is large, the sample standard deviation <em>s</em> is likely
+    to be close to the SD of the population, and
+</p>
+
+<p class="math">
+    se=<em>s</em>/<em>n</em><sup>&frac12;</sup>
+</p>
+
+<p>
+    is likely to be an accurate estimate of SE(<em>M</em>).
+    The <a class="glossRef" href="gloss.htm#clt">central limit theorem</a> tells us that
+    when the sample size <span class="math">n</span> is large, the probability histogram of the
+    sample mean, converted to standard units, is approximated well by the normal curve.
+    Under the null hypothesis,
+</p>
+
+<p class="math">
+    E(<em>M</em>)  =  &mu;<sub>0</sub>,
+</p>
+
+<p>
+    and thus when <span class="math">n</span> is large
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>)
+</p>
+
+<p>
+    has expected value zero, and its probability histogram is approximated well by
+    the normal curve, so we can use <em>Z</em> as the <em>Z</em> statistic in a <em>z</em> test.
+    If the alternative hypothesis is true, the expected value of <em>Z</em> could be
+    either greater than zero or less than zero, so it is appropriate to use a
+    two-tail <em>z</em> test.
+    If the alternative hypothesis is <span class="math">&mu;&nbsp;&gt;&nbsp;&mu;<sub>0</sub></span>,
+    then under the alternative hypothesis, the expected value of <em>Z</em> is greater
+    than zero, and it is appropriate to use a right-tail <em>z</em> test.
+    If the alternative hypothesis is <span class="math">&mu;&nbsp;&lt;&nbsp;&mu;<sub>0</sub></span>,
+    then under the alternative hypothesis, the expected value of <em>Z</em> is less
+    than zero, and it is appropriate to use a left-tail <em>z</em> test.
+</p>
+
+<h3>
+    <a id="z_for_difference_of_means"></a>
+    <em>z</em> Test for a Difference of Population Means
+</h3>
+
+<p>
+    Consider the problem of testing the hypothesis that two population means are
+    equal, using random samples from the two populations.
+    Different sampling designs lead to different hypothesis testing procedures.
+    In this section, we consider two kinds of random samples from the two populations:
+    <em>paired samples</em> and <em>independent samples</em>, and construct
+    <em>z</em> tests appropriate for each.
+</p>
+
+
+<h4>
+    <a id="paired_samples"></a>
+    Paired Samples
+</h4>
+
+<p>
+    Consider a population of <span class="math">N</span> individuals, each of whom is labeled with two numbers.
+    For example, the <span class="math">N</span> individuals might be a group of doctors, and the two numbers
+    that label each doctor might be the annual payments to the doctor by an HMO under the
+    terms of the current contract and under the terms of a proposed revision of the contract.
+    Let the two numbers associated with individual <em>i</em> be <span class="math">c<sub>i</sub></span>
+    and <span class="math">t<sub>i</sub></span>.
+    (Think of <em>c</em> as <em>control</em> and <em>t</em> as <em>treatment</em>.
+    In this example, control is the current contract, and treatment is the proposed contract.)
+    Let <span class="math">&mu;<sub>c</sub></span> be the population mean of the <span class="math">N</span> values
+</p>
+
+<p class="math">
+    {<em>c</em><sub>1</sub>, <em>c</em><sub>2</sub>, &hellip;,
+    <em>c</em><sub><em>N</em></sub>},
+</p>
+
+<p>
+    and let <span class="math">&mu;<sub>t</sub></span>
+    be the population mean of the <span class="math">N</span> values
+</p>
+
+<p class="math">
+    {<em>t</em><sub>1</sub>, <em>t</em><sub>2</sub>, &hellip;,
+    <em>t</em><sub><em>N</em></sub>}.
+</p>
+
+<p>
+    Suppose we want to test the null hypothesis that
+</p>
+
+<p class="math">
+    &mu; = &mu;<sub><em>t</em></sub> &minus; &mu;<sub><em>c</em></sub> = &mu;<sub>0</sub>
+</p>
+
+<p>
+    against the alternative hypothesis that <span class="math">&mu;&lt;&mu;<sub>0</sub></span>.
+    With <span class="math">&mu;<sub>0</sub>=$0</span>, this null hypothesis is that the average annual payment to
+    doctors under the proposed revision would be the same as the average payment under the
+    current contract, and the alternative is that on average doctors would be paid less
+    under the new contract than under the current contract.
+    With <span class="math">&mu;<sub>0</sub>=&minus;$5,000</span>, this null hypothesis is that the proposed contract
+    would save the HMO an average of $5,000 per doctor, compared with the current contract;
+    the alternative is that under the proposed contract, the HMO would save even more than that.
+    With <span class="math">&mu;<sub>0</sub>=$1,000</span>, this null hypothesis is that doctors would be paid an
+    average of $1,000 more per year under the new contract than under the old one;
+    the alternative hypothesis is that on average doctors would be paid less than an
+    additional $1,000 per year under the new contract&mdash;perhaps even less than they are
+    paid under the current contract.
+    For the remainder of this example, we shall take <span class="math">&mu;<sub>0</sub>=$1,000</span>.
+</p>
+
+<p>
+    The data on which we shall base the test are observations of both
+    <span class="math">c<sub>i</sub></span> and <span class="math">t<sub>i</sub></span> for a sample of
+    <span class="math">n</span> individuals chosen at random with replacement from the population of
+    <span class="math">N</span> individuals (or a simple random sample of size <span class="math">n&lt;&lt;N</span>):
+    We select <span class="math">n</span> doctors at random from the <span class="math">N</span> doctors under contract
+    to the HMO, record the current annual payments to them, and calculate what the
+    payments to them would be under the terms of the new contract.
+    This is called a <em>paired sample</em>, because the samples from the
+    population of control values and from the population of treatment values come
+    in pairs: one value for control and one for treatment for each individual in the sample.
+    Testing the hypothesis that the difference between two population means is equal to
+    <span class="math">&mu;<sub>0</sub></span> using a paired sample is just the problem of testing the
+    hypothesis that the population mean <span class="math">&mu;</span> of the set of differences
+</p>
+
+<p class="math">
+    <em>d</em><sub><em>i</em></sub> = <em>t</em><sub><em>i</em></sub> &minus; <em>c</em><sub><em>i</em></sub>,
+    <em>i</em>=  1, 2, &hellip;, <em>N</em>,
+</p>
+
+<p>
+    is equal to <span class="math">&mu;<sub>0</sub></span>.
+    Denote the <span class="math">n</span> (random) observed values of
+    <span class="math">c<sub>i</sub></span> and <span class="math">t<sub>i</sub></span> by
+    <span class="math">{C<sub>1</sub>, C<sub>2</sub>, &hellip;, C<sub>n</sub>}</span>
+    and <span class="math">{T<sub>1</sub>, T<sub>2</sub>, &hellip;, T<sub>n</sub>}</span>,
+    respectively.
+    The sample mean <span class="math">M</span> of the differences between the observed values of
+    <span class="math">t<sub>i</sub></span> and <span class="math">c<sub>i</sub></span> is the difference
+    of the two sample means:
+</p>
+
+<p class="math">
+    <em>M</em> = (sample mean of observed differences
+              <em>t</em><sub><em>i</em></sub>&minus;<em>c</em><sub><em>i</em></sub>)
+</p>
+
+<p class="math">
+    = ((<em>T</em><sub>1</sub>&minus;<em>C</em><sub>1</sub>) +
+    (<em>T</em><sub>2</sub>&minus;<em>C</em><sub>2</sub>)+ &hellip; +
+    (<em>T</em><sub><em>n</em></sub>–<em>C</em><sub><em>n</em></sub>))/<em>n</em>
+</p>
+
+<p class="math">
+    = (<em>T</em><sub>1</sub>+<em>T</em><sub>2</sub>+ &hellip; +
+    <em>T</em><sub><em>n</em></sub>)/<em>n</em> &minus;
+    (<em>C</em><sub>1</sub>+<em>C</em><sub>2</sub>+ &hellip; +
+    <em>C</em><sub><em>n</em></sub>)/<em>n</em>
+</p>
+
+<p class="math">
+    = (sample mean of observed values of <em>t</em><sub><em>i</em></sub>) &minus;
+    (sample mean of observed values of <em>c</em><sub><em>i</em></sub>).
+</p>
+
+<p>
+    <span class="math">M</span> is an unbiased estimator of <span class="math">&mu;</span>, and if <em>n</em> is large,
+    the normal approximation to its probability histogram will be accurate.
+    The SE of <span class="math">M</span> is the population standard deviation of the <span class="math">N</span>
+    values <span class="math">{d<sub>1</sub>, d<sub>2</sub>,
+    &hellip;, d<sub>N</sub>}</span>, which we shall denote <span class="math">SD<sub>d</sub></span>,
+    divided by the square root of the sample size, <span class="math">n<sup>&frac12;</sup></span>.
+    Let <span class="math">sd</span> denote the sample standard deviation of the <em>n</em> observed differences
+</p>
+
+<p class="math">
+    (<em>T</em><sub><em>i</em></sub>&minus;<em>C</em><sub><em>i</em></sub>),
+    <em>i</em>=1, 2, &hellip;, <em>n</em>:
+</p>
+
+<p class="math">
+    <em>sd</em> = ( ((<em>T</em><sub>1</sub>&minus;<em>C</em><sub>1</sub>&minus;<em>M</em>)<sup>2</sup> +
+    (<em>T</em><sub>2</sub>&minus;<em>C</em><sub>2</sub>&minus;<em>M</em>)<sup>2</sup> +
+    &hellip; +
+    (<em>T</em><sub>1</sub>&minus;<em>C</em><sub><em>n</em></sub>&minus;<em>M</em>)<sup>2</sup>)/(<em>n</em>&minus;1))<sup>&frac12;</sup>
+</p>
+
+<p>
+    (recall that <span class="math">M</span> is the sample mean of the observed differences).
+    If the sample size <span class="math">n</span> is large, <em>sd</em> is very likely to be close to
+    SD(<em>d</em>), and so, under the null hypothesis,
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>sd</em>/<em>n</em><sup>&frac12;</sup>)
+</p>
+
+<p>
+    has expected value zero, and when <span class="math">n</span> is large the probability histogram of
+    <em>Z</em> can be approximated well by the normal curve.
+    Thus we can use <em>Z</em> as the <em>Z</em> statistic in a <em>z</em>
+    test of the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span>.
+    Under the alternative hypothesis that <span class="math">&mu;<&mu;<sub>0</sub></span>
+    (doctors on the average are paid less than an additional $1,000 per
+    year under the new contract), the expected value of <em>Z</em> is less than zero,
+    so we should use a left-tail <em>z</em> test.
+    Under the alternative hypothesis <span class="math">&mu;&ne;&mu;<sub>0</sub></span> (on average, the
+    difference in average annual payments to doctors is not an increase of $1,000,
+    but some other number instead), the expected value of <em>Z</em> could be positive
+    or negative, so we would use a two-tail <em>z</em> test.
+    Under the alternative hypothesis that <span class="math">&mu;&lt;&mu;<sub>0</sub></span> (on average,
+    under the new contract, doctors are paid less than an additional $1,000 per year),
+    the expected value of <em>Z</em> would be less than zero, so we should use a
+    left-tail <em>z</em> test.
+</p>
+
+<h4>
+    <a id="independent_samples"></a>Independent Samples
+</h4>
+
+<p>
+    Consider two separate populations of numbers, with population means
+    <span class="math">&mu;<sub>t</sub></span> and <span class="math">&mu;<sub>c</sub></span>, respectively.
+    Let <span class="math">&mu;=&mu;<sub>t</sub>&minus;&mu;<sub>c</sub></span>
+    be the difference between the two population means.
+    We would like to test the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span>
+    against the alternative hypothesis that <span class="math">&mu;&gt;0</span>.
+    For example, let <span class="math">&mu;<sub>t</sub></span> be the average annual payment by an
+    HMO to doctors in the Los Angeles area, and let <span class="math">&mu;<sub>c</sub></span> be the
+    average annual payment by the same HMO to doctors in the San Francisco area.
+    Then the null hypothesis with <span class="math">&mu;<sub>0</sub>=0</span> is that the HMO pays doctors in the
+    two regions the same amount annually, on the average; the alternative hypothesis
+    is that the average annual payment by the HMO to doctors differs between the two areas.
+    Suppose we draw a random sample of size <span class="math">n<sub>t</sub></span> with
+    replacement from the first population, and independently draw a random sample
+    of size <span class="math">n<sub>c</sub></span> with replacement from the second population.
+    Let <span class="math">M<sub>t</sub></span> and <span class="math">M<sub>c</sub></span> be the sample
+    means of the two samples, respectively, and let
+</p>
+
+<p class="math">
+    <em>M</em> = <em>M</em><sub><em>t</em></sub> &minus; <em>M</em><sub><em>c</em></sub>
+</p>
+
+<p>
+    be the difference between the two sample means.
+    Because the expected value of <span class="math">M<sub>t</sub></span> is <span class="math">&mu;<sub>t</sub></span>
+    and the expected value of <span class="math">M<sub>c</sub></span> is <span class="math">&mu;<sub>c</sub></span>,
+    the expected value of <span class="math">M</span> is
+</p>
+
+<p class="math">
+    E(<em>M</em>) = E(<em>M</em><sub><em>t</em></sub> &minus;
+    <em>M</em><sub><em>c</em></sub>) = E(<em>M</em><sub><em>t</em></sub>) &minus;
+    E(<em>M</em><sub><em>c</em></sub>) = &mu;<sub><em>t</em></sub> &minus; &mu;<sub><em>c</em></sub> = &mu;.
+</p>
+
+<p>
+    Because the two random samples are <a class="glossRef" href="gloss.htm#independent">independent</a>,
+    <span class="math">M<sub>t</sub></span> and <span class="math">&minus;M<sub>c</sub></span> are independent random variables,
+    and the SE of their sum is
+</p>
+
+<p class="math">
+    SE(<em>M</em>) = (SE<sup>2</sup>(<em>M</em><sub><em>t</em></sub>) +
+    SE<sup>2</sup>(<em>M</em><sub><em>c</em></sub>))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    Let <span class="math">s<sub>t</sub></span> and <span class="math">s<sub>c</sub></span> be the
+    sample standard deviations of the two samples, respectively.
+    If <span class="math">n<sub>t</sub></span> and <span class="math">n<sub>c</sub></span> are both very large,
+    the two sample standard deviations are quite likely to be close to the standard
+    deviations of the two populations, and so
+</p>
+
+<p class="math">
+    <em>s</em><sub><em>t</em></sub>/<em>n</em><sub><em>t</em></sub><sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    is likely to be close to <span class="math">SE(<em>M</em><sub><em>t</em></sub>)</span>, and
+</p>
+
+<p class="math">
+    <em>s</em><sub><em>c</em></sub>/<em>n</em><sub><em>c</em></sub><sup>&frac12;</sup>
+</p>
+
+<p>
+    is likely to be close to <span class="math">SE(M<sub>c</sub>)</span>.
+    Therefore, the pooled estimate of the standard error
+</p>
+
+<p class="math">
+    <em>se</em><sub><em>p</em></sub> =
+    ( (<em>s</em><sub><em>t</em></sub>/<em>n</em><sub><em>t</em></sub><sup>&frac12;</sup>)<sup>2</sup> +
+    (<em>s</em><sub><em>c</em></sub>/<em>n</em><sub><em>c</em></sub><sup>&frac12;</sup>)<sup>2</sup>)<sup>&frac12;</sup>
+    = ( s<em>t</em><sub>2</sub>/<em>n</em><sub><em>t</em></sub> +
+    s<em>c</em><sub>2</sub>/<em>n</em><sub><em>c</em></sub> )<sup>&frac12;</sup>
+</p>
+
+<p>
+    is likely to be close to <span class="math">SE(M)</span>.
+    Under the null hypothesis, the statistic
+</p>
+
+<div align="center">
+<center>
+<span class="math">
+    <table border="0">
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="center">
+        <em>M</em> &minus; &mu;<sub>0</sub>
+        </td>
+        <td></td>
+        <td align="center">
+        <em>M</em><sub>1</sub> &minus; <em>M</em><sub>2</sub> &minus; &mu;<sub>0</sub>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>Z</em>
+        </td>
+        <td align="center">
+        &nbsp;=&nbsp;
+        </td>
+        <td>
+        -------------
+        </td>
+        <td align="center">
+        &nbsp;=&nbsp;
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="Center">
+        <em>S</em><sub>diff</sub>
+        </td>
+        <td></td>
+        <td align="center">
+        <big>(</big> <em>S</em><sub>1</sub><sup>2</sup>/<em>n</em><sub>1</sub> +
+        <em>S</em><sub>2</sub><sup>2</sup>/<em>n</em><sub>2</sub>
+        <big>)</big><sup>&frac12;</sup>
+        </td>
+    </tr>
+    </table>
+</span>
+</center>
+</div>
+
+<p>
+    has zero expected value, and its probability histogram is approximated well by the
+    normal curve, so we can use it as the <em>Z</em> statistic in a <em>z</em> test.
+</p>
+
+<p>
+    Under the alternative hypothesis
+</p>
+
+<p class="math">
+    &mu; = &mu;<sub><em>t</em></sub> &minus; &mu;<sub><em>c</em></sub> > &mu;<sub>0</sub>,
+</p>
+
+<p>
+    the expected value of <em>Z</em> is greater than zero, so it is appropriate to use a
+    right-tail <em>z</em> test.
+</p>
+
+<p>
+    If the alternative hypothesis were <span class="math">&mu;&ne;&mu;<sub>0</sub></span>, under the alternative
+    the expected value of <em>Z</em> could be greater than zero or less than zero, so it would
+    be appropriate to use a two-tail <em>z</em> test. If the alternative hypothesis were
+    <span class="math">&mu;&lt;&mu;<sub>0</sub></span>, under the alternative the expected value of <em>Z</em>
+    would be less than zero, so it would be appropriate to use a right-tail <em>z</em> test.
+</p>
+
+<p>
+    The following exercises check that you can compute the <em>z</em> test for a population
+    mean or a difference of population means.
+    The exercises are dynamic: the data will tend to change when you reload the page.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var talkNull = roundToDig(listOfRandInts(1,3,8)[0]/2, 2);
+    var sigLevels = [1, 5, 10];
+    var sigInx = listOfRandInts(1, 0, sigLevels.length - 1)[0];
+    var sig = sigLevels[sigInx];
+    var samSize = 100*listOfRandInts(1, 1, 4)[0];
+    var phoneWord = ' phones ';
+    if ( samSize == 100 ) {
+       phoneWord = ' phone ';
+    }
+    var samSd = roundToDig(listOfRandInts(1, 1, 3)[0]/10, 1);
+    var seHat = samSd/Math.sqrt(samSize + 0.0);
+    var pVal = sig/4;
+    var zScore = normInv(1-pVal/100);
+    var talkHat = roundToDig(talkNull - zScore*seHat, 2);
+    var zScore = roundToDig((talkHat - talkNull)/seHat, 3);
+    var pVal = 2*normCdf(zScore);
+    var qStr = 'A cellular phone manufacturer claims that the rechargable batteries in ' +
+           'a particular model of phone give an average of ' + talkNull.toString() +
+           ' hours of talk time.  A consumer group files a lawsuit against the ' +
+           'manufacturer, alleging that the batteries do not last as long as ' +
+           'claimed.  The consumer group hires you as an expert witness.</p><p>' +
+           'You propose to test the hypothesis that the average talk time is ' +
+           talkNull.toString() + ' hours, at significance level ' + sig.toString() +
+           '%.  For &quot;fairness,&quot; you decide to do a two-tail <em>z</em> test, ' +
+           'based on the sample mean talktime of ' + samSize.toString() +
+           ' phones. The lawyers obtain a court order to compel the manufacturer to ' +
+           'deliver ' + samSize.toString() + ' phones for testing.  You measure the ' +
+           'talk time of each phone, starting with fully charged batteries.  The average ' +
+           'talk time is ' + talkHat.toString() + ' hours, with a sample standard ' +
+           'deviation of ' + samSd.toString() + ' hours.</p><p><span class="qSpan">' +
+           'Should you reject the null hypothesis at significance level ' +
+           sig.toString() + '%?</span>';
+     document.writeln(qStr);
+     var opt = ['no','yes'];
+     writeSelectExercise(false, qCtr++, opt, 'a');
+     document.writeln('</p>');
+     var ansStr = 'There is no reason to think that the sample is random; using these data ' +
+          'for a test of significance is meaningless.  The manufacturer might have ' +
+          'sent phones with particularly long talk times, or particularly short talk ' +
+          'times.  One cannot perform a significance test without a well-defined ' +
+          'random mechanism.';
+     writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'You convince the lawyers that it is crucial to base the inference on ' +
+           'a random sample.  To take a random sample, you select 100 cell phone ' +
+           'stores at random from phone books in 10 major cities, and buy ' +
+           cardinals[samSize/100] + phoneWord +
+           ' of the model in question from each store.  Suppose that the resulting ' +
+           'sample is effectively a random sample of size ' + samSize.toString() +
+           'with replacement from the population of phones of that model currently ' +
+           'available for sale in the U.S.</p><p>You measure the ' +
+           'talk time of each phone, starting with fully charged batteries.  The average ' +
+           'talk time is ' + talkHat.toString() + ' hours, with a sample standard ' +
+           'deviation of ' + samSd.toString() + ' hours.</p><p>' +
+           '<span class="qSpan">What is the <em>z</em> score?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(zScore));
+    qStr =     '</p><p><span class="qSpan">What is the <em>P</em>-value of the null ' +
+           'hypothesis given these data?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pVal,.06));
+    qStr =     '</p><p><span class="qSpan">Should you reject the null hypothesis at ' +
+           'significance level ' + sig.toString() + '%?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    document.writeln('</p>');
+    var ansStr = 'Under the assumption that the sample is like a random sample of size ' +
+         samSize.toString() + ' with replacement from the population of cell phones ' +
+         'of that model, the conditions of the <em>z</em> test are met: the ' +
+         'sample mean talk time is an unbiased estimator of the population mean, ' +
+         'and the sample standard deviation of the observed talk times, divided ' +
+         'by the square-root of the sample size, is likely to be close to the ' +
+         'standard error of the sample mean of the talk times. ' +
+         '</p><p>Under the null hypothesis, the expected value of the sample mean ' +
+         'talk time is ' + talkNull.toString() + ' hours, so the <em>z</em> score is ' +
+         '</p><p class="math">(' + samSize.toString() +
+         '<sup>&frac12;</sup> &times; (' + talkHat.toString() + ' &minus; ' +
+         talkNull.toString() + ') )/' + samSd.toString() + ' = ' +
+         zScore.toString() + '.</p><p>The test is a two-tail test, so the ' +
+         '<em>P</em>-value is the area under the normal curve below the negative ' +
+         'of the absolute value of the <em>z</em>-score plus the area under the ' +
+         'normal curve above the absolute value of the <em>z</em>-score.  That ' +
+         'sum is twice the area of the normal curve to the left of &minus;|<em>z</em>|, ' +
+         'where <em>z</em> is the <em>z</em>-score.  That area is ' +
+         (roundToDig(100*pVal,2)).toString() + '%.  Because this is less than the ' +
+         'significance level of the test, we should reject the null hypothesis. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var samSize = 100*listOfRandInts(1,1,4)[0];
+    var theMeans = listOfDistinctRandInts(2,1,50);
+    var foodMean = roundToDig(theMeans[0]/100, 2);
+    var nonMean = roundToDig(theMeans[1]/100, 2);
+    var theSds = listOfRandInts(2,10,80);
+    var foodSd = roundToDig(theSds[0]/100, 2);
+    var nonSd = roundToDig(theSds[1]/100, 2);
+    var foodSe = foodSd/Math.sqrt(samSize);
+    var nonSe = nonSd/Math.sqrt(samSize);
+    var seDiff = Math.sqrt( (foodSd*foodSd + nonSd*nonSd)/samSize );
+    var zScore = (foodMean - nonMean)/seDiff;
+    var pValue = 1.0 - normCdf(zScore);
+    var sigs = [1, 5, 10];
+    var sigInx = listOfRandInts(1, 0, sigs.length-1)[0];
+    var sig = sigs[sigInx];
+    var reject = false;
+    if (pValue <= sig/100) {
+    reject = true;
+    }
+    var qStr = 'A discount store is comparing the rate of inventory &quot;shrinkage&quot; ' +
+           'for food and non-food items. &quot;Shrinkage&quot; is losing inventory ' +
+           'unintentionally, for example, through shoplifting. </p>' +
+           '<p>Management is going to install more security cameras in the store, but has ' +
+           'not decided where to put them. The store stocks thousands of food and ' +
+           'non-food items. Some of the managers think that food items are stolen more ' +
+           'frequently than non-food items, so the new cameras should be concentrated ' +
+           'disproportionately in the food aisles.  To inform the decision, management ' +
+           'wants to test the null hypothesis that the shrinkage is the same for food and ' +
+           'non-food items, against the alternative hypothesis that shrinkage is higher ' +
+           'for food items. Shrinkage will be measured in units of lost ' +
+           'dollars per line item of inventory.</p>' +
+           '<p>To test the hypothesis, internal auditors will select ' +
+           '<a class="glossRef" href="gloss.htm#simple_random_sample">simple random samples</a> of' +
+           samSize.toString() + ' food line items and ' + samSize.toString() +
+           ' from the thousands of food and non-food line items the store offers. ' +
+           'These sample sizes are small compared with the numbers of food and non-food ' +
+           'items stocked, so the simple random samples can be treated as if they were ' +
+           'random samples <em>with</em> replacement.</p>' +
+           '<p>For each line item in the sample, the auditors note the ' +
+           'number of units inventory records show to be in stock (recorded units) and ' +
+           'physically count the number of units in stock (counted units). They ' +
+           'multiply the discrepancy, recorded units minus the counted units, ' +
+           'by the replacement cost per item, to obtain the total number of dollars of ' +
+           'inventory missing for that line item. Then they find the sample mean and ' +
+           'sample standard deviation of the missing dollars of inventory per line ' +
+           'item separately for food and non-food items. </p>' +
+           '<p>Let <em>X</em> be the ' +
+           'sample mean missing dollars per food line item; let <em>Y</em> be the sample ' +
+           'mean missing dollars per non-food line item; and let ' +
+           '<em>S</em><sub><em>X</em></sub> and <em>S</em><sub><em>Y</em></sub> be the ' +
+           'corresponding sample standard deviations.</p>' +
+           '<p>Suppose that <em>X</em>&nbsp;=&nbsp;$' + foodMean.toString() +
+           ', <em>Y</em>&nbsp;=&nbsp;$' + nonMean.toString() +
+           ', <em>S</em><sub><em>X</em></sub>&nbsp;=&nbsp;$' + foodSd.toString() +
+           ', and <em>S</em><sub><em>Y</em></sub>&nbsp;=&nbsp;$' + nonSd.toString() +
+           '.</p>' +
+           '<p><span class="qSpan">What is the estimated SE of ' +
+           '<em>X</em>&nbsp;&minus;&nbsp;<em>Y</em>?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(seDiff));
+    var qStr = '</p><p><span class="qSpan">What is the observed <em>z</em>-score?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(zScore));
+    var qStr = '</p><p><span class="qSpan">What is the <em>P</em>-value of the null hypothesis?' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pValue));
+    var qStr = '</p><p><span class="qSpan">Should the null hypothesis be rejected at significance ' +
+           'level ' + sig.toString() + '%?</span>';
+    document.writeln(qStr);
+    var opt = ['no', 'yes'];
+    var aVal = 'a';
+    if (reject) {
+        aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+    var ansStr = 'Because both random samples are large, the two sample standard deviations ' +
+         'are very likely to be close to the two population standard deviations, and ' +
+         'thus <em>S</em><sub><em>X</em></sub>/' + samSize.toString() +
+         '<sup>&frac12;</sup> is likely to be close to SE(<em>X</em>) and ' +
+         '<em>S</em><sub><em>Y</em></sub>/' + samSize.toString() +
+         '<sup>&frac12;</sup> is likely to be close to SE(<em>Y</em>).  The ' +
+         'random variables <em>X</em> and <em>Y</em> are independent, so the ' +
+         'standard error of their difference is the square-root of the sum of the ' +
+         'squares of their standard errors, and the estimated standard error of ' +
+         '<em>X</em>&nbsp;&minus;&nbsp;<em>Y</em> is </p><p class="math">' +
+         'se = <big>(</big> <em>S</em><sub><em>X</em></sub><sup>2</sup>/' +
+         samSize.toString() + ' + <em>S</em><sub><em>Y</em></sub><sup>2</sup>/' +
+         samSize.toString() + '<big>)</big><sup>&frac12;</sup> = $' +
+         roundToDig(seDiff,3).toString() + '.</p><p>The <em>z</em>-score is </p>' +
+         '<p class="math"><em>z</em> = (<em>X</em> &minus; <em>Y</em>)/se = ($' +
+         foodMean.toString() + ' &minus; $' + nonMean.toString() + ')/$' +
+         roundToDig(seDiff,3).toString() + ' = ' + roundToDig(zScore,3).toString() +
+         '.</p><p>Under the alternative hypothesis, the expected value of <em>Z</em> ' +
+         'is greater than zero, so we should use a right-tail test.  The ' +
+         '<em>P</em>-value is therefore the area under the normal curve to the right ' +
+         'of the <em>z</em>-score, which is ' + roundToDig(100*pValue,2).toString() +
+         '%.  This is ';
+    if (reject) {
+    ansStr += ' smaller than the significance level, so we would reject the null ' +
+          'hypothesis at significance level ' + sig.toString() + '%.';
+    } else {
+    ansStr += ' larger than the significance level, so we would not reject the null ' +
+          'hypothesis at significance level ' + sig.toString() + '%.';
+    }
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<h2>
+   <a id="t_test"></a> <em>t</em> Tests
+</h2>
+
+<p>
+    For the nominal significance level of the <em>z</em> test for a population mean to
+    be approximately correct, the sample size typically must be large.
+    When the sample size is small, two factors limit the accuracy of the <em>z</em> test:
+    the <a class="glossRef" href="gloss.htm#norm_approx">normal approximation</a>
+    to the probability distribution of the sample mean can be poor,
+    and the sample standard deviation can be an inaccurate estimate of the
+    population standard deviation, so <em>se</em> is not an accurate estimate
+    of the SE of the test statistic <em>Z</em>.
+    For <em>nearly normal populations</em>, defined in the next subsection, the
+    probability distribution of the sample mean is nearly normal even when
+    the sample size is small, and the uncertainty of the sample standard
+    deviation as an estimate of the population standard deviation can be
+    accounted for by using a curve that is broader than the normal curve
+    to approximate the probability distribution of the (approximately)
+    standardized test statistic.
+    The broader curve is <em>Student's <em>t</em> curve</em>.
+    Student's <em>t</em> curve depends on the sample size:
+    The smaller the sample size, the more spread out the curve.
+</p>
+
+<h3>
+    <a id="nearly_normal"></a>Nearly Normally Distributed Populations
+</h3>
+
+<p>
+    A list of numbers is <em>nearly normally distributed</em> if the fraction
+    of values in any range is close to the area under the normal curve for the
+    corresponding range of standard units&mdash;that is, if the list has mean <span class="math">&mu;</span> and
+    standard deviation SD, and for every pair of values <span class="math">a &lt; b</span>,
+</p>
+
+<p class="math">
+    (the fraction of numbers in the list between <em>a</em> and <em>b</em>)
+</p>
+
+<p class="math">
+    is approximately equal to
+</p>
+
+<p class="math">
+    (the area under the normal curve between (<em>a</em> &minus; &mu;)/SD and (<em>b</em> &minus; &mu;)/SD ).
+</p>
+
+<p>
+    A list is nearly normally distributed if the normal curve is a good approximation to the
+    histogram of the list transformed to standard units.
+    The histogram of a list that is approximately normally distributed is (nearly)
+    symmetric about some point, and is (nearly) bell-shaped.
+</p>
+
+<p>
+    No finite population can be <em>exactly</em> normally distributed, because the normal
+    curve has positive area between every two distinct values&mdash;no matter how large or
+    small the values.
+    No population that contains only a finite number of distinct values can be exactly
+    normally distributed, for the same reason.
+    In particular, populations that contain only zeros and ones are <em>not</em> approximately
+    normally distributed, so results for the sample mean of samples drawn from
+    nearly normally distributed populations need not apply to the sample
+    percentage of samples drawn from 0-1 boxes.
+    Such results will be more accurate for the sample percentage when the population
+    percentage is close to 50% than when the population percentage is close to 0% or 100%,
+    because then the histogram of population values is more nearly symmetric.
+</p>
+
+<p>
+    Suppose a population is nearly normally distributed.
+    Then a histogram of the population is approximately symmetric about the mean
+    of the population.
+    The fraction of numbers in the population within &plusmn;1 SD of the mean of the
+    population is about 68%, the fraction of numbers within &plusmn;2 SD of the mean
+    of the population is about 95%, and the fraction of numbers in the population
+    within &plusmn;3 SD of the mean of the population is about 99.7%.
+</p>
+
+<p>
+    The following exercises check that you understand what it means for a list to
+    be nearly normally distributed.
+    The exercises are dynamic: the data tend to change when you reload the page.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var meanHt = listOfRandInts(1,62,70)[0];
+    var sdHt = listOfRandInts(1,3,9)[0];
+    var endPts = (listOfDistinctRandInts(2,meanHt-3*sdHt,meanHt+3*sdHt)).sort(numberLessThan);
+    var loSu3 = (endPts[0] - meanHt)/sdHt;
+    var hiSu3 = (endPts[1] - meanHt)/sdHt;
+    var normApprox = normCdf(hiSu3) - normCdf(loSu3);
+    var qStr = 'A list of heights is approximately normally distributed with mean ' +
+           meanHt.toString() + 'in. and SD ' + sdHt.toString() +
+           'in. <span class="qSpan">What is the approximate fraction of numbers in the ' +
+           'list between ' + endPts[0].toString() + 'in. and ' +
+           endPts[1].toString() + 'in.?</span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(normApprox));
+    document.writeln('</p>');
+    var ansStr = 'In standard units, the lower endpoint is </p><p class="math">( ' +
+         endPts[0].toString() + 'in. &minus; ' + meanHt.toString() + 'in. )/ ' +
+         sdHt.toString() + 'in. = ' + roundToDig(loSu3,3) + ',</p><p> and the ' +
+         'upper endpoint is </p><p class="math">( ' +
+         endPts[1].toString() + 'in. &minus; ' + meanHt.toString() + 'in. )/ ' +
+         sdHt.toString() + 'in. = ' + roundToDig(hiSu3,3) + ',</p><p>so the fraction ' +
+         'is approximately the area under the normal curve between ' +
+         roundToDig(loSu3,3) + ' and ' + roundToDig(hiSu3,3) + ', which is ' +
+         (roundToDig(100*normApprox,1)).toString() + '%:<p><p class="figure">' +
+         '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
+         'width="620" height="300" archive="PbsGui.zip"><param name="hiLiteHi" value="' +
+         hiSu3.toString() + '"><param name="hiLiteLo" value="' + loSu3.toString() +
+         '"></applet></p>';
+    var thisApplet1 = document.applets.length;
+    var setThisApplet = function(thisApplet1) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet1,
+                                            function(){document.applets[thisApplet1].setLimits(loSu3.toString(),hiSu3.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1,ansStr,setThisApplet());
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var meanHt = listOfRandInts(1,62,70)[0];
+    var sdHt = listOfRandInts(1,3,9)[0];
+    var endPts = (listOfDistinctRandInts(2,meanHt-2*sdHt,meanHt+2*sdHt)).sort(numberLessThan);
+    var loSu4 = (endPts[0] - meanHt)/sdHt;
+    var hiSu4 = (endPts[1] - meanHt)/sdHt;
+    var normApprox = normCdf(hiSu4) - normCdf(loSu4);
+    var perturb = (listOfRandInts(1,-1,1)[0])*.1;
+    var boxProb = normApprox + perturb;
+    if (boxProb < 0.0) {
+        boxProb = 0.0;
+    } else if (boxProb > 1.0) {
+        boxProb = 1.0;
+    }
+    var qStr = 'A list of heights has mean ' + meanHt.toString() + 'in. and SD ' +
+           sdHt.toString() + 'in. The fraction of values in the list between ' +
+           endPts[0].toString() + 'in. and ' + endPts[1].toString() + 'in. is ' +
+           roundToDig(boxProb*100,2).toString() + '%.</p><p><span class="qSpan">Is the ' +
+           'list of numbers approximately normally distributed?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    if (Math.abs(boxProb-normApprox) > 0.01) {
+        aVal = 'a';
+        var isWord = ' is ';
+    } else {
+        aVal = 'b';
+        var isWord = ' is not ';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = 'In standard units, the lower endpoint is </p><p class="math">( ' +
+         endPts[0].toString() + 'in. &minus; ' + meanHt.toString() + 'in. )/ ' +
+         sdHt.toString() + 'in. = ' + roundToDig(loSu4,3) + ',</p><p> and the ' +
+         'upper endpoint is </p><p class="math">( ' +
+         endPts[1].toString() + 'in. &minus; ' + meanHt.toString() + 'in. )/ ' +
+         sdHt.toString() + 'in. = ' + roundToDig(hiSu4,3) + ',</p><p>so the normal ' +
+         'approximation to the fraction is the area under the normal curve between ' +
+         roundToDig(loSu4,3) + ' and ' + roundToDig(hiSu4,3) + ', which is ' +
+         (roundToDig(100*normApprox,1)).toString() + '%:<p><p class="figure">' +
+         '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
+         'width="620" height="300" archive="PbsGui.zip"><param name="hiLiteHi" value="' +
+         hiSu4.toString() + '"><param name="hiLiteLo" value="' + loSu4.toString() +
+         '"></applet></p><p>This ' +
+         isWord + ' very different from the actual fraction, ' +
+         roundToDig(100*boxProb,2).toString() + '%.';
+    var thisApplet2 = document.applets.length;
+    var setThisApplet = function(thisApplet2) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet2,
+                                            function(){document.applets[thisApplet2].setLimits(loSu4.toString(),hiSu4.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1,ansStr,setThisApplet());
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = ['smallest','middle','largest'];
+    var which = listOfRandInts(1,0,opt.length)[0];
+    var nNums = listOfRandInts(1,2,5)[0];
+    var qStr = 'A list contains three distinct values, <span class="math">a &lt; b &lt; c</span>. ' +
+           '<span class="qSpan">Depending on the relative frequencies of the values, ' +
+           'the list, the list could be nearly normally distributed.</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, ['false','true'], 'a');
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="student_t_curve"></a>
+    Student's <em>t</em>-curve
+</h3>
+
+<p>
+    Student's <em>t</em> curve is similar to the normal curve, but broader.
+    It is positive, has a single maximum, and is symmetric about zero.
+    The total area under Student's <em>t</em> curve is 100%.
+    Student's <em>t</em> curve approximates some probability histograms more
+    accurately than the normal curve does.
+    There are actually infinitely many Student <em>t</em> curves,
+    one for each positive integer value of the degrees of freedom.
+    As the degrees of freedom increases, the difference between
+    Student's <em>t</em> curve and the normal curve decreases.
+</p>
+
+<p>
+    Consider a population of <span class="math">N</span> units labeled with numbers.
+    Let <span class="math">&mu;</span> denote the population mean of the <span class="math">N</span> numbers,
+    and let SD denote the population standard deviation of the <span class="math">N</span> numbers.
+    Let <span class="math">M</span> denote the sample mean of a random sample of size <span class="math">n</span> drawn
+    with replacement from a population, and let <em>s</em> denote the sample standard
+    deviation of the sample.
+    The expected value of <span class="math">M</span> is <span class="math">&mu;</span>, and the SE of <span class="math">M</span> is
+    SD/<em>n</em><sup>&frac12;</sup>. Let
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>M</em>  &minus;  &mu;)/(SD/<em>n</em><sup>&frac12;</sup>).
+</p>
+
+<p>
+    Then the expected value of <em>Z</em> is zero, the SE of <em>Z</em> is 1, and if <em>n</em>
+    is large enough,  the normal curve is a good approximation to the probability histogram
+    of <em>Z</em>.
+    The more nearly normal the distribution of values in the population, the smaller
+    <em>n</em> needs to be for the normal curve to be a good approximation to the distribution
+    of <em>Z</em>.
+    Consider the statistic
+</p>
+
+<p class="math">
+    <em>T</em> = (<em>M</em>  &minus;  &mu;)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>),
+</p>
+
+<p>
+    which replaces SD by its estimated value (the sample standard deviation <span class="math">s</span>).
+    If <em>n</em> is large enough, <em>s</em> is very likely to be close to SD, so <em>T</em>
+    will be close to <em>Z</em>; the normal curve will be a good approximation to the
+    probability histogram of <em>T</em>; and we can use <em>T</em> as the <em>Z</em>
+    statistic in a <em>z</em> test of hypotheses about <span class="math">&mu;</span>.
+</p>
+
+<p>
+    For many populations, when the sample size is small&mdash;say less than 25, but the accuracy
+    depends on the population&mdash;the normal curve is not a good approximation to the
+    probability histogram of <span class="math">T</span>.
+    For nearly normally distributed populations, when the sample size is intermediate&mdash;say 25&ndash;100,
+    but again this depends on the population&mdash;the normal curve is a good approximation
+    to the probability histogram of <span class="math">Z</span>, but not to the probability histogram of
+    <em>T</em>, because of the variability of the sample standard deviation <em>s</em>
+    from sample to sample, which tends to broaden the probability distribution of
+    <em>T</em> (to make SE(<em>T</em>)&gt;1).
+</p>
+
+<p>
+    For nearly normally distributed populations, Student's <em>t</em> curve is a better
+    approximation to the probability histogram of <em>T</em> than the normal curve is.
+    Student's <em>t</em> curve is broader and flatter than the normal curve, which
+    accounts for the extra variability in the distribution of <em>T</em>.
+    Actually, Student's <em>t</em> curve is not one curve: It is a family of curves,
+    one for each value of the degrees of freedom d.f., 1, 2, &hellip;.
+    In approximating the probability histogram of <em>T</em>, the appropriate value of
+    d.f. to use is <span class="math">n &minus;1</span>, one less than the sample size.
+    When d.f. is small, Student's <em>t</em> curve is much broader and flatter than
+    the normal curve.
+    As d.f. grows, Student's <em>t</em> curve gets closer and closer to the normal curve;
+    for d.f. over 200, the two curves are essentially indistinguishable.
+    For every value of the degrees of freedom, the total area under Student's
+    <em>t</em> curve is 100%, the curve has a single peak at zero, and the curve is
+    symmetric about zero.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    plots Student's <em>t</em> curve for various values of the degrees of freedom, and
+    gives the area under Student's <em>t</em> curve over any interval.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Area under Student\'s <em>t</em>-curve';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet archive="PbsGui.zip" CODE="NormHiLite.class" WIDTH="640" HEIGHT="330"
+       codebase="../../Java">
+    <param name="distribution" value="Student-t">
+    <param name="df" value="25">
+    <param name="hiLiteLo" value="-1.96">
+    <param name="hiLiteHi" value="1.96">
+    You need Java to see this tool.
+    </applet>
+</p>
+
+<p>
+    When you first load this page, the degrees of freedom will be set to 25, and the
+    region from &minus;1.96 to 1.96 will be hilighted.
+    The area under the normal curve between &plusmn;1.96 is 95%, but for Student's
+    <em>t</em> curve with 25 degrees of freedom, the area is about 93.9%:
+    Student's <em>t</em> curve with d.f.=25 is broader than the normal curve.
+    Increase the degrees of freedom to 200; you will see that the Student <em>t</em> curve gets
+    slightly narrower, and the area under the curve between &plusmn;1.96 is about 94.9%.
+</p>
+
+<p>
+    We define quantiles of Student <em>t</em> curves in the same way we defined quantiles of the
+    normal curve: For any number a between 0 and 100%, the a quantile of Student's <em>t</em>
+    curve with <span class="math">d.f.=d</span>, <span class="math">t<sub>d,a</sub></span>, is the unique
+    value such that the area under the Student <em>t</em> curve with d degrees
+    of freedom from minus infinity to <span class="math">t<sub>d,a</sub></span> is equal
+    to <span class="math">a</span>.
+    For example, <span class="math">t<sub>d,0.5</sub>&nbsp;=&nbsp;0</span> for all values of
+    <em>d</em>. Generally, the value of <span class="math">t<sub>d,a</sub></span>
+    depends on the degrees of freedom <em>d</em>.
+    The probability calculator allows you to find quantiles of Student's <em>t</em> curve.
+</p>
+
+<h3>
+    <a id="t_test_pop_mean"></a><em>t</em> test for the Mean of a Nearly Normally Distributed Population
+</h3>
+
+<p>
+    We can use Student's <em>t</em> curve to construct approximate tests of hypotheses about
+    the population mean <span class="math">&mu;</span> when the population standard deviation is unknown, for
+    intermediate values of the sample size <span class="math">n</span>.
+    The approach is directly analogous to the <em>z</em> test, but instead of using a
+    quantile of the normal curve, we use the corresponding quantile of Student's
+    <em>t</em> curve for the appropriate value of degrees of freedom.
+    However, for the test to be accurate when <span class="math">n</span> is small or intermediate,
+    the distribution of values in the population must be nearly normal, which is a
+    somewhat bizarre restriction: It can require a very large sample to detect that the
+    population is not nearly normal, but if the sample is very large, we can use the
+    <em>z</em> test instead of the <em>t</em> test.
+    It is my opinion that the <em>t</em> test is over-taught and overused&mdash;because its
+    assumptions are not verifiable in the situations where it is potentially useful.
+</p>
+
+<p>
+    Consider testing the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> using the sample
+    mean <span class="math">M</span> and sample standard deviation <em>s</em> of a random sample of size
+    <span class="math">n</span> drawn with replacement from a population that is known to have a nearly
+    normal distribution.
+    Define
+</p>
+
+<p class="math">
+    <em>T</em> = (<em>M</em> &minus; &mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>).
+</p>
+
+<p>
+    Under the null hypothesis, if <span class="math">n</span> is not too small, Student's <em>t</em> curve
+    with <span class="math">n&minus;1</span> degrees of freedom will be an accurate approximation to the probability
+    histogram of <em>T</em>, so
+</p>
+
+<p class="math">
+    P(<em>T</em> &lt; <em>t</em><sub><em>n</em>&minus;1,<em>a</em></sub>),
+</p>
+
+<p class="math">
+    P(<em>T</em> &gt; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>),
+</p>
+
+<p>
+    and
+</p>
+
+<p class="math">
+    P(|<em>T</em>| &gt; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2)
+</p>
+
+<p>
+    all are approximately equal to <span class="math">a</span>.
+    As we saw earlier in this chapter for the <em>Z</em> statistic, these three
+    approximations give three tests of the null hypothesis <span class="math">&mu;=&mu;<sub>0</sub></span>
+    at approximate significance level <span class="math">a</span>&mdash;a left-tail <em>t</em> test, a right-tail
+    <em>t</em> test, and a two-tail <em>t</em> test:
+</p>
+
+<ul>
+    <li>
+        Reject the null hypothesis if <span class="math">T &lt; t<sub>n&minus;1,a</sub></span>
+        (left-tail)
+    </li>
+    <li>
+        Reject the null hypothesis if <span class="math">T &gt; t<sub>n&minus;1,1&minus;a</sub></span>
+        (right-tail)
+    </li>
+    <li>
+        Reject the null hypothesis if <span class="math">|T| &gt;
+        t<sub>n&minus;1,1&minus;a</sub>/2</span> (two-tail)
+    </li>
+</ul>
+
+<p>
+    To decide which <em>t</em> test to use, we can apply the same rule of thumb we used for
+    the <em>z</em> test:
+</p>
+
+<ul>
+    <li>
+        Use a left-tail <em>t</em> test if, under the alternative hypothesis, the expected
+        value of <em>T</em> is less than zero.
+    </li>
+    <li>
+        Use a right-tail <em>t</em> test if, under the alternative hypothesis, the expected
+        value of <em>T</em> is greater than zero.
+    </li>
+    <li>
+        Use a two-tail <em>t</em> test if, under the alternative hypothesis, the expected
+        value of <em>T</em> is not zero, but could be less than or greater than zero.
+    </li>
+    <li>
+        Consult a statistician for a more appropriate test if, under the alternative hypothesis,
+        the expected value of <em>T</em> is zero.
+    </li>
+</ul>
+
+<p>
+    P-values for <em>t</em> tests are computed in much the same way as P-values for
+    <em>z</em> tests.
+    Let <em>t</em> be the observed value of <em>T</em> (the <em>t</em> score).
+    In a left-tail <em>t</em> test, the P-value is the area under Student's
+    <em>t</em> curve with <span class="math">n&minus;1</span> degrees of freedom, from minus infinity to <em>t</em>.
+    In a right-tail <em>t</em> test, the P-value is the area under Student's <em>t</em> curve
+    with <span class="math">n&minus;1</span> degrees of freedom, from <em>t</em> to infinity.
+    In a two-tail <em>t</em> test, the P-value is the total area under
+    Student's <em>t</em> curve with <span class="math">n&minus;1</span> degrees of freedom between minus infinity and
+    <span class="math">&minus;|t|</span> and between <span class="math">|t|</span> and infinity.
+</p>
+
+<p>
+    There are versions of the <em>t</em> test for comparing two means, as well.
+    Just like for the <em>z</em> test, the method depends on how the samples from
+    the two populations are drawn.
+    For example, if the two samples are paired (if we are sampling individuals
+    labeled with two numbers and for each individual in the sample, we observe
+    both numbers), we just base the <em>t</em> test on the sample mean of the paired
+    differences and the sample standard deviation of the paired differences.
+    Let <span class="math">&mu;<sub>1</sub></span> and <span class="math">&mu;<sub>2</sub></span>
+    be the means of the two populations, and let
+</p>
+
+<p class="math">
+    &mu; = &mu;<sub>1</sub> &minus; &mu;<sub>2</sub>.
+</p>
+
+<p>
+    The <em>T</em> statistic to test the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> is
+</p>
+
+<p class="math">
+    <em>T</em> = ( (sample mean of differences) &minus;
+    &mu;<sub>0</sub> )/((sample standard deviation of differences)/<em>n</em><sup>&frac12;</sup>),
+</p>
+
+<p>
+    and the appropriate curve to use to find the rejection region for the test is Student's
+    <em>t</em> curve with <span class="math">n&minus;1</span> degrees of freedom, where <em>n</em> is the number of
+    individuals (differences) in the sample.
+</p>
+
+<p>
+    Two-sample <em>t</em> tests for a difference of means using independent samples depend on
+    additional assumptions, such as equality of the two population standard deviations;
+    we shall not present such tests here.
+    The following exercises check your ability to compute <em>t</em> tests.
+    The exercises are dynamic: the data tend to change when you reload the page.
+</p>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var popMean = 200;
+    var samSize = 5*listOfRandInts(1, 5, 8)[0];
+    var samSd= listOfRandInts(1, 60, 150)[0];
+    var seHat = samSd/Math.sqrt(samSize);
+    var rawScore = 0.5*listOfRandInts(1, -2, 11)[0];
+    if (rawScore == 0) {
+        rawScore = 1;
+    }
+    var samMean = roundToDig(popMean + rawScore*seHat, 1);
+    var tScore = (samMean - popMean)/seHat;
+    var pValue = 1.0 - tCdf(samSize-1, tScore);
+    var sigs = [1, 5, 10];
+    var sigInx = listOfRandInts(1, 0, sigs.length-1)[0];
+    var sig = sigs[sigInx];
+    var reject = false;
+    if (pValue <= sig/100) {
+        reject = true;
+    }
+    var qStr = 'An internet service provider (ISP) provides internet connections to 100,000 ' +
+           'customers. Historically, its customers have sent and received an average of ' +
+           popMean.toString() + ' email messages per month.  The ISP suspects that email ' +
+           'use is increasing, and wants to plan for increased demand.  To determine ' +
+           'whether its customers currently send and receive an average of more than ' +
+           popMean.toString() + ' messages per month, the ISP will take a simple random ' +
+           'sample of ' + samSize.toString() + ' customers and calculate the ' +
+           'sample mean and sample standard deviation of the number of email messages ' +
+           'those customers sent and received in the previous month. </p>' +
+           '<p><span class="qSpan">The null hypothesis is that</span>';
+    document.writeln(qStr);
+    var opt = ['the sample mean is less than ' + popMean.toString() + ' messages/month',
+           'the population mean is less than ' + popMean.toString() + ' messages/month',
+           'the sample mean is equal to ' + popMean.toString() + ' messages/month',
+           'the population mean is equal to ' + popMean.toString() + ' messages/month',
+           'the sample mean is greater than ' + popMean.toString() + ' messages/month',
+           'the population mean is greater than ' + popMean.toString() + ' messages/month',
+           'none of the above'
+           ];
+    writeSelectExercise(false, qCtr++, opt, 'd');
+    var qStr = '</p><p><span class="qSpan">The alternative hypothesis is that</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, 'f');
+    var qStr = '</p><p> Suppose that the distribution of the number of email messages per ' +
+           'month among all customers of the ISP has a nearly normal distribution. </p>' +
+           '<p><span class="qSpan">It is appropriate to use</span>';
+    document.writeln(qStr);
+    var opt = ['a left-tail <em>z</em>-test',
+           'a left-tail <em>t</em>-test',
+           'a two-tail <em>z</em>-test',
+           'a two-tail <em>t</em>-test',
+           'a right-tail <em>z</em>-test',
+           'a right-tail <em>t</em>-test',
+           'none of the above'
+           ];
+    writeSelectExercise(false, qCtr++, opt, 'f');
+    var qStr = '</p><p>The sample mean is observed to be ' + samMean.toString() +
+           ' emails per month, with a sample standard deviation of ' + samSd.toString() +
+           ' emails per month.</p>' +
+           '<p><span class="qSpan">The estimated standard error of the sample mean is ' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(seHat) );
+    var qStr = '<span class="qSpan"> emails per month.</span></p>' +
+           '<p><span class="qSpan">The observed value of the <em>T</em> statistic is ' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(tScore));
+    var qStr = '</p><p><span class="qSpan">The <em>P</em>-value of the null hypothesis is ' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pValue,.001) );
+    var qStr = '</p><p><span class="qSpan">The ISP should reject the null hypothesis at ' +
+           'significance level ' + sig.toString() + '%.</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    aVal = 'a';
+    if (reject) {
+       aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+    var ansStr = 'The null hypothesis is that the average number of email messages per month ' +
+         'for all customers (the population) is 200; the alternative hypothesis ' +
+         'is that the population mean exceeds 200.  The sample is drawn without ' +
+         'replacement, but the sample size is very small compared with the population ' +
+         'size, so the difference between sampling with and without replacement is ' +
+         'negligable. The population is &quot;known&quot; to have a distribution ' +
+         'that is nearly normal. The sample size is intermediate, and the population ' +
+         'SD is unknown.  Because of all these things, it is appropriate to use a ' +
+         '<em>t</em>-test for the population mean.</p>' +
+         '<p>The <em>T</em> statistic is ' +
+         'the sample mean minus 200, divided by the estimated standard error of the ' +
+         'sample mean.  The expected value of the <em>T</em> statistic is greater than ' +
+         'zero under the alternative hypothesis, so we should use a right-tail ' +
+         '<em>t</em>-test. The number of degrees of freedom is ' +
+         (samSize-1).toString() + '. </p>' +
+         '<p>The estimated standard error of the sample mean is the sample standard ' +
+         'deviation, divided by the square-root of the sample size: ' +
+         samSd.toString() + '/' + roundToDig(Math.sqrt(samSize),3).toString() +
+         ' = ' + roundToDig(seHat, 3).toString() + '.</p>' +
+         '<p>The observed <em>t</em>-score is (' + samMean.toString() + ' &minus; ' +
+         popMean.toString() + ' )/ ' + roundToDig(seHat, 3).toString() + ' = ' +
+         roundToDig(tScore, 3).toString() + '. </p><p>Because this is a right-tail ' +
+         'test, the <em>P</em>-value is the area under Student\'s <em>t</em>-curve ' +
+         'with ' + (samSize - 1).toString() + ' degrees of freedom from ' +
+         roundToDig(tScore, 3).toString() + ' to infinity, which is ' +
+         roundToDig(100*pValue, 2).toString() + '%. This is ';
+    if (reject) {
+    ansStr += 'less than ' + sig.toString() + '%, so we would reject the null hypothesis ' +
+          'at significance level ' + sig.toString() + '%.';
+    } else {
+    ansStr += 'greater than ' + sig.toString() + '%, so we would not reject the null ' +
+          'hypothesis at significance level ' + sig.toString() + '%.';
+    }
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="tests_confidence_intervals"></a>
+    Hypothesis Tests and Confidence Intervals
+</h2>
+
+<p>
+    There is a deep connection between hypothesis tests about parameters, and
+    confidence intervals for parameters.
+    If we have a procedure for constructing a level 100%&times;(1&minus;a) confidence
+    interval for a parameter <span class="math">&mu;</span>, then the following rule is a two-sided significance
+    level <span class="math">a</span> test of the null hypothesis that <span class="math">&mu; = &mu;<sub>0</sub></span>:
+</p>
+
+<p class="math">
+    reject the null hypothesis if the confidence interval does not contain &mu;<sub>0</sub>.
+</p>
+
+<p>
+    Similarly, suppose we have an hypothesis-testing procedure that lets us test the null
+    hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> for any value of <span class="math">&mu;<sub>0</sub></span>, at
+    significance level <span class="math">a</span>. Define
+</p>
+
+<p class="math">
+    <em>A</em> = (all values of &mu;<sub>0</sub> for which we would not reject the null
+    hypothesis that &mu; = &mu;<sub>0</sub>).
+</p>
+
+<p>
+    Then <span class="math">A</span> is a <span class="math">100%&times;(1&minus;a)</span> confidence set</em> for
+     <span class="math">&mu;</span>:
+</p>
+
+<p class="math">
+    P(<em>A</em> contains the true value of &mu;) = 100%&times;(1&minus;<em>a</em>).
+</p>
+
+<p>
+    (A <em>confidence set</em> is a generalization of the idea of a confidence interval:
+    a <span class="math">1&minus;a</span> confidence set for the parameter <span class="math">&mu;</span> is a random set that
+    has probability <span class="math">1&minus;a</span> of containing <span class="math">&mu;</span>.
+    As is the case with confidence intervals, the probability makes sense only
+    before collecting the data.)
+    The set <em>A</em> might or might not be an interval, depending on the nature of the test.
+    If one starts with a two-tail <em>z</em> test or two-tail <em>t</em> test, one
+    ends up with a confidence interval rather than a more general confidence set.
+</p>
+
+<h3>
+    <a id="t_interval"></a>Confidence Intervals Using Student's <em>t</em> curve
+</h3>
+
+<p>
+    The <em>t</em> test lets us test the hypothesis that the population mean <span class="math">&mu;</span>
+    is equal to <span class="math">&mu;<sub>0</sub></span> at approximate significance level a using a
+    random sample with replacement of size <em>n</em> from a population with a
+    nearly normal distribution.
+    If the sample size <em>n</em> is small, the actual significance level is
+    likely to differ considerably from the nominal significance level.
+    Consider a two-sided <em>t</em> test of the hypothesis <span class="math">&mu;=&mu;<sub>0</sub></span>
+    at significance level <span class="math">a</span>.
+    If the sample mean is <span class="math">M</span> and the sample standard deviation is <em>s</em>,
+    we would not reject the null hypothesis at significance level <span class="math">a</span> if
+</p>
+
+<p class="math">
+    |(<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>)| =
+    <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2.
+</p>
+
+<p>
+    We rearrange this inequality:
+</p>
+
+<p class="math">
+    &minus;<em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &le;
+    (<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>) &le;
+    <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2
+</p>
+
+<p class="math">
+    &minus;<em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup> &le; <em>M</em> &minus; &mu;<sub>0</sub> &le;
+    <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times; <em>s</em>/<em>n</em><sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    &minus;<em>M</em> &minus; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup> &le; &minus; &mu;<sub>0</sub> &le;
+    &minus;<em>M</em> + <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    <em>M</em> + <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup> &le; &mu;<sub>0</sub> &le;
+    <em>M</em> &minus; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    <em>M</em> &minus; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup> &le; &mu;<sub>0</sub> &le;
+    <em>M</em> + <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup>.
+<p>
+
+<p>
+    That is, we would not reject the hypothesis <span class="math">&mu; = &mu;<sub>0</sub></span>
+    provided <span class="math">&mu;<sub>0</sub></span> is in the interval
+</p>
+
+<p class="math">
+    [<em>M</em> &minus; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+      <em>s</em>/<em>n</em><sup>&frac12;</sup>, <em>M</em> +
+      <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+      <em>s</em>/<em>n</em><sup>&frac12;</sup>].
+</p>
+
+<p>
+    Therefore, that interval is a <span class="math">100%&minus;a</span> confidence interval for <span class="math">&mu;</span>:
+</p>
+
+<p class="math">
+    P([<em>M</em> &minus; <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup>, <em>M</em> +
+    <em>t</em><sub><em>n</em>&minus;1,1&minus;<em>a</em></sub>/2 &times;
+    <em>s</em>/<em>n</em><sup>&frac12;</sup>] contains &mu;) ~ 1&minus;<em>a</em>.
+</p>
+
+<p>
+    The following exercise checks that you can use Student's <em>t</em> curve to construct
+    a confidence interval for a population mean.
+    The exercise is dynamic: the data tend to change when you reload the page.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var tCrit = tInv( 1.0-(sig/200), samSize-1);
+    var tCiDf = samSize-1;
+    var loEnd = samMean - tCrit*seHat;
+    var hiEnd = samMean + tCrit*seHat;
+    var qStr = '<span class="qSpan">In the previous example, a ' + (100-sig).toString() +
+           '% confidence interval for the average number of email messages sent and ' +
+           'received by custimers of the ISP in the month in question is from ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(loEnd) );
+    document.writeln('(low) to ');
+    writeTextExercise(8, qCtr++, numToRange(hiEnd) );
+    document.writeln('(high)</span>');
+    document.writeln('</p>');
+    var ansStr = 'The 100%&minus;<em>p</em>/2 percentile of Student\'s <em>t</em> curve with ' +
+         (samSize-1).toString() + ' degrees of freedom is ' +
+         roundToDig(tCrit,3).toString() + ':</p><p class="figure">' +
+         '<applet archive="PbsGui.zip" CODE="NormHiLite.class" WIDTH="640" ' +
+         'HEIGHT="330" codebase="../../Java"><param name="hiLiteLo" value="' +
+         (-tCrit).toString() + '"><param name="hiLiteHi" value="' + tCrit.toString() +
+         '"><param name="distribution" value="Student-t"><param name="df" value="' +
+         (samSize-1).toString() + '">You need Java to see this ' +
+         'tool.</applet></p><p>Therefore, a ' + (100-sig).toString() +
+         '% confidence interval for <span class="math">&mu;</span> starts at </p><p class="math">' +
+         samMean.toString() + ' &minus; (' + samSd.toString() + '/' +
+         roundToDig(Math.sqrt(samSize),3).toString() + ') &times; ' +
+         roundToDig(tCrit,3).toString() + ' = ' + roundToDig(loEnd,3).toString() +
+         ' emails/month</p><p>and runs to</p><p class="math">' +
+         samMean.toString() + ' + (' + samSd.toString() + '/' +
+         roundToDig(Math.sqrt(samSize),3).toString() + ') &times; ' +
+         roundToDig(tCrit,3).toString() + ' = ' + roundToDig(hiEnd,3).toString() +
+         ' emails/month.</p>';
+    var thisApplet3 = document.applets.length;
+    var setThisApplet = function(thisApplet3) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet3,
+                                            function(){document.applets[thisApplet3].setLimits((-tCrit).toString(), tCrit.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    In hypothesis testing, a <em>Z</em> statistic is a random variable whose
+    probability histogram is approximated well by the normal curve if the null
+    hypothesis is correct:
+    If the null hypothesis is true, the expected value of a <em>Z</em> statistic is zero,
+    the SE of a <em>Z</em> statistic is approximately 1, and the probability that a
+    <em>Z</em> statistic is between <span class="math">a</span> and <span class="math">b</span> is approximately the
+    area under the normal curve between <span class="math">a</span> and <span class="math">b</span>.
+    Suppose that the random variable <em>Z</em> is a <em>Z</em> statistic.
+    If, under the alternative hypothesis, <span class="math">E(<em>Z</em>)&lt;0</span>, the appropriate
+    <em>z</em> test to test the null hypothesis at approximate significance level <span class="math">a</span>
+    is the left-tailed <em>z</em> test: Reject the null hypothesis
+    if <span class="math">Z&lt;z<sub>a</sub></span>, where
+    <span class="math">z<sub>a</sub></span> is the a quantile of the normal curve.
+    If, under the alternative hypothesis, <span class="math">E(<em>Z</em>)&gt;0</span>, the appropriate
+    <em>z</em> test to test the null hypothesis at approximate significance level <span class="math">a</span>
+    is the right-tailed <em>z</em> test:
+    Reject the null hypothesis if <span class="math">Z&gt;z<sub>1&minus;a</sub></span>.
+    If, under the alternative hypothesis, E(<em>Z</em>)&ne;0 but could be greater
+    than 0 or less than 0, the appropriate <em>z</em> test to test the null
+    hypothesis at approximate significance level <span class="math">a</span> is the two-tailed <em>z</em> test:
+    reject the null hypothesis if <span class="math">|Z|&gt;z<sub>1&minus;a/2</sub></span>.
+    If, under the alternative hypothesis, <span class="math">E(Z)=0</span>, a <em>z</em> test probably
+    is not appropriate&mdash;consult a statistician.
+    The exact significance levels of these tests differ from <span class="math">a</span>
+    by an amount that depends on how closely the normal curve approximates the
+    probability histogram of <em>Z</em>.
+</p>
+
+<p>
+    <em>Z</em> statistics often are constructed from other statistics by transforming
+    approximately to standard units, which requires knowing the expected value and
+    SE of the original statistic on the assumption that the null hypothesis is true.
+    Let <em>X</em> be a test statistic; let E(<em>X</em>) be the expected value of
+    <em>X</em> if the null hypothesis is true, and let <em>se</em> be approximately equal to
+    the SE of <em>X</em> if the null hypothesis is true.
+    If <em>X</em> is a sample sum of a large random sample with replacement, a
+    sample mean of a large random sample with replacement, or a sum or difference of
+    independent sample means of large samples with replacement,
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>X</em>&minus;E(<em>X</em>))/<em>se</em>
+</p>
+
+<p>
+    is a <em>Z</em> statistic.
+</p>
+
+<p>
+    Consider testing the null hypothesis that a population percentage <em>p</em> is equal
+    to the value <em>p</em><sub>0</sub> on the basis of the sample percentage &phi; of a
+    random sample of size <span class="math">n</span> with replacement.
+    Under the null hypothesis, E(&phi;)=<em>p</em><sub>0</sub> and
+</p>
+
+<p class="math">
+    SE(&phi;) =
+    (<em>p</em><sub>0</sub>&times;(1&minus;<em>p</em><sub>0</sub>))<sup>&frac12;</sup>/<em>n</em><sup>&frac12;</sup>,
+</p>
+
+<p>
+    and if <span class="math">n</span> is sufficiently large
+    (say <span class="math">n&times;p&gt;30</span> and <span class="math">n&times;(1&minus;p)&gt;30</span>,
+    but this depends on the desired accuracy), the normal approximation to
+</p>
+
+<p class="math">
+    <em>Z</em> =
+    (&phi;&minus;<em>p</em><sub>0</sub>)/((<em>p</em><sub>0</sub> &times;
+    (1&minus;<em>p</em><sub>0</sub>))<sup>&frac12;</sup>/<em>n</em><sup>&frac12;</sup>)
+</p>
+
+<p>
+    will be reasonably accurate,  so <em>Z</em> can be used as the <em>Z</em> statistic in a
+    <em>z</em> test of the null hypothesis <em>p</em>=<em>p</em><sub>0</sub>.
+</p>
+
+<p>
+    Consider testing the null hypothesis that a population mean <span class="math">&mu;</span> is equal to the
+    value <span class="math">&mu;<sub>0</sub></span>, on the basis of the sample mean
+    <span class="math">M</span> of a random
+    sample of size <span class="math">n</span> with replacement.
+    Let <em>s</em> denote the sample standard deviation.
+    Under the null hypothesis, <span class="math">E(M)=&mu;<sub>0</sub></span>, and if <span class="math">n</span> is large,
+</p>
+
+<p class="math">
+    SE(<em>M</em>)=SD/<em>n</em><sup>&frac12;</sup>~<em>s</em>/<em>n</em><sup>&frac12;</sup>,
+</p>
+
+<p>
+    and the normal approximation to
+</p>
+
+<p class="math">
+    <em>Z</em> = (<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>)
+</p>
+
+<p>
+    will be reasonably accurate, so <em>Z</em> can be used as the  <em>Z</em> statistic in a
+    <em>z</em> test of the null hypothesis <span class="math">&mu;=&mu;<sub>0</sub></span>.
+</p>
+
+<p>
+    Consider a population of <span class="math">N</span> individuals, each labeled with two numbers.
+    The <span class="math">i</span>th individual is labeled with the numbers
+    <span class="math">c<sub>i</sub></span> and <span class="math">t<sub>i</sub></span>, <span class="math">i=1, 2,
+    &hellip;, N</span>.
+    Let <span class="math">&mu;<sub>c</sub></span> be the population mean of the <span class="math">N</span> values
+    <span class="math">{c<sub>1</sub>, &hellip;, c<sub><em>N</em></sub>}</span>
+    and let <span class="math">&mu;<sub>t</sub></span> be the population mean of the <span class="math">N</span> values
+    <span class="math">{t<sub>1</sub>, &hellip;, t<sub>N</sub>}</span>.
+    Let <span class="math">&mu;=&mu;<sub>t</sub>&minus;&mu;<sub>c</sub></span> be the difference
+    between the two means.
+    Consider testing the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> on the basis of a
+    paired random sample of size <span class="math">n</span> with replacement from the population: that is,
+    a random sample of size <span class="math">n</span> is drawn with replacement from the population, and
+    for each individual <span class="math">i</span> in the sample, <span class="math">c<sub>i</sub></span> and
+    <span class="math">t<sub>i</sub></span> are observed.
+    This is equivalent to testing the hypothesis that the population mean of the <span class="math">N</span>
+    values <span class="math">{(t<sub>1</sub>&minus;c<sub>1</sub>), &hellip;, (t<sub>N</sub>&minus;c<sub>N</sub>)}</span>
+    is equal to <span class="math">&mu;<sub>0</sub></span>, on the basis of the sample random sample of size
+    <span class="math">n</span> drawn with replacement from those <span class="math">N</span> values.
+    Let <span class="math">M<sub>t</sub></span> be the sample mean of the <span class="math">n</span> observed
+    values of <span class="math">t<sub>i</sub></span> and let <span class="math">M<sub>c</sub></span> be
+    the sample mean of the <span class="math">n</span> observed values of <span class="math">c<sub>i</sub></span>.
+    Let <em>sd</em> denote the sample standard deviation of the <span class="math">n</span> observed differences
+    <span class="math">{(t<sub>i</sub>&minus;c<sub>i</sub>)}</span>.
+    Under the null hypothesis, the expected value of
+</p>
+
+<p class="math">
+    (<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>) is &mu;<sub>0</sub>,
+    and if <span class="math">n</span> is large,
+</p>
+
+<p class="math">
+    SE(<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>)~<em>sd</em>/<em>n</em><sup>&frac12;</sup>,
+</p>
+
+<p>
+    and the normal approximation to the probability histogram of
+</p>
+
+<p class="math">
+    <em>Z</em> =
+    ((<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>&minus;&mu;<sub>0</sub>)/(<em>sd</em>/<em>n</em><sup>&frac12;</sup>)
+</p>
+
+<p>
+    will be reasonably accurate, so <em>Z</em> can be used as the <em>Z</em> statistic in a <em>z</em>
+    test of the null hypothesis that
+    <span class="math">&mu;<sub>t</sub>&minus;&mu;<sub>c</sub>=&mu;<sub>0</sub></span>.
+</p>
+
+<p>
+    Consider testing the hypothesis that the difference
+    (<span class="math">&mu;<sub>t</sub>&minus;&mu;<sub>c</sub></span>)
+    between two population means, <span class="math">&mu;<sub>c</sub></span> and
+    <span class="math">&mu;<sub>t</sub></span>, is equal to <span class="math">&mu;<sub>0</sub></span>, on the basis of the
+    difference (<span class="math">M<sub>t</sub>&minus;M<sub>c</sub></span>)
+    between the sample mean <span class="math">M<sub>c</sub></span> of a random sample of size
+    <span class="math">n<sub>c</sub></span> with replacement from the first population and the sample mean
+    <span class="math">M<sub>t</sub></span> of an independent random sample of size
+    <span class="math">n<sub>t</sub></span> with replacement from the second population.
+    Let <span class="math">s<sub>c</sub></span> denote the sample standard deviation of the sample
+    of size <span class="math">n<sub>c</sub></span> from the first population and let
+    <span class="math">s<sub>t</sub></span> denote the sample standard deviation of the sample
+    of size <span class="math">n<sub>t</sub></span> from the second population.
+    If the null hypothesis is true,
+</p>
+
+<p class="math">
+    E(<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>)=&mu;<sub>0</sub>,
+</p>
+
+<p>
+    and if <span class="math">n<sub>c</sub></span> and <span class="math">n<sub>t</sub></span> are both large,
+</p>
+
+<p class="math">
+    SE(<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>) ~
+    (<em>s</em><em>t</em><sub>2</sub>/<em>n</em><sub><em>t</em></sub> +
+    <em>s</em><em>c</em><sub>2</sub>/<em>n</em><sub><em>c</em></sub>)<sup>&frac12;</sup>
+</p>
+
+<p>
+    and the normal approximation to the probability histogram of
+</p>
+
+<p class="math">
+    <em>Z</em> =
+    (<em>M</em><sub><em>t</em></sub>&minus;<em>M</em><sub><em>c</em></sub>&minus;&mu;<sub>0</sub>)/(<em>s</em><em>t</em><sub>2</sub>/<em>n</em><sub><em>t</em></sub> + <em>s</em><em>c</em><sub>2</sub>/<em>n</em><sub><em>c</em></sub>)<sup>&frac12;</sup>
+</p>
+
+<p>
+    will be reasonably accurate, so <em>Z</em> can be used as the <em>Z</em> statistic in a
+    <em>z</em> test of the null hypothesis that
+    <span class="math">&mu;<sub>t</sub>&minus;&mu;<sub>c</sub>=&mu;<sub>0</sub></span>.
+</p>
+
+<p>
+    A list of numbers is <em>nearly normally distributed</em> if the fraction of numbers between
+    any pair of values, <span class="math">a&lt;b</span>, is approximately equal to the area under the
+    normal curve between <span class="math">(a&minus;&mu;)/SD</span> and <span class="math">(b&minus;&mu;)/SD</span>, where
+    <span class="math">&mu;</span> is
+    the mean of the list and SD is the standard deviation of the list.
+    Student's <em>t</em> curve with <em>d</em> degrees of freedom is symmetric about 0, has a
+    single bump centered at 0, and is broader and flatter than the normal curve.
+    The total area under Student's <em>t</em> curve is 1, no matter what <em>d</em> is;
+    as <em>d</em> increases, Student's <em>t</em> curve grows closer and closer to
+    the normal curve.
+    Let <em>M</em> be the sample mean of a random sample of size <span class="math">n</span> with
+    replacement from a population with mean <span class="math">&mu;</span> and a nearly normal distribution,
+    and let <em>s</em> be the sample standard deviation of the random sample.
+    For moderate values of <span class="math">n</span> (<span class="math">n&lt;100</span> or so), Student's <em>t</em> curve
+    approximates the probability histogram of
+    <span class="math">(M&minus;&mu;)/(s/n<sup>&frac12;</sup>)</span> better than the normal
+    curve does, which can lead to an approximate hypothesis test about <span class="math">&mu;</span>
+    that is more accurate than the <em>z</em> test:
+    Consider testing the null hypothesis that the mean <span class="math">&mu;</span> of a population with a
+    nearly normal distribution is equal to <span class="math">&mu;<sub>0</sub></span> from a random sample of
+    size <span class="math">n</span> with replacement.
+    Let
+</p>
+
+<p class="math">
+    <em>T</em>=(<em>M</em>&minus;&mu;<sub>0</sub>)/(<em>s</em>/<em>n</em><sup>&frac12;</sup>),
+</p>
+
+<p>
+    where <em>M</em> is the sample mean and <em>s</em> is the sample standard deviation.
+    The tests reject the null hypothesis if <span class="math">T&lt;t<sub>n&minus;1,a</sub></span>
+    (left-tail <em>t</em> test), reject the null hypothesis if
+    <span class="math">T&gt;t<sub>n&minus;1,1&minus;a</sub></span> (right-tail <em>t</em> test),
+    and reject the null hypothesis if <span class="math">|T|&gt;t<sub>n&minus;1,1&minus;a</sub>/2</span>
+    (two-tail <em>t</em> test) all have approximate significance level <span class="math">a</span>.
+    How close the nominal significance level <span class="math">a</span> is to the actual significance level
+    depends on the distribution of the numbers in the population, the sample size <span class="math">n</span>, and <span class="math">a</span>.
+    The same rule of thumb for selecting whether to use a left, right, or two-tailed <em>z</em>
+    test (or not to use a <em>z</em> test at all) works to select whether to use a left, right,
+    or two-tailed <em>t</em> test: If, under the alternative hypothesis, E(<em>T</em>)&lt;0,
+    use a left-tail test.
+    If, under the alternative hypothesis, E(<em>T</em>)&gt;0, use a right-tail test.
+    If, under the alternative hypothesis, E(<em>T</em>) could be less than zero or greater
+    than zero, use a two-tail test.
+    If, under the alternative hypothesis, E(<em>T</em>)=0, consult an expert.
+    Because the <em>t</em> test differs from the <em>z</em> test only when the sample
+    size is small, and from a small sample it is not possible to tell whether the population
+    has a nearly normal distribution, the <em>t</em> test should be used sparingly, if ever.
+</p>
+
+<p>
+    A <span class="math">1&minus;a</span> confidence set</em> for a parameter <span class="math">&mu;</span> is like a <span class="math">1&minus;a</span>
+    confidence interval for a parameter <span class="math">&mu;</span>: It is a random set of values that has probability
+    <span class="math">1&minus;a</span> of containing the true value of <span class="math">&mu;</span>.
+    The difference is that the set need not be an interval.
+    There is a deep duality between hypothesis tests about a parameter <span class="math">&mu;</span> and confidence
+    sets for <span class="math">&mu;</span>.
+    Given a procedure for constructing a <span class="math">1&minus;a</span> confidence set for <span class="math">&mu;</span>, the rule
+    <em>reject the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> if the confidence
+    set does not contain <span class="math">&mu;</span></em> is a significance level <span class="math">a</span> test of the null
+    hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span>.
+    Conversely, given a family of significance level <span class="math">a</span> hypothesis tests that allow
+    one to test the hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> for any value of
+    <span class="math">&mu;<sub>0</sub></span>, the set of all values <span class="math">&mu;<sub>0</sub></span> for which one would not
+    reject the null hypothesis that <span class="math">&mu;=&mu;<sub>0</sub></span> is a <span class="math">1&minus;a</span>
+    confidence set for <span class="math">&mu;</span>.
+</p>
+
+<h2>
+    <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>alternative hypothesis               </li>
+    <li>box                                  </li>
+    <li>central limit theorem                </li>
+    <li>complement                           </li>
+    <li>confidence interval                  </li>
+    <li>confidence set                       </li>
+    <li>control                              </li>
+    <li>estimator                            </li>
+    <li>expected value                       </li>
+    <li>histogram                            </li>
+    <li>independent                          </li>
+    <li>independent random variable          </li>
+    <li>left-tail                            </li>
+    <li>mean                                 </li>
+    <li>mutatis mutandis                     </li>
+    <li>nearly normal distribution           </li>
+    <li>normal approximation                 </li>
+    <li>normal curve                         </li>
+    <li>null hypothesis                      </li>
+    <li>P-value                              </li>
+    <li>percentage                           </li>
+    <li>pooled bootstrap estimate of the population SD</li>
+    <li>pooled bootstrap estimate of the SE  </li>
+    <li>population                           </li>
+    <li>population mean                      </li>
+    <li>population percentage                </li>
+    <li>population standard deviation        </li>
+    <li>power                                </li>
+    <li>probability                          </li>
+    <li>probability distribution             </li>
+    <li>probability histogram                </li>
+    <li>quantile                             </li>
+    <li>random sample                        </li>
+    <li>random variable                      </li>
+    <li>rejection region                     </li>
+    <li>right-tail                           </li>
+    <li>sample mean                          </li>
+    <li>sample percentage                    </li>
+    <li>sample size                          </li>
+    <li>sample standard deviation            </li>
+    <li>sample sum                           </li>
+    <li>significance level                   </li>
+    <li>simple random sample                 </li>
+    <li>standard deviation (SD)              </li>
+    <li>standard error (SE)                  </li>
+    <li>standard unit                        </li>
+    <li>statistic                            </li>
+    <li>Student's <em>t</em> curve           </li>
+    <li>symmetric                            </li>
+    <li>test statistic                       </li>
+    <li>treatment                            </li>
+    <li><em>t</em> test                      </li>
+    <li>two-tailed test                      </li>
+    <li>Type I error                         </li>
+    <li>unbiased                             </li>
+    <li>unit                                 </li>
+    <li><em>Z</em> statistic                 </li>
+    <li><em>z</em> score                     </li>
+    <li><em>z</em> test                      </li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

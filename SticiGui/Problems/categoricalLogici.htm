@@ -1,0 +1,794 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "categoricalLogic";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Categorical Logic
+</h2>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nouns = ['unicorns','ravens','goats','gnus','wombats','lemurs'];
+    var verbs = [' have purple spots',
+                 ' play poker',
+                 ' lay eggs',
+                 ' live to a ripe old age',
+                 ' eat their young',
+                 ' suntan easily',
+                 ' are susceptible to flattery',
+                 ' refuse to pay income taxes'
+                ];
+    var firsts = [' All ',' Some ',' No '];
+    var seconds = [' ',' not '];
+    var whichNoun = listOfRandInts(1,0,nouns.length-1)[0];
+    var whichVerb = listOfRandInts(1,0,verbs.length-1)[0];
+    var whichFirst = listOfRandInts(1,0,firsts.length-1)[0]
+    var whichSecond = listOfRandInts(1,0,seconds.length-1)[0]
+    var verbFirst = randBoolean();
+    var qSentence = '<span class="example">' + firsts[whichFirst];
+    if (verbFirst) {
+         qSentence += ' animals that ' + verbs[whichVerb] + ' are ' + 
+                      seconds[whichSecond] + nouns[whichNoun];
+    } else {
+         qSentence +=  nouns[whichNoun];
+         if (whichSecond > 0) {  
+             qSentence += ' do not ';
+         }
+         qSentence += verbs[whichVerb];
+    }
+    qSentence += '.</span>';           
+    var quantOpt = [
+                      '<span class="math">&forall;x, if x&isin;A then x&isin;B</span>',
+                      '<span class="math">&exist;x: x&isin;A and x&isin;B</span>',
+                      '<span class="math">&forall;x, if x&isin;B then x&isin;A</span>',
+                      '<span class="math">&exist;x: x&isin;A and x&notin;B</span>',
+                      '<span class="math">&forall;x, if x&isin;A then x&notin;B</span>',
+                      '<span class="math">&exist;x: if x&isin;B and x&notin;A</span>'
+                   ];
+    if (!verbFirst) {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'a';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'd';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    } else {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'c';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'f';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    }
+    var qStr = 'Let the domain of discourse <span class="math"><strong>S</strong></span> be animals. ' +
+               'Let <span class="math">A</span> be ' + nouns[whichNoun] + 
+               ' and let <span class="math">B</span> be animals that ' + verbs[whichVerb] + '. ' +
+               '<span class="qSpan">In quantifier notation, what is the sentence </span>' + 
+                qSentence + '<span class="qSpan">?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, quantOpt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nouns = ['flight attendants',
+                 'statisticians',
+                 'runners',
+                 'celebrities',
+                 'artisan bakers'
+                ];
+    var verbs = [' love geeks',
+                 ' drink espresso',
+                 ' have a sick sense of humor',
+                 ' eat their young',
+                 ' bathe regularly',
+                 ' embarrass themselves on tv',
+                 ' live to a ripe old age',
+                 ' can count to five without using their fingers'
+                ];
+    var firsts = [' All ',' Some ',' No '];
+    var seconds = [' ',' not '];
+    var whichNoun = listOfRandInts(1,0,nouns.length-1)[0];
+    var whichVerb = listOfRandInts(1,0,verbs.length-1)[0];
+    var whichFirst = listOfRandInts(1,0,firsts.length-1)[0]
+    var whichSecond = listOfRandInts(1,0,seconds.length-1)[0]
+    var verbFirst = randBoolean();
+    var qSentence = '<span class="example">' + firsts[whichFirst];
+    if (verbFirst) {
+         qSentence += ' people who ' + verbs[whichVerb] + ' are ' + 
+                      seconds[whichSecond] + nouns[whichNoun];
+    } else {
+         qSentence +=  nouns[whichNoun];
+         if (whichSecond > 0) {  
+             qSentence += ' do not ';
+         }
+         qSentence += verbs[whichVerb];
+    }
+    qSentence += '.</span>';           
+    var quantOpt = [
+                      '<span class="math">A&sub;B</span>',
+                      '<span class="math">A&nsub;B<sup>c</sup></span>',
+                      '<span class="math">B&sub;A</span>',
+                      '<span class="math">A&nsub;B</span>',
+                      '<span class="math">A&sub;B<sup>c</sup></span>',
+                      '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>'
+                   ];
+    if (!verbFirst) {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'a';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'd';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    } else {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'c';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'f';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    }
+    var qStr = 'Let the domain of discourse <span class="math"><strong>S</strong></span> be people. ' +
+               'Let <span class="math">A</span> be ' + nouns[whichNoun] + 
+               ' and let <span class="math">B</span> be people who ' + verbs[whichVerb] + '. ' +
+               '<span class="qSpan">In set notation, what is the sentence </span>' + 
+               qSentence + '<span class="qSpan">?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, quantOpt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No '];
+    var negs = [' ',' not '];
+    var whichQuant = listOfRandInts(1,0,quants.length-1)[0];
+    var whichNeg = listOfRandInts(1,0,negs.length-1)[0]
+    var qSentence = '<span class="example">' + quants[whichQuant] + ' <span class="math">A</span> are ' +
+                    negs[whichNeg] + ' <span class="math">B</span>.</span>'; 
+    var qStr = '<span class="qSpan">Identify all the expressions that are equivalent to </span>' +
+               qSentence + ' (Select all that apply. Hint: there are three.)';
+    document.writeln(qStr);
+    var quantOpt = [
+                      [ // 0, 1, 2
+                       '<span class="math">A&sub;B</span>',
+                       '<span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B<sup>c</sup> = {}</span>'
+                      ],
+                      [ // 3, 4, 5
+                       '<span class="math">A&nsub;B<sup>c</sup></span>',
+                       '<span class="math">B&nsub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B &ne; {}</span>'
+                      ],
+                      [ // 6, 7, 8
+                       '<span class="math">B&sub;A</span>',
+                       '<span class="math">A<sup>c</sup>&sub;B<sup>c</sup></span>',
+                       '<span class="math">A<sup>c</sup>&cap;B = {}</span>'
+                      ],
+                      [ // 9, 10, 11
+                       '<span class="math">A&nsub;B</span>',
+                       '<span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B<sup>c</sup> &ne; {}</span>'
+                      ],
+                      [ // 12, 13, 14
+                       '<span class="math">A&sub;B<sup>c</sup></span>',
+                       '<span class="math">B&sub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B = {}</span>'
+                      ],
+                      [ // 15, 16, 17
+                       '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>',
+                       '<span class="math">B&nsub;A</span>',
+                       '<span class="math">A<sup>c</sup>&cap;B &ne; {}</span>'
+                      ]
+                   ];
+    var lookup = new Array();
+    if (whichQuant == 0) {
+       if (whichNeg == 0) {
+          lookup = [0, 1, 2];
+       } else {
+          lookup = [12, 13, 14];
+       }
+    } else if (whichQuant == 1) {
+       if (whichNeg == 0) {
+          lookup = [3, 4, 5];
+       } else {
+          lookup = [9, 10, 11];
+       }
+    } else if (whichQuant == 2) {
+       if (whichNeg == 0) {
+          lookup = [12, 13, 14];
+       } else {
+          lookup = [0, 1, 2];
+       }
+    }
+    var rawOpt = new Array();
+    var m = 0;
+    for (var i=0; i< quantOpt.length; i++) {
+        for (var j=0; j < quantOpt[i].length; j++) {
+            rawOpt[m++] = quantOpt[i][j];
+        }
+    }
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (var i=0; i < lookup.length; i++) {
+        aVal = aVal + alphabet[optPerm[1][lookup[i]]] + '&';
+    }
+    aVal = aVal.substring(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  never = ['Some <span class="math">A</span> are not <span class="math">A</span>.',
+                  'Not all <span class="math">A</span> are <span class="math">A</span>.',
+                  'Some <span class="math">A</span> are <span class="math">B</span>, and no ' +
+                         '<span class="math">B</span> are <span class="math">A</span>.',
+                  'Not all <span class="math">A</span> are <span class="math">B</span>, and no ' +
+                         '<span class="math">A</span> are not <span class="math">B</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">A&nsub;B</span>.',
+                 ];
+    var  canBe = ['All <span class="math">A</span> are not <span class="math">A</span>.',
+                  '<span class="math">A&cap;A<sup>c</sup> = A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> = A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> &sub; A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> &nsub; A</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">B&sub;A</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">B&nsub;A</span>.',
+                 ];
+    var always = ['<span class="math">A&cap;A<sup>c</sup> = {}.</span>',
+                  '<span class="math">A&cup;A<sup>c</sup> = <strong>S</strong>.</span>',
+                  'No <span class="math">A</span> are not <span class="math">A</span>.',
+                  'For any <span class="math">x</span>, either <span class="math">x</span> is in ' +
+                        '<span class="math">A</span> or <span class="math">x</span> is not in ' +
+                        '<span class="math">A</span>.',
+                  '<span class="math">A&sub;B</span> or <span class="math">A&nsub;B</span>.'
+                 ];
+    var which = listOfDistinctRandInts(3,0,2);
+    var stmt = new Array(3);
+    var aVals = new Array(3);
+    for (var i=0; i < 3; i++) {
+        switch (which[i]) {
+            case 0:
+                stmt[i] = randomSample(never, 1, true);
+                aVals[i] = 'a';
+                break;
+            case 1:
+                stmt[i] = randomSample(canBe, 1, true);
+                aVals[i] = 'b';
+                break;
+            case 2:
+                stmt[i] = randomSample(always, 1, true);   
+                aVals[i] = 'c';
+                break;
+         }
+    }       
+    var qStr = '<span class="qSpan">Are the following statements never true, sometimes true, or ' +
+               'always true?</span></p>';
+    document.writeln(qStr);
+    var stmt;
+    var opt = ['never true','sometimes true','always true'];
+    for (var i=0; i < 3; i++) {
+        switch (which[i]) {
+            case 0:
+                stmt = randomSample(never, 1, true);
+                aVal = 'a';
+                break;
+            case 1:
+                stmt = randomSample(canBe, 1, true);
+                aVal = 'b';
+                break;
+            case 2:
+                stmt = randomSample(always, 1, true);   
+                aVal = 'c';
+                break;
+         }
+         document.writeln('<p><span class="qSpan">' + stmt + '</span>');
+         writeSelectExercise(false, qCtr++, opt, aVal);
+         document.writeln('</p>');
+    }       
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No ', ' Not all '];
+    var cats = [' A', ' B', ' C', ' D'];
+    var whichQuants = listOfRandInts(3, 0, quants.length-1);
+    var whichCats = listOfRandInts(6, 0, cats.length-1);
+    var repeat = false;
+    var noMiddle = false;
+    if (whichCats[0] == whichCats[1] || whichCats[2] == whichCats[3] || whichCats[4] == whichCats[5]) {
+        repeat = true;
+    } 
+    if (whichCats[0] != whichCats[2] && whichCats[0] != whichCats[3] 
+                && whichCats[1] != whichCats[2] && whichCats[1] != whichCats[3]) {
+        noMiddle = true;
+    }
+    var nMajor = 0;
+    var nMinor = 0;
+    var nMiddle = 0;
+    for (var i=0; i < 4; i++) {
+         if (whichCats[i] == whichCats[4]) {
+             nMinor++;
+         } else if (whichCats[i] == whichCats[5]) {
+             nMajor++;
+         } else {
+             nMiddle++;
+         }
+    }
+    var isSyll = false;
+    if (nMinor == 1 && nMajor == 1 && !noMiddle && !repeat) {
+         isSyll = true;
+    }
+    isStandard = false;
+    if (isSyll && (whichCats[0] == whichCats[5] || whichCats[1] == whichCats[5]) ) {
+         isStandard = true;
+    }
+    var theArgument = quants[whichQuants[0]] + cats[whichCats[0]] + ' are ' + cats[whichCats[1]] + '. ' + 
+                      quants[whichQuants[1]] + cats[whichCats[2]] + ' are ' + cats[whichCats[3]] + '. ' +
+                      'Therefore, ' + quants[whichQuants[2]].toLowerCase() + cats[whichCats[4]] + 
+                      ' are ' + cats[whichCats[5]] + '. ';
+    var qStr = 'Consider the following three line argument: <span class="example">' + theArgument + '</span>' +
+               '<span class="qSpan">Is the argument a categorical syllogism?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    var aVal = (isSyll)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Is the argument in standard form for a categorical syllogism?</span>';
+    document.writeln(qStr);
+    aVal = (isStandard)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No ', ' Not all '];
+    var cats = Alphabet;
+    var whichQuants = listOfRandInts(3, 0, quants.length-1);
+    var whichCats = listOfDistinctRandInts(3, 0, cats.length-1);
+    var majorFirst = randBoolean();
+    var firstFirst = randBoolean();
+    var secondFirst = randBoolean();
+    var premise1 = quants[whichQuants[0]] + ' ';
+    premise1 += (majorFirst)? 
+                      ((firstFirst)? 
+                         cats[whichCats[0]] + ' are ' + cats[whichCats[2]] + '. '
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[0]] + '. ')
+                    :
+                      ((firstFirst)? 
+                         cats[whichCats[1]] + ' are ' + cats[whichCats[2]] + '. ' 
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[1]] + '. ');
+    var premise2 = quants[whichQuants[1]] + ' ';
+    premise2 += (majorFirst)? 
+                      ((secondFirst)? 
+                         cats[whichCats[1]] + ' are ' + cats[whichCats[2]] + '. '
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[1]] + '. ')
+                    :
+                      ((secondFirst)? 
+                         cats[whichCats[0]] + ' are ' + cats[whichCats[2]] + '. ' 
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[0]] + '. ');
+    var conclude = quants[whichQuants[2]] + cats[whichCats[1]] + ' are ' + cats[whichCats[0]] + '. ';
+    var qStr = 'Consider the following syllogism: <span class="example">' + premise1 + premise2 + 
+               ' Therefore, ' + conclude + '</span></p>';
+    document.writeln(qStr);
+    var aVal = 'a';
+    qStr = '<p><span class="qSpan">The major, minor and middle terms are, respectively:</span>';
+    document.writeln(qStr);
+    wcats = [cats[whichCats[0]], cats[whichCats[1]], cats[whichCats[2]]];
+    var rawOpt = [ wcats[0] + ', ' + wcats[1] + ', ' + wcats[2],
+                   wcats[0] + ', ' + wcats[2] + ', ' + wcats[1],
+                   wcats[1] + ', ' + wcats[0] + ', ' + wcats[2],
+                   wcats[1] + ', ' + wcats[2] + ', ' + wcats[0],
+                   wcats[2] + ', ' + wcats[0] + ', ' + wcats[1],
+                   wcats[2] + ', ' + wcats[1] + ', ' + wcats[0],
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">The major premise, minor premise and conclusion are, respectively:</span>';
+    document.writeln(qStr);
+    var majorP = (majorFirst)? premise1 : premise2;
+    var minorP = (majorFirst)? premise2 : premise1;
+    var pats = [ majorP, minorP, conclude];
+    var rawOpt = [ pats[0] + ', ' + pats[1] + ', ' + pats[2],
+                   pats[0] + ', ' + pats[2] + ', ' + pats[1],
+                   pats[1] + ', ' + pats[0] + ', ' + pats[2],
+                   pats[1] + ', ' + pats[2] + ', ' + pats[0],
+                   pats[2] + ', ' + pats[0] + ', ' + pats[1],
+                   pats[2] + ', ' + pats[1] + ', ' + pats[0],
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Is the argument in standard form for a categorical syllogism?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    aVal = (majorFirst)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Which of the following represents the syllogism in set notation?</span>';
+    function quantToSet(s1, s2, q) {
+         var a = '';
+         switch(q) {
+             case 0:
+                 a = s1 + '&sub;' + s2;
+                 break;
+             case 1:
+                 a = s1 + '&nsub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 2:
+                 a = s1 + '&sub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 3:
+                 a = s1 + '&nsub;' + s2;
+                 break;
+          }
+          return(a);
+    }
+    var prem1Set = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[0])
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[0])
+                      );
+    var prem2Set = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[1])
+                       )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[1])
+                      );
+    var conclSet = quantToSet(cats[whichCats[1]], cats[whichCats[0]], whichQuants[2]);
+    var prem1SetA = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[0])
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[0])
+                      );
+    var prem2SetA = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[1])
+                      )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[1])
+                      );
+    var conclSetA = quantToSet(cats[whichCats[0]], cats[whichCats[1]], whichQuants[2]);
+    function twist(j, k) {
+        return((k+Math.floor(j/2)) % j);
+    }
+    var prem1SetB = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], twist(quants.length,whichQuants[0]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], twist(quants.length,whichQuants[0]))
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], twist(quants.length,whichQuants[0]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], twist(quants.length,whichQuants[0]))
+                      );
+    var prem2SetB = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], twist(quants.length,whichQuants[1]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], twist(quants.length,whichQuants[1]))
+                      )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], twist(quants.length,whichQuants[1]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], twist(quants.length,whichQuants[1]))
+                      );
+    var conclSetB = quantToSet(cats[whichCats[1]], cats[whichCats[0]], twist(quants.length,whichQuants[2]));
+    document.writeln(qStr);
+    var rawOpt = [ prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1Set + '. ' + prem2SetA + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1Set + '. ' + prem2SetB + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetA + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1SetB + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSetA + '. '
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var whichCats = listOfDistinctRandInts(3, 0, Alphabet.length-1);
+    var quints = [
+                  [0, 0, 0, 1, 1, 0],
+                  [0, 1, 1, 1, 0, 0],
+                  [0, 1, 1, 1, 1, 0],
+                  [0, 3, 3, 0, 1, 0],
+                  [0, 2, 2, 0, 0, 0],
+                  [0, 2, 2, 0, 1, 0],
+                  [2, 0, 2, 0, 1, 0],
+                  [2, 0, 2, 1, 1, 0],
+                  [2, 1, 3, 0, 0, 0],
+                  [2, 1, 3, 0, 1, 0],
+                  [2, 1, 3, 1, 0, 0],
+                  [2, 1, 3, 1, 1, 0],
+                  [1, 0, 1, 1, 0, 0],
+                  [1, 0, 1, 0, 0, 0],
+                  [3, 0, 3, 1, 0, 0],
+  //
+                  [0, 3, 3, 0, 0, 0],
+                  [0, 1, 1, 0, 0, 0],
+                  [0, 3, 1, 0, 0, 0],
+                  [1, 0, 3, 0, 0, 0],
+                  [1, 1, 1, 0, 0, 0],
+                  [1, 1, 3, 0, 0, 0],
+                  [1, 2, 0, 0, 0, 0],
+                  [1, 2, 1, 0, 0, 0],
+                  [1, 2, 0, 0, 0, 0],
+                  [1, 2, 3, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 1, 1, 0, 1, 0],
+                  [0, 3, 3, 1, 0, 0],
+                  [0, 2, 2, 1, 0, 0],
+                  [0, 2, 2, 1, 1, 0],
+                  [2, 0, 2, 0, 0, 0],
+                  [2, 0, 1, 0, 0, 0],
+                  [2, 0, 1, 1, 0, 0],
+                  [2, 1, 1, 0, 0, 0],
+                  [2, 1, 1, 1, 0, 0],
+                  [2, 2, 0, 0, 0, 0],
+                  [2, 2, 2, 0, 0, 0],
+                  [2, 3, 1, 0, 0, 0],
+                  [2, 3, 1, 0, 1, 0],
+                  [2, 3, 3, 0, 0, 0],
+                  [2, 3, 3, 0, 1, 0],
+                  [3, 2, 1, 0, 0, 0],
+                  [3, 0, 3, 0, 1, 0],
+                  [3, 0, 3, 1, 1, 0]
+                 ];
+    var whichQuint = listOfDistinctRandInts(3, 0, quints.length-1);
+    function quantToSet(s1, s2, q) {
+         var a = '';
+         switch(q) {
+             case 0:
+                 a = s1 + '&sub;' + s2;
+                 break;
+             case 1:
+                 a = s1 + '&nsub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 2:
+                 a = s1 + '&sub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 3:
+                 a = s1 + '&nsub;' + s2;
+                 break;
+          }
+          return(a);
+    }
+    var qStr = '<span class="qSpan">Are the following arguments valid or invalid?</span></p>';
+    document.writeln(qStr);
+    var p1 = (quints[whichQuint[0]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[0]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[0]][0]);
+    var p2 = (quints[whichQuint[0]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[0]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[0]][1]);
+    var concl = (quints[whichQuint[0]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[0]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[0]][2]);
+    var qStr = '<p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[0]< 15)? 'b':'a';
+    var opt = ['invalid','valid'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var p1 = (quints[whichQuint[1]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[1]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[1]][0]);
+    var p2 = (quints[whichQuint[1]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[1]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[1]][1]);
+    var concl = (quints[whichQuint[1]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[1]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[1]][2]);
+    var qStr = '</p><p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[1]< 15)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);    
+    var p1 = (quints[whichQuint[2]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[2]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[2]][0]);
+    var p2 = (quints[whichQuint[1]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[2]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[2]][1]);
+    var concl = (quints[whichQuint[1]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[2]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[2]][2]);
+    var qStr = '</p><p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[2]< 15)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);    
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

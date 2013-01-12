@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 15:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "montyHall";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<!-- let's make a deal scripts -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/lmad.js"></script>
+
+
+<form method="POST">
+
+<h1>
+    <a id="lets_make_a_deal"></a>The
+  &quot;Let's Make a Deal&quot; (Monty Hall) Problem
+</h1>
+
+<p>
+    Turning word problems into probability problems can be subtle, and
+    intuition about probability can be misleading.
+    This chapter looks carefully at a problem that has confused both the
+    general public and professional mathematicians and statisticians:
+    the <em>Let's Make a Deal</em> or <em>Monty Hall</em> problem.
+    At issue is whether the <a class="glossRef" href="gloss.htm#condition_probability">conditional
+    probability</a> of two <a class="glossRef" href="gloss.htm#event">events</a> is equal.
+</p>
+
+<h2><a id="background"></a>Background</h2>
+<p>
+    &quot;Let's make a Deal&quot; is a game show on
+    television. Frequently in the show a contestant tries to guess which of three doors hides
+    a prize. 
+    Often, after the contestant chooses, the host reveals to the contestant
+    that the prize is not behind one of the doors the contestant did not pick; the host then
+    offers the contestant the opportunity to change his/her guess to the remaining door.
+</p>
+
+<p>
+    Whether it is better strategy at that point to switch one's guess is a
+    question that has generated some publicity: Marilyn vos Savant,
+    &quot;the world's smartest person,&quot; has a syndicated column called
+    &quot;Ask Marilyn,&quot; in which she said that switching is the better
+    strategy.
+    A number of professors wrote to her with proofs that switching does not help.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is an implementation of the game.
+    The question marks represent the three doors.
+    Click one of the question marks; what is behind another door will be revealed:
+</p>
+
+<p class="math">
+    <img src="../Graphics/answer_empty.gif" width="27" height="27">
+    means the prize <strong>was not</strong> behind that door.
+</p>
+
+<p class="math">
+    <img src="../Graphics/answer_good.gif" width="23" height="23">
+    means the prize <strong>was</strong> behind the door.
+</p>
+
+<p>
+    Either click the same door again (stick with your original guess),
+    or switch your guess by clicking the other closed door.
+    What was behind the two unopened doors then will be revealed.
+    To play again, click any door, or click the New Game button.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Model of the Let\'s Make a Deal Game.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="math">
+<a href="javascript:void(0)"
+     onClick="revealDoor(0)"><img src="../Graphics/question.gif"
+     width="32" height="32" alt="click to reveal contents"></a>
+<a href="javascript:void(0)" onClick="revealDoor(1)"><img src="../Graphics/question.gif"
+     width="32" height="32" alt="click to reveal contents"></a>
+<a href="javascript:void(0)" onClick="revealDoor(2)"><img src="../Graphics/question.gif"
+    alt="click to reveal contents" width="32" height="32"></a>
+</p>
+<p class="math">
+    <center>
+    <input type="button" value="New Game" name="makeADealButton" onClick="shufflePrize()">
+    </center>
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var dr = document.images.length;
+    for (i=0; i < nDoors; i++){
+        doorLocations[i] = dr-3+i;
+    }
+    sectionContext += 'shufflePrize();\n';
+// -->
+</script>
+
+<p>
+    Be assured that the game is programmed so that the prize is hidden at random
+    before you pick a door, with chance 1/3 of being behind each of the doors.
+    The prize stays put until you start a new game; it is then placed behind
+    one of the doors at random again.
+</p>
+
+<p>
+    We shall take a closer look at the question of the better strategy
+    (stick with the original guess, or switch to the other unopened door),
+    from several points of view.
+</p>
+
+<h2><a id="assumptions_arguments"></a>
+    Assumptions and Arguments
+</h2>
+
+<p>
+    We shall begin by making the rules of the game precise, so that we
+    can compare the arguments carefully.
+    Then we shall examine two arguments against switching&mdash;one naive and one
+    based on conditional probability&mdash;and two arguments for
+    switching&mdash;one heuristic and one based on conditional probability.
+</p>
+
+<h3><a id="assumptions_rules"></a>
+    Assumptions and Rules of the Game
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=3605&end=3655" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>We shall assume that the game is played as follows: </p>
+
+<ol>
+    <li>The prize is hidden randomly, with chance 1/3 of being behind each
+      of the three doors.</li>
+    <li>The contestant picks a door at random, with chance 1/3 of picking
+      each door.</li>
+    <li>The contestant's choice is <a class="glossRef" href="gloss.htm#independent">independent</a>
+      of the door the prize is really behind.</li>
+    <li>After the contestant guesses, the host <em>always</em> reveals that
+      the prize is not behind one of the two doors the contestant did not pick.
+      If the contestant happens to pick the correct door the first time, the host
+      chooses which of the
+      other two doors to reveal randomly, with chance 50% each.</li>
+</ol>
+<p>
+    The game in this chapter satisfies assumptions (1) and (4), and,
+    neglecting paranormal abilities on your part, also satisfies (3).
+    I have no way to know
+    whether your way of picking a door satisfies (2) or not, but in fact,
+    the assumption is not needed&mdash;we could eliminate assumptions 2 and 3 by
+    <a class="glossRef" href="gloss.htm#conditional_probability">conditioning</a> on the door
+    the contestant picks, and the analysis would be essentially the same.
+    With these assumptions, we are ready for the arguments.
+</p>
+
+<h3><a id="arg1"></a>
+    Argument 1 (don't switch&mdash;naive)
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=3655&end=3674" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Argument 1 says it cannot help to switch: After the host reveals what is
+    behind one door, there are two doors left, and the prize is equally
+    likely to be behind either one.
+    Therefore, there is no advantage to switching
+</p>
+
+<h3><a id="arg2"></a>
+    Argument 2 (don't switch&mdash;conditional probability)
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=3674&end=3818" frameborder="0" allowfullscreen></iframe>
+</p>
+
+
+<p>
+    Argument 2 is a more sophisticated version of  Argument 1,
+    using conditional probability. I think this is the argument that the professors had in mind.
+</p>
+
+<p>
+    We shall call the three doors <em>a</em>, <em>b</em>, and <em>c</em>.
+    Let <em>A</em> be the event that the prize
+    is behind door <em>a</em>, <em>B</em> be the event that the prize is behind <em>b</em>, etc.
+    To keep things definite, we assume the contestant picks <em>a</em>;
+    the host then reveals either <em>B</em><sup>c</sup> or
+    <em>C</em><sup>c</sup>, that is, that the prize is
+    not behind <em>b</em> or that the prize is not behind <em>c</em>.
+    For definiteness, suppose the host reveals <em>B</em><sup>c</sup>.
+</p>
+
+<p>
+    According to Argument 2, the contestant should switch if the
+    conditional probability of <em>C</em> given <em>B</em><sup>c</sup> is larger than the
+    conditional probability of <em>A</em> given <em>B</em><sup>c</sup>,
+    because then the chance of
+    winning, having learned that the prize is not behind door <em>b</em>,
+    is higher if the contestant switches.
+    Here is the algebra:
+</p>
+
+<p class="math">
+    P(<em>C</em> | <em>B</em><sup>c</sup>) = P(<em>CB</em><sup>c</sup>)/P(<em>B</em><sup>c</sup>)
+</p>
+
+<p class="math">
+    = P(<em>C</em>)/P(<em>B</em><sup>c</sup>)
+</p>
+
+<p class="math">
+    = (1/3)/(2/3)
+</p>
+
+<p class="math">
+    = 1/2.
+</p>
+
+<p>
+    The second line uses the fact that <span class="math">CB<sup>c</sup> = C</span>:
+    The only way that the prize can be behind door <em>c</em> is if it is not
+    behind door <em>b</em>, so <em>C</em> is a subset of
+    <em>B</em><sup>c</sup>, and hence <em>CB</em><sup>c</sup> = <em>C</em>.
+    By similar reasoning,
+</p>
+
+<p class="math">
+    P(<em>A</em> | <em>B</em><sup>c</sup>) = P(<em>AB</em><sup>c</sup>)/P(<em>B</em><sup>c</sup>)
+</p>
+
+<p class="math">
+    = P(<em>A</em>)/P(<em>B</em><sup>c</sup>)
+</p>
+
+<p class="math">
+    = (1/3)/(2/3)
+</p>
+
+<p class="math">
+    = 1/2.
+</p>
+
+<p>
+    Thus there is no advantage to switching.
+</p>
+
+
+<h3><a id="arg3"></a>
+    Argument 3 (switch&mdash;heuristic)
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=3818&end=3966" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Marilyn's argument went something like this:
+</p>
+
+<p>
+    Suppose you play over and over.
+    In the long run, 1/3 of the time, your first guess will be right.
+    So, if you never switch, you will win 1/3 of the time.
+    But when your first guess is wrong (which happens 2/3 of the time in
+    the long run), you will win if you switch.
+    So, if you switch every time, you will win 2/3 of the time in the long run.
+    Thus you should switch.
+</p>
+
+<p>
+    This argument essentially applies the
+    <a class="glossRef" href="gloss.htm#theories_of_probability">Frequency Theory of Probability</a>
+    to determine the probability of winning by a particular strategy:
+    If, in the long run, a contestant would win 2/3 of the time by switching,
+    the probability of winning by switching is 2/3.
+    Marilyn's argument seems pretty persuasive, but what about the more mathematical
+    argument using conditional probability?
+    Why do they disagree?
+    Doesn't the mathematical argument have to be right?
+</p>
+
+<p>
+    Actually,  Argument 2 calculates a conditional probability that has little to
+    do with how the game is played.
+    In the notation we used in Argument 2, the event that we condition on
+    should not be <em>B</em><sup>c</sup>.
+    The contestant does not learn &quot;out of the blue&quot; that the prize
+    is not behind door <em>b</em>.
+    Rather, the host's choice to open door <em>b</em> depends on which door the
+    contestant picked, and on which door the prize is really behind.
+    This leads us to the fourth argument.
+</p>
+
+<h3><a id="arg4"></a>
+    Argument 4 (switch&mdash;conditional probability)
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=3966&end=4590" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    According to the fourth argument, the conditional probability we seeks is actually
+</p>
+
+<p class="math">
+    P(<em>C</em> |  {pick <em>a</em>} and {host reveals <em>B</em><sup>c</sup>}).
+</p>
+
+<p>
+    To calculate this conditional probability, we need to use the rest of the
+    assumptions; only the first was needed for the other arguments.
+    Under the assumptions, {<em>C</em> and {pick <em>a</em>}} implies
+    {host reveals <em>B</em><sup>c</sup>},
+    because <em>b</em> is the only door the host can open without revealing the prize.
+    Thus the event {<em>C</em> and {pick <em>a</em>} } is a subset
+    of the event {host reveals <em>B</em><sup>c</sup>}.
+    The chance of the event {<em>C</em> and {pick <em>a</em>} } is
+</p>
+
+<p class="math">
+    P(<em>C</em> and {pick <em>a</em>} ) = 1/3 &times; 1/3 = 1/9
+</p>
+
+<p>
+    using our assumption that the random hiding of the prize is independent of
+    the contestant's choice of a door.
+</p>
+
+<p>
+    The chance of the event
+</p>
+
+<p class="math">
+    { {pick <em>a</em>} and
+    {host reveals <em>B</em><sup>c</sup>} }
+</p>
+
+<p>
+    can be found as follows.
+    The event can occur two ways: Either the prize really is behind door <em>a</em> or
+    really is behind door <em>c</em>; these possibilities are mutually exclusive, so
+    they <a class="glossRef" href="href="gloss.htm#partition">partition</a> the event
+    <span class="math">{ {pick <em>a</em>} and
+    {host reveals <em>B</em><sup>c</sup>} }</span>.
+     Hence,
+</p>
+</p>
+
+<p class="math">
+    P({pick <em>a</em>} and {host reveals <em>B</em><sup>c</sup>}) =
+</p>
+
+<p class="math">
+    P(<em>A</em> and {pick <em>a</em>} and
+    {host reveals <em>B</em><sup>c</sup>}) + P(<em>C</em> and
+    {pick <em>a</em>} and {host reveals <em>B</em><sup>c</sup>}).
+</p>
+
+<p>
+    The latter summand is 1/9, as we just saw.
+    We can find the first summand using the
+    <a class="glossRef" href="gloss.htm#multiplication_rule">Multiplication Rule</a>
+    for conditional probabilities:
+</p>
+
+<p class="math">
+    P(<em>A</em> and {pick <em>a</em>} and {host reveals <em>B</em><sup>c</sup>}) =
+</p>
+
+<p class="math">
+    P({host reveals <em>B</em><sup>c</sup>} | <em>A</em> and
+    {pick <em>a</em>}) &times; P(<em>A</em> and {pick <em>a</em>})
+</p>
+
+<p class="math">
+    = 1/2 &times; 1/9 = 1/18
+</p>
+
+<p>
+    using the assumption that the host decides randomly which door
+    to reveal if the contestant picked the right door the first time,
+    and the assumption that the contestant's choice of door and the
+    hiding of the prize behind a door are independent.
+    We thus find
+</p>
+
+<p class="math">
+    P(<em>C</em> |  {pick <em>a</em>} and {host reveals <em>B</em><sup>c</sup>}) =
+</p>
+
+<p class="math">
+    P(<em>C</em> and {pick <em>a</em>} and
+       {host reveals <em>B</em><sup>c</sup>})/P({pick <em>a</em>} and
+       {host reveals <em>B</em><sup>c</sup>})
+</p>
+
+<p class="math">
+    = (1/9)/(1/9 + 1/18)
+</p>
+
+<p class="math">
+    = 2/3.
+</p>
+
+<p>
+    This agrees with Marilyn's conclusion: switching is better.
+</p>
+
+<h2><a id="conclusions"></a>Conclusions</h2>
+
+<p>
+    Which of these arguments do you find most satisfactory? Most intuitive?
+</p>
+
+<ul>
+    <li>
+        Argument 1 jumps to the fallacious conclusion that if there are two
+        outcomes, they must be equally likely.
+    </li>
+    <li>
+        Argument 2 misuses conditional probability, by not recognizing
+        that the host's choice of door to open depends on which
+        door the contestant picks.
+    </li>
+    <li>
+        Argument 3 is simple, and depends only on the assumption that the
+        prize initially is equally likely to be behind any of the three doors.
+    </li>
+    <li>
+        Argument 4 is technical, and requires additional assumptions about
+        independence, how the host decides which door to show when the
+        contestant picked the right one in the first place, etc.
+    </li>
+</ul>
+
+<p>
+    In 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHallTest') + ', ');
+// -->
+</script>
+    we will construct an empirical approach to
+    testing which conclusion is correct.
+</p>
+
+<p>
+    The following exercises check your ability to extend the reasoning we used
+    in this chapter to more complicated situations.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qDoors = (listOfRandInts(1,4,10))[0];
+    var pPrizeSwitch = roundToDig(100*((qDoors-1)/qDoors)/(qDoors-2),2);
+    var pPrizeNoSwitch = roundToDig(100/qDoors,2);
+    var qStr = 'Consider playing &quot;Let\'s Make A Deal&quot; with the prize hidden ' +
+           'behind one of ' + cardinals[qDoors]   + ' doors, instead of behind one ' +
+           'of three doors.  The rules and the host\'s strategy are otherwise ' +
+           'unchanged, except that if you decide to switch, you pick one of the ' +
+           'remaining doors at random, with equal probability of picking each of the ' +
+           cardinals[qDoors-2]   + ' doors other than the one you chose first, and ' +
+           'the one the host opened. <span class="qSpan">The chance that the first ' +
+           'door picked conceals the prize is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pPrizeNoSwitch/100.0));
+    var qStr = '</p><p><span class="qSpan">The chance that you win by switching is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pPrizeSwitch/100.0));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+    'The chance that the prize is behind the first door chosen is </p><p class="math"> ' +
+    '100%/(#doors) = ' + pPrizeNoSwitch.toString() + '%. </p><p>' +
+    'The chance that the prize is behind one of the doors you did not pick first is ' +
+    '</p><p class="math">' +
+    '100%&times;(#doors - 1)/(#doors) = ' +
+      roundToDig(100*(qDoors-1)/qDoors,2) + '%. </p><p> ' +
+    'Given that the prize is not behind the opened door, the events that the prize is behind ' +
+    'each of the remaining ' + cardinals[qDoors-2]  +
+    ' doors are equally likely. The chance that you win if you switch to one of those ' +
+     cardinals[qDoors-2] + ' at random is thus </p><p class="math"> ' +
+    ' 100%&times;(#doors - 1)/<font size="+1">(</font>(#doors) ' +
+    ' &times;(#doors - 2)<font size="+1">)</font> </p><p class="math"> = ' +
+      roundToDig(100*(qDoors-1)/qDoors,2) + '%/' + (qDoors-2).toString() + '</p> ' +
+    '<p class="math"> = ' + pPrizeSwitch + '%. '
+    );
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var ansStr = 'This is actually more straightforward than the real game, where the host ' +
+        'never opens the door that hides the prize. ' +
+        'We can break up the outcomes according to whether or not you ' +
+        'picked the correct door.  Those possibilities are disjoint, so: ' +
+        '</p><p align=\"center\"> P(host reveals prize) = </p><p align=\"center\"> ' +
+        'P({host reveals prize} and  {pick correct door}) + ' +
+        'P({host reveals prize} and {pick incorrect door})</p><p align=\"center\"> = ' +
+        'P({host reveals prize} and {pick incorrect door}),</p><p>' +
+        'because the host cannot reveal the prize if you picked the door that ' +
+        'conceals the prize.  By the multiplication rule, the probability that ' +
+        'the host reveals the prize (and you pick an incorrect door) is the ' +
+        'conditional probability that the host ' +
+        'reveals the prize given that you pick an incorrect door, times the ' +
+        'unconditional probability that you pick an incorrect door.  The ' +
+        'conditional probability that the host reveals the prize, given that ' +
+        'you pick a door that does not have the prize behind it ' +
+        'is 1/(#doors - 1), and the probability that you pick such a door door is ' +
+        '(#doors - 1)/(#doors), so</p><p align=\"center\"> ' +
+        'P(host reveals prize) = ' +
+        '<font size=\"+1\">(</font>1/(#doors - 1)<font size=\"+1\">)</font> ' +
+        '&times;<font size=\"+1\">(</font>(#doors - 1)/(#doors)<font size=\"+1\">) ' +
+        '</font> = 1/(#doors) = ' +
+        (roundToDig(100/qDoors,2)).toString() + '%.</p><p>' +
+        'Now we get to the second part of the problem: the chance of winning by ' +
+        'switching, given that the host\'s door did not conceal the prize. ' +
+        'To win by switching, the first guess must be wrong.  We apply the ' +
+        'multiplication rule repeatedly to find </p><p align=\"center\"> ' +
+        'P({win by switching} and {host does not reveal prize}) </p>' +
+        '<p align = \"center\"> = ' +
+        'P({win by switching} and {host does not reveal prize} and {first guess is ' +
+        'wrong}) </p><p align=\"center\"> = ' +
+        'P({win by switching} | {host does not reveal prize} and {first ' +
+        'guess is wrong})&times;P({host does not reveal prize} and {first guess is ' +
+        'wrong})</p><p align=\"center\"> = P({win by switching} | ' +
+        '{host does not reveal prize} and {first ' +
+        'guess is wrong})&times;P({host does not reveal prize} | {first guess is ' +
+        'wrong})&times;P(first guess is wrong)</p><p align=\"center\"> ' +
+        '= (1/(#doors - 2)) &times; ((#doors - 2)/(#doors - 1)) &times; ' +
+        '(#doors - 1)/(#doors) = 1/(#doors).</p><p> By the definition of ' +
+        'conditional probability, we seek </p><p align=\"center\"> ' +
+        'P({win by switching} | {host does not reveal prize}) </p><p align=\"center\">' +
+        ' = P({win by switching} and {host does not reveal prize})/P(host does not ' +
+        'reveal prize).</p><p> The denominator is the probability of the complement ' +
+        'of the event in the first part of the question, so </p><p align=\"center\">' +
+        'P(host does not reveal prize) = 100% - 1/(#doors) = ' +
+        '(#doors - 1)/(#doors),</p><p> and thus </p><p align=\"center\">' +
+        'P({win by switching} | {host does not reveal prize}) = ' +
+        '(1/(#doors))/((#doors - 1)/(#doors)) </p><p align=\"center\"> ' +
+        ' =  1/(#doors - 1) = ' +
+        (roundToDig(100/(qDoors-1),2)).toString() + '%.</p>';
+    var aVal = numToRange(1/qDoors);
+    var qStr = 'Suppose that the game were played with different rules, too: the host ' +
+           'decides randomly which of the doors you did not pick first to open, ' +
+           'with equal probability of opening each of the ' + cardinals[qDoors-1]   +
+           ' doors, regardless of where the prize is. Sometimes, that reveals ' +
+           'the prize. </p><p><span class="qSpan">The probability that the host ' +
+           'opens the door that conceals the prize is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    var qStr = '</p><p><span class="qSpan">The conditional chance that you win by ' +
+           'switching, given that the door the host opens does not conceal the ' +
+           'prize, is</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(1/(qDoors-1));
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider another variant of the game with ' + cardinals[qDoors]   +
+           ' doors. The prize is hidden at random behind one of the doors, ' +
+           'with equal chance of being behind each of the doors. Independently, ' +
+           'you pick one of the doors at random, again with equal chance of ' +
+           'picking each door. Independently of the hiding of the prize and of ' +
+           'your choice of a door, the host opens one of the doors at random, ' +
+           'with equal chance of opening each of the doors. This could result ' +
+           'in opening the door you pick first, or in opening the door that ' +
+           'conceals the prize (whether or not that is the door you picked first). ' +
+           '<span class="qSpan">The chance that the first door you pick conceals ' +
+           'the prize is </span>';
+    document.writeln(qStr);
+    var aVal = numToRange(1/qDoors);
+    writeTextExercise(8, qCtr++, aVal);
+    var qStr = '</p><p><span class="qSpan">The chance that the host opens the door that ' +
+           'hides the prize is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    var qStr = '</p><p><span class="qSpan">The conditional chance that the first door ' +
+           'you pick hides the prize, given that the door the host opens does not ' +
+           'hide the prize, is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    var ansStr = 'The problem statement says that the event that you pick a given door ' +
+         'is independent of the hiding of the prize, so </p>' +
+         '<p align=\"center\">P({pick correct door first}) = ' +
+         'P({{pick first door} and {prize behind first door}} or ' +
+         '{{pick second door} and {prize behind second door}} or ' +
+         '&hellip; or ' +
+         '{{pick ' + ordinals[qDoors] + ' door} and {prize behind ' +
+         ordinals[qDoors] + ' door}})</p><p align=\"center\"> = ' +
+         'P({pick first door} and {prize behind first door}) + ' +
+         'P({pick second door} and {prize behind second door}) + ' +
+         '&hellip; + ' +
+         'P({pick ' + ordinals[qDoors] + ' door} and {prize behind ' +
+         ordinals[qDoors] + ' door})</p><p align=\"center\"> = ' +
+         '(1/(#doors))&times;(1/(#doors)) + (1/(#doors))&times;(1/(#doors)) + ' +
+         '&hellip; + ' +
+         '(1/(#doors))&times;(1/(#doors))</p><p align=\"center\"> = 1/(#doors)' +
+         '</p><p align=\"center\"> = ' +
+         roundToDig(100/qDoors,2) + '%.</p><p>' +
+         'Essentially the same computation shows that the chance that the host opens ' +
+         'the door that hides the prize is ' + roundToDig(100/qDoors,2) + '%.</p><p>' +
+         'The conditional chance that the door you first pick hides the prize, given ' +
+         'that the door the host opens does not hide the prize, is also ' +
+         roundToDig(100/qDoors,2) + '%, because the event that you pick the door with ' +
+         'the prize and the event that the host opens a door without the prize are ' +
+         'independent.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var paths = (listOfDistinctRandInts(2,2,6)).sort(numberLessThan);
+   var pVal = 0;
+   for (var i= paths[0]; i > 0; i--) {
+       pVal += (paths[1] - i)/(paths[1]*paths[0]);
+   }
+   aVal = numToRange(pVal);
+   var ansStr = 'The mouse in the first maze (mouse 1) beats the mouse in the second ' +
+        'maze (mouse 2) if mouse 1 tries all ' + cardinals[paths[0]] +
+        ' paths before finding the cheese and mouse 2 tries more than ' +
+        cardinals[paths[0]] + ' paths before finding the cheese, ';
+   for (var i= paths[0]-1; i > 1; i--) {
+       ansStr += ' or if mouse 1 tries ' + cardinals[i] + ' paths and mouse 2 tries ' +
+         cardinals[i+1] + ' or more paths,'
+   }
+   ansStr += ' or if mouse 1 tries one path and mouse 2 tries two or more paths. ';
+   ansStr += 'These possibilities are disjoint, so to find the probability of their ' +
+         'union, we add their probabilities.  The event that mouse 1 tries any ' +
+         'particular number of paths is independent of the event that mouse 2 tries ' +
+         'any particular number or numbers of paths, so we can find the probabilities ' +
+         'of the intersections in each of these possibilities by multiplying the ' +
+         'probabilities for each mouse.  We can think of each mouse as ordering the ' +
+         'paths in its maze randomly, with each path equally likely to be in any given ' +
+         'place in the ordering; the mouse stops on the <em>k</em>th trip if the ' +
+         'path that leads to the cheese is the <em>k</em>th path in its ordering. ' +
+         'The chance that the path that leads to the cheese is the <em>k</em>th path ' +
+         'is 1/n, where n is the number of paths in that mouse\'s maze. Moreover, the ' +
+         'event that a mouse tries exactly <em>k</em> paths is mutually exclusive of ' +
+         'the event that the same mouse tries exactly <em>l</em> paths unless ' +
+         '<em>k</em> = <em>l</em>. Thus the ' +
+         'chance that mouse 1 tries ' + cardinals[paths[0]] + ' paths and mouse 2 tries ' +
+         ' more than ' + cardinals[paths[0]] + ' paths is </p><p align=\"center\">' +
+         '(1/' + paths[0] + ')&times;(' + (paths[1]-paths[0]).toString() + '/' +
+         paths[1] + ') = ' + roundToDig(100*(paths[1]-paths[0])/(paths[1]*paths[0]),2) +
+         '%. </p><p>';
+   if (paths[0] > 2) { ansStr += 'The other pieces are computed in the same way. '; }
+   ansStr += 'The last piece, the chance that mouse one finds the cheese on its first ' +
+         'attempt and mouse 2 has to try more than one path, is </p><p align=\"center\">' +
+         '(1/' + paths[0] + ')&times;(' + (paths[1]-1).toString() + '/' +
+         paths[1] + ') = ' + roundToDig(100*(paths[1]-1)/(paths[1]*paths[0]),2) + '%; ' +
+         '</p><p>the sum of the probabilities is ' + roundToDig(100*pVal,2) + '%. ';
+    var qStr = 'Two mice are put in separate mazes.  At the end of each maze is a piece ' +
+           'of cheese.  The mazes are simple: in each, only one path leads to the ' +
+           'cheese. The first maze has ' + cardinals[paths[0]]   +
+           ' paths, of which ' + cardinals[paths[0]-1];
+    if (paths[0] == 2) {
+           qStr += ' is a dead end, ';
+    } else {
+           qStr += ' are dead ends, ';
+    }
+    qStr += ' and the second maze has ' + cardinals[paths[1]]   + ' paths, of which ' +
+           cardinals[paths[1]-1];
+    if (paths[1] == 2) {
+           qStr += ' is a dead end, ';
+    } else {
+           qStr += ' are dead ends. ';
+    }
+    qStr += ' The mice move at the same speed, and all ' + cardinals[paths[0]+paths[1]]   + 
+           ' paths are the same length. ' +
+           'Each mouse decides randomly which path to take first, with equal chance of ' +
+           'taking each path in its maze.  If the path leads to a dead end, the mouse ' +
+           'goes back to the starting point (at the same speed), and picks one of ' +
+           'the remaining paths at random, with equal chance of taking each of the ' +
+           'untrodden paths in its maze. This continues until each mouse finds the ' +
+           'cheese in its maze. The mice behave independently. ' +
+           '<span class="qSpan">What is the chance that the mouse in the first ' +
+           'maze takes less time to find the cheese than the mouse in the second ' +
+           'maze does?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    Intuition about probability can be misleading; so can careless
+    probability calculations.
+    Conditional probability can be subtle, especially when turning a verbal
+    story into a mathematical problem: Be sure to condition on the right event.
+    Thinking about probabilities using frequentist ideas&mdash;considering what would happen in
+    repeated trials&mdash;sometimes can guide your intuition about probability.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>conditional probability</li>
+    <li>event</li>
+    <li>Frequency Theory of Probability</li>
+    <li>independent</li>
+    <li>Multiplication Rule</li>
+    <li>mutually exclusive</li>
+    <li>probability</li>
+</ul>
+
+</form>
+
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+
+</html>

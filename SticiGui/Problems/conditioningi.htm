@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "conditioning";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Conditional Probability, Multiplication Rule, Independence,
+    and Bayes' Rule
+</h2>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theCards = ["spade","seven","face card","two or a nine","heart or a diamond"];
+    var which = (listOfDistinctRandInts(2,0,theCards.length-1));
+    var pVec = [1/4, 1/13, 3/13, 2/13, 1/2];
+    var pCondition = [[12/51, 1/13, 12/52, 2/13, 26/51 ],
+                      [  1/4, 3/51, 12/51, 8/51, 1/2 ],
+                      [  1/4, 4/51, 11/51, 8/51, 1/2 ],
+                      [  1/4, 4/51, 12/51, 7/51, 1/2 ],
+                      [13/51, 4/52, 12/52, 2/13, 25/51]
+                     ];
+    var aVal = [[ 'a', 'c', 'c', 'c', 'a' ],
+                [ 'c', 'a', 'a', 'a', 'c' ],
+                [ 'c', 'a', 'a', 'a', 'c' ],
+                [ 'c', 'a', 'a', 'a', 'c' ],
+                [ 'a', 'c', 'c', 'c', 'a' ]
+               ];
+    var fromTop = (listOfRandInts(1,2,20))[0];
+    var opt = ["no","cannot be determined without knowing other cards","yes"];
+    var qStr = '<span class="qSpan">The chance that the top card in a well shuffed deck is a ' +
+               theCards[which[0]] + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(pVec[which[0]]));
+    qStr = '</p><p><span class="qSpan">The chance that the ' + ordinals[fromTop] +
+           ' card from the top of the deck is a ' + theCards[which[1]] + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(pVec[which[1]]));
+    qStr = '</p><p><span class="qSpan">The chance that the top card in the deck is a ' +
+            theCards[which[0]] + ' given that the ' + ordinals[fromTop] +
+            ' card from the top is a ' + theCards[which[1]] + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(pCondition[which[1]][which[0]]));
+    qStr = '</p><p><span class="qSpan">Are the events that the top card is a ' +
+           theCards[which[0]] + ' and that the ' + ordinals[fromTop] +
+           ' card is a ' + theCards[which[1]] + ' independent?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal[which[1]][which[0]]);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var pHit = roundToDig((listOfRandInts(1,1,4))[0]/10,1);
+    var nThrows = (listOfRandInts(1,5,10))[0];
+    var aVal = numToRange(1- Math.pow(1-pHit,nThrows));
+    var qStr = 'A mechanical dart thrower throws darts independently each time, ' +
+               'with probability ' + roundToDig(100*pHit,0) + '% of hitting the ' +
+               'bullseye in each attempt. <span class="qSpan">The chance that the ' +
+               'dart thrower hits the bullseye at least once in ' + nThrows.toString() +
+               ' attempts is</span> ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = (listOfDistinctRandInts(4,1,9)).sort(numberLessThan);
+    var pGood = roundToDig(theInts[2]/10,1);
+    var pSayBadBad = roundToDig(theInts[1]/10,1);
+    var pSayBadGood = roundToDig(theInts[0]/10,1);
+    var pGoodSayGood =pGood*(1-pSayBadGood)/(pGood*(1-pSayBadGood) + (1-pGood)*(1-pSayBadBad));
+    var aVal = numToRange(pGoodSayGood);
+    var qStr = 'Suppose that of all used cars of a particular year, make, and model, ' +
+               (roundToDig(100 - 100*pGood,0)).toString() + '% have bad brakes. ' +
+               'You are considering buying a used car of this year, make, and model. ' +
+               'You take the car to a mechanic to have the brakes checked. ' +
+               'The mechanic is not infallible: the chance that the mechanic will correctly ' +
+               'report that a car with bad brakes has bad brakes is ' +
+               roundToDig(100*pSayBadBad,0).toString() + '%, and the chance that the mechanic ' +
+               'will erroneously report that a car with good brakes has bad brakes is ' +
+               roundToDig(100*pSayBadGood,0).toString() + '%. <span class="qSpan">' +
+               'Assuming that the car you take to the mechanic is selected &quot;at random&quot; ' +
+               'from the population of cars of that year, make, and model, the chance that the ' +
+               'car\'s brakes are good given that the mechanic says its brakes are good is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var driveTraffic = roundToDig(1 + (listOfRandInts(1,0,3))[0]/10,1);
+    var driveMin = 60*driveTraffic + 10; // includes shuttle to SFO
+    var threshMin = driveMin - 60 + listOfRandInts(1,0,9)[0];
+    var pBridge = roundToDig((listOfRandInts(1,3,7)[0])/10,1);
+    var aVal1 = numToRange((1-pBridge));
+    var pGtOne;
+    if (driveMin > 60 + threshMin) { // takes > threshMin if there's traffic
+        pGtOne = pBridge;
+    } else if (driveMin + 9 < 60 + threshMin) { // always takes less than threshMin
+        pGtOne = 0;
+    } else {
+        minLeft = 60 + threshMin - driveMin;
+        pGtOne = pBridge*(10 - minLeft - 1)/10;
+    }
+    var aVal2 = numToRange(pGtOne);
+    var nPass = Math.floor(threshMin/10);
+    var pVanThresh = 0;
+    if (nPass < 3) {
+        pVanThresh = (3-nPass)/4;
+    }
+    aVal3 = numToRange(pVanThresh);
+    var pVanFast=0;
+    var baseMin = driveMin - 60; // traffic time incl. parking shuttle, minus van time
+    var refMin;
+    for (nPass = 0; nPass <=3; nPass++) {
+        refMin = baseMin - nPass*10; // driving takes this much longer with 0 wait for shuttle
+        if (refMin > 0) {
+            pVanFast += 0.25;
+        } else if (refMin > -9) { // if wait more than -refMin, van wins
+            pVanFast = pVanFast + (9 + refMin)/40;
+        }
+    }
+    pVanFast *= pBridge;
+    var aVal4 = numToRange(pVanFast);
+    var hrStr = " hours ";
+    if (driveTraffic == 1) {
+        hrStr = " hour ";
+    }
+    var qStr = 'To get from Berkeley to the San Francisco airport (SFO) one can either take ' +
+               'a shuttle van or drive. Either way, one must cross the San Francisco Bay Bridge. ' +
+               'The shuttle van drops its passengers at the airport departure terminal. ' +
+               'If one drives, he or she must park in a lot near the airport, then take a ' +
+               'parking shuttle from the parking lot to the airport departure terminal. ' +
+               'There is a ' + roundToDig(100*pBridge,0).toString() + '% chance that the Bay ' +
+               'Bridge will be congested with traffic. If it is, it takes ' +
+               driveTraffic.toString() + hrStr + ' to drive to the parking lot. ' +
+               'If not, it takes 40 minutes to drive to the parking lot.  The parking shuttle ' +
+               'runs every 10 minutes and takes 10 minutes to get to the airport departure ' +
+               'terminal from the parking lot. Suppose it is equally likely that one must wait ' +
+               '0, 1, 2, ..., or 9 minutes for the parking shuttle once getting to the parking ' +
+               'lot, and that the amount of time one must wait is independent of the amount of ' +
+               'time it takes to drive to the parking lot from Berkeley.</p><p>If one takes the ' +
+               'shuttle van from Berkeley directly to the airport, it will take an hour, plus 10 ' +
+               'minutes per stop for other passengers. Suppose that it is equally likely that the ' +
+               'shuttle van will make 0, 1, 2, or 3 stops to pick up other passengers. The shuttle ' +
+               'van can take the carpool lane; assume that the time it takes the shuttle van to go ' +
+               'from Berkeley to the airport is not affected by traffic on the bridge.</p><p>' +
+               '<span class="qSpan">The chance it takes less than one hour to get to the airport ' +
+               'by driving and taking the parking shuttle is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal1);
+    qStr = '</p><p><span class="qSpan">The chance it takes more than ' +
+           (threshMin+60).toString() + ' minutes to get to the airport by driving and taking ' +
+           'the parking shuttle is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal2);
+    qStr = '</p><p><span class="qSpan">The chance it takes more than ' +
+           (threshMin+60).toString() + ' minutes to get to the airport taking the shuttle van ' +
+           'directly from Berkeley to the airport is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal3);
+    qStr = '</p><p>Suppose John takes the shuttle van directly from ' +
+           'Berkeley to the airport, and Jane drives from Berkeley and takes the parking ' +
+           'shuttle. They leave at the same time, and their travel times are independent. ' +
+           '<span class="qSpan">The chance that John gets to the airport before Jane is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6, qCtr++, aVal4);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

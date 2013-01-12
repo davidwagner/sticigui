@@ -1,0 +1,1997 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "chiSquare";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<h1>
+    The Multinomial Distribution and the Chi-Squared Test for Goodness of Fit
+</h1>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('testing') + ', ');
+// -->
+</script>
+    presented hypothesis tests in a general setting.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('percentageTests') + ', ');
+// -->
+</script>
+    presented exact
+    and approximate hypothesis testing procedures for population percentages.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('zTest') + ', ');
+// -->
+</script>
+    presented approximate tests of hypotheses about population means.
+    All the examples of hypothesis testing so far have involved counts of outcomes
+    that are dichotomous (categorical data with only two categories&mdash;good and bad&mdash;or
+    quantitative data that have only two possible values&mdash;0 and 1), or have involved
+    quantitative data.
+    This chapter presents hypothesis tests and approximate hypothesis tests for
+    probability models of <a class="glossRef" href="gloss.htm#categorical">categorical data</a>.
+    Along the way, it introduces <em>joint probability distributions</em>
+    and the <em>chi-square curve</em>, which approximates the probability
+    histogram of a random variable introduced in the chapter, the
+    <em>chi-square statistic</em>.
+</p>
+
+
+<h2>
+    <a id="multinomial"></a>
+    The Multinomial Distribution
+</h2>
+
+<p>
+    The <em>multinomial probability distribution</em> is a probability model for
+    random categorical data:
+    If each of <em>n</em> independent trials can result in any
+    of <em>k</em> possible types of outcome, and the probability that the outcome is
+    of a given type is the same in every trial, the numbers of outcomes of
+    each of the <em>k</em> types have a multinomial joint probability distribution.
+    This section develops the multinomial distribution; later in the chapter we develop
+    hypothesis tests that a given multinomial
+    model is correct, using the observed counts of data in each of the categories.
+</p>
+
+
+<p>
+    Suppose we have an experiment that will produce
+    <a class="glossRef" href="gloss.htm#categorical">categorical data</a>:
+    The outcome can fall in any of <em>k</em> categories, where <em>k</em>&nbsp;&gt;&nbsp;1
+    is known.
+    Let <em>p</em><sub><em>i</em></sub> be the probability that the outcome is
+    in category <em>i</em>, for <em>i</em>&nbsp;=&nbsp;1, 2,
+    &hellip;, <em>k</em>.
+    (We assume that the categories are <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>&mdash;a given
+    outcome cannot be in more than one category&mdash;and
+    <a class="glossRef" href="gloss.htm#exhaustive">exhaustive</a>&mdash;each datum must fall in
+    some category.
+    That is, each datum must be in one and only one of the k categories.
+    It follows that
+    <em>p</em><sub>1</sub> + <em>p</em><sub>1</sub> +
+    &hellip; + <em>p</em><sub><em>k</em></sub> = 100%.)
+</p>
+
+<p>
+    For example, consider rolling a fair die.
+    The side that lands on top can be in any of six categories: 1, 2,
+    &hellip; , 6,
+    according to the number of spots it has.
+    The corresponding category probabilities are
+</p>
+
+<p class="math">
+    <em>p</em><sub>1</sub> = <em>p</em><sub>2</sub> = &hellip;
+    = <em>p</em><sub>6</sub> = 1/6.
+</p>
+
+<p>
+    Now consider repeating the experiment <em>n</em> times, independently, and recording
+    how many times each type of outcome occurs.
+    The <a class="glossRef" href="gloss.htm#outcome_space">outcome space</a>
+    is a set of <em>k</em> counts: the number of trials that result in an outcome
+    of type <em>i</em>, for <em>i</em>&nbsp;=&nbsp;1, 2,
+    &hellip;, <em>k</em>.
+    Let <em>X</em><sub><em>i</em></sub> be the number of trials in which the
+    outcome was in category <em>i</em>.
+    Because there are <em>n</em> trials, each of which must result in one of
+    the <em>k</em> possible outcomes,
+</p>
+
+<p class="math">
+    <em>X</em><sub>1</sub> + <em>X</em><sub>1</sub> + &hellip; +
+    <em>X</em><sub><em>k</em></sub> = <em>n</em>.
+</p>
+
+<p>
+    For example, consider rolling the die four times, so <em>n</em>&nbsp;=&nbsp;4.
+    <em>X</em><sub>1</sub> is the number of times the side with one spot shows in
+    four rolls of the die;
+    <em>X</em><sub>2</sub> is the number of times the side with two spots shows in
+    same four rolls of the die; <em>etc</em>.
+    One possible outcome is
+</p>
+
+<p class="math">
+    (<em>X</em><sub>1</sub> = 2, <em>X</em><sub>2</sub> = 1, <em>X</em><sub>3</sub> = 1,
+    <em>X</em><sub>4</sub> = 0, <em>X</em><sub>5</sub> = 0, <em>X</em><sub>6</sub> = 0),
+</p>
+
+<p>
+    which means one spot showed in two rolls, two spots showed in one roll,
+    three spots showed in one roll,
+    and the other faces (four, five, six) did not show.
+    The outcome
+</p>
+
+<p class="math">
+    (<em>X</em><sub>1</sub> = 2, <em>X</em><sub>2</sub> = 2, <em>X</em><sub>3</sub> = 1,
+    <em>X</em><sub>4</sub> = 0, <em>X</em><sub>5</sub> = 0, <em>X</em><sub>6</sub> = 0),
+</p>
+
+<p>
+    is impossible, because it would require five rolls of the die
+    (<em>X</em><sub>1</sub>+<em>X</em><sub>2</sub>+<em>X</em><sub>3</sub>+
+    <em>X</em><sub>4</sub>+<em>X</em><sub>5</sub>+<em>X</em><sub>6</sub> = 5).
+</p>
+
+<p>
+    The number of outcomes in category <em>i</em> is like
+    the number of successes in <em>n</em> <a class="glossRef" href="gloss.htm#independent">independent</a>
+    trials with the same probability <em>p</em><sub><em>i</em></sub> of success in
+    each trial, so <em>X</em><sub><em>i</em></sub> has
+    a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with parameters
+    <em>n</em> and <em>p</em><sub><em>i</em></sub>.
+    The <a class="glossRef" href="gloss.htm#random variable">random variables</a>
+    {<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, &hellip;,
+    <em>X</em><sub><em>k</em></sub>}
+    are <a class="glossRef" href="gloss.htm#dependent">dependent</a>.
+</p>
+
+<p>
+    For example, if <em>X</em><sub>1</sub>&nbsp;=&nbsp;<em>n</em>, it follows that
+</p>
+
+<p class="math">
+    <em>X</em><sub>2</sub>=&nbsp;&hellip;&nbsp;=&nbsp;
+    <em>X</em><sub><em>k</em></sub>&nbsp;=&nbsp;0.
+</p>
+
+<p>
+    Similarly,
+</p>
+
+<p class="math">
+    <em>X</em><sub>1</sub> = <em>n</em> - <big>(</big> <em>X</em><sub>2</sub> +
+    &hellip; +
+    <em>X</em><sub><em>k</em></sub> <big>)</big>.
+</p>
+
+<p>
+    The variables are informative with respect to each other, so they are not independent.
+</p>
+
+<p class="math">
+    P<big>(</big>
+    <em>X</em><sub>1</sub> = <em>n</em><sub>1</sub> and
+    <em>X</em><sub>2</sub> = <em>n</em><sub>2</sub> and &hellip; and
+    <em>X</em><sub><em>k</em></sub> = <em>n</em><sub><em>k</em></sub>
+     <big>)</big>
+</p>
+
+<p>
+    is not in general equal to
+</p>
+
+<p class="math">
+    P(<em>X</em><sub>1</sub> = <em>n</em><sub>1</sub>) &times;
+    P(<em>X</em><sub>2</sub> = <em>n</em><sub>2</sub> ) &times;
+    &hellip; &times;
+    P(<em>X</em><sub><em>k</em></sub> = <em>n</em><sub><em>k</em></sub>).
+</p>
+
+<p>
+    We can find
+</p>
+
+<p class="math">
+    P<big>(</big>
+    <em>X</em><sub>1</sub> = <em>n</em><sub>1</sub> and
+    <em>X</em><sub>2</sub> = <em>n</em><sub>2</sub> and &hellip; and
+    <em>X</em><sub><em>k</em></sub> = <em>n</em><sub><em>k</em></sub>
+     <big>)</big>
+</p>
+
+<p>
+    using logic similar to that we used to find the binomial distribution.
+    The difference is that here there can be more than two categories of outcome (<em>k</em>
+    can be greater than 2), while for the binomial, there were exactly two categories,
+    &quot;success&quot; and &quot;failure.&quot;
+</p>
+
+<p>
+    Consider the <em>n</em> trials in sequence.
+    Let
+</p>
+
+<p class="math">
+    <em>n</em><sub>1</sub>, <em>n</em><sub>2</sub>, &hellip;,
+    <em>n</em><sub><em>k</em></sub>
+</p>
+
+<p>
+    be nonnegative integers whose sum is <em>n</em>.
+    In how many ways can the <em>n</em> trials result in <em>n</em><sub>1</sub> outcomes of
+    type 1, <em>n</em><sub>2</sub> outcomes of type 2, &hellip;, and
+    <em>n</em><sub><em>k</em></sub> outcomes of type <em>k</em>?
+    There are <sub><em>n</em></sub>C<sub><em>n</em><sub>1</sub></sub> ways to allocate
+    the <em>n</em><sub>1</sub> outcomes of type 1 among the <em>n</em> trials.
+    For each of those, there are
+    <sub><em>n</em>-<em>n</em><sub>1</sub></sub>C<sub><em>n</em><sub>2</sub></sub>
+    ways to allocate the <em>n</em><sub>2</sub> outcomes of type 2 among
+    the remaining <em>n</em>-<em>n</em><sub>1</sub> trials.
+    For each of those,
+    there are <sub><em>n</em>-<em>n</em><sub>1</sub>-<em>n</em><sub>2</sub></sub>
+    C<sub><em>n</em><sub>3</sub></sub> ways to allocate the <em>n</em><sub>3</sub>
+    outcomes of type 3 among the remaining
+    <em>n</em>-<em>n</em><sub>1</sub>-<em>n</em><sub>2</sub> trials, <em>etc</em>.
+    Finally, there are only <em>n</em><sub><em>k</em></sub> spaces left
+    for the <em>n</em><sub><em>k</em></sub> outcomes of type <em>k</em>.
+    According to the <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental rule
+    of counting</a>, the total number of ways is therefore
+</p>
+
+<p class="math">
+    <sub><em>n</em></sub>C<sub><em>n</em><sub>1</sub></sub> &times;
+    <sub>(<em>n</em>-<em>n</em><sub>1</sub>)</sub>C<sub><em>n</em><sub>2</sub></sub>
+    &times;
+    <sub>(<em>n</em>-<em>n</em><sub>1</sub>-<em>n</em><sub>2</sub>)</sub>
+    C<sub><em>n</em><sub>3</sub></sub> &times; &hellip; &times;
+    <sub>(<em>n</em>-<em>n</em><sub>1</sub>-<em>n</em><sub>2</sub>-
+    &hellip; -
+    <em>n</em><sub><em>k</em>-2</sub>)</sub>
+    C<sub><em>n</em><sub><em>k</em>-1</sub></sub>.
+</p>
+
+<p>
+    There are many cancellations in this product; the expression simplifies to
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="center">
+        <em>n</em>!
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        ------------------------------- .
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>n</em><sub>1</sub>! &times; <em>n</em><sub>2</sub>! &times;
+        &hellip; &times; <em>n</em><sub><em>k</em></sub>!
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    What is the probability of each such sequence of outcomes?
+    The trials are independent, so the
+    chance of each sequence with <em>n</em><sub>1</sub> outcomes of type 1,
+    <em>n</em><sub>2</sub> outcomes of type 2, &hellip; ,
+    and <em>n</em><sub><em>k</em></sub> outcomes of type <em>k</em> is
+</p>
+
+<p class="math">
+    <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup>
+    &times;
+    <em>p</em><sub>2</sub><sup><em>n</em><sub>2</sub></sup> &times;
+    &hellip; &times;
+    <em>p</em><sub><em>k</em></sub><sup><em>n</em><sub><em>k</em></sub></sup>.
+</p>
+
+<p>
+    Therefore, the chance that the <em>n</em> trials result in
+    <em>n</em><sub>1</sub> outcomes of type 1, <em>n</em><sub>2</sub>
+    outcomes of type 2, &hellip; ,
+    and <em>n</em><sub><em>k</em></sub> outcomes of
+    type <em>k</em> is
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="center">
+        <em>n</em>!
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td align="center">
+        ----------------------
+        </td>
+        <td align="center">
+        &times;
+        </td>
+        <td align="center">
+        <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+        <em>p</em><sub>2</sub><sup><em>n</em><sub>2</sub></sup> &times;
+        &hellip; &times;
+        <em>p</em><sub><em>k</em></sub><sup><em>n</em><sub><em>k</em></sub></sup>,
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>n</em><sub>1</sub>! &times;
+        <em>n</em><sub>2</sub>! &times; &hellip; &times;
+        <em>n</em><sub><em>k</em></sub>!
+        </td>
+        <td></td>
+        <td></td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    if <em>n</em><sub>1</sub>, &hellip; ,
+    <em>n</em><sub><em>k</em></sub> are
+    nonnegative integers that sum to <em>n</em>.
+    (Otherwise, the chance is zero.)
+    This is called the <em>multinomial distribution</em> with parameters <em>n</em> and
+    <em>p</em><sub>1</sub>, &hellip; , <em>p</em><sub><em>k</em></sub>.
+</p>
+
+<div class="callout">
+        <p>
+           <span class="calloutCaption">The Multinomial Distribution</span>
+        </p>
+        <p>
+            Let {<em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>,
+            &hellip; , <em>X</em><sub><em>k</em></sub>},
+            <em>k</em>&nbsp;&gt;&nbsp;1, be a set of
+            random variables, each of which can take the values
+            0, 1, &hellip; , <em>n</em>.
+        </p>
+        <p>
+            Suppose there are <em>k</em> nonnegative numbers {<em>p</em><sub>1</sub>,
+            <em>p</em><sub>2</sub>, &hellip; ,
+            <em>p</em><sub><em>k</em></sub>} that sum to one, such that
+            for every set of <em>k</em> nonnegative integers
+            {<em>n</em><sub>1</sub>, &hellip; ,
+            <em>n</em><sub><em>k</em></sub>} whose sum is <em>n</em>,
+        </p>
+        <p class="math">
+            P<big>(</big> <em>X</em><sub>1</sub> = <em>n</em><sub>1</sub> <strong>and</strong>
+              <em>X</em><sub>2</sub> = <em>n</em><sub>1</sub> <strong>and</strong>
+              &hellip; <strong>and</strong>
+              <em>X</em><sub><em>k</em></sub> = <em>n</em><sub><em>k</em></sub> <big>)</big>
+              =
+         </p>
+         <div align="center">
+         <center>
+             <table border="0">
+             <tr>
+                 <td align="center">
+                 <em>n</em>!
+                 </td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td align="center">
+                 ----------------------
+                 </td>
+                 <td align="center">
+                 &times;
+                 </td>
+                 <td align="center">
+                 <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+                 <em>p</em><sub>2</sub><sup><em>n</em><sub>2</sub></sup> &times;
+                 &hellip; &times;
+                 <em>p</em><sub><em>k</em></sub><sup><em>n</em><sub><em>k</em></sub></sup> .
+                 </td>
+             </tr>
+             <tr>
+                 <td align="center">
+                 <em>n</em><sub>1</sub>! &times;
+                 <em>n</em><sub>2</sub>! &times; &hellip; &times;
+                 <em>n</em><sub><em>k</em></sub>!
+                 </td>
+                 <td></td>
+                 <td></td>
+             </tr>
+             </table>
+         </center>
+        </div>
+        <p>
+            Then {<em>X</em><sub>1</sub>, <em>X</em><sub>1</sub>,
+            &hellip; , <em>X</em><sub><em>k</em></sub>}
+            have a <em>multinomial joint distribution</em> with parameters
+            <em>n</em> and
+            <em>p</em><sub>1</sub>, <em>p</em><sub>2</sub>, &hellip; ,
+            <em>p</em><sub><em>k</em></sub>.
+        </p>
+        <p>
+            The parameter <em>n</em> is called the <em>number of trials</em>;
+            the parameters <em>p</em><sub>1</sub>, <em>p</em><sub>2</sub>,
+            &hellip; ,
+            <em>p</em><sub><em>k</em></sub> are called the
+            <em>category probabilities</em>; <em>k</em> is called the <em>number of
+            categories</em>.
+        </p>
+</div>
+
+
+<p>
+    What kinds of variables have a multinomial joint distribution?
+    The canonical example of random variables with a multinomial joint distribution
+    are the numbers of observations in each of <em>k</em>
+    categories in <em>n</em> independent trials, where the probability
+    <em>p</em><sub><em>i</em></sub> that the observation
+    is in category <em>i</em> is the same in every trial, and
+    the categories are <a class="glossRef" href="gloss.htm#disjoint">disjoint</a> and
+    <a class="glossRef" href="gloss.htm#exhaustive">exhaustive</a>: every observation must be in
+    exactly one of the <em>k</em> categories.
+    If the number of categories or their probabilities vary from trial to trial,
+    if the number of trials is not fixed in advance, if the trials are dependent, if
+    an observation can be in more than one category, or if an observation can be
+    in none of the categories, the resulting counts do not have a multinomial
+    joint distribution.
+</p>
+
+<p>
+    Note that in the special case <em>k</em>&nbsp;=&nbsp;2, the multinomial probability
+    reduces to the binomial probability
+</p>
+
+<p class="math">
+    <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+    <em>p</em><sub>2</sub><sup><em>n</em><sub>2</sub></sup> &times;
+    <em>n</em>!/(<em>n</em><sub>1</sub>! &times; <em>n</em><sub>2</sub>!) =
+    <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+    (1 - <em>p</em><sub>1</sub>)<sup><em>n</em> - <em>n</em><sub>1</sub></sup> &times;
+    <em>n</em>!/<big>(</big><em>n</em><sub>1</sub>! &times;
+    (<em>n</em> - <em>n</em><sub>1</sub>!)<big>)</big>
+</p>
+
+<p class="math">
+    <sub><em>n</em></sub>C<sub><em>n</em><sub>1</sub></sub> &times;
+    <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+    (1 - <em>p</em><sub>1</sub>)<sup><em>n</em> - <em>n</em><sub>1</sub></sup>.
+</p>
+
+<p>
+    Continuing the example of rolling a fair die four times, we find
+</p>
+
+<p class="math">
+    P(<em>X</em><sub>1</sub> = 2, <em>X</em><sub>2</sub> = 1, <em>X</em><sub>3</sub> = 1,
+    <em>X</em><sub>4</sub> = 0, <em>X</em><sub>5</sub> = 0, <em>X</em><sub>6</sub> = 0)
+    =
+</p>
+
+<p class="math">
+    = (1/6)<sup>2</sup> &times; (1/6)<sup>1</sup> &times; (1/6)<sup>1</sup> &times;
+      (1/6)<sup>0</sup> &times; (1/6)<sup>0</sup>&times;(1/6)<sup>0</sup>
+      &times; 4!/(2!&times;1!&times;1!&times;0!&times;0!&times;0!) =
+</p>
+
+<p class="math">
+    = (1/6)<sup>4</sup> &times; 24/2 = 1/108.
+</p>
+
+<p>
+    The following exercise checks your ability to compute using the multinomial distribution.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var spins = listOfRandInts(1,4,7)[0];
+    var outcomes = listOfDistinctRandInts(3, 0, spins);
+    outcomes = vMult(spins/vSum(outcomes), outcomes);
+    outcomes = vFloor(outcomes);
+    outcomes[0] += spins - vSum(outcomes);
+    outcomes = outcomes.sort(numberGreaterThan);
+    var pVec = new Array(3);
+    pVec[0] = 18.0/38.0;
+    pVec[1] = pVec[0];
+    pVec[2] = 2.0/38.0;
+    if (vMinMax(outcomes) < 0.0) {
+    alert('Error #1 in ' + theChapter + ': impossible (negative) value for outcomes!');
+    }
+    var prob1 = multinomialPmf(outcomes, pVec);
+    var prob2 = binomialTail(spins, 18.0/38.0, outcomes[1]);
+    var qStr = 'The positions on a roulette wheel are divided into three colors: red, black, ' +
+           'and green.  There are 18 red positions, 18 black positions, and two ' +
+           'green positions.  If the wheel is fair, the chance that the ball lands in ' +
+           'any position is equal to the chance that it lands in any other position, ' +
+           '1/38.</p><p><span class="qSpan">The probability that in ' + spins.toString() +
+           ' independent spins of the wheel, the ball lands in a red slot ' +
+           iteratives[outcomes[0]] + ', in a black slot ' + iteratives[outcomes[1]] +
+           ' and in a green slot ' + iteratives[outcomes[2]] + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(prob1) );
+    var qStr = '</p><p><span class="qSpan">The chance that the ball lands in a red slot at ' +
+           'least ' + iteratives[outcomes[1]] + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(prob2) );
+    document.writeln('</p>');
+    var ansStr = 'The numbers of red, black, and green outcomes in ' + spins.toString() +
+         ' independent spins of the wheel have a multinomial joint distribution ' +
+         'with parameters ' +
+         '<em>n</em> = ' + spins.toString() + ', <em>p</em><sub>1</sub> = (18/38), ' +
+         '<em>p</em><sub>2</sub> = (18/38), and <em>p</em><sub>3</sub> = (2/38), ' +
+         'so the answer is </p>' +
+         '<p class="math">(18/38)<sup>' + outcomes[0].toString() +
+         '</sup> &times; (18/38)<sup>' + outcomes[1].toString() +
+         '</sup> &times; (2/38)<sup>' + outcomes[2].toString() +
+         '</sup> &times; ' + spins.toString() + '!/<big>(</big>' +
+         outcomes[0].toString() + '!&times;' + outcomes[1].toString() +
+         '!&times;' + outcomes[2].toString() + '! <big>)</big> = ' +
+         roundToDig(100*prob1, 2).toString() + '%.</p><p>The number of times ' +
+         'the ball lands in a red slot has a binomial distribution with parameters ' +
+         '<em>n</em> = ' + spins.toString() + ' and <em>p</em> = (18/38), so the ' +
+         'chance that the ball lands in a red slot ' + cardinals[outcomes[1]] +
+         ' or more times is</p><p class="math">';
+    for (var i=outcomes[1]; i <= spins; i++) {
+    ansStr += ' <sub>' + spins.toString() + '</sub>C<sub>' + i.toString() +
+          '</sub> &times; (18/38)<sup>' + i.toString() + '</sup>&times;(20/38)<sup>' +
+          (spins-i).toString() + '</sup> +';
+    }
+    ansStr = ansStr.substring(0, ansStr.length-1);
+    ansStr += ' = ' + roundToDig(100*prob2, 2).toString() + '%. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<h3>
+    <a id="chi_2_statistic">
+    The chi-square statistic</a>
+</h3>
+
+<p>
+    The chi-square statistic is a summary measure of how well the observed frequencies
+    of categorical data match the frequencies that would be expected under the null
+    hypothesis that a
+    particular multinomial probability model for the data is correct.
+</p>
+
+<p>
+    Suppose we would like to test the null hypothesis that a set of categorical
+    data arises from a multinomial distribution with <em>k</em> categories and
+    category probabilities <em>p</em><sub>1</sub>, &hellip;,
+    <em>p</em><sub><em>k</em></sub>.
+    (For example, suppose we want to test the hypothesis that a die is fair on the
+    basis of the numbers of times the die lands with each of its six faces showing in
+    100 independent rolls.)
+    We could base a test on the differences between the observed and expected numbers
+    of outcomes in each of the <em>k</em> categories.
+    If those differences are all small, the data are consistent with the null
+    hypothesis.
+    If those differences are sufficiently large, either the null hypothesis is false,
+    or an event has occurred that has small probability.
+    How small is small enough to be acceptable?
+    How large is large enough to be surprising?
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#se">standard error</a> of <em>X</em><sub><em>i</em></sub>
+    measures how far <em>X</em><sub><em>i</em></sub> is its from its expected value,
+    on the average (it is the square-root of the expected deviation
+    of <em>X</em><sub><em>i</em></sub> from its expected value).
+    It makes sense to measure the difference between <em>X</em><sub><em>i</em></sub>
+    and its expected value as a multiple of the standard error of
+    <em>X</em><sub><em>i</em></sub>.
+    (For example, <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> bounds the chance
+    that <em>X</em> is many SEs from its expected value.)
+    Dividing each discrepancy by its standard error also puts the <em>k</em>
+    categories on an equal footing, which will help us combine them into a single
+    summary measurement of how far the data are from their expected values.
+</p>
+
+<p>
+    Under the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>,
+    the number of outcomes in category <em>i</em>
+    has a <a class="glossRef" href="gloss.htm#binomial">binomial probability distribution</a> with parameters
+    <em>n</em> and <em>p</em><sub><em>i</em></sub>,
+    so the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of
+    <em>X</em><sub><em>i</em></sub>,
+    the number of outcomes in category <em>i</em>, is
+</p>
+
+<p class="math">
+    <a class="glossRef" href="gloss.htm#expectation">E</a><em>X</em><sub><em>i</em></sub>
+    = <em>n</em>&times;<em>p</em><sub><em>i</em></sub>.
+</p>
+
+<p>
+    Note that the sum of the expected values of the <em>k</em> variables is
+</p>
+
+<p class="math">
+    <em>n</em>&times;<em>p</em><sub>1</sub> + <em>n</em>&times;<em>p</em><sub>2</sub>
+    + &hellip; + <em>n</em>&times;<em>p</em><sub><em>k</em></sub> =
+    <em>n</em> &times; (<em>p</em><sub>1</sub> + <em>p</em><sub>2</sub>
+    + &hellip; + <em>p</em><sub><em>k</em></sub> ) =
+    <em>n</em> &times; 1 = <em>n</em>.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#se">standard error</a> of
+    <em>X</em><sub><em>i</em></sub> is
+</p>
+
+<p class="math">
+    <a class="glossRef" href="gloss.htm#se">SE</a>(<em>X</em><sub><em>i</em></sub>) =
+    <big>(</big> <em>n</em> &times; <em>p</em><sub><em>i</em></sub> &times;
+    (1 - <em>p</em><sub><em>i</em></sub>) <big>)</big><sup>&frac12;</sup>.
+</p>
+
+<p>
+    To put all the discrepancies on an equal footing, we can divide them
+    by their standard errors (under the null hypothesis), which leads us to
+    consider the standardized variables
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="Center">
+        <em>X</em><sub><em>i</em></sub> &minus;
+        <em>n</em>&times;<em>p</em><sub><em>i</em></sub>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        ---------------------------- .
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <big>(</big> <em>n</em>&times;<em>p</em><sub><em>i</em></sub>&times;(1 &minus;
+        <em>p</em><sub><em>i</em></sub>)
+        <big>)</big><sup>&frac12;</sup>
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<div class="indent">
+<p class="inline">
+    Unless every discrepancy is zero, some will be positive and some
+    will be negative, because they must sum to zero.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The sum of all the variables is <em>n</em>, because there are ' +
+           '<em>n</em> trials, and the sum of the expected values of the variables ' +
+           'is <em>n</em>, as shown above. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    To get an overall measure of the size of the discrepancies, we might square the
+    normalized discrepancies to make them all positive, then add the squares.
+    Squaring the discrepancies keeps differences of opposite signs from
+    canceling each other&mdash;regardless of sign, it is the <em>size</em> of each
+    discrepancy that matters.
+</p>
+</div>
+
+<p>
+    This leads us to consider the summary measure
+</p>
+
+<div align="Center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>1</sub> -
+            <em>n</em>&times;<em>p</em><sub>1</sub> <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>2</sub> -
+        <em>n</em>&times;<em>p</em><sub>2</sub> <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub><em>k</em></sub> -
+        <em>n</em>&times;<em>p</em><sub><em>k</em></sub> <big>)</big><sup>2</sup>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        &hellip;
+        </td>
+        <td align="Center">
+        +
+        </td>
+        <td align="center">
+        ------------------------- .
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub>1</sub>&times;(1 - <em>p</em><sub>1</sub>)
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub>2</sub>&times;(1 - <em>p</em><sub>2</sub>)
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub><em>k</em></sub>&times;(1 -
+        <em>p</em><sub><em>k</em></sub>)
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    There are theoretical reasons, beyond the scope of this book, that make it
+    preferable to omit the factors (1 - <em>p</em><sub><em>i</em></sub>)
+    in the denominators of the terms in the sum.
+    (If there are many categories, and none of the category probabilities
+    is large, then (1 - <em>p</em><sub><em>i</em></sub>)<sup>&frac12;</sup> is
+    nearly unity, and it does not matter whether we include the factors.)
+    This leads to the summary statistic
+</p>
+
+<div align="Center">
+<center>
+    <table border="0">
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>1</sub> -
+            <em>n</em>&times;<em>p</em><sub>1</sub> <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>2</sub> -
+        <em>n</em>&times;<em>p</em><sub>2</sub> <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub><em>k</em></sub> -
+        <em>n</em>&times;<em>p</em><sub><em>k</em></sub> <big>)</big><sup>2</sup>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>chi-squared</em>
+        </td>
+        <td align="center">
+        =
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        &hellip;
+        </td>
+        <td align="Center">
+        +
+        </td>
+        <td align="center">
+        ------------------------- .
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub>1</sub>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub>2</sub>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <em>n</em>&times;<em>p</em><sub><em>k</em></sub>
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    which also can be written
+</p>
+
+<div align="Center">
+<center>
+    <table border="0">
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>1</sub> -
+            E(<em>X</em><sub>1</sub>) <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub>2</sub> -
+        E(<em>X</em><sub>2</sub>) <big>)</big><sup>2</sup>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        <big>(</big> <em>X</em><sub><em>k</em></sub> -
+        E(<em>X</em><sub><em>k</em></sub>) <big>)</big><sup>2</sup>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <em>chi-squared</em>
+        </td>
+        <td align="center">
+        =
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        -------------------------
+        </td>
+        <td align="center">
+        +
+        </td>
+        <td align="center">
+        &hellip;
+        </td>
+        <td align="Center">
+        +
+        </td>
+        <td align="center">
+        ------------------------- .
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        E(<em>X</em><sub>1</sub>)
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        E(<em>X</em><sub>2</sub>)
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="center">
+        E(<em>X</em><sub><em>k</em></sub>)
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+
+<p>
+    Let <em>o</em><sub><em>i</em></sub> denote the number times an outcome in
+    category <em>i</em> occurs, and let <em>e</em><sub><em>i</em></sub> denote the
+    expected number of outcomes in category <em>i</em> on the assumption that the
+    null hypothesis is true.
+    Then the <em>chi-squared</em> statistic is the sum of
+</p>
+
+<p class="math">
+    (<em>o</em><sub><em>i</em></sub>&nbsp;-&nbsp;
+    <em>e</em><sub><em>i</em></sub>)<sup>2</sup>/<em>e</em><sub><em>i</em></sub>,
+</p>
+
+<p>
+    over all categories <em>i</em>&nbsp;=&nbsp;1, 2, &hellip;, <em>k</em>.
+</p>
+
+<p>
+    The following exercise checks your understanding of the development so far&mdash;your
+    ability to compute the expected numbers of outcomes in a multinomial model,
+    and your ability to calculate the chi-squared statistic.
+    The exercise is dynamic: the data tend to change when you reload the page.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var spins = listOfRandInts(1, 20, 100)[0];
+    var outcomes = listOfDistinctRandInts(3, 0, spins);
+    outcomes = vMult(spins/vSum(outcomes), outcomes);
+    outcomes = vFloor(outcomes);
+    outcomes[0] += spins - vSum(outcomes);
+    outcomes = outcomes.sort(numberGreaterThan);
+    var pVec = new Array(3);
+    pVec[0] = 18.0/38.0;
+    pVec[1] = pVec[0];
+    pVec[2] = 2.0/38.0;
+    if (vMinMax(outcomes) < 0.0) {
+        alert('Error #2 in ' + theChapter + ': impossible (negative) value for outcomes!');
+    }
+    var eOutcomes = new Array(outcomes.length);
+    var chi2 = 0.0;
+    for (var i=0; i < outcomes.length; i++) {
+        eOutcomes[i] = spins*pVec[i];
+        chi2 += (outcomes[i] - eOutcomes[i] + 0.0)*(outcomes[i] - eOutcomes[i])/eOutcomes[i];
+    }
+    var qStr = 'A fair roulette wheel will be spun ' + spins.toString() + ' times. </p>' +
+           '<p><span class="qSpan">The expected number of times the ball lands in a ' +
+           'red space is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(eOutcomes[0]));
+    var qStr = '</p><p><span class="qSpan">The expected number of times the ball lands in ' +
+           'a black space is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(eOutcomes[1]));
+    var qStr = '</p><p><span class="qSpan">The expected number of times the ball lands in ' +
+           'a green space is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(eOutcomes[2]));
+    var qStr = '</p><p>Suppose that in ' + spins.toString() + ' independent spins of a fair ' +
+           'roulette wheel, the ball landed in a red space ' + outcomes[0].toString() +
+           ' times, in a black space ' + outcomes[1].toString() +
+           ' times, and in a green space ' + outcomes[2].toString() + ' times.</p>' +
+           '<p><span class="qSpan">The observed value of the <em>chi-squared</em> ' +
+           'statistic is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(chi2));
+    document.writeln('</p>');
+    var ansStr = 'The expected number of times the ball lands in a red space is equal to ' +
+         'the number of trials times the probability that it lands in a red ' +
+         'space in each trial: ' + spins.toString() + ' &times; (18/38) = ' +
+         roundToDig(eOutcomes[0], 2).toString() + '. The expected number of times ' +
+         'the ball lands in a black space is the same, because the probability ' +
+         'that the ball lands in a black space is the same as the probability that ' +
+         'it lands in a red space.  The expected number of times the ball lands in ' +
+         'a green space is ' + spins.toString() + ' &times; (2/38) = ' +
+         roundToDig(eOutcomes[2], 2).toString() + '.</p>' +
+         '<p>The observed value of the <em>chi-squared</em> statistic is the sum of ' +
+         '(observed - expected)<sup>2</sup>/expected over the three categories:</p>' +
+         '<p class="math">' +
+         '(' + outcomes[0].toString() + ' - ' + roundToDig(eOutcomes[0], 2).toString() +
+         ')<sup>2</sup>/' + roundToDig(eOutcomes[0], 2).toString() + ' + ' +
+         '(' + outcomes[1].toString() + ' - ' + roundToDig(eOutcomes[1], 2).toString() +
+         ')<sup>2</sup>/' + roundToDig(eOutcomes[1], 2).toString() + ' + ' +
+         '(' + outcomes[2].toString() + ' - ' + roundToDig(eOutcomes[2], 2).toString() +
+         ')<sup>2</sup>/' + roundToDig(eOutcomes[2], 2).toString() + ' = ' +
+         roundToDig(chi2, 3).toString() + '. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<h3>
+    <a id="chi_2_sample_dist"></a>
+    The sampling distribution of the chi-squared statistic
+</h3>
+
+<p>
+    The <em>chi-squared</em> statistic is a summary measure of how far the observed
+    numbers of counts in each category are from their expected values,
+    given a multinomial probability model for the data under the null hypothesis.
+    It would be reasonable to reject the null hypothesis if <em>chi-squared</em>
+    is large.
+    But how large is large?
+    If the null hypothesis is true, how large does the <em>chi-squared</em> statistic
+    tend to be?
+    What threshold value <em>x</em> can we set for <em>chi-squared</em> so that,
+    if the null hypothesis is true,
+</p>
+
+<p class="math">
+    P(<em>chi-squared</em> &gt; <em>x</em>) &le; <em>p</em>?
+</p>
+
+<p>
+    In general, the answer depends on the number of trials, the number of categories,
+    and the probability of each category; but we shall see that there are regularities&mdash;there
+    is an approximation that depends only on the number of categories, and is
+    accurate provided the expected count in every category is large.
+</p>
+
+<p>
+    Let us look at the
+    <a class="glossRef" href="gloss.htm#sampling_distribution">sampling distribution</a>
+    of the <em>chi-squared</em> statistic empirically.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    below starts with four category probabilities: 0.1, 0.2, 0.3, 0.4.
+    Note that the sum of these probabilities is 1.
+    Sample Size is set to 5 initially.
+    When you click the Take Sample button, the computer simulates drawing a
+    random sample of
+    size 5 with replacement from the four categories, and computes
+</p>
+
+<p class="math">
+    <em>chi-squared</em> =
+    (<em>o</em><sub>1</sub>&nbsp;-&nbsp;5&times;0.1)<sup>2</sup>/(5&nbsp;&times;&nbsp;0.1)
+    +
+    (<em>o</em><sub>2</sub>&nbsp;-&nbsp;5&times;0.2)<sup>2</sup>/(5&nbsp;&times;&nbsp;0.2)
+    +
+    (<em>o</em><sub>3</sub>&nbsp;-&nbsp;5&times;0.3)<sup>2</sup>/(5&nbsp;&times;&nbsp;0.3)
+    +
+    (<em>o</em><sub>4</sub>&nbsp;-&nbsp;5&times;0.4)<sup>2</sup>/(5&nbsp;&times;&nbsp;0.4),
+</p>
+
+<p>
+    where <em>o</em><sub><em>i</em></sub> is the number of elements of the random sample that
+    were in category <em>i</em>, for <em>i</em> = 1, &hellip;, 4.
+    It then plots this value in a <a class="glossRef" href="gloss.htm#histogram">histogram</a>
+    in the main panel of the tool.
+    Every time you click the button, the computer takes another random sample
+    and appends the observed value of the <em>chi-squared</em> statistic to the list
+    of values plotted in the histogram.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling distribution of the chi-square statistic';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="SampleDist.class" codebase="../../Java/"
+        align="baseline" width="640" height="400" archive="PbsGui.zip">
+      <param name="variables" value="chi-squared">
+      <param name="startWith" value="chi-squared">
+      <param name="boxContents" value="1,2,3,4">
+      <param name="sources" value="box">
+      <param name="boxHistControl" value="false">
+      <param name="showBoxHist" value="false">
+      <param name="replaceControl" value="false">
+      <param name="bins" value="50">
+      <param name="hiLiteLo" value="7.8">
+      <param name="hiLiteHi" value="28">
+      You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Click the button a few times to get a feel for what happens.
+    Change the value of the Take__________samples control to 1000.
+    Now when you click the button, the computer will draw 1000 samples of size 5 and
+    append the 1000 observed values of the <em>chi-squared</em> statistic
+    to the list of values plotted in the histogram.
+    Click the &quot;Take Sample&quot; button until you have drawn 10,000 samples
+    of size 5.
+</p>
+
+<p>
+    Because of the
+    <a class="glossRef" href="gloss.htm#law_of_large_numbers">law of large numbers</a>, the histogram
+    of 10,000 observed values of the <em>chi-squared</em> statistic is quite likely to
+    be close to the
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability histogram</a>
+    of the <em>chi-squared</em> statistic for this set of category probabilities and
+    this sample size
+    (ignoring differences caused by the choice of
+    <a class="glossRef" href="gloss.htm#bin">bins</a>).
+    The histogram starts high near zero, rises to a peak near two, then descends,
+    but has a few &quot;spikes&quot; at unusually common values.
+    It is skewed to the right.
+    The area under the histogram to the right of 7.8 is about 2%.
+    Increase the Sample Size control to 50, and take 10,000 samples.
+    The histogram will look much more filled in and regular, but still
+    will have some spikes at particularly probable values.
+    The area under the histogram to the right of 7.8 is roughly 5%.
+    Increase the Sample Size control to 300, and take 10,000 samples.
+    Now the histogram will be very regular, with one mode just below 2, and skewed
+    to the right.
+    The area under the histogram to the right of 7.8 will be very close to 5%.
+    Clear the histogram by clicking in the box of probabilities at the right hand side of
+    the figure then clicking again anywhere else in the figure, and repeat the
+    experiment of drawing 10,000 samples of size 300
+    several times to verify that the
+    area to the right of 7.8 is always about 5%.
+</p>
+
+<p>
+    Replace the four category probabilities with four different probabilities,
+    and repeat the experiment of increasing the sample size from 5 to 300, drawing 10,000
+    samples each time.
+    You should find that when the sample size is small, the histogram is rough and the area
+    to the right of 7.8 depends on the category probabilities, but when the sample size
+    is 300, the area to the right of 7.8 is always about 5%, regardless of the category
+    probabilities, provided none of the category probabilities is too small
+    (not less than 0.05 or so).
+</p>
+
+<p>
+    Under the histogram is a drop-down menu that says No Curve when you
+    first load the page.
+    Select Chi-squared Curve instead of No Curve.
+    A curve will be superposed on the histogram.
+    This is the <em>chi-squared curve with 3 degrees of freedom</em>.
+    The area under the <em>chi-squared curve with 3 degrees of freedom</em> to the
+    right of 7.8 is 5%; that area will be displayed under the histogram next to
+    the area of the highlighted part of the histogram.
+    Highlight different ranges of values and compare the area under the histogram
+    with the area under the curve.
+    The two will be close.
+    Change Sample Size back to 5, draw 10,000 samples,
+    and compare the area under the histogram with the area under the curve for
+    different ranges.
+    You will find that the two tend to differ considerably.
+</p>
+
+<p>
+    Change the number of category probabilities and their values,
+    and repeat the experiment for different sample sizes.
+    When you change the number of category probabilities, the curve that is
+    displayed is the <em>chi-squared curve with <em>k</em>&nbsp;-&nbsp;1 degrees
+    of freedom</em>, where <em>k</em> is the number of category probabilities.
+    The tool always assumes that the number of probabilities is the number of
+    categories, and if the probabilities you type in do not sum to 100%, it
+    scales them so that they do, keeping their relative sizes the same.
+</p>
+
+<p>
+    The accuracy with which the <em>chi-squared curve with <em>k</em>&nbsp;-&nbsp;1
+    degrees of freedom</em> approximates the histogram of
+    observed values of the <em>chi-squared statistic</em> depends on the sample size,
+    the number of categories, and the probability of each category.
+    When the sample size is small, the observed histogram of sample values of the
+    <em>chi-squared</em> statistic will tend to be irregular, and the corresponding
+    <em>chi-squared</em> curve will not approximate the histogram very well.
+    When the sample size is large, the observed histogram of sample values
+    (in 10,000 samples) will be close to the <em>chi-squared curve with
+    <em>k</em>&nbsp;-&nbsp;1 degrees
+    of freedom</em>, in the sense that the area under the histogram is approximately
+    equal to the area under the curve for the same range of values.
+    As rule of thumb, if the expected count in every category is 10 or greater (if
+    <em>n</em>&nbsp;&times;&nbsp;<em>p</em><sub><em>i</em></sub>&nbsp;&ge;&nbsp;10 for
+    all <em>i</em>&nbsp;=&nbsp;1, 2, &hellip;, <em>k</em>),
+    the chi-squared curve will be a reasonably accurate approximation to the histogram.
+</p>
+
+
+<h3>
+    <a id="chi_2_curve"></a>
+    The chi-squared curve
+</h3>
+
+<p>
+    We have just seen that the <em>chi-square curve</em>
+    is an approximation to the
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability histogram</a> of the
+    <em>chi-squared</em> statistic (when the null hypothesis is true).
+    Like <a class="glossRef" href="gloss.htm#Student-t">Student's <em>t</em> curve</a>,
+    the chi-squared curve is actually a family of curves,
+    one for each value of the degrees of freedom.
+    The chi-squared curve with <em>k</em>&nbsp;-&nbsp;1 degrees of freedom
+    is a good approximation to
+    the probability histogram of the <em>chi-squared</em>
+    statistic for <em>k</em> categories if the null hypothesis is true and the
+    number of trials is sufficiently large that the expected number of outcomes in each
+    category is 10 or larger.
+</p>
+
+<p>
+    If we think of the chi-squared curve with <em>d</em> degrees of
+    freedom as a probability histogram, the expected value of the corresponding
+    random variable would be <em>d</em> (the balance point of the curve
+    is <em>d</em>) and the standard error of the random variable
+    would be (&nbsp;2<em>d</em>&nbsp;)<sup>&frac12;</sup>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    below displays the chi-square curve and lets you find
+    the area under the curve over an interval of values.
+    When you first visit this page, the figure will show the chi-square curve
+    with 3 degrees of freedom, and the range from 7.8 to 18 will be
+    highlighted; you can change the degrees of freedom and the highlighted
+    range.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Area under the chi-square curve';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+           align="baseline" width="620" height="300" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="18">
+    <param name="hiLiteLo" value="7.8">
+    <param name="distribution" value="chi-square">
+    <param name="df" value="3">
+    </applet>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    Experiment by changing the number of degrees of freedom.
+    As the degrees of freedom increases, the peak moves to larger and larger values,
+    the balance point moves to larger and larger values, and the peak gets
+    wider, but narrower relative to the balance point.
+    As the number of degrees of freedom grows, the curve gets more nearly symmetric.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'In fact, the <em>chi-squared</em> curve with <em>d</em> degrees of freedom ' +
+           'approaches the normal curve, in ' +
+           'the following sense: as <em>d</em> grows, the area under the ' +
+           '<em>chi-square</em> curve between <em>a</em> and <em>b</em> approaches ' +
+           'the area under the normal curve between </p><p class="math">' +
+           '(<em>a</em> - <em>d</em>)/(2<em>d</em>)<sup>&frac12;</sup> ' +
+           '&nbsp;&nbsp;and&nbsp;&nbsp; ' +
+           '(<em>b</em> - <em>d</em>)/(2<em>d</em>)<sup>&frac12;</sup>,' +
+           '</p><p>the values of <em>a</em> and <em>b</em> transformed to ' +
+           '<a class="glossRef" href="gloss.htm#standard units">standard units</a>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    We can define quantiles of the chi-square curve just as we did quantiles
+    of the normal curve and Student's <em>t</em>-curve:
+    For any number <em>a</em> between
+    0 and 1, the <em>a</em> quantile of the chi-square curve with
+    <em>d</em> degrees of freedom, <em>x</em><sub><em>d</em>,<em>a</em></sub>, is the unique
+    value such that the area under the chi-square curve with <em>d</em> degrees
+    of freedom from minus infinity up to <em>x</em><sub><em>d</em>,<em>a</em></sub>
+    is <em>a</em>.
+</p>
+
+<p>
+    The following exercise checks your ability to use
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    to find areas under
+    the chi-square curve and quantiles of the chi-square curve.
+    The exercise is dynamic: The questions will tend to change when you reload the page.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var df = listOfRandInts(1, 3, 50)[0];
+    var lims = listOfRandInts(2, 1, 4);
+    var se = Math.sqrt(2*df);
+    lims[0] = roundToDig(Math.max(0, df - lims[0]*se), 1) ;
+    lims[1] = roundToDig(df + lims[1]*se, 1);
+    var theProb = chi2Cdf(lims[1], df) - chi2Cdf(lims[0], df);
+    var theP = 10*listOfRandInts(1,1,9)[0];
+    var pctile = chi2Inv(theP/100, df);
+    var qStr = '<span class="qSpan">The area under the chi-square curve with ' +
+           df.toString() + ' degrees of freedom from ' + lims[0].toString() +
+           ' to ' + lims[1].toString() + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(theProb));
+    var qStr = '</p><p><span class="qSpan">The ' + theP.toString() +
+           '% percentile of the chi-square curve with ' + df.toString() +
+           ' degrees of freedom is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pctile));
+    document.writeln('</p>');
+    var ansStr = 'To find the area, just plug the appropriate values into the chi-square ' +
+         'curve tool.  To find the percentile, use trial and error in the tool, ' +
+         'with the lower limit set to zero and the degrees of freedom set to ' +
+         df.toString() + '.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+   <a id="chi_2_test"></a>
+   The Chi-square test for goodness of fit
+</h2>
+
+<p>
+    At last we have the technology to solve the problem posed originally: to
+    test the hypothesis that a set of categorical data were generated by a given
+    <a class="glossRef" href="gloss.htm#multinomial">multinomial</a> probability model.
+    Suppose that, under the null hypothesis, the data arise from <em>n</em> independent
+    trials, each of which has probability <em>p</em><sub>1</sub> of resulting in an
+    outcome in category 1, probability <em>p</em><sub>2</sub> of resulting in an
+    outcome in category 2,  &hellip; ,
+    and probability <em>p</em><sub><em>k</em></sub> of resulting in an outcome of type
+    <em>k</em>, where
+</p>
+
+<p class="math">
+    <em>p</em><sub>1</sub> + <em>p</em><sub>2</sub> + &hellip; +
+    <em>p</em><sub><em>k</em></sub> = 100%.
+</p>
+
+<p>
+    Suppose further that
+</p>
+
+<p class="math">
+    <em>n</em> &times; <em>p</em><sub><em>i</em></sub> &ge; 10, for
+    <em>i</em>&nbsp;=&nbsp;1, 2, &hellip; , <em>k</em>.
+</p>
+
+<p>
+    Then, under the null hypothesis, the chance that the <em>chi-square</em> statistic
+    exceeds <em>x</em> is very close to the area under the chi-square curve with
+    <em>k</em>&nbsp;-&nbsp;1 degrees of freedom above <em>x</em>.
+    Therefore, if we reject the null hypothesis when the observed value of the
+    <em>chi-squared</em> statistic is greater than
+    <em>x</em><sub><em>k</em>-1,1-<em>a</em></sub>,
+    the chance of a <a class="glossRef" href="gloss.htm#type_error">Type I</a> error
+    (rejecting the null hypothesis when it is in fact true) will be
+    about <em>a</em>.
+</p>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    we return to the problem that motivated this chapter: testing whether a die is fair.
+    The example is dynamic: the data tend to change when you reload the page, so you can
+    see many examples of the computations.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Testing Whether a Die Is Fair';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var rolls = 60*listOfRandInts(1, 3, 10)[0];
+    var pVec = listOfRandInts(6, 60, 140);
+    pVec = vMult(1.0/vSum(pVec), pVec); // normalize to a probability vector
+    var df = pVec.length - 1;
+    var probVec = new Array(pVec.length);
+    for (var i=0; i < pVec.length; i++ ) {
+    probVec[i] = roundToDig(100*pVec[i], 2) + '%';
+    }
+    var outcomes = multinomialSample(pVec, rolls);
+    var expect = rolls/6;
+    var chi2 = 0.0;
+    for (var i = 0; i < outcomes.length; i++) {
+    chi2 += (outcomes[i] - expect)*(outcomes[i] - expect)/expect;
+    }
+    var pVal = 1.0 - chi2Cdf(chi2, df);
+    var expStr = roundToDig(expect, 2).toString();
+    var sides = [1, 2, 3, 4, 5, 6];
+    var header = ['side','occurrences'];
+    var tabArr = [sides, outcomes];
+    var qStr = 'We return to the problem that motivated this chapter: testing whether ' +
+           'a die is fair. Suppose we roll the die ' + rolls.toString() +
+           ' times.  The six different sides show with the following frequencies:</p>' +
+           listToTable(header, tabArr, 'standard','center',false) +
+           '<p>Under the null hypothesis that the die is fair, the expected number of ' +
+           'times each side shows is ' + rolls.toString() + ' &times; (1/6) = ' +
+           expStr + ', so the <em>chi-squared</em> statistic is </p>' +
+           '<p class="math"><em>chi-squared</em> = sum of ' +
+           '(observed - expected)<sup>2</sup>/expected</p><p class="math"> = ' +
+           '(' + outcomes[0].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' + ' +
+           '(' + outcomes[1].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' + ' +
+           '(' + outcomes[2].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' + ' +
+           '(' + outcomes[3].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' + ' +
+           '(' + outcomes[4].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' + ' +
+           '(' + outcomes[5].toString() + ' - ' + expStr + ')<sup>2</sup>/' + expStr +
+           ' = ' + roundToDig(chi2, 2).toString() + '.</p>' +
+           '<p>Let us see how likely it would be for the <em>chi-squared</em> statistic ' +
+           'to be this large if the die really is fair.  Here is the ' +
+           '<em>chi-squared</em> sampling tool again, this time initialized to have ' +
+           'six equal category probabilities, and sample size ' + rolls.toString() +
+           '.  Draw 10,000 samples of size ' + rolls.toString() + ' and see how often ' +
+           'the <em>chi-squared</em> statistic exceeds ' +
+           roundToDig(chi2,2).toString() + '.  That is an estimate of the ' +
+           '<em>P</em>-value of the null hypothesis that the coin is fair.  Because the ' +
+           'sample size is large enough that under the null hypothesis the expected number ' +
+           'of outcomes in each category is 10 or larger, the chi-squared curve with ' +
+           df.toString() + ' degrees of freedom should give a good approximation to the ' +
+           'probability histogram of the <em>chi-squared</em> statistic; the area under ' +
+           'the chi-squared curve with ' + df.toString() + ' degrees of freedom from ' +
+           roundToDig(chi2,2).toString() + ' to infinity is ' +
+           roundToDig(100*pVal, 2).toString() + '%; that is the estimated ' +
+           '<em>P</em>-value we would use in an approximate chi-squared test of the ' +
+           'null hypothesis that the die is fair.  We would reject the hypothesis that ' +
+           'the die is fair at any significance level greater than the <em>P</em>-value. ' +
+           '</p><p class="figure"><applet code="SampleDist.class" codebase="../../Java/" ' +
+           'align="baseline" width="640" height="400" archive="PbsGui.zip"> ' +
+           '<param name="variables" value="chi-squared"> ' +
+           '<param name="startWith" value="chi-squared"> ' +
+           '<param name="boxContents" value="1,1,1,1,1,1"> ' +
+           '<param name="sampleSize" value="' + rolls.toString() + '">' +
+           '<param name="samplesToTake" value="1000">' +
+           '<param name="sources" value="box"> ' +
+           '<param name="boxHistControl" value="false"> ' +
+           '<param name="showBoxHist" value="false"> ' +
+           '<param name="replaceControl" value="false"> ' +
+           '<param name="bins" value="50"> ' +
+           '<param name="hiLiteLo" value="' + chi2.toString() + '"> ' +
+           '<param name="hiLiteHi" value="35">You need Java to see this.</applet></p>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setSampleSize(' + rolls.toString() + ');\n' +
+              'document.applets[' + appNum + '].' +
+              'setBars(\"' + chi2.toString() + '\", "35");\n' +
+              'document.applets[' + appNum + '].setAreas();\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+    var tabArr = [sides, probVec];
+    var header = ['side','probability'];
+    var qStr = '<p>By the way, the actual probabilities of the six sides used to generate ' +
+           'these data were </p>' +
+           listToTable(header, tabArr, 'standard','center',false) +
+           '<p>The value of the <em>chi-square</em> statistic using these probabilities ' +
+           'in the null hypothesis is </p><p class="math">';
+    var chi2b = 0.0;
+    for (var i = 0; i < pVec.length; i++) {
+    expected = rolls*pVec[i];
+    chi2b += (outcomes[i] - expected)*(outcomes[i] - expected)/expected;
+    expStr = roundToDig(expected, 2).toString();
+    qStr += ' (' + outcomes[i] + ' - ' + expStr + ')<sup>2</sup>/' + expStr + ' +';
+    }
+    qStr = qStr.substr(0, qStr.length-1);
+    qStr += ' = ' + roundToDig(chi2b,2).toString() + '</p><p>The corresponding ' +
+        '<em>P</em>-value is ' + roundToDig(100*(1 - chi2Cdf(chi2b, df)),2) + '%.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    This is the <em>chi-square test for goodness of fit</em>.
+    The ingredients of the test are as follows:
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Ingredients of the chi-square test for goodness of fit</span>
+        </p>
+        <ul>
+            <li>
+                The data are counts of occurrences in <em>k</em> categories,
+                where <em>k</em>&nbsp;&ge;&nbsp;2.
+                (If there are only two categories, one could use a test based
+                on the binomial distribution or a <em>z</em>-test, but the
+                chi-squared test still makes sense.)
+                Let <em>o</em><sub><em>i</em></sub>, <em>i</em>&nbsp;=&nbsp;1, 2,
+                &hellip; , <em>k</em>, be the observed counts.
+            </li>
+            <li>
+                Under the null hypothesis, the data have a
+                <a class="glossRef" href="gloss.htm#multinomial">multinomial distribution</a>
+                with <em>n</em> trials and
+                with known category probabilities
+                <em>p</em><sub>1</sub>, <em>p</em><sub>2</sub>,
+                &hellip;, <em>p</em><sub><em>k</em></sub>.
+                (Under the null hypothesis, the data behave like the number of times
+                each of <em>k</em> disjoint events occurs in <em>n</em> independent
+                trials, where the probability of each event is the same in every
+                trial and the probabilities of the <em>k</em> events sum to 100%.)
+            </li>
+            <li>
+                Under the null hypothesis, the expected numbers of occurrences in each
+                category,
+                <p class="math">
+                    <em>e</em><sub><em>i</em></sub>&nbsp;=&nbsp;<em>n</em>
+                    &times; <em>p</em><sub><em>i</em></sub>, &nbsp;&nbsp;
+                    <em>i</em>&nbsp;=&nbsp;1, 2,
+                    &hellip; , <em>k</em>,
+                </p>
+                are all at least 10.
+            </li>
+        </ul>
+        <p>
+            Then, under the null hypothesis, the probability histogram of
+            the <em>chi-squared</em> statistic,
+        </p>
+        <p class="math">
+            <em>chi-squared</em> = sum of
+            (<em>o</em><sub><em>i</em></sub> -
+            <em>e</em><sub><em>i</em></sub>)<sup>2</sup>/<em>e</em><sub><em>i</em></sub>
+        </p>
+        <p>
+            over all categories <em>i</em>&nbsp;=&nbsp;1, 2,
+            &hellip; , <em>k</em>,
+            is approximated reasonably well by the chi-squared
+            curve with <em>k</em>&nbsp;-&nbsp;1 degrees of freedom.
+        </p>
+        <p>
+            The <em>chi-squared test for goodness of fit</em>
+            is to reject the null hypothesis if the observed value of the
+            <em>chi-squared</em> statistic is greater than
+            <em>x</em><sub><em>k</em>-1,1-<em>a</em></sub>, the
+            1-<em>a</em> quantile of the chi-squared curve with
+            <em>k</em>-1 degrees of freedom, where
+            <em>a</em> is the desired significance level.
+            Under the assumptions given above, the significance level of
+            this test is approximately <em>a</em>.
+        </p>
+        <p>
+            The <em>P</em>-value of the null hypothesis is approximately equal to
+            the area under the chi-squared curve with <em>k</em>&nbsp;-&nbsp;1
+            degrees of freedom, to the right of the observed value of the
+            <em>chi-squared</em> statistic.
+        </p>
+</div>
+
+<p>
+    Note that we might reject the null hypothesis in a number of different
+    situations:
+</p>
+
+<ul>
+    <li>
+        The null hypothesis is true, but an event occurred that had probability
+        less than or equal to the significance level.
+    </li>
+    <li>
+        The data arise from a multinomial model, but the category probabilities
+        in the null hypothesis are incorrect.
+    </li>
+    <li>
+        The category probabilities in the null hypothesis are correct, but the
+        trials are not independent.
+    </li>
+    <li>
+        The multinomial model is completely wrong.
+    </li>
+</ul>
+
+
+<p>
+    The test cannot tell us which of these scenarios holds.
+</p>
+
+<p>
+    The following exercises check your ability to perform the chi-squared test
+    for goodness of fit.
+    The exercises are dynamic: the data tend to change when you reload the page.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var jurors = 500*listOfRandInts(1, 3, 6 )[0];
+    var ethLabel = ['White',
+            'Black',
+            'Native American',
+            'Asian and Pacific Islander',
+            'Other'
+           ];
+    var pNull = [0.8029, 0.1206,  0.0079,  0.0292,  0.0394];
+    var probNull = new Array(pNull.length);
+    for (var i=0; i < pNull.length; i++) {
+       probNull[i] = roundToDig(100*pNull[i], 2).toString() + '%';
+    }
+    var pVec = listOfRandInts(pNull.length, 80, 120);
+    pVec = vPointwiseMult(pNull, pVec);
+    pVec = vMult(1.0/vSum(pVec), pVec); // normalize to a probability vector
+    var df = pVec.length - 1;
+    var probVec = new Array(pVec.length);
+    for (var i=0; i < pVec.length; i++ ) {
+       probVec[i] = roundToDig(100*pVec[i], 2) + '%';
+    }
+    var outcomes = multinomialSample(pVec, jurors);
+    var chi2 = 0.0;
+    var expect = new Array(pVec.length);
+    var expectStr = new Array(pVec.length);
+    for (var i = 0; i < outcomes.length; i++) {
+       expect[i] = jurors*pNull[i];
+       expectStr[i] = roundToDig(expect[i],2);
+       chi2 += (outcomes[i] - expect[i])*(outcomes[i] - expect[i])/expect[i];
+    }
+    var pVal = 1.0 - chi2Cdf(chi2, df);
+    var sigLevels = [1, 5, 10];
+    var sigInx = listOfRandInts(1, 0, sigLevels.length - 1)[0];
+    var sig = sigLevels[sigInx];
+    var header = ['Ethnicity','fraction of juror pool'];
+    var reject = false;
+    if (pVal < sig/100.0) {
+       reject = true;
+    }
+    var tabArr = [ethLabel, probNull];
+    var qStr = 'Suppose that in a certain county, people are supposed to be selected randomly ' +
+           'for jury duty.  A civil rights group sues the county, claiming that ' +
+           'different ethnicities are not represented proportionally for jury duty. ' +
+           'Suppose that the ethnicities of the pool of people in the county who are ' +
+           'eligible for jury duty is as follows:</p>' +
+           listToTable(header, tabArr, 'standard','center',false) +
+           '<p>The previous year, ' + jurors.toString() + ' persons were selected for ' +
+           'jury duty; their ethnicities were as follows: </p>';
+    var header = ['Ethnicity','jurors selected'];
+    var tabArr = [ethLabel, outcomes];
+    qStr +=    listToTable(header, tabArr, 'standard','center',false) +
+           '<p>The court retains you as an independent expert to assess the statistical ' +
+           'evidence that there was discrimination.  You propose to formulate the issue ' +
+           'as an hypothesis test.  The null hypothesis is that the people selected ' +
+           'for jury duty are a simple random sample from the population of potential ' +
+           'jurors.  Suppose that the pool of potential jurors is sufficiently large that ' +
+           'the difference between sampling with and without replacement is not ' +
+           'important, so you decide to use a chi-squared test.</p> ';
+    document.writeln(qStr);
+    for (var i = 0; i < ethLabel.length; i++) {
+       qStr = '<p><span class="qSpan">Under the null hypothesis, the expected number of ' +
+              ethLabel[i] + ' persons selected for jury duty is </span>';
+       document.writeln(qStr);
+       writeTextExercise(8, qCtr++, numToRange(expect[i]) );
+       document.writeln('</p>');
+    }
+    var qStr = '<p><span class="qSpan">Under the null hypothesis, the smallest expected ' +
+           'count is </span>';
+    document.writeln(qStr);
+    var bigEnough = false;
+    var aVal = 'a';
+    if (jurors*(vMinMax(pNull)[0]) >= 10) {
+       bigEnough = true;
+       aVal = 'b';
+    }
+    var opt = ['less than 10','10 or greater'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '<span class="qSpan"> so the probability histogram of the ' +
+           '<em>chi-square</em> statistic </span>';
+    document.writeln(qStr);
+    var opt = ['might not','will'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '<span class="qSpan"> be approximated well by a chi-squared curve.</span></p>' +
+           '<p><span class="qSpan">The appropriate chi-squared curve to use has degrees of freedom equal ' +
+           'to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(df) );
+    var qStr = '</p><p><span class="qSpan">The observed value of the <em>chi-squared</em> ' +
+           'statistic is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(chi2));
+    var qStr = '</p><p><span class="qSpan">The <em>P</em>-value of the null hypothesis is ' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pVal,.0005));
+    var qStr = '</p><p><span class="qSpan">Should the null hypothesis be rejected at ' +
+           'significance level ' + sig.toString() + '%?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    var aVal = 'a';
+    if (reject) {
+       aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+    var ansStr = 'Under the null hypothesis, the expected number of ' +
+         'jurors in each ethnic group is ' + jurors.toString() + ' times the ' +
+         'fraction of jurors of that ethnicity in the pool.  This gives </p>';
+    var header = ['Ethnicity','Expected number of jurors'];
+    var tabArr = [ethLabel, expectStr];
+    ansStr +=    listToTable(header, tabArr, 'standard','center',false) +
+         '<p>All these numbers are at least 10, so the chi-squared curve with ' +
+         '(categories - 1) = ' + df.toString() + ' degrees of freedom should be ' +
+         'a good approximation to the sampling distribution of the ' +
+         '<em>chi-squared</em> statistic under the null hypothesis.  The observed ' +
+         'value of the <em>chi-squared</em> statistic is </p>' +
+         '<p class="math"><em>chi-squared</em> = sum of ' +
+         '(observed - expected)<sup>2</sup>/expected</p><p class="math"> = ';
+    for (var i = 0; i < pVec.length; i++) {
+       ansStr += ' (' + outcomes[i] + ' - ' + expectStr[i] + ')<sup>2</sup>/' + expectStr[i] +
+             ' +';
+    }
+    ansStr = ansStr.substr(0, ansStr.length-1);
+    ansStr += '</p><p class="math"> = ' + roundToDig(chi2,2).toString() +
+        '</p><p>The <em>P</em>-value is the area under the chi-squared curve with ' +
+        df.toString() + ' degrees of freedom to the right of ' +
+        roundToDig(chi2, 2).toString() + ', which is ' + roundToDig(100*pVal, 2).toString() +
+        '%.  This is ';
+    if (reject) {
+       ansStr += 'smaller than ' + sig.toString() + '%, so we would reject the ' +
+          'null hypothesis at significance level ' + sig.toString() + '%.';
+    } else {
+       ansStr += 'larger than ' + sig.toString() + '%, so we would not reject the ' +
+          'null hypothesis at significance level ' + sig.toString() + '%.';
+    }
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+<!-- ====================================================================================== -->
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    The <em>multinomial distribution</em> is a common probability model for categorical data.
+    It is a generalization of the binomial distribution to more than two possible categories
+    of outcome.
+    In an independent sequence of <em>n</em> trials,
+    each of which has probability <em>p</em><sub>1</sub> of resulting in an outcome in category 1,
+    probability <em>p</em><sub>2</sub> of resulting in an outcome in category 2, &hellip; ,
+    and probability <em>p</em><sub><em>k</em></sub> of resulting in an outcome
+    in category <em>k</em>,
+    with <em>p</em><sub>1</sub>+<em>p</em><sub>2</sub>+ &hellip;
+    +<em>p</em><sub><em>k</em></sub>=100%,
+    the numbers  <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, &hellip; ,  ,
+    <em>X</em><sub><em>k</em></sub> of outcomes in each of the <em>k</em> categories have
+    a <em>multinomial joint probability distribution</em>:
+    If <em>n</em><sub>1</sub>+<em>n</em><sub>2</sub>+ &hellip; +<em>n</em><sub><em>k</em></sub>=<em>n</em>,
+</p>
+
+<p class="math">
+    P(<em>X</em><sub>1</sub>=<em>n</em><sub>1</sub> and <em>X</em><sub>2</sub>=<em>n</em><sub>2</sub>
+    and &hellip; and <em>X</em><sub><em>k</em></sub>=<em>n</em><sub><em>k</em></sub>) =
+    <em>p</em><sub>1</sub><sup><em>n</em><sub>1</sub></sup> &times;
+    <em>p</em><sub>2</sub><sup><em>n</em><sub>2</sub></sup> &times; &hellip;
+    &times;<em>p</em><sub><em>k</em></sub><sup><em>n</em><sub><em>k</em></sub></sup> &times;
+    <em>n</em>!/(<em>n</em><sub>1</sub>!&times;<em>n</em><sub>2</sub>!&times;
+    &hellip; &times;<em>n</em><sub><em>k</em></sub>!).
+</p>
+
+<p>
+    The probability is zero if <em>n</em><sub>1</sub>+<em>n</em><sub>2</sub>+&hellip;
+    +<em>n</em><sub><em>k</em></sub>&ne;<em>n</em>.
+    This is called the <em>multinomial distribution with parameters <em>n</em> and
+    <em>p</em><sub>1</sub>, <em>p</em><sub>2</sub>, &hellip; , <em>p</em><sub><em>k</em></sub></em>.
+    The expected number of outcomes in category <em>i</em> is
+    <em>n</em>&times;<em>p</em><sub><em>i</em></sub>.
+</p>
+
+<p>
+    The <em>chi-squared statistic</em> is a summary measure of the discrepancy between the
+    observed numbers of outcomes in each category and the expected number of outcomes in each
+    category:
+</p>
+
+<p class="math">
+    chi-squared=(<em>X</em><sub>1</sub>-E(<em>X</em><sub>1</sub>))2/E(<em>X</em><sub>1</sub>) +
+    (<em>X</em><sub>2</sub>-E(<em>X</em><sub>2</sub>))2/E(<em>X</em><sub>2</sub>) + &hellip;
+    + (<em>X</em><sub><em>k</em></sub>-E(<em>X</em><sub><em>k</em></sub>))2/E(<em>X</em><sub><em>k</em></sub>).
+</p>
+
+<p>
+    The probability distribution of the chi-squared statistic when the null hypothesis is true
+    depends on the number <em>n</em> of trials and the probabilities <em>p</em><sub>1</sub>,
+    <em>p</em><sub>2</sub>, &hellip;   , <em>p</em><sub><em>k</em></sub>.
+    However, if the number of trials is large enough that
+    <em>n</em>&times;<em>p</em><sub><em>i</em></sub>&gt;10 for every category
+    <em>i</em>=1, 2, &hellip; , <em>k</em>, the chi-square curve with
+    <em>k</em>-1 degrees of freedom is an accurate approximation to the probability
+    histogram of the chi-squared statistic.
+    The chi-square curve with <em>d</em> degrees of freedom is positive, has total
+    area 100%, and has a single bump (mode).
+    The balance point of the chi-square curve with d degrees of freedom is <em>d</em>.
+    The <em>a</em> quantile of the chi-square curve with <em>d</em> degrees of freedom,
+    denoted <em>x</em><sub><em>d</em>,<em>a</em></sub>, is the point for which the
+    area to the left of <em>x</em><sub><em>d</em>,<em>a</em></sub> under the chi-square
+    curve with <em>d</em> degrees of freedom is <em>a</em>.
+</p>
+
+<p>
+    The chi-squared statistic and the chi-square curve can be used to test the null hypothesis
+    that a given multinomial model gives rise to observed categorical data as follows:
+    Let <em>n</em> be the total number of observations, and let <em>k</em> be the number of
+    categories, let <em>p</em><sub>1</sub>, &hellip; , <em>p</em><sub><em>k</em></sub>
+    be the probabilities of the categories according to the null hypothesis.
+    Let <em>X</em><sub>1</sub> be the observed number of outcomes in category 1, let
+    <em>X</em><sub>2</sub> be the observed number of outcomes in category 2, <em>etc</em>.
+    Let
+</p>
+
+<p class="math">
+    chi-squared =
+    (<em>X</em><sub>1</sub>-<em>n</em><em>p</em><sub>1</sub>)<sup>2</sup>/(<em>n</em><em>p</em><sub>1</sub>) +
+    (<em>X</em><sub>2</sub>-<em>n</em><em>p</em><sub>2</sub>)<sup>2</sup>/(<em>n</em><em>p</em><sub>2</sub>) +
+    &hellip;  +
+    (<em>X</em><sub><em>k</em></sub>-<em>n</em><em>p</em><sub><em>k</em></sub>)<sup>2</sup>/(<em>n</em><em>p</em><sub><em>k</em></sub>).
+</p>
+
+<p>
+    If <em>n</em>&times;<em>p</em><sub><em>i</em></sub>&gt;10 for every category
+    <em>i</em>=1, 2, &hellip; , <em>k</em>, the probability histogram of chi-squared
+    when the null hypothesis is true can be approximated accurately by the chi-square curve
+    with <em>k</em>-1 degrees of freedom, and the rule
+</p>
+
+<p class="math">
+    Reject the null hypothesis if chi-squared&gt;<em>x</em><sub><em>k</em>-1,1-<em>a</em></sub>
+</p>
+
+<p>
+    is a test of the null hypothesis at approximate significance level <em>a</em>.
+    The (approximate) <em>P</em>-value is the area to the right of chi-squared
+    under the chi-square curve with <em>k</em>-1 degrees of freedom.
+    This is called the <em>chi-square test for goodness of fit</em>.
+</p>
+
+<h2>
+    <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>average                                </li>
+    <li>bin                                    </li>
+    <li>binomial distribution                  </li>
+    <li>categorical data                       </li>
+    <li>Chebychev’s Inequality                 </li>
+    <li>chi-square curve                       </li>
+    <li>Chi-square curve                       </li>
+    <li>chi-squared statistic                  </li>
+    <li>chi-squared test for goodness of fit   </li>
+    <li>dependent                              </li>
+    <li>disjoint                               </li>
+    <li>exhaustive                             </li>
+    <li>expected value                         </li>
+    <li>experiment                             </li>
+    <li>Fundamental Rule of Counting           </li>
+    <li>histogram                              </li>
+    <li>hypothesis test                        </li>
+    <li>independent                            </li>
+    <li>Law of Large Numbers                   </li>
+    <li>multinomial distribution               </li>
+    <li>normal curve                           </li>
+    <li>null hypothesis                        </li>
+    <li>outcome space                          </li>
+    <li>parameter                              </li>
+    <li>population mean                        </li>
+    <li>probability                            </li>
+    <li>probability distribution               </li>
+    <li>probability histogram                  </li>
+    <li>P-value                                </li>
+    <li>quantile                               </li>
+    <li>quantitative data                      </li>
+    <li>random sample                          </li>
+    <li>random variable                        </li>
+    <li>rms                                    </li>
+    <li>sample size                            </li>
+    <li>sampling distribution                  </li>
+    <li>significance level                     </li>
+    <li>standard error (SE)                    </li>
+    <li>standard unit                          </li>
+    <li>Student’s t-curve                      </li>
+    <li>Symmetric                              </li>
+    <li><em>t</em> test                        </li>
+    <li>Type I error                           </li>
+    <li>Type II error                          </li>
+    <li><em>z</em> test                        </li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

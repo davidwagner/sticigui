@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "percentageTests";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<div class="indent">
+<h2>
+    Testing whether two Percentages are equal
+</h2>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+    The University of California, Berkeley (Cal) and Stanford University are
+    athletic archrivals in the Pacific 10 conference.
+    Stanford fans claim Stanford's basketball team is better than Cal's team;
+    Cal fans challenge this assertion.
+</p>
+
+<p>
+    In 2004, Stanford University's basketball team went nearly undefeated
+    within the Pac 10.
+    Stanford's record, and those of Cal and the other eight teams in the
+    conference, are listed in
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    citeTable();
+// -->
+</script>
+    In all, there were 89 games played among the Pac 10 teams in the season.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Conference Performance of Pac 10 Basketball Teams, 2003-4 Season.  Data from ' +
+               '<a href="http://sportsillustrated.cnn.com/basketball/ncaa/men/standings/2003/pac10/" target="_new">' +
+               'Sports Illustrated</a>.';
+    writeTableCaption(qStr);
+    var header = ['team', 'wins', 'losses', 'games'];
+    var data = [['Stanford',
+                 'Washington',
+                 'Arizona',
+                 'Oregon',
+                 'California',
+                 'USC',
+                 'Washington State',
+                 'UCLA',
+                 'Oregon State',
+                 'Arizona State'
+                ],
+                [17, 12, 10,  9,  9,  8,  7,  7,  6,  4],
+                [ 1,  6,  7,  9,  9, 10, 11, 11, 12, 13],
+                [18, 18, 17, 18, 18, 18, 18, 18, 18, 17]
+               ];
+    listToTable(header,data,'transpose','center');
+// -->
+</script>
+</p>
+
+<p>
+    Stanford won 17 of the 18 games it played; Cal won 9 of 18.
+    We would like to use these data to test the Stanford fans' claim that
+    Stanford's team is better than Cal's.
+    That is, we would like to determine whether the difference between the two teams'
+    performance reasonably could be attributed to chance, if the Stanford and Cal teams
+    in fact have equal skill.
+</p>
+
+<!--  =================================  START PROBLEM ======================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ['the Stanford and Cal teams have the same skill',
+                  'Stanford has the better team',
+                  'Cal has the better team',
+                  'the Stanford and Cal teams have different skills',
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    var qStr = '<span class="qSpan">The null hypothesis is that</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var aVal = alphabet[optPerm[1][1]];
+    qStr = '</p><p><span class="qSpan">The alternative hypothesis is that</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    To test the hypothesis, we shall make a number of simplifying assumptions.
+    First of all, we shall ignore the fact that some of the games were played between
+    Stanford and Cal: we shall pretend that all the games were played against
+    other teams in the conference.
+    One strong version of the hypothesis that the two teams have equal skill is that
+    the outcomes of the games would have been the same had the two teams swapped
+    schedules.
+    That is, suppose that when Washington played Stanford on a particular day, Stanford won.
+    Under this strong hypothesis, had Washington played Cal that day instead of Stanford,
+    Cal would have won.
+</p>
+
+<p>
+    A weaker version of the hypothesis is that the outcome of Stanford's games is determined
+    by independent draws from a 0-1 box that has a fraction
+    <em>p</em><sub>C</sub> of tickets labeled &quot;1&quot; (Stanford wins the game if
+    the ticket drawn is labeled &quot;1&quot;), that the outcome of Berkeley's
+    games is determined similarly, by independent draws from a 0-1 box with a fraction
+    <em>p</em><sub>S</sub> of tickets labeled &quot;1,&quot; and that
+    <em>p</em><sub>S</sub>&nbsp;=&nbsp;<em>p</em><sub>C</sub>.
+    This model has some shortcomings.
+    (For instance, when Berkeley and Stanford play each other, the independence assumption
+    breaks down, and the fraction of tickets labeled &quot;1&quot; would need to be 50%.
+    Also, it seems unreasonable to think that the chance of winning does not depend on
+    the opponent.
+    We could refine the model, but that would require knowing more details about who
+    played whom, and the outcome.)
+</p>
+
+<p>
+    Nonetheless, this model does shed some light on how surprising the records would be if the
+    teams were, in some sense, equally skilled.
+    This box model version allows us to use Fisher's Exact test for independent samples,
+    considering &quot;treatment&quot; to be playing against Stanford, and &quot;control&quot;
+    to be playing against Cal, and conditioning on the total number of wins by both teams
+    (26).
+</p>
+
+
+<!--  =================================  START PROBLEM ======================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ['the number of games Stanford wins',
+                  'the number of times Stanford beats Cal',
+                  'the number of times Cal beats Stanford',
+                  'the number of games Cal wins'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    var qStr = '<span class="qSpan">The test statistic is</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    rawOpt = ['binomial',
+              'geometric',
+              'hypergeometric',
+              'negative binomial'
+             ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][2]];
+    qStr = '</p><p><span class="qSpan">If the null hypothesis is true, the test ' +
+           'statistic has a </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    rawOpt = ['n=26, p=0.5',
+              'n=36, p=26/36',
+              'n=36, p=0.5',
+              'N=36, G=26, n=18',
+              'N=36, G=26, n=17',
+              'N=36, G=17, n=18',
+              'N=26, G=17, n=18',
+              'p=0.5',
+              'p=26/36',
+              'p=0.5, r=17',
+              'p=26/38, r=17',
+              'p=17/18, r=17'
+             ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][3]];
+    qStr = '<span class="qSpan"> distribution with parameter(s)</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!--  =================================  START PROBLEM ======================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    document.writeln(startProblem(pCtr++));
+    var stanWins = 17;
+    var stanGames = 18;
+    var totWins = 26;
+    var games = 36;
+    var alphList = [1,5,10];
+    var alpha = alphList[listOfRandInts(1,0,alphList.length-1)[0]];
+    var qStr = '<span class="qSpan">The <em>P</em>-value for a one-sided test against ' +
+           'the alternative hypothesis that the Stanford team is better than the Cal team is</span>';
+    document.writeln(qStr);
+    var pVal = hyperGeoTail( games, totWins, stanGames, stanWins);
+    writeTextExercise(8,qCtr++, numToRange(pVal));
+    qStr = '</p><p><span class="qSpan">At significance level ' + alpha.toString() + '%, we should ' +
+           'reject the null hypothesis.</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = alphabet[0];
+    if (pVal <= alpha/100) {
+        aVal = alphabet[1];
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!--  =================================  START PROBLEM ======================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    document.writeln(startProblem(pCtr++));
+    var stanWins = 17;
+    var stanGames = 18;
+    var totWins = 26;
+    var games = 36;
+    var qStr = '<span class="qSpan">If the null hypothesis is true, the expected value of the ' +
+               'test statistic is </span>';
+    document.writeln(qStr);
+    p = totWins/games;
+    var eX = stanGames*totWins/games;
+    var seX = Math.sqrt(stanGames*p*(1-p)*(games-stanGames)/(games-1));
+    var z = (stanWins-eX)/seX;
+    var pVal = 1-normCdf(z);
+    writeTextExercise(8,qCtr++, numToRange(eX));
+    qStr = '<span class="qSpan"> and the standard error of the test statistic is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(seX));
+    qStr = '</p><p><span class="qSpan">The <em>z</em>-score of the test statistic is</span> ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(z));
+    qStr = '</p><p><span class="qSpan">The normal approximation to the <em>P</em>-value for ' +
+           'Fisher\'s exact test against the alternative that the Stanford ' +
+           'team is better than the Berkeley team is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pVal,.1*pVal));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+
+<p>
+    Now consider the <em>z</em> test using independent samples. We pretend that each team's
+    wins and losses are independent random samples with replacement from 0-1 boxes in which
+    the fraction of ones represents the probability that that team wins each game it plays.
+    The number of tickets labeled &quot;1&quot; in the sample is the number of games the
+    team wins.
+</p>
+
+
+<!--  =================================  START PROBLEM ======================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    document.writeln(startProblem(pCtr++));
+    var stanWins = 17;
+    var calWins = 9;
+    var stanGames = 18;
+    var calGames = 18;
+    var totWins = 26;
+    var games = 36;
+    var pHat = totWins/games;
+    var sdBox = Math.sqrt(pHat*(1-pHat));
+    var stanPhat = stanWins/stanGames;
+    var stanSE = sdBox/Math.sqrt(stanGames);
+    var calPhat = calWins/calGames;
+    var calSE = sdBox/Math.sqrt(calGames);
+    var diffPhat = stanPhat - calPhat;
+    var seDiff = Math.sqrt(stanSE*stanSE+calSE*calSE);
+    var zDiff = diffPhat/seDiff;
+    var pVal = 2*(1-normCdf(zDiff));
+    var qStr = '<span class="qSpan">The sample percentage of games won by ' +
+               'Stanford is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(stanPhat));
+    qStr = '<span class="qSpan">On the assumption that the null hypothesis is true, the bootstrap ' +
+           'estimate of the standard error of the sample percentage of games won by Stanford is  ' +
+           '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(stanSE));
+    qStr = '<p>(<em>Hint: if the null hypothesis is true, then with the simplifications we made ' +
+           'it is as if the teams independently draw at random with replacement from the same ' +
+           'box of tickets. What percentage of the tickets in that box would you estimate to be ' +
+           'labeled &quot;1?&quot;</em>)';
+    document.writeln(qStr);
+    qStr = '<p><span class="qSpan">The sample percentage of games won by Cal is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(calPhat));
+    qStr = '<span class="qSpan">On the assumption that the null hypothesis is true, the bootstrap ' +
+           'estimate of the standard error of the sample percentage of games won by Cal is  </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(calSE));
+    qStr = '</p><p><span class="qSpan">The difference in sample percentages of games won by ' +
+           'Stanford and Cal is  </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(diffPhat));
+    qStr = '<span class="qSpan">On the assumption that the null hypothesis is true, the bootstrap ' +
+           'estimate of the standard error of the difference in sample percentages is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(seDiff));
+    qStr = '</p><p><span class="qSpan">The <em>z</em>-score for the difference in sample ' +
+           'percentages is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(zDiff));
+    qStr = '</p><p><span class="qSpan">The approximate <em>P</em>-value for ' +
+           '<em>z</em> test against the <em>two-sided</em> alternative that the Stanford ' +
+           'and Berkeley teams have different skills is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pVal,.1*pVal));
+    var alpha = alphList[listOfRandInts(1,0,alphList.length-1)[0]];
+    qStr = '</p><p><span class="qSpan">At significance level ' + alpha.toString() + '%, we should ' +
+           'reject the null hypothesis.</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = alphabet[0];
+    if (pVal <= alpha/100) {
+        aVal = alphabet[1];
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

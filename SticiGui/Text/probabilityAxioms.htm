@@ -1,0 +1,2499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "4 June 2011 21:37 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "probabilityAxioms";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>Probability: Axioms and Fundaments</h1>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityPhilosophy') + ', ');
+// -->
+</script> 
+    discussed how the mathematical theory of probability is connected to the world
+    through philosophical
+    <a class="glossRef" href="gloss.htm#probability_theories">theories of probability</a>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sets') + ', ');
+// -->
+</script>
+    reviewed the basic tool needed to discuss probability
+    mathematically, Set Theory.
+    This chapter introduces the mathematical theory of probability,
+    in which probability is a function that assigns numbers between
+    0 and 100% to <a class="glossRef" href="gloss.htm#event">events</a>, subsets of
+    <a class="glossRef" href="gloss.htm#outcome_space">outcome space</a>.
+    Starting with just three axioms and a few definitions, the mathematical
+    theory develops powerful and beautiful consequences.
+    The chapter presents the
+    <a class="glossRef" href="gloss.htm#axioms_of_probability">axioms of probability</a>
+    and some consequences of the axioms.
+    <a class="glossRef" href="gloss.htm#conditional_probability">Conditional probability</a>
+    is then defined, which leads to two useful
+    formulae&mdash;the <a class="glossRef" href="gloss.htm#multiplication_rule">Multiplication Rule</a>
+    and <a class="glossRef" href="gloss.htm#bayes_rule">Bayes' Rule</a>&mdash;and to the
+    definition of <a class="glossRef" href="gloss.htm#independent">independence</a>.
+    All these concepts and formulae play important roles in the sequel.
+</p>
+
+<h2><a id="axioms_of_probability"></a>
+    The Axioms of Probability
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=33&end=266" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The <span class="termOfArt">axioms of probability</span> are mathematical rules that probability must satisfy.
+    Let <span class="math">A</span> and <span class="math">B</span> be events.
+    Let <span class="math">P(A)</span> denote the probability of the event <span class="math">A</span>.
+    The axioms of probability are these three conditions on the function <span class="math">P</span>:
+</p>
+
+<ol>
+    <li>
+        The probability of every event is at least zero.
+        (For every event <span class="math">A</span>, <span class="math">P(A) &ge; 0</span>.
+        There is no such thing as a negative probability.)
+    </li>
+    <li>
+        The probability of the entire outcome space is 100%.
+        (<span class="math">P(<strong>S</strong>) = 100%</span>.
+        The chance that <em>something</em> in the outcome space occurs is 100%,
+        because the outcome space contains every possible outcome.)
+    </li>
+    <li>
+        If two events are <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>, the
+        probability that either of the events happens is the sum of the
+        probabilities that each happens.
+        (If <span class="math">AB = {}</span>,
+        <span class="math">P(A &cup; B) =
+        P(A) + P(B)</span>.)
+    </li>
+</ol>
+
+
+<p>
+    In place of axiom 3, the following axiom sometimes is used:
+</p>
+
+<p>
+    3') If <span class="math">{A<sub>1</sub>, A<sub>2</sub>, A<sub>3</sub>,
+    &hellip; }</span>
+    is a partition of the set <span class="math">A</span>, then
+    <span class="math">P(A) = P(A<sub>1</sub>) + P(A<sub>2</sub>)
+    + P(A<sub>3</sub>) +  &hellip; <span class="math">
+</p>
+
+<div class="indent">
+<p class="inline">
+    Axiom 3' is more restrictive than axiom 3.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'To see that axiom 3\' is more restrictive than axiom 3, ' +
+           'suppose <span class="math">A</span> and <span class="math">B</span> are disjoint. Let ' +
+           '<span class="math">A<sub>1</sub> = A</span>, <span class="math">A<sub>2</sub> = B</span>, ' +
+           'and <span class="math">A<sub>k</sub> = {}</span> for <span class="math">k &gt; 2</span>.  ' +
+           'Then <span class="math">{A<sub>1</sub>, A<sub>2</sub>, ' +
+           'A<sub>3</sub>, &hellip; }</span> is a partition of ' +
+           '<span class="math">A&cup;B</span>: ' +
+           '</p><p class="math">' +
+           'A<sub>1</sub> &cup; A<sub>2</sub>&cup;A<sub>3</sub> &cup; &hellip; = ' +
+           'A&cup;B, ' +
+           'and </p><p class="math">A<sub>i</sub>A<sub>j</sub> = {} if i&ne;j.</p>' +
+           '<p>Axiom 3\' thus requires that </p>' +
+           '<p class="math">P(A&cup;B) = ' +
+           'P(A<sub>1</sub>) + P(A<sub>2</sub>) + ' +
+           'P(A<sub>3</sub>) + &hellip;  ' +
+           '= P(A) + P(B) + P({}) + P({}) + &hellip; .  ' +
+           'Let <span class="math">C = (A&cup;B)<sup>c</sup></span>. ' +
+           'Then <span class="math">{A, B, C, {}, {}, &hellip;  }</span> is a partition ' +
+           'of <span class="math"><strong>S</strong></span>.  Axioms 2 and 3\' imply that </p><p class="math">' +
+           'P(A)+P(B)+P(C)+ P({})+P({}) + &hellip; = 100%. ' +
+           '</p><p>Axiom 1 implies that <span class="math">P(C)</span> and ' +
+           '<span class="math">P({})</span> are greater than or ' +
+           'equal to zero.  It follows that <span class="math">P({})</span> must equal zero, so ' +
+           'axioms 1, 2, and 3\' imply that ' +
+           '<span class="math">P(A&cup;B) = P(A) + P(B)</span>, as axiom 3 asserts.  ' +
+           'Thus axiom 3\' is more restrictive than axiom 3.  The strategy ' +
+           'of  this demonstration involved forming an infinite ' +
+           'collection of disjoint sets whose a union is equal to the union ' +
+           'of a finite number of disjoint sets, by appending the empty ' +
+           'set to the collection infinitely many times.  This is a ' +
+           'common strategy.  To form an infinite collection ' +
+           'of sets whose <em>intersection</em> that is equal to the intersection ' +
+           'of a finite number of sets, just append the last set to the list ' +
+           'infinitely many times.  That is, use the fact that </p>' +
+           '<p class="math">' +
+           'A<sub>1</sub>A<sub>2</sub>A<sub>3</sub> ' +
+           '&hellip;  A<sub>n</sub> = ' +
+           'A<sub>1</sub>A<sub>2</sub>A<sub>3</sub> ' +
+           '&hellip; ' +
+           'A<sub>n</sub>A<sub>n</sub>' +
+           'A<sub>n</sub>A<sub>n</sub> ' +
+           '&hellip; .';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Both axiom 3 and axiom 3' hold for every probability function used in
+    this book.
+    Any function <span class="math">P</span> that assigns numbers to subsets of the outcome space
+    <span class="math"><strong>S</strong></span> and satisfies the Axioms of Probability is called a
+    <em>probability distribution on</em> <span class="math"><strong>S</strong></span>.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'The Uniform Probability Distribution.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Let <span class="math"><strong>S</strong></span> be a set containing 
+    <span class="math">n&gt;0</span> elements, for example,
+    <span class="math"><strong>S</strong>= {1, 2, &hellip; , n}</span>.
+    For any subset <span class="math">A</span> of <span class="math"><strong>S</strong></span>, 
+    define <span class="math">#A</span>
+    to be the number of elements of <span class="math">A</span>.
+    For example,  <span class="math">#{} = 0, #{1, 2} = 2</span>, and 
+    <span class="math">#{n, n&minus;1, n&minus;2} = 3</span>.
+    The function # is called the <span class="termOfArt">cardinality function</span> and  
+    <span class="math">#A</span> is called the 
+    <em>cardinality of</em> <span class="math">A</span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    The cardinality of a finite set is the number of elements it contains, so
+    in this example, where <span class="math"><strong>S</strong> = {1, 2, 3, &hellip; , n}</span>,
+    <span class="math">#<strong>S</strong> = n</span>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'If the elements of a set can be put in 1:1 correspondence with the ' +
+               'integers, the cardinality of the set is denoted <em>aleph-null</em>. ' +
+               'Thus </p><p class="math">#{&hellip;, -2, -1, 0, 1, 2, 3, ' +
+               '&hellip;} = aleph-null.</p><p>If the elements of the set can be ' +
+               'put in 1:1 correspondence with the real numbers, the cardinality of the ' +
+               'set is denoted <span class="math">c</span>.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+ // -->
+ </script>
+ </p>
+</div>
+
+<p>
+    Let <span class="math">P(A) = #A/n</span>, the number of elements in the
+    subset <span class="math">A</span>, divided by the total number of elements in <span class="math"><strong>S</strong></span>.
+    Then the function <span class="math">P</span> is called 
+    <span class="termOfArt">the uniform probability distribution on</span>
+    <span class="math"><strong>S</strong></span>.
+    The function <span class="math">P</span> satisfies the axioms of probability.
+    Let us see why.
+</p>
+
+<ol>
+    <li>
+        <p>
+            The number of elements in any subset <span class="math">A</span> of 
+            <span class="math"><strong>S</strong></span> is at least
+            zero (<span class="math">#A&ge;0</span>), so <span class="math">P(A) &ge; 0/n = 0</span>.
+            Thus <span class="math">P</span> satisfies Axiom 1.
+        </p>
+    </li>
+    <li>
+        <p>
+            <span class="math">P(<strong>S</strong>) = 
+             #<strong>S</strong>/n = n/n = 100%</span>.
+            Thus <span class="math">P</span> satisfies Axiom 2.
+        </p>
+    </li>
+    <li>
+        <p>
+            If <span class="math">A</span> and <span class="math">B</span> are disjoint, 
+            then the number of elements in the
+            union <span class="math">A&cup;B</span>
+            is the number of elements in <span class="math">A</span> plus the number
+            of elements in <span class="math">B</span>:
+        </p>
+        <p class="math">
+            #(A&cup;B)
+            = #A + #B.
+        </p>
+        <p>
+            Therefore,
+        </p>
+        <p class="math">
+            P(A&cup;B) =
+            #(A&cup;B)/n =
+            (#A + #B)/n = #A/n +
+            #B/n = P(A)
+            + P(B).
+        </p>
+        <p>
+            Thus <span class="math">P</span> satisfies Axiom 3.
+        </p>
+    </li>
+</ol>
+</div>
+
+<p>
+    We shall use the uniform probability distribution very often.
+    For example, we shall use the uniform probability distribution on
+    the outcome space <span class="math"><strong>S</strong> = {0, 1}</span> to model the number of heads in a
+    single toss of a fair coin.
+    We shall use the uniform probability distribution on the outcome
+    space <span class="math"><strong>S</strong> =  {1, 2, &hellip; , 6}</span> to model the number of spots that
+    show on the top face of a fair die when it is rolled.
+    We shall use the uniform probability distribution on the outcome
+    space <span class="math"><strong>S</strong></span> of the 36 pairs
+</p>
+
+<p class="math">
+    {(i, j):  i = 1, 2, &hellip; , 6 and j = 1, 2, &hellip; , 6}
+</p>
+
+<p>
+    to model rolls of a fair pair of dice.
+    We shall use the uniform probability distribution on the outcome
+    space <span class="math"><strong>S</strong></span> of all 52! permutations of a deck of cards to model
+    shuffling the deck well.
+    We shall use the uniform probability distribution to model
+    drawing a ticket from a well-stirred box of numbered tickets;
+    in that case, the outcome space <span class="math"><strong>S</strong></span> is the collection
+    of numbers written on the tickets (including duplicates
+    as often as they occur on the tickets).
+    The uniform probability distribution is the same as the
+    distribution postulated by the
+    <a class="glossRef" href="gloss.htm#theories_of_probability">Theory of Equally Likely Outcomes</a>
+    (if the outcomes are defined suitably).
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'The Probability Distribution for a Single Trial.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Consider a random trial that can result in failure or success.
+    Let 0 stand for failure, and let 1 stand for success.
+    Then we can consider the outcome space to be <span class="math"><strong>S</strong> = {0, 1}</span>.
+    For any number <span class="math">p</span> between 0 and 100%, define the 
+    function <span class="math">P</span> as follows:
+</p>
+
+<ul>
+    <li>
+        <span class="math">P({1}) = p</span>,
+    </li>
+    <li>
+        <span class="math">P({0}) = 100% &minus; p</span>,
+    </li>
+    <li>
+        <span class="math">P(<strong>S</strong>) = 100%</span>,
+    </li>
+    <li>
+        <span class="math">P({}) = 0</span>.
+    </li>
+</ul>
+
+<p>
+    Then <span class="math">P</span> is a probability distribution on 
+    <span class="math"><strong>S</strong></span>, as we can verify
+    by checking that it satisfies the axioms:
+</p>
+
+<ol>
+    <li>
+        <p>Because <span class="math">p</span> is between 0 and 100%, so is 
+          <span class="math">100% &minus; p</span>.
+        The outcome space <span class="math"><strong>S</strong></span> has but four subsets: 
+         <span class="math">{}, {0}, {1}</span>, and <span class="math">{0, 1}</span>.
+        The values assigned to them by <span class="math">P</span> are 
+        <span class="math">0, 1 &minus; p, p,</span> and <span class="math">100%</span>,
+        respectively.
+        All these numbers are at zero or larger, so <span class="math">P</span> satisfies Axiom 1.
+        </p>
+    </li>
+    <li>
+        <p>By definition, <span class="math">P(<strong>S</strong>) = 100%</span>, so 
+           <span class="math">P</span> satisfies Axiom 2.</p>
+    </li>
+    <li>
+        <p>
+            The empty set and any other set are disjoint, and it is easy to
+            see that
+        </p>
+        <p class="math">
+            P({}&cup;A) =
+            P({}) + P(A) for any subset A of <strong>S</strong>.
+        </p>
+        <p>
+            The only other pair of disjoint events in <span class="math"><strong>S</strong></span>
+            is <span class="math">{0}</span> and <span class="math">{1}</span>.
+            We can calculate
+        </p>
+        <p class="math">
+            P({0}&cup;{1}) = P(<strong>S</strong>)
+            = 100% = (100% &minus; p) + p = P({0}) + P({1}).
+        </p>
+        <p>
+            Thus <span class="math">P</span> satisfies Axiom 3.
+        </p>
+    </li>
+</ol>
+
+<p>
+    In later chapters this probability distribution will be the building
+    block for more complex distributions involving sequences of trials.
+</p>
+</div>
+
+
+<h2><a id="consequences"></a>Consequences of the Axioms of Probability</h2>
+
+<div class="indent">
+<p class="inline">
+    Everything that is mathematically true of probability is a consequence
+    of the Axioms of Probability, and of further definitions.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Well, almost. There are subtleties regarding the probability of ' +
+           'infinite unions of events and the possibility that <span class="math">P</span> cannot assign ' +
+           'probabilities to every subset of <span class="math"><strong>S</strong></span>.  If the outcome ' +
+           'space <span class="math"><strong>S</strong></span> has a finite number of elements (as it does in ' +
+           'most applications in this book), these complications do not arise.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    For example, if <span class="math"><strong>S</strong></span> is
+    <a class="glossRef" href="gloss.htm#countable">countable</a>&mdash;that is,
+    if its elements can be put into 1:1 correspondence with a subset of the
+    integers&mdash;the sum of the probabilities of the elements of
+    <span class="math"><strong>S</strong></span> must be 100%.
+    This follows from Axioms 2 and 3': Axiom 3' tells us that because the
+    elements of <span class="math"><strong>S</strong></span>
+    <a class="glossRef" href="gloss.htm#partition">partition</a> <span class="math"><strong>S</strong></span>, the
+    probability of <span class="math"><strong>S</strong></span> is the sum of the probabilities
+    of the elements of <span class="math"><strong>S</strong></span>. Axiom 2 tells us that that sum must be 100%.
+</p>
+</div>
+
+<h3>
+   <a id="complement_rule"></a>The Complement Rule
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=1810&end=2102" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Another consequence of the axioms is the Complement Rule: The probability
+    that an event occurs is always equal to 100% minus the probability
+    that the event does not occur:
+</p>
+
+<p class="math">
+    P(A<sup>c</sup>) = 100% &minus; P(A).
+</p>
+
+<p>
+    The Complement Rule is extremely useful, because in many problems
+    it is much easier to calculate the probability that <span class="math">A</span> does not
+    occur than to calculate the probability that <span class="math">A</span> does occur.
+    The complement rule can be derived from the axioms: the union of <span class="math">A</span>
+    and its complement <span class="math">A<sup>c</sup></span> is 
+    <span class="math"><strong>S</strong></span>
+    (either <span class="math">A</span> happens or it does not,
+    and there is no other possibility), so
+</p>
+
+<p class="math">
+    P(A&cup;A<sup>c</sup>)
+    = P(<strong>S</strong>) = 100%,
+</p>
+
+<p>
+    by axiom 2.
+    The event <span class="math">A</span> and its complement are disjoint (if
+    &quot;<span class="math">A</span> does not happen&quot; happens, 
+    <span class="math">A</span> does not happen;
+    if <span class="math">A</span> happens, &quot;<span class="math">A</span> 
+    does not happen&quot; does not happen), so
+</p>
+
+<p class="math">
+    P(A&cup;A<sup>c</sup>) =
+    P(A) + P(A<sup>c</sup>)
+</p>
+
+<p>
+    by axiom 3.
+    Putting these together, we get
+</p>
+
+<p class="math">
+    P(A) + P(A<sup>c</sup>) = 100%.
+</p>
+
+<p>
+    Subtracting <span class="math">P(A)</span> from both sides of this equation yields
+    what we sought: 
+</p>
+
+<p class="math">
+    P(A<sup>c</sup>) = 100%-P(A).
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'An Application of the Complement Rule.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Consider tossing a fair coin 10 times in such a manner that every
+    sequence of 10 heads and/or tails is equally likely.
+    What is the probability that the coin lands heads at least once?
+</p>
+
+<p>
+    This would be quite difficult to calculate directly, because there
+    are very many ways in which the coin can land heads at least once.
+    However, there is only one way the coin can fail to land heads at least once:
+    All the tosses must yield tails.
+    That makes it easy to calculate the probability that the coin lands
+    heads at least once, using the Complement Rule.
+</p>
+
+<p>
+    Every sequence of heads and tails is equally likely, by assumption:
+    The probability distribution is the uniform distribution on sequences
+    of 10 heads and/or tails, so the probability of any particular
+    sequence is 100%/(total number of sequences).
+    By the <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental Rule of Counting</a>,
+    there are 
+</p>
+
+<p class="math">
+        2&times;2&times; &hellip; &times;2 = 2<sup>10</sup> = 1,024
+</p>
+
+<p>
+    sequences of 10 heads and tails.
+</p>
+
+<p>
+    One of those sequences is (tails, tails, &hellip; , tails), so the probability that
+    the coin lands tails in all 10 tosses is 
+</p>
+
+<p class="math">
+    100%/2<sup>10</sup> = 0.0977%.
+</p>
+
+<p>
+    By the complement rule, the probability that the coin lands heads at
+    least once is therefore 
+</p>
+
+<p class="math">
+      100% &minus; 0.0977% = 99.902%</span>.
+</p>
+</div>
+
+<p>
+    A special case of the Complement Rule is that the probability of the empty set
+    is always zero <span class="math">(P({}) = 0%)</span>,  because 
+    <span class="math">P(<strong>S</strong>) = 100%</span>, and
+    <span class="math"><strong>S</strong><sup>c</sup>= {}</span>.
+</p>
+
+<p>
+    An event <span class="math">A</span> whose probability is 100% is said to be 
+    <span class="termOfArt">certain</span> or <span class="termOfArt">sure</span>.
+    <span class="math"><strong>S</strong></span> is certain.
+</p>
+
+<h3>
+   <a id="union_rule"></a>The Probability of the Union of Two Events
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=2102&end=2595" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The third Axiom of Probability tells us how to find the probability of a
+    union of disjoint events in terms of their individual probabilities.
+    The Axioms can be used together to find a formula for the probability
+    of a union of two events that are not necessarily disjoint in
+    terms of the probability of each of the events and the probability of
+    their intersection.
+</p>
+
+<p>
+    The union of two events, <span class="math">A&cup;B</span>,
+    can be <a class="glossRef" href="gloss.htm#partition">partitioned</a> into three
+    <a class="glossRef" href="gloss.htm#disjoint">disjoint</a> sets:
+</p>
+
+<ul>
+    <li>
+        Elements of <span class="math">A</span> that are not in <span class="math">B</span> 
+        (<span class="math">AB<sup>c</sup></span>)
+    </li>
+    <li>
+        Elements of <span class="math">B</span> that are not in <span class="math">A</span> 
+        (<span class="math">A<sup>c</sup>B</span>)
+    </li>
+    <li>
+        Elements of both <span class="math">A</span> and 
+        <span class="math">B</span> (<span class="math">AB</span>)
+    </li>
+</ul>
+
+<p>
+    Together, these three disjoint sets contain every element of
+    <span class="math">A&cup;B</span>:
+</p>
+
+<p class="math">
+    A&cup;B =
+    AB<sup>c</sup> &cup;
+    A<sup>c</sup>B
+    &cup; AB.
+</p>
+
+<p>
+    That is, the three sets <a class="glossRef" href="gloss.htm#partition">partition</a>
+    <span class="math">A&cup;B</span>.
+    The third axiom implies that the chance that either
+    <span class="math">A</span> or <span class="math">B</span> occurs is
+</p>
+
+<p class="math">
+    P(A&cup;B)
+    = P(AB<sup>c</sup>) + P(A<sup>c</sup>B)
+    + P(AB).
+</p>
+
+<p>
+    On the other hand,
+</p>
+
+<p class="math">
+    P(A) = P(AB<sup>c</sup>
+    &cup; AB) =
+    P(AB<sup>c</sup>) + P(AB),
+</p>
+
+<p>
+    because <span class="math">AB<sup>c</sup></span> and <span class="math">AB</span> are disjoint. 
+    Similarly,
+</p>
+
+<p class="math">
+    P(B) = P(A<sup>c</sup>B
+    &cup; AB) =
+    P(A<sup>c</sup>B) + P(AB),
+</p>
+
+<p>
+    because <span class="math">A<sup>c</sup>B</span> and <span class="math">AB</span> are disjoint.
+    Adding, we find that
+</p>
+
+<p class="math">
+    P(A) + P(B) = P(AB<sup>c</sup>) +
+    P(A<sup>c</sup>B) +2&times;P(AB).
+</p>
+
+<p>
+    This would be equal to <span class="math">P(A&cup;B)</span>,
+    but for the fact that <span class="math">P(AB)</span> is
+    counted twice, not once.
+    It follows that in general
+</p>
+
+<p class="math">
+    P(A&cup;B) =
+    P(A) + P(B) &minus; P(AB).
+</p>
+
+<p>
+    This is a true statement, but it is not one of the axioms of probability.
+    In the special case that <span class="math">AB = {}</span>, this result is equivalent to
+    the third axiom, because  <span class="math">P({}) = 0%</span>.
+</p>
+
+
+<h3>
+   <a id="bounds"></a>Bounds on Probabilities
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=2595&end=2880" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    It follows from the fact that
+    <span class="math">P(A&cup;B) =
+    P(A) + P(B) &minus; P(AB)</span> that
+</p>
+
+<p class="math">
+    P(A&cup;B)
+    &le; P(A) + P(B),
+</p>
+
+<div class="indent">
+<p class="inline">
+    because Axiom 1 guarantees that <span class="math">P(AB) &ge; 0</span>.
+    Moreover, taking a union cannot exclude any outcomes already present, so
+    <span class="math">P(A &cup;B) &ge; P(A)</span>.
+    And taking an intersection cannot include additional outcomes, so
+    <span class="math">P(AB) &le; P(A)</span>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'These results can be shown rigorously by partitioning the ' +
+           'sets in question as follows, then applying the third axiom: ' +
+           '<span class="math">A&cup;B = ' +
+           'A &cup; (A<sup>c</sup>B)</span>, ' +
+           '<span class="math">A = AB &cup; AB<sup>c</sup></span>, ' +
+           '<span class="math">A&cup;B = ' +
+           'B &cup; (AB<sup>c</sup>)</span>, ' +
+           'and <span class="math">B = AB &cup; A</em><sup>c</sup>B</span>.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    Thus
+</p>
+</div>
+
+<p class="math">
+     0 &le; P(AB) &le; P(A) &le;
+     P(A&cup;B)
+    &le;  P(A) + P(B).
+</p>
+
+<p>
+    More generally, if <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+    A<sub>3</sub>, &hellip; }</span> is a
+    <a class="glossRef" href="gloss.htm#countable">countable</a>
+    collection of events, then
+</p>
+
+<p class="math">
+    0 &le; P(A<sub>1</sub>A<sub>2</sub>
+    A<sub>3</sub> &hellip;) &le; P(A<sub>k</sub>)
+    &le; P(A<sub>1</sub> &cup; A<sub>2</sub>
+    &cup; A<sub>3</sub>
+    &cup; &hellip;)
+    &le; P(A<sub>1</sub>) + P(A<sub>2</sub>) +
+    P(A<sub>3</sub>) + &hellip; . ,
+    for <span class="math">k = 1, 2, 3, &hellip;</span> .
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Useful Consequences of the Axioms of Probability</span>
+    </p>
+    <ul>
+        <li><span class="math">P({}) = 0</span>.</li>
+        <li>For any event <span class="math">A</span>, 
+            <span class="math">P(A<sup>c</sup>) = 100% &minus; P(A)</span>.</li>
+        <li>
+            If <span class="math"><strong>S</strong> = { A<sub>1</sub>, A<sub>2</sub>,
+            A<sub>3</sub>, &hellip; , A<sub>n</sub> }</span>,
+            then <span class="math">P(A<sub>1</sub>) + P(A<sub>2</sub>)
+            + P(A<sub>3</sub>) +
+            &hellip;  + P(A<sub>n</sub>) = 100%</span>.
+        </li>
+        <li>
+            If <span class="math"><strong>S</strong> = { A<sub>1</sub>,
+            A<sub>2</sub>, A<sub>3</sub>,
+            &hellip;  }</span>, then <span class="math">P(A<sub>1</sub>) +
+            P(A<sub>2</sub>) + P(A<sub>3</sub>) +
+            &hellip;   = 100%</span>.</li>
+        <li>
+            For any events <span class="math">A</span> and <span class="math">B</span>,
+            <ul>
+                <li>
+                    <span class="math">P(A&cup;B) =
+                    P(A) + P(B) &minus; P(AB)</span>.
+                </li>
+                <li>
+                    <span class="math">0 &le; P(AB) &le; P(A) &le;
+                    P(A&cup;B)
+                    &le;
+                    P(A) + P(B)</span>.
+                </li>
+            </ul>
+        </li>
+        <li>
+           If <span class="math">{A<sub>1</sub>, A<sub>2</sub>,
+                A<sub>3</sub>, &hellip; }</span>
+                is a countable collection of
+                events, then for <span class="math">k = 1, 2, 3, &hellip; </span>,
+            <p class="math">
+                0 &le; P(A<sub>1</sub>A<sub>2</sub>
+                A<sub>3</sub> &hellip;)
+                &le; P(A<sub>k</sub>) &le;
+                P(A<sub>1</sub> &cup;
+                A<sub>2</sub> &cup;
+                A<sub>3</sub> &cup;
+                &hellip;) &le;
+                P(A<sub>1</sub>) + P(A<sub>2</sub>) +
+                P(A<sub>3</sub>) + &hellip; .
+            </p>
+        </li>
+    </ul>
+</div>
+
+
+<div class="indent">
+<p class="inline">
+    Probability is analogous to area or volume or mass.
+    Consider the unit square, each of whose sides has length 1.
+    Its total area is <span class="math">1&times;1 = 1 = 100%</span>.
+    Let's call the square <span class="math"><strong>S</strong></span>, just like outcome space.
+    Now consider regions inside the square <span class="math"><strong>S</strong></span>
+    (<a class="glossRef" href="gloss.htm#subset">subsets</a>
+    of <span class="math"><strong>S</strong></span>).
+    The area of any such region is at least zero, the area of <span class="math"><strong>S</strong></span> is
+    100%, and the area of the union of two regions is the sum of
+    their areas, if they do not overlap (i.e., if they are
+    <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>).
+    These facts are direct analogues of the axioms of probability,
+    and we shall often use this model to get intuition about probability.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'This is an example of the uniform distribution on an uncountable ' +
+           'set: The probability of a subset <span class="math">A</span> of ' +
+           '<span class="math"><strong>S</strong></span> is ' +
+           '<span class="math">area(A)/area(<strong>S</strong>)</span>. ' +
+           'The probability of any particular ' +
+           'point in the square is zero, because the area of a point is zero.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    It might help your intuition to consider the square <span class="math"><strong>S</strong></span> to be a
+    dartboard.
+    The experiment consists of throwing a dart at the board once.
+    The event <span class="math">A</span> occurs if the dart sticks in the set <span class="math">A</span>.
+    The event <span class="math">AB</span> occurs if the dart sticks in both 
+    <span class="math">A</span> and <span class="math">B</span> on that one toss.
+    Clearly, <span class="math">AB</span> cannot occur unless <span class="math">A</span> and 
+    <span class="math">B</span> overlap&mdash;the
+    dart cannot stick in two places at once.
+    <span class="math">A&cup;B</span> occurs if the dart
+    sticks in either <span class="math">A</span> or <span class="math">B</span> (or both) on that
+    one throw.
+    <span class="math">A</span> and <span class="math">B</span> need not overlap for
+    <span class="math">A&cup;B</span> to occur.
+</p>
+
+<p>
+    This analogy is also useful for thinking about the connection between
+    Set Theory and logical implication.
+    If <span class="math">A</span> is a subset of <span class="math">B</span>, the 
+    occurrence of <span class="math">A</span>
+    <a class="glossRef" href="gloss.htm#implies">implies</a>
+    the occurrence of <span class="math">B</span>; We shall sometimes say that <span class="math">A</span>
+    implies <span class="math">B</span>.
+    In the dartboard model, the dart cannot stick in <span class="math">A</span>
+    without sticking in <span class="math">B</span> as well, so if 
+    <span class="math">A</span> occurs, <span class="math">B</span> must occur also.
+    If <span class="math">A</span> implies <span class="math">B</span>, <span class="math">AB=A</span>, 
+    so <span class="math">P(AB)=P(A)</span>.
+    If <span class="math">AB = {}</span>, 
+    <span class="math">A</span> implies <span class="math">B<sup>c</sup></span> and
+    <span class="math">B</span> implies <span class="math">A<sup>c</sup></span>: If the dart sticks
+    in <span class="math">A</span> it did not stick in <span class="math">B</span>, and vice versa.
+    If <span class="math">A</span> implies <span class="math">B</span>, 
+    then if <span class="math">B</span> does not occur <span class="math">A</span> cannot
+    occur either:
+    <span class="math">B<sup>c</sup></span> implies <span class="math">A<sup>c</sup></span>,
+    so <span class="math">B<sup>c</sup></span> is a subset of <span class="math">A<sup>c</sup></span>.
+</p>
+
+<p>
+    The following exercises test your understanding of the axioms of
+    probability and their consequences.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=2880&end=3014" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=3014&end=3157" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=3157&end=3242" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=3242&end=3380" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var pA = roundToDig(100*rand.next(),0);
+    var pB = roundToDig(100*rand.next(),0);
+    var qStr = 'Consider two events, <span class="math">A</span> and <span class="math">B</span>. ' +
+        'Suppose <span class="math">P(A)&nbsp;=&nbsp;' +
+        pA.toString() + '%</span> and <span class="math">P(B)&nbsp;=&nbsp;' + pB.toString() +
+        '%</span>. <span class="qSpan">The chance that either <span class="math">A</span> or ' +
+        '<span class="math">B</span> occurs is ' +
+        '(select all that apply)</span>';
+    document.writeln(qStr);
+    var maxP = 100;
+    var itsOne = true;
+    if (pA + pB < maxP) {
+    itsOne = false;
+    maxP = pA + pB;
+    }
+    var opt = ['100%',
+        (pA + pB).toString()+'%',
+        'at most ' + maxP.toString() + '%',
+        'at least ' + (Math.max(pA,pB)).toString() + '%',
+        'at least ' + (Math.min(pA,pB)).toString() + '%',
+        'none of the above'
+          ];
+    var aVal = 'c&d&e';
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = '(a) is false because we do not know <span class="math">P(AB)</span>, ' +
+         'the probability of the intersection ' +
+         'of <span class="math">A</span> and <span class="math">B</span>.</p>' +
+         '<p>(b) is false for the same reason.</p><p>' +
+         '(c) is true because ' +
+         '<span class="math">P(A&cup;B) &le; ';
+    if (itsOne) {
+        ansStr += '100%</span>. ';
+    } else {
+        ansStr += 'P(A) + P(B)</span>. ';
+    }
+    ansStr += '</p><p>(d) is true because ' +
+          '<span class="math">P(A&cup;B)</span> is greater than ' +
+          'or equal to both <span class="math">P(A)</span> and <span class="math">P(B)</span>.</p><p>' +
+          '(e) is true for the same reason.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider dealing 5 cards from a well shuffled deck. Let <span class="math">A</span> be the event ' +
+           'that the first card is an Ace, and let <span class="math">B</span> be the event that the second ' +
+           'card is an Ace. <span class="qSpan">The chance that ' +
+           '<span class="math">A&cup;B</span> occurs is </span>';
+    document.writeln(qStr);
+    var opt = [
+         'the chance <span class="math">A</span> occurs plus the chance <span class="math">B</span> occurs',
+         'the chance <span class="math">A</span> occurs times the chance <span class="math">B</span> occurs',
+         'less than the chance <span class="math">A</span> occurs plus the chance <span class="math">B</span> occurs',
+         'more than the chance <span class="math">A</span> occurs plus the chance <span class="math">B</span> occurs',
+         'none of the above'
+          ];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+    var ansStr = '(a) is false because <span class="math">A</span> and ' +
+         '<span class="math">B</span> are not disjoint. </p><p> ' +
+         '(b) is false because <span class="math">A</span> and <span class="math">B</span> are not ' +
+         '<a class="glossRef" href="gloss.htm#independent">independent</a> (you will learn ' +
+         'about independence soon).</p><p>' +
+         '(c) is true because the chance is at most the smaller of ' +
+         '<span class="math">P(A)</span> and <span class="math">P(B)</span>, ' +
+         'and therefore smaller than the sum of <span class="math">P(A)</span> ' +
+         'and <span class="math">P(B)</span>.</p><p>' +
+         '(d) is false because the chance is at most the smaller of <span class="math">P(A)</span> ' +
+         'and <span class="math">P(B)</span>.</p><p>' +
+         '(e) is false because (c) is true.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfDistinctRandInts(2,10,100);
+    theInts.sort(numberLessThan);
+    var pA = theInts[0];
+    var pB = theInts[1];
+    var qStr = 'Consider two events, <span class="math">A</span> and <span class="math">B</span>. Suppose every outcome in ' +
+           '<span class="math"><strong>S</strong></span> ' +
+           'has probability greater than zero, and that <span class="math">P(A)&nbsp;=&nbsp;' +
+           pA.toString() + '%</span>, <span class="math">P(B)&nbsp;=&nbsp;' + pB.toString() + '%</span>, and ' +
+           '<span class="math">P(AB)&nbsp;=&nbsp;' + pA.toString() + '%</span>. <span class="qSpan">Select ' +
+           'the true statement.</span>';
+    document.writeln(qStr);
+    var opt = ['<span class="math">A</span> implies <span class="math">B</span>',
+           '<span class="math">B</span> implies <span class="math">A</span>',
+           'could be either of the above',
+           'none of the above'
+          ];
+    var aVal = 'a';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = '(a) is true because if <span class="math">P(AB) = P(A)</span> and every ' +
+         'outcome has probability > 0, ' +
+         '<span class="math">A</span> must be a subset of <span class="math">B</span>, so every way <span class="math">A</span> can ' +
+         'occur requires ' +
+         '<span class="math">B</span> to occur too: ' +
+         '<span class="math">A</span> implies <span class="math">B</span>.</p><p>' +
+         '(b) is false: if <span class="math">P(B) > P(A)</span>, so <span class="math">B</span> ' +
+         'cannot be a subset of <span class="math">A</span>, and thus ' +
+         '<span class="math">B</span> cannot imply <span class="math">A</span> (there must be ways that <span class="math">B</span> can ' +
+         'occur without <span class="math">A</span> also ' +
+         'occurring).</p><p>' +
+         '(c) is false because (a) is true and (b) is false.</p><p>' +
+         '(d) is false because (a) is true.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfDistinctRandInts(3,10,100);
+    theInts.sort(numberLessThan);
+    var pA = theInts[0];
+    var pB = theInts[1];
+    var pC = theInts[2];
+    var qStr = 'Consider three events, <span class="math">A</span>, <span class="math">B</span>, and ' +
+           '<span class="math">C</span>. Suppose ' +
+           '<span class="math">P(A)&nbsp;=&nbsp;' +
+        pA.toString() + '%</span>, <span class="math">P(B)&nbsp;=&nbsp;' + pB.toString() +
+        '%</span>, and <span class="math">P(C)&nbsp;=&nbsp;' + pC.toString() +
+        '%</span>. <span class="qSpan">Then <span class="math">P(ABC)</span></span>';
+    document.writeln(qStr);
+    var opt = ['is at least ' + pA.toString() +'%',
+        'cannot exceed ' + pA.toString() + '%',
+        'cannot exceed ' + pB.toString() + '%',
+        'cannot exceed ' + pC.toString() + '%',
+        'is ' + (Math.min(pA+pB+pC,100)).toString() + '%',
+        'none of the above'
+          ];
+    var aVal = 'b&c&d';
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = '(a) is false: <span class="math">P(ABC)</span> is at most the smallest of the three probabilities ' +
+         '<span class="math">P(A)</span>, <span class="math">P(B)</span>, and <span class="math">P(C)</span>.</p><p>' +
+         '(b), (c), and (d) are true because <span class="math">P(ABC)</span> is smaller than all three ' +
+         'probabilities <span class="math">P(A)</span>, <span class="math">P(B)</span>, and ' +
+         '<span class="math">P(C)</span>.</p><p>' +
+         '(e) is false because (b), (c), and (d) are true. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfDistinctRandInts(3,10,100);
+    theInts.sort(numberLessThan);
+    var pA = theInts[0];
+    var pB = theInts[1];
+    var pC = theInts[2];
+    var qStr = 'Consider three events, <span class="math">A</span>, <span class="math">B</span>, ' +
+           'and <span class="math">C</span>. ' +
+           'Suppose <span class="math">P(A)&nbsp;=&nbsp;' +
+           pA.toString() + '%</span>, <span class="math">P(B)&nbsp;=&nbsp;' + pB.toString() +
+           '%</span>, and <span class="math">P(C)&nbsp;=&nbsp;' + pC.toString() + '%</span>. ' +
+           '<span class="qSpan">Then ' +
+           '<span class="math">P(A&cup;B&cup;C)</span></span>';
+    document.writeln(qStr);
+    var opt = ["is at least " + pA.toString() +"%",
+               "cannot exceed " + pC.toString() + "%",
+               "is at least " + pB.toString() + "%",
+               "is at least " + pC.toString() + "%",
+               "is " + (Math.min(pA+pB+pC,100)).toString() + "%",
+               "none of the above"
+          ];
+    var aVal = 'a&c&d';
+    if (pC == 100) {
+        aVal ='a&b&c&d&e';
+    }
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = '(a), (c), and (d) are true because the probability of the union is at least as large ' +
+           'as <span class="math">P(A)</span>, <span class="math">P(B)</span> and ' +
+           '<span class="math">P(C)</span>.</p><p>';
+    if (pC < 100) {
+        ansStr += '(b) is false; if <span class="math">A</span> or <span class="math">B</span> ' +
+                  'contain elements not in ' +
+                  '<span class="math">C</span>, the probability of ' +
+                  'the union could exceed the probability of <span class="math">C</span>.</p><p>';
+    } else {
+        ansStr += '(b) is true: the probability of the union cannot exceed 100%.</p><p>';
+    }
+    if (pC < 100) {
+        ansStr += '(e) is false; we do not know the probability of the intersections ' +
+                  'of the events.</p><p>';
+    } else {
+        ansStr += '(e) is true: <span class="math">C</span> already contains all the probability; including ' +
+                  '<span class="math">A</span> and <span class="math">B</span> cannot increase the probability further.</p><p>';
+    }
+    ansStr += '(f) is false because some of the other answers hold.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="conditioning"></a>Conditioning</h2>
+
+<p>
+    In probability, <em>conditioning</em> means incorporating new
+    restrictions on the outcome of an experiment:
+    updating probabilities to take into account new information.
+    This section describes conditioning, and how conditional
+    probability can be used to solve complicated problems.
+</p>
+
+<h3>
+    <a id="conditional_probability"></a>
+    Conditional Probability
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=3380&end=4170" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The conditional probability of <span class="math">A</span> given <span class="math">B</span>, 
+    <span class="math">P(A | B)</span>,
+    is the probability of the
+    event <span class="math">A</span>, updated on the basis of the knowledge that the event <span class="math">B</span>
+    occurred.
+    Suppose that <span class="math">AB = {}</span> 
+    (<span class="math">A</span> and <span class="math">B</span> are disjoint).
+    Then if we learn that <span class="math">B</span> occurred, we know <span class="math">A</span> did not occur,
+    so we should revise the probability of <span class="math">A</span> to be zero
+    (the conditional probability of <span class="math">A</span> given <span class="math">B</span> is zero).
+    On the other hand, suppose that <span class="math">AB = B</span>
+    (<span class="math">B</span> is a subset of <span class="math">A</span>, so <span class="math">B</span> implies <span class="math">A</span>).
+    Then if we learn that <span class="math">B</span> occurred, we know <span class="math">A</span> must have
+    occurred as well, so we should revise the probability of
+    <span class="math">A</span> to be 100% (the conditional probability of <span class="math">A</span> given <span class="math">B</span> is 100%).
+    For in-between cases, the conditional probability of <span class="math">A</span> given <span class="math">B</span>
+    is defined to be
+</p>
+
+<div align="center">
+<center>
+    <table>
+    <tr>
+        <td></td>
+        <td></td>
+        <td align="center"><span class="math">P(AB)</span></td>
+    </tr>
+        <tr>
+        <td align="center"><span class="math">P(A | B)</span></td>
+        <td align="center">=</td>
+        <td align="center">------------ ,</td>
+    </tr>
+        <tr>
+        <td></td>
+        <td></td>
+        <td align="center"><span class="math">P(B)</span></td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    provided <span class="math">P(B)</span> is not zero (division by zero is undefined).
+    &quot;<span class="math">P(A | B)</span>&quot; is pronounced &quot;the
+    (conditional) probability of <span class="math">A</span> given <span class="math">B</span>.&quot;
+</p>
+
+<p>
+    Why does this formula make sense?
+    First of all, note that it does agree with the intuitive answers we
+    found above: if <span class="math">AB = {}</span>, then 
+    <span class="math">P(AB) = 0</span>, so
+</p>
+
+<p class="math">
+    P(A | B)
+    = 0/P(B) = 0;
+</p>
+
+<p>
+    and if <span class="math">AB = B</span>,
+</p>
+
+<p class="math">
+    P(A | B) = P(B)/P(B) = 100%.
+</p>
+
+<p>
+    Similarly, if we learned that <span class="math"><strong>S</strong></span> occurred, this is not really new
+    information (by definition, <span class="math"><strong>S</strong></span> always occurs, because it
+    contains all possible outcomes), so we would like
+    <span class="math">P(A | <strong>S</strong>)</span> to equal <span class="math">P(A)</span>.
+    That is how it works out:
+    <span class="math">A<<strong>S</strong> = A</span>, so
+</p>
+
+<p class="math">
+    P(A | <strong>S</strong>) = P(A)/P(<strong>S</strong>) =
+    P(A)/100% = P(A).
+</p>
+
+<p>
+    Now suppose that <span class="math">A</span> and <span class="math">B</span> are not disjoint.
+    Then if we learn that <span class="math">B</span> occurred, we can restrict attention
+    to just those outcomes that are in <span class="math">B</span>, and disregard the
+    rest of <span class="math"><strong>S</strong></span>, so we have a new outcome space that is just <span class="math">B</span>.
+    We need P(B) = 100% to consider <span class="math">B</span> an outcome space; we
+    can make this happen by dividing all probabilities by <span class="math">P(B)</span>.
+    For <span class="math">A</span> to have occurred in addition to 
+    <span class="math">B</span> requires that <span class="math">AB</span> occurred,
+    so the conditional probability of <span class="math">A</span> given <span class="math">B</span> is 
+    <span class="math">P(AB)/P(B)</span>,
+    just as we defined it above.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Conditional Probability in Card Shuffling.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+
+<p>
+    We shall deal two cards from a well shuffled deck.
+    What is the conditional probability that the second card is an Ace
+    (event <span class="math">A</span>), given that the first card is an Ace (event <span class="math">B</span>)?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    By definition, this is <span class="math">P(AB)/P(B)</span>.
+    The (unconditional) chance that the first card is an Ace
+    is 100%/13 = 7.7%, because there are 13 possible
+    faces for the first card, and all are equally likely
+    (this is what we mean by a well well-shuffled deck).
+</p>
+
+<p>
+    The chance that both cards are Aces can be computed as follows:
+    From the four suits, we need to pick two; there are <sub>4</sub>C<sub>2</sub> = 6 ways
+    that can happen.
+    The total number of ways of picking two cards from the deck is
+    <sub>52</sub>C<sub>2</sub> = 52&times;51/2 = 1326, so the chance that the two cards are
+    both Aces is (6/1326)&times;100% = 0.5%.
+    The conditional probability that the second card is an
+    Ace given that the first card is an Ace is thus
+    0.5%/7.7% = 5.9%.
+    As we might expect, it is somewhat lower than the chance that the
+    first card is an Ace, because we know one of the Aces is gone.
+</p>
+
+<p>
+    We could approach this more intuitively as well: Given that
+    the first card is an Ace, the second card is an Ace too if it is one of
+    the three remaining Aces among the 51 remaining cards.
+    These possibilities are equally likely if the deck was shuffled well,
+    so the chance is 3/51 &times; 100% = 5.9%.
+</p>
+</div>
+
+<p>
+    Conditional probability behaves just like probability:
+    It satisfies the axioms of probability and all their consequences.
+    Thus, for example,
+</p>
+
+<ul>
+    <li><span class="math">P(A | B) &ge; 0</span>.</li>
+    <li><span class="math">P(B | B) = 100%</span>.</li>
+    <li><span class="math">P(A&cup;C | B)
+          = P(A | B)  + P(C | B)</span> if 
+         <span class="math">ABC = {}</span>.
+    </li>
+    <li><span class="math">P(A<sup>c</sup> | B) = 
+         100% &minus; P(A | B)</span>.</li>
+    <li><span class="math">P({} | B) = 0</span>.</li>
+    <li><span class="math">P(A&cup;C | B) =
+          P(A | B)  + P(C | B) &minus;
+          P(AC | B)</span>.
+    </li>
+    <li><span class="math">0 &le; P(A<sub>1</sub> A<sub>2</sub>
+        A<sub>3</sub> &hellip; | B)
+        &le; P(A<sub>k</sub> | B) &le;
+        P(A<sub>1</sub>&cup;A<sub>2</sub>
+        &cup;
+        A<sub>3</sub>&cup;&hellip; | B)
+        &le; P(A<sub>1</sub> | B) + P(A<sub>2</sub> | B)
+        + P(A<sub>3</sub> | B) + &hellip;
+        &le; 1, for k = 1, 2, 3, &hellip;</span>
+    </li>
+</ul>
+
+
+<h3>
+    <a id="independence"></a>
+    Independence
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=4182&end=4858" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>Two events are <span class="termOfArt">independent</span> if learning that one occurred gives us 
+    no information about whether the other occurred.
+    That is, <span class="math">A</span> and <span class="math">B</span> are independent
+    if <span class="math">P(A | B) = P(A)</span> and 
+    <span class="math">P(B | A) = P(B)</span>.
+    A slightly more general way to write this is that 
+    <span class="math">A</span> and <span class="math">B</span> are independent
+    if <span class="math">P(AB) = P(A)&times;P(B)</span>.
+    (This covers the cases that <span class="math">P(A)</span>, 
+    <span class="math">P(B)</span> or both are equal to zero,
+    while the definition of independence in terms of conditional probability requires the
+    probability in the denominator to be different from zero.)
+    To reiterate: Two events are independent if and only if the probability
+    that both events happen simultaneously is the product of their
+    unconditional probabilities.
+    If two events are not independent, they are <span class="termOfArt">dependent</span>.
+</p>
+
+<p>
+    <strong>Independence and Mutual Exclusivity Are Different!</strong>
+    In fact, the only way two events can be both
+    <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a> and
+    <a class="glossRef" href="gloss.htm#independent">independent</a> is if at least one of them has probability equal to zero.
+    If <span class="math">A</span> and <span class="math">B</span>  are mutually exclusive, 
+    learning that <span class="math">B</span> happened
+    tells us that <span class="math">A</span> did not happen.
+    This is clearly informative: The conditional probability of <span class="math">A</span> given
+    <span class="math">B</span> is zero!
+    This changes the (conditional) probability of <span class="math">A</span> unless its
+    (unconditional) probability was zero.
+</p>
+
+<p>
+    Independent events bear a special relationship to each other.
+    Independence is a very precise point between being disjoint
+    (so that the occurrence of one event implies that the other did not occur),
+    and one event being a <a class="glossRef" href="gloss.htm#subset">subset</a> of the
+    other (so that the occurrence of one event implies the occurrence of the other).
+    Here is a summary of the contrast between independent events and
+    mutually exclusive events:
+</p>
+
+<ul>
+    <li>
+        If two events are mutually exclusive, they cannot both occur
+        in the same trial: The probability of their intersection is zero.
+        The probability of their union is the sum of their probabilities.
+    </li>
+    <li>
+        If two events are independent, both can occur in the same trial
+        (except possibly if at least one of them has probability zero).
+        The probability of their intersection is the product of their
+        probabilities.
+        The probability of their union is less than the sum of their
+        probabilities, unless at least one of the events has
+        probability zero.
+    </li>
+</ul>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    contains a Venn diagram that represents two events,
+    <span class="math">A</span> and <span class="math">B</span>, as subsets of a rectangle <span class="math"><strong>S</strong></span>.
+    The probabilities of the events are proportional to their areas.
+    Initially, the probability of <span class="math">A</span> is 30% and the probability
+    of <span class="math">B</span> is 20%.
+    The figure also shows the probability of <span class="math">AB</span> and of
+    <span class="math">A&cup;B</span>.
+    Try to make <span class="math">A</span> and <span class="math">B</span> independent by dragging them to make
+    the area of their intersection equal to the product of their areas,
+    so that <span class="math">P(AB) = P(A)&times;P(B) = 30%&times;20% = 6%</span>.
+    It is hard to get just the right amount of overlap:
+    Independence is a very special relationship between events.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Venn Diagram to Illustrate Independence.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Venn.class" width="400" height="320" align="baseline"
+     codebase="../../Java/" archive="PbsGui.zip">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    If <span class="math">A</span> and <span class="math">B</span> are independent, so are
+</p>
+
+<ul class="compact">
+    <li><span class="math">A</span> and <span class="math">B<sup>c</sup></span></li>
+    <li><span class="math">A<sup>c</sup></span> and <span class="math">B<sup>c</sup></span></li>
+    <li><span class="math">A<sup>c</sup></span> and <span class="math">B</span>.</li>
+</ul>
+
+<p>
+    What kinds of events are (generally assumed to be) independent?
+    The outcomes of successive fair tosses
+    of a fair coin, the outcomes of random draws from a box with replacement, <em>etc.</em>
+    Draws without replacement are
+    <a href="gloss.htm#dependent" class="glossRef">dependent</a>,
+    because what can happen on a given
+    draw depends on what happens on previous draws.
+    The next two examples illustrate the contrast between independent and dependent events.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Drawing at Random from a Box of Tickets.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose I have a box with four tickets in it, labeled
+    1, 2, 3, and 4.
+    I stir the tickets and then draw one from the box,
+    stir the remaining tickets again without returning the ticket I drew the first
+    time, and draw another ticket.
+    Consider the event <span class="math">A</span> = {I get the ticket labeled 1 on the first draw} and the
+    event <span class="math">B = {I get the ticket labeled 2 on the second draw}</span>.
+    Are <span class="math">A</span> and <span class="math">B</span> dependent or independent?
+</p>
+
+<p>
+    <strong>Solution: </strong>
+    The chance that I get the 1 on the first draw is 25%.
+    The chance that I get the 2 on the second draw is 25%.
+    The chance that I get the 2 on the second draw given that
+    I get the 1 on the first draw is 33%, which is much larger
+    than the unconditional chance that I draw the 2 the second time.
+    Thus <span class="math">A</span> and <span class="math">B</span> are dependent.
+</p>
+
+<p>
+    Now suppose that I replace the ticket I got on the first
+    draw and stir the tickets again before drawing the second time.
+    Then the chance that I get the 1 on the first draw is 25%,
+    the chance that I get the 2 on the second draw is 25%, and
+    the conditional chance that I get the 2 on the second draw
+    given that I drew the 1 the first time is also 25%.
+    <span class="math">A</span> and <span class="math">B</span> are thus independent if I draw with replacement.
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Rolling a Fair Pair of Dice.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+
+<p>
+    Two fair dice are rolled independently; one is blue, the other is red.
+    What is the chance that the number of spots that show on the red die is
+    less than the number of spots that show on the blue die?
+</p>
+
+<p>
+    <strong>Solution</strong>: The event that the number of spots that
+    show on the red die is less than the number that show on the blue
+    die can be broken up into mutually exclusive events,
+    according to the number of spots that show on the blue die.
+    The chance that the number of spots that show on the red die is
+    less than the number that show on the blue die is the sum of the
+    chances of those simpler events.
+    If only one spot shows on the blue die, the number that shows on the
+    red die cannot be smaller, so the probability is zero.
+    If two spots show on the blue die, the number that shows
+    on the red die is smaller if the red die shows exactly one spot.
+    Because the numbers of spots that show on the blue and red dice are
+    independent, the chance that the blue die shows two spots and the
+    red die shows one spot is (1/6)(1/6) = 1/36.
+    If three spots show on the blue die, the number that shows on the red
+    die is smaller if the red die shows one or two spots.
+    The chance that the blue die shows three spots and the red die
+    shows one or two spots is (1/6)(2/6) = 2/36.
+    If four spots show on the blue die, the number that show on the
+    red die is smaller if the red die shows one, two, or three spots;
+    the chance that the blue die shows four spots and the red die
+    shows one, two, or three spots is (1/6)(3/6) = 3/36.
+</p>
+
+<p>
+    Proceeding similarly for the cases that the blue die shows five or
+    six spots gives the ultimate result:
+</p>
+
+<p class="math">
+    P(red die shows fewer spots than the blue die) =
+    1/36 + 2/36 + 3/36 + 4/36 + 5/36 = 15/36.
+</p>
+
+<p>
+    Alternatively, one could just count the ways:
+    There are 36 possibilities, which can be written in a square table as follows.
+</p>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>The 36 possible outcomes of rolling two dice</caption>
+    <tr>
+        <td colspan="1" valign="middle" align="center">&nbsp;</td>
+        <th colspan="6" valign="middle" align="center" bgcolor="#00FFFF">Blue Die</th>
+    </tr>
+    <tr>
+        <th valign="middle" align="center" rowspan="6" bgcolor="#FF5656">R<br />
+          e<br />
+          d<br />&nbsp;<br />D<br />
+          i<br />
+          e</th>
+        <td valign="middle" align="center">1,1</td>
+        <td valign="middle" align="center">1,2</td>
+        <td valign="middle" align="center">1,3</td>
+        <td valign="middle" align="center" bgcolor="#FFFF00">1,4</td>
+        <td valign="middle" align="center">1,5</td>
+        <td valign="middle" align="center">1,6</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">2,1</td>
+        <td valign="middle" align="center">2,2</td>
+        <td valign="middle" align="center">2,3</td>
+        <td valign="middle" align="center" bgcolor="#FFFF00">2,4</td>
+        <td valign="middle" align="center">2,5</td>
+        <td valign="middle" align="center">2,6</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">3,1</td>
+        <td valign="middle" align="center">3,2</td>
+        <td valign="middle" align="center">3,3</td>
+        <td valign="middle" align="center" bgcolor="#FFFF00">3,4</td>
+        <td valign="middle" align="center">3,5</td>
+        <td valign="middle" align="center">3,6</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">4,1</td>
+        <td valign="middle" align="center">4,2</td>
+        <td valign="middle" align="center">4,3</td>
+        <td valign="middle" align="center">4,4</td>
+        <td valign="middle" align="center">4,5</td>
+        <td valign="middle" align="center">4,6</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">5,1</td>
+        <td valign="middle" align="center">5,2</td>
+        <td valign="middle" align="center">5,3</td>
+        <td valign="middle" align="center">5,4</td>
+        <td valign="middle" align="center">5,5</td>
+        <td valign="middle" align="center">5,6</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">6,1</td>
+        <td valign="middle" align="center">6,2</td>
+        <td valign="middle" align="center">6,3</td>
+        <td valign="middle" align="center">6,4</td>
+        <td valign="middle" align="center">6,5</td>
+        <td valign="middle" align="center">6,6</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The outcomes above the diagonal comprise the event whose probability we seek.
+    There are 36 outcomes in all, of which 6 are on the diagonal.
+    Half of the remaining 36-6=30 are above the diagonal; half of 30 is 15.
+    The 36 outcomes are equally likely, so the chance is 15/36.
+    The outcomes highlighted in yellow&mdash;(1,4), (2,4) and (3,4)&mdash;comprise one of the
+    mutually exclusive pieces used in the computation in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr-1);
+    document.writeln(': ');
+// -->
+</script>
+    namely, the three ways the red die can show a smaller number of spots than the blue die,
+    when the blue die shows exactly 4 spots.
+</p>
+</div>
+
+<p>
+    The following exercises check your understanding of independence.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var spots = (listOfRandInts(1,1,6))[0];
+    var spotWord = 'spots';
+    if (spots == 1) {
+    spotWord = 'spot';
+    }
+    var qStr = 'A die has six sides; one has one spot, one has two spots, ' +
+           '&hellip; , and one has six spots. Consider rolling ' +
+           'a fair die twice, independently, in such a way that every side is equally ' +
+           'likely to land on top in each roll. <span class="qSpan">The probability ' +
+           'that the sum of the numbers of spots that show in the two rolls is even ' +
+           'is </span>';
+    document.writeln(qStr);
+    var aVal = numToRange(0.5);
+    writeTextExercise(10,qCtr++,aVal);
+    var qStr = '</p><p><span class="qSpan">The conditional probability that the sum of ' +
+           'the numbers of spots that show in the two rolls is even, given that ' +
+           'the first die lands with ' + spots.toString() + ' ' + spotWord +
+           ' showing is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,aVal);
+    var qStr = '</p><p><span class="qSpan">The event that the sum of the numbers of ' +
+           'spots that show in the two rolls is even and the event that the first ' +
+           'die lands with ' + spots.toString() + ' ' + spotWord + ' showing </span>';
+    document.writeln(qStr);
+    var opt = ["are dependent",
+        "are independent",
+        "could be independent or dependent"
+          ];
+    var aVal = 'b';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">The probability that the sum of the numbers ' +
+           'of spots that show in the two rolls is 9 is </span>';
+    document.writeln(qStr);
+    var aVal = numToRange(4/36);
+    writeTextExercise(10,qCtr++,aVal);
+    var qStr = '</p><p><span class="qSpan">The conditional probability that the sum ' +
+           'of the numbers of spots that show in the two rolls is 9, given that the ' +
+           'first die lands with ' + spots.toString() + ' ' + spotWord +
+           ' showing is</span>';
+    document.writeln(qStr);
+    if (spots == 1 || spots == 2) {
+    aVal= numToRange(0,.000001);
+    } else {
+    aVal = numToRange(1/6);
+    }
+    writeTextExercise(10,qCtr++,aVal);
+    var qStr = '</p><p><span class="qSpan">The event that the sum of the numbers of ' +
+           'spots that show in the two rolls is 9 and the event that the first ' +
+           'die lands with ' +  spots.toString() + ' ' + spotWord + ' showing </span>';
+    document.writeln(qStr);
+    var opt = ["are dependent",
+           "are independent",
+           "could be independent or dependent"
+          ];
+    var aVal = 'a';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    ansStr = 'Eighteen of the thirty-six equally likely outcomes are even, so the chance of ' +
+         'rolling an even number is 18/36 = 50%.</p><p>' +
+         'Given that  the first roll shows ' + spots.toString() + ' ' + spotWord +
+         ', the sum of the rolls is even if the second roll shows an ';
+    if (Math.floor(spots/2) == spots/2) {
+    ansStr += ' even ';
+    } else {
+    ansStr += ' odd ';
+    }
+    ansStr += ' number of spots. The chance of that is 50%. Because this is the same as the ' +
+          'unconditional probability that the sum of the rolls is even, the event that ' +
+          'the first roll shows ' + spots.toString() + ' ' + spotWord + ' and the event ' +
+          'that the sum of the rolls is even are independent.</p><p>' +
+          'Four of the 36 possible rolls sum to 9: (3,6), (6,3), (4,5), and (5,4). ' +
+          'Thus the probability that the sum of the rolls equals 9 is 4/36 = 1/9.</p><p>' +
+          'Given that the first roll shows ' + spots.toString() + ' ' + spotWord + ', ';
+    if (spots == 1 || spots == 2) {
+    ansStr += 'it is impossible for the sum of the rolls to equal 9, so the ' +
+          'conditional probability that the sum of the rolls is 9 given that the ' +
+          'first roll is ' + spots.toString() + ' is zero. Because this does not ' +
+          'equal the unconditional chance that the sum of the rolls is 9, the two ' +
+          'events are dependent.';
+    } else {
+    ansStr += 'the sum of the rolls equals 9 only if the second roll shows ' +
+          cardinals[9-spots] + ' spots.  The chance of that is 1/6, so the ' +
+          'conditional probability that the sum of the rolls is 9 given that the ' +
+          'first roll shows ' + spots.toString() + ' ' + spotWord + ' is 1/6. ' +
+          'Because this does not equal the unconditional chance of rolling a 9, ' +
+          'the event that the first roll shows ' + spots.toString() + ' ' + spotWord +
+          ' and the event that the sum of the rolls is 9 are dependent.';
+    }
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '</p><div class="indent"><p class="inline">It has been said that if you put ' +
+           'enough monkeys in front of typewriters, ' +
+           'and wait long enough, one of them will type the complete works of ' +
+           'Shakespeare.';
+    document.writeln(qStr);
+    var fStr = '&quot;We\'ve all heard that a million monkeys banging on a million typewriters ' +
+           'will eventually reproduce the entire works of Shakespeare. Now, thanks to ' +
+           'the Internet, we know this is not true.&quot; Robert Wilensky, Professor of Computer ' +
+           'Science, University of California, Berkeley.';
+    writeFootnote(fCtr++, fCtr, fStr);
+    var qStr = '</p></div><div class="indent"><p class="inline">Consider the sentence ' +
+           '&quot;the simians are jubilant.&quot; ' +
+           'Neglecting the period at the end, but including the spaces, there are 24 ' +
+           'characters in this sentence. Suppose we put 1,000 monkeys in front of ' +
+           'special typewriters that have only lowercase letters and a ' +
+           'spacebar&mdash;no numbers, punctuation marks, or special characters, so there ' +
+           'are 27 keys in all. Every time a monkey types 24 characters, ' +
+           'we change the paper in the typewriter. Assume that monkeys type ' +
+           'independently of each other, and that they pick which character to type ' +
+           'independently each time and with equal probability of striking each of ' +
+           'the 27 keys. Each monkey types 24 characters per minute for 8 hours a ' +
+           'day, 365.25 days a year, for 20 years. Assume that it does not take any ' +
+           'time to change the paper in the typewriter. ' +
+           '<span class="qSpan">What is the chance that at least one of the monkeys ' +
+           'types the sentence? </span>';
+    document.writeln(qStr);
+    var triesPerMonk = 60*8*365.25*20;
+    var totTries = 1000*triesPerMonk;
+    var littleP = totTries*Math.pow(1/27,24);
+    writeTextExercise(10,qCtr++,numToRange(littleP));
+    var fStr = 'To solve this problem, you need to evaluate an expression ' +
+           'of the form</p><p class="math">1&nbsp;&minus;&nbsp;(1&minus;x)<sup>n</sup>,' +
+           '</p><p>where <span class="math">x</span> is nearly zero and ' +
+           '<span class="math">n</span> is very large. You can find the ' +
+           'answer approximately using the following result:</p><p class="math">' +
+           '(1&minus;x)<sup>n</sup> =1 + n&times;(&minus;x) + ' +
+           '<big>(</big>n&times;(n&minus;1)/2<big>)</big>&times;(&minus;x)<sup>2</sup>' +
+           '+ &hellip; + <sub>n</sub>C<sub>k</sub> &times; ' +
+           '(&minus;x)<sup>k</sup> + &hellip; + (&minus;x)<sup>n</sup>.</p>' +
+           '<p>The function <span class="math">(1&nbsp;x)<sup>n</sup></span> is called a <em>binomial</em>.' +
+           'The fact that the coefficient of <span class="math">x<sup>k</sup></span> in the expansion of ' +
+           '<span class="math">(1&minus;x)<sup>n</sup></span> is ' +
+           '<span class="math"><sub>n</sub>C<sub>k</sub></span> is the reason ' +
+           '<span class="math"><sub>n</sub>C<sub>k</sub></span> is sometimes called a ' +
+           '<em>binomial coefficient</em>.  When <span class="math">x</span> is very small, ' +
+           '<span class="math">x<sup>2</sup></span>, ' +
+           '<span class="math">x<sup>3</sup></span>, &hellip; are much smaller still ' +
+           '(and they get smaller faster than ' +
+           '<span class="math"><sub>n</sub>C<sub>k</sub></span> grows), so the terms ' +
+           'involving higher powers of <span class="math">x</span> than ' +
+           '<span class="math">x<sup>1</sup></span> are effectively negligible. ' +
+           'That is, when <span class="math">x</span> is nearly zero, </p>' +
+           '<p class="math">(1&minus;x)<sup>n</sup> is approximately ' +
+           '1&minus;n&times;x, so </p><p class="math">' +
+           '1 &minus; (1&minus;x)<sup>n</sup> is approximately ' +
+           'n&times;x.</p><p>Using that approximation is equivalent to ignoring the ' +
+           'possibility that the monkeys type the sentence more than once. The probability that the ' +
+           'sentence is typed more than once is tiny compared to the (already microscopic) chance that ' +
+           'the sentence is typed exactly once.';
+    writeFootnote(fCtr++, 'Hint for exercise '+ chapterNumbers[cNum].toString() + '-' + (pCtr-1).toString(), fStr);
+    document.writeln('</p></div>');
+    var ansStr = 'The chance that one monkey succeeds is (100% - the chance that no monkey ' +
+         'succeeds). Because the monkeys type independently, the chance that no monkey ' +
+         'succeeds is the product of the chances that each does not succeed. ' +
+         'Because each try is independent, the chance that a given monkey does not ' +
+         'succeed in any of its tries is the product of the chances that it does not ' +
+         'succeed in each of its tries. Each monkey gets </p><p class="math">' +
+         '(1 try/minute)&times;(60 minutes/hour)&times;(8 hours/day)&times;' +
+         '(365.25 days/year)&times;(20 years) = ' + commify(roundToDig(triesPerMonk,0)) +
+         ' tries, </p><p>for a total of ' + commify(roundToDig(totTries,0)) + ' tries for all ' +
+         'the monkeys.  The chance that a given monkey does not succeed in a given ' +
+         'try is 100% minus the chance the monkey succeeds in that try; the chance ' +
+         'is the same for every try.  The chance of succeeding ' +
+         'in a given try is the chance the monkey types all 24 characters correctly. ' +
+         'The chance of typing each character correctly is 1/27.  Because the letters ' +
+         'are typed independently, the chance of typing all 24 correctly is ' +
+         '(1/27)<sup>24</sup>.  Thus the chance a monkey fails in a given try is ' +
+         '(100% &minus; (1/27)<sup>24</sup>), and the chance that all the monkeys fail in ' +
+         'every try is </p>' +
+         '<p class="math">(100% &minus; (1/27)<sup>24</sup>)<sup>' + 
+         commify(roundToDig(totTries,0)) + '</sup>.</p>' +
+         '<p>The number we seek is </p>' +
+         '<p class="math">1 &minus; (1 &minus; (1/27)<sup>24</sup>)<sup>' + commify(roundToDig(totTries,0)) + 
+         '</sup>.</p><p> Now we use the hint:</p><p class="math">' +
+         '1 &minus; (1 &minus; (1/27)<sup>24</sup>)<sup>' + commify(roundToDig(totTries,0)) +
+         '</sup>&nbsp; is approximately ' + commify(roundToDig(totTries,0)) +
+         '&times;(1/27)<sup>24</sup> = ' + littleP.toString() + '. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="multiplication_rule"></a>
+    The Multiplication Rule
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=795&end=1077" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>We can rearrange the definition of <a class="glossRef" href="gloss.htm#conditional_probability">conditional probability</a> to solve for the
+    probability that both <span class="math">A</span> and <span class="math">B</span> occur
+    (that <span class="math">AB</span> occurs) in
+    terms of the probability that <span class="math">B</span>
+    occurs and the <a class="glossRef" href="gloss.htm#conditional_probability">conditional probability</a> of
+    <span class="math">A</span> given <span class="math">B</span>:
+</p>
+
+<p class="math">
+    P(AB) = P(A | B)&times;P(B).
+</p>
+
+<p>
+    This is called the <a class="glossRef" href="gloss.htm#multiplication_rule">Multiplication Rule</a>.
+    The following two examples illustrate the Multiplication Rule.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'The Multiplication Rule in Card Shuffling.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+
+<p>
+    A deck of cards is shuffled well, then two cards are drawn.
+    What is the chance that both cards are aces?
+</p>
+
+<p>
+    <strong>Solution</strong>: Apply the Multiplication Rule.
+</p>
+
+<p class="math">
+    P(card 1 is an Ace and card 2 is an Ace) =
+    P(card 2 is an Ace | card 1 is an Ace)&times;P(card 1 is an Ace)
+</p>
+
+<p class="math">
+    = 3/51 &times; 4/52 = 0.5%.
+</p>
+
+<p>
+    You can see that the Multiplication Rule can save you a lot of time!
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Using the Multiplication Rule.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose there is a 50% chance that you catch the 8:00am bus.
+    If you catch the bus, you will be on time.
+    If you miss the bus, there is a 70% chance that you will be late.
+    What is the chance that you will be late?
+</p>
+
+<p>
+    <strong>Solution</strong>: Apply the Multiplication Rule.
+</p>
+
+<p class="math">
+    P(late) = P(miss the bus and late)
+    = P(late | miss the bus) &times; P(miss the bus)
+</p>
+
+<p class="math">
+    = 0.5 &times; 0.7 = 35%.
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to apply the Multiplication Rule.
+</p>
+
+<p>
+	One Example of Exercise 17-8<br />
+	(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)<br />
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=1077&end=1535" frameborder="0" allowfullscreen></iframe>
+</p>
+
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = (listOfRandInts(3,10,25)).sort(numberLessThan);
+    var cHomework = theInts[2];
+    var cMidterm = theInts[1];
+    var cFinal = theInts[0];
+    var bFinal = (listOfRandInts(1,3,7))[0];
+    var pCPass = (cHomework/100)*(cMidterm/100)*(cFinal - bFinal);
+    var pPass = bFinal + pCPass;
+    var qStr = 'Suppose you are taking a Statistics course with the following grading ' +
+           'policy: to pass, you need to get a C or better on the homework, ' +
+           'midterm, and final, or make a B or better on the final. Suppose ' +
+           'you do all your assignments and exams by guessing randomly (say, ' +
+           'based on rolls of a die); you guess independently on everything. ' +
+           'The chance you will get a C or better on the homework by guessing is ' +
+           cHomework.toString() + '%; the chance you will get a C or better on the ' +
+           'midterm by  guessing is ' + cMidterm.toString() +
+           '%; the chance you will get a C or better on the final by guessing is ' +
+           cFinal.toString() + '%; and the chance you will get a B or better on the ' +
+           'final by guessing is ' + bFinal.toString() +
+           '%. <span class="qSpan">The chance of getting a C on the final by guessing ' +
+           'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange((cFinal-bFinal)/100.0));
+    var qStr = '</p><p><span class="qSpan">The chance of passing the course by guessing ' +
+           'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pPass/100.0));
+    document.writeln('</p>');
+    var ansStr = 'Getting a C on the final is getting a C or better, but not getting ' +
+         'a B or better. Because getting a C or better is the union of getting a ' +
+         'C and getting a B or better, and getting a C and getting a B or better ' +
+         'are <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>, the chance of getting a ' +
+         'C or better is the chance of getting a C plus the chance of getting a B ' +
+         'or better. Thus the chance of getting a C on the final is the chance of ' +
+         'getting a C or better, minus the chance of getting a B or better: ' +
+         cFinal.toString() + '% - ' + bFinal.toString() + '% = ' +
+         (cFinal - bFinal).toString() + '%. <br />' +
+         'Passing the course by guessing can be partitioned into two disjoint events: ' +
+         'getting a C or better on the homework and midterm and a C on the final, ' +
+         'and getting a B or better on the final.  The chance of getting a C or ' +
+         'better on the homework and midterm and a C on the final can be found ' +
+         'by multiplying the corresponding chances, because the guesses are ' +
+         'independent. The chance of passing by guessing is thus </p><p class="math">' +
+         cHomework.toString() + '%&times;' + cMidterm.toString() + '%&times;' +
+         (cFinal - bFinal).toString() + '% + ' + bFinal.toString() + '% = ' +
+         pPass.toString() + '%.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfRandInts(4,70,95);
+    var pOntime = theInts[1]/100*theInts[0]/100 * theInts[2]/100 * theInts[3];
+    var qStr = 'A particular construction project has four stages. The first two stages ' +
+           'can be undertaken concurrently, and their completion times are independent. ' +
+           'However, the first stage must be complete before the third stage can start. ' +
+           'The third stage starts as soon as the first stage finishes. The second ' +
+           'stage is independent of the first and third stages. If the third stage ' +
+           'starts late, it will end late. The second and third stages must be ' +
+           'complete before the fourth stage can start; the fourth stage starts ' +
+           'as soon as the second and third stages finish. For the project to finish ' +
+           'on time, the fourth stage has to finish on time. If the fourth stage ' +
+           'does not start on time, it cannot finish on time. The chance that the ' +
+           'first stage finishes on time is ' + theInts[0].toString() +
+           '%.  The chance that the second stage finishes on time is ' +
+           theInts[1].toString() + '%. The chance that the third stage finishes on ' +
+           'time given that the first stage finishes on time is ' + theInts[2].toString() +
+           '%. The chance that the fourth stage finishes on time given that the ' +
+           'second and third stages finish on time is ' + theInts[3].toString() +
+           '%. <span class="qSpan">The chance that the project finishes on time is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(pOntime/100.0));
+    document.writeln('</p>');
+    var ansStr = 'A careful reading of the problem shows that the project finishes on time ' +
+         'if and only if the fourth stage finishes on time, which can happen only ' +
+         'if all previous stages finish on time. The chance the fourth stage finishes ' +
+         'on time is </p><p class="math">P(fourth stage finishes on time) = ' +
+         'P(all four stages finish on time)</p><p class="math">= ' +
+         'P(fourth stage finishes on time | ' +
+         'first three stages finish on time)&times;' +
+         'P(first three stages all finish on time)</p><p class="math">= ' +
+         theInts[3] + '% &times;' +
+         'P(first three stages all finish on time)</p><p class="math">= ' + theInts[3] +
+         '% &times; P(first and third stages finish on time | second stage ' +
+         'finishes on time)&times;P(second stage finishes on time)</p>' +
+         '<p class="math">= ' +
+         theInts[3] + '% &times;P(first and third stages finish on time)&times;' +
+         'P(second stage finishes on time)</p><p class="math">= ' +
+         theInts[3] + '% &times; P(first and third stages finish on time)&times;' +
+         theInts[1] + '%</p><p class="math">= ' + theInts[3] +
+         '% &times;P(third stage finishes ' +
+         'on time | first stage finishes on time)&times;P(first stage finishes ' +
+         'on time)&times;' + theInts[1] +'%</p><p class="math">= ' +
+         theInts[3] + '% &times; ' + theInts[2] + '% &times; ' +
+         theInts[0] + '% &times; ' + theInts[1] + '% </p><p class="math">= ' +
+         roundToDig(pOntime,2) +
+         '%. </p><p>The last two steps used the fact that the second stage is ' +
+         'independent of the first and third stages.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+   <a id="bayes_rule"></a>Bayes' Rule
+</h3>
+
+<p>
+    Bayes' Rule is a formula that expresses <span class="math">P(A | B)</span> in terms of
+    <span class="math">P(B | A)</span>, 
+    <span class="math">P(B | A<sup>c</sup>)</span>, 
+    <span class="math">P(A)</span>,
+    and <span class="math">P(A<sup>c</sup>)</span>:
+</p>
+
+<p class="math">
+    P(A | B) =
+    P(B | A) &times; P(A)/( P(B | A) &times;
+    P(A) + P(B | A<sup>c</sup>)&times;P(A<sup>c</sup>)).
+</p>
+
+<div class="indent">
+<p class="inline">
+    The numerator on the right is <span class="math">P(AB)</span>, computed using the
+    Multiplication Rule.
+    The denominator is just <span class="math">P(B)</span>, computed by 
+    <a class="glossRef" href="gloss.htm#partition">partitioning</a> <span class="math">B</span>
+    into the mutually exclusive sets <span class="math">AB</span> and <span class="math">A<sup>c</sup>B</span>,
+    and finding the probability of each of those pieces using the
+    Multiplication Rule.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Derivation of Bayes\' Rule. ' +
+           '<span class="math">P(A | B) = P(AB)/P(B)</span>, by definition. By the ' +
+           'Multiplication Rule, the numerator on the right hand ' +
+           'side is equal to <span>P(AB) =  P(B | A)&times;P(A)</span>. ' +
+           'The event <span class="math">B</span> can be partitioned into the two disjoint sets ' +
+           '<span class="math">BA</span> and <span class="math">BA<sup>c</sup></span>, so the ' +
+           'denominator of the right ' +
+           'hand side is equal to <span class="math">P(BA) + P(BA<sup>c</sup>)</span>.  ' +
+           'Applying the ' +
+           'Multiplication Rule to each of the terms gives</p><p class="math">' +
+           'P(B) = P(BA) + P(BA<sup>c</sup>) =  ' +
+           'P(B | A)&times;P(A) + ' +
+           'P(B | A<sup>c</sup>)P(A<sup>c</sup>),</p><p>' +
+           'so </p><p class="math">P(A | B) = ' +
+           'P(B | A)&times;P(A)/( ' +
+           'P(B | A)&times;P(A) ' +
+           '+ P(B | A<sup>c</sup>)P(A<sup>c</sup>) ),</p><p>as claimed.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Bayes' Rule is useful to find the conditional probability of
+    <span class="math">A</span> given <span class="math">B</span> in terms of the conditional probability
+    of <span class="math">B</span> given <span class="math">A</span>,
+    which is the more natural quantity to measure in some
+    problems, and the easier quantity to compute in some
+    problems. For example, in screening for a disease, the
+    natural way to calibrate a test is to see how well it does at
+    detecting the disease when the disease is present, and to see
+    how often it raises false alarms when the disease is not
+    present.
+    These are, respectively, the conditional probability of
+    detecting the disease given that the disease is present,
+    and the conditional probability of incorrectly raising an alarm
+    given that the disease is not present.
+    However, the interesting quantity for an individual is the
+    conditional chance that he or she has the disease,
+    given that the test raised an alarm.
+    An example will help.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Bayes\' Rule in Disease Screening';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose that 10% of a given population has benign chronic flatulence.
+    Suppose that there is a standard screening test for benign chronic
+    flatulence that has a 90% chance of correctly detecting that one has
+    the disease, and a 10% chance of a <em>false positive</em>
+    (erroneously reporting that one has the disease when one does not).
+    We pick a person at random from the population (so that everyone has
+    the same chance of being picked) and test him/her.
+    The test is positive. What is the chance that the person has the disease?
+</p>
+
+<p>
+    <strong>Solution</strong>:
+    We shall combine several things we have learned.
+    Let <span class="math">D</span> be the event that the person has the disease, and let 
+    <span class="math">T</span> be
+    the event that the person tests positive for the disease.
+    The problem statement told us that:
+</p>
+
+<ul>
+    <li><span class="math">P(D) = 10%</span>.</li>
+    <li><span class="math">P(T | D) = 90%</span>.</li>
+    <li><span class="math">P(T | D<sup>c</sup>) = 10%</span>.</li>
+</ul>
+
+<p>
+    The problem asks us to find <span class="math">P(D | T) = P(DT)/P(T)</span>.
+    We shall find <span class="math">P(T)</span>
+    by partitioning <span class="math">T</span> into two mutually exclusive
+    pieces, <span class="math">DT</span> and <span class="math">D<sup>c</sup>T</span>, corresponding to
+    testing positive and having the disease (<span class="math">DT</span>) and testing positive falsely
+    (<span class="math">D<sup>c</sup>T</span>).
+    Then <span class="math">P(T)</span> is the sum of <span class="math">P(DT)</span>
+    and <span class="math">P(D<sup>c</sup>T)</span>.
+    We will find those two probabilities using the Multiplication Rule.
+    We need <span class="math">P(DT)</span> for the numerator, and it will be one of the
+    terms in the denominator as well.
+    The probability of <span class="math">DT</span> is, by the Multiplication Rule,
+</p>
+
+<p class="math">
+    P(DT) = P(T | D) &times; P(D) = 90% &times; 10% = 9%.
+</p>
+
+<p>
+    The probability of <span class="math">D<sup>c</sup>T</span> is, by the multiplication
+    rule and the complement rule,
+</p>
+
+<p class="math">
+    P(D<sup>c</sup>T) = P(T | D<sup>c</sup>) &times;
+    P(D<sup>c</sup>) = P(T | D<sup>c</sup>) &times;
+    (100% &minus; P(D) ) = 10% &times; 90% = 9%.
+</p>
+
+<p>
+    By the third axiom,
+</p>
+
+<p class="math">
+    P(T) = P(DT) + P(D<sup>c</sup>T) = 9% + 9% = 18%,
+</p>
+
+<p>
+    because <span class="math">DT</span> and <span class="math">D<sup>c</sup>T</span> are mutually exclusive.
+    Finally, plugging in the definition of <span class="math">P(D | T)</span> gives:
+</p>
+
+<p class="math">
+    P(D | T) = P(DT)/P(T) = 9%/18% = 50%.
+</p>
+
+<p>
+    Because only a small fraction of the population actually have benign chronic
+    flatulence, the chance that a positive test result for someone
+    selected at random from the population is a false positive is
+    50%, even though the test is 90% accurate.
+    The computation we just made is equivalent to using Bayes' rule:
+</p>
+
+<p class="math">
+    P(D | T) =
+    P(T | D)&times;P(D)/(P(T | D)&times;P(D) +
+    P(T | D<sup>c</sup>)&times;P(D<sup>c</sup>) )
+</p>
+
+<p class="math">
+    = 90%&times;10%/( 90%&times;10% + 10%&times;90%)
+</p>
+
+<p class="math">
+    = 50%.
+</p>
+</div>
+
+<p>
+   The <a class="glossRef" href="gloss.htm#base_rate_fallacy">Base Rate Fallacy</a> 
+   consists of ignoring <span class="math">P(A)</span>
+   or <span class="math">P(B)</span>
+   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and 
+   <span class="math">P(A | B<sup>c</sup>)</span>.
+   For instance, in the example above, the base rate for chronic benign flatulence is 10%.
+   The test is 90% accurate (both for false positives and for false negatives).
+   The base rate fallacy is to conclude that since the test is 90% accurate, it must be true that 90% of people
+   who test positive in fact have the disease&mdash;ignoring the base rate of the disease in the population
+   and the frequency of false positive test results.
+   We just saw that that conclusion is wrong: if people are tested at random, of those who test positive, 
+   only 50% have the disease, on average.
+</p>
+
+<div class="indent">
+<p class="inline">
+   The <a class="glossRef" href="gloss.htm#prosecutors_fallacy">Prosecutor's Fallacy</a> 
+   consists of confusing
+   <span class="math">P(B | A)</span> with <span class="math">P(A | B)</span>.
+   For instance, <span class="math">P(A | B)</span> might be the probability of some evidence
+   if the accused is guilty, <span class="math">P(B | A)</span> is the probability that
+   the accused is guilty given the evidence.
+   The second &quot;conditional probability&quot; generally does not make sense at all;
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'The latter probability is generally meaningless, because to make sense of ' +
+               '<span class="math">P(accused is guilty | evidence)</span> requires the unconditional ' +
+               'probability <span class="math">P(accused is guilty)</span> to be defined.  What is ' +
+               'random about the accused being guilty?  The accused either is guilty or not. Unless ' +
+               'the accused party was selected at random from some population that includes the guilty ' +
+               'party, the expression is nonsense.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+   even when it does,
+   its numerical value need not be close to the value of <span class="math">P(A | B)</span>.
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to work with conditional
+    probability, the Multiplication Rule, and Bayes' Rule.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li>Example of Bayes' Rule in Disease Screening<br /><iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=1740&end=2675" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=2675&end=3362" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A hypothetical urine test for narcotics use has a 1% rate of <em>false positives</em>: ' +
+           'on average, one in 100 people who do not use narcotics will test positive for narcotics use. ' +
+           'Suppose that a large population of people is screened for narcotics use using this test. ' +
+           '<span class="qSpan">The vast majority of people who test positive for narcotics use ' +
+           '(according to this test) actually use narcotics.</span>';
+    document.writeln(qStr);
+    var opt = ['true','false'];
+    aVal = 'b';
+    writeSelectExercise(false,qCtr++,opt, aVal);
+    document.writeln('</p>');
+    var ansStr = 'This does not follow. The accuracy of the test does not by itself ' +
+         'determine the rate of false positives among the positive test results. ' +
+         'The fraction of false positives among the positive test results also depends on the ' +
+         'base rate of narcotics use in the population that is tested.  ' +
+         'For example, if everyone in the population uses narcotics, then ' +
+         'every positive test result is correct, and the vast majority&mdash;indeed, the totality&ndash;' +
+         'of the positive test results are true positives.  At the other extreme, if no one in the ' +
+         'population uses narcotics, then every positive test result is a false positive: none of the ' +
+         'people who test positive actually uses narcotics.';    
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nCoins = (listOfDistinctRandInts(2,1,8)).sort(numberLessThan);
+    var pGoldGOne = 0.5;
+    var pGoldGTwo = nCoins[1]/(nCoins[1] + nCoins[0]);
+    var pTwo = 0.5;
+    var pGold = (1-pTwo)*pGoldGOne + pTwo*pGoldGTwo;
+    var pTwoGGold = pGoldGTwo*pTwo/pGold;
+    var sc = 'coins';
+    if (nCoins[0] == 1) {
+    sc = 'coin';
+    }
+    var qStr = 'A box has two drawers. One drawer contains one gold coin and one ' +
+           'silver coin. The other drawer contains ' + nCoins[1].toString() +
+           ' gold coins and ' + nCoins[0].toString() + ' silver ' + sc +
+           '. A drawer is picked at random with chance 1/2 of picking ' +
+           'each drawer, then a coin is picked at random from that drawer, ' +
+           'with equal chance of picking each coin in the drawer. ' +
+           '<span class="qSpan">The conditional chance that the drawer picked ' +
+           'contains at least one more gold coin, given that the coin picked from ' +
+           'the drawer is gold, is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(pTwoGGold));
+    document.writeln('</p>');
+    var ansStr = 'Only the second drawer has another gold coin, so we seek the chance that ' +
+         'the second drawer was picked given that we picked a gold coin. The chance ' +
+         'of picking a gold coin given that the first drawer was picked is 50%. ' +
+         'The chance of picking a gold coin given that the second drawer was picked ' +
+         'is</p><p class="math">' + nCoins[1].toString() +
+         '/(' + nCoins[1].toString() + ' + ' + nCoins[0].toString() + ') = ' +
+         roundToDig(100*pGoldGTwo,2) + '%.</p><p>The chance that the second drawer ' +
+         'was picked and a gold coin was picked is the chance that the second drawer ' +
+         'was picked given that a gold coin was picked, times the chance that the ' +
+         'second drawer was picked:</p>' +
+         '<p class="math">50%&times;' + roundToDig(100*pGoldGTwo,2) + '% = ' +
+         roundToDig(50*pGoldGTwo,2) + '%.</p><p> ' +
+         'The event that a gold coin is drawn can be partitioned into two disjoint ' +
+         'events: the event that the first drawer is picked and a gold coin is drawn, ' +
+         'and the event that the second  drawer is picked and a gold coin is drawn. ' +
+         'Thus the unconditional chance of picking a gold coin is the conditional ' +
+         'chance of picking a gold coin given that the first drawer was picked, ' +
+         'times the chance of picking the first drawer, plus the conditional chance ' +
+         'of picking a gold coin given that the second drawer was picked, times the ' +
+         'unconditional chance of picking the second drawer:</p><p class="math">' +
+         'P(picking a gold coin) = 50%&times;50% + 50%&times;' +
+         roundToDig(100*pGoldGTwo,2) + ' = ' + roundToDig(100*pGold,2) + '%. </p><p>' +
+         'The chance that the second drawer was picked and a gold coin was picked ' +
+         'is the conditional chance that a gold coin is picked given that the second ' +
+         'drawer is picked, times the unconditional chance of picking the second ' +
+         'drawer:</p><p class="math">P(picking 2nd drawer and a gold coin) = ' +
+         '50%&times;' + roundToDig(100*pGoldGTwo,2) + ' = ' + roundToDig(50*pGoldGTwo,2) +
+         '%.</p><p>The conditional chance that the second drawer was picked given ' +
+         'that a gold coin was picked is the chance that the second drawer was ' +
+         'picked and a gold coin was picked, divided by the chance that a gold coin ' +
+         'was picked:</p><p class="math">P(second drawer was picked | gold coin was ' +
+         'picked) = ' + roundToDig(50*pGoldGTwo,2) + '%/' + roundToDig(100*pGold,2) +
+         '% = ' + roundToDig(100*pTwoGGold,2) + '%.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+       document.writeln(startProblem(pCtr++));
+       var aVal = "";
+       var nThrows = 3;
+       var nTosses = 5;
+       var which = randBoolean();
+       var stateStr;
+       if (which) {
+       stateStr = 'A fair die is rolled ' + cardinals[nThrows] + ' times, independently. ' +
+          '<span class="qSpan"> The probability that the sum of the numbers of spots that ' +
+          'show on the first ' + cardinals[nThrows-1] + ' dice is less than the number ' +
+          'of spots that show on the ' + ordinals[nThrows] + ' die is </span>';
+       var pLess = 0;
+       pLess += (1/6)*(1/36); // 3rd shows 3, first two sum to 2
+       pLess += (1/6)*(3/36); // 3rd shows 4; first two sum to 2 or 3
+       pLess += (1/6)*(6/36); // 3rd shows 5, first  two sum to 2, 3, or 4
+       pLess += (1/6)*(10/36); // 3rd shows 6, first two sum to 2, 3, 4, or 5.
+       var aVal = numToRange(pLess);
+       ansStr = 'We can divide the event that the sum of the first two is less than the third ' +
+            'into mutually exclusive pieces, depending on the number of spots the third ' +
+            'die shows.  If the third die shows 1 or 2 spots, the sum of the first two ' +
+            'cannot be less.  If the third shows 3 spots, the sum of the first two is less ' +
+            'only if both show one spot.  The chance of that is ' +
+            '(1/6)&times;(1/36), using the independence of the rolls of the different dice. ' +
+            'If the third die shows 4 spots, the sum of the first two can be less if the ' +
+            'first two sum to two or three.  The chance that they sum to two is 1/36, and ' +
+            'the chance that they sum to 3 is 2/36, so the chance that the third shows ' +
+            '4 and the first two sum to less than 4 is ' +
+            '(1/6)&times;(3/36), using the independence assumption.  ' +
+            'Similarly, the chance that the first two sum to less than 5 is 6/36, ' +
+            'and the chance that they sum to less than 6 is 10/36, so the probability ' +
+            'that the first two sum to less than the third is ' +
+            '</p><p align=\"center\">(1/6)&times;(1/36 + 3/36 + 6/36 + 10/36) = ' +
+            '(1/6)&times;(20/36) </p><p align=\"center\"> = ' + roundToDig(100*20/216,2) +
+         '%. ';
+       } else {
+       stateStr = 'A fair coin is tossed ' + cardinals[nTosses] + ' times, independently. ' +
+             '<span class="qSpan"> The probability that the total number of heads in the ' +
+             'first ' + cardinals[nTosses-2] + ' tosses  is less than or equal to the ' +
+             'total number of heads in the last ' + cardinals[2] + ' tosses is </span>';
+       var pLess = 0;
+       pLess += (1/8)*(1/4);        // no heads at all
+       pLess += ((1/8)+(3/8))*(1/2)     // first show 0 or 1; last show 1
+       pLess += ((1/8)+(3/8)+(3/8))*(1/4);  // first show 0, 1, or 2; last show 2
+       var aVal = numToRange(pLess);
+       ansStr = 'We can divide the event that the number of heads in the first three tosses ' +
+           'does not exceed the number of heads in the last two tosses into three mutually ' +
+           'exclusive pieces, according to the number of heads in the last two tosses, which ' +
+           'can be 0, 1, or 2.  If the number of heads in the last two tosses is 0, for ' +
+           'the number of heads in the first three tosses not to exceed the number in the ' +
+           'last two tosses, the number of heads in the first three tosses must also ' +
+           'be zero.  The probability that the number of heads in the first ' +
+           'three tosses is zero and the number of heads in the last two tosses is ' +
+           'also zero is (1/8)&times;(1/4), using the fact that the tosses are ' +
+           'independent.  If the last two tosses give one head, which has probability ' +
+           '1/2, for the event in question to occur, the first three tosses must ' +
+           'give 0 heads or 1 head, which has probability 1/8 + 3/8 = 1/2. ' +
+           'Because the tosses are independent, the chance that the first ' +
+           'three tosses give 0 or 1 heads and the last two tosses give 1 head is ' +
+           '(1/8 + 3/8)&times;(1/2).  If the last two tosses give two heads, which ' +
+           'has probability 1/4, the event in question occurs if the first three tosses ' +
+           'give 0, 1, or 2 heads, which has probability (1/8 + 3/8 + 3/8) = 7/8. Again, ' +
+           'because the tosses are independent, the chance that the first three tosses ' +
+           'give 0, 1, or 2 heads and the last two tosses give two heads is ' +
+           '(7/8)&times;(1/4). Summing these contributions gives the probability that ' +
+           'the number of heads in the first three tosses is less than or equal to the ' +
+           'number of heads in the last two tosses: </p><p align=\"center\">' +
+           '(1/8)&times;(1/4) + (1/2)&times;(1/2) + (7/8)&times;(1/4) =  '+
+           '1/32 + 8/32 + 7/32 = 16/32 = 50%. ';
+      }
+      document.writeln(stateStr);
+      writeTextExercise(8, qCtr++, aVal);
+      document.writeln('</p>');
+      writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    The <em>Axioms of Probability</em> are mathematical rules that
+    must be followed in assigning probabilities to events:
+    The probability of an event cannot be negative, the probability that
+    something happens must be 100%, and if two events cannot both occur,
+    the probability that either occurs is the sum of the probabilities
+    that each occurs.
+    A function that assigns numbers to events and satisfies the axioms
+    is called a <em>probability distribution</em>.
+</p>
+
+<p>
+    The axioms have numerous consequences, including the following:
+    The probability of the empty set is zero.
+    The probability that a given event does not occur is 100% minus the
+    probability that the event occurs.
+    The probability that either of two events occurs is the sum of the
+    probabilities that each occurs, minus the probability that both occur.
+    The probability that either of two events occurs is at least as large
+    as the probability that each occurs, and no larger than the sum of
+    the probabilities that each occurs.
+    The probability that two events both occur is no larger than either
+    of their individual probabilities.
+</p>
+
+<p>
+    Conditioning describes updating probabilities to incorporate new knowledge.
+    For example, how should we update the probability of the event <span class="math">A</span>
+    if we learn that the event <span class="math">B</span> occurs?
+    The updated probability is the <em>conditional probability of</em>
+    <span class="math">A</span> <em>given</em> <span class="math">B</span>, 
+    which is equal to the probability
+    that <span class="math">A</span> and <span class="math">B</span>
+    both occur, divided by the probability that <span class="math">B</span> occurs,
+    provided that the probability that <span class="math">B</span> occurs is not zero.
+    Conditional probability satisfies the axioms of probability.
+</p>
+
+<p>
+    Rearranging the definition of conditional probability yields the
+    <span class="termOfArt">Multiplication Rule</span>:
+    The probability that <span class="math">A</span> and <span class="math">B</span> both
+    occur is the conditional probability of <span class="math">A</span> given <span class="math">B</span>, times the
+    probability that <span class="math">B</span> occurs.
+    Two events are <em>independent</em> if the occurrence of one is
+    uninformative with respect to the occurrence of the other:
+    if <span class="math">P(A | B) = P(A)</span>.
+    A slightly more general definition is that <span class="math">A</span> and 
+    <span class="math">B</span> are independent
+    if <span class="math">P(AB) = P(A)&times;P(B)</span>.
+</p>
+
+<p>
+    Bayes' Rule expresses <span class="math">P(A | B)</span> in terms
+    of <span class="math">P(B | A)</span>, 
+    <span class="math">P(B | A<sup>c</sup>)</span>, and 
+    <span class="math">P(A)</span>,
+    which in some problems are easier to calculate than <span class="math">P(A | B)</span>.
+    Bayes' Rule says that
+</p>
+
+<p class="math">
+    P(A | B) =
+    P(B | A)&times;P(A)/<big>(</big>
+    P(B | A)&times;P(A) +
+    P(B | A<sup>c</sup>)&times;P(A<sup>c</sup>)
+    <big>)</big>
+</p>
+
+<p>
+   The <em>base rate fallacy</em> consists of ignoring <span class="math">P(A)</span>
+   or <span class="math">P(B)</span>
+   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and 
+   <span class="math">P(A | B<sup>c</sup>)</span>.
+   The <em>prosecutor's fallacy</em> consists of confusing <span class="math">P(A | B)</span>
+   for <span class="math">P(B | A)</span>.
+</p>
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>Axioms of Probability</li>
+    <li>base rate fallacy</li>
+    <li>Bayes' Rule</li>
+    <li>binomial</li>
+    <li>binomial coefficient</li>
+    <li>certain event, sure event</li>
+    <li>Complement Rule</li>
+    <li>conditional probability, conditioning, given</li>
+    <li>dependent</li>
+    <li>disjoint</li>
+    <li>event</li>
+    <li>Fundamental Rule of Counting</li>
+    <li>independent</li>
+    <li>intersection</li>
+    <li>Multiplication Rule</li>
+    <li>mutually exclusive</li>
+    <li>outcome space</li>
+    <li>partition</li>
+    <li>permutations</li>
+    <li>probability</li>
+    <li>probability distribution</li>
+    <li>prosecutor's fallacy</li>
+    <li>set</li>
+    <li>subset</li>
+    <li>Theory of Equally Likely Outcomes</li>
+    <li>uniform probability distribution</li>
+    <li>union</li>
+    <li>Venn diagram</li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

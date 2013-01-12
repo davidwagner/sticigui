@@ -1,0 +1,116 @@
+The university textbook market is about $4 billion in new books
+and $2 billion in used books.
+
+There are on the order of 14 million college and university students;
+the California Community College system alone has 4.1 million students.
+
+There is mounting pressure on colleges and universities
+to admit more students as the children of baby boomers reach college age.
+UC Berkeley needs to admit 4,000
+more students annually, phased in over the next 10 years.
+That means hiring more faculty, building more classrooms, and teaching
+more efficiently -- especially by using "classrooms without walls"
+(distance learning) and finding ways to automate some student services,
+such as grading homework.
+Middle and lower-tier universities see increased use
+of technology in the classroom as a selling point for their schools.
+
+Paper ("dead-tree") textbooks don't stay up-to-date. They
+don't adapt to students' needs. They provide a limited number of exercises
+and examples. They provide a limited number of homework problems, and those
+problems need to be graded by an instructor, who needs to collect the
+assignments, grade them, record the grades, and hand the assignments back.
+Moreover, sales of new books begin to drop immediately after the semester
+they are introduced, as sales of used books compete with new book sales.
+
+Our online instructional materials overcome all these problems.
+The materials include all the elements of a traditional book, and in addition
+    1) Examples and exercises in the text change every time the student reads a
+         chapter, allowing unlimited practice and unlimited tutoring.
+       Exercises accept student responses and are scored instantly to give
+         immediate feedback.
+       Detailed solutions update continuously to correspond to the exercises.
+    2) Homework assignments are submitted on the web, graded automatically,
+         and the grades are logged to a website that students can query, and
+         that instructors can use to manage the class.
+       Every student gets a different version of each assignment, but all are
+         graded automatically, and each student can see the solutions to his or
+         her version after the due date -- "mass customization."
+    3) Java applets illustrating key concepts are embedded in the text.
+       The applets also allow instructors to demonstrate ideas in class.
+       Students can reproduce any demonstration done in lecture, without
+         specialized software ("reproducible lectures").
+    4) Review materials include interactive tutorials, where the line of questioning
+         changes depending on the student's responses.
+    5) The text and assignments have links to an extensive glossary of all the
+         technical terms used in the class.
+
+The materials are written in HTML, Java, and JavaScript. They are accessible
+from anywhere in the world, using any standard browser (both Netscape and Internet
+Explorer) No plug-in or proprietary software is needed, minimizing technical
+barriers for the student and the instructor.  Moreover, the software is written
+in such a way that the bandwidth requirements are minimal -- a 28.8kbps modem
+connection is adequate.
+
+Instructors control assignments and manage grades, etc., through a simple web
+interface that does not require the professor to know how to program.
+
+New model: information is free, pay for services.
+
+Services to instructors and universities:
+   teaching without classrooms or instructors
+   grading homework
+   grading exams
+   managing courses -
+        tracking assignment grades
+        computing course grades
+        managing assignment deadlines
+        managing enrollment
+
+Services to students:
+   better pedagogy than traditional books
+   reduced costs -
+       less expensive than a textbook
+       eliminates the need for special-purpose software
+
+I have been using these materials for about 3 years in large lecture courses
+(300-400 students). This saves the department approximately $3000 per class in
+grading homework.
+
+There is unsolicited demand from universities ranging from University of Cambridge to
+Gallaudet University, University of Alaska, Southern Methodist University, University
+of California, University of Colorado, University of Toronto -- and even high school
+teachers leading advanced placement classes.
+I have been approached by accounting firms who want to use the
+materials to train CPAs in statistical methods for audits, and by manufacturers who
+want to use the materials to train engineers.  I have received rave comments from
+undergraduates at other universities, from engineers at software firms and automotive
+manufaturerers, and from professors of Communications and of Statistics.
+
+Versatile infrastructure.
+The software libraries can be used for many other courses; the first targets
+are calculus, economics, and econometrics.  The design makes it easy
+to implement all the features described above, with different course content.
+Universities are spending on the order of $140,000 per course to develop
+materials that amount to online lecture notes, lacking any of the functionality
+and interactivity of this software.  The market for these materials at
+UC Berkeley alone is approximately 3,000 units/year in Statistics, 5,000 units/year
+in Economics, and 8,000 units/year in Calculus.
+
+
+Philip B. Stark is Professor of Statistics, University of California, Berkeley.
+Stark began his undergraduate education at MIT at the age of 15.  He graduated
+from Princeton University in 1980 at age 19 with a degree in Philosophy.
+After attending law school briefly at the University of Texas and working in
+industrial marketing, he started graduate work in Geophysics, and in 1986 received his
+Ph.D. from the University of California, San Diego, Scripps Institution of Oceanography.
+He won an NSF postdoctoral fellowship in Mathematical Sciences in 1987 and joined the
+Statistics faculty at UC Berkeley in 1988. He was a Presidential Young Investigator
+from 1989-1994.  Stark is a Fellow of the Institute of Physics, a member of a variety of
+professional societies in Statistics and Mathematics, a former Miller Research Professor,
+and has served on the editorial board of international Statistics, Geophysics, and
+Applied Mathematics journals.  His research focuses on inference problems in
+astronomy and geophysics with large datasets. He consults in legal, legislative, and
+scientific applications of Statistics, and has given testimony before the
+U.S. House of Representatives Subcommittee on the Census, and the State
+of California Natural Resources Subcommittee.

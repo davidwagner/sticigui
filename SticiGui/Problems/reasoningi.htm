@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "18 June 2012 22:24 PST";
+	// copyright 1997-2012 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "reasoning";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = 'Identify whether the following sequences of statements are valid reasoning or formal fallacies ' +
+                '</p>';
+    document.writeln(qStr);
+    var opt = ['valid','fallacious'];
+    var vstatements = [
+                       ['A. Therefore, not (not A).',
+                           'This is the definition of &quot;not.&quot;'],
+                       ['A. B. Therefore, A and B.',
+                           'This is the definition of &quot;and.&quot;'],
+                       ['B. Therefore, A or B.',
+                           '<span class="math">A or B</span> is true if <span class="math">A</span> is true, ' +
+                           'if <span class="math">B</span> is true and if both <span class="math">A</span> ' +
+                           ' and <span class="math">B</span> are true.'],
+                       ['A or B. Not B. Therefore, A.',
+                           'If either <span class="math">A</span> or <span class="math">B</span> is true, and ' +
+                           '<span class="math">B</span> is not true, <span class="math">A</span> must ' +
+                           'be true.'],
+                       ['If A then B. A. Therefore, B.',
+                           'This is <a class="glossRef" href="gloss.htm#affirming_the_antecedent">affirming ' +
+                           'the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, not A.',,
+                           'This is <a class="glossRef" href="gloss.htm#denying_the_consequent">denying ' +
+                           'the consequent</a>.'],
+                       ['not (A or B).  Therefore, (not A) and (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'],
+                       ['not (A or B).  Therefore, (not A) or (not B)',
+                           'By one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>, if ' +
+                           '<span class="math">not (A or B)</span>, ' +
+                           'then <span class="math">A</span> is false and <span class="math">B</span> ' +
+                           'is false. But if both <span class="math">A</span> and ' +
+                           '<span class="math">B</span> are false, then either <span class="math">A</span> ' +
+                           'is false or <span class="math">B</span> is false.'],
+                       ['not (A and B).  Therefore, (not A) or (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'],
+                       ['A or not B.  B. Therefore, A.',
+                           'This is the definition of &quot;or&quot; applied to <span class="math">A</span> ' +
+                           'and <span class="math">not B</span>.  If either <span class="math">A</span> is ' +
+                           'true or <span class="math">B</span> is false, and <span class="math">B</span> ' +
+                           'is true, then <span class="math">A</span> must be false.']
+                      ];
+    var fstatements = [
+                       ['A or B.  A.  Therefore, not B.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['A or B.  B.  Therefore, not A.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['not (A and B). Therefore, not B.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">B</span> ' +
+                           'might be true and <span class="math">A</span> might be false. It does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['not (A and B). Therefore, not A.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">A</span> ' +
+                           'might be true and <span class="math">B</span> might be false. It does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['If A then B. Not A. Therefore, not B.',
+                           'This is an example of <a class="glossRef" href="gloss.htm#denying_the_antecedent">' +
+                           'denying the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, A.',
+                           'By <a class="glossRef" href="gloss.htm#denying_the_consequent">denying the ' +
+                           'consequent</a>, we can conclude that <span class="math">A</span> is false, not that ' +
+                           '<span class="math">A</span> is true.'],
+                       ['If A then B. B. Therefore, A.',
+                           'This is an example of <a class="glossRef" href="gloss.htm#affirming_the_consequent">' +
+                           'affirming the consequent</a>.'],
+                       ['not (A and B). Therefore, (not A) and (not B)',
+                           'It follows that either <span class="math">A</span> is false or ' +
+                           '<span class="math">B</span> is false, but not necessarily that both are false.'],
+                       ['If A then B. C. Therefore, A.',
+                           'This is a <a class="glossRef" href="non_sequitur_of_evidence">non sequitur of ' +
+                           'evidence</a>.'],
+                       ['If A then B. A. Therefore, C.',
+                           'This is a <a class="glossRef" href="non_sequitur_of_relevance">non sequitur of ' +
+                           'relevance</a>.']
+                      ];
+    qStr = '<p class="math"><span class="qSpan"><span class="math">';
+    var vOrF = randBoolean();
+    var alternate = randBoolean();
+    var whichv = listOfDistinctRandInts(2, 0, vstatements.length-1);
+    var whichf = listOfDistinctRandInts(2, 0, fstatements.length-1);
+    var aVal;
+    var vk = 0;
+    var fk = 0;
+    if (vOrF) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]][0];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if ((vOrF && !alternate) || (!vOrF && alternate)) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]][0];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if ((vOrF && alternate) || (!vOrF && !alternate)) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]][0];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if (!vOrF) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]][0];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = 'Identify whether the following sequences of statements are valid reasoning or formal fallacies. ' +
+                '</p><p class="math"><span class="qSpan">';
+    var opt = ['valid','fallacious'];
+    var vstatements = [
+                       '<span class="math">It is warm. Therefore, it is not cold.</span>',
+                       '<span class="math">It is sunny. It is warm. Therefore, it is sunny and warm.</span>',
+                       '<span class="math">It is warm. Therefore, it is sunny or it is warm.</span>',
+                       '<span class="math">It is sunny or it is warm.  It is cold. Therefore, it is sunny.</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is sunny. ' +
+                              'Therefore, it is warm.</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is not warm. ' +
+                              'Therefore, it is not sunny.</span>',
+                       '<span class="math">It is not sunny or warm. ' +
+                              'Therefore, it is not sunny and it is not warm.</span>',
+                       '<span class="math">It is not sunny and warm.  ' +
+                              'Therefore, it is not sunny or it is not warm.</span>',
+                       '<span class="math">It is sunny or not warm. It is warm. ' +
+                              'Therefore, it is sunny.</span>',
+                       '<span class="math">It is not sunny or warm. ' +
+                              'Therefore, it is not warm.</span>'
+                      ];
+    var fstatements = [
+                       '<span class="math">It is sunny or warm.  It is sunny.  Therefore, it is not warm.</span>',
+                       '<span class="math">It is not sunny and warm.  Therefore, it is not warm.</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is not sunny. ' +
+                              'Therefore, it is not warm</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is warm. ' +
+                              'Therefore, it is sunny.</span>',
+                       '<span class="math">It is not sunny and warm.  ' +
+                              'Therefore, it is not sunny and it is not warm.</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is dry. ' +
+                              'Therefore, it is sunny.</span>',
+                       '<span class="math">If it is sunny then it is warm.  It is sunny. ' +
+                              'Therefore, it is dry.</span>'
+                      ];
+    var aVal;
+    var vOrF = randBoolean();
+    var alternate = randBoolean();
+    var whichv = listOfDistinctRandInts(2, 0, vstatements.length-1);
+    var whichf = listOfDistinctRandInts(2, 0, fstatements.length-1);
+    var vk = 0;
+    var fk = 0;
+    if (vOrF) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if ((vOrF && !alternate) || (!vOrF && alternate)) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if ((vOrF && alternate) || (!vOrF && !alternate)) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p class="math"><span class="qSpan"><span class="math">';
+    if (!vOrF) {
+         aVal = 'a';
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal = 'b';
+         qStr += fstatements[whichf[fk++]];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    var vstatements = [
+                        'Leeks are like scallions.  Both are in the onion family.  Both have a pungent taste. ' +
+                           'Both grow in the ground and photosynthesize using chlorophyll. Therefore, ' +
+                            'both are plants.',
+                        'The police and courts are designed to prosecute and punish those who break ' +
+                           'the law. It is a law that you must stop at red lights. Therefore, if ' +
+                           'you run a red light, the police and courts might prosecute and punish you.',
+                        'Something is representative if it is typical of the group from which it is drawn. ' +
+                           'Elements of random samples tend to be representative of the population from ' +
+                           'which they are drawn.  Therefore, elements of random samples tend to be ' +
+                           'typical of the population from which they are drawn.',
+                        'Adolph Hitler\'s Nazi dictatorship killed more than 12 million people. ' +
+                           'That is more than almost any other regime.  Therefore, the Nazi government ' +
+                           'was unusually effective at killing.',
+                        'In a state of starvation, the body metabolizes itself. Even heart muscle can ' +
+                           'be metabolized, which can lead to heart damage.  Therefore, while they can ' +
+                           'be effective for weight loss, starvation diets also pose the risk of heart ' +
+                           'damage.',
+                        'I saw a dog running away from a cat. Therefore, dogs can run.',
+                        'Four out of five dentists surveyed recommend sugarless gum for their ' +
+                           'patients who chew gum.  Therefore, there are at least four dentists who ' +
+                           'recommend sugarless gum for their patients who chew gum.',
+                        'Software companies have sold millions of copies of filtering software designed ' +
+                           'to prevent children from encountering pornography on the Internet.  Software ' +
+                           'companies do not continue to sell products that are not profitable. Therefore, ' +
+                           'filtering software is profitable.',
+                        'Surveys of parents who install &quot;parental control&quot; software to prevent their ' +
+                           'children from encountering pornography on the Internet generally find that most ' +
+                           'respondents are satisfied with the software.  Therefore, ' +
+                           'some respondents report that they are satisfied with &quot;parental ' +
+                           'control&quot; software.',
+                        'Paleoclimate data suggests that there have been large changes in Earth\'s climate ' +
+                           'many times in the past, including ice ages and warming spells long before ' +
+                           'human civilization. Changes in climate since the industrial revolution are ' +
+                           'small compared with ice ages.  Therefore, the magnitude of global warming ' +
+                           'does not by itself provide evidence that industrialization and ' +
+                           'the burning of fossil fuels are causing the polar ice caps to melt.',
+                        'Lung cancer rates for people who live near power lines are indistinguishable from ' +
+                           'lung cancer rates for people who live far from power lines.  Therefore, if ' +
+                           'living near power lines increases the risk of lung cancer, it does not ' +
+                           'increase the risk by much.',
+                        'I have $2 with me.  If I spend it on coffee, I won\'t have money left for food. ' +
+                           'I won\'t have money left for bus fare.  I won\'t have money left for a newspaper. ' +
+                           'I won\'t have money left for candy.',
+                        'If you don\' brush your teeth, you will get cavities.  Therefore, if you don\'t want ' +
+                           'cavities, you should brush your teeth.'
+                      ];
+    var fstatements = [
+                        ['Life is like an onion.  Both have many layers.  Both can make you cry. ' +
+                           'Onions are good on hamburgers.  Therefore, life is good on hamburgers. ' +
+                           'Ants live on hamburgers.  Therefore, ants have a good life.',
+                         'weak analogy and equivocation.',[20,6]],
+                        ['The police and courts are designed to prosecute and punish those who break ' +
+                           'the law. Gravity is a law. Therefore, if you break the law of gravity, ' +
+                           'the police and courts might prosecute and punish you.',
+                         'equivocation.',[6]],
+                        ['Something is representative if it is typical of the group from which it is drawn. ' +
+                           'Members of congress are representatives of their states.  Therefore, members ' +
+                           'of congress from California are typical Californians.',
+                         'equivocation.',[6]],
+                        ['Adolph Hitler\'s Nazi dictatorship killed more than 12 million people. ' +
+                           'The Nazi government advocated eugenics.  Therefore, eugenics ' +
+                           'programs should not be pursued.',
+                         'personal attack, guilt by association.',[8,14]],
+                        ['The only effective diet is a starvation diet.  If you eat anything at all, ' +
+                           'you will be tempted to eat more.  Then more.  Then even more.  Eventually, ' +
+                           'you will eat so much that you gain back any weight you lost.  Therefore, ' +
+                           'starvation diets are the best way to control your weight.',
+                         'slippery slope.',[17]],
+                        ['I saw a dog running away from a cat. Therefore, dogs are afraid of cats.',
+                         'hasty generalization, non sequitur of evidence, questionable cause',
+                           [9,15]],
+                        ['Four out of five dentists surveyed recommend sugarless gum for their ' +
+                           'patients who chew gum.  Therefore, sugarless gum is better for your teeth than ' +
+                           'regular gum.',
+                         'non sequitur of relevance, non sequitur of evidence, inappropriate appeal to authority.',
+                            [10]],
+                        ['Software companies have sold millions of copies of filtering software designed ' +
+                           'to prevent children from encountering pornography on the Internet.  Therefore, ' +
+                           'filtering software is effective at preventing children from encountering ' +
+                           'pornography on the Internet.',
+                         'non sequitur of relevance, bandwagon; less clear-cut: inappropriate appeal to ' +
+                           'authority, hasty generalization.',[4,9,10]],
+                        ['Surveys of parents who install &quot;parental control&quot; software to prevent their ' +
+                           'children from encountering pornography on the Internet generally find that most ' +
+                           'respondents are satisfied with the software.  Therefore, ' +
+                           '&quot;parental control&quot; software is effective.',
+                         'non sequitur of evidence, non sequitur of relevance, bandwagon, hasty generalization, ' +
+                           'inappropriate appeal to authority, red herring.',[4,9,10,16]],
+                        ['Google is by far the most popular search engine.  Therefore, it is the best ' +
+                           'search engine.',
+                         'non sequitur of relevance, bandwagon.',[4]],
+                        ['More people use google than any other search engine.  Therefore, it is ' +
+                           'the most popular search engine.',
+                         'begs the question.', [5]],
+                        ['Some NASA scientists are concerned about global warming.  But other NASA scientists ' +
+                           'helped leave junk in space, and rocket exhaust could damage the ozone layer. ' +
+                           'Therefore, global warming is not a legitimate concern.',
+                         'look who\'s talking, guilt by association', [13,8]],
+                        ['The evidence linking global warming to human activity&mdash;such as burning ' +
+                           'fossil fuels&mdash;is weak.  Therefore, human activity does not cause global ' +
+                           'warming.',
+                         'appeal to ignorance.',[1]],
+                        ['Either global warming is caused by burning fossil fuel or it is caused by a rapid, ' +
+                           'drastic change in Earth\'s orbit or in solar radiation.  Careful astronomical ' +
+                           'and geophysical observations show that changes in Earth\'s orbit and in solar ' +
+                           'radiation have been small and gradual for hundreds of millions of years. ' +
+                           'Therefore, global warming is caused by burning fossil fuel.',
+                         'false dichotomy.', [7]],
+                        ['Global average temperature has been increasing as the burning of fossil fuels has ' +
+                           'increased.  Therefore, burning fossil fuels causes global warming.',
+                         'cum hoc ergo propter hoc, questionable cause.', [15]],
+                        ['Power lines produce magnetic fields.  There is no scientific evidence that the ' +
+                           'magnetic fields of power lines cannot cause cancer. Therefore, power lines ' +
+                           'pose a health hazard.',
+                         'appeal to ignorance.', [1]],
+                        ['If you don\' brush your teeth, I will kick your teeth in.  Therefore, you should ' +
+                           'brush your teeth.',
+                         'appeal to force (<span class="termOfArt"><em>ad baculum</em></span>).', [0]],
+                        ['Everybody brushes his or her teeth.  Therefore, you should ' +
+                           'brush your teeth.',
+                         'bandwagon argument.', [4]],
+                        ['I have $2 in my pocket.  If I spend it on coffee, I won\'t have money left for bus ' +
+                           'fare.  If I don\'t have money for bus fare, I will get stuck downtown. ' +
+                           'If I get stuck downtown late at night, I will get mugged. ' +
+                           'If I get mugged, I will get beaten up. If I get beaten up, I will be permanently ' +
+                           'injured or possibly killed.  Therefore, I should not spend my money on coffee.',
+                          'slippery slope.', [17]]
+                      ];
+    var iOpt = [
+                'appeal to force',        // 1
+                'appeal to ignorance',
+                'appeal to pity',
+                'attacking the motive',
+                'bandwagon argument',     // 5
+                'begs the question',
+                'equivocation',
+                'false dichotomy',
+                'guilt by association',
+                'hasty generalization',     // 10
+                'inappropriate appeal to authority',
+                'inconsistency',
+                'loaded question',
+                'look who\'s talking',
+                'personal attack',      // 15
+                'questionable cause',
+                'red herring',
+                'slippery slope',
+                'straw man',
+                'two wrongs make a right',   // 20
+                'weak analogy'
+               ];
+    var opt1 = ['no informal fallacy','one or more informal fallacies'];
+    var rawOpt = iOpt;
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt2 = optPerm[0];
+    opt2[opt2.length] = 'none of the above';
+    var vOrF = randBoolean();
+    var alternate = randBoolean();
+    var aVal1;
+    var aVal2;
+    var whichv = listOfDistinctRandInts(2, 0, vstatements.length-1);
+    var whichf = listOfDistinctRandInts(2, 0, fstatements.length-1);
+    var vk = 0;
+    var fk = 0;
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    if (vOrF) {
+         aVal1 = 'a';
+         aVal2 = alphabet[opt2.length-1];
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal1 = 'b';
+         aVal2 = '';
+         for (var i = 0; i < fstatements[whichf[fk]][2].length; i++) {
+              aVal2 += alphabet[optPerm[1][fstatements[whichf[fk]][2][i]]] + '|';
+         }
+         aVal2 = aVal2.substr(0, aVal2.length-1);
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt1,aVal1);
+    qStr = '</p><p><span class="qSpan">Which of the following informal fallacies does the argument commit?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true, qCtr++, opt2, aVal2);
+    document.writeln('</p><p>');
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    if ( (!vOrF && alternate) || (vOrF && !alternate)) {
+         aVal1 = 'a';
+         aVal2 = alphabet[opt2.length-1];
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal1 = 'b';
+         aVal2 = '';
+         for (var i = 0; i < fstatements[whichf[fk]][2].length; i++) {
+              aVal2 += alphabet[optPerm[1][fstatements[whichf[fk]][2][i]]] + '|';
+         }
+         aVal2 = aVal2.substr(0, aVal2.length-1);
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt1,aVal1);
+    qStr = '</p><p><span class="qSpan">Which of the following informal fallacies does the argument commit?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true, qCtr++, opt2, aVal2);
+    document.writeln('</p><p>');
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    if ( (vOrF && alternate) || (!vOrF && !alternate)) {
+         aVal1 = 'a';
+         aVal2 = alphabet[opt2.length-1];
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal1 = 'b';
+         aVal2 = '';
+         for (var i = 0; i < fstatements[whichf[fk]][2].length; i++) {
+              aVal2 += alphabet[optPerm[1][fstatements[whichf[fk]][2][i]]] + '|';
+         }
+         aVal2 = aVal2.substr(0, aVal2.length-1);
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt1,aVal1);
+    qStr = '</p><p><span class="qSpan">Which of the following informal fallacies does the argument commit?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true, qCtr++, opt2, aVal2);
+    document.writeln('</p><p>');
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    if (!vOrF) {
+         aVal1 = 'a';
+         aVal2 = alphabet[opt2.length-1];
+         qStr += vstatements[whichv[vk++]];
+    } else {
+         aVal1 = 'b';
+         aVal2 = '';
+         for (var i = 0; i < fstatements[whichf[fk]][2].length; i++) {
+              aVal2 += alphabet[optPerm[1][fstatements[whichf[fk]][2][i]]] + '|';
+         }
+         aVal2 = aVal2.substr(0, aVal2.length-1);
+         qStr += fstatements[whichf[fk++]][0];
+    }
+    qStr +=  '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt1,aVal1);
+    qStr = '</p><p><span class="qSpan">Which of the following informal fallacies does the argument commit?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true, qCtr++, opt2, aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+
+</html>

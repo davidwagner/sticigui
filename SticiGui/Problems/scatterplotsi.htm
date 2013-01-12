@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "scatterplots";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    theStates = [ "Alabama","Alaska","Arizona","Arkansas",
+                        "California", "Colorado", "Connecticut", "Delaware",
+                        "District of Columbia","Florida", "Georgia", "Hawaii",
+                        "Idaho","Illinois","Indiana","Iowa","Kansas",
+                        "Kentucky","Louisiana","Maine","Maryland","Massachusetts",
+                        "Michigan","Minnesota","Mississippi","Missouri",
+                        "Montana","Nebraska","Nevada","New Hampshire",
+                        "New Jersey","New Mexico","New York","North Carolina",
+                        "North Dakota","Ohio","Oklahoma","Oregon",
+                        "Pennsylvania","Rhode Island","South Carolina","South Dakota",
+                        "Tennessee","Texas","Utah","Vermont","Virginia",
+                        "Washington","West Virginia","Wisconsin","Wyoming"
+                    ];
+// -->
+</script>
+
+<h2>Multivariate Data and Scatterplots</h2>
+
+<div class="indent">
+<h3>
+    Part I
+</h3>
+<p class="inline">
+   In the frame below is a scatterplot of some 1990
+   <a href="http://www.census.gov" target="bookWin">U.S. Census</a> data. The variables are, for
+  each of the 50 states and the District of Columbia, the number of people of various races,
+  and the total state populations, all divided by 1000. The Census Bureau uses the following
+  five racial categories:
+</p>
+</div>
+
+<div align="center"><center><table class="dataTable">
+<caption>Abbreviations of census racial categories</caption>
+    <tr>
+      <th id="row0" scope="row">Census category</th>
+      <th id="col1">White</th>
+      <th id="col2">Black</th>
+      <th id="col3">American Indian, Eskimo, and Aleut</th>
+      <th id="col4">Asian and Pacific Islander</th>
+      <td id="col5">Other Race</th>
+    </tr>
+    <tr>
+      <th id="row1" scope="row">Scatterplot abbreviation</th>
+      <td headers="col1,row1">White</td>
+      <td headers="col2,row1">Black</td>
+      <td headers="col3,row1">Native</td>
+      <td headers="col4,row1">Asian,Pac Isl</td>
+      <td headers="col5,row1">Other</td>
+    </tr>
+  </table>
+  </center></div><p>In this assignment, take the word &quot;state&quot; to mean any of the
+  50 states or the District of Columbia. The scatterplot also shows the variable <em>Total</em>,
+  the total population of each state. All the values in the scatterplot are in 1000s of
+  people. </p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which state has the largest population? </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,theStates,"5");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which state has the smallest population?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,theStates,"51");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which state has the largest number of ' +
+               'American Indians, Eskimos, and Aleuts?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,theStates,"37");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which state has the smallest number of ' +
+               'Blacks?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,theStates,"46");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the average number of Whites among the 50 states ' +
+               'and D.C.?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(3915410,50));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Look at the scatterplot of Asians and Pacific Islanders versus Blacks. ' +
+               '<span class="qSpan">There is an outlier, namely,</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,theStates,"5");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Neglecting that state, the association between ' +
+               'the number of Asians and Pacific Islanders and the number of Blacks ' +
+               'is</span>';
+    document.writeln(qStr);
+    var opt=["strongly negative","weak","strongly positive"];
+    writeSelectExercise(false,qCtr++,opt,"b");
+    document.writeln('</p>');
+// -->
+</script>
+</span>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the population of Blacks in the state ' +
+               'with the highest population of Asians and Pacific Islanders? </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(2208801,10));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the range of total population among the states?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(29306433,10));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the IQR of Asian and Pacific Islander ' +
+               'populations among the states?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(92453,5));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'There is a histogram below the scatterplot in the frame below. ' +
+               'Look at the distribution of Total state populations. ' +
+               '<span class="qSpan">The distribution of total state populations is ';
+    document.writeln(qStr);
+    var opt=["Skewed to the left","Symmetric","Skewed to the right"];
+    writeSelectExercise(false,qCtr++,opt,"c");
+    qStr = ' because there are many states with relatively ';
+    document.writeln(qStr);
+    var opt=["small","large"];
+    writeSelectExercise(false,qCtr++,opt,"a");
+    qStr = ' populations and a small number of states with much ';
+    document.writeln(qStr);
+    var opt=["smaller","larger"];
+    writeSelectExercise(false,qCtr++,opt,"b");
+    qStr = 'populations.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which shows more variability: Total population or ' +
+               'White population?</span>';
+    document.writeln(qStr);
+    var opt=["Total population","White population"];
+    writeSelectExercise(false,qCtr++,opt,"a");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The association between White population and ' +
+               'Total population is</span>';
+    document.writeln(qStr);
+    var opt=["strong and negative","weak","strong and positive"];
+    writeSelectExercise(false,qCtr++,opt,"c");
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The scatterplot of Other against Total shows a ';
+    document.writeln(qStr);
+    var opt=["linear","nonlinear"];
+    writeSelectExercise(false,qCtr++,opt,"b");
+    qStr = 'pattern.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The scatterplot of Native against Total shows a ';
+    document.writeln(qStr);
+    var opt=["homoscedastic","heteroscedastic"];
+    writeSelectExercise(false,qCtr++,opt,"b"); 
+    qStr = 'pattern.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part II
+</h3>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+// set up hetero/homo and linear/nonlinear data, outlier...; plot; ask questions.
+    var parms = new Array(4);
+    var examplePoints = 100;
+    parms[0] = [["polynomial", .5, rand.next(), 1], 1 + 7*Math.floor(rand.next()+0.5),
+        1 + 4*Math.floor(rand.next()+0.5)];
+    parms[1] = [["polynomial", rand.next() - .5, 1], 1 + 7*Math.floor(rand.next()+0.5),
+        1 + 4*Math.floor(rand.next()+0.5) ];
+    parms[2] = [["polynomial", .5, rand.next(), rand.next(), 1], 1 + 7*Math.floor(rand.next()+0.5),
+        1 + 4*Math.floor(rand.next()+0.5)];
+    var thePermutation = randPermutation([0,1,2]);
+    var data1 = fakeBivariateData(examplePoints,parms[thePermutation[0]][0],
+        parms[thePermutation[0]][1],parms[thePermutation[0]][2]);
+    var data2 = fakeBivariateData(examplePoints,parms[thePermutation[1]][0],
+        parms[thePermutation[1]][1],parms[thePermutation[1]][2]);
+    var data3 = fakeBivariateData(examplePoints,parms[thePermutation[2]][0],
+        parms[thePermutation[2]][1],parms[thePermutation[2]][2]);
+    var opt = ["linear","nonlinear","homoscedastic","heteroscedastic","weak or no association",
+        "strong association"];
+    var qStr = '<span class="qSpan">Select those attributes that describe the following plot:</span>';
+    document.writeln(qStr);
+    var k;
+    if (thePermutation[0] == 1) {
+        k = "a";
+    } else {
+        k = "b";
+    }
+    if (parms[thePermutation[0]][1] > 1) {
+        k += "&d";
+    } else {
+        k += "&c";
+    }
+    if (parms[thePermutation[0]][2] < 2) {
+        k +="&e";
+    } else { 
+        k+= "&f";
+    }
+    writeSelectExercise(true,qCtr++,opt,k);
+    document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600" height="320" name="q1applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Faux Dataset 1">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  appNum = document.applets.length - 1;
+  sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data1[0].join()' +
+                    ', data1[1].join());' +
+                    'document.applets[' + appNum.toString() + '].showPlot();';
+  // -->
+</script>
+</p>
+  </center></div>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Select those attributes that describe the following plot:</span>';
+    document.writeln(qStr);
+    var k;
+    if (thePermutation[1] == 1) {
+         k = "a";
+    } else {
+         k = "b";
+    }
+    if (parms[thePermutation[1]][1] > 1) {
+         k += "&d";
+    } else {
+         k += "&c";
+    }
+    if (parms[thePermutation[1]][2] < 2) {
+         k +="&e";
+    } else { 
+         k+= "&f";
+    }
+    writeSelectExercise(true,qCtr++,opt,k);
+    document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600" height="320" name="q2applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Faux Dataset 2">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  appNum = document.applets.length - 1;
+  sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data2[0].join()' +
+                    ', data2[1].join());' +
+                    'document.applets[' + appNum.toString() + '].showPlot();';
+  // -->
+</script>
+</p>
+  </center></div>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Select those attributes that describe the following plot:</span>';
+    document.writeln(qStr);
+    var k;
+    if (thePermutation[2] == 1) {
+         k = "a";
+    } else {
+         k = "b";
+    }
+    if (parms[thePermutation[2]][1] > 1) {
+         k += "&d";
+    } else {
+         k += "&c";
+    }
+    if (parms[thePermutation[2]][2] < 2) {
+         k +="&e";
+    } else {
+         k+= "&f";
+    }
+    writeSelectExercise(true,qCtr++,opt,k);
+    document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600" height="320" name="q3applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Faux Dataset 3">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  appNum = document.applets.length - 1;
+  sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data3[0].join()' +
+                    ', data3[1].join());' +
+                    'document.applets[' + appNum.toString() + '].showPlot();';
+  // -->
+</script>
+</p>
+</div>
+</div>
+
+
+<applet code="Bivariate.class" codebase="../../Java/" align="middle" width="0"
+   height="0" archive="PbsGui.zip">
+  <param name="addPoints" value="false">
+  <param name="files" value="./Data/p6-1990.dat">
+  <param name="graphAveButton" value="false">
+  <param name="regressButtons" value="false">
+  <param name="sdLineButton" value="false">
+  <param name="showNormal" value="false">
+  <param name="showR" value="false">
+</applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var scatAppletNum = document.applets.length - 1;
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "7 January 2009 12:07 PST";
+	// copyright 1997-2009 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "set26";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<div class="indent">
+<h2>
+    The Method of Comparison, Experiments, and Observational Studies
+</h2>
+</div>
+
+<div class="indent">
+<p class="inline">
+<h3>
+    Surgery for Psychiatric Illness
+</h3>
+
+<p class="inline">
+    The next few questions refer to a research article
+<script language="JavaScript1.2"><!--
+    var fStr = ' W.J. Spangler, B.S., G.R. Cosgrove, M.D., H.T. Ballantine Jr., M.D., ' +
+               'E.H. Cassem, M.D., S.L. Rauch, M.D., ' +
+               'A. Nierenberg, M.D., and B.H. Price, M.D., 1996. Magnetic Resonance ' +
+               'Image-guided Cingulotomy for Intractable Psychiatric Disease, ' +
+               '<em>Neurosurgery</em>, <em>38</em>, 1071-1078.  ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    that reports on 34 patients who received brain surgery to treat psychiatric problems.
+    The 34 patients had MRI-guided cingulotomies at
+    Massachusetts General Hospital (MGH) between May, 1991, and February, 1995, to treat
+    refractory psychiatric disease.
+</p>
+</div>
+
+<p>
+    The patients (18 male, 16 female, ages 16-71, mean age 37) all had been referred by
+    their treating psychiatrists.
+    Their cases were reviewed by the MGH Cingulotomy Assessment Committee
+    (comprised principally of a subset of the authors) to become candidates for the procedure.
+    The committee had to agree unanimously that the patient should undergo the procedure, and
+    the patient had to give his or her informed consent.
+    Prerequisites for the committee to
+    favor treatment included patient's resistance to pharmacotherapy, psychotherapy, behavior
+    therapy, and electro-convulsive therapy (when applicable), and the symptoms had to be
+    severe and unremitting for at least one year.
+    All patients had a documented DSM III-R
+    disease that interfered significantly with normal functioning (<i>e.g.</i>., major
+    affective disorder with unipolar depression (10 patients), or bipolar depression (5
+    patients), undiagnosible developmental disorders (1 patient), and obsessive-compulsive
+    disorder with major depression (15 patients)).
+    For some patients whose condition failed to
+    improve 6 months after surgery, additional cingulotomies were performed.
+</p>
+
+<p>
+    The cingulotomy procedure is to insert a pair of electrodes into holes drilled in the skull
+    just above the hairline, to a pre-determined position in the brain (guided by MRI).
+    Radio-frequency electricity is passed through the electrodes, to raise the temperature in
+    the part of the brain between the electrodes to 85&deg;C
+    (185&deg;F) for 90 seconds, essentially cooking part of the brain between the
+    electrodes.
+    (This causes what is called a radio-frequency thermocoagulation lesion).
+    The basic procedure was changed in 1993 to include a larger
+    part of the brain.
+</p>
+
+<p>
+    Of the 34 subjects, 31 were available for follow-up assessment of some sort; of the 31,
+    two had committed suicide. Follow-up assessment was done two ways: either the referring
+    psychiatrist or the treating psychiatrist completed two questionnaires---the Clinical
+    Global Improvement Scale, and the Current, Global, Psychiatric-Social Status Scale---or,
+    if the patient was no longer seeing a psychiatrist, the most recent correspondence with
+    the patient was used to assign ratings. I could not find a reference to the number of
+    patients who were in each of these categories. On the basis of these ratings, each patient
+    was classified as a &quot;responder&quot; (R), a &quot;possible responder&quot; (P), or a
+    &quot;non-responder&quot; (N).
+</p>
+
+<p>
+    Fourteen of the patients who had not responded six months after the initial procedure
+    had multiple procedures.
+    The categorized responses were as follows:
+</p>
+
+<div align="center">
+<center>
+    <table border="1" bgcolor="#FFFFFF" bordercolor="#000000" cellspacing="2" callpadding="2">
+        <tr>
+          <td>procedure</td>
+          <td align="center">%R</td>
+          <td align="center">%P</td>
+          <td align="center">%N</td>
+        </tr>
+        <tr>
+          <td>single cingulotomy, procedure 1 (11)</td>
+          <td align="right">33</td>
+          <td align="right">33</td>
+          <td align="right">33</td>
+        </tr>
+        <tr>
+          <td>single cingulotomy, procedure 2 (23)</td>
+          <td align="right">38</td>
+          <td align="right">0</td>
+          <td align="right">62</td>
+        </tr>
+        <tr>
+          <td>multiple procedures (14 of initial non-responders)</td>
+          <td align="right">36</td>
+          <td align="right">36</td>
+          <td align="right">28</td>
+        </tr>
+        <tr>
+          <td>overall (31 patients, single and multiple) </td>
+          <td align="right">38</td>
+          <td align="right">23</td>
+          <td align="right">38</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The article breaks down the responses further by type of mental illness.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div clas="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The cingulotomy research is</span>';
+    document.writeln(qStr);
+    var opt = ['an observational study.',
+               'an uncontrolled experiment.',
+               'a controlled experiment.',
+               'a controlled experiment with historical controls.',
+               'a randomized, controlled experiment.',
+               'a randomized, controlled, blind  experiment.',
+               'a randomized, controlled, double-blind experiment.'
+               ];
+    var aVal = alphabet[1];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following would one reasonably expect to ' +
+               'bias cingulotomy research?</span> (select all that apply)</p>';
+    document.writeln(qStr);
+    var opt = ['the placebo effect',
+               'the expectations/hopes of the surgeons and psychiatrists',
+               'self-selection',
+               'patients unavailable for followup of any kind',
+               'self-reporting followup for some patients, based on last correspondence',
+               'improvement in patients\'s mental health unrelated to the cingulotomy'
+              ];
+    var aVal = 'a&b&c&d&e&f';
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">This research uses the method of comparison.</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following ' +
+               'would be important to know to assess the effectiveness of an MRI-guided ' +
+               'cingulotomy for treating psychiatric disease?</span> ' +
+               '(select all that apply)</p><p>';
+    document.writeln(qStr);
+    var rawOpt = ['The overall fraction of psychiatric patients who recover from severe ' +
+                     'psychiatric symptoms that last a year or longer.',
+                  'The number of patients whose follow-up evaluations were based on letters ' +
+                      'from them, rather than assessments by a psychiatrist.',
+                  'Suicide rates among patients with severe psychiatric symptoms who do ' +
+                       'not get cingulotomies.',
+                  'The effect of a cingulotomy on people without mental illness.'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]] + '&' + alphabet[optPerm[1][1]] + '&' +
+        alphabet[optPerm[1][2]] ;
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'In the cingulotomy research, 38% of the 31 patients were classified as ' +
+               'responders.</p><p><span class="qSpan">An approximate 95% confidence interval ' +
+               'for the fraction of patients with severe psychiatric symptoms lasting a ' +
+               'year or longer who would respond to single or multiple cingulotomies is ' +
+               '</span></p><p>';
+    document.writeln(qStr);
+    var aVal = alphabet[4];
+    var opt = ['38% &plusmn; 2&times;31<sup>&frac12;</sup>&times;' +
+                    '(0.38&times;0.62)<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;(0.38&times;0.62)<sup>&frac12;</sup>/' +
+                    '31<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;31<sup>&frac12;</sup>&times;' +
+                    '(0.5&times;0.5)<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;(0.5&times;0.5)<sup>&frac12;</sup>/' +
+                    '31<sup>&frac12;</sup>.',
+               'cannot be determined from the information given.'
+               ];
+    writeRadioExercise(qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Alcohol and Heart Disease
+</h3>
+
+
+<p class="inline">
+    The next few questions refer to an hypothetical study of alcohol and heart disease.
+</p>
+</div>
+
+<p>
+    I wish to study the effect of daily consumption of small amounts of
+    alcohol (say, two glasses of wine) on the incidence of heart disease.
+    In many European countries, it is customary to drink wine with dinner,
+    while in most Islamic countries, it is not.
+    I therefore decide to compare
+    the average incidence of heart disease for several European countries in
+    which the average daily consumption of wine is two glasses, with the
+    incidence of heart disease in Saudi Arabia, where the consumption of
+    alcohol is negligible (it is a capital offense).
+    Consider the non-drinkers
+    to be the control group, and the drinkers to be the treatment group.
+    Suppose it turns out that the
+    incidence of heart disease is lower in Saudi Arabia.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Because individual drinking patterns vary, the ' +
+               'assignment of subjects to treatment and control is effectively random. ' +
+               '</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Because one\'s nationality is essnetially an ' +
+               'accident of birth, assignment of subjects to treatment and control is ' +
+               'effectively random.</span>';
+    document.writeln(qStr);
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Because the sample sizes are very large, I ' +
+               'should be able to detect even a small effect (a test will have good ' +
+               '&quot;power&quot; to detect that the null hypothesis is false if it is ' +
+               'false).</span>';
+    document.writeln(qStr);
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(qCtr++));
+    var qStr = '</p><p><span class="qSpan">Which best describes this scenario?</span></p>';
+    document.writeln(qStr);
+    var opt = ['observational study',
+               'uncontrolled experiment',
+               'experiment with historical controls',
+               'randomized, controlled experiment'
+              ];
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    &quot;The Patch&quot;
+</h3>
+
+<p class="inline">
+    This problem refers to an article
+<script language="JavaScript1.2"><!--
+    var fStr = 'Hurt, R.D., L.C. Dale, P.A. Fredrickson, C.C. Caldwell, G.A. Lee, ' +
+               'K.P. Offord, G.G. Lauger, Z. Marusic, L.W. Neese, and T.G. Lundberg, ' +
+               '1994. Nicotine patch therapy for smoking cessation combined ' +
+               'with physician advice and nurse follow-up, <em>Journal of the ' +
+               'American Medical Association</em>, <em>271</em>, 595&mdash;600. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    that studies the effectiveness of nicotine patches for quitting smoking.
+</p>
+</div>
+
+<p>
+    It is well known that smoking cigarettes is bad for you.
+    Many smokers try to quit, but quitting can be very difficult.
+    Nicotine patches are a popular medication prescribed by doctors
+    to help people quit smoking.
+    One of the objectives of the study described here was to determine how effective
+    a nicotine patch, combined with the National Cancer Institute program for
+    physician advice and nurse follow-up, is in helping people &quot;stay quit&quot;
+    for a year.
+</p>
+
+<div class="indent">
+<p class="inline">
+    The experimenters solicited volunteers; subjects were selected randomly
+    from the volunteers and screened physically and psychologically.
+    To be eligible for the study, a subject had to be between 20 and 65 years old,
+    had to have smoked at least 20 cigarettes per day for the last year,
+    had to have expired carbon monoxide (CO) levels
+    of 10 parts per million (10&nbsp;ppm) or more,
+<script language="JavaScript1.2"><!--
+    var fStr = 'Carbon monoxide is a chemical in cigarette smoke. Having CO in ' +
+               'exhalations (expired air) confirms that the subject is a smoker. ' +
+               'CO is a minor component of ordinary air, but it is a common combustion ' +
+               'product.  Hemoglobin, the oxygen-carrying compound in the blood, has ' +
+               'a strong affinity for CO; too much causes death by asphyxiation:  the ' +
+               'blood carries CO instead of the oxygen one needs to survive.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    had to want to stop smoking, had to be in reasonably good health
+    according to a doctor's examination (including blood chemistry, blood cell count,
+    cholesterol and triglyceride levels, urinalysis, and an electrocardiogram;
+    medical history was also checked to make sure that subjects did not have a
+    history of heart trouble or take medications that might have made the patch
+    inadvisable), could not have psychiatric disorder, could have no chemical
+    dependencies other than nicotine,
+    could not consume nicotine in any form other than cigarettes, and could not have
+    participated in previous nicotine patch studies.
+    The researchers enrolled 240 subjects after the screening.
+</p>
+</div>
+
+<p>
+    Those subjects were assigned at random either to receive a 22&nbsp;mg nicotine patch
+    (and physician's advice and nurse follow-up) --- the treatment group ---
+    or to receive a placebo patch
+    (and physician's advice and nurse follow-up) --- the control group.
+    One hundred twenty subjects were assigned to treatment and 120 were assigned to control.
+    Subjects wore patches for 8 weeks.
+</p>
+
+<p>
+    Nurse follow up was weekly, face-to-face for the first 8 weeks and by phone
+    thereafter.
+    Neither the subjects, the doctors, nor the nurses, knew which subjects
+    wore active patches and which wore placebo patches.
+</p>
+
+<p>
+    The study classified a subject as having quit smoking if:
+</p>
+
+<ol>
+    <li>
+        the subject reported that he or she had not smoked <em>at all</em>
+        since the last visit, and
+    </li>
+    <li>
+        the level of CO in the subject's expired air was 8&nbsp;ppm or less.
+    </li>
+</ol>
+
+<p>
+    Subjects with missing information or who dropped out of the
+    study for any reason were considered smokers.
+</p>
+
+<p>
+    Here are some characteristics of the two groups after random
+    assignment, but before the treatment began:
+</p>
+
+<div align="center"
+<center>
+    <table class="dataTable">
+    <caption>Characteristics of Treatment and Control Groups</caption>
+    <tr BGCOLOR="#33CCFF">
+        <td align="Center">Characteristic</td>
+        <td align="Center">Active Patch</td>
+        <td align="center">Placebo Patch</td>
+    </tr>
+    <tr>
+        <td align="center">% female</td>
+        <td align="right">52</td>
+        <td align="right">52</td>
+    </tr>
+    <tr>
+        <td align="center">% HS graduate or less</td>
+        <td align="right">46</td>
+        <td align="right">47</td>
+    </tr>
+    <tr>
+        <td align="Center">% employed</td>
+        <td align="right">85</td>
+        <td align="right">73</td>
+    </tr>
+    <tr>
+        <td align="center">% tried to quit previously</td>
+        <td align="right">89</td>
+        <td align="right">92</td>
+    </tr>
+    <tr>
+        <td align="center">% with other smokers in household</td>
+        <td align="right">43</td>
+        <td align="right">36</td>
+    </tr>
+    <tr>
+        <td align="center">% treated for depression previously</td>
+        <td align="right">8</td>
+        <td align="right">13</td>
+    </tr>
+    <tr>
+        <td align="center">mean age</td>
+        <td align="right">43</td>
+        <td align="right">44</td>
+    </tr>
+    <tr>
+        <td align="center">mean years smoking</td>
+        <td align="right">24</td>
+        <td align="right">26</td>
+    </tr>
+    <tr>
+        <td align="center">expired CO (ppm)</td>
+        <td align="right">28</td>
+        <td align="right">30</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The nicotine patch research was</span>';
+    document.writeln(qStr);
+    var rawOpt = ['an observational study',
+                  'an uncontrolled experiment',
+                  'a controlled experiment with historical controls',
+                  'a randomized controlled experiment without blinds',
+                  'a randomized, controlled blind experiment',
+                  'a randomized, controlled, double-blind experiment'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][5]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The research sought to determine whether</span> ' +
+               '(select all that apply)</p> ';
+    document.writeln(qStr);
+    var rawOpt = ['physician\'s advice and nurse follow up affect quitting rates',
+                  'the placebo patch affects quitting rates',
+                  'the nicotine patch affects quitting rates',
+                  'baseline characteristics affect quitting rates',
+                  'expired CO level affects quitting rates'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The best reason for providing physician ' +
+               'counseling and nurse follow up to both the treatment and control groups is ' +
+               '</span></p>';
+    document.writeln(qStr);
+    var rawOpt = ['because it helps them quit smoking',
+                  'because people outside the study who use the patch would get ' +
+                        'physician counseling and nurse follow up',
+                  'it would be unethical not to',
+                  'so the doctors and nurses can meet the subjects'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The most plausible reason for including the expired air ' +
+               'CO test among the criteria is </span></p>';
+    document.writeln(qStr);
+    var rawOpt = ['to be sure subjects who said they had quit indeed had quit',
+                  'to make sure the randomization succeeded',
+                  'to determine whether subjects were in the treatment or control group',
+                  'to study the effect of expired CO on quitting'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    In the first eight weeks, 44 subjects dropped out of the study,
+    19 from the treatment group and 25 from the control group.
+    Some dropped out because of adverse reactions to the patch (6 treatment, 0 control)
+    or adverse events related the patch (1 treatment, 3 control).
+    Twenty-four of the subjects (9 treatment, 13 control) did not comply with the
+    visit requirements, and were dropped from the study; one treated subject was
+    dropped because she got pregnant; and one control subject was dropped for using
+    nicotine gum.
+    I could not find information in the paper on the drop out rates after the eighth week
+    (the patch phase of the study).
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the cessation results as of week 8. ' +
+               '<span class="qSpan">Counting the drop-outs as smokers </span></p>';
+    document.writeln(qStr);
+    var rawOpt = ['probably biases the results against the patch',
+                  'probably biases the results in favor of the patch',
+                  'does not bias the results for or against the patch'
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var empl = roundToDig(120*(0.85 + 0.73),0);
+    var expect = empl/2.0;
+    var qStr = 'The background characteristics of the treatment and control groups ' +
+               'are not identical. Most of the numbers seem pretty close, but it is ' +
+               'possible that something went wrong with the randomization. Consider ' +
+               'testing the hypothesis that the randomization went awry, using Fisher\'s ' +
+               'exact test for the equality of two percentages.  The characteristic with ' +
+               'the largest difference is the percentage who were employed: 85% for ' +
+               'the group assigned to treatment and 73% for the control group.  Suppose we ' +
+               'look only at this characteristic.  The total number of employed subjects is ' +
+               '120&times;0.85&nbsp;+&nbsp;120&times;0.73&nbsp;=&nbsp;190. Under the null ' +
+               'hypothesis, the number of employed persons in the control group is like a ' +
+               'simple random sample of 120 individuals from a population of 240 individuals ' +
+               'of whom 190 are employed.  That has an hypergeometric ' +
+               'distribution with parameters <em>N</em>&nbsp;=&nbsp;240, ' +
+               '<em>G</em>&nbsp;=&nbsp;190, and <em>n</em>&nbsp;=&nbsp;120. The expected ' +
+               'number of employed in the control group is 120&times;(190/240&nbsp;=&nbsp;' +
+               '95; the observed number is 120&nbsp;&times;&nbsp;0.85&nbsp;=&nbsp;102, which ' +
+               'is higher than the expected value by 7.  Under the null hypothesis, the ' +
+               'chance that the observed number of employed persons in the treatment group ' +
+               'would differ from the expected value by seven or more is about 3.8%; this is ' +
+               'the <em>P</em>-value for this test.  However, we decided to look at this ' +
+               'variable (employed) because it was the most extreme difference among the ' +
+               'percentages, so we should not put much faith in the <em>P</em>-value: this ' +
+               'is an example of data mining.  A <em>P</em>-value that took into account the ' +
+               'fact that we &quot;snooped&quot; at the data before deciding which hypothesis ' +
+               'to test would be somewhat larger.  Because we do not know the dependence ' +
+               'among the baseline variables (and we do not have the original data), it is ' +
+               'not clear how to adjust the <em>P</em>-value.</p>' +
+               '<p><span class="qSpan">Bearing this in mind, is the difference between the ' +
+               'fraction of employed persons in the treatment group and the fraction of ' +
+               'employed persons in the control group strong evidence that something went ' +
+               'wrong in the randomization?</span></p>';
+    document.writeln(qStr);
+    var opt = ['no',
+               'yes'
+              ];
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    Here are the results:
+</p>
+
+<div align="center">
+<center>
+    <table BORDER="2">
+        <caption>Percent nonsmoking since last visit.</caption>
+        <tr BGCOLOR="#33CCFF">
+            <td align="center">Time after treatment</td>
+            <td align="center">Active Patch</td>
+            <td align="center">Placebo Patch</td>
+        </tr>
+        <tr>
+            <td align="center">8-week</td>
+            <td align="right">47</td>
+            <td align="right">20</td>
+        </tr>
+        <tr>
+            <td align="center">3-month</td>
+            <td align="right">37</td>
+            <td align="right">18</td>
+        </tr>
+        <tr>
+            <td align="center">6-month</td>
+            <td align="right">30</td>
+            <td align="right">16</td>
+        </tr>
+        <tr>
+            <td align="center">9-month</td>
+            <td align="right">32</td>
+            <td align="right">17</td>
+        </tr>
+        <tr>
+            <td align="center">12-month</td>
+            <td align="right">28</td>
+            <td align="right">14</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which conclusion is most defensible on the basis of ' +
+               'this study as reported?</span></p>';
+    document.writeln(qStr);
+    var rawOpt = ['the nicotine patch with counseling is more effective than counseling alone ' +
+                        'in helping smokers quit, measured at the eighth week',
+                  'combining the nicotine patch and counseling did not affect quitting rates ' +
+                        'significantly',
+                  'the randomization failed, so one cannot draw scientific conclusions ' +
+                        'about the effect of the patch on quitting',
+                  'the nicotine patch is effective in helping smokers quit',
+                  'the nicotine patch should be prescribed routinely to help smokers quit'
+                  ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<div class="indent">
+<h3>
+    Confounding
+</h3>
+</div>
+
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var foodPct = listOfDistinctRandInts(2, 2, 6).sort(numberLessThan);
+    var foodPct = vMult(10, foodPct);
+    var conB = 0.1*listOfRandInts(1, 1, 4)[0];
+    var conH = 0.1*listOfRandInts(1, 6, 9)[0];
+    bartPct = roundToDig((1.0-conB)*foodPct[0] + conB*foodPct[1], 0);
+    homerPct = roundToDig((1.0-conH)*foodPct[0] + conH*foodPct[1], 0);
+    var qStr = 'In the popular TV cartoon series, &quot;The Simpsons,&quot; the Simpson ' +
+               'family has five members: Homer, Marge, Bart, Lisa, and Maggie.  Let\'s ' +
+               'involve the Simpsons in Simpson\'s Paradox. </p><p>' +
+               'Consider Homer and Bart\'s consumption of potato ' +
+               'chips and donuts. Suppose that Marge is in the room ' + foodPct[0].toString() +
+               '% of the time that Bart is eating chips and ' + foodPct[1].toString() +
+               '% of the time that Bart is eating donuts.  Similarly, suppose that Marge is ' +
+               'in the room ' + foodPct[0].toString() +
+               '% of the time that Homer is eating chips and ' + foodPct[1].toString() +
+               '% of the time that Homer is eating donuts; thus she catches them eating each ' +
+               'kind of snack equally often.  Nonetheless, Marge is in the ' +
+               'room ' + bartPct.toString() + '% of the time that Bart is eating either ' +
+               'donuts or chips, and Marge is in the room ' + homerPct.toString() +
+               '% of the time that Homer is eating either donuts or chips.</p>' +
+               '<p><span class="qSpan">What fraction of the time that Bart eats either ' +
+               'chips or donuts does he eat donuts?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(conB) );
+    var qStr = '</p><p><span class="qSpan">What fraction of the time that Homer eats either ' +
+               'chips or donuts does he eat donuts?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(conH) );
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.2"><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

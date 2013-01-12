@@ -1,0 +1,838 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference" pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 14:48 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "scatterplots";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>
+    Multivariate Data and Scatterplots
+</h1>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=3015&end=3093" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    Many sets of data involve measurements of a variety of variables for one set of individuals.
+    The individuals might be people, places, objects, times, etc.
+    For instance, we might measure the heights and weights of a particular set of people.
+    Or we might measure the weights of a particular set of people, before and after they increase their daily exercise.
+    Or we might measure the SAT scores of a group of students before and after they take a preparatory course.
+    Or we might measure the viral load of a group of AIDS patients before and after taking a drug regimen.
+    These are examples of <span class="termOfArt">bivariate data</span>, because there are two measurements per individual.
+    More generally, <span class="termOfArt">multivariate data</span> involves making two or more measurements per individual.
+    Scatterplots are a way to visualize multivariate data to help classify and understand the relationships among the
+    variables.
+</p>
+
+<h2>
+    <a id="multivariate"></a>
+    Multivariate Data
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=3093&end=3201" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+  So far, we have been looking at one <a class="glossRef" href="gloss.htm#variable">variable</a> at a time.
+  We now start to look at the relationship among two or more
+  <a class="glossRef" href="gloss.htm#variable">variables</a>, each measured for the same collection of
+  individuals.
+  An &quot;individual&quot; is not necessarily a person: it might be an
+  automobile, a place, a family, a university, <em>etc.</em>
+  For example, the two variables might be the heights of a man and of his son,
+  in which case the &quot;individual&quot; is the pair (father, son).
+  Such pairs of measurements are called
+  <a class="glossRef" href="gloss.htm#bivariate">bivariate data</a>.
+  Observations of two or more variables per individual in
+  general are called <a class="glossRef" href="gloss.htm#multivariate">multivariate data</a>.
+</p>
+
+<p>
+  We will use the GMAT data as an example of a
+  <a class="glossRef" href="gloss.htm#multivariate">multivariate</a> data set.
+  These data were made available by Howard Wainer of the Educational Testing Service.
+  The data comprise 5 variables measured
+  for each of 913 individuals, who were then students in their second year of an MBA program
+  at five good business schools.
+  The variables are the undergraduate GPA, verbal
+  and quantitative GMAT scores, first-year MBA GPA, and an integer indicating which of the
+  five business schools the student attended. I do not know the year these data were collected.
+  The applet in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    allows you to display a histogram of each of those variables in turn:
+</p>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Histograms of the GMAT data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+        align="baseline" width="640" height="380" archive="PbsGui.zip">
+    <param name="binControl" value="false">
+    <param name="bins" value="15">
+    <param name="files" value="./Data/gmat.dat">
+    <param name="nFiles" value="1">
+    <param name="univariateStats" value="true">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+
+<p>
+    The drop-down menu at the top of
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    (which should show &quot;Verbal GMAT&quot; when you first visit the page) lets you select which
+    variable in the data set is displayed in the histogram.
+    The List data button opens a table of the values of the 5 variables
+    for all 913 students.
+    The &quot;Mean&quot; and &quot;SD&quot; are the mean and SD of the variable
+    currently displayed.
+</p>
+
+<p>
+  By looking at these five histograms, we can learn about the distribution
+  of each of the variables.
+  For example, both the verbal and quantitative GMAT
+  scores have means of about 35 and SDs a bit over 6 points.
+  That is, on the average, these students scored about 35 points on the verbal
+  GMAT and about 35 points on the quantitative GMAT, but individual scores
+  varied from those averages, typically by about 6 points.
+</p>
+
+<p>
+  Did students with higher than average verbal GMAT scores also
+  tend to have higher than average quantitative GMAT scores (are verbal and quantitative
+  GMAT scores <a class="glossRef" href="gloss.htm#association">positively associated</a>)?
+  Or, perhaps, was there a tendency for students who did
+  better than average on the verbal GMAT to do worse than average on the quantitative GMAT
+  (are verbal and quantitative GMAT scores negatively associated)?
+  Similarly, did students who had higher than average undergraduate GPAs tend to do
+  better than average in their first year as MBA students?
+  Suppose you were the director of admissions for an MBA program.
+  Which variables seem to predict how a student will do in his or her first year
+  in the MBA program?
+  How would you decide whom to admit?
+</p>
+
+<p>
+  Such questions are hard to answer using just the five histograms.
+  These questions are about the <a class="glossRef" href="gloss.htm#association">association</a>
+  of the measured variables.
+  The histograms say nothing about the association.
+  The association is also quite hard to see directly from the list of data,
+  especially for lists as long as this one.
+  (Try it: click the List Data button and see whether you can find a
+  relationship among the variables.)
+  To see association graphically, we need to display more than one variable at a
+  time.
+</p>
+
+<h2>
+    <a id="scatterplots"></a>Scatterplots
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=3201&end=4007" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+  One of the best tools for studying the <a class="glossRef" href="gloss.htm#association">association</a>
+  of two variables graphically is the <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a> or
+  scatter diagram.
+  Scatterplots are especially helpful when the number of data is large&mdash;studying a
+  list is then virtually hopeless.
+  A scatterplot plots two measured variables against each other, for each individual.
+  That is, the x (horizontal) coordinate of a point in a scatterplot is the value of one
+  measurement (X) of an individual, and the y (vertical) coordinate of that point is
+  the other measurement (Y) of the same individual.
+  We call such a plot a <em>scatterplot of</em> Y <em>versus</em> X or
+  a <em>scatterplot of</em> Y <em>against</em> X.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows scatterplots of pairs of variables.
+</p>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Scatterplot of the GMAT data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<a id="gmat_scatterplot"></a>
+<applet code="Bivariate.class" codebase="../../Java/" align="baseline" width="640"
+    height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="files" value="./Data/gmat.dat">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="Xinit" value="Verbal GMAT">
+    <param name="Yinit" value="Quant. GMAT">
+    You need Java to see this.
+</applet>
+</p>
+
+</div>
+
+<p>
+  Initially, the scatterplot should show the quantitative
+  GMAT scores (on the vertical or &quot;y&quot; axis) versus the verbal GMAT scores
+  (on the horizontal or &quot;x&quot; axis).
+  You can change which variable is plotted against which by using the
+  drop-down menus containing the variable names, located at the top of the figure.
+  If the scatterplot is not of quantitative GMAT versus verbal GMAT, please change
+  to those variables.
+</p>
+
+<p>
+  Clicking the List Data button opens a table of the data.
+  Clicking the Univariate Stats button opens a window that contains summary statistics
+  of the 5 variables: the number of individuals for whom each variable was measured,
+  the mean and SD of each variable, and the minimum, lower quartile,
+  median, upper quartile and maximum of each variable.
+</p>
+
+<p>
+  <a id="point_of_averages"></a>The red square in the middle of
+  the <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a> is the
+  <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>.
+  Its horizontal coordinate is the <a class="glossRef" href="gloss.htm#mean">mean</a> of the values
+  of the variable plotted on the horizontal
+  axis (the mean verbal GMAT score at first), and its vertical coordinate is the
+  mean of the values of the variable plotted on the
+  vertical axis (the mean quantitative GMAT score at first).
+  The <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a> is a measure of the
+  &quot;center&quot; of a <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a>, quite analogous
+  to the <a class="glossRef" href="gloss.htm#mean">mean</a> as a measure of the center of a list.
+</p>
+
+<p>
+  Put the cursor over the <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>.
+  The &quot;meter&quot; at the bottom of the plot that looks like
+</p>
+
+<p class="math">
+  x = 35.nn y = 35.nn
+</p>
+
+<p>
+  will show that the x (horizontal) coordinate of the
+  cursor is about 35 and the y (vertical) coordinate of the cursor is also about 35.
+  Put the cursor over the highest blue dot on the plot.
+  You should be able to tell from the meter that the x-value of that point is about 40,
+  and its y-value is about 60.
+  The dot corresponds to a single student whose verbal GMAT score was about 40,
+  and whose quantitative GMAT score was about 60.
+  That student scored above average on both parts of the GMAT test, but much further
+  above average in the quantitative score.
+</p>
+
+<p>
+  Click the List Data button to open a table of all the student data.
+  The top line shows that the variables are:
+</p>
+
+<p class="math">
+    School &quot;1st year MBA GPA&quot; &quot;Verbal GMAT&quot;
+    &quot;Quant. GMAT&quot; &quot;Undergrad. GPA&quot;
+</p>
+
+<p>
+  Each row in the table corresponds to one student.
+  The first column in each row is the student's business school, the second column is his
+  first-year MBA GPA, the third column is his verbal GMAT score, the fourth column is
+  his quantitative GMAT score, and the fifth column is his undergraduate GPA.
+  The first row in the table is:
+</p>
+
+<p class="math">
+  1 3.155 31 37 3.53.
+</p>
+
+<p>
+  That is, the first student attended business school 1, had a first-year MBA GPA of
+  3.155, scored 31 on the verbal GMAT, 37 on the quantitative GMAT, and had an
+  undergraduate GPA of 3.53.
+</p>
+
+<p>
+  Find the record of the student whose quantitative GMAT score was 60.
+  (<em>Hint: it's the 13th student in school 3.</em>)
+  Click that row of the table.
+  The corresponding point in the scatterplot should turn yellow.
+  You can highlight any number of points by clicking the corresponding rows of the table.
+  To clear the highlighting of a point, click its row again.
+</p>
+
+<p>
+  The following exercises check your ability to use the scatterplot applet in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+  to answer questions about multivariate data.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the highest undergraduate GPA among these ' +
+           'students?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(4));
+    document.writeln('</p>');
+    var ansStr = ' The maximum undergraduate GPA is 4.0. You can find this several ways, ' +
+         ' including </p><dir><li><p>by pushing the &quot;Univariate ' +
+         ' Stats&quot; button and reading the maximum from the summary statistics for ' +
+         ' Undergrad. GPA</p></li><li><p>by pushing the &quot;List data&quot; ' +
+         ' button and scanning the data visually</p></li><li><p>by using the ' +
+         ' drop-down menu to change the first variable plotted in the scatterplot ' +
+         'to be Undergrad. GPA, then putting the cursor over the highest point ' +
+         'in the scatterplot, and reading the &quot;y&quot; coordinate of the ' +
+         'point from the meter at the right end of the last line in the tool.' +
+         '</p></li></dir> ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the mean undergraduate GPA among these ' +
+           'students?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'3.2:3.25');
+    document.writeln('</p>');
+    var ansStr = 'The mean undergraduate GPA was 3.23. You can find this several ways, ' +
+         'including</p><dir><li><p>by pushing the &quot;Univariate Stats&quot; ' +
+         'button and reading the mean from the summary statistics for Undergrad. ' +
+         'GPA</p></li><li><p>by using the drop-down menu to change the first ' +
+         'variable plotted in the scatterplot to be Undergrad. GPA, then putting ' +
+         'the cursor over the point of averages (the red square), and reading the ' +
+         '&quot;y&quot; coordinate of the point from the meter at the right end ' +
+         'of the last line in the tool.</p></li></dir>';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the quantitative GMAT score of the student ' +
+           'with the lowest undergraduate GPA?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'35');
+    document.writeln('</p>');
+    var ansStr =  'There are at least two ways to find the quantitative GMAT score of the ' +
+          'student with the lowest undergraduate GPA.</p><dir><li><p>Push the ' +
+          '&quot;Univariate Stats&quot; button to see summary statistics for all the variables. ' +
+          ' The summary statistics show that the lowest undergraduate ' +
+          ' GPA was 1.1. Push the &quot;List data&quot; button to see ' +
+          ' a table of all the data. The undergraduate GPA is the ' +
+          ' last column in the table. Scroll down the table until you ' +
+          ' see 1.1 in the last column; that row is the record of the ' +
+          ' student with the lowest undergraduate GPA. The ' +
+          ' quantitative GMAT score is in the fourth column of the ' +
+          ' table, so the fourth number in that row is the student\'s ' +
+          ' quantitative GMAT score, namely, 35.</p></li><li><p>Alternatively, ' +
+          ' use the drop-down menus to change the scatterplot to show &quot;Undergrad. ' +
+          ' GPA&quot; versus &quot;Quantitative GMAT.&quot; Put the cursor over ' +
+          ' the lowest point in that scatterplot; the y-coordinate of ' +
+          ' the point is the lowest undergraduate GPA (1.1), and the ' +
+          ' x-coordinate of the point is the quantitative GMAT score of the same person, ' +
+          ' 35.</p></li></dir>';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The lowest undergraduate GPA is near the failing ' +
+           'level&mdash;a C- or D+ average. Nonetheless, that student was admitted to a ' +
+           '&quot;good&quot; business school. <span class="qSpan">Select all of the ' +
+           'following that might account for this apparent inconsistency. </span>';
+    document.writeln(qStr);
+    var opt = ["The GPA was reported or transcribed incorrectly",
+         "The student had excellent letters of recommendation",
+         "The student was admitted erroneously",
+         "The student's GMAT scores were very high",
+         "The student's family made a large donation to the school"
+          ];
+    writeSelectExercise(true,qCtr++,opt,'a&b&c&e');
+    document.writeln('</p>');
+    var ansStr = 'The student\'s GMAT scores were not particularly high, so that ' +
+         ' does not explain why he or she was admitted. The other answers ' +
+         ' are more-or-less plausible explanations. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+
+
+<h2>
+  <a id="descriptions_of_scatterplots"></a>
+  Describing Scatterplots
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/RqIfbcgpx5w?start=4007&end=4571" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Scatterplots let us see the relationships among variables.
+    Does one variable tend to be larger when another is large?
+    Does the relationship follow a straight line?
+    Is the scatter in one variable the same, regardless of the value of the other variable?
+</p>
+
+<h3>
+      <a id="nonlinearity"></a>Linearity and Nonlinearity
+</h3>
+
+<p>
+    The scatterplot in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    illustrates a <em>linear</em>
+    relationship between the variables.
+    The scatterplot is roughly
+    <a class="glossRef" href="gloss.htm#football_shaped" target="glossWin">football-shaped</a>:
+    the points do not lie exactly on a line, but are scattered more-or-less evenly around one.
+    (Note: this figure will be different every time you visit or reload the page.)
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A scatterplot illustrating linear association.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Correlation.class" codebase="../../Java/"
+       align="baseline" width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="n" value="100">
+    <param name="r" value="0.8">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showNBar" value="false">
+    <param name="showR" value="false">
+    <param name="showRBar" value="false">
+    <param name="title" value="Football-Shaped Scatterplot">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The scatterplot in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    illustrates <a class="glossRef" href="gloss.htm#nonlinearity" target="glossWin">nonlinearity</a>.
+    The pattern in the relationship between the variables is not a straight line&mdash;it is curved.
+    The data are scattered more-or-less evenly around a curve: The scatter in the values of Y is about the
+    same for different values of X, that is, in different <em>vertical slices</em> through
+    the scatterplot.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A scatterplot illustrating nonlinear association.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Correlation.class" codebase="../../Java/"
+      align="baseline" width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Nonlinearity">
+    <param name="x" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
+        26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50">
+    <param name="y" value="1.3648462,2.4493555,2.4686836,3.1937691,4.5300116,4.1035171,
+        4.7296546,4.1827321,4.7415191,4.5860516,4.6978422,
+        5.0302679,4.8101506,4.6254892,3.9367077,3.7839850,2.8874823,2.8867729,3.3807606,
+        3.0995626,2.8559447,2.2024342,2.9366545,3.1528946,3.1058939,3.7296558,5.0469460,
+        4.2949031,4.3250106,4.4094161,5.6797091,6.2004392,6.4514583,8.1304136,8.0355230,
+        8.1702298,8.2398647,7.0043573,8.8214607,8.0677759,7.5286017,6.8350082,7.4065463,
+        7.8839126,6.8542513,6.7049488,5.9683663,6.1649185,4.9026613,5.7249926">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<h3>
+    <a id="heteroscedasticity"></a>Homoscedasticity and Heteroscedasticity
+</h3>
+
+<p>
+  When the scatter in Y is about the same in different vertical slices through a
+  scatterplot, the data (and the scatterplot) are said to be
+  <a class="glossRef" href="gloss.htm#homoscedasticity" target="glossWin">homoscedastic</a>
+  (equal scatter).
+  So far, all the plots in this section have been homoscedastic.
+<script language="JavaScript1.4" type="text/javascript"><!--
+     citeFig();
+// -->
+</script>
+   is a scatterplot of
+   <a class="glossRef" href="gloss.htm#heteroscedasticity" target="glossWin">heteroscedastic</a> data:
+   The scatter in vertical slices depends on where you take the slice.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Scatterplot of Heteroscedastic Data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+    align="baseline" width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Heteroscedasticity">
+    <param name="x" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
+    25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50">
+    <param name="y" value="1.1649535,6.2683908e-1,7.5080155e-2,3.5160690e-1,
+    -6.9651254e-1,1.6961425,5.9059778e-2,1.7970718,2.6406853e-1,8.7167329e-1,-1.4461715,
+    -7.0116535e-1,1.2459821,-6.3897700e-1,
+    5.7735022e-1,-3.6002963e-1,-1.3557629e-1,-1.3493385,-1.2704499,9.8457027e-1,-4.4880614e-2
+    -7.9894452e-1,-7.6517243e-1,8.6173490e-1,-5.6225124e-2,-1.0468476e+1,1.1623159e+1
+    6.5728916,-2.3130569,2.8005323,-9.4031013,-9.0894999,3.9055214,1.2783624e+1,7.2205421
+    -5.3999438,9.1709824,-2.9921077,-7.2645313,-2.8438920,-5.2814626,-1.8233400,4.6979893
+    -1.0709728e+1,3.6637808,1.0772906e+1,1.1632368,7.4466680,1.0336977,1.7740662e+1">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<h3>
+    <a id="outliers"></a>Outliers
+</h3>
+
+<p>
+  A point that does not fit the overall pattern of the data, or that is many
+  <a class="glossRef" href="gloss.htm#sd">SD</a>s from the bulk of the data, is called an <em>outlier</em>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+    document.writeln(' and ');
+    citeFig(figCtr+1);
+// -->
+</script>
+   are examples of scatterplots of data with with a large outlier.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Data with an outlier.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+   align="baseline" width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="An Outlier">
+    <param name="x" value="-4.326e-1,-1.67,1.25e-1,2.877e-1,-1.146,1.19,1.189,-3.7e-2,3.27e-1
+    1.75e-1,-1.87e-1,7.26e-1,-5.88e-1,2.18,-1.363e-1,1.139e-1,1.067,5.93e-2,-9.56e-2
+    -8.32e-1,10">
+    <param name="y" value="2.94e-1,-1.34,7.14e-1,1.623562,-6.9177570e-1,8.58e-1,
+    1.254001,-1.593729,-1.440964,5.7114762e-1,-3.9988558e-1,6.9e-1,8.1562229e-1
+    7.1190832e-1,1.290249,6.69e-1,1.19,-1.2,-1.98e-2,-1.57e-1,10">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Data with a different sort of outlier.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+    width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Another Outlier">
+    <param name="x" value=" -1.6040856,2.5730423e-1,-1.0564729,1.4151415,-8.0509040e-1
+    5.2874301e-1,2.1932067e-1,-9.2190162e-1,-2.1706745,-5.9187825e-2,-1.0106337
+    6.1446305e-1,5.0774079e-1,1.6924299,5.9128259e-1,-6.4359520e-1,3.8033725e-1
+    -1.0091155,-1.9510670e-2,-4.8220789e-2,1.5">
+    <param name="y" value="-1.4436727,1.9978787e-1,-8.4132526e-1,1.0862283,-6.8176304e-1,
+    5.6543256e-1,2.7048434e-1,-7.7192573e-1,-1.9495756,1.4439877e-2,-8.5268032e-1,
+    5.2745220e-1,4.1921981e-1,1.4935982,3.8464088e-1,-6.0263609e-1,3.5414801e-1,
+    -8.7672307e-1,1.2679122e-1,-7.8496184e-2,-8.0">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to categorize scatterplots.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Below is a scatterplot of the number of people with various levels of ' +
+           'educational attainment in each of the 50 states and the District of ' +
+           'Columbia, according to the 1990 <a href="http://www.census.gov" ' +
+           'target="_top">U.S. Census</a>. The variable names were shortened; here is ' +
+           'what they mean:</p><div align="center"><center><table class="dataTable"><tr>' +
+           '<th align="center" id="col0">Variable Name</th> ' +
+           '<th align="center" id="col1">Meaning: Thousands of people age 18 ' +
+           'years and over who</th>' +
+           '</tr><tr>' +
+           '<td headers="col0">&lt;9th grade/1000</td>' +
+           '<td headers="col1">did not complete the 9th grade</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">9-12th grade/1000</td> ' +
+           '<td headers="col1">completed at least the 9th grade, no high school diploma</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">High Sch grad/1000</td>' +
+           '<td headers="col1">have a high school diploma, but took no college courses</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">College:no deg/1000</td>' +
+           '<td headers="col1">took some college courses, no college degree</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">Associate deg/1000</td>' +
+           '<td headers="col1">got an Associate (2 year) degree, nothing higher</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">Bachelors deg/1000</td>' +
+           '<td headers="col1">got a Bachelor\'s (4 year) degree, nothing higher</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">advanced deg/1000</td>' +
+           '<td headers="col1">got a graduate or professional degree</td>' +
+           '</tr><tr>' +
+           '<td headers="col0">total/1000</td>' +
+           '<td headers="col1">total of all the above</td>' +
+           '</tr></table>' +
+           '</center></div><p class="figure">' +
+           '<applet code="Bivariate.class" codebase="../../Java/" align="baseline" ' +
+           'width="640" height="380" archive="PbsGui.zip">' +
+           '<param name="addPoints" value="false">' +
+           '<param name="files" value="./Data/p60-1990.dat">' +
+           '<param name="graphAveButton" value="false">' +
+           '<param name="regressButtons" value="false">' +
+           '<param name="sdButton" value="false">' +
+           '<param name="sdLineButton" value="false">' +
+           '<param name="showR" value="false">You need Java to see this.' +
+           '</applet></p><p><span class="qSpan">Identify the attributes of the ' +
+           'scatterplots of the following pairs of variables:</span></p>' +
+           '<div align="center"><center><table class="dataTable"><tr> ' +
+           '<td><span class="qSpan">9-12th grade/1000</span>' +
+           'vs.<span class="qSpan"> Total/1000</span></td><td>';
+    document.writeln(qStr);
+    var opt = ["linear","nonlinear"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '</td></tr><tr><td><span class="qSpan">Associate deg/1000 </span>' +
+           'vs.<span class="qSpan"> College:no ' +
+           'deg/1000</span></td><td>';
+    document.writeln(qStr);
+    var opt = ["no outliers","one or more outliers"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '</td></tr><tr><td><span class="qSpan">advanced deg/1000 </span>' +
+           ' vs.<span class="qSpan"> High Sch ' +
+           'grad/1000</span></td><td>';
+    document.writeln(qStr);
+    var opt = ["homoscedastic","heteroscedastic"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '</td></tr></table></center></div>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'There is a scatterplot of the GMAT data at the beginning of the next section. ' +
+           'Look at the scatterplot of first-year MBA GPA versus undergraduate GPA. ' +
+           'There is an outlier. <span class="qSpan">The value of the undergraduate ' +
+           'GPA for the outlier is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(1.1,.1));
+    var qStr = ' <span class="qSpan">That is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(5.35,.05));
+    var qStr = '<span class="qSpan">SDs</span>';
+    document.writeln(qStr);
+    var opt = ["below","above"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '<span class="qSpan">the mean undergraduate GPA.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    Multivariate data are observations of two or more variables per individual.
+    Two variables at a time (bivariate data) can be displayed in a scatterplot.
+    The points in a scatterplot represent individuals.
+    The coordinates of each point are the values of the two variables for
+    that individual.
+    The point of averages in a scatterplot is the point with coordinates
+</p>
+
+<p class="math">
+    (mean of X, mean of Y),
+</p>
+
+<p>
+    where X is the variable plotted on the x (horizontal) axis and Y
+    is the variable plotted on the y (vertical) axis.
+    Two variables are <a class="glossRef" href="gloss.htm#association">associated</a>
+    if the scatter of one variable in <em>slices</em> defined by restricting the other
+    variable to a small range is less than the overall scatter of the first variable.
+</p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#outlier">Outliers</a> are points many
+    <a class="glossRef" href="gloss.htm#sd">standard deviations</a> away from the bulk of the data
+    in at least one of their coordinates.
+    <a class="glossRef" href="gloss.htm#homoscedastic">Homoscedasticity</a> means <em>same scatter</em>:
+    The vertical scatter in different vertical slices through the scatterplot
+    is about the same, regardless of where the slice is centered.
+    <a class="glossRef" href="gloss.htm#heteroscedastic">Heteroscedasticity</a> means
+    <em>different scatter</em>: The vertical scatter in different vertical slices
+    varies appreciably, depending on where the slice is centered.
+    If a scatterplot shows linear association (or no association),
+    homoscedasticity, and no outliers, it is said to be <em>football-shaped</em>.
+</p>
+
+
+<h2>
+   <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>association</li>
+    <li>bin</li>
+    <li>bivariate</li>
+    <li>Chebychev's inequality</li>
+    <li>football-shaped</li>
+    <li>heterosedastic</li>
+    <li>homoscedastic</li>
+    <li>horizontal slice</li>
+    <li>linear association</li>
+    <li>mean</li>
+    <li>multivariate</li>
+    <li>nonlinear association</li>
+    <li>negative association</li>
+    <li>nonlinearity</li>
+    <li>outlier</li>
+    <li>point of averages</li>
+    <li>positive association</li>
+    <li><em>post hoc ergo propter hoc</em></li>
+    <li>range</li>
+    <li>scatterplot</li>
+    <li>secular trend</li>
+    <li>variable</li>
+    <li>vertical slice</li>
+</ul>
+
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>
+
+
+
+
+

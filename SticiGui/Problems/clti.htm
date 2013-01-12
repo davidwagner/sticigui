@@ -1,0 +1,839 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "clt";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>The Normal Curve, The Central Limit
+        Theorem, and Markov's and Chebychev's Inequalities for Random Variables
+</h2>
+
+<div class="indent">
+<h3>
+   Part I: Binomial Probability Histograms
+</h3>
+
+<p class="inline">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var smallN = 5;
+    var bigN = 100;
+    var smallP =roundToDig(listOfRandInts(1,5,15)[0],1);
+    var mediumP = listOfRandInts(1,20,40)[0];
+    var firstP = 50;
+    var qStr = 'The frame below initially shows a binomial probability ' +
+               'histogram with parameters <em>n</em> = '  + smallN.toString() +
+               ' and <em>p</em> = ' + firstP.toString() + '%. </p><p>' +
+               ' Find one of the bins for which the normal approximation and ' +
+               ' the binomial probability differ most.</p>';
+    document.writeln(qStr);
+// -->
+</script>
+<p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var n=smallN;
+   var p=0.5;
+   var eX = n*p;
+   var seX = Math.sqrt(n*p*(1-p));
+   var discrep1 = 0.0;
+   var worstBin = '';
+   for (var i=0; i<=n; i++) {
+       var normApprox = normCdf((i+0.5 - eX)/seX) - normCdf((i-0.5 - eX)/seX);
+       var dum = Math.abs(binomialPmf(n,p,i) - normApprox);
+       if (dum > 1.05*discrep1) {
+           discrep1 = dum;
+           worstBin = i.toString();
+       } else if ((Math.abs(dum-discrep1)/discrep1 < 0.1) ||
+                  (Math.abs(dum-discrep1) < 0.01) ) {
+           discrep1 = Math.max(dum,discrep1);
+           worstBin += '|' + i.toString();
+       }
+   }
+   var aVal1 = worstBin;
+   var aVal2 = numToRange(discrep1,Math.max(0.15*discrep1,0.01));
+   var qStr = '<span class="qSpan">One of the bins for which the binomial probability ' +
+              'differs most from the normal approximation is the bin centered at (type ' +
+              'an integer) ';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, aVal1);
+   qStr = ', where the absolute value of the difference in areas is </span> ';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, aVal2);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Change the probability <em>p</em> of success to ' +
+               mediumP.toString() + '%, and find the bin for which the difference ' +
+               ' between the normal approximation and the binomial probability is ' +
+               'largest.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var n=smallN;
+   var p = mediumP/100;
+   var eX = n*p;
+   var seX = Math.sqrt(n*p*(1-p));
+   var discrep2 = 0.0;
+   var worstBin = '';
+   for (var i=0; i <=n; i++) {
+       var normApprox = normCdf((i+0.5 - eX)/seX) - normCdf((i-0.5 - eX)/seX);
+       var dum = Math.abs(binomialPmf(n,p,i) - normApprox);
+       if (dum > 1.05*discrep2) {
+           discrep2 = dum;
+           worstBin = i.toString();
+       } else if ( (Math.abs(dum-discrep2)/discrep2 < 0.1) ||
+                   (Math.abs(dum-discrep2) < 0.005) ) {
+           discrep2 = Math.max(dum,discrep2);
+           worstBin += '|' + i.toString();
+       }
+   }
+   var aVal1 = worstBin;
+   var aVal2 = numToRange(discrep2,Math.max(0.1*discrep2,0.005));
+   var qStr = '<span class="qSpan"> For <em>p</em>= ' + mediumP.toString() +
+              '%, the absolute value of the largest difference between the area of ' +
+              ' one bin in the binomial probability histogram and the normal ' +
+              ' approximation is </span>';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, aVal2);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   if (discrep2 < discrep1) {
+       aVal = 'a';
+   } else if (discrep2 == discrep1) {
+       aVal = 'b';
+   } else {
+       aVal = 'c';
+   }
+   var opt=["is smaller than","is the same as","is larger than"];
+   var qStr = '<span class="qSpan">The largest difference between the area ' +
+              'of one bin of the binomial probability histogram and the area under ' +
+              'the normal curve for the corresponding range when <em>p</em>= ' +
+              mediumP.toString() + '% ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   qStr = ' the largest difference when <em>p</em> = ' + firstP.toString() + '%.</span></p>';
+   document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Change the probability <em>p</em> of success to ' +
+               (100 - mediumP).toString()  + '%.</p><p> ';
+    document.writeln(qStr);
+// -->
+</script>
+    
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'b';
+    var qStr = '<span class="qSpan">The largest difference between the area of one ' +
+           ' bin in the binomial probability histogram and the normal approximation ' +
+           ' when <em>p</em>= ' + (100 - mediumP).toString() + '% ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' the largest difference when <em>p</em>= ' + mediumP.toString() + '%.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Now look at the normal approximation to the binomial for <em>p</em> = ' +
+               smallP.toString() + '% and <em>p</em> = ' + (100-smallP).toString() +
+               '%.</p><p>';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var n=smallN;
+    var p = smallP/100;
+    var eX = n*p;
+    var seX = Math.sqrt(n*p*(1-p));
+    var discrep3 = 0.0;
+    var worstBin = '';
+    for (var i=0; i <=n; i++) {
+        var normApprox = normCdf((i+0.5 - eX)/seX) - normCdf((i-0.5 - eX)/seX);
+        var dum = Math.abs(binomialPmf(n,p,i) - normApprox);
+        if (dum > 1.05*discrep3) {
+            discrep3 = dum;
+            worstBin = i.toString();
+        } else if ( (Math.abs(dum-discrep3)/discrep3 < 0.1) ||
+                    (Math.abs(dum-discrep3) < 0.005) ) {
+            discrep3 = Math.max(dum,discrep3);
+            worstBin += '|' + i.toString();
+        }
+    }
+    var aVal1 = worstBin;
+    var aVal2 = numToRange(discrep3,Math.max(0.15*discrep3,0.005));
+    qStr = '<span class="qSpan">For <em>p</em>= ' + smallP.toString() +
+           '%, the absolute value of the largest difference between the area ' +
+           'of the binomial probability histogram and the normal approximation for ' +
+           'a single bin is ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    qStr = ' One of the bins for which this difference is attained is the bin ' +
+           'centered at </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   if (discrep3 < discrep2) {
+       aVal = 'a';
+   } else if (discrep3 == discrep2) {
+       aVal = 'b';
+   } else {
+       aVal = 'c';
+   }
+   var opt=["is smaller than","is the same as","is larger than"];
+   var qStr = '<span class="qSpan">The largest probability difference between ' +
+              'the binomial probability histogram and the normal approximation for a ' +
+              'single bin when <em>p</em>= ' + smallP.toString() + '% ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   qStr = ' the largest difference when <em>p</em>= ' + mediumP.toString() + '%.</span></p>';
+   document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal = 'a';
+   var opt = ["worse than","the same as","better than"];
+   var qStr = '<span class="qSpan">Overall, the normal curve follows the ' +
+              'shape of the binomial histogram for <em>p</em>= ' + smallP.toString() +
+              '% ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   qStr = ' it does when <em>p</em>= ' + mediumP.toString() + '%.</span></p>';
+   document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal = 'b';
+   var opt = ["is smaller than","is the same as","is larger than"];
+   var qStr = '<span class="qSpan">The largest probability difference between ' +
+              'the binomial histogram and the normal approximation for a single bin ' +
+              'when <em>p</em>= ' + smallP.toString() + '% ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   qStr = ' the largest difference when <em>p</em>= ' + (100-smallP).toString() + '%.</span></p>';
+   document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal = 'c';
+   var opt = ['p is small',
+              'p is large',
+              '|p - 50%| is small'
+              ];
+   var qStr = '<span class="qSpan">Based on this numerical evidence, for a ' +
+              'given value of <em>n</em>, the normal approximation to the ' +
+              'binomial is best when </span>';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var opt = ["skewed to the left","nearly symmetric","skewed to the right"];
+   var aVal = 'c';
+   var qStr = '<span class="qSpan">As <em>p</em> gets close to 0%, the binomial ' +
+              'probability histogram is more</span> ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal = 'a';
+   var qStr = '<span class="qSpan">As <em>p</em> gets close to 100%, ' +
+              'the binomial probability histogram is more</span>';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var opt = ["skewed to the left","symmetric","skewed to the right"];
+   var aVal = 'b';
+   var qStr = '<span class="qSpan"> The normal curve is </span>';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Set <em>p</em> to ' + smallP.toString() +
+               '%, and change the number of trials <em>n</em> from ' +
+                smallN.toString()  + ' to ' + bigN.toString();
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var n=bigN;
+    var p = smallP/100;
+    var eX = n*p;
+    var seX = Math.sqrt(n*p*(1-p));
+    var discrep4 = 0.0;
+    var worstBin = '';
+    for (var i=0; i <=n; i++) {
+        var normApprox = normCdf((i+0.5 - eX)/seX) - normCdf((i-0.5 - eX)/seX);
+        var dum = Math.abs(binomialPmf(n,p,i) - normApprox);
+        if (dum > 1.05*discrep4) {
+            discrep4 = dum;
+            worstBin = i.toString();
+        } else if ( (Math.abs(dum-discrep4)/discrep4 < 0.1) ||
+                    (Math.abs(dum-discrep4) < 0.005) ) {
+             discrep4 = Math.max(dum,discrep4);
+             worstBin += '|' + i.toString();
+        }
+    }
+    var aVal1 = worstBin;
+    var aVal2 = numToRange(discrep4,Math.max(0.2*discrep4,0.005));
+    var qStr = '<span class="qSpan">For <em>n</em> = ' + bigN.toString() +
+               ' and <em>p</em> = ' + smallP.toString() + '%, the absolute value of ' +
+               'the largest difference between the area of one bin in the binomial ' +
+               'probability histogram and the normal approximation is</span> ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    qStr = '<span class="qSpan">One of the bins at which this difference is attained is the bin ' +
+           'centered at </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+       var aVal = 'c';
+    var opt = ["worse than","the same as","better than"];
+    var qStr = '<span class="qSpan">Overall, the normal curve follows the shape ' +
+               'of the binomial probability histogram ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' it does for <em>n</em> = ' + smallN.toString() + ' and <em>p</em> = ' +
+           smallP.toString() + '%. </span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+
+<p>
+Repeat the experiment of increasing <em>n</em> from
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( smallN.toString() + " to " + bigN.toString() + " for <em>p</em> = " +
+                      mediumP.toString() + "% ");
+// -->
+</script>
+and
+<script language="JavaScript1.4" type="text/javascript" ><!--
+document.writeln( "<em>p</em> = "   + firstP.toString() + "%; ");
+// -->
+</script> note the pattern.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal1 = 'c';
+    var opt1 = ["gets worse","stays the same","gets better"];
+    var opt2 = ["worst","the same","best"];
+    var qStr = '<span class="qSpan">For each fixed value of <em>p</em>, the normal ' +
+               'approximation to the binomial ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt1,aVal1);
+    qStr = ' when <em>n</em> increases.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">For each fixed value of <em>n</em>, the normal ' +
+               'approximation to the binomial is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt2,aVal1);
+    qStr = ' when <em>p</em> = ' + firstP.toString() + '%.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'a';
+    var opt = ["gets worse","stays the same","gets better"];
+    var qStr = '<span class="qSpan">For each fixed <em>n</em>, the normal ' +
+               'approximation to the binomial probability histogram ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' as <em>p</em> gets closer to 0% or to 100%.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+       Part II: The Distribution of the Sample Sum of Independent Draws
+</h3>
+
+<p class="inline">
+  Scroll down in the bottom screen so that the second applet is visible.
+  The second applet initially has a box with 5 numbers in it:
+  0, 0, 0, 1, and 5. 
+  The sample size is preset to 10, and the number of
+  samples to take should be preset to 10,000. 
+  When you click
+  <span class="appCtrlName">Take Sample</span>, the computer will take 10,000 samples of
+  size 10 with replacement, calculate the 10,000 sample sums, and
+  display a histogram of the resulting 10,000 values.
+  Taking so many samples can take some time, especially later in the
+  assignment when the size of each sample is larger.
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'c';
+    var opt = ["skewed to the left","symmetric","skewed to the right"];
+    var qStr = '<span class="qSpan">The distribution of the population of numbers ' +
+               'in the box is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+Click <span class="appCtrlName">Take sample</span>.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal = 'a';
+   var opt = ["less skewed than","equally skewed as","more skewed than"];
+// -->
+</script>
+<span class="qSpan">
+The distribution of the sample sum for a sample of size 10 is
+<script language="JavaScript1.4" type="text/javascript" ><!--
+writeSelectExercise(false,qCtr++,opt,aVal);
+// -->
+</script>
+the distribution of the population.
+</span>
+</p>
+</div>
+
+
+<p>
+  Note the shape of the histogram of the sample sum and
+  how well the normal curve approximates the histogram
+  of values of the sample sum, then increase <span class="appCtrlName">Sample size</span> to 100
+  and click <span class="appCtrlName">Take sample</span>.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The distribution of the sample sum for a sample ' +
+               'of size 100 is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' the distribution of the sample sum for a sample of size 10.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'b';
+    var opt= ["worse","better"];
+    var qStr = '<span class="qSpan">The normal curve is a ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' approximation to the distribution of the sample sum for a sample ' +
+           'of size 100 than for a sample of size 10.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<p>
+Replace the contents of the box with a different set of 5 numbers,
+and see how large a sample is required before the normal
+approximation to the distribution of the sample sum is reasonably
+good.
+Try several different groups of numbers, with differing means,
+differing SDs, and
+differing degrees of symmetry or skewness,
+to determine which of these factors influences the accuracy of
+the normal approximation.
+You can isolate the effect of the mean and SD
+as follows:
+</p>
+
+<p>
+You can change just the mean of a list by adding the same number to
+every element of the list.
+For example, the mean of the list {5, 5, 5, 6, 10} is larger
+by 5 than the mean of the original contents of the box, but has the
+same SD and the same degree of skewness.
+</p>
+
+<p>
+You can change just the SD of a list that has mean equal to
+zero by multiplying
+every element of the list by a positive number; the mean will
+still be zero, and the skewness will be the same.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'a';
+    var opt = ["does not influence","influences"];
+    var qStr = '<span class="qSpan">The mean of the list of numbers on the tickets ' +
+               'in the box ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' how large a sample is needed for the normal approximation to be accurate.</p></span>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The SD of the list of numbers on the tickets in ' +
+               'the box ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' how large a sample is needed for the normal approximation to be accurate.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = 'b';
+    var qStr = '<span class="qSpan">The skewness of the distribution of the list ' +
+               'of numbers on the tickets ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' how large a sample is needed for the normal approximation ' +
+           'to be accurate.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<div class="indent">
+<h3>
+     Part III
+</h3>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var aVal1 = 'd';
+   var aVal2 = 'a|d';
+   var opt = ["less accurate than","of the same accuracy as","more accurate than",
+              "could be less, equally, or more accurate than"
+             ];
+   var meanTicks = listOfDistinctRandInts(2,-30,50);
+   var sdTicks = listOfDistinctRandInts(2,2,20);
+   var qStr = 'Box 1 contains 100 tickets labeled with numbers, and Box 2 contains ' +
+              '1,000 tickets labeled with numbers. The average of the labels on the ' +
+              'tickets in Box 1 is ' + meanTicks[0].toString() + ' with an SD of ' +
+              sdTicks[0].toString() + '. The average of the labels on the tickets ' +
+              'in Box 2 is ' + meanTicks[1].toString() + ' with an SD of ' +
+              sdTicks[1].toString() + '. </p>' +
+              '<p><span class="qSpan"> The normal approximation to the distribution ' +
+              'of the sample sum of 10 independent random draws with replacement from ' +
+              'Box 1 is ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal1);
+   qStr = ' the normal approximation to the distribution of the sample sum of 10 ' +
+          'independent random draws with replacement from Box 2.</span></p>' +
+          '<p><span class="qSpan">The normal approximation to the distribution of ' +
+          'the sample sum of 10 independent random draws with replacement from Box 1 is ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal1);
+   qStr = 'the normal approximation to the distribution of the sample sum of 100 ' +
+          'independent random draws with replacement from Box 2.</span></p>' +
+          '<p><span class="qSpan">The normal approximation to the distribution of ' +
+          'the sample sum of 10 independent random draws with replacement from Box 1 is ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal2);
+   qStr = 'the normal approximation to the distribution of the sample sum of 1,000 ' +
+          'independent random draws with replacement from Box 1.</span></p>';
+   document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+  var nTickets = listOfRandInts(1,5,15)[0];
+  var tickVals = listOfRandInts(nTickets,0,4*nTickets).sort(numberLessThan);
+  var nDraws = 10*listOfRandInts(1,4,11)[0];
+  var meanTick = mean(tickVals);
+  var sdTick = sd(tickVals);
+  var tickList = tickVals.join(', ');
+  var eSum = nDraws*meanTick;
+  seSum = Math.sqrt(nDraws)*sdTick;
+  var thresh = roundToDig(3*rand.next(),1);
+  var sumThresh = Math.floor(eSum + thresh*seSum);
+  var threshcc = (sumThresh+ 0.5 - eSum)/seSum;
+  var threshLo = (sumThresh - eSum)/seSum;
+  var tailProbcc = normCdf(threshcc);
+  var tailProb = normCdf(threshLo);
+  var meanProb = (tailProbcc+tailProb)/2;
+  var probRange = (tailProbcc-tailProb)/2;
+  var ffac = 1.1*probRange/meanProb;
+  var qStr = 'A box contains ' + cardinals[nTickets] + ' tickets, labeled with ' +
+             'the numbers ' + tickList   + '. <span class="qSpan">The normal ' +
+             'approximation to the chance that the sum of ' + nDraws.toString()  +
+             ' draws with replacement from this box is no larger than ' +
+             sumThresh.toString()  + ' is </span>';
+  document.writeln(qStr);
+  writeTextExercise(8,qCtr++,numToRange(meanProb,Math.max(ffac,0.002)));
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+     document.writeln(startProblem(pCtr++));
+     var meanTick =roundToDig(100*rand.next(),1);
+     var nDraws = listOfRandInts(1,5,20)[0];
+     var thresh3 = listOfRandInts(1,11,90)[0]/10;
+     var aVal2;
+     var opt = ["about","at most","at least"];
+     var wChoice = randBoolean();
+     var ineqWord;
+     var aVal1;
+     if (wChoice) {
+         ineqWord = " exceeds ";
+         aVal1 = 'b';
+         aVal2 = numToRange(1/thresh3,.002);
+     } else {
+         ineqWord = " does not exceed ";
+         aVal1 = 'c';
+         aVal2 = numToRange(1 - 1/thresh3,.002);
+     }
+    var qStr = 'A box contains 100 tickets labeled with numbers. None of the labels is negative. ' +
+               'The average of the labels is ' + meanTick.toString() + '. ' + Cardinals[nDraws] +
+               ' tickets will be drawn independently at random with replacement from the box. ' +
+               '<span class="qSpan">The chance that the sample sum ' + ineqWord  + ' ' + 
+                roundToDig(thresh3*nDraws*meanTick,2).toString() + ' is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    writeTextExercise(8,qCtr++,aVal2);
+    document.writeln('</span></p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+     document.writeln(startProblem(pCtr++));
+     var meanTick = roundToDig(200*(rand.next()-0.5),1);
+     var sdTick = roundToDig(10*(rand.next()+0.1),1);
+     var nDraws = listOfRandInts(1,5,20)[0];
+     var thresh4 = listOfRandInts(1,11,90)[0]/10;
+     var aVal2;
+     var opt = ["about","at most","at least"];
+     var wChoice = randBoolean();
+     var ineqWord;
+     var aVal1;
+     if (wChoice) {
+         ineqWord = " exceeds ";
+         aVal1 = 'b';
+         aVal2 = numToRange(1/(thresh4*thresh4),.002);
+     } else {
+         ineqWord = " does not exceed ";
+         aVal1 = 'c';
+         aVal2 = numToRange(1 - 1/(thresh4*thresh4),.002);
+     }
+     var qStr = 'A box contains 100 tickets labeled with numbers. The average of ' +
+                'the labels is ' + meanTick.toString()  + ' and the SD of the labels is ' +
+                sdTick.toString() + '. ' + Cardinals[nDraws] + ' tickets will be drawn ' +
+                'independently at random with replacement from the box. ' +
+                '<span class="qSpan">The chance that the absolute value of the ' +
+                'difference between the sample sum of the labels on the tickets and ' +
+                roundToDig(nDraws*meanTick,2).toString() + ineqWord  + ' ' +
+                roundToDig(thresh4*Math.sqrt(nDraws)*sdTick,2).toString() +
+                ' is </span>';
+     document.writeln(qStr);
+     writeSelectExercise(false,qCtr++,opt,aVal1);
+     writeTextExercise(8,qCtr++,aVal2);
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+
+</html>

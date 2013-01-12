@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = 'location';
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/bbsal98.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    medSal = percentile(salary,50);
+    meanSal = mean(salary);
+    var n = 10;
+    var detroitSample = randomSample(detroitSal,n,false);
+    var meanDetroitSal = mean(detroitSample);
+    var medDetroitSal = percentile(detroitSample,50);
+    detroitMnMx = vMinMax(detroitSample);
+// -->
+</script>
+
+
+<h2>
+    Measures of Location and Spread
+</h2>
+
+<div class="indent">
+<h3>
+    Part I
+</h3>
+
+<p class="inline">
+  Below is the histogram of 1998 Major League Baseball
+  salaries that you saw in the previous assignment. (Source of data: Conway Sports.)
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' The figure shows the mean and SD of the salaries. ' +
+               '<span class="qSpan">The mean salary is</span>';
+    document.writeln(qStr);
+    var opt = ["smaller than","equal to","larger than"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    var qStr = '<span class="qSpan"> the median salary, because the salary ' +
+               'distribution is </span>';
+    document.writeln(qStr);
+    var opt= ["skewed to the left", "symmetric", "skewed to the right"];
+    writeSelectExercise(false,qCtr++,opt,'c');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' Use the &quot;List Data&quot; button to see the actual salaries ' +
+               '(in $100,000s). The salaries are not in any particular order. ' +
+               '<span class="qSpan"> The range of the salaries is $</span>';
+    document.writeln(qStr);
+    aVal = numToRange(100000*(salMnMx[1] - salMnMx[0]),1000);
+    writeTextExercise(8,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">Estimated from the histogram, the interquartile ' +
+               'range of the salaries is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(1254600,5000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' The top-earning player had a salary of $9,237,500. Suppose his salary ' +
+               'changed to $';
+    var oldSal = 100000*salMnMx[1];
+    var newSal = 100000*((listOfRandInts(1,Math.ceil(meanSal),200))[0]);
+    qStr += commify(newSal) + '.</p><p><span class="qSpan">The mean salary would </span>';
+    document.writeln(qStr);
+    var opt = ["decrease","stay the same","increase"];
+    if (newSal < oldSal) {
+        aVal = 'a';
+    } else if (newSal == oldSal) {
+        aVal = 'b';
+    } else if (newSal > oldSal) {
+        aVal = 'c';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">The median salary would </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '</p><p><span class="qSpan"> The mode salary would </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,'b');
+    var qStr = '</p><p><span class="qSpan">The range of the salaries would</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">The IQR of the salaries would </span>';
+    document.writeln(qStr);
+    if (newSal < 100000*percentile(salary,75)) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">The SD of the salaries would</span>';
+    document.writeln(qStr);
+    if (newSal < oldSal) {
+        aVal = 'a';
+    } else if (newSal == oldSal) {
+        aVal = 'b';
+    } else if (newSal > oldSal) {
+        aVal = 'c';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' True or false: <span class="qSpan"> half the players have above ' +
+               'average salaries, and half have below average salaries.</span>';
+    document.writeln(qStr);
+    var opt = ["false","true"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part II
+</h3>
+
+<p class="inline">
+  Here are the 1998 salaries of the Detroit Tigers baseball team, as
+  reported by Conway Sports.
+</p>
+</div>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>1998 Salaries of the Detroit Tigers</caption>
+        <tr>
+          <td align="right">9,237,500</td>
+          <td align="right">5,150,000</td>
+          <td align="right">2,000,000</td>
+          <td align="right">670,000</td>
+          <td align="right">600,000</td>
+          <td align="right">500,000</td>
+          <td align="right">500,000</td>
+          <td align="right">325,000</td>
+          <td align="right">275,000</td>
+        </tr>
+        <tr>
+          <td align="right">275,000</td>
+          <td align="right">225,000</td>
+          <td align="right">200,000</td>
+          <td align="right">185,000</td>
+          <td align="right">185,000</td>
+          <td align="right">179,000</td>
+          <td align="right">170,000</td>
+          <td align="right">170,000</td>
+          <td align="right">170,000</td>
+        </tr>
+        <tr>
+          <td align="right">170,000</td>
+          <td align="right">150,000</td>
+          <td align="right">150,000</td>
+          <td align="right">127,500</td>
+          <td align="right">109,000</td>
+          <td align="right">109,000</td>
+          <td align="right">109,000</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+  Here is a table of a random sample of the 1998
+  salaries of ten of the Detroit Tigers players:
+  </p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  var header = "salary ($)";
+  listToTable(header,commifyList(detroitSample),"standard", "right");
+// -->
+</script>
+
+<p>
+    The following questions refer to this sample of ten salaries.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = '<span class="qSpan"> The mean of the sample of ten ' +
+               '1998 Detroit Tigers salary is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(meanDetroitSal,1000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">The median of the sample of ten 1998 Detroit ' +
+               'Tigers salary is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(medDetroitSal,1000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">The range of the sample of ten Detroit ' +
+               'Tigers salaries is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(detroitMnMx[1]-detroitMnMx[0],1000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">The interquartile range of the sample of ten ' +
+               'Detroit Tigers salaries is $</span>';
+    document.writeln(qStr);
+    aVal = numToRange(percentile(detroitSample,75) - percentile(detroitSample,25),1000);
+    writeTextExercise(14,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">The rms of the sample of ten Detroit ' +
+               'Tigers salaries is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(rms(detroitSample),1000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' <span class="qSpan">The SD of the sample of ten Detroit ' +
+               'Tigers salaries is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(sd(detroitSample),1000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part III
+</h3>
+</div>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' The public radio show &quot;A Prairie Home Companion,&quot; ' +
+               'features news from the fictional town of Lake Wobegon, MN, home to ' +
+               'many Norwegian bachelor farmers, and where &quot;all the women ' +
+               'are strong, all the men are good looking, and all the children are above ' +
+               'average.&quot; Suppose average means average for the town. ' +
+               '<span class="qSpan">Such a town could not possibly exist, because ' +
+               '(select all that apply)</span>';
+    document.writeln(qStr);
+    var rawOpt = ["half the children must be below average",
+            "not all the children can be above average",
+            "not all Norwegian bachelor farmers are good looking",
+            "not all women are strong"];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' Suppose you are looking for a house to purchase, and have a maximum ' +
+               'price you can afford. <span class="qSpan">To help decide which neighborhoods ' +
+               'to shop for a home in, which is <em>most</em> useful to you?</span>';
+    document.writeln(qStr);
+    var opt = ["the mean house price",
+            "the median house price",
+            "the mode house price",
+            "the SD of the house prices",
+            "the range of the house prices"];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var numTrips = 10*((listOfRandInts(1,10,20))[0]);
+    var aveWait = (listOfRandInts(1,3,8))[0];
+    var threshFac = (listOfRandInts(1,2,5))[0];
+    var threshWait = threshFac*aveWait;
+    var qStr = ' Evans Hall is home to the University of California at Berkeley ' +
+               'Statistics Department. In ' + numTrips + ' trips on the Evans Hall elevator, ' +
+               'the average waiting time for the car to arrive was ' + aveWait +
+               ' minutes. <span class="qSpan"> The largest number of trips (among those ' +
+               numTrips + ') in which it took ' + threshWait +
+               ' minutes or longer for the car to arrive is</span>';
+    document.writeln(qStr);
+    writeTextExercise(5,qCtr++,(Math.floor(numTrips/threshFac)).toString());
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var aveIQ = (listOfRandInts(1,90,110))[0];
+    var IQfac = roundToDig(((listOfRandInts(1,3,6))[0])/2,1);
+    var sdIQ = 8 + Math.floor(16*rand.next());
+    var loIQ = aveIQ -  sdIQ*IQfac;
+    var hiIQ = aveIQ + sdIQ*IQfac;
+    var limit = (1 - 1/(IQfac*IQfac));
+    var qStr = ' A certain population has an average IQ of ' +
+                aveIQ + ' with an SD of ' + sdIQ + '. <span class="qSpan">' +
+                'By Chebychev\'s inequality, the fraction of people in ' +
+                'that population with IQs between ' + loIQ + ' and ' + hiIQ +
+                ' is </span>';
+    document.writeln(qStr);
+    var opt = ["at least", "equal to", "at most"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    writeTextExercise(8, qCtr++,numToRange(limit));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' The SD of a list is zero. <span class="qSpan">' +
+               'Select all that apply: </span>';
+    document.writeln(qStr);
+    var opt = [ 'all the numbers in the list must be zero',
+            'at least half the numbers in the list must be zero',
+            'all the numbers in the list must be equal',
+            'at least half the numbers in the list must be equal',
+            'the mean of the list must be zero',
+            'the IQR of the list must be zero',
+            'the range of the list must be zero',
+            'all of the above',
+            'none of the above'];
+    writeSelectExercise(true,qCtr++,opt,'c&d&f&g');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.write(startProblem(pCtr++));
+    var qStr = ' The IQR of a list is zero. <span class="qSpan">Select all that apply:</span>';
+    document.writeln(qStr);
+    var opt = [ 'all the numbers in the list must be zero',
+                'at least half the numbers in the list must be zero',
+                'all the numbers in the list must be equal',
+                'at least half the numbers in the list must be equal',
+                'the median of the list must be zero',
+                'the SD of the list must be zero',
+                'the range of the list must be zero',
+                'all of the above',
+                'none of the above'
+              ];
+    writeSelectExercise(true,qCtr++,opt,'d');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<applet code="HistHiLite.class" codebase="../../Java/"
+        align="baseline" width="0" height="0" archive="PbsGui.zip" name="histogram">
+  <param name="binControl" value="false">
+  <param name="bins" value="30">
+  <param name="files" value="./Data/baseball98.dat">
+  <param name="nFiles" value="1">
+  <param name="restrict" value="false">
+  <param name="showNormal" value="false">
+  <param name="univariateStats" value="false">
+    You need Java to see this.
+</applet>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var histNum = document.applets.length - 1;
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

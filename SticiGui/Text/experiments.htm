@@ -1,0 +1,1861 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "experiments";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+
+<form method="POST">
+
+<h1>
+    Does Treatment Have an Effect?
+</h1>
+
+<p>
+    The problem of determining whether a treatment has an effect is ubiquitous in science, engineering,
+    social science, economics, business, and many other fields.
+    <em>Treatment</em> is meant generically: It could be a magnetic field, a metallic coating,
+    welfare, decreasing the marginal income tax rate, a drug, a fertilizer, or an advertising campaign.
+    <em>Effect</em> could be to bend light, to increase the durability of a part, to decrease the crime rate,
+    to increase savings, to relieve headaches, to increase crop yields, or to increase sales.
+    To evaluate whether a treatment has an effect, it is crucial to compare the outcome when treatment
+    is applied (the outcome for the <span class="termOfArt">treatment group</span>) with the outcome 
+    when treatment is withheld
+    (the outcome for the <span class="termOfArt">control group</span>), in situations that are as
+    alike as possible but for the treatment.
+    This is called the <span class="termOfArt">method of comparison</span>.
+    How individuals come to be in the treatment group is important, too:
+    This distinguishes <span class="termOfArt">experiments</span> from 
+    <span class="termOfArt">observational studies</span>.
+</p>
+
+<p>
+    The most reliable way to determine whether a treatment has an effect is to compare the outcome
+    for the treatment group with the outcome for a control group, using a random
+    mechanism to allocate individuals between the treatment group and control group.
+    This is called a <em>controlled randomized experiment</em>.
+    If the individuals are people, taking precautions to ensure that they do not know whether
+    they are in the treatment group or the control group can reduce confounding&mdash;this is called
+    <span class="termOfArt">blinding</span>.
+    If evaluating the outcome involves subjective judgment, it is better if the evaluators do
+    not know which individuals are in the treatment group and which are in the control group.
+    When combined with blinding, this is called <span class="termOfArt">double-blinding</span>.
+</p>
+
+<h2><a id="method_of_comparison"></a>
+    The Method of Comparison
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=709&end=1704" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The method of comparison is perhaps the most important idea in science:
+    To determine whether a treatment has an effect,
+    compare what happens with and without the treatment.
+</p>
+
+<p>
+    For example, this class is taught using internet based materials.
+    How might we assess whether this way of teaching is effective?
+    Suppose we simply look at the final exams of students who take the class.
+    They will answer some questions correctly.
+    Does that show that the materials are effective?
+    Obviously not: The students might have known the answers to those questions
+    before taking the course; they might have learned the answers from some source
+    other than the online material; and they might have gotten the answers right
+    by lucky guessing.
+</p>
+
+<p>
+    To determine whether students learn anything from the class (the treatment),
+    we need to compare the state of their knowledge after taking the class with
+    something else.
+    The &quot;something else&quot; could be students who have not taken the class,
+    but it would be even better to compare the students with themselves before
+    they took the class:
+    We can <a class="glossRef" href="gloss.htm#control">control for</a> what the students know when
+    they enter the class by administering a pretest at the beginning of the term,
+    so that we can compare the final exam scores with the pretest scores to
+    measure (in some way that we shall leave vague) the increase in their
+    knowledge of Statistics.
+    This is an example of the method of comparison: Compare student performance on
+    an exam before and after the treatment, which in this case is taking the Web-based class.
+    In the method of comparison, one compares the outcome with treatment to the outcome
+    without treatment.
+</p>
+
+<p>
+    The method of comparison is one of the most important and fundamental empirical
+    techniques, because it can (in principle) isolate the effect of one
+    factor&mdash;the treatment.
+    In this example, using the method of comparison helps us separate the effect of
+    the instructional materials from what people happened to know before coming into the class.
+</p>
+
+<p>
+    More interesting and perhaps more important than whether students learn anything at
+    all from an online class is how online instruction succeeds compared with traditional
+    instruction.
+    To isolate the difference attributable to the method of instruction, we need to
+    compare how much students learn in a traditional statistics class with how much students
+    learn in a Web-based class.
+    This is an example of the method of comparison applied to two treatments: One group
+    receives traditional lecture instruction, and the other group receives online instruction.
+</p>
+
+<p>
+    The method of comparison is a general and flexible tool for evaluating whether a treatment
+    is effective, be it a drug, fertilizer, teaching technique, surgical procedure,
+    quality control measure, car wax, or advertising campaign.
+    The basic idea is to compare what happens with and without the treatment,
+    to isolate the effect of the treatment.
+    If only some of the individuals are treated, and the outcome for them is
+    compared with the outcome for individuals who are not treated, the group that receives
+    treatment is called the <span class="termOfArt">treatment group</span>, and the group that does not is called the
+    <span class="termOfArt">control group</span>.
+    Sometimes, as is the case in pretest/final assessment, a single group's responses with
+    and without treatment are compared (the individuals are their own <span class="termOfArt">controls</span>).
+    Sometimes, as is the case in comparing traditional instruction with online instruction,
+    there are two or more treatment groups, and the responses of different groups are compared.
+    The group that takes the traditional course probably would be considered the
+    control group in that example, because that is the default method of teaching.
+    These are variations of the method of comparison.
+    Without controls, we have no idea whether the treatment is the cause of any
+    observed response.
+    With controls, it can be possible to determine whether treatment has an effect.
+</p>
+
+<h2><a id="confounding"></a>
+    Confounding
+</h2>
+
+<p>
+    Even with the method of comparison, differences between the control group
+    and the treatment group other than the treatment can be responsible for
+    observed differences in outcome between the two groups.
+    This is called <span class="termOfArt">confounding</span>.
+    Confounding can hide a real effect, or can produce the spurious appearance of a
+    treatment effect when the real cause is a difference between the treatment
+    and control groups other than the treatment.
+    Individuals' responses to treatment differ, as do individuals' responses in
+    the absence of treatment.
+    Some causes of those differences might be known, but many are not.
+    If the treatment group predominantly contains individuals who would do well
+    (or who would do poorly) whether or not they received treatment, we cannot
+    separate the effect of the assignment from the effect of the treatment:
+    Confounding still could be responsible for an apparent treatment effect, or could
+    obscure a real treatment effect.
+</p>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=2123&end=2397" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'SAT Coaching';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+<strong>Example</strong> (from <a href="references.htm#wang">Wang, 1993</a>).
+    The Trenton Times, quoting the New York Times, reported on February 10, 1988,
+    that the college entry test &quot;coaching industry is playing on parental
+    anxiety,&quot; arguing that coaching
+    does not improve test scores.
+    The data on which they base this conclusion are gleaned from
+    questionnaires sent to 1409 Harvard University freshmen in the fall of 1987.
+    Of those surveyed, 69% said they had received no coaching, and 14% said they had
+    received coaching (<a class="glossRef" href="gloss.htm#nonresponse">what happened to the other 17%?</a>).
+    The verbal and mathematical SAT scores of the students are listed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Average SAT Scores of Some Harvard Freshmen in 1987.';
+    writeTableCaption(qStr);
+    var header = [' ', 'Not coached', 'Coached', 'Difference'];
+    var data = [ ['Verbal', 'Mathematical'],
+                 [649, 685],
+                 [611, 660],
+                 [38, 25]
+               ];
+    listToTable(header,data,'transpose','center');
+// -->
+</script>
+
+<p>
+    Because the scores of the students who were coached were, on average, lower than those
+    of the students who were not coached, the author argued that coaching does not help.
+</p>
+
+<p>
+    What else might be going on?
+</p>
+
+<p>
+    If the students who sought coaching were weaker on the whole than those who did
+    not (after all, why did they seek help?), we would expect the students who sought
+    coaching to do worse than those who did not, unless coaching were so effective
+    that it more than wiped out the natural difference.
+    The propensity to seek coaching is <a class="glossRef" href="gloss.htm#confounding">confounded</a>
+    with the effect of coaching, if any.
+</p>
+
+<p>
+    Is coaching helpful? One cannot say from these data.
+</p>
+
+</div>
+
+<h2><a id="historical"></a>
+    Historical Controls
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=1704&end=1838" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Sometimes a treatment group is compared with individuals from some other epoch
+    who did not receive the treatment.
+    For example, one might compare the clinical outcomes of patients who undergo a
+    new surgical procedure to treat a diagnosed condition with the clinical outcomes
+    of patients diagnosed with that condition before the surgical procedure was available.
+    However, with historical controls, the control and treatment groups tend to differ
+    in more ways than just the treatment, and confounding tends to be a problem.
+</p>
+
+<h2><a id="longitudinal"></a>
+    Longitudinal and Cross-Sectional Comparisons
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=1838&end=2123" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Time is often considered to be a treatment, for example, in studying the
+    effect of aging.
+    There are two common strategies to studying the effect of time:
+    comparing individuals of different ages at a single moment in time,
+    and following individuals over time as they age.
+    The first is called a <span class="termOfArt">cross-sectional comparison</span> or a 
+    <span class="termOfArt">cross-sectional study</span>;
+    the second is called a <span class="termOfArt">longitudinal comparison</span>.
+    Cross-sectional comparisons are more prone to suffer from confounding.
+    Some examples follow.
+</p>
+
+<p>
+    Freedman et al. (1997) present data from the Health and Nutrition Examination Survey of
+    1976&ndash;1980 (HANES).
+    The Public Health Service examined a cross-section of Americans whose ages ranged from 1&ndash;74.
+    HANES data on average height versus average age in groups of about 10 years of age show
+    that heights decrease consistently from about age 20, when the average height of
+    men is about 70 inches, to age 70, when the average height of men is about 68 inches.
+    Similarly, men’s weights seem to be lowest for those in their twenties, peak around age
+    40&ndash;50, then decrease.
+    Does this mean that as men age they get shorter and fatter?
+</p>
+
+<p>
+    There is a similar example in Huff (1993): The angle between women's feet is larger for older
+    women (at least, at the time the book was written) than for younger women.
+    Does this mean that as women age, their feet turn out?
+</p>
+
+<p>
+    Both the HANES study described by Freedman et al. and the example described by Huff are
+    <span class="termOfArt">cross-sectional comparisons</span>: The people compared are a cross section of the
+    population at a particular time.
+    They differ from each other in many more ways than just their ages.
+    They grew up in different times, when eating and exercise habits were different,
+    when different amounts of hormones and antibiotics were fed to animals destined for
+    human consumption, <em>etc.</em>
+    In fact, what the data reflect is a <em>secular trend</em>:
+    The HANES data show that at maturity, people are taller and heavier than they used to be.
+    In Huff's example, the cause of the apparent age effect is that women used to be
+    encouraged to walk with their feet turned out: It was considered more elegant.
+    Those women grew up to become a significant fraction of the sample of older women.
+    Their feet didn't turn out more as they aged, and the feet of the younger women in the
+    sample probably won't either.
+    Both of these examples illustrate a secular trend confounding with age.
+</p>
+
+<p>
+    One cannot draw reliable conclusions about the effect of age using cross-sectional
+    comparisons, because of confounding.
+    Longitudinal comparisons&mdash;where the investigators follow subjects over time, comparing
+    each subject to himself or herself at different ages&mdash;provide more persuasive evidence for the
+    effects of age than do cross-sectional studies.
+    In longitudinal comparisons many possible confounding factors cancel in comparing
+    each individual with himself.
+    However, longitudinal comparisons are more difficult, more expensive, and more time
+    consuming than cross-sectional comparisons: The investigator must keep track of the
+    subjects over time, keep in touch with them, maintain records, and wait for years
+    or decades to pass to collect the data and publish the results.
+    Attrition tends to be high, and patience tends to be low.
+</p>
+
+<h2>
+    <a id="simpsons_paradox"></a>Simpson's Paradox
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=2397&end=2715" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+A classic example of
+    <a class="glossRef" href="gloss.htm#confounding">confounding</a>
+    is <a class="glossRef" href="gloss.htm#simpson">Simpson's Paradox</a>:
+    what is true for the parts is not necessarily true for the whole.
+    <a href="references.htm#fpp">Freedman <em>et al</em>. (1997)</a>
+    give an example of <a class="glossRef" href="gloss.htm#prima_facie"><em>prima facie</em></a> gender
+    bias in graduate admissions to the University of California at
+    Berkeley.
+    In 1973, 8,442 men and 4,321 women applied to grad school at UCB. About 44% of
+    the men and 35% of the women were admitted.
+    This looks like women might have been discriminated against, assuming applicants of
+    both genders were equally qualified.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    gives a breakdown of the applicants to the six largest departments, denoted A&ndash;F,
+    which together account for more than a third of the total number of applicants.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '1973 U.C. Berkeley Graduate School Applications and Admission Rates by Gender for the six largest ' +
+               'Majors.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>1973 U.C. Berkeley Graduate applications and admissions, 6 largest majors</caption>
+    <tr>
+        <td headers="pctM">&nbsp;</td>
+        <th id="colM" colspan="2">Men</th>
+        <th id="colF" colspan="2">Women</th>
+    </tr>
+    <tr>
+        <th id="major">Major</th>
+        <th id="mApp">Applied</th>
+        <th id="mAdm">% Admitted</th>
+        <th id="fApp">Applied</th>
+        <th id="fAdm">% Admitted</th>
+    </tr>
+    <tr>
+        <td headers="major">A </td>
+        <td headers="colM,mApp">825</td>
+        <td headers="colM,mAdm">62</td>
+        <td headers="colF,fApp">108</td>
+        <td headers="colF,fAdm">82</td>
+    </tr>
+    <tr>
+        <td headers="major">B </td>
+        <td headers="colM,mApp">560 </td>
+        <td headers="colM,mAdm">63 </td>
+        <td headers="colF,fApp">25 </td>
+        <td headers="colF,fAdm">68 </td>
+    </tr>
+    <tr>
+        <td headers="major">C </td>
+        <td headers="colM,mApp">325 </td>
+        <td headers="colM,mAdm">37 </td>
+        <td headers="colF,fApp">593 </td>
+        <td headers="colF,fAdm">34 </td>
+    </tr>
+    <tr>
+        <td headers="major">D </td>
+        <td headers="colM,mApp">417 </td>
+        <td headers="colM,mAdm">33 </td>
+        <td headers="colF,fApp">375 </td>
+        <td headers="colF,fAdm">35 </td>
+    </tr>
+    <tr>
+        <td headers="major">E </td>
+        <td headers="colM,mApp">191 </td>
+        <td headers="colM,mAdm">28 </td>
+        <td headers="colF,fApp">393 </td>
+        <td headers="colF,fAdm">24 </td>
+    </tr>
+    <tr>
+        <td headers="major">F</td>
+        <td headers="colM,mApp">373 </td>
+        <td headers="colM,mAdm">6</td>
+        <td headers="colF,fApp">341</td>
+        <td headers="colF,fAdm">7</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    In most of the departments, women are admitted at a higher rate than men
+    (C &amp; E are the exceptions).
+    How can women be admitted at a lower rate overall, if they are admitted at a higher rate
+    in almost every department?
+</p>
+
+<p>
+    A larger fraction of women than men apply to departments with low admission rates.
+    Differences in the admission rates of departments show up as an apparent difference in the
+    admission rates for different genders.
+    The effect of gender is <a class="glossRef" href="gloss.htm#confounding">confounded</a>
+    with a difference in the admission rates in different departments.
+</p>
+
+<p>
+    What would be a more sensible measure of the gender-specific admissions rate than the
+    overall rate?
+    One possibility is a <a class="glossRef" href="gloss.htm#weighted_ave">weighted average</a>, where we
+    assign greater weight to the departments with more applicants, as in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Weighted Mean Graduate Admission Rates for Men and Women, ' +
+               'Six Largest Majors, U.C. Berkeley, 1973';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>Weighted Mean Graduate Admission Rates for Men and Women, 6 Largest Majors, U.C. Berkeley, 1973</caption>
+    <tr>
+        <th id="major">Major</th>
+        <th id="pool">Applicant<br />Pool</th>
+        <th id="pctM">%men<br />admitted</th>
+        <th id="applPctM">#appl.&times;%men</th>
+        <th id="pctF"">%women<br />admitted</th>
+        <th id="applPctF">#appl.&times;%women</th>
+    </tr>
+    <tr>
+        <td headers="major">A</td>
+        <td headers="pool">933</td>
+        <td headers="pctM">62</td>
+        <td headers="applPctM">57,848</td>
+        <td headers="pctF">82</td>
+        <td headers="applPctF">76,506</td>
+    </tr>
+    <tr>
+        <td headers="major">B</td>
+        <td headers="pool">585</td>
+        <td headers="pctM">63</td>
+        <td headers="applPctM">36,855</td>
+        <td headers="pctF">68</td>
+        <td headers="applPctF">39,780</td>
+    </tr>
+    <tr>
+        <td headers="major">C</td>
+        <td headers="pool">918</td>
+        <td headers="pctM">37</td>
+        <td headers="applPctM">33,966</td>
+        <td headers="pctF">34</td>
+        <td headers="applPctF">31,212</td>
+    </tr>
+    <tr>
+        <td headers="major">D</td>
+        <td headers="pool">792</td>
+        <td headers="pctM">33</td>
+        <td headers="applPctM">26,136</td>
+        <td headers="pctF">35</td>
+        <td headers="applPctF">27,720</td>
+    </tr>
+    <tr>
+        <td headers="major">E</td>
+        <td headers="pool">584</td>
+        <td headers="pctM">28</td>
+        <td headers="applPctM">16,352</td>
+        <td headers="pctF">24</td>
+        <td headers="applPctF">14,016</td>
+    </tr>
+    <tr>
+        <td headers="major">F</td>
+        <td headers="pool">714</td>
+        <td headers="pctM">6</td>
+        <td headers="applPctM">4284</td>
+        <td headers="pctF">7</td>
+        <td headers="applPctF">4,998</td>
+    </tr>
+    <tr>
+        <td headers="major">Total A&ndash;F</td>
+        <td headers="pool">4,526</td>
+        <td headers="pctM"></td>
+        <td headers="applPctM">175,441</td>
+        <td headers="pctF"></td>
+        <td headers="applPctF">194,232</td>
+    </tr>
+    <tr>
+        <td headers="major">Total/(Total Appl)</td>
+        <td headers="pool">1</td>
+        <td headers="pctM"></td>
+        <td headers="applPctM">38.76</td>
+        <td headers="pctF"></td>
+        <td headers="applPctF">42.91</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The weighted average gives a more accurate impression of the relative
+    acceptance rates: women are in fact admitted at a higher rate by most departments.
+</p>
+
+<p>
+    In computing a weighted average, the last step is always to divide by the
+    sum of the weights.
+    In an unweighted average, every observation implicitly gets the same weight,
+    one; in that case, dividing by the sum of the weights is dividing by the
+    number of things averaged, which leads to the usual <a class="glossRef" href="gloss.htm#mean">mean</a>.
+</p>
+
+<p>
+    The following exercise checks your understanding of Simpson’s Paradox.
+    The exercise is dynamic: The data tend to change when you reload the page.
+
+
+<p>
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nEach = 50*listOfRandInts(1, 2, 6)[0];
+    var loPcts = listOfDistinctRandInts(2, 2, 10).sort(numberLessThan);
+    var hiPcts = listOfDistinctRandInts(2, 85, 95).sort(numberLessThan);
+    var guyLam = 0.05*listOfRandInts(1, 12, 19)[0];
+    var guyAve = ( loPcts[0]*(1.0 - guyLam) + hiPcts[0]*guyLam )/100.0;
+    var galLam = (guyAve*100 - loPcts[1])/(hiPcts[1] - loPcts[1]);
+    var galTarg = galLam/2.0;
+    var ans = Math.floor(galTarg*nEach);
+    galTarg = roundToDig(ans/nEach, 4);
+    var galAdm = roundToDig( loPcts[1] * (1.0 - galTarg) + hiPcts[1] * galTarg , 2);
+    var qStr = '<span class="qSpan">Fill in the missing value so that the overall ' +
+           'admission rate for women is ' + galAdm.toString() +
+           '%, lower than that for men (' + roundToDig(100*guyAve, 2).toString() +
+           '%), even though the admission ' +
+           'rates in both departments are higher for women than for men.</span></p>' +
+           '<div align="center"><center><table class="dataTable"><caption>Two Departments<br />' +
+           nEach.toString() + ' male applicants and ' + nEach.toString() +
+           ' female applicants<br />Department A is less selective</caption>' +
+           '<tr><td></td>' +
+           '<th id="m" colspan="2">Male</th>' +
+           '<th id="f" colspan="2">Female</th></tr><tr>' +
+           '<th id="dept">Department</th><th id="mApp">#applicants</th>' +
+           '<th id="mAdm">%admitted</th><th id="fApp">#applicants</th>' +
+           '<th id="fAdm">%admitted</th></tr><tr>' +
+           '<td headers="dept">A</td><td headers="m,mApp">' +
+           roundToDig(nEach*guyLam, 0).toString() + '</td><td headers="m,mAdm">' +
+           hiPcts[0].toString() + '%</td><td headers="f,fApp">';
+    document.writeln(qStr);
+    writeTextExercise(6, qCtr++, numToRange(ans) );
+    var qStr = '</td><td headers="f,fAdm">' + hiPcts[1].toString() +
+           '%</td></tr><tr><td headers="dept">B</td>' +
+           '<td headers="m,mApp">' + roundToDig(nEach*(1.0-guyLam),0).toString() +
+           '</td><td headers="m,mAdm">' + loPcts[0].toString() +
+           '%</td><td headers="f,fApp">' +
+           nEach.toString() + ' &minus;; answer</td><td headers="f,fAdm">' +
+           loPcts[1].toString() + '%</td></tr></table>' +
+           '</center></div>';
+    document.writeln(qStr);
+    var ansStr = 'To get an overall admission rate of ' + galAdm.toString() + '% for women, ' +
+         'we shall find the fraction <span class="math">f</span> of women who must apply to department ' +
+         'A to get the right overall admission rate: </p><p class="math">' +
+         'f &times; ' + hiPcts[1].toString() + '% + (1 &minus; f) &times; ' +
+         loPcts[1].toString() + '% = ' + galAdm.toString() + '%. </p><p>Solving ' +
+         ' for <span class="math">f</span> gives </p><p class="math">f = (' +
+         galAdm.toString() + ' &minus; ' + loPcts[1].toString() + ')/(' +
+         hiPcts[1].toString() + ' &minus; ' + loPcts[1].toString() + ') = ' +
+         roundToDig(100*galTarg,2).toString() + '%.</p><p>The number of women ' +
+         'who must apply to department A is </p><p class="math">f &times; ' +
+         nEach.toString() + ' = ' + roundToDig(100*galTarg,2).toString() + '% &times; ' +
+         nEach.toString() + ' = ' + ans.toString() + '.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="experiment_study"></a>
+    Experiments and Observational Studies
+</h2>
+
+<p>
+    To prevent confounding, the treatment and control groups should be alike in every regard
+    that can affect the outcome, except the treatment.
+    Then, differences between the outcomes for the treatment group and for the control
+    group can be ascribed to the effect of the treatment, rather than to other variables
+    that differ for the two groups.
+    As a practical matter, it can be hard to ensure that the two groups are alike: Often 
+    nature, history, or the
+    individuals themselves divide the treatment group from the control group.
+    Moreover, sets of subjects usually do not come in matched pairs, one to assign to
+    treatment and one to control&mdash;although identical twins are very popular medical subjects!
+</p>
+
+<p>
+    If the investigator gets to decide who will receive the treatment, the investigation is
+    called an <span class="termOfArt">experiment</span>.
+    An experiment need not use the <a class="glossRef" href="gloss.htm#method_of_comparison">method of comparison</a>
+    to isolate the effect of treatment using controls, but good ones do.
+    Some experiments merely select a collection of subjects, treat all of them, and report
+    what happens.
+    Experiments that use the method of comparison are called <span class="termOfArt">controlled experiments</span>.
+    Experiments that do not are called <span class="termOfArt">uncontrolled experiments</span>.
+    Inferences about the effect of treatment on the basis of uncontrolled experiments are suspect.
+</p>
+
+<p>
+    If the investigator merely observes whether subjects are treated, rather than selecting which
+    subjects will be treated, the investigation is called an <span class="termOfArt">observational study</span>.
+    Observational studies also can be controlled or uncontrolled; better observational
+    studies use controls.
+    Generally, inferences from observational studies are less reliable than inferences from
+    experiments&mdash;but see the section about John Snow's study of the mode of communication
+    of cholera later in this chapter for an example of an observational study as
+    compelling as the best controlled experiments.
+</p>
+
+<p>
+    Investigations of the effect of diet and other behavioral variables on human subjects
+    tend to be observational studies rather than experiments, because it is hard to get
+    people to do what you ask them to&mdash;and even harder to get them to keep doing
+    it for months or years.
+    For example, it is hard to find subjects who would be willing to smoke for 20 years or
+    to refrain from smoking for 20 years, according to whether they were assigned to treatment
+    or to control.
+    The impossibility of an experiment to study the effect of gender or of height is even clearer:
+    an investigator cannot intervene and change the gender or height of a subject.
+    In the Simpson's paradox example earlier in the chapter, the investigators could not
+    decide which applicants would be male and which female, nor could they decide which
+    department each applicant would apply to&mdash;so the investigation is an observational study.
+    Observational studies are prone to suffer from confounding.
+</p>
+
+<p>
+    The key difference between an experiment and an observational study is whether the
+    researcher chooses who will receive the treatment.
+    In an observational study, the researcher merely observes what happens to the treatment
+    group, or compares those observations with observations of the control group, but the
+    assignment to treatment or control is up to nature, historical accident, or the
+    subjects themselves.
+    &quot;Choosing&quot; is different from &quot;classifying:&quot; an investigator studying
+    the effects of smoking on health can classify individuals as smokers or nonsmokers,
+    but cannot choose who will smoke and who will not.
+    That is why the controlled experiments on smoking are done with animals, and the human
+    evidence is from observational studies.
+</p>
+
+<h3><a id="online_contd"></a>
+    Assessing Online Instruction
+</h3>
+
+<p>
+    Let us continue our discussion of assessing the effectiveness of online instruction
+    compared with a traditional Statistics class.
+    How should we divide the students between the treatment group, who will use the online
+    materials, and the control group, who will use traditional materials?
+    Suppose we allow the students to choose whether to take a traditional course or
+    a Web-based course.
+    This would be an <a class="glossRef" href="gloss.htm#study">observational study</a>.
+    Students who choose the Web-based version might tend to be more technically
+    inclined than those who choose the traditional course, and more technically
+    inclined students might tend to do better in Statistics, regardless of the mode of
+    instruction.
+    This is an example of <a class="glossRef" href="gloss.htm#confounding">confounding</a> from
+    <span class="termOfArt">self-selection</span>&mdash;the subjects decide whether they are to be in the
+    treatment or control group, and factors that influence their decision also
+    tend to influence the outcome.
+</p>
+
+<p>
+    We might instead try to balance the allocation of students between the two groups,
+    for example, by having them fill out a questionnaire about their mathematical and
+    computer background, interests, and skills, and deliberately trying to have a similar
+    number from each level of background, interest, and skill in the treatment group and
+    the control group.
+    That is likely to be an improvement over self-selection, but much like a
+    <a class="glossRef" href="gloss.htm#quota_sample">quota sample</a>,
+    it will tend to be biased by confounding with variables we have not thought of, cannot
+    measure, or simply cannot balance within the population of students available to us for
+    the experiment&mdash;but that are associated with the outcome we are studying.
+</p>
+
+<p>
+    However, if subjects are assigned at random to either treatment or control
+    (for example, by tossing a coin), there is a tendency for differences other
+    than the treatment to average out: differences among the subjects, including
+    those differences that can effect the outcome, tend to be distributed &quot;fairly&quot;
+    between the treatment and control groups&mdash;whether or not we know what those differences are.
+    <em>Randomized assignment</em> thus is the preferred way to assign subjects to the treatment
+    or control group.
+    An experiment in which chance is deliberately introduced into the assignment of
+    subjects to treatment and control (to mitigate possible biases, conscious or unconscious,
+    that might otherwise affect the outcome) is called a 
+    <span class="termOfArt">randomized controlled experiment</span>.
+</p>
+
+<p>
+    Professor Jerald G. Schutte of the Sociology Department at California State University,
+    Northridge, used a randomized, controlled experiment to study the effectiveness of online
+    Statistics instruction (see
+    <a href="http://www.csun.edu/sociology/virexp.htm">http://www.csun.edu/sociology/virexp.htm</a>).
+    Professor Schutte compared the performance of 33 students, 17 of whom were taught introductory
+    Statistics for Sociology in a traditional lecture class, and 16 of whom were taught in a
+    &quot;virtual class&quot; consisting of online instructional material and software for
+    the students to have interactive real-time chats online.
+    (The online materials were unrelated to this text.)
+    Prof. Schutte found that the students in the virtual class did better, on the average.
+    He attributed the difference to the fact that students in the virtual class spent more
+    time studying the material, and that they used tools for collaborative learning.
+</p>
+
+<p>
+    There is an apocryphal story of the testing of a seasickness preventative, in which the
+    captain of a ship was given a quantity of pills to evaluate during a cruise.
+    Afterwards, he reported that the preventative worked perfectly: No one who took it got sick,
+    but many who did not take it did get sick.
+    It turned out that he had given the preventative only to the crew, because their health
+    was more important to the functioning of the ship than was that of the passengers.
+    For obvious reasons, that experiment does not prove anything about the effectiveness
+    of the preventative: The control and treatment groups differed in a way that obviously
+    confounds with the treatment effect.
+</p>
+
+<p>
+    If the captain instead had decided randomly who would get the pill, with every individual having
+    the same chance of being chosen, an approximately proportionate number of crew members would
+    have been in the treatment and control groups. Differences between individuals that affect
+    their propensity for seasickness (such as having spent much of their lives at sea) would tend
+    to be distributed evenly across the treatment and control groups, leaving the pill as the
+    primary difference between the groups.
+    Then we might be able to draw conclusions about the effectiveness of the preventative.
+</p>
+
+
+<h2>
+    <a id="placebo_effect"></a>
+    The Placebo Effect
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=2715&end=2847" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    Especially when dealing with human subjects, the mere belief that one is
+    receiving treatment can affect the outcome.
+    (For example, it is well known that taking a sugar pill&mdash;a 
+    <a class="glossRef" href="gloss.htm#placebo">placebo</a> with no pharmacological benefit&mdash;
+    with the belief that it is a pain reliever actually reduces subjective pain.
+    This is called the <a class="glossRef" href="gloss.htm#placebo_effect">placebo effect</a>.)
+    For this reason, experiments often involve giving a
+    <a class="glossRef" href="gloss.htm#placebo">placebo</a> to
+    the <a class="glossRef" href="gloss.htm#control_group">control group</a> so that the only difference
+    between the <a class="glossRef" href="gloss.htm#control_group">control</a> and the
+    <a class="glossRef" href="gloss.htm#treatment_group">treatment group</a> is the contents of the
+    &quot;remedy&quot; they are given, not whether they are given a
+    &quot;remedy.&quot;
+    This is the essence of a <a class="glossRef" href="gloss.htm#blind">blind experiment</a>:
+    the <a class="glossRef" href="gloss.htm#subject">subjects</a> do not know whether they are in the
+    <a class="glossRef" href="gloss.htm#treatment_group">treatment</a> or
+    <a class="glossRef" href="gloss.htm#control_group">control group</a>.
+</p>
+
+<p>
+    The conscious and unconscious hopes and expectations of the people who evaluate the
+    subjects can also <a class="glossRef" href="gloss.htm#bias">bias</a> the results, especially when
+    evaluating the outcome involves some subjective judgment, as in assessing whether a
+    patient's condition has improved.
+    (Most researchers do care about the outcome of their experiments!)
+    For this reason, it is desirable that the person or
+    persons assessing the subjects not know to which group the subjects belong.
+    (Of course, <em>someone</em>
+    has to keep track of which subjects comprise the treatment group and which comprise the
+    control group in order ultimately to analyze the results.)
+    When neither the subjects nor the evaluator(s) knows which group the subjects are in,
+    the experiment is said to be <a class="glossRef" href="gloss.htm#double_blind">double-blind</a>.
+    The best experiments on human subjects are randomized, controlled, and double-blind.
+</p>
+
+
+<div class="callout">
+        <p>
+              <span class="calloutCaption">Determining the effect of treatment</span>
+        </p>
+        <p>
+            The method of comparison isolates the effect of a treatment by comparing the outcome
+            for a group that receives treatment (the treatment group) to the outcome for
+            a group that does not (the control group).
+        </p>
+
+        <p>
+            To reduce confounding and other biases, the treatment group and control group
+            should be as similar as possible in all respects except the treatment.
+        </p>
+
+        <p>
+            The best way to ensure that the groups are similar is to use randomization to assign
+            individuals to the treatment group or the control group; that yields a controlled,
+            randomized experiment.
+        </p>
+
+        <p>
+            Randomized assignment mixes up other factors that might affect the outcome, in a
+            way that tends to be fair to the treatment and the control.
+        </p>
+
+        <p>
+            With randomized assignment, the effects of other factors tend to average out between
+            the treatment and control groups, which reduces confounding.
+        </p>
+
+        <p>
+            With human subjects, the belief that one is receiving treatment can have an effect on
+            the outcome.
+            For that reason, it is important to use a placebo to ensure that the difference between
+            the control and treatment groups is the treatment, not the treatment and the belief
+            that one is receiving treatment.
+        </p>
+
+        <p>
+            When there is any subjective element to assessing the outcome, it is best if the person
+            making the assessment does not know which subjects are in the control group and which
+            are in the treatment group.
+        </p>
+</div>
+
+
+<h2>
+    <a id="cholera"></a>
+    John Snow's study of the mode of communication of cholera: a natural experiment
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/iIb5bzGQkf8?start=2847&end=3363" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    John Snow's study of how cholera is communicated
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Snow, J., 1855. <em>On the Mode of Communication of Cholera</em>. ' +
+           'Churchill, London (reprinted 1965 by Hafner, N.Y.)';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    is an extremely rare example of
+    an observational study that has as much persuasive power as a randomized
+    controlled experiment&mdash;as if Nature had run a controlled randomized experiment
+    on Snow's behalf.
+    The treatment in this section is adapted from a paper by David Freedman.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Freedman, D.A., 1999. From Association to Causation: Some Remarks on the ' +
+           'History of Statistics, <em>Statistical Science</em>, <em>14</em>, 243&ndash;258.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    John Snow was a nineteenth-century physician in London, England.
+    In 1855, decades before the germ theory of disease was accepted, Snow showed
+    that cholera is caused by an infectious organism that lives in water.
+    His argument had many facets:
+    an apparent time lag between infection and symptoms, explained by the time
+    it takes the organism to reproduce in the human body; propagation of the disease along
+    trade routes;
+    the fact that sailors visiting ports where there was cholera did not get sick until
+    they came in contact with locals; identifying the first and second cases in the 1848
+    London cholera epidemic (the first was a seaman named John Harnold who had just come
+    from Hamburg,  Germany, where there was a cholera outbreak; the second was the
+    person who stayed in the room Harnold had used, after Harnold died).
+    Snow found apartment buildings where many people had died, adjacent to apartment
+    buildings where few or none had died; their water suppliers differed.
+    Following an outbreak of cholera in 1854, Snow made a map of the residences of victims.
+    They were concentrated near a public water pump: the Broad Street pump in Soho.
+    A few buildings in the area were relatively unaffected by cholera; it turned out that
+    their water supplies were different (a brewery and a poorhouse, both of which had their
+    own pumps).
+    Snow showed that most of the cholera victims in other parts of London had drunk from
+    the Broad Street pump.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Snow convinced authorities to remove the pump handle; the epidemic abated. ' +
+           'However, that does not prove that the water was transmitting ' +
+           'cholera, because the epidemic was already diminishing before the pump ' +
+           'handle was removed. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    At the time, there were several water companies in London.
+    The companies drew their water from different parts of the Thames river, and
+    they treated the water differently.
+    Snow found that cholera was more prevalent in buildings served by water companies
+    who drew their water from dirty parts of the river, with the exception of one
+    company, which purified its water effectively.
+    One of the water companies (Lambeth) started drawing its water further upstream
+    in 1852 (water is cleaner upstream of the city, because refuse and sewage are dumped
+    into the river as the river flows through the city).
+    This allowed Snow to compare the rates of cholera in the 1853&ndash;1854 epidemics
+    (in which about 2,800 people died, more than 500 in a single 10-day period)
+    with earlier epidemics, when the Lambeth company drew its water further downstream,
+    along with one of its competitors, the Southwark and Vauxhall company.
+    It turns out that which buildings were served by which water company was largely
+    accidental: other than water supplier, there was not much difference that could
+    account for the differences in the rate of cholera.
+    Snow wrote:<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Snow, 1855, pp 74&ndash;75, transcribed from Freedman, 1999, p.245&ndash;246. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<blockquote>
+    Although the
+    above facts shown in the table above afford very strong evidence of the
+    powerful influence which the drinking of water containing the sewage of
+    a town exerts over the spread of cholera, when that disease is present,
+    yet the question does not end here; for the intermixing of the water supply
+    of the Southwark and Vauxhall Company with that of the Lambeth Company,
+    over an extensive part of London, admitted of the subject being sifted
+    in such a way as to yield the most incontrovertible proof on one side or
+    the other.
+    In the subdistricts enumerated in the above table as being supplied
+    by both Companies, the mixing of the supply is of the most intimate kind.
+    The pipes of each company go down all the streets, and into nearly all
+    the courts and alleys.
+    A few houses are supplied by one Company and a few
+    by the other, according to the decision of the owner or occupier at that
+    time when the Water Companies were in active competition.
+    In many cases a single house has a supply different from that on either side.
+    Each company supplies both rich and poor, both large houses and small; there
+    is no difference either in the condition or occupation of the persons receiving
+    the water of the different Companies.
+    Now it must be evident
+    that, if the diminution of cholera, in the districts partly supplied with
+    improved water, depended on this supply, the houses receiving it would
+    be the houses enjoying the whole benefit of the diminutions of the malady,
+    whilst the houses supplied by the water from Battersea Fields would suffer
+    the same mortality as they would if the improved supply did not exist
+    at all.
+    As there is no difference whatever in the houses or the people
+    receiving the supply of the two Water Companies, or in any of the physical
+    conditions with which they are surrounded, it is obvious that no experiment
+    could have been devised which would more thoroughly test the effect of
+    water supply on the progress of cholera than this, which circumstances
+    placed ready made before the observer.
+</blockquote>
+
+<blockquote>
+    The experiment, too, was on the grandest scale.  No fewer than three
+    hundred thousand people of both sexes, of every age and occupation,
+    and of every rank and station, from gentlefolks down to the very poor,
+    were divided into groups without their choice, and in most cases,
+    without their knowledge; one group being supplied with water containing the
+    sewage of London, and amongst it, whatever might have come from the
+    cholera patients; the other group having water quite free from such impurity.
+</blockquote>
+
+<blockquote>
+    To turn this grand experiment to account, all that was required was to learn the supply
+    of water to each individual house where a fatal attack of cholera might occur.
+</blockquote>
+
+<p>
+    That is, nature essentially performed a controlled randomized experiment, in which
+    the control and treatment groups differed in their water supply, but not in other
+    factors that might have affected the outcome.
+    The assignment to treatment and control was not exactly random, but was effectively
+    random, depending on accidents of history.
+    This is called a <span class="termOfArt">natural experiment</span>.
+    Moreover, there was no possibility of self-selection, because individuals  (at that time)
+    could not choose their water supplier, nor where the water supplier
+    drew its water: it was the Lambeth water company that changed its intake, and its
+    customers were stuck with the result, good or bad.
+    The &quot;experiment&quot; was essentially blind, because
+    even those who knew their water supplier or knew that Lambeth changed its source
+    were unlikely to have suspected a link between water quality and cholera.
+    Snow's findings are in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Cholera death rates by water source, London epidemic of ' +
+               '1853&ndash;1854. Snow\'s Table IX. Reproduced from Freedman, 1999.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<div><center>
+    <table class="dataTable">
+    <caption>Cholera deaths by water source, London epidemic of 1853&ndash;1854. Snow\'s Table IX.
+             Reproduced from Freedman, 1999.'</caption>
+    <tr>
+        <th id="col0" align="center">water supplier</th>
+        <th id="col1" align="center">houses</th>
+        <th id="col2" align="center">deaths from cholera</th>
+        <th id="col3" align="center">deaths per 10,000</th>
+    </tr>
+    <tr>
+        <td headers="col0" align="left">
+        Southwark and Vauxhall
+        </td>
+        <td headers="col1" align="right">
+        40,046
+        </td>
+        <td headers="col2" align="right">
+        1,263
+        </td>
+        <td headers="col3" align="right">
+        315
+        </td>
+    </tr>
+    <tr>
+        <td headers="col0" align="left">
+        Lambeth
+        </td>
+        <td headers="col1" align="right">
+        26,107
+        </td>
+        <td headers="col2" align="right">
+        98
+        </td>
+        <td headers="col3" align="right">
+        37
+        </td>
+    </tr>
+    <tr>
+        <td headers="col0" align="left">
+        rest of London
+        </td>
+        <td headers="col1" align="right">
+        256,423
+        </td>
+        <td headers="col2" align="right">
+        1,422
+        </td>
+        <td headers="col3" align="right">
+        59
+        </td>
+    </tr>
+    </table>
+<center>
+</div>
+</div>
+
+<p>
+    The rate of deaths from cholera among persons whose water came from
+    the Southwark and Vauxhall company is roughly nine times larger than it is for
+    persons whose water came from the Lambeth company.
+    Other than the difference in water supplier, the buildings are alike with respect to
+    demographics of the occupant, construction, <em>etc</em>.
+    The sample was large (over 300,000 people), and it was representative of London
+    as a whole.
+    This is an example of applied statistics at its best.
+</p>
+
+
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption"> &quot;No causation without
+        manipulation.&quot; (P. Holland)</span>
+    </p>
+
+    <p>
+        One should be skeptical of observational studies that claim to infer a
+        causal relationship between one variable and another.
+    </p>
+    <p>
+        Unless one variable is deliberately manipulated (unless an experiment is performed),
+        and unless the method of comparison is used (unless the experiment is a controlled
+        experiment), causal inferences are rarely warranted.
+    </p>
+    <p>
+        Moreover, confounding is the rule&mdash;not the exception&mdash;unless the assignment to
+        treatment and control is randomized.
+    </p>
+</div>
+
+<a id="dowsing">
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The Kassel Dowsing Experiment.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<div class="indent">
+<p class="inline">
+    <em>Dowsers</em> claim to be able to find water and
+    minerals underground, or hidden or missing objects, typically using a forked stick
+    called a <em>dowsing rod</em>.
+    According to a 1997 article in <em>Swift</em>, a publication of the
+    <a href="http://www.jref.org" target="_top">James Randi Educational Foundation</a>,
+    there were about 10,000 active dowsers in Germany alone, generating an estimated
+    $50 million in annual revenue.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'R. K&ouml;nig, J. Moll, and A. Sarma, 1997. The Kassel Dowsing Test, ' +
+           '<em>Swift</em>, <em>1</em>, pp3&ndash;8.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    In 1989&ndash;1990, a scientific test of dowsing was performed in
+    Kassel, Germany, under the auspices of the the German skeptic's society
+    <a href="www.gwup.org" target="_self">Gesellschaft zur wissenschaftlichen
+    Untersuchung von
+    Parawissenschaften</a> (GWUP; Society for the Scientific Examination of Parasciences)
+    by&nbsp; three scientists: Robert K&ouml;nig, PhD (Justus-Liebig Universität, Gie&szlig;en),
+    J&uuml;rgen Moll, PhD (Vice-managing-director of GWUP), and Armardeo Sarma, Ing. (Scientific
+    Collaborator at the Forschungsinstitut der Deutschen Bundespost Telekom, and Managing
+    director of GWUP since 1987). The test is described in the January 1991 issue of
+    <a href="www.gwup.org/index_skeptiker.html" target="_self"><em>Skeptiker</em></a>, a
+    publication of&nbsp; the GWUP (R. K&ouml;nig, J. Moll, and A. Sarma, 1991.
+    W&uuml;nschelruten-Test in Kassel,
+    <a href="www.gwup.org/index_skeptiker.html" target="_self"><em>Skeptiker</em></a>,
+    pp.4&ndash;10; part of the article is translated into English in the article in
+    <em>Swift</em> cited above).
+    The experiment was funded by the Hessische Rundfunk TV network, who
+    videotaped the experiment for a planned special on dowsing; the tests were performed on
+    their property near their headquarters in Kassel, Germany. James Randi provided the prize
+    money ($10,000) in the event that a participant could demonstrate successful dowsing (as
+    defined by the <a href="#rules">rules of the test</a>), and helped design the experiment.
+</p>
+
+<p>
+    The experiment began in 1989, with a press release announcing
+    the experiment and the prize. The announcement sparked a number of newspaper articles,
+    which led about 100 dowsers from a variety of European countries to respond to the GWUP.
+    &nbsp; Based on what the responding dowsers claimed to be able to do, the scientists
+    designed two experiments: one to test the ability of dowsers to determine whether water is
+    flowing in a buried pipe (the <em>water test</em>), and one to test the ability of dowsers
+    to sense hidden objects made of various materials (the <em>box test</em>).
+</p>
+
+<h3>
+  The Water Test
+</h3>
+
+<p>
+    The water test was designed to determine if the
+    dowsers could detect whether water was flowing in a buried pipe. The experimental
+    apparatus was a 130ft long network of pipes buried 20in deep, a valve, a pump, and two
+    tanks. The diameter of the pipe was 2.5in. The ground above the pipe was marked with
+    bright plastic tape, so the dowsers knew exactly where to look. One leg of one of the
+    pipes ran through a 26ft by 20ft tent, where the dowsers were during the test. Using the
+    valve, the experimenters could control whether 400 gallons of water flowed from the source
+    tank to the receiving tank through a pipe buried under the tent, or through another pipe
+    that did not go under the tent. After each trial, the pump moved the water back to the
+    source tank. The network of pipes was roughly like
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+</p>
+
+
+<style type="text/css">
+<!--
+#tank {
+    width:            9%;
+    line-height:      3em;
+    border:           solid #000000;
+    border-width:     medium;
+    margin:           auto;
+    position:         absolute;
+    left:             0%;
+    bottom:           50%;
+}
+
+#pipe1 {
+    width:            7%;
+    position:         absolute;
+    bottom:           54%;
+    left:             9.2%;
+} 
+
+#valve {
+    width:            8%;
+    line-height:      3em;
+    border:           solid #000000;
+    border-width:     medium;
+    margin:           auto;
+    position:         absolute;
+    left:             16%;
+    bottom:           50%;
+}
+
+#tent {
+    z-index:          1;
+    width:            20%;
+    line-height:      3em;
+    border:           solid #000000;
+    border-width:     medium;
+    margin:           auto;
+    position:         absolute;
+    bottom:           12%;
+    left:             41%;
+    vetical-align:    middle;
+}
+
+#pipe2 {
+    width:            9%;
+    position:         absolute;
+    left:             82%;
+    bottom:           54%;
+}
+
+
+#pump {
+    width:            8%;
+    line-height:      3em;
+    border:           solid #000000;
+    border-width:     medium;
+    margin:           auto;
+    position:         absolute;
+    left:             91%;
+    bottom:           50%;
+}
+
+#pipe3 {
+    width:            91%;
+    position:         absolute;
+    left:             4%;
+    bottom:           5%;
+}
+
+#pipe4 {
+    height:           45%;
+    width:            1em;
+    position:         absolute;
+    left:             4%;
+    bottom:           5%;
+}
+
+#pipe5 {
+    height:           45%;
+    width:            1em;
+    position:         absolute;
+    left:             95%;
+    bottom:           5%;
+}
+
+
+#pipes {
+    z-index:          0;
+    width:            60%;
+    height:           70%;
+    line-height:      3em;
+    border:           solid #000099;
+    border-width:     0.8em;
+    margin:           auto;
+    text-align:       center;
+    position:         absolute;
+    left:             20%;
+    bottom:           15%;
+ }
+            
+-->
+</style>
+
+<div class="chart" height="26em">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Pipe Network for the Water Test.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+   <div id="pipes"><span class="big">Water flows under or around tent, 
+                   according to (random) valve setting</span></div>
+   <div id="pipe1" class="horizontalPipe">&rarr; pipe &rarr;</div>
+   <div id="pipe2" class="horizontalPipe">&rarr; pipe &rarr;</div>
+   <div id="pipe3" class="horizontalPipe">&larr; &larr; &larr;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &larr; &larr; &larr; &nbsp;&nbsp; return pipe&nbsp;&nbsp; &larr; &larr; &larr;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &larr; &larr; &larr;</div>
+   <div id="pipe4" class="verticalPipe">&uarr;<br />&uarr;<br />&nbsp;<br />
+           r<br />e<br />t<br />u<br />r<br />n<br /> <br />p<br />i<br />p<br />e<br />&nbsp;<br />
+           &uarr;<br />&uarr;</div>
+   <div id="pipe5" class="verticalPipe">&darr;<br />&darr;<br />&nbsp;<br />
+           r<br />e<br />t<br />u<br />r<br />n<br /> <br />p<br />i<br />p<br />e<br />&nbsp;<br />
+           &darr;<br />&darr;</div>
+   <div id="tank"><a class="chart" href="">Source Tank</a></div>
+   <div id="valve"><a class="chart" href="">Valve <span class="big">&otimes;</span></a></div>
+   <div id="tent"><a class="chart" href="">Dowsers' Tent</a></div>
+   <div id="pump"><a class="chart" href="">Pump</a></div>
+</div>
+
+<p>
+    At the start of each trial, the people operating the apparatus
+    would draw a ping pong ball from a bag. A symbol on the ball determined which way they
+    would set the valve in a given trial&mdash;which pipe the water would flow through. The bag,
+    the control room, <em>etc</em>., were not visible to the dowsers.
+</p>
+
+<h4>
+    Why two paths for the water?
+</h4>
+
+<p>
+    The reason for having two paths for the water was to control for the noises,
+    vibrations, and other cues to the fact that water was flowing at all.
+    That isolated the experimental condition or &quot;treatment&quot; as much as
+    possible: the difference between treatment and control was whether water was flowing
+    through the pipe under the tent, not whether water was flowing at all.
+</p>
+
+<p>&nbsp;</p>
+
+<h3>
+    The Box Test
+</h3>
+
+<p>
+    In the box test, each dowser could choose one of the following materials to try to locate:
+</p>
+
+<p class="center">
+    iron, coal, gold, silver, copper, magnet.
+</p>
+
+<p>
+    In each trial, an object composed of the material the
+    dowser chose was hidden in one of 10 opaque plastic boxes placed in a row on a bench.
+    Which box it was hidden in was determined by drawing a ping-pong ball from a bag, as
+    in the water test.
+    The dowser was to determine which of the 10 boxes contained the object.
+    The other boxes were empty.
+    This test took place indoors for all but one of the subjects.
+</p>
+
+<h3>
+   <a id="rules"></a>The Rules
+</h3>
+
+<p>
+    To participate in the experiment, each dowser had to
+    sign the following declarations:
+</p>
+
+<p>
+    Before the test:
+</p>
+
+<p>
+  <em>1) I declare that I have been given sufficient information
+  about the tests by the GWUP and by James Randi both verbally and in writing.
+  In pre-trial
+  runs, I had the opportunity to adjust myself to the conditions, and I feel physically and
+  psychically able to succeed in the test under the given circumstances.</em>
+</p>
+<p>
+   After the test:
+</p>
+<p>
+    <em>2) I declare that the tests were conducted impeccably. The
+    test conditions and the schedule have in no way impeded me during the tests.</em>
+</p>
+<p>
+    To win the prize, a dowser had to get 25 correct answers out of
+    30 trials in water experiment (83.3%), or 8 hits out of 10 trials in the box experiment
+    (80%). All the dowsers claimed that they could &quot;hit&quot; in 90&ndash;100% of the cases, so
+    by the rules of the test, they did not need to perform as well as they claimed they could
+    to win the prize.
+</p>
+
+<h3>
+   The Participants
+</h3>
+
+<p>
+    Twenty-one dowsers said they would participate in the water test, but only 20 showed up.
+    One of the 20 who showed said the environment had too
+    much radiation, so he could not possibly work under the circumstances.
+    Thus 19 dowsers participated in the water test.
+</p>
+
+<p>
+    Fourteen dowsers agreed to participate in the box test; one of
+    them (the same one who backed out of the water test) refused to work under the conditions
+    of the experiment. The person who complained about the radiation did the experiment, but
+    in a way that differed from everyone else: for that person, the test was conducted
+    outside, and involved 20 trials rather than 10.
+</p>
+
+<p>&nbsp;</p>
+
+<h3>
+    The Results
+</h3>
+
+<p>
+    The results were unremarkable and unspectacular.
+</p>
+
+<h4>
+    Water Test
+</h4>
+
+<p>
+    <strong>Protocol problems</strong>.
+    Among all the
+    trials in the water test, there were four mistakes in the valve setting (cases where the
+    valve was not set in the direction the ping-pong ball specified).
+    Three of those errors were discovered during the test; the fourth was
+    discovered from the videotape of the test.
+    &nbsp; In all four of those cases, the valve was set to &quot;out&quot; when it should
+    have been set to &quot;in.&quot;
+</p>
+
+<p>
+  <strong>Dowsers' success rates.</strong>
+  Individual dowsers
+  &quot;hit&quot; between 11 and 20 times out of 30.
+  On average, they were right 53.3% of the time.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    is a <a class="glossRef" href="gloss.htm#frequency_table">frequency table</a>
+    of the success rate of the dowsers.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Frequency of Successes in the Kassel Water Test.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>Frequency of successes in the Kassel water test</caption>
+    <tr>
+        <th id="succ">Successes</th>
+        <th id="no">No. of Dowsers</th>
+    </tr>
+    <tr>
+        <td headers="succ">11</td>
+        <td headers="no">1</td>
+    </tr>
+    <tr>
+        <td headers="succ">14</td>
+        <td headers="no">5</td>
+    </tr>
+    <tr>
+        <td headers="succ">15</td>
+        <td headers="no">5</td>
+    </tr>
+    <tr>
+        <td headers="succ">16</td>
+        <td headers="no">3</td>
+    </tr>
+    <tr>
+        <td headers="succ">17</td>
+        <td headers="no">1</td>
+    </tr>
+    <tr>
+        <td headers="succ">18</td>
+        <td headers="no">1</td>
+    </tr>
+    <tr>
+        <td headers="succ">19</td>
+        <td headers="no">1</td>
+    </tr>
+    <tr>
+        <td headers="succ">20</td>
+        <td headers="no">2</td>
+    </tr>
+    <tr>
+        <td headers="succ">Total</td>
+        <td headers="no">19</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<h4>
+     Box Test
+</h4>
+
+<p>
+    Recall that one of the participants had 20 trials rather than 10.
+    That dowser never &quot;hit.&quot;
+</p>
+
+<p>
+    Among the 13 other participants in the box test, there were
+    14 hits in all (10.8%).
+    Including the specially treated dowser decreases the hit rate to 9.3%.
+    See
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Frequency of Successes for the Box Test.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <tr>
+        <th id="succ">Successes</th>
+        <th id="no">No. of Dowsers</th>
+    </tr>
+    <tr>
+        <td headers="succ">0</td>
+        <td headers="no">5</td>
+    </tr>
+    <tr>
+        <td headers="succ">1</td>
+        <td headers="no">3</td>
+    </tr>
+    <tr>
+        <td headers="succ">2</td>
+        <td headers="no">6</td>
+    </tr>
+    <tr>
+        <td headers="succ">Total</td>
+        <td headers="no">14</td>
+    </tr>
+    </table>
+</center>
+</div>
+<p>&nbsp;</p>
+
+<p>
+    None of the dowsers succeeded on either the
+    water test or the box test according to the terms of the test.
+    The prize was not awarded.
+</p>
+
+<h3>
+    Analysis
+</h3>
+
+<p>
+    We would like to know whether the results support the
+    conclusion that dowsing works.
+    The natural <a class="glossRef" href="gloss.htm#null_hypothesis">null
+    hypothesis</a> is that dowsing does not work. In that case, in the water test, the number
+    of times a dowser guesses correctly which of the pipes the water is flowing through would
+    be like the number of tickets labeled &quot;1&quot; one gets in 30 draws with replacement
+    from a box of two tickets of which one is labeled &quot;1&quot; and one is labeled
+    &quot;0.&quot; 
+    That has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with
+    parameters <span class="math">n=30</span> and <span class="math">p=50%</span>. 
+    Similarly, under the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>, the number of times a dowser
+    succeeds in locating the hidden object is like the number of tickets labeled &quot;1&quot;
+    one gets in 10 draws with replacement from a box of two tickets of which one is labeled
+    &quot;1&quot; and nine are labeled &quot;0.&quot;
+    That has a <a class="glossRef" href="gloss.htm#binomial">binomial
+    distribution</a> with parameters <span class="math">n=10</span> and <span class="termOfArt">p=10%</span>.
+</p>
+
+<p>
+    Implicit in the rules is that the null hypothesis will be
+    rejected if <em>any</em> of the dowsers gets the right answer 25 or more times out of 30
+    in the water test, or 8 times or more out of 10 in the box test.
+</p>
+<p>
+    We start by examining dowsers separately for each of the two
+    tests. Because the drawing of the ping-pong balls is presumably independent each time,
+    under the null hypothesis, the results for all the dowsers are independent. This
+    simplicity makes it possible for us to analyze the experiment.
+</p>
+<p>
+    Under the null hypothesis, what is the chance that a particular
+    dowser correctly identifies which pipe the water is flowing through 25 or more times out
+    of 30? The probability is so small that it is indistinguishable from zero in the
+    probability histogram;
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is the probability calculator, which you can use to make this calculation.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability Calculator';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+<p class="figure">
+    <applet width="620" height="280" code="DistCalc.class"
+    codebase="../../Java/" archive="PbsGui.zip">
+    <param name="distributions" value="binomial,geometric,hypergeometric,negative binomial">
+    You need Java to see this
+    </applet>
+</p>
+</div>
+
+<p>
+    The chance is 0.016%.
+    Thus the <a class="glossRef" href="gloss.htm#significance">significance level</a> of
+    the water test for a single dowser is 0.016%.
+</p>
+
+<p>
+    What about <a class="glossRef" href="gloss.htm#power">power</a>?
+    We need a specific alternative hypothesis to calculate the power.
+    The dowsers all claimed to be able to &quot;hit&quot; in 90% to 100%
+    of the cases, so let us take as the alternative hypothesis that the trials are independent
+    with chance 90% of success in each trial.
+    Then the number of successes is like the number
+    of tickets labeled &quot;1&quot; in 30 draws with replacement from a box of tickets
+    containing nine tickets labeled &quot;1&quot; and one ticket labeled &quot;0,&quot; which
+    has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with parameters 
+    <span class="math">n=30</span> and <span class="math"> = 90%</span>.
+    The chance of drawing 25 or more tickets labeled &quot;1&quot; in
+    30 independent draws from such a box is about 92.7%.
+    Thus the power against the
+    alternative hypothesis that dowsing increases to 90% the chance of successfully
+    determining which pipe the water is flowing through is about 92.7%.
+</p>
+
+<p>
+    If the null hypothesis is true, the number of times in ten trials
+    that a dowser correctly identifies which of the ten boxes contains the hidden substance
+    has a binomial distribution with parameters <span class="math">n = 10</span> 
+    and <span class="math">p = 10%</span>. The
+    significance level of the test of a single dowser is the chance of 8 or more successes in
+    10 independent trials with probability 10% of success in each trial, which is about
+    0.00004%. That is the significance level of the box test of a single dowser. The power
+    against the alternative hypothesis that the dowser's chance of correctly identifying the
+    correct box is 90% is the chance of 8 or more successes in 10 independent trials with
+    probability 90% of success in each trial, which is about 93%.
+</p>
+
+<p>
+    We shall ignore the &quot;special&quot; dowser who refused to
+    do the water test and took 20 trials in the box test. The chance that if dowsing does not
+    work (<em>i.e.</em>, if the null hypothesis is true), one or more of the dowsers would
+    pass the water test and/or the box test is (using the independence of the tests)
+</p>
+<p class="math">
+    100% &minus; chance none passes = 100% &minus; (99.884%)<sup>19</sup>&times;(99.99996%)<sup>13</sup>
+</p>
+<p class="math">
+  = 2.2%.
+</p>
+
+<p>
+    Thus even though the chance is about 0.016% that a
+    given dowser with no ability will pass the water test, and about 0.00004% that a given
+    dowser with no ability will pass the box test, the chance that if no dowser had any
+    ability Randi still would have to pay the prize was over 1/50&mdash;many times larger. This
+    is an example of <a class="glossRef" href="gloss.htm#multiple_tests"><em>multiplicity</em></a> in
+    hypothesis testing: the chance of one or more Type I errors in a large number of tests can
+    be much larger than the chance of a Type I error in each test.
+</p>
+
+<p>
+    Under the alternative hypothesis that dowsing increases the
+    chance of &quot;hitting&quot; to 90% for every dowser
+    (all are equally skillful) and that the results of different dowsers
+    are independent, the power of the combined water and box
+    tests (of 19 and 13 subjects, respectively) is
+</p>
+<p class="math">
+    100% &minus; chance none passes = 100% &minus; (7.3%)<sup>19</sup>&times;(7%)<sup>13</sup>
+</p>
+<p class="math">
+    = 100% (to 37 decimal places).
+</p>
+
+</div>
+<!-- end Kassel Dowsing Experiment Example -->
+
+<h2><a id="summary"></a>
+    Summary
+</h2>
+
+<p>
+    Determining whether a treatment has an effect is an ubiquitous problem in science.
+    The best way to determine whether a treatment has an effect is to use the
+    <span class="termOfArt">method of comparison</span>:
+    to compare the outcome for subjects who are treated (the <span class="termOfArt">treatment group</span>) 
+    with the outcome
+    for the control subjects who are not treated (the <span class="termOfArt">control group</span>).
+    For such a comparison to isolate the effect of the treatment, it is crucial that the
+    treatment and control groups be as similar as possible but for the treatment.
+    Effects of differences between the treatment and the control group other than
+    the treatment cannot be distinguished from effects of the treatment:
+    Differences between the treatment and control groups can <span class="termOfArt">confound</span> 
+    with the treatment.
+</p>
+
+<p>
+    Comparisons using <span class="termOfArt">historical controls</span>, subjects from the past who did not receive
+    treatment, tend to suffer from confounding.
+    The effect of age tends to be confounded with other variables in 
+    <span class="termOfArt">cross-sectional comparisons</span>,
+    which seek to study the effect of age by comparing individuals of different ages at the same time.
+    <span class="termOfArt">Cross-sectional comparisons</span> tend to suffer from confounding.
+    <span class="termOfArt">Longitudinal comparisons</span> study the effects of age by comparing individuals with
+    themselves at different ages.
+    Longitudinal comparisons are less prone to confounding than cross-sectional comparisons are,
+    but they are more expensive and more time consuming, because they the investigators
+    must track the subjects over time.
+    <span class="termOfArt">Simpson's Paradox</span> is an illustration of confounding: What is true for the parts need
+    not be true for the whole.
+</p>
+
+<p>
+    If the assignment of individuals to treatment is left to the subjects or to nature&mdash;the defining
+    characteristic of an <span class="termOfArt">observational study</span>&mdash;confounding tends to be a problem.
+    However, in many situations there is no alternative, and observational studies sometimes
+    provide compelling evidence that treatment has an effect, as John Snow's study of
+    cholera shows.
+    (In Snow's study, Nature mixed subjects between treatment and control in
+    a way that mimicked a randomized, blind experiment: a <span class="termOfArt">natural experiment</span>.)
+    Even if the assignment to treatment is deliberate on the part of the investigator&mdash;the defining
+    characteristic of an <span class="termOfArt">experiment</span>&mdash;confounding can be a problem.
+    Confounding caused by individual differences can be reduced by using the method of
+    comparison with <span class="termOfArt">randomization</span> to assign subjects to treatment or control.
+    <span class="termOfArt">Randomized assignment</span> tends to balance differences between the treatment and
+    control groups, so that the overall difference between the outcomes for the two groups
+    can be attributed more reliably to the treatment itself.
+</p>
+
+<p>
+    In experiments on human subjects, using a <span class="termOfArt">placebo</span> can prevent the subjects from
+    knowing whether they are in the treatment or the control group.
+    This is important because the mere belief that one is being treated has an effect,
+    called the <span class="termOfArt">placebo effect</span>.
+    Using a placebo makes the control and treatment groups alike with respect to the placebo effect.
+    An experiment that uses a placebo to prevent subjects from knowing whether they are
+    in the treatment or control group is called a <span class="termOfArt">blind experiment</span>.
+    If assessing the outcome for individual subjects involves an element of judgment,
+    confounding tends to be reduced if the person assessing the outcome does not know
+    which subjects are in the treatment group and which are in the control group.
+    An experiment in which the subjects do not know whether they are in the treatment or control group,
+    and in which the assessors do not know which subjects are in the treatment group and which are
+    in the control group, is called a <span class="termOfArt">double-blind experiment</span>.
+    The best method for determining whether a treatment has an effect on human subjects is a
+    <span class="termOfArt">randomized, controlled, double-blind experiment</span>.
+</p>
+
+<h2>
+    <a id="key_terms">Key Terms</a>
+</h2>
+
+<ul>
+    <li>alternative hypothesis                </li>
+    <li>bias                                  </li>
+    <li>binomial distribution                 </li>
+    <li>blind experiment                      </li>
+    <li>causal relationship                   </li>
+    <li>confound                              </li>
+    <li>control                               </li>
+    <li>control group                         </li>
+    <li>controlled randomized experiment      </li>
+    <li>cross-sectional study                 </li>
+    <li>double-blind experiment               </li>
+    <li>effect                                </li>
+    <li>experiment                            </li>
+    <li>frequency table                       </li>
+    <li>historical control                    </li>
+    <li>independent                           </li>
+    <li>longitudinal study                    </li>
+    <li>mean                                  </li>
+    <li>method of comparison                  </li>
+    <li>multiplicity in hypothesis testing    </li>
+    <li>null hypothesis                       </li>
+    <li>observational study                   </li>
+    <li>parameter                             </li>
+    <li>placebo                               </li>
+    <li>placebo effect                        </li>
+    <li>population                            </li>
+    <li>power                                 </li>
+    <li>probability                           </li>
+    <li>probability histogram                 </li>
+    <li>quota sample                          </li>
+    <li>randomized controlled experiment      </li>
+    <li>secular trend                         </li>
+    <li>significance level                    </li>
+    <li>Simpson's Paradox                     </li>
+    <li>subject                               </li>
+    <li>treatment                             </li>
+    <li>treatment effect                      </li>
+    <li>treatment group                       </li>
+    <li>Type I error                          </li>
+    <li>Type II error                         </li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

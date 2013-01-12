@@ -1,0 +1,1868 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "29 July 2011 10:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "sampling";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="post">
+
+<h1>
+    <a id="sampling"></a>
+    Sampling
+</h1>
+
+<p>
+    A central problem in statistics is to obtain information about a <span class="termOfArt">population</span>,
+    a collection of <span class="termOfArt">units</span>, without examining every unit in the population&mdash;only a
+    <span class="termOfArt">sample</span> from the population.
+    The ability to draw conclusions from a sample is essential if it is impossible or
+    impractical to collect information about the entire population.
+    Moreover, in some situations, sampling can lead to more reliable estimates and inferences than
+    attempting to measure every unit in the entire population.
+    The <span class="termOfArt">sampling design</span>, the rules for deciding which units comprise the sample,
+    is crucial to the accuracy and reliability of the results.
+    Poor designs result in <span class="termOfArt">bias</span>, a systematic tendency for estimators of population
+    parameters using the sample to be too high or too low.
+    <span class="termOfArt">Sample surveys</span>&mdash;samples of the opinions of people obtained by interviewers,
+    pollsters, or questionnaires&mdash;tend to suffer from <span class="termOfArt">nonresponse bias</span>: those who
+    respond to the survey often differ from those who do not respond with respect to variables
+    that the survey seeks to study.
+    Even if response is complete, some sampling designs tend to be biased.
+    The best way to keep bias to a minimum is to use <span class="termOfArt">random sampling</span>, which deliberately
+    introduces chance into the selection of the sample from the population.
+    The error of extrapolating to a population from a random sample can be estimated,
+    while the error of extrapolating other kinds of samples is essentially impossible
+    to estimate.
+</p>
+
+<h2>
+    <a id="params_stats"></a>
+    Parameters and Statistics
+</h2>
+
+<p>
+    In our discussion so far of drawing from a box (or
+    sampling from a <a class="glossRef" href="gloss.htm#population">population</a>), we have
+    known the contents of the box, and calculated the chance (exact or approximate)
+    that the sum or average of the draws would be in some range.
+    These are probability calculations.
+    Now we turn to statistical estimation and inference, which work in the other
+    direction: Starting with a sample from a box and information about how the sample
+    was drawn, we can draw conclusions about the contents of the box (the population).
+    The conclusions are subject to uncertainty, unless the sample is known to be the
+    entire population.
+</p>
+
+<p>
+    Typically, we are interested in a numerical property of the population, called a
+    <a class="glossRef" href="gloss.htm#parameter">parameter</a>, and we base our estimates and inferences on
+    the observed value of a quantity computed from the sample, called a
+    <a class="glossRef" href="gloss.htm#statistic">statistic</a>.
+    These are two of the most important and fundamental problems Statistics addresses:
+    How to estimate and make inferences about a parameter of a population,
+    using a statistic computed from the sample.
+</p>
+
+<p>
+    A <a class="glossRef" href="gloss.htm#population">population</a> is a collection of
+    <a class="glossRef" href="gloss.htm#unit">units</a>,
+    which could be people, things, places, times, temperatures, <em>etc</em>.
+    A parameter is a numerical property of a population.
+    For example, the population might be all the registered voters in the United States in
+    October, 2003, and the parameter might be the fraction of those registered voters
+    who were registered as Democrats.
+    The parameter is what the statistician would like to know but does not;
+    a statistic is something the statistician can calculate from things he knows
+    (or will know once the sample is drawn), and could use to try to estimate the parameter.
+</p>
+
+<p>
+    A statistic that is calculated in order to estimate a parameter is called an <span class="termOfArt">estimator</span>.
+    For example, the sample mean is a common estimator of the population mean,
+    and the sample percentage is a common estimator of the population percentage.
+</p>
+
+<p>
+    The following exercises check your ability to identify parameters and statistics.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The United States 2000 Decennial Census sought to count the population ' +
+           'of the US, broken down by various geographic regions and demographic ' +
+           'groups, as of 1 April 2000.</p><p><span class="qSpan">For the 2000 Census, ' +
+           'the number of black males age 30&ndash;44 in a given block is a</span>';
+    document.writeln(qStr);
+    var opt = ['parameter',
+           'statistic'
+          ];
+    var aVal = 'a';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = 'The number of people in a demographic group living in a given ' +
+         'block on Census day is a property of the population&mdash;a parameter. ' +
+         'The Bureau of the Census estimates this property from a sample, a sample ' +
+         'that tries to capture the entire population.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The number of black males age 30&ndash;44 the Census ' +
+           'found in a given block as of Census day is a</span>';
+    document.writeln(qStr);
+    var opt = ["parameter","statistic"];
+    var aVal = "b";
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var ansStr = 'The number of people in a demographic group the census finds in a given ' +
+         'block on Census day depends on the sample&mdash;it is a statistic. ' +
+         'However, the sample is not a random sample in any straightforward ' +
+         'way, so it is not clear whether the statistic should be treated as ' +
+         'a random variable. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="why_sample"></a>
+    Why Sample?
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=45&end=173" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Estimating parameters from a sample instead of making measurements on an
+    entire population is useful in many situations, including quality control, market
+    research, predicting elections, <em>etc</em>.
+    Sampling can be preferable to attempting to make measurements on an
+    entire population, for a variety of reasons:
+</p>
+
+<ul>
+    <li>
+        Sampling reduces the number of measurements that need to be made.
+        This can
+    <ul>
+        <li>
+            allow more expensive measurement apparatus and better trained staff to be used,
+            which can increase the precision and accuracy of the results
+        </li>
+        <li>
+            save money, time, and resources
+        </li>
+        <li>
+            make timely estimates possible
+        </li>
+        <li>
+            be essential in destructive testing.
+        </li>
+     </ul>
+    </li>
+    <li>
+        If the sample is designed well, one can quantify the error in parameter
+        estimates based on the sample.
+    </li>
+</ul>
+
+<p>
+    As an extreme example, if an automobile manufacturer wants to know how its cars
+    fare in a crash, it cannot test all the cars it manufactures&mdash;it would have
+    no cars left to sell.
+    A lightbulb manufacturer who wants to know how long a certain type of bulb lasts
+    cannot run all such bulbs until they burn out&mdash;it would have no bulbs left to sell.
+    Using a product until it fails to see how long it lasts, crashing cars into
+    barriers to see how crash-worthy they are, cutting through a casting to see
+    whether it contains flaws, and similar methods for assessing product quality are
+    called <span class="termOfArt">destructive testing</span>.
+    It is clearly desirable to be able to extrapolate to the whole population of bulbs, cars,
+    or what have you, from a sample tested destructively.
+</p>
+
+<p>
+    In other cases, the cost (in time, manpower, or money) of making measurements on the
+    whole population can be prohibitive.
+    For example, in the U.S. Census, about one household in ten receives the long form.
+    Whether results from a sample can be extrapolated to the population from which the sample
+    was drawn depends critically on the <span class="termOfArt">design</span> of the sample&mdash;how the sample was
+    drawn&mdash;as we shall see in the next section.
+</p>
+
+<h2>
+    <a id="surveys"></a>Sample Surveys
+</h2>
+
+<p>
+    <a class="glossRef" href="gloss.htm#sample_survey">Sample surveys</a> attempt to determine the opinions,
+    beliefs, behavior, or other parameters of a population of people from the responses
+    of a sample from the population to a questionnaire or interview.
+    Sample surveys are an important tool in Epidemiology, Social Science, and Economics,
+    with applications ranging from estimating the prevalence of risky sexual behavior to
+    market research.
+    Sample surveys are subject to various <a class="glossRef" href="gloss.htm#bias">biases</a>, 
+    some of which are discussed in the following sections.
+    One of the distinguishing characteristics of a survey is that the individuals are
+    relied upon to report data about themselves, by answering questions.
+    Because individuals could elect not to respond to a survey and could respond
+    inaccurately or untruthfully, interpreting surveys requires care.
+</p>
+
+<h3>
+    <a id="Hite_report"></a>
+     Hite Report on Women and Love, 1987
+</h3>
+
+<p>
+    In the 1980's, Shere Hite sent out over 100,000 questionnaires to study how women feel
+    about their relationships with men.
+    Her findings were reported in
+    <a href="references.htm#hite"><em>Women and Love</em></a>.
+    The discussion of Hite's survey below is based on <em>Sense and Nonsense of 
+    statistical Inference: Controversy,
+    misuse, and subtlety</em> (C. Wang, 1993), which reports and discusses some of Hite's data,
+    and contrasts her findings with contemporary findings of other researchers.
+</p>
+
+<p>
+    Hite's results were at odds with the outcome of previous studies of sexuality in the U.S.
+    For example, Hite claims to have proved Kinsey (1953) wrong&mdash;the Kinsey report
+    found that 26% of women had had extra-marital affairs; Hite found that 70% had.
+    Hite says
+</p>
+
+<blockquote>
+    <p>
+    Kinsey's figures were just rather low because he was conducting face to face
+    interviews &hellip; inhibited reporting &hellip;
+    </p>
+</blockquote>
+
+<p>
+    Hite saw a &quot;flood of unhappiness&quot; in the responses she received.
+</p>
+
+<p>
+    In contrast, other studies at close to the same time as Hite's, including the
+    <em>Redbook</em> survey and a 1991 survey of a random sample of 2000 people by
+    Patterson and Kim, found that about 31% of women had extra-marital affairs.
+    This figure is larger than Kinsey's, which might reflect changes in behavior
+    from the 1950s to the 1990s, but it is still far lower than the rate Hite found.
+    Hite also says that the following is representative of women in the US:
+</p>
+
+<blockquote>
+    <p>
+      Feminists have raised a cry against the many injustices of marriage&mdash;exploitation of
+      women financially, physically, sexually, and emotionally.
+      This outcry has been just and
+      accurate.
+    </p>
+</blockquote>
+
+<p>
+    In contrast, a 1987 Harris poll of 3000 people selected at random found that family life
+    gives great satisfaction to both men and women: 89% said their relationship was
+    satisfying.
+</p>
+
+<p>
+    What is going on here?
+</p>
+
+<p>
+    All these studies&mdash;by Hite, Kinsey, <em>Redbook</em>, Patterson and Kim, and Harris&mdash;are
+    sample surveys.
+    Some used face-to-face or telephone interviews; others used written questionnaires.
+    The fraction of U.S. women in 1991 who had had extramarital affairs is a
+    <a class="glossRef" href="gloss.htm#parameter">parameter</a> of the 
+    <a class="glossRef" href="gloss.htm#population">population</a>
+    of U.S. women.
+    The fraction of women in the 1991 Patterson and Kim survey who had had extramarital
+    affairs is a <a class="glossRef" href="gloss.htm#statistic">statistic</a> intended to estimate that
+    parameter.
+    Hite claimed that her statistics were more accurate 
+    <a class="glossRef" href="gloss.htm#estimator">estimators</a>
+    of the corresponding parameters than Kinsey’s were, because her methodology was better:
+    Using written questionnaires instead of face-to-face interviews made it more likely that
+    respondents would answer truthfully, instead of fabricating a response out of shame, fear,
+    or desire to please the interviewer.
+    Hite cites the demographic breakdown of her sample as evidence that her results are accurate.
+    The demographics of Hite's sample match the demographics of women in the United States
+    at that time remarkably well.
+    Tables
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+    document.writeln(' through ');
+    citeTable(tCtr+3);
+// -->
+</script>
+    present some summary statistics for the two groups.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Hite Survey respondents and American women by annual income level';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+<table class="dataTable">
+    <caption>Hite Sample versus US Population: (annual income)/1000</caption>
+    <tr>
+    <th id="col0">Stratum</th>
+    <th id="col1">Study%</th>
+    <th id="col2">US%</th>
+    </tr>
+    <tr>
+    <th align="left" id="row1" scope="row">&lt;$2000</th>
+    <td headers="col1,row1">19</td>
+    <td headers="col2,row1">18.3</td>
+    </tr>
+    <tr>
+    <th align="left" id="row2" scope="row">$2000-4000</th>
+    <td headers="col1,row2">12.0</td>
+    <td headers="col2,row2">13.2</td>
+    </tr>
+    <tr>
+    <th align="left" id="row3" scope="row">$4000-6000</th>
+    <td headers="col1,row3">12.5</td>
+    <td headers="col2,row3">12.2</td>
+    </tr>
+    <tr>
+    <th align="left" id="row4" scope="row">$6000-8000</th>
+    <td headers="col1,row4">10.0</td>
+    <td headers="col2,row4">9.7</td>
+    </tr>
+    <tr>
+    <th align="left" id="row5" scope="row">$8000-10,000</th>
+    <td headers="col1,row5">7.0</td>
+    <td headers="col2,row5">7.4</td>
+    </tr>
+    <tr>
+    <th align="left" id="row6" scope="row">$10,000-12,500</th>
+    <td headers="col1,row6">8.0</td>
+    <td headers="col2,row6">8.8</td>
+    </tr>
+    <tr>
+    <th align="left" id="row7" scope="row">$12,500-15,000</th>
+    <td headers="col1,row7">5.0</td>
+    <td headers="col2,row7">6.2</td>
+    </tr>
+    <tr>
+    <th align="left" id="row8" scope="row">$15,000-20,000</th>
+    <td headers="col1,row8">0.0</td>
+    <td headers="col2,row8">9.8</td>
+    </tr>
+    <tr>
+    <th align="left" id="row9" scope="row">$20,000-25,000</th>
+    <td headers="col1,row9">8.0</td>
+    <td headers="col2,row9">6.4</td>
+    </tr>
+    <tr>
+    <th align="left" id="row10" scope="row">&gt;$25,000</th>
+    <td headers="col1,row10">8.5</td>
+    <td headers="col2,row10">8.2</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Hite Survey respondents and U.S. women by type of area of residence';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+<table class="dataTable">
+    <caption>Area</caption>
+    <tr>
+    <th id="col0">Stratum</th>
+    <th id="col0">Study%</th>
+    <th id="col0">US%</th>
+    </tr>
+    <tr>
+    <th align="left" id="row1" scope="row">City/Urban</th>
+    <td headers="col1,row1">60</td>
+    <td headers="col2,row1">62</td>
+    </tr>
+    <tr>
+    <th align="left" id="row2" scope="row">Rural</th>
+    <td headers="col1,row2">27</td>
+    <td headers="col2,row2">26</td>
+    </tr>
+    <tr>
+    <th align="left" id="row3" scope="row">Small Town</th>
+    <td headers="col1,row3">13</td>
+    <td headers="col2,row3">12</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Hite Survey respondents and U.S. women by geographic region';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+<table class="dataTable">
+    <caption>Region</caption>
+    <tr>
+    <th id="col0">Stratum</th>
+    <th id="col1">Study%</th>
+    <th id="col2">US%</th>
+    </tr>
+    <tr>
+    <th align="left" id="row1" scope="row">Northeast</th>
+    <td headers="col1,row1">21</td>
+    <td headers="col2,row1">22</td>
+    </tr>
+    <tr>
+    <th align="left" id="row2" scope="row">North Central</th>
+    <td headers="col1,row2">27</td>
+    <td headers="col2,row2">26</td>
+    </tr>
+    <tr>
+    <th align="left" id="row3" scope="row">South</th>
+    <td headers="col1,row3">31</td>
+    <td headers="col2,row3">33</td>
+    </tr>
+    <tr>
+    <th align="left" id="row4" scope="row">West</th>
+    <td headers="col1,row4">21</td>
+    <td headers="col2,row4">19</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Hite Survey respondents and U.S. women by race';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+<table class="dataTable">
+    <caption>Race</caption>
+    <tr>
+    <th id="col0">Stratum</th>
+    <th id="col1">Study%</th>
+    <th id="col2">US%</th>
+    </tr>
+    <tr>
+    <th align="left" id="row1" scope="row">White</th>
+    <td headers="col1,row1">82.5</td>
+    <td headers="col2,row1">83.0</td>
+    </tr>
+    <tr>
+    <th align="left" id="row2" scope="row">Black</th>
+    <td headers="col1,row2">13.0</td>
+    <td headers="col2,row2">12.0</td>
+    </tr>
+    <tr>
+    <th align="left" id="row3" scope="row">Asian</th>
+    <td headers="col1,row3">1.8</td>
+    <td headers="col2,row3">2.0</td>
+    </tr>
+    <tr>
+    <th align="left" id="row4" scope="row">Hispanic</th>
+    <td headers="col1,row4">1.8</td>
+    <td headers="col2,row4">1.5</td>
+    </tr>
+    <tr>
+    <th align="left" id="row5" scope="row">Native American</th>
+    <td headers="col1,row5">0.9</td>
+    <td headers="col2,row5">1.0</td>
+    </tr>
+    <tr>
+    <th align="left" id="row6" scope="row">Middle Eastern</th>
+    <td headers="col1,row6">0.3</td>
+    <td headers="col2,row6">0.5</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    The demographics match those of the general US population remarkably well.
+    Does that mean Hite is right?
+</p>
+
+<h3>
+    <a id="survey_bias"></a>
+    Bias in Surveys
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=571&end=1394" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The more plausible conclusion is that Hite's results were 
+    <a class="glossRef" href="gloss.htm#bias">biased</a> by
+    <span class="termOfArt">nonresponse</span>:
+    The conclusions are based on the responses of
+    women who chose to fill out the survey and mail it back.
+    It would not be surprising if angry, unhappy, dissatisfied women were more likely
+    to respond to Hite's questionnaires than were women in generally
+    fulfilling relationships.
+    (Anger is a stronger motivator than happiness, in my experience.)
+    In contrast, it would be rather surprising if the large differences between Hite's results
+    and those of the other surveys were due to dishonest responses to the other surveys.
+</p>
+
+<p>
+    Only 4,500 of the (over) 100,000 women who were sent questionnaires responded (4.5%).
+    Roughly 95,500 of the people from whom a response was solicited did not respond to
+    the survey: They are called <span class="termOfArt">nonresponders</span>.
+    The <a class="glossRef" href="gloss.htm#nonresponse_rate">nonresponse rate</a> in the Hite
+    survey is thus (at least)
+</p>
+
+<div align="center">
+<center>
+<table border="0" cellpadding="2">
+    <tr>
+    <td align="center">
+         number of nonresponders
+    </td>
+    <td>
+    </td>
+    <td align="center">
+        100,000 &minus; 4,500
+    </td>
+    <td>
+    </td>
+    <td align="center">
+        95,500
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+    <tr>
+    <td align="center">
+        -----------------------------
+    </td>
+    <td align="center">
+        =
+    </td>
+    <td align="center">
+        --------------------
+    </td>
+    <td align="center">
+        =
+    </td>
+    <td align="center">
+        -------------
+    </td>
+    <td align="center">
+        =
+    </td>
+    <td align="center">
+        95.5%.
+    </td>
+    </tr>
+    <tr>
+    <td align="center">
+        responses solicited
+    </td>
+    <td>
+    </td>
+    <td align="center">
+        100,000
+    </td>
+    <td>
+    </td>
+    <td align="center">
+        100,000
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    This is a very high rate of nonresponse.
+    The 95,500 nonresponders might be quite different from the 4,500 responders
+    with respect to the issues the survey sought to explore, even though the
+    4,500 responders were much like the general population of women with respect to
+    basic demographic characteristics, such as age, ethnicity, income, and place
+    of residence.
+    If so, the difference between the responders and the nonresponders could bias
+    the results.
+    This is called <a class="glossRef" href="gloss.htm#nonresponse_bias">nonresponse bias</a>.
+    Even if the 100,000 women who were sent surveys were a representative subset
+    of all american women, the 4,500 who responded might not be.
+    In fact, that is a plausible explanation for the differences between the results
+    of the Hite report and the results of the other studies cited.
+</p>
+
+<p>
+    We can bound the extent to which nonresponse
+    affects estimates of percentages by imagining what would have happened
+    had all the nonresponders answered one way or the other.
+    For example, if the nonresponders had all had extramarital affairs, the estimated
+    rate of extramarital affairs would have been
+</p>
+
+<p class="math">
+    <big>(</big>
+    70%&times;(4,500 responders) + 100%&times;(95,500 nonresponders)
+    <big>)</big>/100,000 = 98.7%.
+</p>
+
+<p>
+    On the other hand, if none of the nonresponders had had an extramarital affair, the
+    estimated rate of extramarital affairs would have been
+</p>
+
+<p class="math">
+    <big>(</big>
+    70%&times;(4,500 responders) + 0%&times;(95,500 nonresponders)
+    <big>)</big>/100,000 = 3.2%.
+</p>
+
+<p>
+    The nonresponse could have biased the estimate upwards by (70% &minus; 3.2%) = 66.8%,
+    or could have biased the estimate downwards by (98.7% &minus; 70%) = 28.7%.
+</p>
+
+<p>
+    The following exercise checks your ability to calculate the possible size of nonresponse bias.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var sizes = listOfDistinctRandInts(2,1,10).sort(numberLessThan);
+    for (j=0; j < sizes.length; j++) {
+    sizes[j] *= 1000;
+    }
+    var p = 10*(listOfRandInts(1,1,9)[0]);
+    var pMax = ((p/100)*sizes[0] + (sizes[1]-sizes[0]))/sizes[1];
+    var pMin = ((p/100)*sizes[0])/sizes[1];
+    var qStr = 'A researcher sends a questionnaire to ' + sizes[1] +
+           ' individuals. She gets back ' + sizes[0] + ' responses.   ' +
+           'The percentage of women among the respondents is ' + p.toString() +
+           '%.  <span class="qSpan">Because of nonresponse, the fraction of women ' +
+           'among recipients of the survey could be anything between (low) ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pMin));
+    var qStr = ' and (high)</span> ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pMax));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    The Hite report might be evidence that women's dissatisfaction in their relationships
+    with men (and perhaps infidelity) is fairly evenly distributed throughout our society;
+    but, primarily because of nonresponse, the survey says very little about the prevalence
+    of dissatisfaction and infidelity.
+    Proportional representation in the sample of various subgroups of the population does
+    not ensure that the sample is like the population with respect to the variables of interest.
+    In the Hite survey, it is reasonable to conclude that those women who responded to the
+    questionnaire were not typical of the general population of U.S. women with
+    regard to the variables being studied, even though they were like the general
+    population with regard to various demographic variables: the factors that influence
+    whether a woman responded to the Hite survey probably are
+    strongly associated with the variables the survey studied.
+</p>
+
+<p>
+    There are many other potential sources of bias in sample surveys.
+    The following list summarizes some of them:
+</p>
+
+<ol>
+  <li>
+      <strong>Frame bias</strong>. As discussed later, the sampling frame from
+      which individuals are selected to participate in a survey can differ from the
+      general population with regard to the variables studied.
+      A classic example of this is the 1936 Literary Digest poll of 10 million people,
+      which attempted to predict the outcome of the 1936 presidential election.
+      The poll predicted that Landon (Republican) would beat Roosevelt (Democrat)
+      by a margin of more than two to one; instead, Roosevelt won.
+      The 10,000,000 people in the poll were subscribers to Literary Digest and
+      people with telephone service. In those days, both were relatively expensive,
+      and the people on the list were predominantly Republican.
+      The sample was not representative of the voting population;
+      it was biased in favor of the Republican candidate.
+      This is an example of a sample with built-in bias.
+      See <em>How to Lie with Statistics</em> (Huff, 1993) for more examples.
+  </li>
+  <li>
+      <strong>Question wording</strong>. The wording of a question can influence the response enormously.
+      For example, which of the following do you think would elicit more &quot;pro-life&quot; responses:
+      <ul>
+        <li>Should a woman have control over her own body, including her reproductive system?</li>
+        <li>Should a doctor be allowed to murder unborn children who cannot defend themselves?</li>
+      </ul>
+  </li>
+  <li>
+      <strong>Sensitive topics</strong>. It is hard to get honest answers to questions on sensitive
+      topics, including income, sex, hygiene, and nefarious or illegal behavior, such as tax
+      evasion or cheating on exams.
+      Hite probably was correct that the anonymity of her survey increased the truthfulness of responses
+      to questions about infidelity: Women who had extramarital affairs were more likely to
+      report so than they would have been had they been asked directly by a researcher.
+  </li>
+  <li>
+      <strong>Interviewer bias</strong>.
+      Interviewers can bias the results consciously or unconsciously, in a variety of ways.
+      For example, if the interviewer has any discretion in selecting subjects to interview,
+      the sample is likely to be biased towards persons the interviewer finds approachable
+      or appealing.
+      The interviewer's appearance and demeanor affect people's willingness to respond.
+      Also, most interviewees unconsciously seek to please the interviewer.
+      The appearance and demeanor of the interviewer influence what subjects imagine the
+      interviewer to be thinking.
+      A man with a military haircut wearing a business suit asking whether there should be more
+      homeless shelters probably would get different responses than would a shabbily
+      dressed woman with an infant in her arms.
+  </li>
+</ul>
+
+<div class="indent">
+<p class="inline">
+      See <a href="references.htm#huff">Huff (1993)</a> for more discussion and more examples.
+      Hite was concerned primarily with the third and fourth of these sources of bias:
+      People tend to color their responses when the topic is sensitive,
+      and when they are worried that the interviewer is judging them, or that their responses
+      could have negative repercussions for them.
+      There are techniques that try to reduce this bias, but it is hard to eliminate completely.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'One technique for encouraging truthful reporting on sensitive topics is called ' +
+           '<span class="termOfArt">randomized response</span>, in which the ' +
+           'respondent is asked to toss a coin.  If the coin lands heads, the ' +
+           'respondent is supposed to answer the sensitive question.  If the coin ' +
+           'lands tails, the respondent is supposed to answer &quot;yes,&quot; regardless ' +
+           'of the question.  The idea is that respondents will answer a sensitive ' +
+           'question more truthfully if they believe the interviewer does not know ' +
+           'whether they are answering it or the coin just happened to land ' +
+           'tails&mdash;the randomization preserves their anonymity.</p>' +
+           '<p>In this hypothetical example, we would expect that about half of the ' +
+           'respondents answered the sensitive question and about half responded ' +
+           '&quot;yes&quot; because the coin landed tails.  The total number of ' +
+           'affirmative responses thus would be about </p><p class="math">' +
+           '(half the number of respondents)&times;(fraction of those who answered ' +
+           'the sensitive question who answered &quot;yes&quot;) ' +
+           ' + (half the number of respondents)&times;100%. ' +
+           '</p><p>The fraction of affirmative responses is thus about ' +
+           '</p><p class="math">50%&times;(fraction who answered &quot;yes&quot; ' +
+           'to the sensitive question) + 50%,</p><p> so the estimated fraction of ' +
+           'people who would have answered &quot;yes&quot; to the sensitive question ' +
+           'would be </p><p class="math">2 &times; <big>(</big> ' +
+           '(fraction of &quot;yes&quot; responses) &minus;  50% <big>)</big>.</p>' +
+           '<p>For example, if 60% of the respondents answered &quot;yes&quot;, we ' +
+           'would estimate that the 60% represents 50% from the coin landing tails, plus ' +
+           '10% from the coin landing heads and people answering &quot;yes&quot; to the ' +
+           'sensitive question.  Among persons who answered the question, the fraction ' +
+           'who answered &quot;yes&quot; is about 2&times;(60% &minus; 50%) = 20%.'
+    ;
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+      Conscious or unconscious bias in selecting subjects to interview can be eliminated by
+      selecting subjects at random.
+</p>
+</div>
+
+<h2>
+    <a id="sampling_designs"></a>
+    Sampling Designs
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1394&end=1535" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This section introduces terminology and a taxonomy of <span class="termOfArt">sampling designs</span>,
+    strategies for drawing a sample from a population to draw inferences about a population of
+    people or other units from a sample. The terminology and
+    classification apply not only to sample surveys, but to sampling generally.
+</p>
+
+<p>
+    The <span class="termOfArt">sample size</span> is the number of <a class="glossRef" href="gloss.htm#unit">units</a> the sample contains.
+    Commonly, the sample is chosen not from the entire population of units,
+    but from a subset of the population, or a different population, called a <span class="termOfArt">frame</span> or
+    <span class="termOfArt">sampling frame</span>.
+    If the value of the parameter differs for the population and the frame, this can introduce
+    <span class="termOfArt">frame bias</span> into estimates computed from the sample, as described earlier in this
+    chapter.
+    Throughout the remainder of this chapter, <span class="math">n</span> will denote the sample size and
+    <span class="math">N</span> will denote the number of units in the frame.
+</p>
+
+<h3><a id="cluster"></a>
+    Cluster Sampling
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1535&end=1580" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Sometimes the units are not sampled directly, one at a time; rather, <span class="termOfArt">clusters</span>
+    of units are selected.
+    The basic element sampled is called the <span class="termOfArt">sampling unit</span>.
+    The sampling units can be the same as the population units, but it is quite common for the
+    sampling units to be clusters of population units; then the sample is called a <span class="termOfArt">cluster sample</span>.
+</p>
+
+<h3><a id="stratified"></a>
+    Stratified Sampling
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1580&end=1642" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Sometimes the population is divided into non-overlapping groups, called <span class="termOfArt">strata</span>
+    (singular: stratum), and a sample is taken separately from each stratum.
+    This is called <span class="termOfArt">stratified sampling</span>; the sample is called a <span class="termOfArt">stratified sample</span>.
+    If the variable of interest varies within the population in a way that is associated
+    with membership in different strata, stratified sampling can yield smaller errors
+    than simpler sampling designs, for a given sample size.
+</p>
+
+<h3><a id="multistage"></a>
+    Multistage Sampling
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1642&end=1740" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Sometimes it is easier to draw the sample in stages.
+    For example, to draw a sample of persons in the United States, we might proceed as follows:
+</p>
+
+<ol>
+    <li>
+        Make a list of states.
+    </li>
+    <li>
+        Select two states; then list the counties in those states.
+    </li>
+    <li>
+        Select two counties from each of the states, and list the blocks in the counties.
+    </li>
+    <li>
+        Select three blocks from each county, and list the housing units in the blocks.
+    </li>
+    <li>
+        Select five housing units from each of the blocks, and list the residents of the
+        housing units.
+    </li>
+    <li>
+        Select one person from each of the selected housing units.
+    </li>
+</ol>
+
+<p>
+    Such an approach is called <span class="termOfArt">multistage sampling</span>.
+    It can be much more economical than trying to sample directly from the population.
+    In this example, the multistage approach needs a list of persons in a few dwellings,
+    a list of dwellings in a few blocks, a list of blocks in a few counties,
+    a list of counties in a few states, and a list of states.
+    Constructing or obtaining these lists is much easier and much less error-prone
+    than trying to construct a list of all persons in the United States, which we
+    would need to sample persons directly in a single stage.
+</p>
+
+<h3><a id="hybrid"></a>
+    Hybrid Sampling Designs
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1740&end=1803" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    There are also more complicated sampling designs that combine these strategies.
+    For example, in the description of multistage sampling in the previous section,
+    had we taken <em>all</em> the residents of the selected housing units to be in the sample,
+    instead of just <em>one</em> resident of each housing unit in the sample,
+    we would have been sampling clusters of people instead of individuals.
+    This is called <span class="termOfArt">multistage cluster sampling</span>.
+</p>
+
+<h2><a id="ways_to_draw"></a>
+    Ways to Draw Samples
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1803&end=1826" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Whether we sample individuals or clusters of individuals, sample in one stage from the
+    frame or in several stages, sample from the frame as a whole or from strata separately,
+    we need to pick the sampling units that comprise the sample.
+    How the sampling units are selected is crucial in determining whether the
+    sample is representative, and whether it is possible to quantify the error
+    committed by using the sample to estimate parameters of the population.
+</p>
+
+<h3><a id="convenience"></a>
+    Convenience Samples
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1826&end=1904" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>A convenience sample is a sample that consists of units that are readily
+  accessible to the investigator or data collector&mdash;units it is convenient to examine.
+  The data collector has complete latitude in deciding which units to include in the sample.
+  For example, suppose I seek to estimate the fraction of University of California at
+  Berkeley faculty who are registered Republicans.
+  I might just start at the beginning of the campus telephone directory, and call faculty
+  until I reach 100 people who are willing to answer my question.
+  Alternatively, I might go to the Faculty Club at lunchtime and interview the first 100
+  faculty who consent.
+  Either would be a convenience sample.
+  A convenience sample typically is not representative of the population, and usually it is
+  not possible to quantify the error in extrapolating from a convenience sample to the
+  entire frame or population.
+  For example, in the second case, if the membership of the Faculty Club is
+  disproportionately Republican compared with the faculty at large, the sample
+  would tend to be biased.
+  The Hite study essentially used a sample of convenience.
+</p>
+
+<h3><a id="quota"></a>
+    Quota Samples
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1904&end=1973" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    A quota sample is a sample picked to match the population with respect to some summary
+    characteristics.
+    For example, in an opinion poll, one might want the proportions of various ethnicities
+    in a sample to match the proportions of ethnicities in the overall population.
+    Like convenience samples, quota samples leave latitude for the data collectors to select
+    the individuals who will comprise the sample&mdash;subject to the constraint that the
+    summary characteristics of the sample match their target values.
+    Generally, this is a bad idea: Unconscious biases in the interviewers' selections can have
+    strong effects on which individuals end up in the sample, which can cause the sample
+    to be unrepresentative of the population with respect to the variable being studied.
+    This is called <span class="termOfArt">selection bias</span>.
+    As with a sample of convenience, usually it is not possible to quantify how closely
+    representative of the population a quota sample is likely to be.
+    Although the Hite study did not use quota sampling, the demographics of its sample
+    matched the demographics of the population extremely well, but the results did not
+    seem to be representative of the population (if the contemporaneous studies using
+    random samples are trustworthy).
+    This shows that matching some characteristics of the sample to characteristics of the
+    population does not guarantee that the sample is representative of the population with
+    regard to the variables of interest.
+</p>
+
+<h3><a id="systematic"></a>
+    Systematic Samples
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=1973&end=2054" frameborder="0" allowfullscreen></iframe>
+</p>
+ 
+<p>
+    A systematic sample results from taking every <span class="math">k</span>th 
+    unit from the frame, where <span class="math">k</span>
+    is chosen to give a sample of the desired size.
+    For example, if there are 20,000 units in the frame and we want a sample of size 100,
+    we would take every 200th unit to be in the sample.
+    To take a systematic sample, the units in the frame have to be listed in some order.
+    If the order is essentially haphazard, a systematic sample behaves much like a simple
+    random sample, described later in this chapter.
+    If the order of the units in the list is related to the value of the variable under
+    study, a systematic sample can be biased.
+    Systematic samples are cluster samples&mdash;the frame is divided into <span class="math">k</span>
+    clusters, and
+    one of those <span class="math">k</span> clusters comprises the sample.
+    It is difficult to quantify the error that results from using a systematic sample.
+    Systematic samples do not leave latitude for the data collector to select the units
+    that comprise the sample, which can reduce deliberate and unconscious biases compared
+    with convenience samples and quota samples.
+</p>
+
+<h3><a id="probability"></a>
+    Probability Samples
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=2054&end=2190" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    A probability sample is a sample drawn using a random mechanism to select the units from
+    the frame to comprise the sample; that is, whether each unit in the frame is in
+    the sample is a random event, with a specified probability.
+    In a probability sample, one can specify ahead of time (before the sample is drawn)
+    the chance that each unit in the frame will end up in the sample.
+    The probability of being selected need not be the same for every unit in the frame.
+    A <a class="glossRef" href="gloss.htm#statistic">statistic</a> computed from a probability sample is a
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a>, because its value depends
+    upon which units happen to be in the sample, and those units are chosen randomly.
+    In a probability sample, the person collecting the data has no discretion in about
+    which units to include in the sample, so deliberate and unconscious
+    <a class="glossRef" href="gloss.htm#bias">biases</a> cannot affect the choice of units.
+    As a result, probability samples tend to be more representative of the general
+    population than convenience samples and quota samples are, if the probability
+    of drawing each unit is the same.
+    Moreover, it is possible to quantify the error of estimators computed from a probability
+    sample, which is not possible for samples of convenience, quota samples, or
+    systematic samples.
+</p>
+
+<h4><a id="simple"></a>
+    Simple Random Samples
+</h4>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=2190&end=2552" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    A <span class="termOfArt">simple random sample of size n</span> from a frame containing 
+    <span class="math">N</span> units is a
+    <a class="glossRef" href="gloss.htm#probability_sample">probability sample</a> drawn in such a way that
+    every subset of <em>n</em> of the <em>N</em> units in the frame is equally likely to
+    be the sample. 
+    (Each of those subsets has probability <span class="math">1/<sub>N</sub>C<sub>n</sub></span>).
+    This is like writing a unique identifier for each unit in the frame on one of <em>N</em>
+    otherwise identical cards, shuffling the cards well, then dealing the top <em>n</em> cards.
+    Equivalently, taking a simple random sample is like writing an identifier for each of the <em>N</em>
+    units in the population on <em>N</em> otherwise identical tickets, putting the tickets
+    into a box, stirring them vigorously, and drawing <em>n</em> of the tickets without looking;
+    then considering the sample to consist of those units whose identifiers were on the tickets drawn.
+    Conceptually, a simple random sample is a sample drawn without replacement as follows:
+    In the first step, each of the <em>N</em> units is equally likely to be drawn.
+    At the second step, each of the <em>N</em>&minus;1 remaining units is equally likely to be drawn,
+    <em>etc</em>., until, at the <em>n</em>th step, each of the <em>N</em>&minus;<em>n</em>+1 remaining
+    units is equally likely to be drawn.
+    After <em>n</em> steps, we have a simple random sample of size <em>n</em>.
+    In practice, simple random samples are drawn using a computer to generate
+    pseudo-random numbers, as follows: Each unit in the population is assigned (independently)
+    a random number between zero and one.
+    The sample consists of those units that were assigned the <em>n</em> largest random numbers.
+    If there are ties, they are broken randomly and independently
+    (<em>e.g.</em>, by tossing a coin).
+    In simple random sampling, the chance that any particular unit in the frame is included
+    in the sample is <em>n</em>/<em>N</em>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Consider any perticular unit in the frame.  ' +
+           ' Of the <sub><em>N</em></sub>C<sub><em>n</em></sub> ' +
+           ' subsets of size <em>n</em>, ' +
+           ' <sub><em>N</em>&minus;1</sub>C<sub><em>n</em>&minus;1</sub> contain that unit, and the ' +
+           ' subsets are equally likely, ' +
+           ' so the probability that a simple random sample contains the unit is </p>' +
+           ' <div align="center"><center>' +
+           ' <table cellpadding="1" cellspacing="2" border="0" align="center">' +
+           '     <tr><td align="center">' +
+           '         <sub><em>N</em>&minus;1</sub>C<sub><em>n</em>&minus;1</sub>' +
+           '     </td> <td> </td>' +
+           '     <td align="center">' +
+           '         (<em>N</em>&minus;1)!/<big>(</big>(<em>n</em>&minus;1)! &times;' +
+           '         (<em>N</em>&minus;1 &minus; (<em>n</em>&minus;1))!<big>)</big>' +
+           '     </td>' +
+           '     </tr> <tr> <td align="center">' +
+           '         ---------------' +
+           '     </td> <td align="center">  = </td> <td align="center">' +
+           '         ------------------------------------- ' +
+           '     </td></tr> <tr> <td align="center">' +
+           '         <sub><em>N</em></sub>C<sub><em>n</em></sub>' +
+           '     </td><td> </td> <td align="center">' +
+           '         <em>N</em>!/<big>(</big><em>n</em>! &times; ' +
+           '         (<em>N</em>&minus;<em>n</em>)!<big>)</big>' +
+           '     </td>' +
+           '     </tr>' +
+           ' </table>' +
+           ' <p></p>' +
+           ' <table cellpadding="1" cellspacing="2" border="0" align="center">' +
+           '     <tr><td></td> <td align="center">' +
+           '         (<em>N</em>&minus;1)! &times; <em>n</em>! ' +
+           '          &times; (<em>N</em>&minus;<em>n</em>)!' +
+           '     </td></tr><tr><td align="center"> = </td>' +
+           '     <td align="center">' +
+           '         -----------------------------------' +
+           '     </td></tr><tr> <td></td> <td align="center">' +
+           '         (<em>n</em>&minus;1)! &times; (<em>N</em>&minus;<em>n</em>)! ' +
+           '         &times; <em>N</em>!' +
+           '     </td>' +
+           '     </tr>' +
+           ' </table>' +
+           ' <p></p>' +
+           ' <table cellpadding="1" cellspacing="2" border="0" align="center">' +
+           '     <tr> <td></td> <td align="center">' +
+           '         (<em>N</em>&minus;1)! &times; <em>n</em>!' +
+           '     </td> </tr> <tr> <td align="center">  =  </td>' +
+           '     <td align="center">' +
+           '         -----------------' +
+           '     </td></tr> <tr> <td></td><td align="center">' +
+           '         <em>N</em>! &times; (<em>n</em>&minus;1)!' +
+           '     </td></tr>' +
+           ' </table>' +
+           ' </center>' +
+           ' </div>' +
+           ' <p class="math">' +
+           '     = <em>n</em>/<em>N</em>.' +
+           ' </p>' +
+           ' <p>' +
+           '     Therefore, in a simple random sample, every element in the frame' +
+           '     has an equal chance of' +
+           '     being in the sample: the chance is equal to the ratio of the size' +
+           '     of the sample' +
+           '     to the number of units in the frame.' +
+           ' </p>';
+    writeFootnote(fCtr++,fCtr.toString(),fStr);
+// -->
+</script>
+</p>
+</div>
+
+<h4><a id="systematic_random"></a>
+    Systematic Random Samples
+</h4>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=2552&end=3897" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Suppose for the moment that <em>n</em>, the sample size, is a divisor of <em>N</em>,
+    the frame size, so that <em>N</em>=<em>n</em>&times;<em>k</em>, where <em>k</em> is
+    an integer.
+    Assume that the elements of the frame are listed in some order.
+    If we took every <em>k</em>th element of the frame, we would get a systematic sample of
+    size <em>n</em>, as described above.
+    If we pick a random number <em>K</em> between 1 and <em>k</em>, uniformly, and take every
+    <em>k</em>th element in the list, starting with the <em>K</em>th element, we get a
+    <span class="termOfArt">systematic random sample of size n</span>.
+    In this example, we can think of the <a class="glossRef" href="gloss.htm#frame">frame</a> as
+    <em>n</em> groups of <em>k</em> units.
+    The systematic sample picks the first element of each of these groups.
+    The systematic random sample picks the <em>K</em>th element of each of these groups,
+    where <em>K</em> is random, but the same for every group.
+    Systematic random samples have the following characteristics:
+</p>
+
+<ul>
+    <li>
+        Every element in the frame has an equal chance of being in the sample.
+    </li>
+    <li>
+        Not every subset of size <em>n</em> of the frame has the same chance of being the sample.
+        In particular, the sample must be one of <em>k</em> subsets, which are equally likely.
+        In contrast, a simple random sample can be any of the <sub><em>N</em></sub>C<sub><em>n</em></sub>
+        possible subsets of <em>n</em> units from the frame, and those subsets are equally likely.
+    </li>
+</ol>
+
+<p>
+    For example, suppose the frame consists of <em>N</em>=100 elements, listed in some order,
+    and we seek a sample of size <em>n</em>=10.
+    If we take every <em>k</em>=10th element, that will yield a sample of the size we desire.
+    Suppose we start with the <em>K</em>th element, where <em>K</em> is chosen at random and
+    is equally likely to be 1, 2, &hellip;, or 10.
+    Then there are ten equally likely samples, consisting of elements
+</p>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>The 10 equally likely samples for systematic random sampling of 10 elements from 100</caption>
+    <tr>
+        <th id="row1" scope="row" align="left">sample 1</th>
+        <td headers="row1">
+        1, 11, 21, 31, 41, 51, 61, 71, 81, 91
+        </td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row" align="left">sample 2</th>
+        <td headers="row2">
+        2, 12, 22, 32, 42, 52, 62, 72, 82, 92
+        </td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row" align="left">sample 3</th>
+        <td headers="row3">
+        3, 13, 23, 33, 43, 53, 63, 73, 83, 93
+        </td>
+    </tr>
+        <th id="row4" scope="row" align="left">sample 4</th>
+        <td headers="row4">
+        4, 14, 24, 34, 44, 54, 64, 74, 84, 94
+        </td>
+    <tr>
+        <th id="row5" scope="row" align="left">sample 5</th>
+        <td headers="row5">
+        5, 15, 25, 35, 45, 55, 65, 75, 85, 95
+        </td>
+    </tr>
+    <tr>
+        <th id="row6" scope="row" align="left">sample 6</th>
+        <td headers="row6">
+        6, 16, 26, 36, 46, 56, 66, 76, 86, 96
+        </td>
+    </tr>
+    <tr>
+        <th id="row7" scope="row" align="left">sample 7</th>
+        <td headers="row7">
+        7, 17, 27, 37, 47, 57, 67, 77, 87, 97
+        </td>
+    </tr>
+    <tr>
+        <th id="row8" scope="row" align="left">sample 8</th>
+        <td headers="row8">
+        8, 18, 28, 38, 48, 58, 68, 78, 88, 98
+        </td>
+    </tr>
+    <tr>
+        <th id="row9" scope="row" align="left">sample 9</th>
+        <td headers="row9">
+        9, 19, 29, 39, 49, 59, 69, 79, 89, 99
+        </td>
+    </tr>
+    <tr>
+        <th id="row10" scope="row" align="left">sample 10</th>
+        <td headers="row10">
+        10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    Each unit is in exactly one of these possible samples, so the chance any particular element
+    is in the sample is 1/10 = 10%.
+    The chance that the sample consists of elements {1, 11, 21,
+    &hellip;, 91} is 1/10.
+    The chance that the sample consists of elements {1, 2, 3, &hellip;, 10} is zero.
+</p>
+
+<p>
+    Systematic random sampling is better than systematic sampling, but usually is not as good
+    as simple random sampling, and is not much easier to implement.
+    Systematic random sampling is in effect random cluster sampling: In the previous example,
+    there were 10 clusters in all.
+    The probability of drawing each cluster is 1/10.
+    Because every cluster contains the same number of units and the chance of drawing each
+    cluster is the same, the chance each unit is in the sample is the same.
+    (However, because only the clusters are possible samples, the chance each subset of
+    10 elements comprises the sample is not the same.)
+    More generally, it is possible to draw cluster samples randomly in such a way that every
+    unit has the same chance of being in the sample; one simply makes the probability of
+    selecting each cluster proportional to the number of units in the cluster.
+    However, unless each cluster contains only one unit, not every subset of <em>n</em>
+    units is equally likely to be the sample, so typically cluster sampling cannot
+    yield a simple random sample.
+</p>
+
+<p>
+    To illustrate the differences among sampling designs, suppose we wish to estimate the average
+    size of undergraduate classes at the University of California, Berkeley, in the current semester.
+    Consider seven approaches:
+</p>
+
+<ol>
+    <li>
+        Take a random sample of 100 courses from the current course schedule and average their sizes.
+    </li>
+    <li>
+        Take a random sample of 50 students, list the courses each student is taking, and average the list.
+    </li>
+    <li>
+        Take a random sample of 50 instructors, list the courses they are teaching, and average
+        the combined list.
+    </li>
+    <li>
+        Take separate random samples of 5 courses from each department in the university,
+        and average the sizes of the courses in all the samples.
+    </li>
+    <li>
+        Take a random sample of 5 science/engineering departments and a random sample of 5
+        humanities/professional departments; for each department in the sample, list the
+        sizes of all the courses.
+        Average the sizes of the courses in the lists.
+    </li>
+    <li>
+        Take a random sample of 5 science/engineering departments and a random sample of
+        5 humanities/professional departments.
+        For each department in the sample, take a random sample of 5 instructors.
+        Average the sizes of the courses those instructors are teaching in the current term.
+    </li>
+    <li>
+        Pick a random number <em>K</em> between 1 and 10.
+        Starting with the <em>K</em>th course in the course schedule, list the size of every
+        10th class.
+        Average the list of sizes.
+    </li>
+</ul>
+
+<p>
+    The population we wish to sample is the set of courses taught in the current semester.
+    In the first approach, the sampling frame is the same as the population, and the
+    sampling units are the population units.
+    Drawing a sample in this case is like drawing tickets from a box of numbered tickets,
+    with one ticket for each course.
+    The size of the course is written on the ticket.
+</p>
+
+<div class="indent">
+<p class="inline">
+    In the second approach, the sampling units are clusters of courses: all courses
+    taken by a single student.
+    The frame is a collection of lists of course sizes, one for each enrolled student.
+    The size of every course with at least one student enrolled is written on at least
+    one of the lists in the frame.
+    The size of each course has a chance of being represented in the sample, but different
+    courses have different chances: the larger the enrollment, the larger the chance.
+    In the second approach, drawing the sample is like drawing tickets from a box of
+    numbered tickets, with several numbers on each ticket.
+    There is one ticket for each student; written on the ticket are the sizes of the
+    courses that student is enrolled in. The sizes of courses with large enrollments will
+    appear on many more tickets than the sizes of courses with small enrollments.
+    The average size of courses taken by students will tend to be higher than the average
+    size of courses overall.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Sampling Proportional to Size. Larger courses have more students in them, ' +
+               'by definition. Thus, if we poll students, larger courses will be represented ' +
+               'disproportionately often, tending to bias the average upwards. If the students ' +
+               'are selected at random, the probability that a given course is in the sample is ' +
+               'proportional to the number of students enrolled in the course. This is called ' +
+               '<span class="termOfArt">sampling proportional to size</span>. As an example, suppose there are only ' +
+               'two courses: one with 100 students and one with one student. Each student is ' +
+               'enrolled in only one of the courses. The average course size is (100+1)/2 = 50.5 ' +
+               'students, but if we draw a random sample of students, the expected value of the ' +
+               'sample mean of the sizes of the courses they are taking is (100×100 + 1)/101 =  99.02 ' +
+               'students.';
+    writeFootnote(fCtr.toString(), fCtr++, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    In the third approach, the sampling units again are lists of course sizes, one list for
+    each instructor who is teaching a course.
+    Drawing the sample is like drawing tickets from a box with one ticket for each instructor,
+    with the sizes of the courses taught by the instructor written on it.
+    The size of each course appears on only one ticket, barring ties.
+    Each distinct class size appears on as many tickets as there are classes of that size.
+    Taking the set of tickets as a whole, there is one number for each class.
+    The average of the numbers on the tickets in the sample is an unbiased estimate of the
+    average class size in the first and third approaches, but is a biased estimate for
+    the second approach.
+    This is another example of a <span class="termOfArt">sample with built-in bias</span>; see
+    <a href="references.htm#huff">Huff (1993)</a> for more examples.
+    The second and third approaches are examples of cluster sampling.
+</p>
+
+<p>
+    The fourth approach is an example of stratified sampling.
+    The strata are department course offerings.
+    Averaging the sizes of the courses in the sample typically would give a biased estimate
+    of the average class size, unless the probability that each department is selected is
+    proportional to the number of courses that department offers, or the number of courses
+    drawn from a given department is adjusted to compensate.
+    Otherwise, drawing the sample is like drawing from a box of numbered tickets,
+    with one number on each ticket, but a different number of tickets for courses
+    in different departments.
+    For example, if simple random sampling were used to draw the sample of departments,
+    and then simple random samples of the same size were drawn from each department
+    selected at the first stage, the box would have fewer tickets per course for
+    departments that offer many courses than for departments that offer few courses.
+</p>
+
+<p>
+    The fifth approach is an example of stratified cluster sampling: There are two strata,
+    the humanities and professional courses (as a collection), and the science and engineering
+    courses (as a collection).
+    The sampling units are departments, and the clusters are lists of sizes of all courses
+    offered by each department.
+</p>
+
+<p>
+    The sixth approach is an example of stratified multistage cluster sampling:
+    There are two strata, the humanities and professional courses, and the science
+    and engineering courses.
+    The first stage of sampling is to select departments; the second stage is to select
+    instructors.
+    Instructors correspond to clusters of courses.
+</p>
+
+<p>
+    The seventh approach is an example of a systematic random sample.
+</p>
+
+<p>
+    The following exercise checks your ability to identify a sampling design from a verbal
+    description.
+    This exercise is dynamic&mdash;the wording will tend to change when you reload the page.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qText = [
+        'Take a random sample of 5 departments; for each department in the ' +
+            'sample, list the sizes of all its courses.  Average the sizes ' +
+            'of the courses in the lists.',
+        'Take separate random samples of 5 freshmen, 5 sophomores, 5 juniors, ' +
+            '5 seniors, and 5 graduate students.  For each student in the sample, ' +
+            'list the sizes of the courses he or she is taking.  Average the list.',
+        'Average the sizes of every 25th course in the course catalog',
+        'Average the sizes of the first 100 courses in the course catalog.',
+        'Average the sizes of every 25th course in the course catalog, ' +
+            'starting with a course selected at random from the first 25 courses.',
+        'Take a random sample of 5 courses.  For each course, take a random sample ' +
+            'of 3 students enrolled in the course.  List the sizes of the courses ' +
+            'those students are taking; average the list.'
+        ];
+    var opt = [
+        'a simple random sample.',
+        'a stratified random sample.',
+        'a random cluster sample.',
+        'a random stratified cluster sample.',
+        'a systematic random sample',
+        'random multistage cluster sample',
+        'not a probability sample.'
+          ];
+    var aV = [2,3,6,6,4,5];
+    var which = listOfRandInts(1,0,qText.length-1)[0];
+    var qStr = 'Suppose we want to estimate the average size of classes at a certain ' +
+           'university. Consider the following approach: ' + qText[which] +
+           '</p><p><span class="qSpan">The sample is</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,alphabet[aV[which]]);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="hypothetical_pop"></a>
+    Sampling from Hypothetical Populations
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_nE-kvM2VYk?start=3897&end=4195" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Sometimes the population itself is hypothetical or fictitious.
+    For example, consider administering an achievement test to a random sample of 10th grade
+    students from a particular high school, and averaging the results.
+    We might think of this as sampling test scores to try to estimate the average achievement score of
+    10th graders at the school.
+    Under closer inspection, this gets squishy: The 10th graders at the school do not all have
+    scores&mdash;only those who were tested have scores.
+    To tighten up the logic, we need to imagine an hypothetical population:
+    We seek to estimate the average of the population of scores that would have existed had every
+    10th grader in the school been tested.
+    This population is fictitious&mdash;it does not exist.
+</p>
+
+<p>
+    Here is an even more extreme example: Suppose we wish to estimate the effectiveness of an
+    SAT preparatory course.
+    We might imagine drawing a random sample of high-school seniors.
+    For each senior in the sample, we toss a coin.
+    If the coin lands heads, the student takes the preparatory course; otherwise,
+    the student does not.
+    We compare the average SAT scores of the students who took the course with the average of
+    those who did not.
+    We can think of the difference of the averages as an estimate of the effect of the
+    preparatory course.
+    As in the previous example, clarity recedes when we look closely at the procedure.
+    The idea is that we are estimating what the average score of students who did not take the
+    preparatory course would have been if they had taken the preparatory course,
+    and we are estimating what the average scores of the students who took the preparatory
+    course would have been had they not taken the course.
+    Moreover, we are estimating this even for students who did not take the SAT at all!
+</p>
+
+<p>
+    The ideas can be tightened up by imagining an hypothetical population of tickets, one for
+    each student.
+    Each student's ticket has two numbers written on it: the SAT score he or she would get
+    without taking the preparatory course, and the SAT score he or she would get having taken
+    the preparatory course.
+    For each student, we generate a random number with the possible values {0, 1, 2}.
+    If the value of the random number is 0, the student's ticket is not drawn, and we do not
+    observe any number on the student's ticket. If the value of the random number is 1,
+    the student's ticket is drawn, and we observe the SAT score the student would get without
+    taking the preparatory course.
+    If the random number is 2, we observe the SAT score the student would get after taking the
+    preparatory course.
+</p>
+
+<p>
+    Consider the difference between the average score observed for students for whom the random
+    number was 2 and the average score observed for students whose random number was 1.
+    That difference is an estimate of the difference between the average of the list of
+    SAT scores that would have been available had all the students taken the preparatory
+    course and the SAT, and the average of the list of SAT scores that would have been
+    available had none of the students taken the preparatory course, but all taken the SAT.
+    Both lists are hypothetical and counterfactual: It is impossible for both lists even to exist,
+    because every student would have had to take the preparatory course and not to take the
+    preparatory course.
+    Nonetheless, we can think of that difference of averages of hypothetical lists as the
+    average effect of taking the preparatory course.
+    The difference of observed averages is an estimate of that difference.
+    If every student has the same chance of being assigned 0, 1, or 2
+    as his or her random number, this difference of observed averages is an unbiased estimate
+    of the difference of averages of the hypothetical lists.
+    The assumption that different students have the same chance of taking the SAT and of taking
+    the preparatory class is not very reasonable, however: Students who would do well on the SAT
+    probably have a greater tendency to take the SAT than students who would do poorly&mdash;they are
+    the students destined for college.
+    Students who take the preparatory classes might be the particularly motivated and
+    diligent students, who would tend to do better than average on the SAT even if they did not
+    take the preparatory class.
+    It is very hard to estimate the sizes of these confounding effects.
+</p>
+
+<p>
+    The following exercise checks your ability to determine whether a sampling design is biased.
+</p>
+
+<!-- ===========================START PROBLEM============================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var blocks = 100*listOfRandInts(1,5,10)[0];
+    var blockSam = Math.floor(blocks/10);
+    var dwellings = 10*listOfRandInts(1,3,6)[0];
+    var dwellSam = Math.floor(dwellings/5);
+    var persons = listOfRandInts(1,2,4)[0];
+    var eSamSize = blockSam*dwellSam*persons;
+    var dwellUnits = blocks*dwellings;
+    var dwellUnitSam = blockSam*dwellSam;
+    var qStr = 'A particular city consists of ' + blocks.toString() +' blocks. ' +
+         'Blocks contain an average of ' + cardinals[dwellings] +
+         ' dwelling units, and dwelling units contain an average of ' +
+         cardinals[persons] + ' persons, but not all blocks have the ' +
+         'same number of dwelling units, and not all dwelling units have ' +
+         'the same number of persons.  Every block contains at least ' +
+         cardinals[dwellSam] + ' dwelling units.  ' +
+         'The city has no homeless people. A multistage cluster sample of ' +
+         'city residents is drawn as follows: ' + Cardinals[blockSam] +
+         ' blocks are drawn at random.  From each such block, ' +
+         cardinals[dwellSam] + ' dwellings are drawn at random. ' +
+         'The persons in those dwelling units comprise the sample. ' +
+         'This results in a sample that contains a random number of persons. ' +
+         '</p><p><span class="qSpan">Does every resident of the city have an ' +
+         'equal chance of being in the sample?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,['no','yes'],'a');
+    var ansStr = 'Not every resident will have the same chances of being in the ' +
+         'sample.  Persons within the same dwelling unit will have the same ' +
+         'chance.  The chance that a person in the <em>k</em>th dwelling unit ' +
+         'is in the sample is the conditional probability that such a person is ' +
+         'in the sample given that his or her block is in the sample, times the ' +
+         'chance that the block is in the sample. The first of these is </p>' +
+         '<p class="math">' +
+         dwellSam.toString() + '/(number of dwellings in the block that contains ' +
+         'the <em>k</em>th dwelling),</p><p> and the second is </p><p class="math">' +
+         blockSam + '/' + blocks + '.</p><p>Because the first term is not the same ' +
+         'for all blocks, the probabilities that different persons are in the sample ' +
+         'are not all equal.';
+    writeSolution(pCtr-1,ansStr);
+    document.writeln('</p>');
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider the average number of people per dwelling in the sample. ' +
+           '<span class="qSpan">Is the expected value of this average equal ' +
+           'to the true average number of people per dwelling, ' + persons.toString() +
+           '?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,['no','yes'],'a');
+    document.writeln('</p>');
+    var ansStr = 'The expected value of the average number of people per dwelling ' +
+         'in the sample can be written as follows. The number of dwellings in ' +
+         'the sample is </p><p class="math">' +
+         '(blocks in the sample)&times;(dwellings sampled per block)' +
+         ' = ' + blockSam.toString() + ' &times; ' + dwellSam.toString() + ' = ' +
+         dwellUnitSam.toString() + '.</p><p> Let I<sub><em>k</em></sub> be the ' +
+         'indicator variable for the event that dwelling <em>k</em> is in the ' +
+         'sample, and let <em>n</em><sub><em>k</em></sub> be the number of ' +
+         'persons residing in the <em>k</em>th dwelling unit. ' +
+         'There are ' + blocks.toString() + ' &times; ' +
+         dwellings.toString() + ' = ' + dwellUnits.toString() + ' dwellings in all, ' +
+         'so the (random) number of persons in the sample is the sum ' +
+         '</p><p class="math">I<sub>1</sub>&times;<em>n</em><sub>1</sub> + ' +
+         ' I<sub>2</sub>&times;<em>n</em><sub>2</sub> + ' +
+         'I<sub>3</sub>&times;<em>n</em><sub>3</sub> + &hellip; ' +
+         '+ I<sub>' + dwellUnits.toString() + '</sub>&times;<em>n</em><sub>' +
+         dwellUnits.toString() + '</sub>.</p><p>The expected value of this sum is ' +
+         'the sum of the expected values, </p><p class="math">' +
+         '<em>n</em><sub>1</sub>&times;P(dwelling 1 is in the sample) + ' +
+         '<em>n</em><sub>2</sub>&times;P(dwelling 2 is in the sample) + ' +
+         ' &hellip; + <em>n</em><sub>' + dwellUnits.toString() +
+         '</sub>&times;P(dwelling ' + dwellUnits.toString() + ' is in the sample),' +
+         '</p><p>and the expected value of the average number of people per dwelling ' +
+         'in the sample is this sum, divided by ' + dwellUnitSam.toString() + '. ' +
+         'This would necessarily equal ' + persons.toString() +
+         ' if every dwelling had probability ' +
+         '(blocks sampled)&times;(dwellings sampled per block)/(total dwellings) ' +
+         'of being in the sample.  But that is not the case.</p><p>For example, ' +
+         'consider the extreme case of a city with 10 blocks and two household ' +
+         'sizes: one person and 10 people.  The city contains 15 households in all: ' +
+         'There is one small household in 9 of the blocks, and six large households ' +
+         'in the tenth block.  The average number of people per household is ' +
+         '</p><p class="math">(9&times;1 + 6&times;10)/15 = 69/15 = 4.6.</p>' +
+         '<p>Suppose we sample as follows: we draw two blocks at random.  From each ' +
+         'block in the sample, we draw one household at random.  Then the number ' +
+         'of people in the sample is either two (if we only get blocks with small ' +
+         'households) or eleven, if the sample includes the block with the large ' +
+         'households.  Because every pair of blocks is equally likely to be sampled, ' +
+         'The expected number of people the sample contains is ' +
+         '</p><p class="math">2&times;(fraction of samples that do not contain ' +
+         'the block with large households) + 11&times;(fraction of samples that ' +
+         'contain the block with large households)</p><p class="math">= ' +
+         '2 &times; ' +
+         '<big>(</big><sub>9</sub>C<sub>2</sub>/<sub>10</sub>C<sub>2</sub><big>)</big>' +
+         ' + 11 &times; ' +
+         '<big>(</big><sub>9</sub>C<sub>1</sub>/<sub>10</sub>C<sub>2</sub><big>)</big>' +
+         '</p><p class="math"> = 2 &times; ' +
+         '<big>(</big>9!/(2!&times;7!)<big>)</big>/<big>(</big>10!/(2! ' +
+         '&times; 8!)<big>)</big> + 11 &times; 9/<big>(</big>10!/(2! ' +
+         '&times; 8!)<big>)</big> </p><p class="math"> = ' +
+         '2 &times; (8/10) + 11 &times; 9/(10&times;9/2)</p>' +
+         '<p class="math"> = 8/5 + 11/5 = 5.4</p><p>The expected value of the average ' +
+         'number of people per household in the sample is 5.4/2 = 2.7, much less than ' +
+         'the true average number of persons per household.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>
+    Summary
+</h2>
+
+<p>
+    A <a class="glossRef" href="gloss.htm#parameter">parameter</a> is a numerical property of a
+    <a class="glossRef" href="gloss.htm#population">population</a>, which is a collection of
+    <a class="glossRef" href="gloss.htm#unit">units</a>.
+    A sample is a collection of units from a population; the number of units
+    in the sample is called the <a class="glossRef" href="gloss.htm#sample_size">sample size</a>.
+    A <a class="glossRef" href="gloss.htm#statistic">statistic</a> is a number computed from a sample.
+    Statistics typically are used to estimate parameters;
+    such statistics are called <a class="glossRef" href="gloss.htm#estimator">estimators</a>.
+    Depending on circumstances, collecting data about a sample of units
+    instead of an entire population of units can be the only way,
+    the most economical way, or the most accurate way to estimate
+    the value of a population parameter.
+    A <a class="glossRef" href="gloss.htm#sample_survey">sample survey</a> is a 
+    sample of opinions or other properties of
+    people that relies on the individuals in the sample to provide the data,
+    for example, through interviews or by filling out a questionnaire.
+    Sample surveys tend to suffer to various extents from
+    <a class="glossRef" href="gloss.htm#nonresponse_bias">nonresponse bias</a>,
+    which is caused by systematic differences in the variables studied
+    between the individuals who participate willingly in the survey and
+    those who elect not to participate.
+    If the <a class="glossRef" href="gloss.htm#nonresponse">nonresponse</a> rate, 
+    the fraction of people who refuse to
+    participate, is large, the nonresponse bias can be large,
+    and the results of the survey should not be trusted.
+    Even people who participate willingly in a survey might not
+    answer questions about sensitive subjects truthfully.
+    There are methods, such as <span class="termOfArt">randomized response</span>, that
+    encourage truthful reporting by guaranteeing anonymity.
+</p>
+
+<p>
+    Samples can be drawn from populations in various ways.
+    Rarely is the sample drawn from the entire population;
+    usually, the sample is drawn from a <a class="glossRef" href="gloss.htm#frame">frame</a> of units
+    that are accessible or that can be listed.
+    Sometimes, instead of drawing units one at a time,
+    clusters of units are drawn from the frame;
+    this is called <a class="glossRef" href="gloss.htm#cluster_sample">cluster sampling</a>.
+    The fundamental unit of sampling is called the <a class="glossRef" href="gloss.htm#sampling_unit">sampling unit</a>,
+    which can be an individual unit of the frame or a cluster of units.
+    Sometimes, instead of drawing sampling units from the frame as a whole,
+    the frame is partitioned into <span class="termOfArt">strata</span> and samples are drawn separately
+    from each stratum; this is called <a class="glossRef" href="gloss.htm#stratified_sample">stratified sampling</a>.
+    The samples need not be drawn in one step:
+    The frame can be divided hierarchically and the sample drawn in stages.
+    Such <a class="glossRef" href="gloss.htm#multistage_sample">multistage sampling</a>
+    is particularly useful when it is difficult
+    or impractical to list the entire frame, but easier to list the
+    elements at each level of the hierarchy.
+    <a class="glossRef" href="gloss.htm#systematic_sample">Systematic sampling</a>
+    consists of listing the units in the frame in
+    some order, then taking every kth unit in the list.
+    Systematic sampling is a special case of cluster sampling.
+    Cluster sampling, stratified sampling, and multistage sampling
+    can be combined in various ways to give hybrid sampling designs,
+    including multistage stratified cluster sampling.
+    Ultimately, which sampling units comprise the sample needs to be decided in some way.
+</p>
+
+<p>
+    A <a class="glossRef" href="gloss.htm#convenience_sample">convenience sample</a>
+    selects sampling units on the basis of
+    their accessibility to the investigator or data collector.
+    The data collector has complete latitude to select the units
+    that comprise the sample.
+    Convenience samples tend not to be representative of the frame,
+    and the extent to which they fail to be representative is hard to quantify.
+    A <a class="glossRef" href="gloss.htm#quota_sample">quota sample</a>
+    selects sampling units in a way that guarantees that
+    some summary statistics of the sample match the corresponding
+    parameters of the population or the frame, but within that
+    constraint, leaves considerable latitude in the selection of
+    sampling units.
+    Quota samples also tend to be unrepresentative:
+    Matchiing summary statistics does not ensure that the sample is
+    like the population or frame with respect to the variables studied.
+    It is hard to quantify the extent to which a quota sample fails
+    to be representative of the population or frame.
+</p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#probability_sample">Probability samples</a>
+    are samples drawn using a random mechanism
+    for which it is possible to specify the chance that any
+    particular unit will be in the sample.
+    Probability samples do not allow the investigator or data collector
+    any choice in the units to include.
+    Eliminating the freedom to choose tends to reduce conscious and
+    unconscious biases in the data collection.
+    Two common ways to draw probability samples are
+    <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sampling</a>
+    and <a class="glossRef" href="gloss.htm#systematic_random_sample">systematic random sampling</a>.
+</p>
+
+<p>
+    Simple random sampling is random sampling without replacement:
+    Every subset of <em>n</em> units from the frame is equally likely to be the sample.
+    In simple random sampling, the chance that any unit in the frame
+    is in the sample is the same.
+    In simple random sampling where the frame is identical to the population,
+    it is possible to quantify the probable error in an estimate of a
+    population parameter computed from the sample.
+</p>
+
+<p>
+    Systematic random sampling consists of taking every <em>k</em>th element of the
+    frame to be in the sample, starting at a random place in the list of
+    units in the frame.
+    Systematic random sampling can behave much like simple random sampling,
+    but tends not to be as representative, especially if there is
+    structure in the listing of the frame.
+    Systematic random samples can be designed so that the chance that
+    each unit in the frame is in the sample is the same, but not so
+    that the chance that each subset of n units in the frame
+    comprises the sample is the same.
+    For that reason, simple random sampling is better than
+    systematic random sampling.
+    Some experiments involving comparing groups of subjects who receive
+    different treatments can be thought of as sampling from hypothetical populations.
+</p>
+
+<h2><a id="keyTerms"></a>
+    Key Terms
+</h2>
+
+<ul>
+    <li>average                </li>
+    <li>bias                   </li>
+    <li>cluster sample         </li>
+    <li>convenience sample     </li>
+    <li>estimator              </li>
+    <li>frame                  </li>
+    <li>independent            </li>
+    <li>multistage sampling    </li>
+    <li>nonresponse bias       </li>
+    <li>nonresponse rate       </li>
+    <li>parameter              </li>
+    <li>population             </li>
+    <li>population mean        </li>
+    <li>population parameter   </li>
+    <li>probability            </li>
+    <li>probability sample     </li>
+    <li>quota sampling         </li>
+    <li>random sample          </li>
+    <li>random variable        </li>
+    <li>sample mean            </li>
+    <li>sample mean            </li>
+    <li>sample size            </li>
+    <li>sample survey          </li>
+    <li>sampling frame         </li>
+    <li>sampling percentage    </li>
+    <li>sampling unit          </li>
+    <li>selection bias         </li>
+    <li>simple random sample   </li>
+    <li>statistic              </li>
+    <li>stratified sample      </li>
+    <li>stratum/strata         </li>
+    <li>systematic sample      </li>
+    <li>unbiased               </li>
+    <li>unit                   </li>
+</ul>
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

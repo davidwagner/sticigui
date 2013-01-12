@@ -1,0 +1,1010 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<!-- last modified 11/29/99 3:48 PM -->
+
+<head>
+<script src="../../Java/irGrade.js" language="JavaScript1.2"></script>
+<script src="../../Java/Data/bbSal-1998.js" language="JavaScript1.2"></script>
+<script language="JavaScript1.2"><!--
+    window.name="bookWin";
+    rand = new rng(1524388); //12345678);
+    var ver = rand.getSeed();
+    var r1 = roundToDig(2*rand.next()-1,1);
+    var r2 = roundToDig(2*rand.next()-1,1);
+    var r3 = roundToDig(.1 + .8*rand.next(),1);
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var fac2 = Math.round(7*rand.next()-3.5);
+    var n = 5;
+    var IQsd = 15;
+    var IQXsd = IQsd + 6*(rand.next()-1);
+    var IQYsd = IQsd + 6*(rand.next()-1);
+    var IQmean = 100;
+    var IQXmean = IQmean + 8*rNorm();
+    var IQYmean = IQmean + 8*rNorm();
+    var lists = cNormPoints(n,r3);
+    var husIQ = lists[0];
+    var wifIQ = lists[1];
+    var m1 = mean(husIQ);
+    var m2 = mean(wifIQ);
+    var s1 = sd(husIQ);
+    var s2 = sd(wifIQ);
+    for (i=0; i < husIQ.length; i++) {
+        husIQ[i] = Math.floor(IQXmean + IQXsd*(husIQ[i]-m1)/s1);
+        wifIQ[i] = Math.floor(IQYmean + IQYsd*(wifIQ[i]-m2)/s2);
+    }
+    var cc = roundToDig(corr(husIQ,wifIQ),2);
+    var aveHus = roundToDig(mean(husIQ),2);
+    var aveWif = roundToDig(mean(wifIQ),2);
+    var sdHus =  roundToDig(sd(husIQ),2);
+    var sdWif =  roundToDig(sd(wifIQ),2);
+    var husPredIQ = aveHus + fac1*sdHus;
+    var husPredIQ2 = aveHus + fac2*sdHus*cc;
+    var wifPredIQ = aveWif + fac1*sdWif*cc;
+    var wifPredIQ2 = aveWif + fac2*sdWif;
+    var husMnMx = vMinMax(husIQ);
+    var wifMnMx = vMinMax(wifIQ);
+    lists[0] = husIQ;
+    lists[1] = wifIQ;
+    var header = new Array("IQ of Husband","IQ of Wife");
+    salMnMx = vMinMax(salary);
+    var nSal = 10;
+    var indices = listOfDistinctRandInts(nSal,0,salary.length-1);
+    var salList = new Array(nSal);
+    var sortSalList = new Array(nSal);
+    for (i = 0; i < nSal; i++) {
+        sortSalList[i] = roundToDig(100000*salary[indices[i]],0);
+    }
+    sortSalList.sort(numberLessThan);
+    var indices = [7,8,1,0,2,9,4,5,3,6];
+    for (i=0; i< nSal; i++) {salList[i] = sortSalList[indices[i]];}
+    var CA = true;
+    var HI = true;
+    var defaultStatus="SticiGui Midterm";
+    function setApplets() {
+        document.applets[q6AppletNum].setVariables((data6[0]).join().toString(),
+            (data6[1]).join().toString());
+        document.applets[q6AppletNum].showPlot();
+    }
+// -->
+</script>
+
+<title>SticiGui Midterm</title>
+</head>
+
+<body onload="setApplets();">
+
+<h1 align="center">SticiGui Midterm</h1>
+<h2 align="center">
+<script language="JavaScript1.2"><!--
+document.write("Version 1." + ver.toString());
+// -->
+</script>
+</h2>
+<h3>
+  Write your name, student ID number, and the exam version on your Scantron form.
+  If you do not, you will not get credit for the exam.
+</h3>
+<h3>
+    Sign the form to confirm &quot;I swear I did not cheat on this exam, nor did I help
+    anyone else to cheat.&quot;
+</h3>
+
+<form name="mt" method="post">
+<p>
+  Here is a table of (fake) bivariate data: the IQs of married couples. The next several
+  questions refer to these data:
+</p>
+<script language="JavaScript1.2"><!--
+ listToTable(header,lists,"standard","center");
+// -->
+</script>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+  var rAns = listOfDistinctRandInts(8,-5,5);
+  rAns[8] = 0;
+  rAns[9] = 0;
+  var rPert = new Array(2);
+  rPert[0] = new Array(5);
+  rPert[1] = new Array(5);
+  for (i=0; i < 5; i++) {
+      rPert[0][i] = rAns[2*i];
+      rPert[1][i] = rAns[2*i+1];
+  }
+  var perm = listOfDistinctRandInts(5,0,4);
+  var opt = [ "(" + (aveHus + rPert[0][perm[0]]).toString() + ", " +
+        (aveWif + rPert[1][perm[0]]).toString() + ")",
+        "(" + (aveHus + rPert[0][perm[1]]).toString() + ", " +
+        (aveWif + rPert[1][perm[1]]).toString() + ")",
+        "(" + (aveHus + rPert[0][perm[2]]).toString() + ", " +
+        (aveWif + rPert[1][perm[2]]).toString() + ")",
+        "(" + (aveHus + rPert[0][perm[3]]).toString() + ", " +
+        (aveWif + rPert[1][perm[3]]).toString() + ")",
+        "(" + (aveHus + rPert[0][perm[4]]).toString() + ", " +
+        (aveWif + rPert[1][perm[4]]).toString() + ")"];
+ var aVal = '';
+ for (i=0; i<n; i++){
+    if (rPert[0][perm[i]] == 0 && rPert[1][perm[i]] == 0) { aVal = alphabet[i];}
+ }
+// -->
+</script>
+<font color="green">The point of averages of these data
+  (for husbands' IQs on the X axis and
+  wives' IQs on the Y axis) is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  writeRadioExercise(qCtr++,opt,aVal);
+  // -->
+</script>
+</font>.
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var rAns = listOfDistinctRandInts(4,-10,10);
+    rAns[4] = 0;
+    var ssr = 0;
+    for (i=0; i < husIQ.length; i++) {
+        ssr += (husIQ[i] - aveHus)*(husIQ[i] - aveHus);
+    }
+    var rPert = new Array(1);
+    for (i=0; i < n; i++) {
+          rPert[i] = rAns[i]*.01*ssr;
+    }
+    var perm = listOfDistinctRandInts(n,0,4);
+    var opt = "";
+    opt = [ (roundToDig((ssr + rPert[perm[0]])/n,1)).toString(),
+        (roundToDig((ssr + rPert[perm[1]])/n,1)).toString(),
+        (roundToDig((ssr + rPert[perm[2]])/n,1)).toString(),
+        (roundToDig((ssr + rPert[perm[3]])/n,1)).toString(),
+        (roundToDig((ssr + rPert[perm[4]])/n,1)).toString()
+        ];
+   var aVal = '';
+   for (i=0; i<n; i++){
+    if (rPert[perm[i]] == 0) { aVal = alphabet[i];}
+   }
+    // -->
+</script>
+<font color="green">The SD of Husbands' IQs is
+  closest to the square root of
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+    // -->
+</script>.
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  var rAns = listOfDistinctRandInts(4,-10,10);
+  rAns[4] = 0;
+  var indMx = 0;
+  var wifMx = wifIQ[0];
+  for (i=1; i < n; i++) {
+    if ( wifMx < wifIQ[i] ) {
+        wifMx = wifIQ[i];
+        indMx = i;
+    }
+  }
+  stdWifVal = (wifIQ[indMx] - aveWif)/sdWif;
+  var rPert = new Array(1);
+  for (i=0; i < 5; i++) {
+      rPert[i] = rAns[i]*.05*stdWifVal;
+  }
+  var perm = listOfDistinctRandInts(5,0,4);
+  var opt = "";
+  opt = [
+        (roundToDig(stdWifVal + rPert[perm[0]],1)).toString(),
+        (roundToDig(stdWifVal + rPert[perm[1]],1)).toString(),
+        (roundToDig(stdWifVal + rPert[perm[2]],1)).toString(),
+        (roundToDig(stdWifVal + rPert[perm[3]],1)).toString(),
+        (roundToDig(stdWifVal + rPert[perm[4]],1)).toString()
+        ];
+ var aVal = '';
+ for (i=0; i<5; i++){
+    if (rPert[perm[i]] == 0) { aVal = alphabet[i];}
+ }
+  // -->
+</script> The SD of the wives' IQs is
+<script language="JavaScript1.2"><!--
+  document.write(sdWif.toString() + ". ");
+  // -->
+</script> In the following table, &quot;SU&quot; stands for
+  &quot;standard units.&quot; </p>
+<div align="center"><center><table border="2">
+    <tr>
+      <td align="center">Husband's IQ</td>
+      <td align="center">Husband's IQ in SU</td>
+      <td align="center">Wife's IQ</td>
+      <td align="center">Wife's IQ in SU</td>
+      <td align="center">(Husb IQ in SU)×(Wife IQ in SU)</td>
+    </tr>
+<script language="JavaScript1.2"><!---
+    var ccHusWif = 0.0;
+    var prodfhfw;
+    for (i = 0; i < 5; i++) {
+            var husStd =  roundToDig((husIQ[i] - aveHus)/sdHus,2);
+            var wifStd = roundToDig((wifIQ[i] - aveWif)/sdWif,2);
+            document.writeln("<tr>");
+            document.writeln("<td align=\"right\">" + husIQ[i]  +"</td>");
+            document.writeln("<td align=\"right\">" + husStd  +"</td>");
+            document.writeln("<td align=\"right\">" + wifIQ[i]  +"</td>");
+            prodHusWif = roundToDig(husStd*wifStd,4);
+            ccHusWif += prodHusWif;
+            if (i == indMx) { // row with the question
+                document.write("<td align=\"center\"><p align=\"center\">" +
+                    "Fill in this blank<br>for problem " + pCtr );
+                //
+                document.writeln("</p></td>");
+            }
+            else {
+                document.writeln("<td align=\"right\">" + wifStd +"</td>");
+                document.writeln("<td align=\"right\">" + prodHusWif + "</td>");
+            }
+            document.writeln("</tr>");
+    }
+    ccHusWif /= n;
+// -->
+</script>
+</table>
+</center></div>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+// -->
+</script>
+<font color="green">The missing
+  value for wives' IQ in standard units is closest to</p>
+<p>
+<script language="JavaScript1.2"><!--
+  writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+  var ans = linspace(-.8,.8,5);
+  var opt = new Array(ans.length);
+  for (i=0; i < ans.length; i++) {
+    opt[i] = (roundToDig(ans[i],1)).toString();
+  }
+  var mn = Math.abs(ccHusWif-ans[0]);
+  var aVal = alphabet[0];
+  var tr;
+  for (i=1; i<5; i++){
+    tr = Math.abs(ccHusWif-ans[i]);
+    if (tr < mn){
+        mn = tr;
+        aVal = alphabet[i];
+    }
+  }
+// -->
+</script>
+<font color="green">The correlation coefficient
+  of husbands' and wives' IQ is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script></font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = "c";
+    var thePct = (listOfRandInts(1,5,95))[0];
+    var which = (listOfRandInts(1,0,3))[0];
+// -->
+</script>
+<font color="#008000">
+<script language="JavaScript1.2"><!--
+    if (which == 0){
+        document.writeln("A seismologist says that the chance of a magnitude 8.2 " +
+            "or greater earthquake on the San Andreas Fault by the year 2020 is");
+    }
+    else if (which == 1) {
+        document.writeln("An economist says that the chance that the Dow Jones " +
+            "Industrial Average reaches 15,000 in the year 2000 is");
+    }
+    else if (which == 2) {
+        document.writeln("A book maker says that the chance that a particular horse wins " +
+                " a given race is ");
+    }
+    else if (which == 3) {
+            document.writeln("A political commentator says that the chance of an " +
+                " act of nuclear terrorism in the USA in 2005 is ");
+    }
+    document.write(thePct.toString() + "%. ");
+// -->
+</script>
+Which theory of probability would be most natural to use
+  to interpret his/her statement?
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    var opt = ["the theory of equally likely outcomes",
+        "the frequency theory","the subjective theory",
+        "the axiomatic theory","the law of averages"];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script> </font>
+</p>
+<p>
+  Consider a peculiar deck of cards that is like a standard deck, but has five suits:
+  spades, hearts, diamonds, clubs, and stars. There are 13 kinds of cards of each suit: Ace
+  (A), 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack (J), Queen (Q), King (K), so there are 65 cards in
+  the deck. Suppose that Aces can be
+  either high or low; that is, that {A, 2, 3, 4, 5} is a straight, and so is {10, Jack,
+  Queen, King, Ace}. Consider being dealt five cards from this deck after it has been
+  shuffled well. Here are some possible five-card hands:
+</p>
+<div align="center"><center>
+<table border="2" cellspacing="1" bgcolor="#FFFFFF" bordercolor="#000000"
+        bordercolorlight="#C0C0C0" bordercolordark="#808080">
+    <tr>
+      <td valign="middle" align="center">Name</td>
+      <td valign="middle" align="center">Meaning</td>
+      <td valign="middle" align="center">Example</td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>Flush</small></td>
+      <td valign="middle" align="left"><small>5 cards all of the same suit,
+               but not consecutive</small></td>
+      <td valign="middle" align="left"><small>3 of diamonds, 6 of diamonds, 7
+      of diamonds, J of diamonds, Q of diamonds</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>Straight</small></td>
+      <td valign="middle" align="left"><small>all 5 cards consecutive, but not all of the same
+      suit</small></td>
+      <td valign="middle" align="left"><small>3 of spades, 4 of hearts, 5 of hearts, 6 of
+      hearts, 7 of clubs</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>4 of a kind</small></td>
+      <td valign="middle" align="left"><small>4 of the 5 cards are the same &quot;kind&quot;;
+      the fifth is a different &quot;kind&quot;</small></td>
+      <td valign="middle" align="left"><small>4 of diamonds, 4 of clubs, 4 of hearts, 4 of
+      spades, 2 of hearts</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>Full House</small></td>
+      <td valign="middle" align="left"><small>3 of the cards are of one kind; the other two are
+      of one (other) kind</small></td>
+      <td valign="middle" align="left"><small>3 of hearts, 3 of diamonds, 3 of clubs, 5 of
+      hearts, 5 of clubs</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>two pair</small></td>
+      <td valign="middle" align="left"><small>two of the cards are of one kind, two of the
+      others are of another kind, the fifth card is of a third kind</small></td>
+      <td valign="middle" align="left"><small>5 of hearts, 5 of spades, 9 of hearts, 9 of clubs,
+      J of clubs</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>one pair</small></td>
+      <td valign="middle" align="left"><small>two of the cards are of one kind, the other three
+      are of three different kinds</small></td>
+      <td valign="middle" align="left"><small>K of stars, K of clubs, 2 of diamonds, 7 of
+      hearts, 8 of spades</small></td>
+    </tr>
+    <tr>
+      <td valign="middle" align="left"><small>5 of a kind</small></td>
+      <td valign="middle" align="left"><small>all 5 cards are the same
+           &quot;kind&quot;</small></td>
+      <td valign="middle" align="left"><small>2 of spades, 2 of diamonds, 2 of hearts, 2 of
+      clubs, 2 of stars</small></td>
+    </tr>
+</table>
+</center></div>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+  var hands = ["one pair","two pair","four of a kind","a full house","a straight"];
+  // 13C1*5C2*12C3*5^3 = 13*10*12*11*10/6*5^3 = 13*100*2*11*5^3 is a pair
+  // 13C2*5C2*5C2*11C1*5 = 13*6*10*10*55 is two pair
+  // 13C1*5C1*12C1*5 = 13*5*60 is four of a kind
+  // 13C1*5C2*12C1*5C3 = 13*10*12*10 is a full house
+  // 10*(5^5 - 5) is a straight
+  var opt = [
+            "13&times;100&times;2&times;11&times;5&times;5&times;5", // one pair
+            "13&times;6&times;100&times;55", // two pair
+            "13&times;5&times;60", // four of a kind
+            "13&times;12&times;100", // full house
+            "10&times;(5&times;5&times;5&times;5&times;5 - 5)"
+            ];
+    var inx = (listOfRandInts(1,0,4))[0];
+    aVal = alphabet[inx];
+      // -->
+</script>
+<font color="green">The number of
+  ways of getting a five card hand that is
+<script language="JavaScript1.2"><!--
+      document.write(hands[inx] + " ");
+      // -->
+</script>
+from this peculiar deck of cards is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+      writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>.
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+      document.writeln(startProblem(pCtr++));
+      var meanLightTime = 10000;
+      var sdLight = 500 + 10*((listOfRandInts(1,-5,5))[0]);
+      var lightFac = roundToDig(1 + 2 * (rand.next() + .25),1);
+      var lightTime = meanLightTime + lightFac * sdLight;
+      var limit = roundToDig(Math.min(1/(lightFac*lightFac),lightTime/meanLightTime),2);
+      var pert = 0.1*limit;
+      var rawOpt = new Array(5);
+      for (i=0; i < 5; i++) {
+        rawOpt[i] = roundToDig(limit + i*pert,2).toString();
+      }
+      var opt = randPermutation(rawOpt);
+      var aVal;
+      for (i=0; i < opt.length; i++ ) {
+        if (opt[i] == limit.toString()) { aVal = alphabet[i];}
+      }
+      // -->
+</script>
+<font color="#008000">A
+certain type of light bulb has an average lifetime of
+<script language="JavaScript1.2"><!--
+      document.writeln(meanLightTime);
+      // -->
+</script>
+        hours. The SD of bulb lifetimes is
+<script language="JavaScript1.2"><!--
+      document.writeln(sdLight);
+// -->
+</script> hours. Which of the following is closest to the largest
+        decimal fraction of bulbs that could last more than
+<script language="JavaScript1.2"><!--
+      document.writeln(lightTime);
+// -->
+</script>
+  hours?</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+ writeRadioExercise(qCtr++,opt,aVal);
+ // -->
+</script>.
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+  var cards = ["ace","two","three","four","five","six","seven","eight","nine","ten",
+                "Jack","Queen","King"];
+  var which = (listOfRandInts(1,0,cards.length-1))[0];
+  var article = " a ";
+  if (which == 0 || which == 7) {article = " an ";}
+  // -->
+</script>
+<font color="#008000">A standard
+  deck of playing cards has 52 different cards in it, four of which are
+<script language="JavaScript1.2"><!--
+  document.write(cards[which] + "s. ");
+  // -->
+</script>
+  According to the frequency theory, what it means to say that the chance that
+  the
+<script language="JavaScript1.2"><!--
+  var places = ["top","seventh","fourteenth","seventeenth","bottom"];
+  var thePlace = (listOfRandInts(1,0,places.length-1))[0];
+  document.write(places[thePlace] + " ");
+// -->
+</script>
+  card of a well shuffled deck is
+<script language="JavaScript1.2"><!--
+  document.write(article + cards[which] + " ");
+// -->
+</script>
+is 1/13 is that
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  var aVal = 'c';
+  var rawOpt = [
+    "in one out of 13 shuffles, " + article + cards[which] + " will end up " +
+                places[thePlace],
+    "in about 1,000,000 of 13,000,000 shuffles, " + article + cards[which] +
+                " will end up " + places[thePlace],
+    "in repeated shuffling, the fraction of shuffles with " + article + cards[which] +
+         " " + places[thePlace] + " will converge to 1/13",
+    "the speaker believes " + article + cards[which] + " will end up " +
+                places[thePlace] + " in 1 out of 13 shuffles"
+      ];
+  var optPerm = randPermutation(rawOpt,'inverse');
+  var opt = optPerm[0];
+  opt[opt.length] = "none of the above";
+  var aVal = alphabet[optPerm[1][2]];
+  writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+<p>
+<font color="#000000">Here is a random
+  sample of 10 the 1998 salaries (in dollars) of major league baseball players.
+  The data are from </font>
+  <a href="http://www.conway-sports.com" target="bookWin">www.conway-sports.com</a>. </p>
+</div>
+<div align="center"><center><table border="2" cellspacing="1">
+<script language="JavaScript1.2"><!--
+document.writeln("<tr>");
+for (i=0; i < 10; i++) {document.writeln("<td align=\"right\">" + salList[i] + "</td>");}
+document.writeln("</tr>");
+// -->
+</script>
+</table>
+</center></div>
+<p>
+<script language="JavaScript1.2"><!--
+document.writeln(startProblem(pCtr++));
+// -->
+</script>
+<font color="#008000">The lower quartile of the
+  salaries of these 10 players is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+document.write("$");
+var rawOpt = [(salList[1]).toString(),
+              ((salList[1] + salList[2])/2).toString(),
+              (sortSalList[1]).toString(),
+              (sortSalList[2]).toString(),
+              ((sortSalList[1] + sortSalList[2])/2).toString()
+              ];
+var optPerm = randPermutation(rawOpt,'inverse');
+var opt = optPerm[0];
+var aVal = alphabet[optPerm[1][3]];
+writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfRandInts(2,1,9);
+    var thePctile = 10*theInts[0]+theInts[1];
+// -->
+</script>
+<font color="#008000">The
+<script language="JavaScript1.2"><!--
+    document.write(thePctile.toString() + " ");
+// -->
+</script>
+percentile of these 10 salaries is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.write("$");
+    var rawOpt = [(salList[theInts[0]-1]).toString(),
+        ((salList[theInts[0]-1] + theInts[1]/10*
+            (salList[theInts[0]]-salList[theInts[0]-1]))).toString(),
+        (sortSalList[theInts[0]-1]).toString(),
+        (sortSalList[theInts[0]]).toString(),
+        ((sortSalList[theInts[0]-1] + theInts[1]/10*
+            (sortSalList[theInts[0]]-sortSalList[theInts[0]-1]))).toString()];
+    var opt = randPermutation(rawOpt);
+    for (i=0; i < opt.length; i++) {
+        if (opt[i] == (sortSalList[theInts[0]]).toString()) { aVal = alphabet[i];}
+    }
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+document.writeln(startProblem(pCtr++));
+// -->
+</script> <font color="#008000">The median of these 10
+  salaries is closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    var rawOpt = ["$"+(salList[4]).toString(),
+                  "$"+((salList[4] + salList[5])/2).toString(),
+                  "$"+(sortSalList[4]).toString(),
+                  "$"+(sortSalList[5]).toString(),
+                  "$"+((sortSalList[4] + sortSalList[5])/2).toString()
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+// -->
+</script> <font color="#008000">The IQR of these
+  10 salaries is closest to
+</p>
+<p>
+$<script language="JavaScript1.2"><!--
+    var uno = (salList[7] - salList[2]);
+    var dos = (salList[7] - salList[1]);
+    var tres = (sortSalList[7] - sortSalList[2]);
+    var quatro = (sortSalList[8] - sortSalList[2]);
+    var cinco = (sortSalList[7] - sortSalList[1]);
+    var rawOpt = ["$"+uno.toString(),"$"+dos.toString(),
+        "$"+tres.toString(),"$"+quatro.toString(),
+        "$"+cinco.toString()];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script></font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInt = (listOfRandInts(1,2,20))[0];
+    var limits = [100000, theInt*100000]; //
+    var count = 0;
+    for (i=0; i < nSal; i++) {
+        if (limits[0] < salList[i] && salList[i] <= limits[1]) { count++;}
+    }
+    pct = count*100/nSal;
+// -->
+</script>
+<font color="#008000">
+In a relative frequency table
+for the 10 salaries, the entry for the class interval
+<script language="JavaScript1.2"><!--
+    document.write("$" + (limits[0]).toString() + " (exclusive) to $" +
+        (limits[1]).toString() + " (inclusive)");
+    var rawOpt = [count.toString(),
+                 (count+1).toString(),
+                 (roundToDig(pct,0)).toString() + "%",
+                 (roundToDig(pct+10,0)).toString() + "%",
+                 (roundToDig(pct+10,0)).toString() + "% per $1"
+              ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+// -->
+</script>
+would be closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var count = 0;
+    for (i=0; i < nSal; i++) {
+        if (limits[0] < salList[i] && salList[i] <= limits[1]) { count++;}
+    }
+    pct = count*100/nSal;
+// -->
+</script>
+<font color="#008000">In a histogram
+for the 10 salaries, the height of the bin for the class interval
+<script language="JavaScript1.2"><!--
+    document.write("$" + (limits[0]).toString() + " (exclusive) to $" +
+        (limits[1]).toString() + " (inclusive)");
+    var rawOpt = [
+              (roundToDig(pct,0)).toString() + "% per $1",
+              (roundToDig(pct+10,0)).toString() + "%",
+              (roundToDig(1000*pct/(limits[1]-limits[0]),2)).toString() + "% per $1000",
+              (roundToDig(1000*(pct+10)/(limits[1]-limits[0]),2)).toString() + "% per $1000",
+              (roundToDig(pct,0)).toString() + "% per $1000"
+              ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+// -->
+</script>
+would be closest to
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+// Fake weight and height data. Take mean weight = 150#; mean height = 66". Slope 1"/5# = .2.
+// ratio of SDs 6"/40# = .15
+//
+    var slope = 0.2;
+    var htRg0 = 20;
+    var aveWt0 = 150;
+    var aveHt0 = 67;
+    var sdRat = 0.15
+    var pVals = listOfDistinctRandInts(2,0,1);
+    var parms = [["polynomial", aveHt0, slope, 10*Math.abs(pVals[0])],
+                1 + 4*Math.max(pVals[1],0), 10];
+    var examplePoints = 100;
+    var data6 = fakeBivariateData(examplePoints,parms[0],parms[1],parms[2], 0, 80);
+    var htMnMx = vMinMax(data6[1]);
+    var loHt = aveHt0 - htRg0/2;
+    var htRg = htMnMx[1] - htMnMx[0];
+    for (i=0; i < data6[0].length; i++) {
+        data6[0][i] += aveWt0 - 40;
+        data6[1][i] = loHt + (data6[1][i] - htMnMx[0])*htRg0/htRg;
+    }
+    var cc = roundToDig(corr(data6[0],data6[1]),1);
+    var aveWt = roundToDig(mean(data6[0]),1);
+    var aveHt = roundToDig(mean(data6[1]),1);
+    var sdWt =  roundToDig(sd(data6[0]),1);
+    var sdHt =  roundToDig(sd(data6[1]),1);
+    var rmsResid = Math.sqrt(1-cc*cc)*sdHt;
+// -->
+</script>
+  The scatterplot below shows
+  fabricated data for the heights and weights of 100 individuals.
+  The average weight is
+<script language="JavaScript1.2"><!--
+    document.write(aveWt.toString() + " lbs. with an SD of " + sdWt.toString() + " lbs., ");
+// -->
+</script>
+and the average height is
+<script language="JavaScript1.2"><!--
+    document.write(aveHt.toString() + " in. with an SD of " + sdHt.toString() + " in. ");
+// -->
+</script>
+The correlation between height and weight is
+<script language="JavaScript1.2"><!--
+    document.write(cc.toString() + ". ");
+// -->
+</script>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var wtFac = (listOfRandInts(1,-3,3))[0];
+    if (wtFac == 0) {wtFac = 2;}
+    var predWt = roundToDig(aveWt + wtFac*sdWt,1);
+    var predHt = roundToDig(aveHt + wtFac*cc*sdHt,1);
+    var pert = 0.05*predHt;
+    var pertFac = listOfDistinctRandInts(4,-5,5);
+    for (i=0; i < pertFac.length; i++) {
+        if (pertFac[i] == 0) { pertFac[i] = 6; }
+    }
+    var rawOpt = new Array(5);
+    for (i=0; i < opt.length - 1; i++) {
+        rawOpt[i] = (roundToDig(predHt + pertFac[i]*pert,1)).toString() + " in.";
+    }
+    rawOpt[opt.length-1] = predHt.toString() + " in.";
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal;
+    for (i = 0; i < opt.length; i++) {
+        if (opt[i] == predHt.toString() ) {aVal = alphabet[i];}
+    }
+// -->
+</script>
+<font color="green">
+The regression line estimate of the height of an
+individual whose weight is
+<script language="JavaScript1.2"><!--
+    document.write(predWt.toString() + " lbs.");
+// -->
+</script>
+is closest to
+</p>
+<p>
+</font>
+<script language="JavaScript1.2"><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+// -->
+</script>
+<font color="green">
+    The rms error of regression for regressing height against weight is closest to
+  (note: sqrt(x) = x<sup>&frac12;</sup>)
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  var coef = roundToDig(1-cc*cc,2);
+  var pert = 0.2*coef;
+  var rawOpt = [
+    "sqrt(" + (roundToDig(coef-2*pert,3)).toString() + ")&times;" + sdHt.toString() + " in.",
+    "sqrt(" + (roundToDig(coef,3)).toString() + ")&times;" + sdHt.toString() + " in.",
+    "sqrt(" + (roundToDig(coef-pert,3)).toString() + ")&times;" + sdWt.toString() + " lbs.",
+    "sqrt(" + (roundToDig(coef-3*pert,3)).toString() + ")&times;" + sdWt.toString() + " in.",
+    "sqrt(" + (roundToDig(coef-pert,3)).toString() + ")&times;" + sdHt.toString() + " lbs."
+    ];
+  var optPerm = randPermutation(rawOpt,'inverse');
+  var opt = optPerm[0];
+  var aVal = alphabet[optPerm[1][1]];
+  writeRadioExercise(true,qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+// -->
+</script>
+<font color="green">
+For this scatterplot, the regression line, together with the
+  SDs of height and weight, summarize the data
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    var opt = ["well",
+        "poorly, because of outliers",
+        "poorly, because of nonlinearity",
+        "poorly, because of heteroscedasticity",
+        "poorly, because the association is weak"
+        ];
+    var aVal = "";
+    var none = true;
+    if (pVals[0] != 0) {
+        aVal += "c&";
+        none = false;
+    }
+    if (pVals[1] > 0) {
+        aVal += "d&";
+        none = false;
+    }
+    if (none) aVal += "a";
+    if (aVal.lastIndexOf('&') == aVal.length - 1) aVal = aVal.substring(0, aVal.length - 1);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</font>
+</p>
+<p align="center">
+<script language="JavaScript1.2"><!--
+  document.writeln('<applet code="Correlation.class" codebase="../../Java" ' +
+    ' align="baseline" width="600" height="320" name="q6Applet" archive="PbsGui.zip">');
+  document.writeln('<param name="addPoints" value="false">');
+  document.writeln('<param name="graphAveButton" value="false">');
+  document.writeln('<param name="sdButton" value="false">');
+  document.writeln('<param name="sdLineButton" value="false">');
+  document.writeln('<param name="title" value="Fake Weight v. Height Data">');
+  document.writeln('<param name="regressButtons" value="false">');
+  document.writeln('<param name="showR" value="false">');
+  document.writeln('<param name="x" value="' + (data6[0]).join() + '">');
+  document.writeln('<param name="y" value="' + (data6[1]).join() + '">');
+  document.writeln('You need Java to see this</applet>');
+// -->
+</script>
+<script language="JavaScript1.2"><!--
+    q6AppletNum = document.applets.length - 1;
+// -->
+</script>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var which = randBoolean();
+    var rawOpt = ["The event C is a subset of the event AB",
+            "The event AB and the event C are disjoint",
+            "The event C is a subset of the event B",
+            "The event AB is a subset of the event C",
+            "The event A is a subset of the event C"
+            ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal;
+    if (which) {
+        aVal = alphabet[optPerm[1][1]];
+    }
+    else {
+        aVal = alphabet[optPerm[1][3]];
+    }
+// -->
+</script>
+<font color="#008000">Consider
+    the experiment of rolling a fair pair of dice. Let A be the event that the total number of
+    spots showing on the two dice is prime, let B be the event that the total number of spots
+    showing on the two dice is even, and let C be the event that at least one die shows
+<script language="JavaScript1.2"><!--
+    if (which) { document.write("more than ");}
+    else {document.write("exactly ");}
+    // -->
+</script>
+    one spot.</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+    // -->
+</script>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  document.writeln(startProblem(pCtr++));
+  var loss = [" rms "," average of the absolute values "];
+  var meas = ["mean","median"];
+  var which = (listOfRandInts(1,0,1))[0];
+// -->
+</script>
+  We play a game in which I give you a list of numbers, then you give me back a
+  single number (not necessarily one of the numbers in the list). I pay you </p>
+<p align="center">
+$100 - (the
+<script language="JavaScript1.2"><!--
+  document.write(loss[which]);
+// -->
+</script>
+  of the differences between the numbers in
+  the list and the number you give me)
+</p>
+<p>
+<font color="green">To win the most money, you should pick the
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  var rawOpt = ["mean","mode","median","SD","IQR"];
+  var opt = randPermutation(rawOpt);
+  var aVal;
+  for (i=0; i < opt.length; i++) {
+    if (opt[i] == meas[which]) {aVal = alphabet[i];}
+  }
+  writeRadioExercise(qCtr++,opt,aVal);
+  // -->
+</script>
+  of the list.</font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ["house prices in the San Francisco Bay area",
+            "the percentage of family income spent on food and housing worldwide",
+            "prices of new cars",
+            "salaries of chief executive officers (CEOs) of public corporations",
+            "human longevity"
+            ];
+    var opt = randPermutation(rawOpt);
+    var aVal;
+    for (i=0; i < opt.length; i++) {
+        if (opt[i].substring(4,11) == "percent") {aVal = alphabet[i];}
+    }
+// -->
+</script>
+<font color="green">
+  Which of the following has a distribution
+  that is skewed to the left? </font>
+</p>
+<p>
+<script language="JavaScript1.2"><!--
+  writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</form>
+<hr>
+
+<script language="JavaScript1.2"><!--
+writeMiscFooter(true);
+// -->
+</script>
+</body>
+</html>

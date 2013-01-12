@@ -1,0 +1,1919 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "14 July 2011 3:24 PST";
+	// copyright 1997-2012 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "montyHallTest";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<!-- let's make a deal scripts -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/lmad.js"></script>
+
+
+<form method="post">
+<h1>
+    Probability Meets Data
+</h1>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHall') + ', ');
+// -->
+</script>
+    examined two a priori arguments that
+    the probability of winning the game by switching is 1/2, and two a priori
+    arguments that the probability of winning by switching is 1/3.
+</p>
+
+<p>
+    This chapter develops an empirical approach to resolving the issue using the
+    observed number of wins in repeated play.
+    Developing the approach leads to several key ideas:
+    <em>box models</em>, <em>the Law of Large Numbers</em>,
+    <em>probability histograms</em>, <em>the binomial distribution</em>,
+    and <em>the maximum likelihood method</em> for deciding among competing models.
+</p>
+
+
+<h2><a id="introduction"></a>Introduction
+</h2>
+
+<p>
+    This chapter uses the Let's Make a Deal problem to develop several ideas that are
+    central to Statistics and Probability.
+    We would like to know whether the chance of winning the game by switching is 1/2 or 2/3.
+    The number of wins by switching in a fixed number of plays of the game is represented
+    by a <em>box model</em>, a probabilistically equivalent problem involving drawing
+    tickets at random from a box.
+    If the chance of winning by switching is 1/2, the number of wins in 50 plays is like
+    the <em>sample sum</em> of the numbers on the tickets in 50 random draws with
+    replacement from a box that contains two tickets, one labeled &quot;1&quot; and one
+    labeled &quot;0.&quot;
+    If the chance of winning by switching is 2/3, the number of wins in 50 plays of the
+    game is like the sample sum of the numbers on the tickets in 50 random draws with
+    replacement from a box that contains three tickets, two labeled &quot;1&quot; and one
+    labeled &quot;0.&quot;
+    This leads us to study the <em>probability distribution</em> of the sample sum of draws with
+    replacement from boxes of numbered tickets.
+    For boxes that contain tickets labeled only with the numbers 0 and 1, we calculate the
+    probability distribution of the sample sum explicitly using ideas from
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('probabilityPhilosophy') + ', and ' +
+                     citeLinkChapter('sets') + '. ');
+// -->
+</script>
+    This distribution is called the <em>binomial distribution</em>.
+    We decide whether the probability of winning by switching is 1/2 or 2/3 using
+    <em>maximum likelihood</em>:  whichever hypothesis assigns larger probability to the
+    observed data.
+</p>
+
+<h2><a id="box_model"></a>
+    A Box Model for the Let's Make a Deal Problem
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/JmBs9_VBA9Q?start=390&end=2351" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Suppose that the chance of winning by switching really is 50%.
+    Then if we play the game (independently) over and over, say 50 times, the number of
+    times we win behaves like the number of heads in 50 tosses of a fair coin.
+    Equivalently, it behaves like the number of tickets labeled &quot;1&quot; we get in 50
+    random draws with replacement from a box of tickets containing one ticket labeled &quot;0&quot;
+    and one ticket labeled &quot;1:&quot;
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 1
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+
+
+
+<p>
+    Getting the ticket labeled &quot;1&quot; in a given draw represents a win by switching
+    in the corresponding play of the game; getting the ticket labeled &quot;0&quot; in a given
+    draw represents a loss by switching in the corresponding play of the game.
+</p>
+
+<p>
+    In contrast, if the chance of winning by switching is really 2/3 (66.67%), the number
+    of times we win by switching in 50 independent plays of the game is like the number
+    of tickets labeled &quot;1&quot; we get in 50 random draws with replacement from a box
+    of tickets containing one ticket labeled &quot;0&quot; and two tickets labeled &quot;1:&quot;
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 2
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+
+<p>
+    We stir up the tickets in the box and draw a ticket without looking.
+    We then record the number on the ticket drawn, replace the ticket,
+    stir up the box again, and draw again, until we have drawn 50 times.
+</p>
+
+<p>
+    These are examples of <em>box models</em>, in which an experiment is modeled by a
+    probabilistically equivalent problem involving drawing tickets at random from a box.
+    We call any box of numbered tickets for which the number on each ticket is 0 or 1 a
+    <span class="termOfArt">0-1 box</span>.
+    Box&nbsp;1 and Box&nbsp;2 are 0-1 boxes.
+</p>
+
+<p>
+    We would expect about half of the draws from Box&nbsp;1 to result in the ticket labeled
+    &quot;1;&quot; we would expect about 2/3 of the draws from Box&nbsp;2 to result in a ticket
+    labeled &quot;1.&quot;
+    We want to decide from the number of tickets labeled &quot;1&quot; we get in 50 draws
+    whether winning by switching is like drawing at random from Box&nbsp;1 or like drawing
+    at random from Box&nbsp;2.
+    Fifty draws from either box could yield a ticket labeled &quot;1&quot; any number of
+    times between 0 and 50, but the chances of these possibilities are different for
+    the two boxes.
+</p>
+
+<p>
+    Consider the following rule:
+</p>
+
+<ul>
+    <li>
+        If 29 or fewer tickets labeled &quot;1&quot; result from the 50 draws, conclude
+        that the box is Box&nbsp;1.
+    </li>
+    <li>
+        Otherwise, conclude that the box is Box&nbsp;2.
+    </li>
+</ul>
+
+<p>
+    Any rule like this can err in two ways: It can lead us to conclude that the box is Box&nbsp;1
+    when it is really Box&nbsp;2, and vice versa.
+    (If the box is neither Box&nbsp;1 nor Box&nbsp;2, the rule always suggests the wrong conclusion.)
+</p>
+
+<p>
+    Because we expect a larger number of tickets labeled &quot;1&quot; if we are drawing from
+    Box&nbsp;2, it makes sense to conclude that the box is Box&nbsp;2 if sufficiently many
+    of the draws give a ticket labeled &quot;1.&quot;
+    How high should we set the threshold?
+</p>
+
+<p>
+    In 50 repeated plays of the game, how does the number of wins by switching behave under
+    the two hypotheses&mdash;that the chance of winning by switching is 50% and that the chance
+    of winning by switching is 66.67%?
+    Equivalently, how does the number of tickets labeled &quot;1&quot; in 50 independent
+    draws with replacement from Box&nbsp;1 compare with the number of tickets labeled &quot;1&quot;
+    in 50 independent draws with replacement from Box&nbsp;2?
+</p>
+
+<p>
+    Notice that the number of tickets labeled &quot;1&quot; in <em>n</em> draws is just the
+    sum of the numbers on the tickets drawn: Each ticket labeled &quot;1&quot; contributes
+    1 to the sum; each ticket labeled &quot;0&quot; leaves the sum unchanged.
+    That is, we get a ticket labeled &quot;1&quot; on exactly <em>k</em> of the <em>n</em>
+    draws if and only if the sum of the numbers on the tickets we draw is <em>k</em>.
+    The sum of the numbers on the tickets drawn at random is called the <em>sample sum</em>.
+</p>
+
+<p>
+    The sample sum of 50 draws with replacement from Box&nbsp;1 or Box&nbsp;2 is not
+    perfectly predictable:
+    It depends on the luck of the draw.
+    There is a calculable probability that the sample sum of 50 random draws with replacement
+    from Box&nbsp;1 equals 0, that it equals 1,&nbsp;&hellip;&nbsp;, and that it equals 50.
+    Those probabilities comprise <em>the sampling distribution of the sample sum for a random
+    sample of size 50 with replacement</em> from Box&nbsp;1.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    lets us study this sampling distribution:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The sampling distribution of the sample sum of 50 draws with replacement ' +
+                'from Box&nbsp;1.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="SampleDist.class" codebase="../../Java/"
+  align="baseline" width="560" height="400" archive="PbsGui.zip">
+    <param name="bins" value="51">
+    <param name="sources" value="box">
+    <param name="boxContents" value="0,1">
+    <param name="boxHistControl" value="false">
+    <param name="sampleSize" value="50">
+    <param name="variables" value="sum">
+    <param name="showBoxHist" value="false">
+    <param name="curveControls" value="false">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+    The text area at the right of the tool shows the contents of the box of tickets:
+    initially, two tickets, one labeled &quot;0&quot; and one labeled &quot;1,&quot; just
+    as in Box&nbsp;1.
+    We shall call this text area the &quot;population box&quot; to distinguish it from the
+    other boxes in the figure that accept input.
+    The number of tickets to draw with replacement is the sample size, which is given near
+    the bottom of the figure, and is set to 50 initially.
+    Every time you click <span class="appCtrlName">Take Sample</span>, the computer draws 50 tickets with
+    replacement from the population box, computes their sample sum, and updates a histogram
+    in the middle of the figure.
+    The histogram displays the frequency distribution of the values of the sample sum so far.
+    Click <span class="appCtrlName">Take Sample</span> a few times.
+    You will see the distribution of the sample sum of 50 draws from Box&nbsp;1 evolve.
+</p>
+
+<p>
+    The numbers at the left of
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    are properties of the numbers in the population box and the sample values.
+    Starting from the bottom,
+    <span class="appCtrlName">Samples</span> is the number of samples of size 50
+    that have been drawn from the population
+    box&mdash;the number of values of the sample sum displayed in the histogram.
+    <span class="appCtrlName">SD(values)</span>
+     is the <a class="glossRef" href="gloss.htm#sd">standard deviation</a> of the Samples observed
+    values of the sample sum.
+    <span class="appCtrlName">Mean(values)</span>
+     is the <a class="glossRef" href="gloss.htm#mean">mean</a> of the Samples observed values
+    of the sample sum.
+    <span class="appCtrlName">SE(sum)</span>
+    is the <em>standard error</em> of the sample sum of 50 random draws with
+    replacement from the population box; standard error is introduced in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('standardError') + '. ');
+// -->
+</script>
+    The standard error of the sample sum is a measure of how scattered the values of the
+    sample sum tend to be in repeated experiments.
+    <span class="appCtrlName">E(sum)</span>
+     is the <em>expected value</em> of the sample sum; expected value is introduced in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + '. ');
+// -->
+</script>
+    The expected value of the sample sum is the long-run average value of the sample sum in
+    repeated experiments.
+    <span class="appCtrlName">SD(box)</span>
+    is the <a class="glossRef" href="gloss.htm#sd">standard deviation</a> of the list of numbers on
+    the tickets in the population box.
+    The population box initially contains one ticket labeled &quot;1&quot; and one ticket
+    labeled &quot;0.&quot;
+    The mean of these two values is (0&nbsp;+&nbsp;1)/2&nbsp;=&nbsp;0.5, so the SD of the
+    list is
+</p>
+
+<p class="math">
+    SD(box)&nbsp;=&nbsp;( ((0-0.5)<sup>2</sup> +
+    (1 - 0.5)<sup>2</sup>)/2 )<sup>&frac12;</sup>&nbsp;=&nbsp;0.5.
+</p>
+
+<p>
+    <span class="appCtrlName">Ave(box)</span>
+    is the mean of the numbers on the tickets in the population box, which is 0.5
+    initially.
+</p>
+
+<p>
+    Change the number of samples to take (in <span class="appCtrlName">Take__________samples</span>) from
+    1 to 1000.
+    This will speed things up: Every time you click <span class="appCtrlName">Take Sample</span>, the computer will
+    draw 50 tickets with replacement from the population Box&nbsp;1000 times, and include the
+    1000 new values of the sample sum in the histogram.
+    Click <span class="appCtrlName">Take Sample</span> a few times.
+    Note that the histogram of the sample sum changes rapidly at first, then stabilizes:
+    Once you have taken a few thousand samples, the shape of the histogram does not change
+    much when you draw even more samples of size 50.
+    (
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    will not allow you to take more than 10,000 samples of size 50.)
+    The distribution is centered at 25: on the average, in 50 draws with replacement from
+    Box&nbsp;1, one gets 25 tickets labeled &quot;1.&quot;
+    However, the entire range of values between 0 and 50 is possible, and a range of about
+    15 values around 25 occurs fairly frequently.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Now delete the contents of the population box on the right and replace them with
+    0, 1, 1, so that the population box is like Box&nbsp;2 instead of Box&nbsp;1.
+    Click <span class="appCtrlName">Take Sample</span> a few times, leaving
+    <span class="appCtrlName">Take_________samples</span>
+    set to 1000.
+    The histogram of the observed values of the sample sum stabilizes to a different shape
+    than it had for draws from Box&nbsp;1.
+    This histogram is centered near 50&times;2/3=33.33.
+    That the shape of the histogram stabilizes as the number of samples of size 50 grows
+    illustrates <em>the Law of Large Numbers</em>, which states that the relative
+    frequency with which an event occurs in repeated, independent trials is increasingly
+    likely to be close to the probability of the event.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'The law of Large Numbers says that in a sequence of independent trials ' +
+               'with the same probability of success, for any number E&gt;0, ' +
+               'the chance that the fraction of trials that result in success differs ' +
+               'from the probability of success by more than E approaches zero ' +
+               'as the number of trials increases.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a> is
+    extremely important for the <a class="glossRef" href="gloss.htm#frequency_theory">Frequency Theory of
+    Probability</a>, because it says we can estimate the probability of an event by the
+    relative frequency of its occurrence in repeated trials.
+    We shall look at the
+    <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a> in more detail
+    in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + '. ');
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    When samples of size 50 with replacement are drawn over and over from a box of tickets,
+    the frequency histogram of the sample sum converges to the <em>probability histogram</em>
+    of the sample sum: The area of each bin converges to the probability that the sample
+    sum is in the bin.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The areas of the bins converge in the following sense: The chance that ' +
+       'the area of a bin differs from the probability that the sample sum lies ' +
+       'in that bin by more than any strictly positive amount E converges ' +
+       'to zero as the number of times the sample is drawn goes to infinity. ' +
+       'This is called <em>convergence in probability</em>. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Previously in this text, histograms were used to represent data (observations) graphically.
+    A probability histogram is different: It represents probabilities graphically.
+    It gives the probability of each possible value of the random quantity in question.
+    The probabilities of all possible values of a random quantity (such as the sample sum) are
+    called a <em>probability distribution</em>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows the probability histogram for the sample sum of 50 independent draws with replacement
+    from Box&nbsp;1:
+</p>
+</div>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability Histogram for the Sample Sum of 50 Draws with Replacement ' +
+               'from Box&nbsp;1: Binomial Distribution with <em>n</em>=50 and <em>p</em>=1/2.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+    align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="0">
+    <param name="hiLiteLo" value="0">
+    <param name="n" value="50">
+    <param name="normalControls" value="false">
+    <param name="p" value=".5">
+        You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The area of each <a class="glossRef" href="gloss.htm#bin">bin</a> is the probability that
+    the sample sum of 50 independent draws with replacement from Box&nbsp;1 is in the
+    <a class="glossRef" href="gloss.htm#class_interval">class interval</a> that forms the base of the bin.
+    This particular probability histogram represents a probability distribution we shall
+    find explicitly.
+    The area of the bin centered at <em>k</em> is the chance of getting <em>k</em>
+    of tickets labeled &quot;1&quot; in 50 independent draws with replacement from Box&nbsp;1.
+</p>
+
+<h2>
+    <a id="binomial"></a>The Binomial Probability Distribution
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/JmBs9_VBA9Q?start=2351&end=2750" frameborder="0" allowfullscreen></iframe>&nbsp;
+   <iframe width="420" height="315" src="http://www.youtube.com/embed/JmBs9_VBA9Q?start=4468&end=4867" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+
+</p>
+
+<p>
+    The sample sum of 50 random draws with replacement from Box&nbsp;1 is a special case of
+    the sample sum of <em>n</em> random draws with replacement from a box of tickets of which a
+    fraction <em>p</em> are labeled &quot;1&quot; and the rest are labeled &quot;0.&quot;
+    The probability distribution of such a sample sum has a name: the binomial distribution
+    with parameters <em>n</em> and <em>p</em>.
+    For <em>k</em>=0, 1, 2, &hellip;&nbsp;, <em>n</em>,  the binomial distribution with
+    parameters <em>n</em> and <em>p</em> gives the chance that the sample sum equals <em>k</em>.
+    The probability distribution of the sample sum of 50 random draws with
+    replacement from Box&nbsp;1 has a binomial distribution with parameters
+    <em>n</em>&nbsp;=&nbsp;50 and <em>p</em>&nbsp;=&nbsp;50%.
+    Let us figure out what that distribution is.
+</p>
+
+<p>
+    The sample sum of 50 draws with replacement from Box&nbsp;1 equals <em>k</em> if we
+    draw <em>k</em> tickets labeled
+    &quot;1&quot; and (50-<em>k</em>) tickets labeled &quot;0.&quot;
+    How many ways can that occur?
+    There are <sub>50</sub>C<sub><em>k</em></sub> ways to specify <em>k</em> of 50
+    draws to be the draws that give tickets labeled &quot;1.&quot;
+    We can find the total chance of getting &quot;1&quot; on <em>k</em> of the
+    draws by adding the chances of getting <em>k</em> &quot;1&quot;s each of
+    those <sub>50</sub>C<sub><em>k</em></sub> possible ways, because
+    those ways are <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a>.
+</p>
+
+<p>
+    Consider one particular way to get <em>k</em> &quot;1&quot;s: the
+    first <em>k</em> draws give the ticket labeled &quot;1,&quot; and the rest give the
+    ticket labeled &quot;0.&quot;
+    Because the draws are independent, the chance of
+</p>
+
+<p>
+    &quot;1&quot; on the first draw and &quot;1&quot; on the second draw and  &hellip;
+    and &quot;1&quot; on the <em>k</em><sup>th</sup> draw and &quot;0&quot; on the
+    <em>k</em>+1<sup>st</sup> draw and &quot;0&quot; on the
+    <em>k</em>+2<sup>nd</sup> draw and &hellip; and &quot;0&quot; on
+    the 50<sup>th</sup> draw
+</p>
+
+<p>
+    is the product of the chance of getting &quot;1&quot; on the first draw, the
+    chance of getting &quot;1&quot; on the second draw, &hellip;
+    and the chance of getting &quot;0&quot; on the 50<sup>th</sup> draw, namely
+</p>
+
+<p class="math">
+    (chance of getting &quot;1&quot;)<sup><em>k</em></sup> &times;
+    (chance of getting &quot;0&quot;)<sup>50-<em>k</em></sup> =
+    (50%)<sup><em>k</em></sup> &times; (50%)<sup>50-<em>k</em></sup>&nbsp;=&nbsp;(50%)<sup>50</sup>.
+</p>
+
+<p>
+    The chance of getting &quot;1&quot; <em>k</em> times and &quot;0&quot; 50-<em>k</em>
+    times in any other order is the same: Because the draws are
+    <a class="glossRef" href="gloss.htm#independent">independent</a>, we would get the same
+    factors in a different order.
+    The product does not depend on the order of the factors
+    (multiplication is commutative), so the product would still be (50%)<sup>50</sup>.
+</p>
+
+<p>
+    Thus the chance of getting &quot;1&quot; <em>k</em> times and &quot;0&quot; 50-<em>k</em> times is
+</p>
+
+<p class="math">
+        <sub>50</sub>C<sub><em>k</em></sub>(50%)<sup>50</sup>.
+</p>
+
+<p>
+        By similar reasoning, if we were drawing from Box&nbsp;2, the chance of getting
+        &quot;1&quot; <em>k</em> times and &quot;0&quot;
+        50-<em>k</em> times in any particular order would be
+        (2/3)<sup>k</sup>(1/3)<sup>50-<em>k</em></sup>,
+        and because there are <sub>50</sub>C<sub><em>k</em></sub>
+        possible orders for the <em>k</em> &quot;1&quot;s, the overall chance of getting
+        <em>k</em> tickets labeled &quot;1&quot; (the chance that the
+        <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> is <em>k</em>) is
+</p>
+
+<p class="math">
+        <sub>50</sub>C<sub><em>k</em></sub> &times;
+        (chance of getting &quot;1&quot;)<sup><em>k</em></sup>
+        &times; (chance of getting &quot;0&quot;)<sup>50-<em>k</em></sup> =
+        <sub>50</sub>C<sub><em>k</em></sub>(2/3)<sup><em>k</em></sup> &times;
+        (1/3)<sup>50-<em>k</em></sup>.
+</p>
+
+<p>
+        These are instances of a general rule:
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Binomial Distribution</span>
+    </p>
+    <p>
+      Suppose a box of tickets has a proportion <em>p</em> of
+      tickets labeled &quot;1&quot; and a proportion 1-<em>p</em> of tickets labeled
+      &quot;0.&quot;
+      The probability of drawing exactly <em>k</em> tickets labeled &quot;1&quot; (the
+      chance that the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> is <em>k</em>) in
+      <em>n</em> <a class="glossRef" href="gloss.htm#independent">independent</a>
+      random draws with replacement from the box is
+    </p>
+
+    <p class="math">
+         <sub><em>n</em></sub>C<sub><em>k</em></sub>&times;<em>p</em><sup><em>k</em></sup>&times;(1-<em>p</em>)<sup><em>n</em>-<em>k</em></sup>,
+    </p>
+    <p>
+       for <em>k</em>&nbsp;=&nbsp;0, 1, &hellip;&nbsp;, <em>n</em>.
+       The probability is zero for every other value of <em>k</em>.
+    </p>
+    <p>
+     This is called the <a class="glossRef" href="gloss.htm#binomial">binomial
+      distribution</a> with parameters <em>n</em> and <em>p</em>.
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    shows the <a class="glossRef" href="gloss.htm#probability_histogram">probability histogram</a> of the
+    <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with
+    parameters <em>n</em>=50 and <em>p</em>=50%.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> of 50
+    <a class="glossRef" href="gloss.htm#independent">independent</a> draws with replacement from
+    Box&nbsp;2 has a binomial distribution with parameters <em>n</em>=50 and <em>p</em>=2/3=66.67%.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is its probability histogram:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability histogram for the sample sum of 50 draws with replacement from ' +
+               'Box&nbsp;2: binomial distribution with <em>n</em>&nbsp;=&nbsp;50 and ' +
+               '<em>p</em>&nbsp;=&nbsp;2/3.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="HistHiLite.class" codebase="../../Java/"
+      align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="0">
+    <param name="hiLiteLo" value="0">
+    <param name="n" value="50">
+    <param name="normalControls" value="false">
+    <param name="p" value=".666667">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+
+<h3>
+   <a id="binomial_n_and_p"></a>Dependence of the Binomial
+  Distribution on <em>n</em> and <em>p</em>
+</h3>
+
+<p>
+    How does the binomial distribution depend on <em>n</em> and <em>p</em>?
+    The larger the number of trials <em>n</em>, the wider the range of
+    possible outcomes: The range of possible outcomes is from zero to <em>n</em>
+    (one cannot draw fewer than 0 tickets labeled &quot;1,&quot; nor more than <em>n</em> tickets
+    labeled &quot;1&quot; in <em>n</em> draws).
+    If the fraction <em>p</em> of tickets labeled &quot;1&quot;
+    in the box is zero, all the draws must result in a ticket labeled &quot;0,&quot;
+    so the chance that the sample sum is zero equals 100%, and the chance of any
+    other value is zero.
+    If <em>p</em> is small, the number of times a ticket labeled &quot;1&quot; is drawn is likely
+    to be small, so the distribution is skewed to the right (most of the probability is
+    at the left end of the histogram, with a long, thin right tail).
+</p>
+
+<p>
+    If <em>p</em>&nbsp;=&nbsp;50%, the chances of drawing a ticket labeled
+    &quot;0&quot; and of drawing a ticket
+    labeled &quot;1&quot; are the same in every trial.
+    The chance the sample sum is <em>k</em> thus must equal the chance that the sample
+    sum is <em>n</em>-<em>k</em>, so the probability histogram must be symmetrical.
+</p>
+
+<p>
+    If <em>p</em> is very large (close to 100%), it is likely that a large proportion of
+    the draws will yield a ticket labeled &quot;1,&quot; so the probability histogram
+    will be skewed to the left.
+    If <em>p</em>&nbsp;=&nbsp;100%, all the tickets are labeled &quot;1,&quot; so the
+    chance that the sample sum is <em>n</em> is
+    100%, and the chance of any other value is zero.
+</p>
+
+<p>
+    The probability histogram is most spread out when <em>p</em>&nbsp;=&nbsp;50%.
+    When <em>p</em> is larger or smaller, the probability tends to be more concentrated in a
+    smaller range of values, becoming increasingly concentrated as <em>p</em> approaches 0% or 100%
+    (then the probability becomes completely concentrated at 0 or <em>n</em>, respectively).
+</p>
+
+<p>
+    Experiment for yourself using
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>:
+    Change the value of <em>n</em> to 5, 20, 50, and 100, and change the value of
+    <em>p</em> to 1%, 10%, 50%, 90%, and 99%.
+    Note how the shape of the binomial probability histogram varies.
+
+</p>
+
+<h3>
+   <a id="binomial_not_appropriate"></a>When the Binomial
+    Distribution Does <em>not</em> Apply
+</h3>
+
+<p>
+    We can identify drawing a ticket labeled &quot;1&quot; with &quot;success,&quot;
+    and drawing a ticket labeled &quot;0&quot; with &quot;failure.&quot;
+    In repeated independent draws with replacement, the number of tickets labeled
+    &quot;1&quot; drawn from the box in <em>n</em> draws (the sample sum of <em>n</em> draws) can be
+    thought of as the number of &quot;successes&quot; in <em>n</em> independent trials that each
+    have the same probability <em>p</em> of success (<em>p</em> is the proportion of tickets
+    in the box labeled &quot;1,&quot; which does not change from draw to draw if the
+    tickets are replaced).
+    If a quantity is not equivalent to the sample sum of <em>n</em> independent draws
+    with replacement from a box of tickets of which a proportion <em>p</em> are labeled
+    &quot;1&quot; and the rest are labeled &quot;0,&quot; the quantity does not have a
+    binomial distribution.
+</p>
+
+<p>
+    If the box contains tickets labeled with numbers other than 0 and 1,
+    the sample sum does not have a binomial distribution.
+    If the number <em>n</em> of draws is not fixed in advance, the sample sum
+    does not have a binomial distribution.
+    If the draws are not independent, the sample sum does not
+    have a binomial distribution.
+    If the chance of drawing a ticket labeled &quot;1&quot; is not the same
+    value <em>p</em> in each draw, the sample sum does not have a binomial distribution.
+</p>
+
+<p>
+    For example, suppose we draw from a box that contains five tickets in it:
+    three with &quot;0&quot; written on them and two with &quot;1&quot; written on them.
+    If we stir up the tickets in the box and draw one at random, the chance
+    that it says &quot;1&quot; is 40% (2/5).
+    If we draw five times in succession, with replacement and stirring the tickets
+    thoroughly between draws, the number of times we get a ticket labeled "1"
+    has a binomial distribution with parameters <em>n</em>=5 and <em>p</em>=40%.
+    If we do not stir the tickets up between draws, we're more likely to
+    draw the same ticket over and over (it stays on top): The draws are not
+    independent, so the binomial distribution does not apply.
+    Similarly, if we do not replace the tickets between draws, the draws are
+    <a class="glossRef" href="gloss.htm#dependent">dependent</a>, and the probability of drawing
+    a ticket labeled &quot;1&quot; is not
+    constant from trial to trial, so the binomial distribution does not apply.
+</p>
+
+<p>
+    The binomial distribution does not apply if the number of draws is not
+    fixed in advance.
+    For example, suppose we draw with replacement from the box just described,
+    mixing the tickets thoroughly between draws, and continue drawing until we
+    see &quot;1&quot; twice in a row.
+    Then the number of draws is random, not fixed, and the sample sum of the draws
+    does not have a binomial distribution.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates the issue.
+</p>
+
+<div class="example">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Macabre Example&mdash;&quot;Russian Roulette.&quot;';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<div class="indent">
+<p class="inline">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A revolver has six chambers in its cylinder, one of which is loaded. ' +
+               'Two people take turns spinning the cylinder, and pulling the trigger. ' +
+               'What\'s the distribution of the number of people shot in the first four turns?';
+    var fStr = 'More traditionally, in Russian Roulette, the cylinder is spun between turns, ' +
+        '  but the game stops if the gun goes off.  Under those rules, what is the probability ' +
+        '  distribution of the number of people shot in four turns?  There are four &quot;trials&quot; ' +
+        '  but the number of &quot;successes&quot; is either 0 (nobody is shot) or 1 (one person ' +
+        '  is shot).  For the distribution to be binomial, the possible number of successes would ' +
+        '  have to be 0, 1, 2, 3, and 4.  Thus the distribution cannot be binomial.  In this ' +
+        '  example, the trials are not independent, because ' +
+        '  if the gun goes off, the game is over.  (Moreover, if there is only one bullet, the gun ' +
+        '  cannot go off more than once.)  Let\'s find the probability distribution of the number ' +
+        '  of people shot in the first four turns.</p><p> Let <em>A</em><sub>1</sub>,     ' +
+        '  <em>A</em><sub>2</sub>, <em>A</em><sub>3</sub> and <em>A</em><sub>4</sub> be the <a        ' +
+        '  class="glossRef" href="gloss.htm#event">events</a> that no one is shot on the 1st    ' +
+        '  turn, 2nd turn, 3rd turn, and 4th turn, respectively. </p>      ' +
+        '  <p class="math">P(no one is shot)&nbsp;=&nbsp;' +
+        '  P(<em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub><em>A</em><sub>4</sub>)</p>     ' +
+        '  <p class="math">&nbsp;=&nbsp;' +
+        '  P(<em>A</em><sub>4</sub>| <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>) &times;   ' +
+        '  P(<em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>)</p><p class="math">    ' +
+        ' &nbsp;=&nbsp;P(<em>A</em><sub>4</sub> |                         ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>) &times; P(<em>A</em><sub>3</sub> |  ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub>) &times; P(<em>A</em><sub>1</sub><em>A</em><sub>2</sub>)   ' +
+        '  </p><p class="math">&nbsp;=&nbsp;P(<em>A</em><sub>4</sub> |              ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>)                ' +
+        '  &times; P(<em>A</em><sub>3</sub> | <em>A</em><sub>1</sub><em>A</em><sub>2</sub>) &times;       ' +
+        '  P(<em>A</em><sub>2</sub> | <em>A</em><sub>1</sub>)&times; P(<em>A</em><sub>1</sub>), </p><p>   ' +
+        '  where we have applied the <a  class="glossRef"          ' +
+        '  href="gloss.htm#multiplication_rule">multiplication rule</a>    ' +
+        '  repeatedly to find the probability of the <a  class="glossRef" ' +
+        '  href="gloss.htm#intersection">intersection</a> of the four <a class="glossRef"  ' +
+        '  href="gloss.htm#event">events</a> <em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>,     ' +
+        '  <em>A</em><sub>3</sub>, and <em>A</em><sub>4</sub> in terms of the <a class="glossRef" ' +
+        '  href="gloss.htm#conditional_probability">conditional        ' +
+        '  probability</a> that no one is shot in a given turn given that no   ' +
+        '  one had been shot before then. If the gun has not gone off before a ' +
+        '  given turn, there is still exactly one bullet left in the 6     ' +
+        '  chambers, so the                            ' +
+        '  <a class="glossRef" href="gloss.htm#conditional_probability">conditional chance</a>  ' +
+        '  that no one is shot in that turn is 5/6. Thus </p><p class="math">' +
+        '  P(<em>A</em><sub>1</sub>)&nbsp;=&nbsp;P(<em>A</em><sub>2</sub> | ' +
+        '  <em>A</em><sub>1</sub>) </p>        ' +
+        '  <p class="math">&nbsp;=&nbsp;P(<em>A</em><sub>3</sub> |  ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub>) ' +
+        '  </p><p class="math">&nbsp;=&nbsp;P(<em>A</em><sub>4</sub> |              ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>)&nbsp;=&nbsp;5/6, ' +
+        '  </p><p> and     ' +
+        '  hence</p><p class="math"> P(no one is shot)&nbsp;=&nbsp;P(<em>A</em><sub>4</sub> |   ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>) &times; ' +
+        '  P(<em>A</em><sub>3</sub> |  ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub>) &times; P(<em>A</em><sub>2</sub> |           ' +
+        '  <em>A</em><sub>1</sub>) &times; P(<em>A</em><sub>1</sub>)&nbsp;=&nbsp;(5/6)<sup>4</sup>&nbsp;=&nbsp;      ' +
+        '  48.2%. </p> <p>Finally, we have</p><p class="math"> P(one person is  ' +
+        '  shot)&nbsp;=&nbsp;100% - P(no one is shot)&nbsp;=&nbsp;51.8%.</p> <p>The probability that ' +
+        '  more than one person is shot is 0.</p><p>To continue this    ' +
+        '  tasteless example, what is the chance someone is shot in the first  ' +
+        '  four turns if the players do not spin the cylinder between turns?   ' +
+        '  The math for calculating                        ' +
+        '  P(<em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub><em>A</em><sub>4</sub>) ' +
+        '  in terms of ' +
+        '  the conditional probabilities is the same, but the conditional      ' +
+        '  probabilities are different. In this case, </p><p class="math">   ' +
+        '  P(<em>A</em><sub>4</sub>| <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>)&nbsp;=&nbsp;2/3     ' +
+        '  </p> <p>(two of the three chambers that have not been tried at the  ' +
+        '  beginning of the fourth turn are empty; one is loaded); </p><p      ' +
+        '  align="center"> P(<em>A</em><sub>3</sub> | <em>A</em><sub>1</sub><em>A</em><sub>2</sub>)&nbsp;=&nbsp;3/4 ' +
+        '  </p><p> (three of the four chambers that have not been tried at the ' +
+        '  beginning of the third turn are empty; one is loaded); </p><p       ' +
+        '  align="center"> P(<em>A</em><sub>2</sub> | <em>A</em><sub>1</sub>)&nbsp;=&nbsp;4/5 (similar     ' +
+        '  reasoning); </p><p>and </p><p class="math"> P(<em>A</em><sub>1</sub>)&nbsp;=&nbsp;   ' +
+        '  5/6, </p><p> as before. Thus </p><p class="math"> P(no one is     ' +
+        '  shot)&nbsp;=&nbsp;P(<em>A</em><sub>4</sub> | ' +
+        '  <em>A</em><sub>1</sub><em>A</em><sub>2</sub><em>A</em><sub>3</sub>)  ' +
+        '  &times; P(<em>A</em><sub>3</sub> | <em>A</em><sub>1</sub><em>A</em><sub>2</sub>) &times;       ' +
+        '  P(<em>A</em><sub>2</sub> | <em>A</em><sub>1</sub>) &times; P(<em>A</em><sub>1</sub>)&nbsp;=&nbsp;(2/3)   ' +
+        '  &times; (3/4) &times; (4/5) &times; (5/6)&nbsp;=&nbsp;1/3&nbsp;=&nbsp;33.3%. </p><p>    ' +
+        '  Finally, we have </p><p class="math"> P(someone is shot)&nbsp;=&nbsp;100% - ' +
+        '  P(no one is shot)&nbsp;=&nbsp;66.7%.';
+    document.writeln(qStr);
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+    qStr = 'The binomial distribution does not apply unless they reload the gun every time the ' +
+           'gun goes off, and continue playing even after someone is shot. Then, the number of ' +
+           'people shot in the first four turns is like the sample sum of four independent ' +
+           'random draws with replacement from a box that contains one ticket labeled ' +
+           '&quot;1&quot; and five tickets labeled &quot;0.&quot;';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+<p></p>
+</div>
+</div>
+
+<h3><a id="using_binomial"></a>
+    Using the Binomial Distribution
+</h3>
+
+<p>
+  The following examples hint at the range of problems that can be solved
+  using the binomial distribution.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling from Box&nbsp;2.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    What is the chance that the sum of 50 independent draws with replacement from Box&nbsp;2 is at
+    least 35 and no larger than 40?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    We break the event into mutually exclusive outcomes whose chances we know how to compute.
+    For the sample sum to be at least 35 and no larger than 40 means that the sample sum is
+    35, 36, 37, 38, 39, or 40.
+</p>
+
+<p>
+    The chance that the sample sum is 35 is
+    <sub>50</sub>C<sub>35</sub>(2/3)<sup>35</sup>(1/3)<sup>15</sup>.
+    The chance that the sample sum is 36 is
+    <sub>50</sub>C<sub>36</sub>(2/3)<sup>36</sup>(1/3)<sup>14</sup>, etc.
+    Adding these 6 numbers together gives the chance that the sample sum is at least 35
+    and no larger than 40.
+</p>
+
+<p>
+    Alternatively, we can read the chance from
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    by highlighting the range of bins centered at 35 to 40.
+    That range is from 34.5 to 40.5; the tool shows that the area from 34.5 to 40.5
+    of the binomial probability histogram for <em>n</em>=50 draws and a proportion <em>p</em>=2/3
+    of tickets labeled &quot;1&quot; is 35.6%.
+</p>
+
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sample Sum of Draws from a Box with Tickets Labeled 0, 1, and 2.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+  A box contains 3 tickets.
+  One of the tickets is labeled &quot;0,&quot; one is labeled &quot;1,&quot; and&nbsp;
+  1 is labeled &quot;2.&quot;
+  What is the chance that the sample sum of two draws with replacement from the box is 2?
+</p>
+
+<p>
+    <strong>Solution</strong>: Because the tickets are labeled with
+    numbers other than just &quot;0&quot; and &quot;1,&quot; the sample sum does not have a
+    binomial distribution.
+    However, we can still find the chance using the kind of reasoning that led to the binomial
+    distribution.
+</p>
+<p>
+    How can the sample sum of two draws with replacement from this box equal 2?
+    There are three mutually exclusive ways:
+</p>
+
+<ul>
+    <li>Draw the ticket labeled &quot;1&quot; in both draws.
+    </li>
+    <li>Draw the ticket labeled &quot;0&quot; on the first draw and the
+          ticket labeled &quot;2&quot; on the second draw.
+    </li>
+    <li>Draw the ticket labeled &quot;2&quot; on the first draw and the
+          ticket labeled &quot;0&quot; on the second draw.
+    </li>
+</ul>
+<p>
+  Because the draws are independent and the chance of getting each of
+  the three tickets is the same (1/3), the chance of each of these mutually exclusive ways
+  that the sample sum can equal 2 is (1/3)(1/3)=1/9.
+  That is, the chance of getting the
+  ticket labeled &quot;1&quot; on the first and second draws is (1/3)(1/3); the chance of
+  getting the ticket labeled &quot;0&quot; on the first draw and the ticket labeled
+  &quot;2&quot; on the second draw is (1/3)(1/3); and the chance of getting the ticket
+  labeled &quot;2&quot; on the first draw and the ticket labeled &quot;0&quot; on the second
+  draw is (1/3)(1/3).
+  The overall chance that the sample sum of two draws with replacement
+  from this box is 2 is thus 1/9+1/9+1/9&nbsp;=&nbsp;1/3.
+</p>
+
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Random Number of Draws.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    A box contains 10 tickets labeled &quot;0&quot; and 5 tickets labeled &quot;1.&quot;
+    Tickets are drawn at random, independently with replacement from the box until three
+    draws in a row give tickets labeled &quot;0.&quot;
+    What is the chance that the sample sum of numbers on the tickets is 2?
+</p>
+
+<p>
+  <strong>Solution</strong>: In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('randomVariables') + ', ');
+// -->
+</script>
+  we shall solve problems like this one.
+  The important thing to note here is that the number of draws is
+  random, so the sample sum does not have a binomial distribution, even though the draws are
+  independent and the tickets are labeled &quot;0&quot; and &quot;1.&quot;
+</p>
+
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Binomial Distribution in Disguise.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    A box of tickets contains three tickets labeled &quot;-1&quot; and seven tickets
+    labeled &quot;5.&quot;
+    What is the chance that the sample sum of 5 independent random draws with
+    replacement from this box is 7?
+</p>
+
+<p>
+    <strong>Solution</strong>: Because the labels on the tickets are not just &quot;0&quot;
+    and &quot;1,&quot; we cannot use the binomial distribution directly.
+    However, we can transform the problem to one in which the binomial distribution
+    can be used. Suppose we added 1 to the label of each ticket in the box.
+    Then the labels on the tickets would be &quot;0&quot; and &quot;6.&quot;
+    That would add 5 to the sample sum of 5 draws, because no matter which ticket we got,
+    it would contribute 1 more than its counterpart in the original problem.
+    Suppose we divided the labels on the tickets in this new box by 6.
+    That would divide the sample sum by six, for the same reason.
+    However, now the transformed labels are &quot;0&quot; and &quot;1.&quot;
+    The sample sum of 5 draws from the original box equals 7 if and only if the sample sum of the
+    relabeled tickets equals (7+5)/6&nbsp;=&nbsp;2.
+    For the sample sum of 5 draws from the original box to equal 7,
+    we need to get the ticket labeled &quot;5&quot; twice, and the ticket labeled
+    &quot;-1&quot; thrice.
+    The chance of this occurring is
+</p>
+
+<p class="math">
+    <sub>5</sub>C<sub>2</sub>&times;(70%)<sup>2</sup>(30%)<sup>3</sup>
+   &nbsp;=&nbsp;13.23%.
+</p>
+
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Another Binomial in Disguise.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    A box contains five tickets, labeled &quot;1,&quot; &quot;2,&quot; &quot;3,&quot;
+    &quot;4,&quot; and &quot;5.&quot;
+    Ten tickets will be drawn at random with replacement from the box.
+    What is the chance that more than 2 and fewer than 6 of the draws give tickets with
+    even numbers on them?
+</p>
+<p>
+  <strong>Solution</strong>: The number of even-numbered tickets
+  in 10 independent draws from this box is like the number of tickets labeled &quot;1&quot;
+  in 10 draws from a box of tickets containing two tickets labeled &quot;1&quot; and three
+  tickets labeled &quot;0.&quot;
+  Drawing a ticket labeled &quot;1&quot; from this box has the same chance as drawing a ticket
+  labeled with an even number from the original box (2/5&nbsp;=&nbsp;40%), and drawing a
+  ticket labeled &quot;0&quot; from this box has the same chance as
+  drawing a ticket labeled with an odd number from the original box (3/5&nbsp;=&nbsp;60%).
+  Thus the number of even-numbered tickets in 10 independent draws from the original box has a
+  binomial distribution with <em>n</em>&nbsp;=&nbsp;10 and <em>p</em>&nbsp;=&nbsp;40%.
+  The chance of drawing more than 2 and fewer than 6 even numbers is the chance of drawing
+  3, 4, or 5 even numbers, which is
+</p>
+
+<p class="math">
+    <sub>10</sub>C<sub>3</sub>&times;(40%)<sup>3</sup>(60%)<sup>7</sup>
+    + <sub>10</sub>C<sub>4</sub>&times;(40%)<sup>4</sup>(60%)<sup>6</sup> +
+    <sub>10</sub>C<sub>5</sub>&times;(40%)<sup>5</sup>(60%)<sup>5</sup>
+   &nbsp;=&nbsp;66.6%.
+</p>
+
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr-1);
+    document.writeln(' and ');
+    citeExample(xCtr);
+// -->
+</script>
+  show that a problem stated in terms of a box of labeled tickets where the labels are not just
+  &quot;0&quot; and &quot;1&quot; sometimes can be re-expressed as a box model in which the
+  tickets have different and possibly fewer labels; in this case, just &quot;0&quot;
+  and &quot;1.&quot;
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Third Binomial in Disguise.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+  A quarter, a dime, and a nickel are tossed together 10 times.
+  Suppose that the coins are fair, so that the chance of &quot;heads&quot; on each coin is
+  50%, and suppose that the tosses are all independent.
+</p>
+
+<ol>
+    <li>
+       What is the chance that in every toss, at least two of the coins show the same face
+       (at least two heads or at least two tails)?
+    </li>
+    <li>
+        What is the chance that all three coins land showing the same face in at least 5 of
+        the ten tosses?
+    </li>
+</ol>
+<p>
+  <strong>Solution</strong>.
+</p>
+
+<ol>
+    <li>
+        The chance is 100%.
+        In every toss, at least two of the three coins <em>must</em> show the same face.
+    </li>
+    <li>
+        <p>
+        The chance that all three coins land showing the same face in a given toss can be
+        broken into two <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a> events:
+        All three coins show heads, and all three coins show tails.
+        Because the tosses are independent, the chance that all three coins show heads
+        on a given toss is (1/2)(1/2)(1/2)&nbsp;=&nbsp;1/8.
+        This is also the chance that all three coins show tails on a given toss.
+        The chance that all three coins show the same face on a given toss is thus
+        1/8+1/8&nbsp;=&nbsp;1/4.
+        The number of times the three coins show the same face in 10 tosses is like the
+        sample sum of 10 independent random draws with replacement from a box that contains
+        three tickets labeled &quot;0&quot; and one ticket labeled &quot;1:&quot;
+        </p>
+<div class="boxModel">
+   <p class="boxLabel">
+      Box
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+        <p>
+        The sample sum of 10 draws with replacement from this box has a
+        binomial distribution with parameters <em>n</em>&nbsp;=&nbsp;10 and <em>p</em>&nbsp;=&nbsp;25%.
+        We can find this probability using
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>,
+        the binomial probability histogram, by changing <em>n</em> to 10, <em>p</em> to 25%,
+        and highlighting the range 4.5 to 10.5.
+        We also can find the sum directly:
+</p>
+<p class="math">
+  <sub>10</sub>C<sub>5</sub>&times;(25%)<sup>5</sup>(75%)<sup>5</sup>
+  + <sub>10</sub>C<sub>6</sub>&times;(25%)<sup>6</sup>(75%)<sup>4</sup> +
+  <sub>10</sub>C<sub>7</sub>&times;(25%)<sup>7</sup>(75%)<sup>3</sup>
+  +<br />
+  <sub>10</sub>C<sub>8</sub>&times;(25%)<sup>8</sup>(75%)<sup>2</sup> +
+  <sub>10</sub>C<sub>9</sub>&times;(25%)<sup>9</sup>(75%)
+  + <sub>10</sub>C<sub>10</sub>&times;(25%)<sup>10</sup> <br />
+ &nbsp;=&nbsp;7.8%.
+</p>
+
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr-1);
+// -->
+</script>
+    is another example of translating a problem involving repeated trials into one that
+    involves drawing numbered tickets independently at random from a box.
+</p>
+
+<p>
+    The following exercises test your understanding of the binomial distribution and
+    your ability to use the probabilistic reasoning used to derive it.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = (listOfDistinctRandInts(3,1,10)).sort(numberLessThan);
+    var p = roundToDig((listOfRandInts(1,1,9))[0]/10,1);
+    var binProb = binomialCdf(theInts[2],p,theInts[1]) -
+          binomialCdf(theInts[2],p,theInts[0]-1);
+    var aVal = numToRange(binProb,0.005);
+    var qStr = 'A box contains 100 tickets of which ' + (100*p).toString() +'% are labeled ' +
+           '&quot;1;&quot; the rest are labeled &quot;0.&quot; <span class="qSpan">' +
+           'The chance that in ' + theInts[2].toString() + ' random draws with ' +
+           'replacement from this box, the sample sum will be at least ' +
+           theInts[0].toString() + ' and no larger than ' + theInts[1].toString() +
+           ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+    qStr = 'The answer is the area of the binomial probability histogram with parameters ' +
+	    '<em>n</em>=' + theInts[2].toString() + ' and <em>p</em>=' + (100*p).toString() +
+	    '% between ' + theInts[0].toString() + ' and ' + theInts[1].toString() + ':</p> ' +
+	    '<p class="math">';
+	for (j=theInts[0]; j<=theInts[1]; j++) {
+	    qStr += '<sub>' + theInts[2].toString() + '</sub>C<sub>' + j.toString() + '</sub>&times;' +
+	            roundToDig(p,2).toString() + '<sup>' + j.toString() + '</sup>&times;' +
+	            roundToDig((1-p),2).toString() + '<sup>' + (theInts[2]-j).toString() + '</sup> + ';
+	}
+	qStr = qStr.substr(0,qStr.length-1);
+	qStr += ' = ' + roundToDig(100*binProb,2).toString() + '%</p>';
+	writeSolution(pCtr-1,qStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theBox = (listOfDistinctRandInts(2,-5,10)).sort(numberLessThan);
+    var theInts = (listOfRandInts(2,3,10)).sort(numberLessThan);
+    var theSum = theBox[0]*theInts[0] + theBox[1]*(theInts[1]-theInts[0]);
+    var p = roundToDig((listOfRandInts(1,1,9))[0]/10,1);
+    var binProb = binomialPmf(theInts[1],p,theInts[0]);
+    var aVal = numToRange(binProb,0.005);
+    var qStr = 'A box contains 100 tickets of which ' + (100*p).toString() +
+           '% are labeled &quot;' + theBox[0].toString() +
+           ';&quot; the rest are labeled &quot;' + theBox[1].toString() +
+           '.&quot; <span class="qSpan">The chance that in ' + theInts[1].toString() +
+           ' random draws with replacement from this box, the sample sum will be ' +
+           'exactly ' + theSum.toString() + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+    qStr = 'The only way the sum of the draws can equal ' + theSum.toString() +
+           ' is if, among the ' + theInts[1].toString() + ' draws, a ticket labeled ' +
+           '&quot;' + theBox[0].toString() + '&quot; is drawn ' + theInts[0].toString() +
+           ' times and a ticket labeled &quot;' + theBox[1].toString() + '&quot; is drawn ' +
+           roundToDig(theInts[1]-theInts[0],1).toString() + ' times.  Since the draws ' +
+           'are independent and the chance of drawing a ticket labeled &quot;' +
+           theBox[0].toString() + '&quot; is ' + roundToDig(100*p,1).toString() +
+           '% in each draw and the chance of drawing a ticket labeled &quot;' +
+           theBox[1].toString() + '&quot; is ' + roundToDig(100*(1-p),1).toString() +
+           '% in each draw, the chance that the sum is ' + theSum.toString() + ' is</p>' +
+           '<p class="math"><sub>' + theInts[1].toString() + '</sub>C<sub>' +
+           theInts[0].toString() + '</sub>&times;' + roundToDig(p,2).toString() +
+           '<sup>' + theInts[0].toString() + '</sup>&times;' + roundToDig(1-p,2).toString() +
+           '<sup>' + roundToDig(theInts[1]-theInts[0],1).toString() + '</sup> = ' +
+           roundToDig(100*binProb,2).toString() + '%</p>';
+    writeSolution(pCtr-1,qStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var theBox = (listOfDistinctRandInts(8,-5,10)).sort(numberLessThan);
+    var theInts = (listOfRandInts(2,3,10)).sort(numberLessThan);
+    var theLimit = roundToDig((theBox[3]+theBox[4])/2,1);
+    var binProb = binomialCdf(theInts[1],0.5,theInts[0]);
+    var aVal = numToRange(binProb,0.005);
+    var qStr = 'A box contains 8 tickets, labeled with the numbers ' +
+        theBox.join().toString() + '. <span class="qSpan">In ' + theInts[1].toString() +
+        ' independent draws with replacement from this box, the chance that ' +
+        'at most ' + theInts[0].toString() + ' of the tickets drawn are labeled ' +
+        'with numbers less than ' + theLimit.toString() + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    // This exercise checks the ability to find the chance that the sample sum
+    // of nDraws (=3) draws with replacement from a box of boxSize (=3 or 4)
+    // tickets with different labels equals a given constant.
+    // There are at most boxSize nDraws (<= 64) possible values of the sample sum.
+    // Strategy: check whether a given selection of tickets gives the sample sum;
+    // if so, increment the probability by the number of ways of selecting that
+    // subset of the tickets.  Divide ultimate result by boxSize nDraws.
+    // Enumerate all possibilities; count those that give the correct sum.
+    document.writeln(startProblem(pCtr++));
+    var boxSize = (listOfRandInts(1,3,4))[0];
+    var theBox = (listOfDistinctRandInts(boxSize,0,10)).sort(numberLessThan);
+    var nDraws = 3; // (listOfRandInts(1,2,3))[0];
+    var repeat = (listOfRandInts(1,0,boxSize-2))[0];
+    var nRep = (listOfRandInts(1,1,nDraws))[0];
+    var theSum = nRep*theBox[repeat] + (nDraws - nRep)*theBox[boxSize-1];
+    var nWays = 0;
+    var drawEnum = new Array(boxSize);
+    for (i=0; i < boxSize; i++) { // brute force. Works only for nDraws==3.
+        for (j=0; j < boxSize; j++) {
+            for (k=0; k < boxSize; k++) {
+                if (theBox[i] + theBox[j] + theBox[k] == theSum) {nWays++;}
+            }
+        }
+    }
+    var theProb = nWays/Math.pow(boxSize,nDraws);
+    var aVal = numToRange(theProb,0.005);
+    var qStr = 'A box contains ' + cardinals[boxSize] + ' tickets, labeled ' +
+        theBox.join().toString() + '. <span class="qSpan">The chance that ' +
+        'the sample sum of the labels on the tickets in three independent ' +
+        'random draws with replacement from this box equals ' + theSum.toString() +
+        ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    qStr = 'This problem requires a &quot;brute force&quot; solution: we must ' +
+           'enumerate all the ways of selecting ' + nDraws.toString() +
+           ' tickets from the box so that they sum to ' + theSum.toString() +
+           '.  In this case, there are ' + nWays.toString() + ' ways, so the chance is ' +
+           nWays.toString() + ' divided by the total number of ways of drawing ' +
+           nDraws.toString() + ' tickets from the box, ' + boxSize.toString() +
+           '<sup>' + nDraws.toString() + '</sup>.</p><p class="math">' + nWays.toString() +
+           '/' + boxSize.toString() + '<sup>' + nDraws.toString() + '</sup> = ' +
+           roundToDig(100*theProb,2).toString() + '%.</p>';
+    writeSolution(pCtr-1, qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    We now know that the distribution of the sample sum of 50 random draws with replacement
+    from Box&nbsp;1 has a binomial distribution with parameters <em>n</em>=50 and
+    <em>p</em>=50%, and that the distribution
+    of the sample sum of 50 random draws with replacement from Box&nbsp;2 has a binomial
+    distribution with parameters <em>n</em>=50 and <em>p</em>=66.67%.
+    These two distributions are quite different: The sample sum is likely to be much larger
+    if we are drawing from Box&nbsp;2.
+    Armed with the binomial distribution, we can analyze the proposed rule for deciding
+    whether switching improves one's chance of winning the Let's Make a Deal problem:
+    conclude switching helps if the number of wins by switching in 50 plays is greater
+    than or equal to 30;
+    otherwise, conclude switching does not help.
+</p>
+
+<h2><a id="lmad_contd"></a>
+    Continuation of the &quot;Let's Make a Deal&quot; Problem
+</h2>
+
+<p>
+    The chance of drawing <em>k</em> tickets labeled &quot;1&quot;
+    from Box&nbsp;1 or Box&nbsp;2 is given by a binomial
+    distribution with appropriate values of the parameters <em>n</em> and <em>p</em>.
+    How can we use this fact to decide which box we are drawing from (how shall we infer
+    whether the chance of winning by switching is 1/2  or 2/3)?
+    There are many ways to proceed.
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('testing') + ', ');
+// -->
+</script>
+    we shall take a
+    different approach, called a &quot;statistical hypothesis test&quot; or a
+    &quot;test of significance.&quot;
+    Here we shall do something similar but simpler.
+</p>
+
+<p>
+    I am going to draw 10 tickets at random with replacement from a box of tickets.
+    I do not know exactly what the box contains, but I do know that either it contains one ticket
+    labeled &quot;0&quot; and one ticket labeled &quot;1,&quot; or it contains one
+    ticket labeled &quot;0&quot; and one
+    ticket labeled &quot;5.&quot;
+    That is, either I shall draw from Box&nbsp;3 or from Box&nbsp;4 below, but I  do not know which.
+    From the labels on the tickets I draw, I want to conclude whether the box is Box&nbsp;3
+    or Box&nbsp;4.
+    Before I draw the tickets, I want to choose a rule for deciding between the hypothesis
+    that the box is Box&nbsp;3 and the competing hypothesis that the box is Box&nbsp;4.
+    The rule will say, for each possible collection of 10 tickets that might be drawn,
+    whether to conclude the box is Box&nbsp;3 or Box&nbsp;4.
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 3
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 4
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">5</p>
+   </div>
+</div>
+
+<p>
+    If I draw even one ticket labeled &quot;1,&quot; I must be drawing from Box&nbsp;3, so I should conclude
+    I am drawing from Box&nbsp;3.
+    Similarly, if I get even one ticket labeled &quot;5,&quot; I must be drawing from Box&nbsp;4, so I should
+    conclude I am drawing from Box&nbsp;4.
+    In either case, my conclusion is that I am drawing from the box for which it is more
+    likely to observe what I do observe.
+    If I get only tickets labeled &quot;0,&quot; the data do not tell me anything about which box I am
+    drawing from, so I might as well toss a coin to make the decision.
+</p>
+
+<p>
+    Now suppose the two possible boxes are Box&nbsp;5 and Box&nbsp;6 below,
+    instead of Box&nbsp;3 and Box&nbsp;4.
+    Again, I shall draw 10 tickets at random with replacement, but this time I will compute
+    the sample sum of the draws.
+    I want to use the value of the sample sum to draw a conclusion about whether the box is
+    Box&nbsp;5 or Box&nbsp;6.
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 5
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+<div class="boxModel">
+   <p class="boxLabel">
+      Box 6
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+<p>
+    Whether the box is Box&nbsp;5 or Box&nbsp;6, the sample sum of 10 independent random draws could be
+    0, 1, 2,  &hellip;&nbsp;, or 10.
+    However, if the sample sum turns out to be 9, it is much more plausible that the box is
+    Box&nbsp;5 than that it is Box&nbsp;6, because the chance that the sample sum is 9 is much larger
+    if the box is Box&nbsp;5 than if it is Box&nbsp;6.
+    It would be reasonable to decide that if the sample sum turns out to be 9, the box is Box&nbsp;5.
+    Similarly, if the sample sum turns out to be 1, it is much more plausible that the box is
+    Box&nbsp;6 than that it is Box&nbsp;5, because the chance that the sample sum is 1 is much larger
+    if the box is Box&nbsp;6 than if the box is Box&nbsp;5.
+    It would be reasonable to decide that if the sample sum turns out to be 1, I am drawing
+    from Box&nbsp;6.
+</p>
+
+<p>
+    This thought experiment suggests the following decision rule for the "Let's Make a Deal"
+    problem: Suppose that the sample sum of 50 random draws with replacement from the box turns
+    out to be <em>k</em>.
+    If the probability that the sample sum of 50 random draws with replacement from Box&nbsp;1 is
+    <em>k</em> is larger than the probability that the sample sum of 50 random draws with replacement
+    from Box&nbsp;2 is <em>k</em>, conclude that the box is  Box&nbsp;1.
+    Conversely, if the probability that the sample sum of 50 random draws with replacement
+    from Box&nbsp;2 is <em>k</em> is larger than the probability that the sample sum of 50 random draws
+    with replacement from Box&nbsp;1 is <em>k</em>,  conclude that the box is Box&nbsp;2.
+    Equivalently, if the ratio
+</p>
+
+<div align="center"><center><table border="0" cellspacing="1">
+<tr>
+<td valign="middle" align="center">P(sample sum = <em>k</em> in 50 draws from Box&nbsp;1)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td valign="middle" align="center">------------------------------------------------------------</td>
+<td>&gt;</td>
+<td valign="middle" align="center">1,</td>
+</tr>
+<tr>
+<td valign="middle" align="center">P(sample sum =<em> k</em> in 50 draws from Box&nbsp;2)</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</center>
+</div>
+
+<p>
+    conclude that the box is  Box&nbsp;1; if the ratio is less than one, conclude that the
+    box is Box&nbsp;2.
+    (If the ratio equals 1 exactly, we could toss a coin to make the decision.)
+</p>
+
+<p>
+    Let's look at the ratio between the chance that the sample sum is <em>k</em> if the box is
+    Box&nbsp;1 and the chance that the sample sum is <em>k</em> if the box is Box&nbsp;2:
+</p>
+
+<div align="center"><center><table border="0" cellspacing="1">
+<tr>
+<td valign="middle" align="center">P(sample sum =<em> k</em> in 50 draws from Box&nbsp;1)</td>
+<td></td>
+<td valign="middle" align="center"><sub>50</sub>C<sub><em>k</em></sub>(1/2)<sup>50</sup></td>
+<td></td>
+<td valign="middle" align="center">(1/2)<sup>50</sup></td>
+<td valign="middle" align="center"></td>
+</tr>
+<tr>
+<td valign="middle" align="center">--------------------------------------------------</td>
+<td>=</td>
+<td valign="middle" align="center">----------------------------</td>
+<td>=</td>
+<td valign="middle" align="center">----------------------------</td>
+<td valign="middle" align="center">=</td>
+</tr>
+<tr>
+<td valign="middle" align="center">P(sample sum =<em> k</em> in 50 draws from Box&nbsp;2)</td>
+<td></td>
+<td valign="middle" align="center"><sub>50</sub>C<sub><em>k</em></sub>(2/3)<em><sup>k</sup></em>(1/3)<sup>50-<em>k</em></sup></td>
+<td></td>
+<td valign="middle" align="center">(2/3)<em><sup>k</sup></em>(1/3)<sup>50-<em>k</em></sup></td>
+<td valign="middle" align="center"></td>
+</tr>
+</table>
+</center></div>
+<div align="center"><center><table border="0" cellspacing="1">
+<tr>
+<td valign="middle" align="center">(1/2)<sup>50</sup></td>
+<td></td>
+<td valign="middle" align="center">(3/2)<sup>50</sup></td>
+</tr>
+<tr>
+<td valign="middle" align="center">---------------</td>
+<td>=</td>
+<td valign="middle" align="center">--------------- .</td>
+</tr>
+<tr>
+<td valign="middle" align="center">2<em><sup>k</sup></em>(1/3)<sup>50</sup></td>
+<td></td>
+<td valign="middle" align="center">2<em><sup>k</sup></em></td>
+</tr>
+</table>
+</center>
+</div>
+<p>
+    The numerator is a number greater than 1, and the denominator grows with <em>k</em>, so the ratio
+    decreases with <em>k</em>.
+    The ratio is largest for <em>k</em>&nbsp;=&nbsp;0, when it is
+    (3/2)<sup>50</sup>&nbsp;=&nbsp;6.38&times;10<sup>8</sup>, and is smallest for <em>k</em>&nbsp;=&nbsp;50,
+    when it is (3/4)<sup>50</sup>&nbsp;=&nbsp;5.66&times;10<sup>-7</sup>.
+    For small values of <em>k</em> the ratio is larger than 1 and for large values of <em>k</em> it is less
+    than 1.
+    It crosses 1 at 50(log<sub>2</sub>(3) - 1)&nbsp;=&nbsp;29.24.
+    That is, for <em>k</em>&nbsp;=&nbsp;0, 1, 2,  &hellip;&nbsp;, 29, the chance that the sample sum is
+    <em>k</em> is larger if the box is Box&nbsp;1 than if the box is Box&nbsp;2, and for
+    <em>k</em>&nbsp;=&nbsp;30, 31,  &hellip;&nbsp;, 50, the chance that the sample sum is <em>k</em> is larger
+    if the box is Box&nbsp;2 than if the box is Box&nbsp;1.
+</p>
+<p>
+    Verify that this is correct by using
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+// -->
+</script>
+    to calculate the probabilities
+    that the sample sum is 28, 29, and 30 for a binomial distribution with <em>n</em>&nbsp;=&nbsp;50 and
+    <em>p</em>&nbsp;=&nbsp;50%, and for a binomial distribution with <em>n</em>&nbsp;=&nbsp;50 and
+    <em>p</em>&nbsp;=&nbsp;66.67%.
+    Begin by making sure that <span class="appCtrlName"><em>n</em></span> is set to 50.
+    Set <span class="appCtrlName">Area from</span> to 27.5
+    (either by deleting the number in the textbox and
+    typing in 27.5, or by using the scrollbar), and set <span class="appCtrlName">to</span>
+    to 28.5.
+    The probability histogram bin centered at 28 should be the only yellow bin.
+    Set <span class="appCtrlName">p(%)</span> to 50 and note
+    <span class="appCtrlName">selected area</span>; it should be 7.9%.
+    Reset <span class="appCtrlName">p(%)</span> to 66.67 and note
+    <span class="appCtrlName">selected area</span>; it should be 3.3%.
+    This shows that the probability that the sample sum of 50 random draws with replacement
+    from Box&nbsp;1 equals 28 is 7.9%, while the probability that the sample sum of 50 draws
+    with replacement from Box&nbsp;2 equals 28 is only 3.3%.
+</p>
+
+<p>
+    Set <span class="appCtrlName">p(%)</span> back to 50.
+    Set <span class="appCtrlName">Area from</span> text box to 28.5 and the
+    to text box to 29.5 to highlight just the
+    bin centered at 29.
+    <span class="appCtrlName">Selected area</span> should be 6%.
+    Change <span class="appCtrlName">p(%)</span> to 66.67; <span class="appCtrlName">selected area</span>
+    should be 5%:
+    The probability that the sample sum of 50 random draws with replacement from Box&nbsp;1
+    equals 29 is 6%, and the probability that the sample sum of 50 random draws with
+    replacement from Box&nbsp;2 equals 28 is 5%.
+</p>
+
+<p>
+    Highlight the bin centered at 30 and repeat the two calculations.
+    You should find that the probability that the sample sum of 50 random draws with
+    replacement from Box&nbsp;1 equals 30 is 4.2%, and the probability that the sample
+    sum of 50 random draws with replacement from Box&nbsp;2 equals 30 is 7%.
+</p>
+
+<p>
+    A reasonable rule for deciding whether the box is Box&nbsp;1 or Box&nbsp;2 is to conclude
+    that the box is the box for which the observed result is more likely.
+    That is, we might reasonably adopt the decision rule &quot;conclude we are drawing from
+    Box&nbsp;1 if the sample sum is less than 30; conclude we are drawing from Box&nbsp;2 if
+    the sample sum is 30 or more.&quot;
+</p>
+
+<p>
+    That rule will sometimes lead to the wrong conclusion: whether we are drawing from
+    Box&nbsp;1 or from Box&nbsp;2, the sample sum is random and has possible values
+    0, 1, 2, &hellip;&nbsp;, 50, so there is a chance that if the box is Box&nbsp;1,
+    the sample sum will be 30 or more, and we will conclude erroneously that the
+    box is Box&nbsp;2.
+    Similarly, if the box is Box&nbsp;2, there is a chance that the sample sum will be 29 or
+    less, and we will conclude erroneously that the box is Box&nbsp;1.
+</p>
+
+<p>
+    What are those chances?
+    We can find them using the binomial probability histogram.
+    The chance we incorrectly conclude that the box is Box&nbsp;2 when the box is in
+    fact Box&nbsp;1 is the chance that the sample sum is 30 or more if the box is Box&nbsp;1.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows that the area of the binomial probability histogram with <em>n</em>&nbsp;=&nbsp;50
+    and <em>p</em>&nbsp;=&nbsp;50% between 29.5 and 50.5 is 10.1%:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability that the sum of 50 draws with replacement from Box&nbsp;1 is at least 30.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+       align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="50.5">
+    <param name="hiLiteLo" value="29.5">
+    <param name="n" value="50">
+    <param name="normalControls" value="false">
+    <param name="p" value=".5">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+  Conversely, the chance we incorrectly conclude that we are
+  drawing from Box&nbsp;1 when we are really drawing from Box&nbsp;2 is the chance that the sample sum
+  is 29 or less if we are drawing from Box&nbsp;2.
+  That is the area of the binomial probability
+  histogram with <em>n</em>&nbsp;=&nbsp;50 and <em>p</em>&nbsp;=&nbsp;66.67%, from -0.5 to 29.5,
+  which is 12.6%, as shown in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability that the sum of 50 draws with replacement from Box&nbsp;2 is less than 30.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+       align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="29.5">
+    <param name="hiLiteLo" value="-0.5">
+    <param name="n" value="50">
+    <param name="normalControls" value="false">
+    <param name="p" value=".6666667">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The chance we err using this approach is thus at most 12.6%, if the only possibilities
+    are that we are drawing from Box&nbsp;1 or Box&nbsp;2.
+    Of course, if the probability of winning by switching is neither 1/2 nor 2/3,
+    this rule can never give the right conclusion, so it is not a substitute for the
+    kind of reasoning we explored in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHall') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    Now let's apply this rule to try to determine empirically whether switching is a
+    better strategy than sticking with the original guess.
+</p>
+
+<p>
+    Here, again, is the game:
+</p>
+<p class="math">
+  <a href="javascript:void(0)"
+   onClick="revealDoor(0)"><img src="../Graphics/question.gif" width="32"
+   height="32" alt="click to reveal contents"></a>
+   <a href="javascript:void(0)"
+   onClick="revealDoor(1)"><img src="../Graphics/question.gif" width="32"
+   height="32" alt="click to reveal contents"></a>
+   <a href="javascript:void(0)"
+   onClick="revealDoor(2)"><img src="../Graphics/question.gif"
+   alt="click to reveal contents" width="32" height="32"></a>
+ </p>
+<p class="math">
+<input type="button" value="New Game" name="makeADealButton" onClick="shufflePrize()">
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var dr = document.images.length;
+    for (i=0; i < nDoors; i++){
+       doorLocations[i] = dr-3+i;
+    }
+    sectionContext += 'shufflePrize();\n';
+// -->
+</script>
+
+<p>
+    Play the game 50 times, switching each time.
+    Keep track of the number of times you win by
+    switching. What do you conclude?
+</p>
+
+<p>
+    The following exercise tests your ability
+    to generalize the probability calculations we have just performed.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTrials = (listOfRandInts(1,8,15))[0];
+    var p0 = .5;
+    var p1 = 2/3;
+    var kThresh = nTrials*(Math.log(3)/Math.log(2) - 1);
+    var opt = ["less than or equal to","greater than or equal to"];
+    var typeIIProb = binomialCdf(nTrials,p1,Math.floor(kThresh));
+    var aVal = numToRange(typeIIProb,0.005);
+    var typeIProb = 1 - binomialCdf(nTrials,p0,Math.floor(kThresh));
+    var aVal2 = numToRange(typeIProb,0.005);
+    var qStr = 'Suppose that we wanted to decide whether the chance of winning by ' +
+           'switching was 1/2 or 2/3 based on the number of times we win by ' +
+           'switching in only ' + nTrials.toString() + ' plays of the game ' +
+           '(rather than 50). <span class="qSpan">If we use the same form of ' +
+           'the decision rule, namely, decide that the chance of winning by ' +
+           'switching is whichever gives the larger probability of the observed ' +
+           'number of wins by switching, we would decide that the chance ' +
+           'of winning by switching is 1/2 if the number of wins by switching is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,'a');
+    writeTextExercise(6, qCtr++, numToRange(Math.floor(kThresh),.0001));
+    var qStr = '</p><p><span class="qSpan">If we use this rule, the chance that we would ' +
+           'incorrectly decide that the chance of winning by switching is 1/2 ' +
+           'if it is really 2/3 is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    var qStr = '</p><p><span class="qSpan">If we use this rule, the chance that we ' +
+           'would incorrectly decide that the chance of winning by switching is ' +
+           '2/3 if it is really 1/2 is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal2);
+    qStr = 'The chance of a large number of wins is smaller if the chance of winning by ' +
+           'switching is 1/2 than if it is 2/3, so we would decide that the chance of ' +
+           'winning by switching is 1/2 if the number of wins is smaller than some ' +
+           'threshold.  What threshold?  The derivation for 50 trials shows that ' +
+           'the threshold is the largest integer <em>k</em> such that (3/2)<sup>' +
+           nTrials.toString() + '</sup>/2<sup>k</sup> &ge; 1.  Solving for the threshold ' +
+           'gives <em>k</em> = ' + Math.floor(kThresh).toString() + '.</p>' +
+           '<p>The chance we decide incorrectly that the chance of winning by switching ' +
+           'is 1/2 if is is really 2/3 is the chance of drawing no more than ' +
+            Math.floor(kThresh).toString() + ' tickets labeled &quot;1&quot; ' +
+           'in ' + nTrials.toString() + ' random draws with replacement from a box of ' +
+           'tickets of which 2/3 are labeled &quot;1&quot; and the rest are labeled ' +
+           '&quot;0.&quot;  That is the area of the binomial probability histogram ' +
+           'with parameters <em>p</em>=66.7% and <em>n</em>=' + nTrials.toString() +
+           ' from 0 to ' + Math.floor(kThresh).toString()  + '.</p>' +
+           '<p>The chance we decide incorrectly that the chance of winning by switching ' +
+           'is 2/3 if is is really 1/2 is the chance of drawing more than ' +
+            Math.floor(kThresh).toString() + ' tickets labeled &quot;1&quot; ' +
+           'in ' + nTrials.toString() + ' random draws with replacement from a box of ' +
+           'tickets of which 1/2 are labeled &quot;1&quot; and the rest are labeled ' +
+           '&quot;0.&quot;  That is the area of the binomial probability histogram ' +
+           'with parameters <em>p</em>=50% and <em>n</em>=' + nTrials.toString() +
+           ' from ' + Math.floor(kThresh+1).toString() + ' to ' + nTrials.toString() + '.</p>';
+    writeSolution(pCtr-1, qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The rule we have explored in this chapter&mdash;pick the model for which the probability
+    of the data is larger&mdash;generalizes to situations where there are more than two models,
+    even an infinite number of models.
+    In the general case, it is called <em>maximum likelihood</em>.
+    The <em>likelihood</em> of a model is the probability that the experiment
+    would result in the observed data if that model is true.
+    The maximum likelihood method picks the model for which the likelihood is largest.
+</p>
+
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    Some experiments can be modeled as drawing tickets at random from a box of numbered
+    tickets.
+    This analogy is called a <em>box model</em>.
+    For example, a box model for the number of times a fair coin lands heads in 10 independent
+    tosses is the <em>sample sum</em> of the numbers on the tickets in 10 random draws with
+    replacement from a box that contains one ticket labeled &quot;1&quot; and one
+    ticket labeled &quot;0.&quot;
+</p>
+
+<p>
+    If one repeats an experiment over and over again, independently, the
+    <em>Law of Large Numbers</em> says that the fraction of times each possible
+    outcome occurs is increasingly likely to be close to the probability of the outcome.
+    Thus if an experiment has numerical outcomes, the histogram of outcomes in repeated
+    experiments will tend to stabilize, getting ever closer to the
+    <em>probability histogram</em> of the experiment.
+    The area of each bin in a probability histogram is the probability that the outcome
+    is in the bin, much as the area of each bin in a histogram is the relative frequency
+    of data in the bin.
+</p>
+
+<p>
+    In repeated trials the sample sum of <span class="math">n</span> random draws with replacement from a box of
+    tickets of which a fraction <span class="math">p</span> are labeled &quot;1&quot; and a fraction <span class="math">(1 &minus; p)</span> are
+    labeled &quot;0&quot; has a <em>binomial probability distribution</em> with parameters <span class="math">n</span>
+    and <span class="math">p</span>.
+    For such an experiment, the chance that the sample sum equals <span class="math">k</span> is
+</p>
+
+<p class="math">
+    <sub><em>n</em></sub>C<sub><em>k</em></sub>&times;<em>p</em><sup><em>k</em></sup> &times;
+    (1-<em>p</em>)<sup><em>n</em>-<em>k</em></sup>,
+    for <em>k</em>=0, 1, 2, &hellip;&nbsp;, <em>n</em>.
+</p>
+
+<p>
+    If the number <span class="math">n</span> of draws is not fixed in advance, if the draws are not independent,
+    if the fraction <span class="math">p</span> of tickets in the box labeled &quot;1&quot; varies for different draws,
+    or if the box contains tickets with labels other than &quot;0&quot; and &quot;1,&quot;
+    the sample sum does not have a binomial distribution.
+</p>
+
+<p>
+    Some scientific questions can be posed as
+    decisions among competing box models for a phenomenon.
+    One way to use data to decide among models is to conclude that the model that
+    explains the data best&mdash;that is, the model for which the probability of the observed
+    data would be highest&mdash;is correct.
+    This is called <em>maximum likelihood</em>.
+    Maximum likelihood generally is fallible: There is a chance that it will come
+    to the wrong conclusion; that chance depends on which of the models is correct.
+    If none of the models is correct, it always reaches the wrong conclusion.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>0-1 box</li>
+    <li>average</li>
+    <li>bin</li>
+    <li>binomial distribution</li>
+    <li>box model</li>
+    <li>class interval</li>
+    <li>Complement Rule</li>
+    <li>conditional probability</li>
+    <li>converge</li>
+    <li>disjoint</li>
+    <li>distribution</li>
+    <li>event</li>
+    <li>Frequency Theory of Probability</li>
+    <li>histogram</li>
+    <li>independent</li>
+    <li>intersection</li>
+    <li>Law of Large Numbers</li>
+    <li>likelihood</li>
+    <li>maximum likelihood</li>
+    <li>mean</li>
+    <li>Multiplication Rule</li>
+    <li>mutually exclusive</li>
+    <li>probability</li>
+    <li>probability distribution</li>
+    <li>probability histogram</li>
+    <li>sample size</li>
+    <li>sample sum</li>
+    <li>sampling distribution</li>
+    <li>skewed</li>
+    <li>standard deviation</li>
+    <li>standard error</li>
+    <li>symmetrical</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+Paper ("dead-tree") textbooks don't stay up-to-date. They don't adapt to
+students' needs. They are not interactive.  They provide a limited number
+of exercises and examples. They provide a limited variety of homework problems,
+and those problems need to be graded by an instructor, who must collect the
+assignments, grade them, record the grades, and return the assignments
+to the students. Textbooks don't help instructors administer courses.
+
+Philip Stark has developed online instructional materials for lower-division
+statistics that address all these limitations of traditional textbooks.
+The materials include all the elements of a traditional book, and in addition:
+
+    1) Examples and exercises change every time the student reads a
+         chapter, allowing unlimited practice and unlimited tutoring.
+       Exercises accept student responses and are scored instantly to give
+         immediate feedback.
+       Detailed solutions update continuously to correspond to the exercises.
+
+    2) Homework assignments are on the internet, are solved using tools on the
+         internet, are submitted over the internet, are graded instantly and
+         automatically, and the grades are available over the internet.  Instructors
+         do not need to handle, grade, or log homework.
+       Students can see their own scores and summary statistics for their class
+         on the web within seconds of submitting the assignment.
+       Every student gets a different version of each assignment, but all versions
+         are graded automatically, and each student can see the solutions to his or
+         her version after the due date.
+       Exams have been written the same way: once the department has enough terminals for
+          students to take the exam simultaneously with supervision,
+          each student will be administered a unique, automatically graded and logged,
+          version of each exam.  At present, several versions are printed, and
+          students use Scantron forms.
+
+    3) Java applets illustrating key concepts are used throughout the text.
+       The applets facilitate classroom demonstrations, which can be reproduced
+          by students at home, without additional software.
+       The same applets are used to solve homework problems, and to view grade
+          summaries.
+       There are applets for
+              *probability calculations for the normal, binomial, chi-square,
+                    exponential, geometric, hypergeometric, negative binomial, Poisson,
+                    and Student t distributions
+              *histograms
+              *scatterplots
+              *regression
+              *correlation
+              *sampling distributions
+              *confidence intervals
+              *the Law of Large Numbers
+              *Venn diagrams
+              *a general-purpose calculator with uniform and normal random number generators
+                 and combinatorial functions
+
+    4) Review materials include interactive tutorials, where the line of questioning
+         changes depending on the student's responses, and practice exams that
+         grade themselves for instant feedback.
+
+    5) The text and assignments have links to an extensive glossary of all the
+         technical terms used in the class.  Flipping to the back of the book is
+         replaced by clicking.
+
+    6) Instructors control assignment due dates by editing a simple text file;
+         this controls access to the assignments and also "publishes" the assignment
+         list without extra effort.
+       Instructors can include grades from external assignments easily;
+         those grades are then accessible on the web in the same way as the
+         automatically graded assignments (password-protected access to individual
+         student grades, and histograms and summary statistics for all students).
+       Instructors can generate machine-readable grade summaries to calculate
+         course grades easily.
+
+The materials compromise between a "statistical literacy" course, such as the
+superlative book Statistics, by Freedman, Pisani, and Purves (Norton, 1996, FPP),
+and a more traditional "statistical methods" text, such as Introduction to the
+Practice of Statistics, by Moore and McCabe (W.H. Freeman, 1993, M&M). The material has
+more mathematical and probabilistic content than FPP, but does not emphasize
+formulae as much as M&M do. Overall, the material is harder than both FPP and M&M
+computationally, especially the probability sections, but easier than FPP in the
+level of statistical reasoning. I have tried to attain the correctness and clarity
+of thinking and exposition of FPP; I am aware that I have fallen short of the mark,
+thus far. I do more with counting arguments and combinatorics than either of those
+books. By incorporating applets into the text, exams, and problem sets, I have been
+able to get students to analyze real datasets (at this time, the largest has 913
+observations of 5 variables) without the pedagogical overhead of teaching students
+to use a proprietary statistics package. Many examples are drawn from my consulting
+experience, and most of the data are real -- from the U.S. Census, litigation,
+geophysical experiments, the EPA, the ETS, the California Department of Fish and Game,
+etc. Using applets has also eliminated the need to teach students to read arcane
+tables associated with different distributions; instead, the student sets the relevant
+parameters, highlights a range of values of the probability density or probability
+histogram, and reads off the probability. Some demonstrations would have been
+impossible to program in a statistics package.
+
+The materials are written in HTML, Java, and JavaScript. As of 3 December 1999,
+the materials consisted of 163 HTML files containing about 60,800 lines of
+HTML and JavaScript, 63 Java classes containing about 14,900 lines of code,
+eight JavaScript libraries containing about 3,100 lines of code, 25 data files
+containing about 5,400 records, and a handful of .jpg and .gif files.
+The materials are accessible from anywhere in the world, using any reasonably
+up-to-date browser, and do not need any "plug-in."
+
+ADD SOMETHING ABOUT THE FLEXIBILITY OF THE INFRASTRUCTURE.
+
+The choice to use HTML, Java and JavaScript was motivated by these
+design criteria:
+
+   1) Maximize accessibility and portability. Recent browsers allow this material to be
+    accessed from almost anywhere in the world, without adding "plug-ins" to the
+    browser, and without buying any proprietary software. The software runs under every
+    major operating system (UNIX, LINUX, Windows 9x and NT, Mac OS), because Netscape
+    and/or Microsoft have versions of their browsers that run on those operating systems.
+    Moreover, if a "plug-in" were required, downloading the plug-in would itself
+    present a considerable barrier to some students.  Browsers come installed on all
+    new personal computers, so this material is immediately accessible to new computer
+    owners.
+
+   2) Maximize interactivity and minimize technological barriers. Students should be
+    able to explore data and to ask and answer "what-if" questions, without needing
+    to learn how to use a conventional statistical software package. Tools should
+    have a point-and-click interface whose use is obvious (no hidden menus, consistent
+    GUI, etc.).
+
+   3) Make the content dynamic.  One of the principal advantages of an online text over
+    a paper one is that the online text can change in pedagogically valuable ways, and can
+    adapt to the reader's needs.
+
+   4) Minimize bandwidth and maximize speed. Using Java allows the figures and plots to be
+    generated on the client-side. The code and data download to the client, then the client
+    computes and creates the figures. This is by far the most efficient way to get dynamic
+    interaction with the data. Otherwise, every time the user changed a parameter value, the
+    client would need to send a message to the server, and the server would have to compute
+    the new figure, and send the resulting figure over the internet to the client. Interactive
+    real-time data exploration would not be possible. There are a few figures stored as
+    GIF or JPG files; almost all the figures are computed by the client. Sending just the
+    data and the rules (programs) for generating figures from the data substantially
+    reduces the time it takes pages to load.  The materials can be viewed comfortably with
+    a 28.8 Kbps modem connection.
+
+   5) Make it easy to use the materials in lectures. Because the software runs on the client,
+    not the server, it is easy to display the content in the classroom without an internet
+    connection. That allows the instructor to demonstrate concepts and the use of the
+    materials in class.
+
+   6) Make it easy for instructors to set due dates for assignments and manage a course, and
+    for students to track their own progress. Due dates are controlled by the instructor by
+    editing a simple text file. The instructor can modify grades, compute course scores, enter
+    extra credit assignments, etc., using text files. Perl-cgi routines (written by Ofer Licht
+    of the SCF) log student submissions, and allow students and instructors to view
+    grades over the internet.
+
+   7) Maximize portability on the server side. Rather than use proprietary solutions,
+    such as Microsoft active server pages (.asp pages) or server-side JavaScript, the "back
+    end" for these materials is a collection of perl cgi routines. The server only needs
+    to support html and perl. This makes the package platform-independent on the server
+    side as well as the client side: there are public-domain perl implementations for
+    all popular operating systems.
+
+Prof. Stark has been using these materials for about 3 years in large lecture courses
+(Statistics 2 and Statistics 21, each with 300-400 students).
+This saves the department approximately $3000 per class per semester in grading homework.
+Student responses have varied considerably, from abject technophobia to absolute delight;
+overall, the response from UCB students is favorable and improving as browsers become
+more stable and more familiar. The site accounts for over 60% of the department's web
+traffic. Everything but the problem sets can be viewed by the public at the URL
+statistics.berkeley.edu/~stark/SticiGui (To see the problem sets, one must be enrolled
+in a course that uses the materials.)
+
+There is unsolicited demand to use the materials by institutions including
+The University of Alaska, The University of Cambridge, The University of Colorado,
+Gallaudet University, Southern Methodist University, and The University of Toronto
+-- and even high school teachers leading advanced placement classes, accountants,
+and engineers in various industries.  Prof. Stark intends to make the materials
+available to other institutions in Fall, 2000.
+
+
+

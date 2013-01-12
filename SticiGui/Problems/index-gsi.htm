@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "17 June 2012 21:43 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/Courses/course.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cName = "Assignments";
+    writeChapterHead('SeEd',cName,'Online Assignments');
+// -->
+</script>
+</head>
+
+<body onload="setApplets();waitForAppletsIterationCount = 0;waitForApplets(function() {setDueDates();});"
+       onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    sticiRelPath = '..';
+    courseRelPath = '../../Teach/S21/Su11';
+    writeChapterTitle('Assignments');
+    writeChapterNav('..');
+// -->
+</script>
+
+<!--  ================  Start of content ================ -->
+<ul>
+ 	<li>
+ 		<a href="#assignmentSched" title="assignment schedule"
+ 		   target="_self">Assignment schedule</a>
+ 	</li>
+ 	<li>
+ 		<a href="#instructions" title="instructions for the online assignments"
+ 		   target="_self">General instructions for online assignments</a>
+ 	</li>
+ 	<li>
+ 		<a href="#troubleshooting"
+ 		       title="troubleshooting technical problems in the assignments"
+ 		       target="_self">Troubleshooting technical problems</a>
+     </li>
+</ul>
+
+
+<h2><a id="access"></a>
+    	Fill out this form to do the assignments or see your scores.
+</h2>
+
+
+
+<form id="frm1">
+  <input type="hidden" id="formname" value="SticiGuiSet" />
+
+<fieldset class="narrow">
+	<legend>Login</legend>
+	<p>
+	<script language="JavaScript1.4" type="text/javascript"><!--
+		writeCourseOptions(0);
+	// -->
+	</script>
+	</p>
+
+	<p>
+		<span class="qSpan">
+		<label for="firstName">First Name:</label> <input type="text" size="25" id="firstName" />
+		<label for="lastName">Last Name:</label> <input type="text" size="25" id="lastName" />
+		<label for="password">Student ID:</label><input type="password" size="10" id="sid" />
+		<br />
+		<label for="email">Email address on record at the beginning of the term:</label><input type="text"
+		       size="35" id="email" />
+		</span>
+	</p>
+</fieldset>
+
+
+<p class="center">
+    <applet id="PsServe" code="PsServe.class" codebase="../../Java/" width="0" height="0"
+          archive="PbsGui.zip">
+          <param name="files" value="Courses/sets.due,Courses/sid.txt">
+        You must have Java enabled to access the assignments
+    </applet>
+</p>
+
+<div class="assignmentTable">
+<p class="center"><a id="grades"></a>
+    <a id="gradeQuery"></a>
+    <input type="button" id="seeGrades" value="My Scores on Past Assignments"
+         onclick="getGrades(document.forms[0])" />
+</p>
+
+<div id="scores"><p>&nbsp;</p></div>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="assignmentTable">
+<a id="assignmentSched" title="Assignment Schedule"></a>
+<h2>
+	Assignment Schedule
+</h2>
+<script language="JavaScript1.4" type="text/javascript"><!--
+     var mapChapterToTitle = new Object;
+     for (var j=0; j < chapterTitles.length; j++) {
+         mapChapterToTitle[chapterTitles[j][1]] = chapterTitles[j][0];
+     }
+
+     var mapAssignmentToReading = new Array(assignmentTitles.length);
+     for (var j=0; j < assignmentTitles.length; j++) {
+         var readings = assignmentTitles[j][3].split(',');
+         var links = '';
+         for (var i=0; i < readings.length; i++) {
+             links += '<a href="' + sticiRelPath + '/Text/' + readings[i] + '.htm" target="_new">' +
+                      mapChapterToTitle[readings[i]] + '</a>, ';
+         }
+         mapAssignmentToReading[assignmentTitles[j][2]] = links.substr(0, links.length-2);
+     }
+
+     var qStr = '<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3 BGCOLOR="#dddddd" ' +
+	           'summary="table of assignments and due dates">' +
+	           '<tr>' +
+	           '<th id="col0"><p class="center"><strong>Reading</strong></p></th>' +
+	           '<th id="col1"><p class="center"><strong>Assignment</strong></p></th>' +
+	           '<th id="col2"><p class="center"><strong>Due date</strong></p></th>' +
+	           '<th id="col3"><p class="center"><strong>Answers posted?</strong></p></th></tr>';
+     var upPath = '\'..\'';
+     for (var j=0; j < assignmentTitles.length; j++) {
+          qStr += '<tr>' +
+    	        '<td align="left" bgcolor="#eeeeee" headers="col0">' +
+    	           j.toString() + '. ' + mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
+    	        '<td align="left" bgcolor="#eeeeee" headers="col1">' +
+    	           '<a href="javascript://" onclick="spawnProblem(document.forms[0],\'' +
+    	                                             assignmentTitles[j][2] + '\',' +
+                                                     upPath + '); return false">' +
+                             assignmentTitles[j][1] +
+                   '</a></td>' +
+                '<td headers="col2" id="set' + assignmentTitles[j][2] +
+                   'Due" align="center"><em>updating . . .</em></td>' +
+                '<td headers="col3" id="set' + assignmentTitles[j][2] +
+                    'Ans" align="center"><em>updating . . .</em></td></tr>';
+    }
+    qStr += '</table>';
+    document.writeln(qStr);
+// -->
+</script>
+
+</div>
+</form>
+
+<H2>
+	<a id="instructions" title="General Instructions"></a>
+	General Instructions for Assignments
+</H2>
+
+<p>
+Your browser must be configured to accept cookies, to allow
+pop-up windows and, to use JavaScript and Java.
+Generally, it is a good idea to set up your browser
+to verify each document every time it is loaded, rather than to use a
+cached copy.
+That will ensure that you have the most up-to-date
+version of every assignment.
+</p>
+<p>
+SticiGui assignments combine forms, instructions, and interactive
+tools to reinforce the material presented in the chapters and to
+assess your understanding. The assignments use two <EM>frames</EM>.
+The upper frame has the instructions and a form for your responses;
+the bottom frame has tools you might need to solve the problems, such
+as graphs, calculators, <EM>etc</EM>.
+</p>
+<p>To access the assignments, you must provide the following
+identifying information:
+</p>
+<p class="center">
+    last name, first name, student ID, email address.
+</p>
+<p>
+   At the bottom of the instruction frame, after all the questions,
+   there are three buttons: one to submit the assignment for grading,
+   one to save your intermediate results on your computer, and one to
+    clear the answer form.
+</p>
+<p class="center">
+   <strong>You must click the submit button to send your
+   answers to be graded.</strong>
+</p>
+<p class="center">
+   <strong>After you click the submit button, you must
+   click another button to confirm that you <em>really</em> want to submit
+   your answers for grading. </strong>
+<p>
+
+<p>
+   Click the &quot;OK&quot; button once only&mdash;if you double-click, it will submit
+   your answers twice and you will lose one of your chances to submit the assignment.
+</p>
+
+<p>
+   The window that contained the problem set will show a confirmation screen (from AutoGrader) giving your
+   score and telling you how many times you have submitted the problem set so far.
+   It might take up to 30 seconds for the confirmation screen to appear, depending on web and server traffic.
+   Be patient.
+   If you get the confirmation screen, the server definitely received your submission.
+   You can also see your scores by clicking the &quot;My Scores on Past Assignments&quot; button near the top of this
+   page, just below where you type in your login information.
+</p>
+<p>
+   <strong>After the due date, there will be no &quot;submit&quot;
+   button.</strong> If the submit button is missing, but the assignment
+   is not yet due, the clock on your computer is mis-set.
+   Your computer's clock needs to be set to the time zone that the course is taught in
+   (Pacific Time, if this is a UC Berkeley course),
+   and to the correct day.
+   If it is not, re-set the clock, clear the browser's cache, and re-start the browser.
+   The submit button will come back.
+</p>
+<p>
+   <a href="#gradeQuery" target="_self">To see your grades</a>, you
+   need to enter your name, email address, and SID, to protect your
+   privacy.
+   Click the button just under the assignment list, near the
+   top of this page.
+   Also, if you go back to the assignment after the
+   due date, you can see the correct answers to your unique version of
+   the assignment.
+</p>
+
+<p>
+   Many of the questions and data in assignments have a random component.
+   Different students get different questions and different data.
+   You are graded based on the questions and data you receive.
+   Differences in question wording can be subtle: If you work with other students,
+   be sure to answer your version of the question.
+</p>
+
+<p>
+   You can save intermediate results on the assignment using a button
+   at the bottom of the instruction page&mdash;sort of.
+   The assignments also save themselves as a cookie on your computer when you submit them.
+   Because the cookie is stored on <em>your</em> computer, you cannot access the
+   answers from a different computer (or even a different browser on your computer).
+   <strong>Warning: Cookies are volatile, not reliable.
+   Some events will cause or require your cookies to be
+   deleted.
+   And they &quot;expire&quot; after a few days.
+   Always write down your answers on paper in case the cookie is deleted.</strong>
+   You've been warned.
+</p>
+
+<p>
+   You can use different computers for different assignments.
+   After filling out the identifying information at the top of
+   this page to access the assignments, your browser will look
+   for a cookie with a record of your previous work on the assignment
+   <strong>on your computer</strong>.
+   If it finds a cookie, the assignment will fill in your previous answers.
+   That is the <em>last</em> thing that happens when the assignment loads.
+   Be patient.
+   Do not scroll, click or type while the assignment page is still loading.
+   If the computers does not find a cookie, the answer fields will be blank.
+</p>
+
+
+<p>
+   <strong>Questions with multiple-choice answers.</strong>
+   There are two types of questions with multiple-choice answers.
+The first kind allows you to select only one response.
+The second kind asks you to &quot;select all that apply.&quot;
+How to select more than one answer depends on the computer operating
+system and browser.
+In Firefox on unix and linux systems, click each answer you want to select;
+clicking an answer again de-selects it.
+On Windows systems, hold down
+the control (ctrl) key while clicking each response to select more
+than one.
+On Macintosh systems, hold down the &quot;command&quot; key while you click
+to select multiple responses.
+   In such &quot;multiple-multiple-choice&quot;
+   questions, if you select an answer that is not correct, or fail to
+   select one that is correct, you will not receive credit&mdash;there is no
+   partial credit.
+</p>
+<p>
+   <strong>Numerical answers.</strong>
+   The grader strips commas from
+   numbers, so you are free to punctuate numerical responses.
+   If your response includes a percent sign at the end, your numerical answer
+   will be converted to a percentage (divided by 100).
+   Scientific notation (e.g., 4.23e-7 as shorthand for 0.000000423) will work; do
+   not put a space between the digits and the letter &quot;e.&quot;
+   Questions that do not have an exact numerical answer accept a small
+   range of answers as correct.
+   The precision required depends on the problem statement.
+   When in doubt, don't round off your final answer.
+   In this class, there is no such thing as an answer that is &quot;too
+   precise.&quot;
+   <strong>Never round off intermediate calculations</strong>.
+</p>
+<p>
+   The chapter exercises accept arithmetic expressions as answers, but these
+   submitted homework assignments, graded by the server, do not.
+   For instance, if the answer is supposed to be 50%, the SticiGui in-chapter
+   exercises will accept 50%, 0.5, 1/2, 50/100, 1/sqrt(4), etc.,
+   as correct.
+   But the homework assignments&mdash;the problems you access through this login page&mdash;will
+   only accept 50% or 0.5.
+   The server will count 50/100 or 1/sqrt(4) as wrong answers.
+</p>
+
+
+<h2>
+	<a id="troubleshooting" title="troubleshooting"></a>Troubleshooting
+</h2>
+
+<p>
+	Most technical problems with the online book and assignments
+	have one of three causes:
+</p>
+
+<ol>
+	<li>
+		Using a browser that is not supported, or that is not configured
+		correctly.
+		See <a href="../minimum.htm"
+		     title="minimum requirements to run SticiGui" target="_new">minimum system
+		     requirements to run SticiGui</a>.
+	</li>
+	<li>
+		Scrolling, clicking or typing before the assignment page is fully loaded.
+		Be sure to wait until the page has loaded completely before you do anything.
+                The cursor should be normal, no hourglass or spinning wheel.
+                The status bar should have a message like &quot;done&quot; or &quot;loaded.&quot;
+	</li>
+	<li>
+		Corrupted cookies or cookies that have grown too big.
+		See <a href="#cookies" title="cookies">cookies</a>.
+	</li>
+</ol>
+
+
+<p>
+    <strong>If you can't log in</strong>, be sure you selected your course from the drop-down menu.
+</p>
+
+<p>
+    <strong>If the submit button is missing but it is before the due date</strong>,
+    the clock or calendar on your computer is set incorrectly.
+    Your clock needs to be set to the time zone in which the problems are assigned (probably Pacific Time)
+    <em>and to the correct day</em>.
+    If it is not, re-set the clock, clear the browser's cache, and re-start the browser.
+    The submit button will come back.
+</p>
+
+<p>
+    <strong>If the server says you have submitted the assignment more times than you remember submitting
+    it</strong>, you might have double-clicked the &quot;OK&quot; button.
+    The server cannot mis-count the number of times you submitted the assignment.
+</p>
+
+<p>
+   If, when you try to access the problem sets, you get an error message that starts like this,
+   delete the cookies (see below):
+</p>
+
+<pre>
+             Bad Request
+
+             Your browser sent a request that this server could not understand.
+             Size of a request header field exceeds server limit.
+
+             Cookie: 0x....
+</pre>
+
+<div class="indent">
+<h3>
+	<a id="cookies" title="cookies"></a>
+	Cookies
+</h3>
+
+<p class="inline">
+   Cookies are small text files stored on your computer.
+   SticiGui uses cookies to store your answers to assignments to homework assignments
+   on your computer and to remember your student ID when you log in to do an
+   assignment or check your scores.
+</p>
+</div>
+
+<p>
+   Cookies are not reliable: many things will cause them to be deleted or require them
+   to be deleted.
+   You might get an error message that you need to clear
+   the cookies in your browser.
+   When you delete the cookies, the answers stored on your computer will be erased,
+   but the server will still retain your submitted answers and your scores&mdash;only
+   the record on your computer is affected.
+   Current browsers allow you to delete cookies easily, but the command is in
+   different menus in different browsers and on different operating systems.
+</p>
+
+
+
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter('','..');
+// -->
+</script>
+
+</BODY>
+</HTML>

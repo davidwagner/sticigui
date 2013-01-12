@@ -1,0 +1,900 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "19 September 2011 16:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "computeR";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+
+<h1>
+   Computing the Correlation Coefficient
+</h1>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=3360&end=3389" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+   This chapter explains how to calculate the correlation coefficient <span class="math">r</span>,
+   a quantitative measure of linear association.
+   To calculate <span class="math">r</span> for a pair of variables involves transforming them
+   to standard units, then taking the average of the product of the two variables in standard units.
+</p>
+
+<p>
+   <span class="termOfArt">Ecological correlation</span> is the correlation coefficient calculated for
+   averages of individuals, rather than for individuals.
+   Ecological correlations say little about the (linear) association for individuals;
+   generally, ecological correlations tend to overstate the strength of the association for individuals.
+</p>
+
+<h2>
+   <a id="computing_corr"></a>Computing <span class="math">r</span>
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=3470&end=4332" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    We saw in chapter
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('correlation'));
+// -->
+</script>
+    that the correlation coefficient measures
+    <a class="glossRef" href="gloss.htm#linear">linear</a> 
+    <a class="glossRef" href="gloss.htm#association">association</a>.
+    We know that <span class="math">r</span> does not measure
+    <a class="glossRef" href="gloss.htm#nonlinear">nonlinear</a> association.
+    We know that the value of <span class="math">r</span> can be deceptive if the data are
+    <a class="glossRef" href="gloss.htm#heteroscedastic">heteroscedastic</a> or contain
+    <a class="glossRef" href="gloss.htm#outlier">outliers</a>.
+    We know that <span class="math">r</span> is always between &minus;1 and +1.
+    We know how to estimate <span class="math">r</span> by eye.
+    But we do not know how to compute <span class="math">r</span> from data.
+    In this section, we shall learn how to compute the correlation
+    coefficient: <span class="math">r</span> is the average product of X and Y, after putting
+    X and Y on an equal footing by transforming them to
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>&mdash;standard
+    deviations above the mean.
+</p>
+
+<h3>
+   <a id="standard_units"></a>Standard units
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=3389&end=3470" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    <a class="glossRef" href="gloss.htm#standard_units">Standard units</a> are a way of
+    putting different kinds of observations on the same scale.
+    The idea is to replace a datum by the number of standard deviations it is above the
+    <a class="glossRef" href="gloss.htm#mean">mean</a> of the data.
+    If a datum is above the mean, its value in standard units is positive; if it is
+    below the mean, its value in standard units is negative.
+    A datum that is above the mean by 2.5 times the SD is 2.5 in standard units.
+</p>
+
+<div align="center">
+<center>
+    <table border="0" cellspacing="1">
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="center">
+        <strong>original datum &minus; <a class="glossRef" href="gloss.htm#mean">mean</a> of original
+          data</strong>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <strong>datum in
+        <a class="glossRef" href="gloss.htm#standard_units">standard units</a></strong>
+        </td>
+        <td align="center">
+        <strong>=</strong>
+        </td>
+        <td align="center">
+        <strong>how many</strong> <a class="glossRef" href="gloss.htm#sd">SD</a>
+        <strong>the datum is above the mean</strong>
+        </td>
+        <td align="center">
+        <strong> =</strong>
+        </td>
+        <td align="center">
+        ----------------------------------------------
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="center">
+        <strong><a class="glossRef" href="gloss.htm#sd">SD</a> of original data</strong>
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<div class="indent">
+<p class="inline">
+    When a list is transformed to standard units,
+    the <a class="glossRef" href="gloss.htm#mean">mean</a> of the new list is zero,
+    and the <a class="glossRef" href="gloss.htm#sd">SD</a> of the new list is one:
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<strong>The mean and SD of a list in standard units.</strong> ' +
+           'Recall from ' + citeLinkChapter('location') + ', that the mean ' +
+           'of a list tranformed by the affine function a&times;x + b is ' +
+           'a&times;mean(X) + b, and the SD of such a list is ' +
+           '|a|&times;SD<sub>X</sub>. The transformation to standard units is an ' +
+           'affine transformation with a = 1/SD<sub>X</sub> and b = ' +
+           '-mean(X)/SD<sub>X</sub>, so the mean of the list after changing to ' +
+           'standard units is </p> <p class="math"> 1/SD<sub>X</sub>&times;mean(X) ' +
+           '&minus; mean(X)/SD<sub>X</sub> = 0, </p> <p> and the SD of the list after ' +
+           'changing to standard units is </p> <p class="math"> |1/SD<sub>X</sub>| ' +
+           '&times; SD<sub>X</sub> = 1.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    that is what it means
+    for a set of data to be in standard units.
+    <a class="glossRef" href="gloss.htm#standard_units">Standard units</a> are dimensionless.
+    If the original list has units, the original SD has the same units.
+    To transform a measurement  to standard units, we divide the measurement
+    (minus the mean) by the SD, which cancels the original units.
+</p>
+</div>
+
+<p>
+    If we know the mean and SD of the original data, we can restore a
+    datum that is in standard units to the original units of measurement, as follows:
+</p>
+
+<p class="math">
+    <strong>original value =
+    (value in <a class="glossRef" href="gloss.htm#standard_units">standard units</a>)
+    &times; <a class="glossRef" href="gloss.htm#sd">SD</a> +
+    <a class="glossRef" href="gloss.htm#mean">mean</a>.</strong>
+</p>
+
+<p>
+    Note that both the transformation from original units to standard units and
+    the transformation from standard units to original units are
+    <a class="glossRef" href="gloss.htm#affine">affine transformations</a>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates converting from original units to standard units and back.
+    It is a dynamic example: it changes whenever you reload the page.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Converting to standard units and back to original units.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var avWt = 170 + 10*(listOfRandInts(1,-2,2)[0]);
+    var sdWt = listOfRandInts(1,10,20)[0];
+    var wtSu1 = roundToDig(6*(rand.next()-.5),1);
+    var wt1 = roundToDig(avWt+wtSu1*sdWt,2);
+    var wtSu2 = roundToDig(5*(rand.next()-.5),1);
+    var wt2 = roundToDig(avWt+wtSu2*sdWt,2);
+    var wtSu3 = roundToDig(5*(rand.next()-.5),1);
+    var wt3 = roundToDig(avWt+wtSu3*sdWt,2);
+    var qStr = 'Suppose that the average of a list of weights is ' + avWt.toString() +
+               'lbs and the SD of the list is ' + sdWt.toString() + 'lbs.</p><p>What would ' +
+               wt1.toString() +
+              'lbs. be in standard units? What would ' + wt2.toString() +
+              'lbs. be in standard units? What weight ' +
+              'would be ' + wtSu3.toString() + ' in standard units?</p><p>';
+    document.writeln(qStr);
+    var ansStr = '<strong>Solution</strong>. The difference between ' + wt1.toString() +
+              'lbs. and the mean is ' + roundToDig(wt1-avWt,2).toString() + 'lbs.,  which is ' +
+               wtSu1.toString() + ' times the SD, so ' + wt1.toString() + ' = ' + wtSu1.toString() +
+               ' standard units. The difference between ' + wt2.toString() + 'lbs and the mean is ' +
+               roundToDig(wt2-avWt,2).toString() + 'lbs, which is ' + wtSu2.toString() +
+               ' times the SD, so ' + wt2.toString() + ' = ' + wtSu2.toString() +
+               ' standard units. A weight of ' + wtSu3.toString() + ' in standard units is ';
+    var loUp;
+    if (wtSu3 < 0) {
+        loUp = 'below ';
+    } else {
+        loUp = 'above ';
+    }
+    ansStr += Math.abs(wtSu3).toString() + 'SDs ' + loUp + ' average. ' +
+              roundToDig(Math.abs(wtSu3),2).toString() +  'SDs is ' +
+              roundToDig(Math.abs(wtSu3*sdWt),2).toString() +
+              'lbs.; <em>i.e.</em>, the weight is ';
+    var sign;
+    if (wtSu3 < 0) {
+        sign = ' - ';
+    } else {
+        sign = ' + ';
+    }
+    ansStr += ' the average' + sign + roundToDig(Math.abs(wtSu3*sdWt),2).toString() +
+              'lbs. = ' + avWt.toString() + 'lbs. ' + sign +
+               roundToDig(Math.abs(wtSu3*sdWt),2).toString() + 'lbs. = ' +
+               roundToDig(avWt + wtSu3*sdWt,2).toString() + 'lbs. ';
+    document.writeln(ansStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Sign of a Value in Standard Units</span>
+    </p>
+    <p>
+        Values that are larger than the
+        <a class="glossRef" href="gloss.htm#mean">mean</a> are positive in
+        <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+    </p>
+    <p>
+        Values that are less than the <a class="glossRef" href="gloss.htm#mean">mean</a> are negative in
+        <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+    </p>
+</div>
+
+<p>
+    The following exercise checks your ability to convert a measurement to standard units.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln('<p>' + startProblem(pCtr++));
+    var qStr = 'The <a href="ch1.htm#gravity_data">gravity data</a> have ' +
+           '<a class="glossRef" href="gloss.htm#mean">mean</a> &minus;41.67 and ' +
+           '<a class="glossRef" href="gloss.htm#sd">SD</a> 54.87. <span class="qSpan">In standard units, ' +
+           'what would a measured value of ';
+    var gravMeas = listOfRandInts(1,-100,50)[0];
+    var ans = (gravMeas +41.67)/54.87;
+    var gravSu = numToRange(ans,.05);
+    qStr += gravMeas.toString() + ' be?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,gravSu);
+    document.writeln('</p>');
+    var ansStr = 'To convert to standard units, you must find how many SD the point is above ' +
+         'the mean. The mean is &minus;41.67, and the SD is 54.87, so the measurement ' +
+         gravMeas + ' is (' + gravMeas + '+ 41.67)/54.87 = ' +
+         roundToDig(ans,3) + ' standard units.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="computing_r"></a>
+    Computing <span class="math">r</span>
+</h3>
+
+<p>
+    The correlation coefficient <span class="math">r</span> of two variables X and Y is the
+    average of the product of X in
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a> and Y
+    in <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+    You must be sure to multiply the measurements corresponding to the
+    <em>same individual.</em>
+    The order in which you multiply doesn't matter, but you should not change the
+    order of one set of measurements relative to the other.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    will help make the idea clear.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Computing <span class="math">r</span>.';
+    writeExampleCaption(qStr);
+    var n = 10;
+    var r4 = roundToDig(.1 + 0.8*(rand.next()),1);
+    var fac2 = Math.round(7*rand.next()-3.5);
+    var fwSd0 = 40;
+    var fhSd0 = 6;
+    var fwSd0 = fwSd0 + 3*(listOfRandInts(1,-3,3)[0]);
+    var fhSd0 = fhSd0 + listOfRandInts(1,-2,2)[0]
+    var fwMean0 = 150;
+    var fhMean0 = 66;
+    var fwMean0 = Math.max(90,fwMean0 + fwSd0*rNorm());
+    var fhMean0 = Math.max(54,fhMean0 + fhSd0*rNorm());
+    var list2 = cNormPoints(n,r4);
+    var fw = list2[0];
+    var fh = list2[1];
+    var mfw1 = mean(fw);
+    var mfh2 = mean(fh);
+    var sfw1 = sd(fw);
+    var sfh2 = sd(fh);
+    for (i=0; i < fw.length; i++) {
+        fw[i] = Math.floor(fwMean0 + fwSd0*(fw[i]-mfw1)/sfw1);
+        fh[i] = Math.floor(fhMean0 + fhSd0*(fh[i]-mfh2)/sfh2);
+    }
+    list2[0] = fw;
+    list2[1] = fh;
+    var cc = roundToDig(corr(fw,fh),2);
+    var avefw = roundToDig(mean(fw),2);
+    var avefh = roundToDig(mean(fh),2);
+    var sdfw =  roundToDig(sd(fw),2);
+    var sdfh =  roundToDig(sd(fh),2);
+    var qStr = '<p>Suppose the heights in inches and weights in pounds of ' + cardinals[n] +
+               ' people are as follows (these values will change when you reload the page):</p>';
+    document.writeln(qStr);
+    var header = new Array('Weight (lbs.)','Height (in.)');
+    listToTable(header,list2,"standard","center");
+    qStr = '<p>';
+    document.writeln(qStr);
+    citeFig();
+    qStr = ' shows the corresponding scatterplot:</p>';
+    document.writeln(qStr);
+    writeFigureCaption('Scatterplot of Fake Weight v. Height Data');
+    var qStr = '<div class="figure"><p class="figure">' +
+         '<applet code="Correlation.class" codebase="../../Java/" ' +
+           'align="baseline" width="400" height="320" name="randDataApplet" ' +
+           'archive="PbsGui.zip" VIEWASTEXT> <param name="addPoints" value="false">' +
+        '<param name="graphAveButton" value="false">' +
+        '<param name="sdButton" value="false">' +
+        '<param name="sdLineButton" value="false">' +
+        '<param name="title" value="Fake Weight vs. Height Data">' +
+        '<param name="regressButtons" value="false">' +
+        '<param name="showR" value="false">' +
+        '<param name="x" value="1,2,3">' +
+        '<param name="y" value="1,2,3">' +
+        'You need Java to see this.' +
+        '</applet></p></div>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum +
+              '].setVariables("' +  fh.join() + '","' + fw.join() +
+              '");\n' + 'document.applets[' + appNum + '].showPlot();\n';
+    var qStr = '<p>The point of averages of these data is (' +
+        roundToDig(avefh,2).toString() + ', ' + roundToDig(avefw,2).toString() +
+        '). The SD of the heights is ' + roundToDig(sdfh,2).toString() +
+        ' in., and the SD of the weights is ' + roundToDig(sdfw,2).toString() +
+        'lbs.</p>';
+    document.writeln(qStr);
+    var qStr = '<p>Let SU stand for standard units.';
+    document.writeln(qStr);
+    citeTable();
+    qStr = ' summarizes how to compute the correlation coefficient of the weights ' +
+           'and heights.</p>';
+    document.writeln(qStr);
+    writeTableCaption('Calculating the correlation coefficient.');
+    var qStr = '<div class="plainTable"><center><table class="dataTable"><tr>' +
+             '<th id="col0" align="center">Height (in.)</th>' +
+             '<th id="col1" align="center">Height in SU</th>' +
+             '<th id="col2" align="center">Weight (lbs.)</th>' +
+             '<th id="col3" align="center">Weight in SU</th>' +
+             '<th id="col4" align="center">(Height in SU)&times;(Weight in SU)</th></tr>';
+    var ccfhfw = 0.0;
+    var prodfhfw;
+    for (i = 0; i < fh.length; i++) {
+        var fhStd =  (fh[i] - avefh)/sdfh;
+        var fwStd = (fw[i] - avefw)/sdfw;
+        qStr += '<tr><td headers="col0" align="right">' + fh[i]  +
+                '</td><td headers="col1" align="right">' +
+                 roundToDig(fhStd,3)  +
+                '</td><td headers="col2" align="right">' + fw[i]  +
+                '</td><td headers="col3" align="right">' + roundToDig(fwStd,3)  + '</td>';
+        prodfhfw = fhStd*fwStd;
+        ccfhfw += prodfhfw;
+        qStr += '<td headers="col4" align="right">' + roundToDig(prodfhfw,6) + '</td></tr>';
+    }
+    qStr += '</table></center></div>';
+    document.writeln(qStr);
+    var qStr = '<p> The sum of the products of the measurements in standard units (the sum of the ' +
+            'entries in the rightmost column) is ' + roundToDig(ccfhfw,6).toString() +
+            ',so the average of the product of the standardized measurements is ' +
+            roundToDig(ccfhfw,6).toString() + '/' + (fh.length).toString() + ' = ' +
+            roundToDig(ccfhfw/n,4).toString() + '. Thus '  +
+            roundToDig(ccfhfw/fh.length,4).toString() +
+           ' is the correlation coefficient of the heights and weights. </p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>
+    The
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a>
+    does not change if the lists are transformed in any of the following ways:
+</p>
+
+<ul>
+    <li>
+        The same number is added to every element of either list.
+    </li>
+    <li>
+        One number is added to every element of one list, and one
+        number is added to every element of the other list.
+        (The number added to the first list need not equal the number added to
+        the second list.)
+    </li>
+    <li>
+        Every element of either list is multiplied by the same positive number.
+    </li>
+    <li>
+        Every element of one list is multiplied by one positive number,
+        and every element of the other list is multiplied by one positive number.
+        (The number that multiplies the elements of the first list need not equal
+        the number that multiplies the elements of the second list.)
+    </li>
+    <li>
+        Every element of one list is multiplied by the one negative number, and
+        every element of the other list is multiplied by one negative number.
+        (The number that multiplies the elements of the first list need not equal
+        the number that multiplies the elements of the second list.)
+    </li>
+</ul>
+
+<div class="indent">
+<p class="inline">
+    This is because the first step in calculating the 
+    <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a> is to
+    convert the two lists to standard units, and any of those changes (except the last)
+    produces two lists 
+    that&mdash;after converting to standard
+    units&mdash;are the same as the original lists in standard 
+    units.<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Equivalently, the correlation coefficient is unaffected by ' +
+           '<a class="glossRef" href="gloss.htm#affine">affine transformations</a> of  both ' +
+           'variables if the multiplicative constants in the transformations ' +
+           'are both greater than zero or are both less than zero.  ' +
+           'If one of the multiplicative constants is less than zero and ' +
+           'the other is greater than zero, <span class="math">r</span> changes sign.</p><p>To see ' +
+           'why this is so, recall how the mean and SD change under affine ' +
+           'transformations: </p><p class="math">mean(a&times;X + b) = ' +
+           'a&times;mean(X) + b, and </p><p class="math">' +
+           'SD(a&times;X + b) = |a|&times;SD<sub>X</sub>.</p><p>' +
+           'Let <em>M</em>=mean(X) and <em>SD</em>=SD<sub>X</sub>.  Let <span class="math">x</span> be one of ' +
+           'the values of X, and consider what happens to the value </p>' +
+           '<p class="math"> <em>z</em>=a&times;x + b</p><p> ' +
+           'when it is converted to standard units:</p><p class="math">' +
+           '(<em>z</em> &minus; (a&times;M + b))/(|a|&times;SD) = ' +
+           '(a&times;x + b &minus; a&times;M &minus; b)/' +
+           '(|a|&times;SD)</p><p class="math"> = (a/|a|)&times;' +
+           '(x&minus;M)/SD, </p><p>which is just the sign of <span class="math">a</span> times ' +
+           '<span class="math">x</span> ' +
+           'in standard units.  Thus the affine change of variables leaves the list of values ' +
+           'in standard units unchanged, except for a sign change if <span class="math">a</span> is negative. ' +
+           'It follows that affine transformations of either or both variables do not affect ' +
+           'the correlation coefficient, except possibly its sign.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    The last transformation produces two lists that, after converting to standard units,
+    are the negatives of the original lists in standard units. 
+    The two negative signs cancel when the corresponding elements of the lists are multiplied.
+</p>
+</div>
+
+<p>
+    If only one of the lists is multiplied by a negative number, <span class="math">r</span> changes sign,
+    but has the same magnitude.
+    A positive association becomes negative, and <em>vice versa</em>.
+</p>
+
+<p>
+    Because computing the correlation coefficient involves converting both lists to
+    standard units and multiplying the results, and because multiplication does not
+    depend on the order of the factors,
+    it does not matter which list is first:
+</p>
+<p class="math">
+   r<sub>XY</sub> = r<sub>YX</sub>.
+</p>
+<p>
+    Two <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a> scatterplots can have
+    the same correlation coefficient but look quite different if the
+    <a class="glossRef" href="gloss.htm#sd">SD</a>s of the variables are different.
+</p>
+
+<p>
+    The following exercises check your ability to convert variables to standard
+    units and to compute the correlation
+    coefficient.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln('<p>' + startProblem(pCtr++));
+    var r3 = roundToDig(-.1 - 0.8*(rand.next()),1);
+    var n = 10;
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var tempSd0 = 15;
+    var rainSd0 = 20;
+    var tempSd0 = Math.max(1,tempSd0 + 6*(rand.next()-1));
+    var rainSd0 = Math.max(1,rainSd0 + 6*(rand.next()-1));
+    var tempMean0 = 60;
+    var rainMean0 = 100;
+    var tempMean0 = Math.max(20,tempMean0 + tempSd0*rNorm());
+    var rainMean0 = Math.max(30,rainMean0 + rainSd0*rNorm());
+    var lists = cNormPoints(n,r3);
+    var temp = lists[0];
+    var rain = lists[1];
+    var m1 = mean(temp);
+    var m2 = mean(rain);
+    var s1 = sd(temp);
+    var s2 = sd(rain);
+    for (i=0; i < temp.length; i++) {
+       temp[i] = Math.floor(tempMean0 + tempSd0*(temp[i]-m1)/s1);
+       rain[i] = Math.max(1,Math.floor(rainMean0 + rainSd0*(rain[i]-m2)/s2));
+    }
+    lists[0] = temp;
+    lists[1] = rain;
+    var cc = roundToDig(corr(temp,rain),2);
+    var aveRain = roundToDig(mean(rain),2);
+    var aveTemp = roundToDig(mean(temp),2);
+    var sdRain =  roundToDig(sd(rain),2);
+    var sdTemp =  roundToDig(sd(temp),2);
+    var qStr = 'Here is a table of (fake) bivariate data: the average annual rainfall ' +
+           'in inches (Rain) and average annual averge temperature in &deg;F (Temp.) ' +
+           'in 10 fictitious places. Note: this table will change every time you ' +
+           'visit or reload the page, so you can practice as much as you wish.';
+    document.writeln(qStr);
+    var header = new Array("Temp. (&deg;F)","Rain (in.)");
+    listToTable(header,lists,"standard","center");
+    var qStr = '</p><p>Here is the corresponding scatterplot:</p><p class="figure">' +
+           '<applet code="Correlation.class" codebase="../../Java/" ' +
+           'align="baseline" width="600" height="320" name="randDataApplet" ' +
+           'archive="PbsGui.zip"><param name="addPoints" value="false">' +
+           '<param name="graphAveButton" value="false">' +
+           '<param name="sdButton" value="false">' +
+           '<param name="sdLineButton" value="false">' +
+           '<param name="title" value="Fictitious Temperature and Rain Data">' +
+           '<param name="regressButtons" value="false">' +
+           '<param name="showR" value="false"><param name="x" value="1,2,3">' +
+           '<param name="y" value="1,2,3">You need Java to see this</applet>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(temp.join().toString(), rain.join().toString());\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+    var qStr = '</p><p><span class="qSpan">Computed from the data (not read from the ' +
+           'scatterplot), the point of averages of these data is (';
+    document.writeln(qStr);
+    writeTextExercise(5,qCtr++,numToRange(aveTemp,.05));
+    document.write(' ,');
+    writeTextExercise(5,qCtr++,numToRange(aveRain,.05));
+    document.writeln(').');
+    var qStr = 'The SD of average annual average temperature is';
+    document.writeln(qStr);
+    writeTextExercise(5,qCtr++,numToRange(sdTemp,.05));
+    document.write(',');
+    var qStr = 'and the SD of average annual rainfall is';
+    document.writeln(qStr);
+    writeTextExercise(5,qCtr++,numToRange(sdRain,.05));
+    document.write('.</span></p>');
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln('<p>' + startProblem(pCtr++));
+    var qStr = 'Let &quot;SU&quot; stand for &quot;standard units.&quot; ' +
+           '<span class="qSpan">Complete the following table for the Rain and ' +
+           'Temp. data given above:</span></p><div align="center"><center>' +
+           '<table class="dataTable"><tr>' +
+           '<th id="col0" align="center">Temp. (&deg;F)</th>' +
+           '<th id="col1" align="center">Temp. in SU</th>' +
+           '<th id="col2" align="center">Rain (in)</th>' +
+           '<th id="col3" align="center">Rain in SU</th>' +
+           '<th id="col4" align="center">(Temp. in SU)&times;(Rain in SU)</th></tr>';
+    document.writeln(qStr);
+    var ansStr = '';
+    var ansStrB = 'The correlation coefficient is the average product of ' +
+          'corresponding pairs ' +
+          'of measurements in standard units: the average of the numbers in the ' +
+          'rightmost column of the table above.  There are 10 numbers, so their ' +
+          'average is </p><p class="math">(';
+    for (i = 0; i < temp.length; i++) {
+		var tempStd =  (temp[i] - aveTemp)/sdTemp;
+		var aveTstr = roundToDig(aveTemp,3);
+		var sdTstr = roundToDig(sdTemp,3);
+		var rainStd = (rain[i] - aveRain)/sdRain;
+		var aveRstr = roundToDig(aveRain,3);
+		var sdRstr = roundToDig(sdRain,3);
+		document.writeln('<tr><td headers="col0" align="right">' + temp[i]  +'</td>');
+		if (i < 5) {
+			document.writeln('<td headers="col1" align="right">' + roundToDig(tempStd,3)  +'</td>');
+		} else {
+			document.writeln('<td headers="col1" align="right">');
+			writeTextExercise(6,qCtr++,numToRange(tempStd,.05));
+			document.writeln('</td>');
+			ansStr += 'In standard units, the temperature ' + temp[i].toString() +
+				  '&deg; is (' +
+				  temp[i].toString() + ' &minus; ' + aveTstr + ')/' + sdTstr + ' = ' +
+				  roundToDig(tempStd,3) + '.<br /> ';
+		}
+		document.writeln('<td headers="col2" align="right">' + rain[i]  +"</td>");
+		if (i < 5) {
+			document.writeln('<td headers="col3" align="right">' + roundToDig(rainStd,3)  +'</td>');
+		} else {
+			document.writeln('<td headers="col3" align="right">');
+			writeTextExercise(6,qCtr++,numToRange(rainStd,.05));
+			document.writeln('</td>');
+			ansStr += 'In standard units, the rainfall ' + rain[i].toString() +
+				  'in. is (' +
+				  rain[i].toString() + ' &minus; ' + aveRstr + ')/' + sdRstr + ' = ' +
+				  roundToDig(rainStd,3) + '.<br /> ';
+		}
+		var sus = roundToDig(tempStd*rainStd,6);
+		ansStrB += sus.toString() + ' + ';
+		var qStr = '<td headers="col4" align="right">' + sus.toString() + '</td></tr>';
+		document.writeln(qStr);
+    }
+    var qStr = '</table></center></div>';
+    document.writeln(qStr);
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln('<p>' + startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The correlation coefficient of annual average ' +
+           'temperature and rainfall is</span>';
+    document.writeln(qStr);
+    var cc = corr(temp,rain);
+    var aVal = doubleToStr(Math.max(cc-0.05,-1),2)+  ":" + doubleToStr(Math.min(cc+0.05,1),2);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+    ansStrB = ansStrB.substr(0,ansStrB.length-2) + ')/10 = ' + roundToDig(cc,3);
+    writeSolution(pCtr-1,ansStrB);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln('<p>' + startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The temperature in &deg;F corresponding to a ' +
+           'temperature of ';
+    var theTempInSU = roundToDig(4*2*(rand.next()-1),2);
+    qStr += theTempInSU + ' in standard units is</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(theTempInSU*sdTemp + aveTemp,1));
+    document.writeln('</p>');
+    var ansStr = 'The temperature in standard units is the number of standard deviations ' +
+         'above the mean, so the corresponding temperature in degrees is the ' +
+         'mean temperature plus the measurement in standard units times the SD ' +
+         'of temperature: ' + aveTstr + '&deg; + (' + theTempInSU + ')&times;(' +
+         sdTstr + '&deg;) = ' + roundToDig(theTempInSU*sdTemp + aveTemp,3) + '&deg.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+     <a id="ecological_correlation"></a>
+    Ecological Correlation
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=4422&end=4736" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    Correlations based on averages can be arbitrarily misleading if they are
+    interpreted to be about individuals.
+    Correlations based on averages are usually too high,
+    because they ignore the variability across individuals.
+    Correlation of averages is called
+    <a class="glossRef" href="gloss.htm#ecological_correlation">ecological correlation</a>.
+</p>
+
+<p>
+    For example,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is a scatterplot of the GMAT data set, averaged by
+    school. That is, there are now five &quot;individuals;&quot; each one is one of the five
+    schools. The first-year MBA GPA for a school is the average of the first-year MBA GPAs of
+    all the students at that school, <em>etc</em>.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'GMAT data averaged for each school to illustrate ecological correlation.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Bivariate.class" codebase="../../Java/"
+           align="baseline" width="640" height="380" archive="PbsGui.zip">
+        <param name="addPoints" value="false">
+        <param name="files" value="./Data/aveGmat.dat">
+        <param name="graphAveButton" value="false">
+        <param name="regressButtons" value="false">
+        <param name="sdButton" value="true">
+        <param name="sdLineButton" value="false">
+        <param name="Xinit" value="Verbal GMAT">
+        <param name="Yinit" value="Quant. GMAT">
+        You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    For the averaged data, the correlation of quantitative and verbal GMAT
+    scores is 0.95; for the original data, it was only 0.35. If you interpreted the
+    correlation based on averaged data as the association between quantitative and verbal GMAT
+    scores for individuals, you would be way off: There is far more scatter in individual
+    students' scores.
+    This effect is called &quot;ecological correlation.&quot;
+</p>
+<p>
+    On the other hand, averaging can reduce correlations.
+    For example the correlation
+    of the averaged first-year MBA GPA and undergraduate GPA is zero, while for the original
+    data, it is 0.24.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Ecological Correlation.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    For a large group of college students, the ages of Freshmen will vary, as will the ages
+    within other years, so the correlation coefficient for age and the number of years one has
+    been in school will not equal 1.
+</p>
+
+<p>
+    However, if we take the average ages for each class {Freshmen, Sophomores, Juniors, Seniors},
+    the averages will probably be very close to 19, 20, 21, and 22, respectively, and the
+    average number of year of education will be pretty close to 13, 14, 15, and 16.
+    The correlation coefficient between the average age in a class and the average
+    number of years of education in a class will be much closer to 1.
+    Nonetheless, we cannot predict an individual's age very well from the number of
+    years he or she has been in school.
+</p>
+
+<p>
+    For a really extreme example, imagine dividing the university population into two groups,
+    faculty and undergraduates (we leave out graduate students and staff).
+    The ages and educational levels vary both within and across these groups, but what
+    happens if we plot just the averages for the two groups?
+    We will get two points, one with average age about 20 and average number of years of
+    education about 14, and one with average age closer to 45 and average number of years of
+    education about 22.
+    These two points will lie on a straight line (any two points do), and the line will
+    have positive slope (the faculty are older on the average, and have more years of
+    education on the average), so the correlation coefficient will be +1
+</p>
+</div>
+
+<p>&nbsp;
+    
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Ecological Correlation</span>
+    </p>
+    <p>
+        Correlation coefficients of averages are called
+        ecological correlations.
+    </p>
+    <p>
+        Correlations of averages of measurements can differ enormously from
+        correlations of individual measurements.
+    </p>
+    <p>
+        Typically, they are much larger, but they can be smaller, too.
+    </p>
+</div>
+
+<p>
+    When you examine a claim that the association between two variables is strong,
+    be alert to the possibility that the stated correlation is an ecological correlation.
+    If it is, the correlation coefficient for
+    individuals could be quite different&mdash;but tends to be smaller in magnitude
+</p>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+
+<p>
+     Converting to <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+     makes different variables commensurable.
+     A measurement in standard units is the number of <a class="glossRef" href="gloss.htm#sd">SD</a>s the
+     measurement is above the <a class="glossRef" href="gloss.htm#mean">mean</a>.
+     Values larger than the mean are positive in standard units; values below the mean are
+     negative in standard units.
+     The mean of a list in standard units is zero, and the SD of a list in standard units is 1.
+     The correlation coefficient of X and Y is the average of the products of X and Y in
+     standard units.
+     It is important to multiply the value of X by the value of Y for the same individual.
+</p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#ecological_correlation">Ecological correlations</a>
+    are correlation coefficients of averages across groups of individuals,
+    rather than correlation coefficients for individuals.
+    Ecological correlations tend to be stronger than the correlation coefficient
+    for individuals, although the opposite is also possible.
+    Beware arguments about association that rely on ecological correlations.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>affine transformation</li>
+    <li>association</li>
+    <li>categorical</li>
+    <li>correlation</li>
+    <li>correlation coefficient <span class="math">r</span></li>
+    <li>ecological correlation</li>
+    <li>football-shaped</li>
+    <li>heterostedastic</li>
+    <li>homoscedastic</li>
+    <li>linear association</li>
+    <li>mean</li>
+    <li>nonlinear</li>
+    <li>ordinal</li>
+    <li>outlier</li>
+    <li>point of averages</li>
+    <li>quantitative</li>
+    <li>secular trend</li>
+    <li>standard deviation (SD)</li>
+    <li>standard units</li>
+    <li>transformation</li>
+    <li>variable</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>
+
+

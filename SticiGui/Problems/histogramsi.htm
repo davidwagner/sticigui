@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "histograms";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/bbsal98.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var n = 30;
+    var indices = listOfDistinctRandInts(n,0,salary.length-1);
+    var list = new Array(n);
+    for (i = 0; i < n; i++) {
+        list[i] = salary[indices[i]];
+    }
+    list.sort(numberLessThan);
+    salary.sort(numberLessThan);
+    var pctile = 100*roundToDig(.1+.8*rand.next(),1);
+// -->
+</script>
+
+<h2>
+    Histograms and Percentiles
+</h2>
+
+<h3>
+    Part 1
+</h3>
+
+<p>
+    Below is a histogram of the 1998 salaries of Major League baseball
+    players (both the American League and the National League).
+    The source of the data is Conway Sports.
+    Most people think all professional ball players have salaries in the millions,
+    in addition to income from product endorsements.
+    In this assignment, we'll look at the distribution of major
+    league baseball salaries in more detail.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The distribution of salaries of the players is</span>';
+    document.writeln(qStr);
+    var aList = ["symmetric","skewed to the right","skewed to the left"];
+    writeSelectExercise(false,qCtr++,aList,'b');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The left-most bin in the histogram goes from $100,000 (inclusive) to ' +
+               '$420,000 (exclusive); it is the tallest bin. ' +
+               '<span class="qSpan">It is tallest because</span>';
+    document.writeln(qStr);
+    var aList = ["most of the players make between $100,000 and $420,000.",
+                 "the largest fraction of players make between $100,000 and $420,000.",
+                 "more players have salaries between $100,000 and $420,000 than have " +
+                         "salaries in any other $320,000 range.",
+                 "the percentage of players per $1 of salary is larger for that bin " +
+                         "than for any other.",
+                 "None of the above."
+                ];
+    writeSelectExercise(false,qCtr++,aList,'c|d');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var salLQ = salary[Math.ceil(.25*salary.length)-1];
+    var salUQ = salary[Math.ceil(.75*salary.length)-1];
+    var salMed = salary[Math.ceil(.5*salary.length)-1];
+    var upLim = roundToDig(rand.next()*(salUQ - salMed)+ salMed,1);
+    var qStr = '<span class="qSpan">Estimated from the histogram, the percentage ' +
+               'of players who make $' + commify(roundToDig(100000*upLim,0)) +
+               ' or less per year is</span>';
+    document.writeln(qStr);
+    binEnd = histMakeBins(30, salary);
+    counts = histMakeCounts(binEnd, salary);
+    writeTextExercise(8,qCtr++,numToRange(100*histHiLitArea(0, upLim, binEnd, counts),.5));
+    document.writeln('<span class="qSpan">%.</span></p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Estimated from the histogram, the ' +
+               'median salary is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(100000*histEstimatedPercentile(50, binEnd, counts),2000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The lower quartile of the salaries, estimated ' +
+               'from the histogram, is about $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(100000*histEstimatedPercentile(25, binEnd, counts), 2000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The ' + pctile.toString() + 'th percentile of the ' +
+               'salaries, estimated from the histogram, is about $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(100000*histEstimatedPercentile(pctile, binEnd, counts),15000));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var salLQ = salary[Math.ceil(.25*salary.length)-1];
+    var salUQ = salary[Math.ceil(.75*salary.length)-1];
+    var salMed = salary[Math.ceil(.5*salary.length)-1];
+    var loLim = roundToDig(0.9*rand.next()*(salMed - salLQ) + salLQ,1);
+    var hiLim = roundToDig((.1 + .9*rand.next())*(salUQ - salMed) + salMed,1);
+    var qStr = '<span class="qSpan">Estimated from the histogram, the percentage of ' +
+               'salaries between $' + commify(roundToDig(100000*loLim,0)) + ' and $' +
+               commify(roundToDig(100000*hiLim,0)) + ' is about </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(100*histHiLitArea(loLim, hiLim, binEnd, counts), 0.5));
+    document.writeln('<span class="qSpan">%.</span>');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The exact value of the lowest salary is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(109000, 0.1) );
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The exact value of the highest salary is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(9237500,0.1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The top earner\'s salary is about</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(1.157,.05));
+    var qStr = '<span class="qSpan">% of the total salary paid. </span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What percentage of the top earner\'s ' +
+               'salary is the bottom earner\'s salary?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(1.18,.05));
+    document.writeln('<span class="qSpan">%.</span></p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part 2
+</h3>
+
+<p class="inline">
+    Here is a random
+    sample of the 1998 salaries (in $100,000) of 30 of the major league players,
+    sorted into increasing order.
+    Again, the data are from Conway Sports.
+    There is a calculator in the window below, if
+    you scroll down below the histogram.
+</p>
+</div>
+
+<p class="center">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(list.join(', '));
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The total salary (in $) of these 30 players is $</span>';
+    document.write(qStr);
+    aList = vSum(list)*100000;
+    writeTextExercise(8,qCtr++,numToRange(aList,1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The lower quartile of the salaries of these 30 ' +
+               'players is $</span>';
+    document.writeln(qStr);
+    aList = percentile(list,25)*100000;
+    writeTextExercise(8,qCtr++,numToRange(aList,1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The 40th percentile of these 30 salaries is $</span>';
+    document.writeln(qStr);
+    aList = percentile(list,40)*100000;
+    writeTextExercise(8,qCtr++,numToRange(aList,1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The median of these 30 salaries is $</span>';
+    document.writeln(qStr);
+    aList = percentile(list,50)*100000;
+    writeTextExercise(8,qCtr++,numToRange(aList,1));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The percentage of these 30 salaries that are ' +
+               'above $1,000,000 is </span>';
+    document.writeln(qStr);
+    var count = 0;
+    for (i=0; i < list.length; i++) {
+        if (list[i] > 10) {count++;}
+    }
+    count = count*100/n;
+    writeTextExercise(8,qCtr++,numToRange(count,.05));
+    qStr = '<span class="qSpan">%.</span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var limits = [1, 1.5, 2, 3, 6, 10, 50, 100]; // note that lowest limit is below lowest salary; otherwise
+                                                        // would err.
+    var cLen = limits.length - 1;
+    var count = new Array(cLen);
+    for (i=0; i < cLen; i++) {
+        count[i] = 0;
+    }
+    for (i=0; i < n; i++) {
+        for (j = 0; j < limits.length - 1; j++) {
+            if (limits[j] < list[i] && list[i] <= limits[j+1]) { count[j]++;}
+        }
+    }
+    for (i=0; i < cLen; i++) {
+        count[i] = count[i]*100/n;
+    }
+    var qStr = '<span class="qSpan">Fill in the missing numbers in this frequency ' +
+               'table for the 30 salaries, and the relative heights of the bins ' +
+               'if one were to plot a histogram:</span></p>' +
+               '<div align="center"><center><table class="dataTable">' +
+               '<tr><th id="col0">Class Interval</th>' +
+               '<th id="col1">Relative Frequency</th>' +
+               '<th id="col2">Height of Histogram Bin</th></tr>';
+    document.writeln(qStr);
+    for (i=0; i < cLen; i++) {
+        aVal1 = roundToDig(count[i],2);
+        aVal2 = roundToDig(count[i]/(100*(limits[i+1] - limits[i])),3);
+        document.writeln('<tr><td headers="col0" align="left">over $' +
+                         commify(100000*limits[i]) + ' to and including $' +
+                         commify(100000*limits[i+1]) + ' </td>');
+        if (i < 3) {
+            document.writeln('<td headers="col1" align="right">' + aVal1.toString() +
+                             '%</td>');
+            document.writeln('<td headers="col2" align="right">' + aVal2.toString() +
+                             '% per $1000</td></tr>');
+        } else {
+            document.writeln('<td headers="col1" align="right">');
+            writeTextExercise(8,qCtr++,numToRange(aVal1,.01));
+            document.writeln('%</td>');
+            document.writeln('<td headers="col2" align="right">');
+            writeTextExercise(8,qCtr++,numToRange(aVal2,.001));
+            document.writeln('% per $1000</td></tr>');
+        }
+    }
+    document.writeln('</table></center></div>');
+// -->
+</script>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+
+</body>
+</html>

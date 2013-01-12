@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "probabilityPhilosophy";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+<h2>
+    Theories of Probability
+</h2>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var cards = ["ace","two","three","four","five","six","seven","eight","nine","ten",
+                "Jack","Queen","King"];
+  var which = (listOfRandInts(1,0,cards.length-1))[0];
+  var article = " a ";
+  if (which == 0 || which == 7) {
+      article = " an ";
+  }
+  var qStr = 'A standard deck of playing cards has 52 different cards in it, four of ' +
+             'which are ' + cards[which] + 's. <span class="qSpan">According to the ' +
+             'frequency theory, what it means to say that the chance that the top card ' +
+             'of a well shuffled deck is ' + article + cards[which] + ' is 1/13 is that</span>';
+  document.writeln(qStr);
+  var aVal = 'c';
+  var opt = ["in one out of 13 shuffles, " + article + cards[which] + " will end up on top",
+         "in about 1,000,000 of 13,000,000 shuffles, " + article + cards[which] +
+                " will end up on top",
+         "in repeated shuffling, the fraction of shuffles with " + article + cards[which] +
+         " on top will converge to 1/13",
+         "none of the above"
+         ];
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var nSpots = ["one","two","three","four","five","six"];
+  var theFaces = (listOfDistinctRandInts(2,0,5)).sort(numberLessThan);
+  var qStr = '<span class="qSpan">According to the theory of equally likely outcomes, ' +
+             'what it means to say that the chance is 1/3 that when you roll a fair die, ' +
+             'it lands showing either ' + nSpots[theFaces[0]] + ' or ' + 
+             nSpots[theFaces[1]] + ' spots is </span>';
+  document.writeln(qStr);
+  var aVal = 'c|e';
+  var opt = [
+                nSpots[theFaces[0]] + " or "  + nSpots[theFaces[1]] +
+                    " will show in one out of 3 rolls",
+                "there are three possible outcomes; all are equally likely",
+                 nSpots[theFaces[0]] + " and "  + nSpots[theFaces[1]] +
+                    " are two of the six possible outcomes, so the chance is 2/6=1/3",
+                 "the die is symmetrical",
+                 "none of the above"
+            ];
+  writeSelectExercise(false,qCtr++,opt,aVal);
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan">According to the subjective theory, what it means ' +
+             'to say that the chance is 1/6 that a die lands with the face with one spot ' +
+             'on top (&quot;a one will show&quot;) when you roll it is </span>';
+  document.writeln(qStr);
+  var opt = ["the speaker thinks a one will show in one out of 6 rolls",
+         "the speaker thinks the chance is 1/6",
+         "the speaker thinks the fraction of rolls that show one will converge to 1/6",
+         "the speaker believes 5 times as strongly that the die won't show one as that it will",
+         "none of the above"
+         ];
+  writeSelectExercise(false,qCtr++,opt,'d');
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theFace = (listOfRandInts(1,0,5))[0];
+    var qStr = '<span class="qSpan">According to the theory of equally likely outcomes, ' +
+               'the chance that a die lands with fewer than ' + nSpots[theFace] + 
+               ' spot(s) showing is (give a decimal fraction or a percentage) </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(theFace/6,.001));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aVal = "c";
+    var thePct = (listOfRandInts(1,5,95))[0];
+    var which = randBoolean();
+    var qStr = '';
+    if (which){
+        qStr += 'A seismologist says that the chance of a magnitude 8.2 ' +
+                'or greater earthquake on the San Andreas Fault by the year 2020 is ';
+    } else {
+        qStr += 'An economist says that the chance that the Dow Jones ' +
+                'Industrial Average reaches 20,000 in the year 2050 is ';
+    }
+    qStr += thePct.toString() + '%. <span class="qSpan">Which theory of probability would be most natural ' +
+            'to use to interpret his/her statement?</span>';
+    document.writeln(qStr);
+    var opt = ["the theory of equally likely outcomes",
+               "the frequency theory",
+               "the subjective theory"
+               ];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theCards = ["heart","seven","face card","two or a nine","heart or a diamond"];
+    var which = (listOfRandInts(1,0,theCards.length-1))[0];
+    var aVal;
+    if (which == 0) {
+         aVal = 0.25;
+    } else if (which == 1) {
+         aVal = 1/13;
+    } else if (which == 2) {
+         aVal = 3/13;
+    } else if (which == 3) {
+         aVal = 2/13;
+    } else if (which == 4) {
+         aVal = 0.5;
+    }
+    var countFromTop = ["second","third","fourth","fifth","sixth","seventh","eighth","ninth",
+        "tenth"];
+    var fromTop = (listOfRandInts(1,0,countFromTop.length-1))[0];
+    var qStr = '<span class="qSpan">What is the chance that the top card in a well shuffed ' +
+               'deck will be a ' + theCards[which] + '? </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(aVal));
+    qStr = '<span class="qSpan">What is the chance that the ' + countFromTop[fromTop] + 
+           ' card from the top of the deck will be a ' + theCards[which] + '?</span> ';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(aVal));
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var hands = ["a pair","two pair","three of a kind","four of a kind","a full house",
+            "a flush","a straight","a straight flush","a royal flush"];
+    var highCards = ["7","8","9","10","Jack","Queen","King","Ace"];
+    var inx = (listOfRandInts(1,0,9))[0];
+    var hiCard = (listOfRandInts(1,0,highCards.length-1))[0];
+    hands[9] = highCards[hiCard] + " high";
+    var totHands = binomialCoef(52,5);
+    var nHands;
+    if      (inx == 0) {
+        nHands = 13*6*binomialCoef(12,3)*4*4*4;
+    } else if (inx == 1) {
+        nHands = binomialCoef(13,2)*6*6*44;
+    } else if (inx == 2) {
+        nHands = 13*4*binomialCoef(12,2)*4*4;
+    } else if (inx == 3) {
+        nHands = 13*48;
+    } else if (inx == 4) {
+        nHands = 13*4*12*6;
+    } else if (inx == 5) {
+        nHands = 4*(binomialCoef(13,5) - 10);
+    } else if (inx == 6) {
+        nHands = 10*(Math.pow(4,5)-4);
+    } else if (inx == 7) {
+        nHands = 36;
+    } else if (inx == 8) {
+        nHands = 4;
+    } else if (inx == 9) {
+        nHands = (binomialCoef(hiCard+5,4) - 1)*(Math.pow(4,5)-4);
+    }
+    var pHand = nHands/totHands;
+    var qStr = 'Suppose that Aces can be either high or low; that is, that ' +
+               '{A, 2, 3, 4, 5} is a straight, and so is {10, Jack, Queen, King, Ace}. Moreover, ' +
+               'a hand that is an Ace-high beats a King-high, <em>etc</em>. ' +
+               '<span class="qSpan">The number of ways of getting a five card hand that is ' + hands[inx] + 
+               ' from a standard deck of cards is </span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nHands));
+    qStr = '<span class="qSpan">The probability of being dealt a five card hand that is ' + hands[inx] + 
+           ' from a well shuffled standard deck of cards is </span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(pHand));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p></p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

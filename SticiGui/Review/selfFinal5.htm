@@ -1,0 +1,1828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "17 July 2011 12:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    window.name="bookWin";
+    CA = true;
+    var ver = 10; // 10, 27, 325, 4021
+    examSetUp(ver, 'Final', 5);
+// -->
+</script>
+
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+
+
+<ul>
+<li>
+    Write your name, student ID number, and the exam version on your Scantron form.
+</li>
+<li>
+    Scantron forms without a student ID number or without an exam version number will not be
+    graded&mdash;you will receive an F on the final (and fail the course) if you omit either.
+</li>
+<li>
+    Write your name and SID on this exam.
+</li>
+<li>
+    Return this exam with your Scantron form.
+</li>
+<li>
+    Sign the Scantron form to confirm &quot;I swear I did not cheat on this exam, nor did I help
+    anyone else to cheat.&quot;
+</li>
+</ul>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = '<span class="qSpan">Which informal fallacy&mdash;if any&mdash;does the following ' +
+                'argument commit?</span></p><p><span class="example">';
+    var vstatements = [
+                        'Many runners with plantar fasciitis (painful inflammation of fascia on the ' +
+                           'bottom of the foot) find that their condition improves after they run barefoot. ' +
+                           'Therefore, barefoot running relieves plantar fasciitis.',
+                        'A particular university\'s expenditures have increased by $20,000 per year per student ' +
+                           'as enrollment has grown. Therefore, each additional student costs the university ' +
+                           '$20,000 per year.',
+                        'Either you approve of smoking in public places, or you don\'t.',
+                        'There is no evidence that cell phone use cannot cause brain cancer. Therefore, ' +
+                           'cell phones cause brain cancer.'
+                      ];
+     var rawOpt = ['appeal to ignorance',    
+                   'questionable cause',
+                   'false dichotomy',
+                   'two wrongs make a right'
+                  ];
+     var which = (listOfRandInts(1, 0, vstatements.length-1))[0];
+     qStr += vstatements[which] + '</span></p><p>';
+     document.writeln(qStr);
+     var optPerm = randPermutation(rawOpt,"inverse");
+     var opt = optPerm[0];
+     opt[opt.length] = "none of the above";
+     var aVal;
+     switch (which) {
+         case 0: 
+           aVal = alphabet[optPerm[1][1]]; 
+           break;
+         case 1:
+           aVal = alphabet[optPerm[1][1]]; 
+           break;
+         case 2:
+           aVal = alphabet[optPerm[1][4]]; 
+           break;
+         case 3:
+           aVal = alphabet[optPerm[1][0]]; 
+           break;
+     }         
+     writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Is the following argument valid or fallacious?</span></p>' +
+               '<p><span class="example">';
+    var vstatements = [
+                       ['A. Therefore, if B then A.',
+                           'If B then A is true if A is true (or if B is false).'],
+                       ['A. B. Therefore, A and B.',
+                           'This is the definition of &quot;and.&quot;'],
+                       ['B. Therefore, A or B.',
+                           '<span class="math">A or B</span> is true if <span class="math">A</span> is true, ' +
+                           'if <span class="math">B</span> is true and if both <span class="math">A</span> ' +
+                           ' and <span class="math">B</span> are true.'],
+                       ['A or B. Not B. Therefore, A.',
+                           'If either <span class="math">A</span> or <span class="math">B</span> is true, and ' +
+                           '<span class="math">B</span> is not true, <span class="math">A</span> must ' +
+                           'be true.'],
+                       ['If A then B. A. Therefore, B.',
+                           'This is <a class="glossRef" href="gloss.htm#affirming_the_antecedent">affirming ' +
+                           'the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, not A.',,
+                           'This is <a class="glossRef" href="gloss.htm#denying_the_consequent">denying ' +
+                           'the consequent</a>.'],
+                       ['not (A or B).  Therefore, (not A) and (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'],
+                       ['not (A or B).  Therefore, (not A) or (not B)',
+                           'By one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>, if ' +
+                           '<span class="math">not (A or B)</span>, ' +
+                           'then <span class="math">A</span> is false and <span class="math">B</span> ' +
+                           'is false. But if both <span class="math">A</span> and ' +
+                           '<span class="math">B</span> are false, then either <span class="math">A</span> ' +
+                           'is false or <span class="math">B</span> is false.'],
+                       ['not (A and B).  Therefore, (not A) or (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'], 
+                       ['A or not B.  B. Therefore, A.',
+                           'This is the definition of &quot;or&quot; applied to <span class="math">A</span> ' +
+                           'and <span class="math">not B</span>.  If either <span class="math">A</span> is ' +
+                           'true or <span class="math">B</span> is false, and <span class="math">B</span> ' +
+                           'is true, then <span class="math">A</span> must be false.']
+                      ];
+    var fstatements = [
+                       ['A or B.  A.  Therefore, not B.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['A or B.  B.  Therefore, not A.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['not (A and B). Therefore, not B.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">B</span> ' +
+                           'might be true and <span class="math">A</span> might be false. It does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['not (A and B). Therefore, not A.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">A</span> ' +
+                           'might be true and <span class="math">B</span> might be false. It does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['If A then B. Not A. Therefore, not B.',   
+                           'This is an example of <a class="glossRef" href="gloss.htm#denying_the_antecedent">' +
+                           'denying the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, A.',  
+                           'By <a class="glossRef" href="gloss.htm#denying_the_consequent">denying the ' +
+                           'consequent</a>, we can conclude that <span class="math">A</span> is false, not that ' +
+                           '<span class="math">A</span> is true.'],
+                       ['If A then B. B. Therefore, A.', 
+                           'This is an example of <a class="glossRef" href="gloss.htm#affirming_the_consequent">' +
+                           'affirming the consequent</a>.'],  
+                       ['not (A and B). Therefore, (not A) and (not B)',
+                           'It follows that either <span class="math">A</span> is false or ' +
+                           '<span class="math">B</span> is false, but not necessarily that both are false.'],
+                       ['If A then B. C. Therefore, A.',   
+                           'This is a <a class="glossRef" href="non_sequitur_of_evidence">non sequitur of ' +
+                           'evidence</a>.'],
+                       ['If A then B. A. Therefore, C.',
+                           'This is a <a class="glossRef" href="non_sequitur_of_relevance">non sequitur of ' +
+                           'relevance</a>.']
+                      ];
+    var which = randBoolean();
+    var opt = ['fallacious','valid'];
+    var stmt;
+    if (which) {
+         stmt = vstatements[listOfRandInts(1,0,vstatements.length-1)[0]][0];
+         aVal = alphabet[1];
+    } else {
+         stmt = fstatements[listOfRandInts(1,0,fstatements.length-1)[0]][0];
+         aVal = alphabet[0];
+    }
+    qStr += stmt + '</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    function f0(p, q) {
+        return(( p || !q));
+    }
+
+    function f1(p, q) {
+        return((p && q));
+    }
+
+    function f2(p, q) {
+        return((p && q));
+    }
+
+    function f3(p, q) {
+        return( (p && q) );
+    }
+
+    var qOpt = [
+                ['<span class="math">p | (q &rarr; p)</span>',
+                     f0],
+                ['<span class="math">p | (p &rarr; q)</span>',
+                     f1],
+                ['<span class="math">!(p &rarr; !q)</span>',
+                     f2],
+                ['<span class="math">p  &harr; (p &rarr; q)</span>',
+                     f3]
+                ];
+    var which = (listOfRandInts(1,0, qOpt.length -1))[0];
+    var p = randBoolean();
+    var q = randBoolean()
+    var qStr = '<span class="qSpan">When <em>p</em> is ' + p.toString() +
+               ' and <em>q</em> is ' + q.toString() + ', ' + qOpt[which][0] +
+               ' is</span></p><p>';
+    document.writeln(qStr);
+    var evalStr = qOpt[which][1] + '(' + p.toString() + ',' + q.toString() + ');';
+    var tv = qOpt[which][1](p, q);
+    var aVal = 'a';
+    if (tv) {
+        aVal = 'b';
+    }
+    var opt = ['false','true'];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var spins = 5;
+    var bars = listOfDistinctRandInts(2, 1, spins-1).sort(numberLessThan);
+    var nBlack = bars[0];
+    var nRed = bars[1] - bars[0];
+    var nGreen = spins - bars[1];
+    var blackWord = ' spins';
+    if (nBlack == 1) {
+         blackWord = ' spin';
+    }
+    var redWord = ' spins';
+    if (nRed == 1) {
+         redWord = ' spin';
+    }
+    var greenWord = ' spins';
+    if (nGreen == 1) {
+         greenWord = ' spin';
+    }
+    var pBlack = 18/38;
+    var pRed = pBlack;
+    var pGreen = 2/38;
+    qStr = 'A roulette wheel has 38 spaces: 18 red, 18 black, and 2 green.  Suppose that ' +
+           'in each spin of the wheel, the ball is equally likely to land on any of the 38 spaces, ' +
+           ' and that spins are independent.  The wheel will be spun ' + cardinals[spins] + ' times.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">The chance that the ball lands on black in all ' + cardinals[spins] + 
+           ' spins is closest to</span></p><p>';
+    var pY = Math.pow(pBlack,spins);
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],pY*facs[1],3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">The chance that the ball lands on black on the first ' +
+            cardinals[nBlack] + blackWord + ' and lands on ' +
+           'a color other than black in the last ' + cardinals[spins-nBlack] +
+           ' spins is closest to</span></p><p>';
+    var pY = Math.pow(pBlack, nBlack)*Math.pow((pRed+pGreen), spins-nBlack); 
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],Math.min(1,pY*facs[1]),3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">The chance that the ball lands on black on (any) ' +
+            cardinals[nBlack] + ' of the spins and lands on a color other than black ' +
+           'in the remaining ' + cardinals[spins-nBlack] + ' spins is closest to</span></p><p>';
+    var pY = binomialCoef(spins, nBlack)*Math.pow(pBlack, nBlack)*Math.pow((pRed+pGreen), spins-nBlack); 
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],Math.min(1,pY*facs[1]),3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">The chance that the ball lands on black on the first ' +
+            cardinals[nBlack] + blackWord + ', lands on red on the next ' + cardinals[nRed] +
+           redWord + ', and lands on green on the last ' + cardinals[nGreen] + greenWord +
+           ' is closest to</span></p><p>';
+    var pY = Math.pow(pBlack, nBlack)*Math.pow(pRed, nRed)*Math.pow(pGreen, nGreen); 
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],Math.min(1,pY*facs[1]),3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">The chance that the ball lands on black on (any) ' +
+            cardinals[nBlack] + blackWord + ', lands on red on (any) ' + cardinals[nRed] +
+           redWord + ', and lands on green on the remaining ' + cardinals[nGreen] + greenWord +
+           ' is closest to</span></p><p>';
+    var pY = binomialCoef(spins, nBlack)*binomialCoef(spins-nBlack, nRed)*
+             Math.pow(pBlack, nBlack)*Math.pow(pRed, nRed)*Math.pow(pGreen, nGreen); 
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],Math.min(1,pY*facs[1]),3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var testLand = 3;
+    var testSpins = 5;
+    qStr = 'Suppose now that the roulette wheel might not be fair: the spins are independent, but the ' +
+           'chance that the ball lands in each of the 38 spaces might not be the same for all of the ' +
+           'spaces.  I want to test whether the wheel is fair. The test consists of spinning the ' +
+           'wheel over and over until the ' + ordinals[testLand] + ' time the ball lands on any one of ' +
+           'the 38 spaces. (The 38 spaces are labeled, so it is possible to tell them apart.) I will ' +
+           'conclude that the wheel is not fair if it takes fewer than ' + cardinals[testSpins] + 
+           ' spins. <span class="qSpan">The null hypothesis is that </span></p><p>';
+    var opt = ['the wheel is fair',
+               'the wheel is unfair',
+               'it takes ' + cardinals[testSpins-1] + ' spins',
+               'it takes ' + cardinals[testSpins] + ' or more spins',
+               'none of the above'];
+    var aVal = alphabet[0];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">If the null hypothesis is true, the probability distribution ' +
+            'of the number of rolls until any space shows up for the ' + ordinals[testLand] + 
+            ' time is</span></p><p>';
+    var opt = ['binomial','geometric','hypergeometric','negative binomial','none of the above'];
+    var aVal = alphabet[4];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+        
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The significance level of this test is closest to</span></p><p>';
+    var pY = Math.pow(1/38,2) + 3*37*Math.pow(1/38,3);
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[1],pY*facs[0],3,30);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var multA = listOfRandInts(1, 2, 8)[0];
+    var pA = roundToDig(multA/(37 + multA), 5);
+    var pR = roundToDig((1-pA)/37, 5);
+    var qStr = '<span class="qSpan">The power of this test against the alternative hypothesis that ' +
+               'the chance the ball lands one particular space is ' + (100*pA).toString() +
+               '% and the chance it lands in any of the other 37 spaces is ' + 
+               (100*pR).toString() + '% is closest to</span></p><p>';
+    var pY = Math.pow(pA,3) + 
+             37*Math.pow(pR,3) + 
+             3*Math.pow(pA,3)*37*pR +
+             37*3*Math.pow(pR,3)*36*pR +
+             3*Math.pow(pR,3)*pA;
+    var facs = listOfRandInts(2, 2, 5);
+    var op = makeProbOptions(pY,pY/facs[0],Math.min(1,pY*facs[1]),3,20);
+    var opt = op[0];
+    var aVal = op[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var Ns = (listOfDistinctRandInts(4,4,18)).sort(numberLessThan);
+    var nOonl = Ns[0];
+    var nLSonl = Ns[1];
+    var nO    = Ns[2];
+    var nLS   = Ns[3];
+    var n     = nO+nLS;
+    var nonl  = nOonl + nLSonl;
+    var NGradLS = 6100;
+    var NAllLS = 3*NGradLS;
+    var NGradO = Math.ceil(NGradLS/3);
+    var NAllO = Math.ceil(NAllLS/3);
+    var NGrad = [NGradLS, Math.ceil(NGradLS/3), NGradLS + Math.ceil(NGradLS/3)];
+    var qStr = 'A UC Berkeley dean who advocates online education wants to know the percentage ' +
+               'of current Berkeley undergraduates who will have taken online courses by the time ' +
+               'they graduate. She also hypothesizes that by the time they graduate, a smaller fraction of ' +
+               'current Letters and Science (L&amp;S) majors will have taken online courses than ' +
+               'students who major in Engineering, Chemistry, Business, and other fields. To ' +
+               'evaluate this hypothesis, she gets a list of student ID numbers (SIDs) of all students ' +
+               'on the degree list for the current term (that is, students who are about to graduate). ' +
+               'She reasons that since those students will graduate at the end of this semester, it is ' +
+               'possible to determine right now whether they will have taken any online courses at Berkeley ' +
+               'by the time they graduate: Any online courses they will have taken by the time they graduate ' +
+               'either will be on their transcript already or will be courses they are currently enrolled ' +
+               'in. (In contrast, a current sophomore might not yet have taken an online class and might ' +
+               'not be enrolled in one, but might still take one before graduating.) ' +
+               'She shuffles those SIDs into a random order, then selects the first ' + n.toString() + 
+               ' SIDs from the shuffled list. She then sends those ' + n.toString() + 
+               ' SIDs to the Registrar, who looks up the transcripts and the courses each of those ' +
+               'students is currently enrolled in, and reports to the dean the number who are L&amp;S ' +
+               'majors, the number who are not, and for each of those groups, the number who have taken ' +
+               'or are currently taking an online class at Berkeley. ' +
+               'Suppose that the numbers of undergraduates are as below:</p> ';
+    document.writeln(qStr);
+    var header = ['enrolled L&amp;S majors', 
+                  'L&amp;S majors on degree list', 
+                  'enrolled: all majors', 
+                  'degree list: all majors'
+                 ];
+    var lists = new Array(4);
+    lists[0] = [commify(NAllLS),''];
+    lists[1] = [commify(NGradLS),''];
+    lists[2] = [commify(NAllLS+NAllO),''];
+    lists[3] = [commify(NGradLS+NGradO),''];
+    listToTable(header,lists,"transpose","center",true,"-1");   
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">What population is the dean\'s hypothesis about?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt =  [  'UC Berkeley undergraduates on the degree list that semester',
+                     'current UC Berkeley L&amp;S majors who have taken an online course',
+                     'UC Berkeley undergraduates on the degree list that semester who have taken online courses',
+                     'current UC Berkeley undergraduates',
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][3]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!-- 
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">What is the frame for this study?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt =  [  'UC Berkeley undergraduates on the degree list that semester',
+                     'current UC Berkeley L&amp;S majors who have taken an online course',
+                     'UC Berkeley undergraduates on the degree list that semester who have taken online courses',
+                     'current UC Berkeley undergraduates',
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What kind of sample is this?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'systematic random sample',
+                     'stratified random sample',
+                     'simple random sample',
+                     'multistage random sample',
+                     'non-probability sample'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Did every member of the frame have the ' +
+               'same chance of being in the sample?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'no',
+                     'yes'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Did every member of the relevant population have the ' +
+               'same chance of being in the sample?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'no',
+                     'yes'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Is the sample percentage of students ' +
+               'on the degree list who have taken (or are currently taking) an online course an ' +
+               'unbiased estimate of the overall percentage of students on the degree list ' +
+               'who will have taken an online course by the time they graduate?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'no',
+                     'yes',
+                     'not enough information to tell'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following is the largest source of bias in estimating ' +
+               'the percentages of current L&amp;S majors and other majors who will have taken an ' +
+               'online course by the time they graduate?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'The dean advocates online instruction',
+                     'Frame bias',
+                     'Nonresponse bias',
+                     'Interviewer bias'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'None of the above is a source of bias here: the sample percentages are unbiased ';
+    var aVal = alphabet[optPerm[1][1]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Is the sample percentage of students ' +
+               'on the degree list who have taken (or are currently taking) an online course an ' +
+               'unbiased estimate of the percentage of current Berkeley undergraduates ' +
+               'who will have taken an online course by the time they graduate?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'no',
+                     'yes',
+                     'not enough information to tell'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following is the most appropriate ' +
+               'null hypothesis for the dean\'s research question?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [   'The population percentage of current L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate ' +
+                           'is equal to the population percentage of current non-L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate. ',
+                     'The sample percentage of L&amp;S majors on the degree list who ' +
+                           'will have taken an online class by the time they graduate ' +
+                           'is equal to the sample percentage of current non-L&amp;S majors ' +
+                           'on the degree list who will have taken an online class by the ' +
+                           'time they graduate. ',
+                     'The sample percentage of current L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate ' +
+                           'is equal to the population percentage of current L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate. ',
+                     'The population percentage of current L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate ' +
+                           'is less than the population percentage of current non-L&amp;S majors who ' +
+                           'will have taken an online class by the time they graduate. ',
+                     'The sample percentage of L&amp;S majors on the degree list who ' +
+                           'will have taken an online class by the time they graduate is less ' +
+                           'than the sample percentage of non-L&amp;S majors on the degree list ' +
+                           'who will have taken an online class by the time they graduate. '
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var fpc = Math.sqrt((NGrad[2]-n)/(NGrad[2]-1));
+    var seBnd = 100*.5*fpc/Math.sqrt(n);
+    var op = makeOptions(seBnd,0.1*seBnd,3,"%");
+    var opt = op[0];
+    var aVal = op[1];
+    var qStr = '<span class="qSpan">The standard error of the sample percentage ' +
+               'of all students on the degree list (whether or not they are L&amp;S majors) ' +
+               'who will have taken an online course by the ' +
+               'time they graduate is at most (choose the smallest correct answer)</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'It turns out that ' + nLS.toString() + ' of the ' + n.toString() + 
+               ' students in the sample are L&amp;S majors and ' + nO.toString() + ' are not. ' + 
+               Cardinals[nLSonl] + ' of the L&amp;S majors and ' + cardinals[nOonl] + ' of the non-L&amp;S ' +
+               'students in the sample will have taken online classes by the time they graduate.</p>' +
+               '<p><span class="qSpan">The sample percentage of L&amp;S majors who will have taken an ' +
+               'online course by the time they graduate is closest to</span></p><p>';
+    document.writeln(qStr);
+    var pHatLS = nLSonl/nLS;
+    var op = makeProbOptions(pHatLS,.1,1);
+    var opt = op[0];
+    var aVal = op[1];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Are the ' + nLS.toString() + ' L&amp;S majors in the sample a ' +
+               'simple random sample of size ' + nLS.toString() + ' of the ' + commify(NGradLS) + 
+               ' L&amp;S majors on the degree list?</span></p><p>';
+    document.writeln(qStr);
+    var opt = ['no','yes','there is not enough information to tell'];
+    var aVal = alphabet[0];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Is the sample percentage of L&amp;S majors currently on the degree list ' +
+               'who will have taken an online course by the time they graduate an unbiased ' +
+               'estimate of the percentage of L&amp;S majors currently on the degree list who will ' +
+               'have taken an online course by the time they graduate?</span></p><p>';
+    document.writeln(qStr);
+    var opt = ['no','yes','there is not enough information to tell'];
+    var aVal = alphabet[0];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var cl = 0.75;
+    var chebyFac = 1/Math.sqrt(1-cl);
+    var fpc = Math.sqrt((NGrad[2]-n)/(NGrad[2]-1));
+    var seBnd = 100*.5*fpc/Math.sqrt(n);
+    var pHat = 100*(nLSonl + nOonl)/n;
+    var loEnd = Math.max(pHat - chebyFac*seBnd, 0);
+    var op = makeOptions(loEnd,0.1*seBnd,3,"%");
+    var opt = op[0];
+    var aVal = op[1];
+    var qStr = '<span class="qSpan">Based on the sample percentage of students currently on the degree list ' +
+               '(whether or not they are L&amp;S majors) who will have taken an online course by the ' +
+               'time they graduate, a conservative 75% confidence interval for the (population) percentage ' +
+               'of students currently on the degree list who will have taken an online course by the ' +
+               'time they graduate has lower endpoint (choose the largest correct answer)</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Suppose that one\'s major has nothing to do with whether one takes an ' +
+               'online course before graduating. We will call this the <em>hypothesis of no association</em>. ' +
+               'Then, given that the number of graduating L&amp;S majors ' +
+               'in the sample is ' + nLS.toString() + ' and that the total number of students in ' +
+               'the sample who will have taken an online class by the time they graduate is ' + 
+               nonl.toString() + ', the number of graduating L&amp;S majors in the sample who will have ' +
+               'taken at least one online class is like the number of tickets labeled 1 in a simple ' +
+               'random sample of size ' + nLS.toString() + 
+               ' from a box that contains ' + n.toString() + ' tickets of which ' + nonl.toString() + 
+               ' are labeled 1 and the rest are labeled 0.</p><p>';
+    document.writeln(qStr);
+    document.writeln(startProblem(pCtr++));
+    qStr = '<span class="qSpan">' +
+               'In this scenario, the expected number of students who will have taken an online course ' +
+               'by the time they graduate among the graduating L&amp;S majors in the sample is ' +
+               'closest to</span></p><p>';
+    document.writeln(qStr);
+    var EX = nonl*nLS/n;
+    var op = makeOptions(EX,.03*EX,4);
+    var opt = op[0];
+    var aVal = op[1];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">' +
+               'In this scenario, the standard error of the sample number of students on ' +
+               'the degree list who will have taken an online ' +
+               'course before graduating among the L&amp;S majors on the degree list is closest to</span></p><p>';
+    document.writeln(qStr);
+    var SEX = Math.sqrt( ((n-nLS)/(n-1)) * nLS * nonl/n * (n-nonl)/n);
+    var op = makeOptions(SEX,.03*SEX,4);
+    var opt = op[0];
+    var aVal = op[1];
+    writeRadioExercise(qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The article &quot;Suicide-Related Events in Patients Treated with Antiepileptic Drugs&quot; ' +
+               'by A. Arana, C.E. Wentworth, J.L. Ayuso-Mateos, and F.M. Arellano, ' +
+               'was published in the New England Journal of Medicine (v.363, pp.542&ndash;551, 5 August 2010). '+
+               'The New England Journal of Medicine is one of the top medical journals in the world. ' +
+               'The authors studied the association between the use of antiepileptic drugs and suicidal ' +
+               'behavior in patients with epilepsy, depression, or bipolar disorder. They ' +
+               'used data collected in the United Kingdom as part of ordinary clinical care of 5,130,795 ' +
+               'patients claimed to be representative of the general population in the UK. ' +
+               'To be included in the analysis, patients had to be enrolled in a clinical practice for at ' +
+               'least 6 months between 1 July 1988 and 31 March 2008. Patients with a family ' +
+               'history of suicide or a personal history of attempted suicide were excluded.</p><p> ' +
+               'In all, 8,212 patients attempted suicide; 464 of those patients succeeded. The researchers ' +
+               'computed rates of suicide-related events per 100,000 person-years for several groups, ' +
+               'and 95% confidence intervals (CIs) for those rates, as follows:<br /> ' +
+               '1. patients without epilepsy, depression, bipolar disorder, or anti-epileptic drug treatment: ' +
+               'rate 15.0, CI 14.6 to 15.5<br /> ' +
+               '2. patients with epilepsy who were not treated with anti-epileptic drugs: ' +
+               'rate 38.2, CI 26.3 to 53.7<br /> ' +
+               '3. patients with epilepsy who were treated with anti-epileptic drugs: ' +
+               'rate 48.2, CI 39.4 to 58.5</p>' +
+               '<p><span class="qSpan">Which of the following are true?</span></p>' +
+               '<ul><li><span class="qSpan">[i] The New England Journal of Medicine is highly reputable, ' +
+               'therefore, these results are reliable.</span></li>' +
+               '<li><span class="qSpan">[ii] The sample size is extremely large, so these results are ' +
+               'reliable.</span></li>' +
+               '<li><span class="qSpan">[iii] This is a randomized experiment, therefore it is possible ' +
+               'to draw causal conclusions from these data.</span></li>' +
+               '<li><span class="qSpan">[iv] This is an observational study, therefore, any inference that ' +
+               'anti-epileptic drugs cause suicidal ideation or behavior should be viewed with skepticism. ' +
+               '</span></li>' +
+               '<li><span class="qSpan">[v] It is reasonable for the authors to base approximate confidence ' +
+               'intervals on the normal approximation, because the number of data is large.</span></li>' +
+               '<li><span class="qSpan">[vi] Neither exact nor approximate confidence intervals can be ' +
+               'computed from these data; the ranges the authors give are not confidence intervals.' +
+               '</span></li></ul><p>';
+    document.writeln(qStr);
+    var rawOpt = ['[i], [ii], [iii]',
+                  '[i], [ii], [iv]',
+                  '[ii], [iv], [v]',
+                  '[ii], [iii], [v]',
+                  '[iv], [vi]'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][4]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var possRs = [-0.95, -0.5, 0, 0.5, 0.95];
+    var rInx = listOfRandInts(1,0,4)[0];
+    var r1 = possRs[rInx];
+    var opt = new Array(possRs.length);
+    for (var i=0; i < possRs.length; i++ ) {
+       opt[i] = roundToDig(possRs[i],2).toString();
+    }
+    var aVal = alphabet[rInx];
+    var nPoints = 50*listOfRandInts(1,1,4)[0];
+    var qStr = 'The following scatterplot contains ' + nPoints.toString() + ' points.</p><p>' +
+               '<span class="qSpan">The correlation coefficient of the two variables is ' +
+               'closest to</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+    var qStr = '</p><p align="center"><applet code="Correlation.class" ' +
+                'codebase="../../Java/" ' +
+                'align="baseline" width="600" height="380" archive="PbsGui.zip" ' +
+                'name="applet1"><param name="addPoints" value="false">' +
+                '<param name="graphAveButton" value="false">' +
+                '<param name="n" value="' + nPoints.toString() + '">' +
+                '<param name="regressButtons" value="false">' +
+                '<param name="sdLineButton" value="false">' +
+                '<param name="sdButton" value="false">' +
+                '<param name="showRBar" value="false">' +
+                '<param name="title" value="Correlation: Question ' +
+                (pCtr-1).toString() + '">' +
+                '<param name="r" value="' + r1.toString() + '">' +
+                'You need Java to see this.' +
+                '</applet>\n';
+     document.writeln(qStr);
+     var appNum = (document.applets.length - 1).toString();
+     sectionContext += // 'document.applets[' + appNum + '].setN(' + nPoints.toString() + ');\n' +
+                       'document.applets[' + appNum + '].setR(' + r1.toString() + ');\n';
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var randSign = rand.next();
+      if (randSign > 0.5) {
+          randSign = 1;
+    } else {
+        randSign = -1;
+    }
+    var parms = new Array(1);
+    var examplePoints = 100;
+    var pVals = listOfRandInts(5,-1,1);
+    parms[0] = [["polynomial", 10*pVals[0], 5*pVals[1],
+                    2*pVals[2], .3*pVals[3]], 1 + 5*Math.max(pVals[4],0),
+                    1 + 4*Math.floor(rand.next()+0.5)];
+    var data5 = fakeBivariateData(examplePoints,parms[0][0],parms[0][1],parms[0][2]);
+    var yMean = mean(data5[1]);
+    yMnMx = vMinMaxAbs(data5[1]);
+      if (Math.abs(yMean) < 0.07*yMnMx[1] || pVals[0] == 0){
+        for (i=0; i < data5[1].length; i++){
+            data5[1][i] -= yMean;
+        }
+        yMean = 0.0;
+    }
+    var xyCorr = corr(data5[0],data5[1]);
+    var opt = ["data show nonlinear association and homoscedasticity; " +
+                      "regression computed correctly",
+               "data show linear association and heteroscedasticity; " +
+                      "regression computed correctly",
+               "data show nonlinear association and heteroscedasticity; " +
+                      "regression computed correctly",
+               "regression is a good summary of the data",
+               "none of the above"];
+    var aVal = '';
+    if ((Math.abs(yMean) > 0.01) || (Math.abs(xyCorr) > 0.05)) {
+        aVal ='e';
+    } else if ((pVals[2] != 0 || pVals[3] != 0) && pVals[4] == 0) {
+        aVal ='a';
+    } else if ((pVals[2] != 0 || pVals[3] != 0) && pVals[4] > 0) {
+        aVal ='c';
+    } else if (pVals[2] == 0 && pVals[3] == 0 && pVals[4] > 0) {
+        aVal = 'b';
+    } else {
+        aVal = 'd';
+    }
+    var qStr = 'Below is a residual plot from a regression. The square is the point of ' +
+               'averages of the residual plot. <span class="qSpan">What does the residual ' +
+               'plot indicate about the the underlying data and the regression?</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+    document.writeln('</p><p align="center">' +
+                     '<applet code="Correlation.class" codebase="../../Java" ' +
+                     ' align="baseline" width="600" height="320" name="applet3" ' +
+                     'archive="PbsGui.zip">' +
+                     '<param name="addPoints" value="false">' +
+                     '<param name="graphAveButton" value="false">' +
+                     '<param name="sdButton" value="false">' +
+                     '<param name="sdLineButton" value="false">' +
+                     '<param name="title" value="Residual Plot">' +
+                     '<param name="regressButtons" value="false">' +
+                     '<param name="showR" value="false">' +
+                     '<param name="x" value="' + (data5[0]).join() + '">' +
+                     '<param name="y" value="' + (data5[1]).join() + '">' +
+                     'You need Java to see this</applet>');
+   var appNum = (document.applets.length - 1).toString();
+   sectionContext += 'document.applets[' + appNum + '].setVariables("' +
+                     (data5[0]).join() + '","' +
+                     (data5[1]).join() + '");\n' +
+                     'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/p6-1990.js"></script>
+<script language="Javascript1.4" type="text/javascript" ><!--
+// for census data questions
+    var headInx = (listOfDistinctRandInts(2,0,headList.length-1)).sort(numberLessThan);
+    var header = [headList[headInx[0]]]; // ,headList[headInx[1]]]; // not using the Y data here
+    var nStat = 8;
+    var indices = listOfDistinctRandInts(nStat,0,popData.length-1);
+    var popXList = new Array(nStat);
+    var sortPopXList = new Array(nStat);
+    var popYList = new Array(nStat);
+    var sortPopYList = new Array(nStat);
+    for (i = 0; i < nStat; i++) {
+        popXList[i] = roundToDig(popData[indices[i]][headInx[0]],3);
+        sortPopXList[i] = popXList[i];
+        popYList[i] = roundToDig(popData[indices[i]][headInx[1]],3);
+        sortPopYList[i] = popYList[i];
+    }
+    sortPopXList.sort(numberLessThan);
+    sortPopYList.sort(numberLessThan);
+    var pctilePerm = distinctRandPermutation(nStat); // [2,3,0,8,7,1,5,9,4,6]; permutation of the sorted data list
+    for (var i=0; i < sortPopXList.length; i++ ) {
+        popXList[i] = sortPopXList[pctilePerm[i]];
+        popYList[i] = sortPopYList[pctilePerm[i]];
+    }
+    var allXData = new Array(51); // array to hold all the X data
+    var allYData = new Array(51); // array to hold all the Y data
+    for (var i=0; i < 51; i++) {
+        allXData[i] = popData[i][headInx[0]];
+        allYData[i] = popData[i][headInx[1]];
+    }
+    var aveAllX = roundToDig(mean(allXData),3);
+    var sdAllX = roundToDig(sd(allXData),3);
+    var aveAllY = roundToDig(mean(allYData),3);
+    var avePopX = mean(popXList);
+    var avePopY = mean(popYList);
+    var sdPopX = sd(popXList);
+    var sdPopY = sd(popYList);
+    var popR = corr(popXList,popYList);
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var fac2 = Math.round(7*rand.next()-3.5);
+    var n = 5;
+    var XPredPop = avePopX + fac2*sdPopX*popR;
+    var YPredPop = avePopY + fac1*sdPopY*popR;
+    var YpredPop2 = avePopY + fac2*sdPopY;
+    var popXMnMx = vMinMax(popXList);
+    var popYMnMx = vMinMax(popYList);
+    var lists = [popXList] // ,popYList]; // not using the Y data in this final
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qStr = 'Here is a table of data, 1990 U.S. Census estimates of the ' +
+               explain[headInx[0]] + ', abbreviated by ' + header[0] + 
+               ', in a simple random sample of size ' + nStat.toString() + 
+               ' from the 50 states and the District of Columbia. ' +
+               'The next several questions refer to these data:</p>';
+    document.writeln(qStr);
+    listToTable(header,lists,"standard","center",true,"-2");
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var thePctile = listOfRandInts(1, Math.ceil(100/nStat), Math.floor(100*(nStat-1)/nStat))[0];
+    frac = thePctile*nStat/100;
+    pctili = Math.ceil(frac)-1;
+    pctToNext = frac - pctili;
+    var qStr = '<span class="qSpan">The ' + ordinals[thePctile] + ' percentile of the ' +
+               nStat.toString() + ' values of ' + header[0] + ' is closest to </span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [
+                   (roundToDig(sortPopXList[pctili],3)).toString(),
+                   (roundToDig(popXList[pctili],3)).toString(),
+                   (roundToDig(sortPopXList[pctili-1] + 
+                       pctToNext*(sortPopXList[pctili]-sortPopXList[pctili-1]),3)).toString(),
+                   (roundToDig(sortPopXList[pctili] + 
+                       pctToNext*(sortPopXList[pctili+1]-sortPopXList[pctili]),3)).toString(),
+                   (roundToDig(popXList[pctili-1] + 
+                       pctToNext*(popXList[pctili]-popXList[pctili-1]),3)).toString(),
+         ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The median of these ' + nStat.toString() + ' values of ' +
+               header[0] + ' is closest to </span></p><p>';
+    document.writeln(qStr);
+    var medi = Math.ceil(0.5*nStat)-1;
+    var rawOpt = [(roundToDig(popXList[medi],3)).toString(),
+                  (roundToDig((popXList[medi] + popXList[medi-1])/2,3)).toString(),
+                  (roundToDig(sortPopXList[medi],3)).toString(),
+                  (roundToDig(sortPopXList[medi-1],3)).toString(),
+                  (roundToDig((sortPopXList[medi] + sortPopXList[medi-1])/2,3)).toString()
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][2]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The IQR of these ' + nStat.toString() + ' values of ' + header[0] +
+               ' is closest to </span></p><p>';
+    document.writeln(qStr);
+    var uqi = Math.ceil(0.75*nStat) - 1;
+    var lqi = Math.ceil(0.25*nStat) - 1;
+    var uno = roundToDig((sortPopXList[uqi] - sortPopXList[lqi]),3);
+    var dos = roundToDig((popXList[uqi] - popXList[lqi]),3);
+    var tres = roundToDig(sortPopXList[lqi],3) + " to " + roundToDig(sortPopXList[uqi],3);
+    var quatro =roundToDig(sortPopXList[lqi-1],3) + " to " + roundToDig(sortPopXList[uqi+1],3);
+    var cinco = roundToDig((sortPopXList[uqi] - sortPopXList[lqi-1]),3);
+    var rawOpt = [uno.toString(),dos.toString(),
+        tres.toString(),quatro.toString(),
+        cinco.toString()];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nBins = 5;
+    var pct = 0;
+    while(pct == 0) {
+        var theInt = (listOfDistinctRandInts(2,1,nBins-1)).sort(numberLessThan);
+        var loLim = roundToDig(popXMnMx[0]*0.9,0);
+        var hiLim =  roundToDig(popXMnMx[1]*1.1,0);
+        var dLim = (hiLim - loLim)/(nBins-1);
+        var limits = [roundToDig(loLim + theInt[0]*dLim,0),
+                      roundToDig(loLim + theInt[1]*dLim,0)
+                     ];
+        var count = 0;
+        for (i=0; i < nStat; i++) {
+            if (limits[0] < popXList[i] && popXList[i] <= limits[1]) {
+                count++;
+            }
+        }
+        pct = count*100/nStat;
+    }
+    var count = 0;
+    for (i=0; i < nStat; i++) {
+        if (limits[0] < popXList[i] && popXList[i] <= limits[1]) {
+            count++;
+        }
+    }
+    pct = count*100/nStat;
+    var qStr = '<span class="qSpan">In a histogram for the ' + nStat.toString() + ' values of ' +
+               header[0] + ', the height of the bin for the class interval ' +
+               (limits[0]).toString() + ' (exclusive) to ' +
+               (limits[1]).toString() + ' (inclusive) would be closest to</span></p><p>';
+    document.writeln(qStr);
+    var binHt = pct/(limits[1]-limits[0]);
+    var bhStr = (roundToDig(binHt,4)).toString();
+    var pctStr = (roundToDig(pct,4)).toString();
+    var rawOpt = [
+              pctStr + "% per person",
+              bhStr + "% per person",
+              pctStr + "%",
+              pctStr + "% per 1000 people",
+              bhStr + "% per 1000 people"
+              ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][4]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var ssr = 0;
+    for (i=0; i < popXList.length; i++) {
+        ssr += (popXList[i] - avePopX)*(popXList[i] - avePopX);
+    }
+    ssr /= popXList.length;
+    op = makeOptions(ssr,.01*ssr,1);
+    opt = op[0];
+    aVal = op[1];
+    var qStr = '<span class="qSpan">The SD of the list of ' + nStat.toString() + ' values of ' +
+               header[0] + ' is closest to the square root of</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+      document.writeln(startProblem(pCtr++));
+      var XFac = roundToDig(1 + 2 * (rand.next() + .5),1);
+      var XPopLim = roundToDig(aveAllX + XFac * sdAllX,2);
+      var XFac = (XPopLim - aveAllX)/sdAllX;
+      var limit = roundToDig(Math.min(1.0/(XFac*XFac),aveAllX/XPopLim),2);
+      var opt = ['1%',
+                '10%',
+                '25%',
+                '50%',
+                '75%'
+                ];
+      var aVal = '';
+      if (limit <= 0.01) {
+            aVal = alphabet[0];
+      } else if (limit <= 0.1) {
+            aVal = alphabet[1];
+      } else if (limit <= 0.25) {
+            aVal = alphabet[2];
+      } else if (limit <= 0.5) {
+            aVal = alphabet[3];
+      } else if (limit <= 0.75) {
+            aVal = alphabet[4];
+      } else {
+          alert('Error in problem ' + (pCtr-1).toString() + ': limit is ' + (100*limit).toString());
+      }
+      var qStr = 'The ' + nStat.toString() + ' observations of ' + header[0] + ' are a random sample from a ' +
+                 'list of 51 numbers, one for each state and the District of Columbia. ' +
+                 'The mean of the original list of 51 values of ' + header[0] +
+                 ' is ' + aveAllX.toString() + ', and the SD of the 51 values is ' +
+                 sdAllX.toString() + '.</p><p> <span class="qSpan">The percentage of ' +
+                 'numbers in the original list of 51 that are greater than or equal to ' + XPopLim + 
+                 ' cannot be bigger than (pick the smallest correct answer)</span></p><p>';
+      document.writeln(qStr);
+      writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nr = (listOfDistinctRandInts(2,1,9)).sort(numberLessThan);
+    var opt = ['10%','30%','50%','90%','<span class="math">P(A|B)</span> cannot be determined from this information']
+    aVal = alphabet[4];
+    var qStr = 'The unconditional chance of the event <span class="math">A</span> is ' +
+               (10*nr[1]).toString() + '% and the unconditional chance of the event ' +
+               '<span class="math">B</span> is ' +
+               (10*nr[0]).toString() + '%. </p><p><span class="qSpan">' +
+               ' <span class="math">P(A|B)</span> is closest to</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var pv = listOfDistinctRandInts(2, 8, 97);
+    var pA = pv[0];
+    var pB = pv[1];
+    var qStr = 'Consider two events, <span class="math">A</span> and <span class="math">B</span>. ' +
+        'Suppose <span class="math">P(A)&nbsp;=&nbsp;' +
+        pA.toString() + '%</span> and <span class="math">P(B)&nbsp;=&nbsp;' + pB.toString() +
+        '%</span>.</p><p> <span class="qSpan">The chance that both <span class="math">A</span> and ' +
+        '<span class="math">B</span> occur is (select the strongest statement that must be true)</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [ roundToDig(pA*pB/100, 2).toString()+'%',
+                   'at most ' + Math.min(pA, pB).toString() + '%',
+                   'at least ' + Math.min(pA, pB).toString() + '%',
+                   'at least ' + Math.max(pA, pB).toString() + '%',
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above is necessarily true';
+    var aVal = alphabet[optPerm[1][1]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider two random variables, <span class="math">X</span> and <span class="math">Y</span>. ' +
+        '<span class="qSpan">Is <span class="math">E(X/Y) = E(X)/E(Y)</span>?</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = [ 'always',
+                   'if and only if <span class="math">X</span> and <span class="math">Y</span> are independent'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'neither of the above is true';
+    var aVal = alphabet[2];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   var nTicks = 3; // listOfRandInts(1,2,5)[0];
+   var nDraws = 20*listOfRandInts(1,5,10)[0];
+   var theBox = listOfDistinctRandInts(nTicks,0,2*nTicks);
+   for (var i=0; i< nTicks; i++) {
+       theBox[i+nTicks] = -theBox[i];
+   }
+   theBox.sort(numberLessThan);
+   nTicks = theBox.length;
+   var boxMean = mean(theBox);
+   var boxSd = sd(theBox);
+   var limits = (listOfDistinctRandInts(2,1,3));
+   var rs = listOfRandSigns(2);
+   for (var i=0; i < rs.length; i++) {
+       limits[i] = rs[i]*limits[i];
+   }
+   limits.sort(numberLessThan);
+   var loLim = roundToDig(boxMean + limits[0]*boxSd*Math.sqrt(nDraws),2);
+   var hiLim = roundToDig(boxMean + limits[1]*boxSd*Math.sqrt(nDraws),2);
+   var pRange = normCdf(limits[1]) - normCdf(limits[0]);
+   var posBox = new Array(theBox.length);
+   var sqBox = new Array(theBox.length);
+   for (var i=0; i < theBox.length; i++) {
+       posBox[i] = Math.max(theBox[i],0);
+       sqBox[i] = theBox[i]*theBox[i];
+   }
+   var posBoxMean = mean(posBox);
+   var sqBoxMean = mean(sqBox);
+   var posBoxSd = sd(posBox);
+   var sqBoxSd = sd(sqBox);
+   var which = randBoolean();
+   var op = makeProbOptions(pRange,.1,.9);
+   var opt = op[0];
+   var aVal = op[1];
+   var qStr = 'A box contains ' + cardinals[nTicks] + ' tickets labeled with the numbers ' + 
+              theBox.join(', ')   + '.</p><p>The next three problems concern drawing ' +
+             'tickets at random with replacement from this box.';
+   document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The normal approximation to the probability that ' +
+               'the sum of the numbers on the tickets in ' + nDraws.toString() +
+               ' random draws with replacement from this box is between ' +
+               loLim.toString() + ' and ' + hiLim.toString() + ' is closest to</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+// -->
+</script>
+    <span class="qSpan">
+    The expected value of the sum of the
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   var which = randBoolean();
+   var word;
+   var a;
+   if(which) {
+       a = posBoxMean*nDraws;
+       var op = makeOptions(a,.15*a,2);
+       word = ' positive ';
+   } else {
+       a = sqBoxMean*nDraws;
+       var op = makeOptions(a,.15*a,2);
+       word = ' squares of the ';
+   }
+   var opt = op[0];
+   var aVal = op[1];
+   document.writeln( '<em>' + word + ' numbers</em> ');
+// -->
+</script>
+    on the tickets drawn in
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( nDraws.toString()  + " ");
+// -->
+</script>
+    random draws with replacement from the box is closest to
+    </span>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var seSum;
+    if (which) {
+        seSum = posBoxSd*Math.sqrt(nDraws);
+    } else {
+        seSum = sqBoxSd*Math.sqrt(nDraws);
+    }
+    op = makeOptions(seSum,.1*seSum,2);
+    var opt = op[0];
+    var aVal = op[1];
+// -->
+</script>
+<span class="qSpan">
+    The standard error of the sum of the
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( '<em>' + word   + ' numbers</em> ');
+// -->
+</script>
+    on the tickets drawn in
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( nDraws.toString()   + " ");
+// -->
+</script>
+    random draws with replacement is closest to
+</span>
+</p>
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Consider drawing 15 times at random with replacement from each of two ' +
+               'boxes of numbers. The first box has the numbers {0, 6.5, 6.9, 7} and the ' +
+               'second has the numbers {-1, 1, 4, 6}.</p><p> <span class="qSpan">Select the ' +
+               'true statement.</span></p><p>';
+    var opt = ['Overall, the normal approximation to the distribution of the sum of the draws will be ' +
+                  'more accurate for drawing from the first box than for drawing from the second box.',
+               'Overall, the normal approximation to the distribution of the sum of the draws will be ' +
+                  'less accurate for drawing from the first box than for drawing from the second box.',
+               'Overall, the normal approximation to the distribution of the sum of the draws will be ' +
+                  'equally accurate for drawing from the first box than for drawing from the second box.',
+               'Overall, the normal approximation to the distribution of the sum of the draws could be ' +
+                  'more accurate, equally accurate, or less accurate ' +
+                  'for drawing from the first box than for drawing from the second box.'
+                 ];
+    var aVal = alphabet[1];
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var qText = [
+                'Take a simple random sample of 5 schools in the district.  ' +
+                    'For each school in the sample, list the weights of every student. ' +
+                    'Combine the lists and average the result.',
+                'Take separate simple random samples of 3 elementary schools, 3 middle schools, ' +
+                    'and 2 high schools.  For each school in the sample, list the weights of ' +
+                    'all the students.  Combine the lists and average ' +
+                    'the results.',
+                'List all the students in the school district.  Average the weights of ' +
+                    'every 50th student on the list.',
+                'List all the students in the school district.  Average the weights ' +
+                    'of the first 200 students on the list.',
+                'List all the students in the school district.  Average the weights ' +
+                    'of every 50th student in the district, starting with a student ' +
+                    'selected at random from the first 50 students.',
+                'Take a simple random sample of 5 schools in the district.  For each school ' +
+                    'in the sample, list all the homerooms.  Take a simple random sample of ' +
+                    '3 homerooms from each school in the sample.  For each homeroom ' +
+                    'in the sample, list the students.  Take a simple random sample of 10 ' +
+                    'students from each homeroom in the sample.  List their ' +
+                    'weights. Combine the lists and average the results.',
+                'Take a simple random sample of 5 schools in the district.  For each school ' +
+                    'in the sample, list all the homerooms.  Take a simple random sample of ' +
+                    '3 homerooms from each school in the sample.  For each homeroom ' +
+                    'in the sample, list the weights of all the students. ' +
+                    'Combine the lists and average the results.',
+                'List all the schools in the school district.  For each school, list all the ' +
+                    'teachers at the school; sort them alphabetically within each school.  ' +
+                    'For each school, list the weights of the students of the teacher ' +
+                    'who is first on that school\'s sorted teacher list. ' +
+                    'Combine the lists and average the results.',
+                'Write the names of all the students in the school district on identical ' +
+                    'slips of paper. Put the slips of paper into a wastebasket.  ' +
+                    'Stir up the slips thoroughly, then draw 100 slips successively without ' +
+                    'looking at the slips.  Average the weights of the students whose ' +
+                    'names are on the slips drawn.'
+                ];
+    var rawOpt = [
+                  'a simple random sample',                          // 0
+                  'a systematic random sample',                      // 1
+                  'a stratified random sample',                      // 2
+                  'a random cluster sample',                         // 3
+                  'a random stratified cluster sample',              // 4
+                  'a multistage random sample',                      // 5
+                  'a multistage random cluster sample',              // 6
+                  'a random stratified multistage cluster sample',   // 7
+                  'a systematic sample',                             // 8
+                  'another non-probability sample'                   // 9
+                ];
+    var aV = [
+                3, //random cluster
+                4, //random stratified cluster
+                8, //systematic
+                9, //not probability
+                1, //systematic random
+                5, //multistage random
+                6, //multistage random cluster
+                9, //non probability
+                0 // simple random
+              ];
+    var tV = [
+                1, //random cluster
+                0, //random stratified cluster
+                0, //systematic
+                0, //not probability
+                1, //systematic random
+                0, //multistage random
+                0, //multistage random cluster
+                0, //non probability
+                1  // simple random
+              ];
+    var which = listOfDistinctRandInts(2,0,qText.length-1);
+    var opt2 = ['Probabilities undefined or not necessarily equal','Probabilities equal'];
+    var qStr = 'The next four questions refer to the same sampling problem. ' +
+               'Suppose we want to estimate the average weight of children ' +
+               'in a particular school district. The district contains 15 elementary ' +
+               'schools, 10 middle schools, and 2 high schools. For each of the following ' +
+               'approaches, select the best description of the sampling design, and identify ' +
+               'whether the sampling scheme ensures that the probability of being included ' +
+               'in the sample is necessarily equal for all students.</p>';
+    document.writeln(qStr);
+    var aVal;
+    for (var i=0; i < which.length; i++) {
+        if (which[i] == 0) {
+            opt = [rawOpt[1], rawOpt[3], rawOpt[4], rawOpt[5], rawOpt[8]];
+            aVal = 'b';
+        } else if (which[i] == 1) {
+            opt = [rawOpt[0], rawOpt[2], rawOpt[3], rawOpt[4], rawOpt[6]];
+            aVal = 'd';
+        } else if (which[i] ==2 ) {
+            opt = [rawOpt[0], rawOpt[2], rawOpt[1], rawOpt[8], rawOpt[9]];
+            aVal = 'd';
+        } else if (which[i] == 3) {
+            opt = [rawOpt[0], rawOpt[2], rawOpt[1], rawOpt[8], rawOpt[9]];
+            aVal = 'e';
+        } else if (which[i] == 4) {
+            opt = [rawOpt[1], rawOpt[3], rawOpt[4], rawOpt[5], rawOpt[8]];
+            aVal = 'a';
+        } else if (which[i] == 5) {
+            opt = [rawOpt[1], rawOpt[3], rawOpt[4], rawOpt[5], rawOpt[6]];
+            aVal = 'd';
+        } else if (which[i] == 6) {
+            opt = [rawOpt[1], rawOpt[3], rawOpt[4], rawOpt[5], rawOpt[6]];
+            aVal = 'e';
+        } else if (which[i] == 7) {
+            opt = [rawOpt[0], rawOpt[2], rawOpt[1], rawOpt[8], rawOpt[9]];
+            aVal = 'e';
+        } else if (which[i] == 8) {
+            opt = [rawOpt[0], rawOpt[2], rawOpt[1], rawOpt[4], rawOpt[8]];
+            aVal = 'a';
+        }
+        document.writeln('<p>' + startProblem(pCtr++) + ' <span class="qSpan">' +
+            qText[which[i]] + '</span></p><p>');
+        writeRadioExercise(qCtr++,opt,aVal);
+        document.writeln('<p>' + startProblem(pCtr++) + ' <span class="qSpan">' +
+            qText[which[i]] + '</span></p><p>');
+        writeRadioExercise(qCtr++,opt2,alphabet[tV[which[i]]]);
+    }
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p align="center">
+   <strong>The next three problems refer to the same artificial data set.
+   </strong>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+// Fake weight and height data. Take mean weight = 150#; mean height = 66". Slope 1"/5# = .2.
+// ratio of SDs 6"/40# = .15
+//
+    var slope = 0.2;
+    var htRg0 = 20;
+    var aveWt0 = 150;
+    var aveHt0 = 67;
+    var sdRat = 0.15
+    var pVals = listOfDistinctRandInts(2,0,1);
+    if (pVals[0] != 0) {
+        slope = 0;
+    }
+    var parms = [["polynomial", aveHt0, slope, 20*Math.abs(pVals[0])],
+                1 + 4*Math.max(pVals[1],0), 10];
+    var examplePoints = 100;
+    var data6 = fakeBivariateData(examplePoints,parms[0],parms[1],parms[2], 0, 80);
+    var htMnMx = vMinMax(data6[1]);
+    var loHt = aveHt0 - htRg0/2;
+    var htRg = htMnMx[1] - htMnMx[0];
+    for (i=0; i < data6[0].length; i++) {
+        data6[0][i] += aveWt0 - 40;
+        data6[1][i] = loHt + (data6[1][i] - htMnMx[0])*htRg0/htRg;
+    }
+    var cc = roundToDig(corr(data6[0],data6[1]),2);
+    var aveWt = roundToDig(mean(data6[0]),1);
+    var aveHt = roundToDig(mean(data6[1]),1);
+    var sdWt =  roundToDig(sd(data6[0]),1);
+    var sdHt =  roundToDig(sd(data6[1]),1);
+    var rmsResid = Math.sqrt(1-cc*cc)*sdHt;
+    var qStr = 'The scatterplot below shows artificial data for the heights and weights ' +
+               'of 100 individuals. The square is the point of averages. The average ' +
+               'weight is ' + aveWt.toString() + ' lbs. with an SD of ' + sdWt.toString() +
+               ' lbs., and the average height is ' + aveHt.toString() +
+               ' in. with an SD of ' + sdHt.toString() + ' in. The correlation between ' +
+               'height and weight is ' + cc.toString() + '.</p>';
+    document.writeln(qStr);
+    var qStr = '<p align="center">' +
+               '<applet code="Correlation.class" codebase="../../Java" ' +
+               ' align="baseline" width="600" height="320" name="applet2" ' +
+               'archive="PbsGui.zip">' +
+               '<param name="addPoints" value="false">' +
+               '<param name="graphAveButton" value="false">' +
+               '<param name="sdButton" value="false">' +
+               '<param name="sdLineButton" value="false">' +
+               '<param name="title" value="Fake Height v. Weight Data">' +
+               '<param name="regressButtons" value="false">' +
+               '<param name="showR" value="false">' +
+               '<param name="x" value="' + (data6[0]).join() + '">' +
+               '<param name="y" value="' + (data6[1]).join() + '">' +
+               'You need Java to see this</applet>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].setVariables(\"' +
+                      (data6[0]).join() + '\",\"' +
+                      (data6[1]).join() + '\");\n' +
+                      'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var wtFac = (listOfRandInts(1,-3,3))[0];
+    if (wtFac == 0) {
+        wtFac = 2;
+    }
+    var predWt = roundToDig(aveWt + wtFac*sdWt,1);
+    var predHt = roundToDig(aveHt + wtFac*cc*sdHt,1);
+    var pert = 0.05*predHt;
+    var op = makeOptions(predHt,pert,1," in.");
+    var opt = op[0];
+    var aVal = op[1];
+    var qStr = '<span class="qSpan">The regression line estimate of the height of an ' +
+               'individual whose weight is ' + predWt.toString() +
+               ' lbs. is closest to</span></p><p>';
+    document.writeln(qStr);
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The rms error of regression for regressing ' +
+               'height against weight is closest to</span></p><p>';
+    document.writeln(qStr);
+    var coef = roundToDig(1-cc*cc,2);
+    var smallDiff = Math.min(coef, 1-coef);
+    if (smallDiff < 0.2) {
+        smallDiff = 0.2;
+    }
+    var pert = 0.2*smallDiff;
+    var rs = listOfRandSigns(4);
+    var pertFac = listOfDistinctRandInts(4,1,5);
+    var perts = new Array(4);
+    for (var i=0; i < 4; i++) {
+        perts[i] = roundToDig(coef+rs[i]*pertFac[i]*pert, 3);
+        if (perts[i] <= 0 || perts[i] >= 1) {
+            perts[i] = roundToDig(coef-rs[i]*pertFac[i]*pert, 3);
+        }
+    }
+    var rawOpt = [
+                   "(" + (roundToDig(coef,3)).toString() + ")<sup>&frac12;</sup>&times;" +
+                       sdHt.toString() + " in.",
+                   "(" + perts[0].toString() +
+                       ")<sup>&frac12;</sup>&times;" + sdHt.toString() + " in.",
+                   "(" + perts[1].toString() +
+                       ")<sup>&frac12;</sup>&times;" + sdWt.toString() + " lbs.",
+                   "(" + perts[2].toString() +
+                       ")<sup>&frac12;</sup>&times;" + sdWt.toString() + " in.",
+                   "(" + perts[3].toString() +
+                       ")<sup>&frac12;</sup>&times;" + sdHt.toString() + " lbs."
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">For this scatterplot, the regression line, together ' +
+               'with the SDs of height and weight, summarize the data</span></p><p>';
+    document.writeln(qStr);
+    var opt = ["well",
+                "poorly, because of outliers",
+                "poorly, because of nonlinearity",
+                "poorly, because of heteroscedasticity",
+                "poorly, because the association is weak"
+              ];
+    var aVal = "";
+    var none = true;
+    if (pVals[0] != 0) {
+        aVal += "c&";
+        none = false;
+    }
+    if (pVals[1] > 0) {
+        aVal += "d&";
+        none = false;
+    }
+    if (none) {
+        aVal += "a";
+    }
+    if (aVal.lastIndexOf('&') == aVal.length - 1) {
+        aVal = aVal.substring(0, aVal.length - 1);
+    }
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript" > <!--
+    var qStr = '<p>';
+    for (var i=0; i< pCtr-1; i++) {
+        qStr += (i+1).toString() + ': ' + crypt(key[i],randSeed.toString()) + '<br />  ';
+    }
+    qStr += '</p>';
+//  document.writeln(qStr);
+// -->
+</script>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeMiscFooter(true);
+// -->
+</script>
+</body>
+</html>

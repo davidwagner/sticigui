@@ -1,0 +1,2849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "27 July 2011 15:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "standardError";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>Standard Error</h1>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of a <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+    is like the <a class="glossRef" href="gloss.htm#mean">mean</a> of a list:
+    It is a <a class="glossRef" href="gloss.htm#location">measure of location</a>&mdash;a typical value.
+    This chapter introduces a measure of spread for random
+    variables&mdash;the <a class="glossRef" href="gloss.htm#se">standard error (SE)</a>.
+    The SE of a random variable is like the <a class="glossRef" href="gloss.htm#sd">SD</a>
+    of a list; both are <a class="glossRef" href="gloss.htm#spread">measures of spread</a>.
+    The SE is a measure of the width of the probability histogram of a random variable,
+    just as the SD is a measure of the width of the histogram of a list.
+    Any list can be written as the mean of the list plus a list of deviations
+    from the mean; the SD of the list is the square-root of the mean of the
+    squares of those deviations (the <a class="glossRef" href="gloss.htm#rms">rms</a> of the
+    deviations).
+    Similarly, any random variable can be written as its expected value plus
+    chance variability, a random departure from its expected value.
+    The SE of the random variable is the square-root
+    of the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the square of
+    the chance variability.
+    Loosely speaking, if a random variable is likely to be very close to its expected value,
+    its SE is small, while if a random variable is likely to differ
+    substantially from its expected value, its SE must be large.
+    (<a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> for random variables,
+    presented in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('clt') + ', ');
+// -->
+</script>
+    makes this precise.)
+    Quantifying the expected size of the chance variability will be important in
+    later chapters for measuring the accuracy of estimators of numerical
+    properties of a population or a probability distribution, which are
+    called <a class="glossRef" href="gloss.htm#parameter">parameters</a>.
+    This chapter presents the tools we need to find the SE of
+    discrete random variables,
+    and calculates the SEs of some common random variables.
+</p>
+
+<h2>
+    <a id="expectation_of_transformation"></a>
+    The Expected Value of
+    Transformations
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/HcWrhV41hcQ?start=192&end=632" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The SE is calculated from the expected value of the square of the chance variability
+    (the SE is its square-root).
+    The square of the chance variability is a random variable; this section shows
+    how to calculate the expected value of such transformations of random variables.
+</p>
+
+<p>
+    A <a class="glossRef" href="gloss.htm#transformation">transformation</a>
+    or function of a <a class="glossRef" href="gloss.htm#random_variable">random variable</a> is
+    another <a class="glossRef" href="gloss.htm#random_variable">random variable</a>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>is dynamic: The wording will tend to change when you
+    reload the page.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Transformations of random variables are random variables.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var nTosses = listOfRandInts(1, 2, 10)[0];
+    var opt = [ 
+        '<span class="math">' + nTosses.toString() + '&nbsp;&minus;&nbsp;X</span>',
+        '<span class="math">X<sup>2</sup></span>',
+        '<span class="math">X/2</span>',
+        '<span class="math">2&times;X&nbsp;&minus;&nbsp;' + nTosses.toString() + '</span>'
+          ];
+    var desc = [
+        'the number of times the coin lands tails',
+        'the square of the number of heads',
+        'half the number of heads',
+        'the number of times the coin lands heads, minus the number of times the ' +
+            'coin lands tails'
+           ];
+    var isAff = [' ',' not ',' ',' '];
+    var which = listOfRandInts(1, 0, opt.length - 1)[0];
+    var qStr = 'For example, consider tossing a fair coin ' + iteratives[nTosses] +
+           ', independently.  Let <span class="math">X</span> be the number of times the coin ' +
+           'lands heads.  Let <span class="math">Y&nbsp;=&nbsp;' + opt[which] +
+           '</span>. Then <span class="math">Y</span> is also a random variable (' + desc[which] +
+           ').   In this case, <span class="math">Y</span> is ' + isAff[which] +
+           ' an <a class="glossRef" href="gloss.htm#affine">affine</a> function of <span class="math">X</span>.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    We saw in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + ', ');
+// -->
+</script>
+    that the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of an <a class="glossRef" href="gloss.htm#affine">affine
+    transformation</a> of a <a class="glossRef" href="gloss.htm#random_variable">random variable</a> is just
+    the same <a class="glossRef" href="gloss.htm#affine">affine transformation</a> applied to the
+    <a class="glossRef" href="gloss.htm#expectation">expectation</a> of the
+    <a class="glossRef" href="gloss.htm#random_variable">random
+    variable</a>.
+    For transformations that are not affine, the situation is a bit more complicated.
+    Suppose that the discrete random variable <span class="math">Y</span> is defined in terms of the discrete random
+    variable <span class="math">X</span>, so that <span class="math">Y = g(X)</span> for some known
+    function <span class="math">g</span>.
+    There are two ways to calculate <span class="math">E(Y)</span>, the expected value 
+    of <span class="math">Y</span>:
+</p>
+
+<ul>
+    <li>
+        Work directly from the definition of the expected value: 
+        If the possible values of <span class="math">Y</span>
+        are <span class="math">y<sub>1</sub>, y<sub>2</sub>, y<sub>3</sub>, &hellip; </span>, then
+        <p class="math">
+        E(Y) =
+        y<sub>1</sub>&times;P(Y=y<sub>1</sub>) +
+        y<sub>2</sub>&times;P(Y=y<sub>2</sub>) +
+        y<sub>3</sub>&times;P(Y=y<sub>3</sub>) + &hellip;
+        </p>
+    </li>
+    <li>
+        Use the following shortcut: If the possible values of <span class="math">X</span> are
+        <span class="math">x<sub>1</sub>, x<sub>2</sub>, x</em><sub>3</sub>,
+        &hellip;, </span> then
+        <div class="indent">
+        <p class="inlineMath">
+        <span class="math">E(Y) =
+        g(x<sub>1</sub>)&times;P(X = x<sub>1</sub>)
+        + g(x<sub>2</sub>)&times;P(X = x<sub>2</sub>) 
+        + g(x<sub>3</sub>)&times;P(X = x<sub>3</sub>) + &hellip; </span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Here is a sketch of a proof: Consider the <span class="math">j</span>th term,</p>' +
+               '<p class="math">y<sub>j</sub>&times;' +
+               'P(Y=y<sub>j</sub>).</p><p>There is at least one value of ' +
+               '<span class="math">x</span> for which <span class="math">g(x)=y<sub>j</sub></span>.  ' +
+               'Call it <span class="math">x<sub>1j</sub></span>.  If there are more than one, number ' +
+               'them in sequence: <span class="math">x<sub>kj</sub>, k=1,&nbsp;&hellip;&nbsp;</span>. ' +
+               'The event <span class="math">(Y=y<sub>j</sub>)</span> can be ' +
+               '<a class="glossRef" href="gloss.htm#partition">partitioned</a> according to ' +
+               'those values of <span class="math">x</span>: </p>' +
+               '<p class="math">(Y=y<sub>j</sub>) = ' +
+               '(X=x<sub>1j</sub>) &cup; ' +
+               '(X=x<sub>2j</sub>) &cup; ' +
+               '&nbsp;&hellip;</p><p>Since these events are disjoint, </p>' +
+               '<p class="math">P(Y=y<sub>j</sub>) = ' +
+               'P(X=x<sub>1j</sub>) + P(X=x<sub>2j</sub>) + ' +
+               '&nbsp;&hellip;</p><p>Finally, since </p>' +
+               '<p class="math">y<sub>j</sub> = ' +
+               'g(x<sub>kj</sub>), k=1,&nbsp;&hellip;,</p>' +
+               '<p>it follows that</p>' +
+               '<p class="math">y<sub>j</sub>&times;' +
+               'P(Y=y<sub>j</sub>) = g(x<sub>1j</sub>)' +
+               '&times;P(X=x<sub>1j</sub>) + g(x<sub>2j</sub>)' +
+               '&times;P(X=x<sub>2j</sub>) + &nbsp;&hellip;</p>' +
+               '<p>The desired result follows by summing over <span class="math">j</span>.';
+    writeFootnote(fCtr++,fCtr.toString(), fStr);
+// -->
+</script>
+        </p>
+        </div>
+    </li>
+</ul>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates calculating the expected value of the square of a random variable using the shortcut.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Expected Value of the Square of a Random Variable';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    What is the <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the square of a <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+      <span class="math">X</span> with parameters <span class="math">n=3</span> 
+      and <span class="math">p=50%</span>
+      (for example, the number of heads in 3
+      <a class="glossRef" href="gloss.htm#independent">independent</a>
+      tosses of a fair coin)?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    The question asks us to compute <span class="math">E(g(X))</span> where
+    <span class="math">g(x)=x<sup>2</sup></span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    essentially contains the calculation, using the &quot;shortcut&quot;
+    method presented above:
+    <span class="math">E(X<sup>2</sup>)</span> is the sum of 
+    <span class="math">x<sup>2</sup></span> times the
+    chance that <span class="math">X</span> takes the value <span class="math">x</span>, 
+    over all possible values <span class="math">x</span> that <span class="math">X</span> can take.
+    The first column of the table lists the possible values <span class="math">x</span> of
+    <span class="math">X</span>, which are <span class="math">{0, 1, 2, 3}</span>.
+    The second column lists the probabilities of each those values; the first two columns
+    comprise the probability distribution of <span class="math">X</span>.
+    The third column gives the values of the function 
+    <span class="math">g(x)=x<sup>2</sup></span>
+    for each possible value <span class="math">x</span> of <span class="math">X</span>.
+    The fourth column lists the products
+    <span class="math">g(x)&times;P(X=x)</span>, for <span class="math">x=0, 1, 2, 3</span>.
+    The sum of the entries in the fourth column, 24/8=3, is the expected value of
+    <span class="math">g(X)=X<sup>2</sup></span>.
+    Note that the <a class="glossRef" href="gloss.htm#expectation">expected value</a> 
+    of the square of <span class="math">X</span>,
+    <span class="math">E(X<sup>2</sup>)</span>, is not equal to
+    the square of the expected value of <span class="math">X</span>, 
+    <span class="math">(E(X))<sup>2</sup></span>,
+    which is (3/2)<sup>2</sup> = 2&nbsp;1/4.
+    Only if <span class="math">g</span> is an <a class="glossRef" href="gloss.htm#affine">affine transformation</a>
+    is <span class="math">E(g(X))</span> necessarily equal to
+    <span class="math">g(E(X))</span>, no matter what the probability distribution of the random
+    variable <span class="math">X</span> might be.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Calculating the expected value of the square of the number of heads in ' +
+               '3 independent tosses of a fair coin';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+
+<div align="center">
+<center>
+    <table class="dataTable">
+        <caption>Calculation of the expected value of X<sup>2</sup></caption>
+    <tr>
+        <th id="col0"><span class="math">x</span></th>
+        <th id="col1"><span class="math">P(X=x)</span></th>
+        <th id="col2"><span class="math">x<sup>2</sup></span></th>
+        <th id="col3"><span class="math">x<sup>2</sup>&times;P(X=x)</span></th>
+    </tr>
+    <tr>
+        <td headers="col0">0</td>
+        <td headers="col1">1/8</td>
+        <td headers="col2">0</td>
+        <td headers="col3">0</td>
+    </tr>
+    <tr>
+        <td headers="col0">1</td>
+        <td headers="col1">3/8</td>
+        <td headers="col2">1</td>
+        <td headers="col3">3/8</td>
+    </tr>
+    <tr>
+        <td headers="col0">2</td>
+        <td headers="col1">3/8</td>
+        <td headers="col2">4</td>
+        <td headers="col3">12/8</td>
+    </tr>
+    <tr>
+        <td headers="col0">3</td>
+        <td headers="col1">1/8</td>
+        <td headers="col2">9</td>
+        <td headers="col3">9/8</td>
+    </tr>
+    <tr>
+        <th id="row0" scope="row">sum</th>
+        <td headers="col1,row0">100%</td>
+        <td headers="col2,row0"></td>
+        <td headers="col3,row0">24/8 = 3</td>
+    </tr>
+    </table>
+</center>
+</div>
+</div>
+
+<p>
+    The next exercise checks whether you can calculate the expected value of a transformation
+    of a random variable.
+</p>
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTosses = 12;
+    var qStr = 'A fair coin is to be tossed ' + nTosses.toString()  + ' times, independently. ' +
+           '<span class="qSpan">The expected value of the absolute value of the ' +
+           'difference between the number of heads that result, and 6, is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(1.354));
+    writeSolution(pCtr-1,
+        'The number of heads in 12 independent tosses of a fair coin has a binomial ' +
+        'distribution with <span class="math">n=12</span> and <span class="math">p=50%</span?. Let ' +
+        '<span class="math">X</span> be the number of tosses. ' +
+        'We seek <span class="math">E(|X&minus;6|)</span>. This is</p><p class="math">' +
+        '|0&minus;6|&times;P(X=0) + |1&minus;6|&times;P(X=1) + ' +
+        '|2&minus;6|&times;P(X=2) + &hellip; + ' +
+        ' |12&minus;6|&times;P(X=12)<br /> ' +
+        ' = 6&times;<sub>12</sub>C<sub>0</sub>&times;(&frac12;)<sup>12</sup> + ' +
+        ' 5&times;<sub>12</sub>C<sub>1</sub>&times;(&frac12;)<sup>12</sup> ' +
+        ' + 4&times;<sub>12</sub>C<sub>2</sub>&times;(&frac12;)<sup>12</sup> + ' +
+        '&hellip; + ' +
+        ' 6&times;<sub>12</sub>C<sub>12</sub>&times;(&frac12;)<sup>12</sup><br /> ' +
+        ' = (&frac12;)<sup>12</sup> &times; <font size="+2">(</font> 6 + ' +
+        ' 60 + 264 + 660 + 990 + 792 + 0 + 792 + 990 + 660 + 264 + 60 + 6' +
+        ' <font size="+2">)</font><br />' + ' = ' +
+        '(&frac12;)<sup>12</sup> &times; 5544 = 1.354.'
+    );
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The following exercise verifies that you can tell whether a transformation
+    is affine.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var cs = listOfRandInts(2,1,20);
+     var opt = [ cs[0].toString(),
+         'X',
+         cs[0].toString() + ' + X',
+         cs[1].toString() + '&times;X',
+         cs[0].toString() + ' + ' + cs[1].toString()+ '&times;X',
+         'X&times;X',
+         '1/X',
+         cs[0].toString() + ' + X&times;X&times;X',
+         'sin(X)',
+         'sin(' + cs[0].toString() + ' + ' + cs[1].toString()+ '&times;X)',
+         'log(' + cs[0].toString() + '&times;X)'
+      ];
+      var aVal = 'a&b&c&d&e';
+     var qStr = '<span class="qSpan">Which of the following are affine functions of ' +
+        '<span class="math">X</span>? (select all that apply)</span>';
+     document.writeln(qStr);
+     writeSelectExercise(true,qCtr++,opt,aVal);
+     writeSolution(pCtr-1,
+             'Only a constant, a constant times <span class="math">X</span>, a constant plus ' +
+             '<span class="math">X</span>, and a constant plus a constant times ' +
+             '<span class="math">X</span> are affine. Other functions ' +
+             'of <span class="math">X</span> are not affine.'
+        );
+// -->
+</script>
+</p>
+</div>
+
+<h2>
+    <a id="SE_of_RV"></a>Standard
+    Error (SE) of a Random Variable
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/HcWrhV41hcQ?start=624&end=2297" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Just as the <a class="glossRef" href="gloss.htm#sd">SD</a> of a list is
+    the <a class="glossRef" href="gloss.htm#rms">rms</a> of the differences between the members of the list and
+    the <a class="glossRef" href="gloss.htm#mean">mean</a> of the list, the <a class="glossRef" href="gloss.htm#se">standard
+    Error</a> (<a class="glossRef" href="gloss.htm#se">SE</a>) of a <a class="glossRef" href="gloss.htm#random_variable">random
+    variable</a> is the (weighted) rms of the differences between
+    the possible values of the random variable and the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+    random variable.
+    (The weights are the probabilities,
+    just like in the definition of the expected value.)
+    The SE of a random variable
+    is a measure of how &quot;spread out&quot; its probability is over its set of possible
+    values, just as the SD of a list is a measure of how
+    &quot;spread out&quot; the list is.
+    The SE of a random variable is a measure of the width of its probability histogram;
+    the SD of a list is a measure of the width of its histogram.
+</p>
+
+<p>
+    Recall that if the SD of a list is zero, all the elements of the list must be
+    equal (to the mean of the list).
+    If the SE of a random variable <span class="math">X</span>, <span class="math">SE(X)</span>
+    is zero, the random
+    variable is (essentially) equal to its expected value.
+    That is, if <span class="math">SE(X)=0</span> then <span class="math">P(X = E(X)) = 100%</span>.
+    If <span class="math">X</span> has a nonzero chance of taking two or more distinct values,
+    <span class="math">SE(X)</span> must be larger than zero.
+</p>
+
+<p>
+    One can think of a random variable as being a constant
+    (its <a class="glossRef" href="gloss.htm#expectation">expected value</a>)
+    plus a contribution that is zero on average (<em>i.e.</em>,
+    its expected value is zero), but that differs randomly
+    from zero.
+    That is, one can think of <span class="math">X</span> as being equal to 
+    <span class="math">E(X) + Y</span>, where
+    <span class="math">Y= X &minus; E(X)</span>.
+    Then
+</p>
+
+<p class="math">
+    E(Y) = E(X &minus; E(X)) =
+    E(X) &minus; E(E(X)) = E(X) &minus; E(X) = 0.
+</p>
+
+<p>
+    The SE of a
+    random variable <span class="math">X</span> is the square-root of the
+    expected value of
+    <span class="math">(X &minus; E(X))<sup>2</sup></span>:
+</p>
+
+<p class="math">
+    SE(X) =
+    <font size="+2">(</font>E<font size="+1">(</font>(X &minus;
+    E(X))<sup>2</sup><font size="+1">)
+    </font><font size="+2">)</font><sup>&frac12;</sup>.
+</p>
+
+<p>
+    <span class="math">SE(X)</span> is a measure of the expected distance between <span class="math">X</span> and the
+    expected value of <span class="math">X</span>.
+    The units of <span class="math">SE(X)</span> are the same as the units of <span class="math">X</span>.
+    The SE of a random variable is completely determined by the probability distribution
+    of the random variable: If two random variables have the same probability distribution,
+    they have the same SE.
+    Thus there is no risk of confusion in referring to the SE of a probability distribution
+    versus the SE of a random variable that has that probability distribution.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">A random variable is its expected value plus chance variability</span>
+    </p>
+    <p class="math">
+        Random variable = <a class="glossRef" href="gloss.htm#expectation">expected
+          value</a> + chance variability
+    </p>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+        chance variability is zero.
+    </p>
+    <p>
+        The &quot;typical size&quot; of the chance
+        variability is the <a class="glossRef" href="gloss.htm#se">SE</a> of the random variable.
+    </p>
+    <p>
+        A random variable is typically about equal to its expected value,
+        give or take an SE or so.
+    </p>
+    <p>
+        The SE of a random variable is the square-root of the expected value
+        of the squared difference between the random variable and the expected
+        value of the random variable.
+    </p>
+    <p>
+        In symbols,
+    </p>
+    <p class="math">
+        SE(X) = <big>(</big> E(X&minus;E(X))<sup>2</sup>
+        <big>)</big><sup>&frac12;</sup>.
+    </p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    The frequentist interpretation of the standard error is as follows:
+    The SE is the long-run RMS difference between a random variable and its
+    long-run average.
+    Make repeated observations of a random variable.
+    Average the observations.
+    Average the squared difference between the observations and their average,
+    and take the square root.
+    As the number of observations increases, that value converges
+    to the standard error.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Technically, it <span class="termOfArt">converges in probability</span>: The chance that it ' +
+               'differs from the standard error by more than any fixed amount goes to ' +
+               'zero as the number of observations increases.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    allows us to study the <a class="glossRef" href="gloss.htm#sampling_distribution">sampling distribution</a>
+    of the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>, which will help us
+    understand the <a class="glossRef" href="gloss.htm#se">SE</a> of the sample sum.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling distribution of the sample sum of random draws from a box of numbered ' +
+               'tickets.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+<p align="left">
+    For any fixed sample size, the SD of the observed values of the sample sum tends to approach the 
+    SE of the sample sum as the number of samples grows.
+</p>
+<p class="figure">
+    <applet code="SampleDist.class" codebase="../../Java/" align="baseline" width="640"
+       archive="PbsGui.zip" height="360">
+    <param name="variables" value="sum">
+    <param name="startWith" value="sum">
+    <param name="curveControls" value="false">
+    <param name="showCurve" value="false">
+    <param name="boxContents" value="0,1,2,3,4">
+    <param name="showBoxHist" value="false">
+    <param name="boxHistControl" value="false">
+    <param name="sources" value="box">
+    <param name="replaceControl" value="false">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Experiment using
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    by drawing a large number of samples from different boxes; pay attention to
+    &quot;SD(samples),&quot; which gives the standard deviation of the observed values
+    of the sample sum, each of which is the sum of <span class="math">n</span> draws.
+    For each box, this standard deviation will tend to stabilize after a few thousand
+    samples.
+    It is an empirical estimate of the SE of the sample sum.
+    You should find that it approaches <span class="math">n<sup>&frac12;</sup>&times;(SD(box))</span>,
+    which is listed as &quot;SE(sum)&quot; at the left side of
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    Vary the contents of the box and the sample size <span class="math">n</span> to confirm that the SD of the
+    observed values of the sample sum still tends to approach
+    (sample size)<sup>&frac12;</sup>&times;(SD(box)) after several thousand samples.
+    Below we shall verify mathematically that SE of the sample sum of <span class="math">n</span> draws
+    with replacement is indeed <span class="math">n<sup>&frac12;</sup>&times;(SD(box))</span>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates calculating the SE of a discrete random variable from the
+    probability distribution of the random variable.
+    This example will tend to
+    change when you reload the page, to provide a variety of illustrations.
+</p>
+
+<!-- ====================================================================== -->
+<div class="example">
+
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Calculating the SE of a Discrete Random Variable from its ' +
+               'Probability Distribution';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var nVals = listOfRandInts(1,5,10)[0];
+    var theVals = listOfDistinctRandInts(nVals,-nVals-2,2*nVals+2).sort(numberLessThan);
+    var thePs = listOfRandInts(nVals,2,10);
+    var sumP = vSum(thePs);
+    var eX = 0;
+    for (var i=0; i < nVals; i++) {
+        thePs[i] = roundToDig(thePs[i]/sumP,3);
+        eX += theVals[i]*thePs[i];
+    }
+    var aVal1 = numToRange(eX);
+    var seX = 0;
+    for (var i=0; i < nVals; i++) {
+        seX += (theVals[i]-eX)*(theVals[i]-eX)*thePs[i];
+    }
+    seX = Math.sqrt(seX);
+    aVal2 = numToRange(seX);
+    var header = ['<span class="math">x</span>','<span class="math">P(X=x)</span>'];
+    var list = new Array(2);
+    list[0] = theVals;
+    list[1] = thePs;
+    var qStr = '<p>A random variable <span class="math">X</span> has the following probability distribution: ';
+    document.writeln(qStr);
+    listToTable(header,list,"transpose","right");
+    qStr = '</p><p><span class="qSpan">The expected value of <span>X</span> is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    qStr = '.</p><p><span class="qSpan">The standard error of <span class="math">X</span> is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    qStr = '.</p>';
+    document.writeln(qStr);
+// -->
+</script>
+
+<p>
+    <strong>Solution.</strong> To find the expected value of <span class="math">X</span>, we
+    need to sum the possible values of <span class="math">X</span>, weighted by their probabilities:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var header = ['<span class="math">x</span>','<span class="math">P(X=x)</span>',
+           '<span class="math">x&times;P(X=x)</span>'
+         ];
+    list[2] = new Array(list[0].length);
+    for (var i=0; i < list[0].length; i++ ) {
+      list[2][i] = roundToDig(list[0][i]*list[1][i],3);
+    }
+    listToTable(header,list,"transpose","right");
+// -->
+</script>
+<p>
+    The sum of the entries in rightmost column is the expected value of <span class="math">X</span>,
+<script language="JavaScript1.4" type="text/javascript"><!--
+  document.writeln( (roundToDig(eX,3)).toString()   + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    To find the standard error of <span class="math">X</span>, we first sum the
+    values of <span class="math">(X &minus; E(X))<sup>2</sup></span> corresponding to the
+    possible values of <span class="math">X</span>, weighted by
+    the probabilities that <span class="math">X</span> takes each of those values:
+</p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var header = [
+          '<span class="math">x</span>',
+          '<span class="math">P(X=x)</span>',
+          '<span class="math">(x &minus; E(X))<sup>2</sup></span>',
+          '<span class="math">(x &minus; E(X))<sup>2</sup>&times;P(X=x)</span>'
+         ];
+    list[2] = new Array(list[0].length);
+    list[3] = new Array(list[0].length);
+    for (var i=0; i < list[0].length; i++ ) {
+       var sq = (list[0][i]-eX)*(list[0][i]-eX);
+       list[2][i] = roundToDig(sq,3);
+       list[3][i] = roundToDig(sq*list[1][i],3);
+    }
+    listToTable(header,list,'transpose','right');
+// -->
+</script>
+<p>
+    The sum of the entries in the rightmost column is the expected value of
+    <span class="math">(X&minus;E(X))<sup>2</sup></span>,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln( (roundToDig(seX*seX,3)).toString()   + ". ");
+// -->
+</script>
+    The square root of the expected value of
+    <span class="math">(X&minus;E(X))<sup>2</sup></span> is the standard error,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln( (roundToDig(seX,3)).toString()   + ". ");
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The following exercise checks whether you can compute the
+    SE of a random variable from its probability distribution.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nVals = listOfRandInts(1,4,6)[0];
+    var theVals = listOfDistinctRandInts(nVals,-nVals-2,nVals+2).sort(numberLessThan);
+    var thePs = listOfRandInts(nVals,1,10);
+    var sumP = vSum(thePs);
+    var eX = 0;
+    for (var i=0; i < nVals; i++) {
+       thePs[i] = roundToDig(thePs[i]/sumP,3);
+       eX += theVals[i]*thePs[i];
+    }
+    var aVal1 = numToRange(eX);
+    var seX = 0;
+    for (var i=0; i < nVals; i++) {
+       seX += (theVals[i]-eX)*(theVals[i]-eX)*thePs[i];
+    }
+    seX = Math.sqrt(seX);
+    aVal2 = numToRange(seX);
+    var header = ['<span class="math">x</span>','<span class="math">P(X=x)</span>'];
+    var list = new Array(2);
+    list[0] = theVals;
+    list[1] = thePs;
+    var qStr = 'A random variable <span class="math">X</span> has the following probability distribution:' +
+           listToTable(header,list,"transpose","right", false) +
+           '</p><p><span class="qSpan">The expected value of <span class="math">X</span> is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    var qStr = '</p><p><span class="qSpan">The standard error of <span class="math">X</span> is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+    var ansStr = 'The expected value of <span class="math">X</span> is the probability-weighted average of ' +
+         'its possible values: </p><p class="math">';
+    for (var i=0; i < nVals; i++) {
+        ansStr += thePs[i] + '&times;(' + theVals[i] + ')+';
+    }
+    var exStr = roundToDig(eX,3);
+    ansStr = ansStr.substr(0,ansStr.length-1) + ' = ' +
+         exStr + '</p><p>';
+    ansStr += 'The standard error of <span class="math">X</span> is the square-root of the ' +
+          'probability-weighted average of the possible values of ' +
+          '<span class="math">(X&minus;E(X))<sup>2</sup></span>: </p><p class="math">( ';
+    for (var i=0; i < nVals; i++) {
+        ansStr += thePs[i] + '&times;(' + theVals[i] + '&minus;(' + exStr + '))<sup>2</sup>+';
+    }
+    var sexStr = roundToDig(seX,3);
+    ansStr = ansStr.substr(0,ansStr.length-1) + ' )<sup>&frac12;</sup>= ' + sexStr;
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="SE_of_transformations"></a>
+    The SE of Transformations of Random Variables
+</h2>
+
+<p>
+    Suppose we know the <a class="glossRef" href="gloss.htm#se">SE</a> of the random variable
+    <span class="math">X</span>.
+    Can we use that to find the SE of <span class="math">f(X)</span>?
+    That depends on the nature of the function <span class="math">f</span>.
+</p>
+
+<p>
+    To find the <a class="glossRef" href="gloss.htm#se">SE</a> of a transformation of a random variable or a
+    collection of random variables, generally one must work from the definition of the SE.
+    However, if <span class="math">f</span> is an <a class="glossRef" href="gloss.htm#affine">affine transformation</a>,
+    <span class="math">SE(f(X))</span> bears a simple relationship to the <span class="math">SE(X)</span>.
+    The SE of a sum of <a class="glossRef" href="gloss.htm#independent">independent</a>
+    random variables (defined presently) bears a simple relationship to the standard errors
+    of the summed variables.
+    Later in this chapter, we shall use these two results to derive the SE of some random
+    variables from the SE of simpler random variables.
+</p>
+
+<h3><a id="se_affine"></a>
+    The Standard Error of an Affine Transformation
+</h3>
+
+<p>
+    A transformation of a random variable is another random variable.
+    Recall that an <a class="glossRef" href="gloss.htm#affine">affine</a> transformation
+    consists of multiplying by a constant, then adding a constant:
+    <span class="math">f(x)&nbsp;=&nbsp;ax&nbsp;+&nbsp;b</span>.
+    The SE of an affine transformation of a random variable is related to the SE
+    of the original variable in a simple way: It does not depend on the additive
+    constant <span class="math">b</span>,
+    just the multiplicative constant <span class="math">a</span>.
+    The SE of the new variable is the absolute value of the multiplicative constant
+    <span class="math">a</span>, times the SE of the original variable.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Standard Error of an Affine Transformation of a Random Variable</span>
+    </p>
+    <p>
+        If <span class="math">Y = aX + b</span>, where <span class="math">a</span> and <span class="math">b</span> 
+        are constants
+        (<em>i.e.</em>, if <span class="math">Y</span> is an 
+        <a class="glossRef" href="gloss.htm#affine">affine transformation</a>
+        of <span class="math">X</span>), then
+    </p>
+    <div class="indent">
+    <p class="inlineMath">
+    <span class="math">SE(Y) = |a|&times;SE(X)</span>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'We can verify that the SE of <span class="math">a&times;X + ' +
+               'b</span> is <span class="math">|a|&times;SE(X)</span> ' +
+               'as follows:</p><p class="math"> SE<sup>2</sup>(aX + b) = ' +
+               'E<big>(</big> (aX + b) &minus; E(aX + ' +
+               'b)<big>)</big><sup>2</sup></p>' +
+               '<p class="math"> = E<big>(</big> aX + b &minus; ' +
+               'aE(X)&minus;b<big>)</big><sup>2</sup></p><p class="math">' +
+               '= E<big>(</big>aX &minus; ' +
+               'aE(X)<big>)</big><sup>2</sup></p>' +
+               '<p class="math"> = ' +
+               'E<big>(</big>a<sup>2</sup>(X&minus;E(X))<sup>2</sup><big>)</big>' +
+               '</p><p class="math"> = ' +
+               'a<sup>2</sup>&times;E(X&minus;E(X))<sup>2</sup></p>' +
+               '<p class="math"> = a<sup>2</sup>&times;SE<sup>2</sup>(X).</p><p>' +
+               'Taking the square root of both sides yields the desired result: ' +
+               '<span class="math">SE(a&times;X + b)&nbsp;=&nbsp;a|&times;SE(X)</span>.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+</div>
+
+<p>&nbsp;
+    
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var payOffEx1 = listOfDistinctRandInts(2,1,7).sort(numberLessThan);
+    var turnsEx1 = listOfRandInts(1,3,10)[0];
+    var pDoub = 1/6;
+    var seDoubEx1 = Math.sqrt(turnsEx1*pDoub*(1-pDoub));
+    var seWinEx1 = payOffEx1[1]*seDoubEx1;
+    var aVal = numToRange(seWinEx1);
+    var qStr = 'Consider the following game: you pay $' + payOffEx1[0].toString()  +
+           ' to roll a fair pair of dice. You win $' + payOffEx1[1].toString()  +
+           ' if you roll doubles. <span class="qSpan">The SE of your net winnings after ' +
+           cardinals[turnsEx1]   + ' plays of the game is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    var ansStr = 'Let <span class="math">X</span> be the number of times you roll doubles in ' +
+         cardinals[turnsEx1] +
+         ' turns. Then <span class="math">X</span> has a binomial distribution with parameters ' +
+         '<span class="math">p=1/6</span> and <span class="math">n = ' + turnsEx1.toString() +
+         '</span>. The parameter <span class="math">p=1/6</span> because ' +
+         'the chance of doubles in each turn is 1/6: there are 6 outcomes ' +
+         'that correspond to doubles: (1,1), (2,2), (3,3), (4,4), (5,5), and (6,6), out ' +
+         'of a total of 36 possible outcomes of rolling a fair pair of dice. ' +
+         'By definition, if the dice are fair, each of the 36 outcomes is equally likely, ' +
+         'so the chance of doubles is 6/36 = 1/6.</p><p>Your net winnings are &minus;$' +
+         (turnsEx1*payOffEx1[0]).toString() + ' + $' + payOffEx1[1].toString() +
+         '<span class="math">&times; X</span>. The &minus;$' + (turnsEx1*payOffEx1[0]).toString()+
+         ' is the cost of your ' + turnsEx1.toString() +
+         ' bets; the other term is your gross winnings. ' +
+         'This is an affine transformation of <span class="math">X</span>, so the SE of your net ' +
+         'winnings is $<span class="math">|' + payOffEx1[1].toString() +
+         '| &times; SE(X)</span>. The SE of <span class="math">X</span> is </p> ' +
+         '<p class="math">(np(1&minus;p))<sup>&frac12;</sup> = (' +
+         turnsEx1.toString() + '&times; 1/6 &times; (1&minus;1/6))<sup>&frac12;</sup></p>' +
+         '<p class="math">= $' + roundToDig(seDoubEx1,3).toString() +
+         ', </p><p>so the SE of your net ' +
+         'winnings in ' + cardinals[turnsEx1] + ' games is ' + payOffEx1[1].toString() +
+         '&times; $' + roundToDig(seDoubEx1,3).toString() + ' = $' +
+         roundToDig(seWinEx1,3).toString() + '. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="independent_random_variables"></a>
+    Independent Random Variables
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/HcWrhV41hcQ?start=&end=3100" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    In general, calculating the <a class="glossRef" href="gloss.htm#se">SE</a>
+    of a function of two or more <a class="glossRef" href="gloss.htm#random_variable">random variables</a>
+    is hard.
+    However, if the random variables bear a special relationship to each other, the
+    calculations simplify.
+</p>
+
+<p>
+    Recall that two <a class="glossRef" href="gloss.htm#event">events</a> <span class="math">A</span>
+    and <span class="math">B</span> are <a class="glossRef" href="gloss.htm#independent">independent</a> if and only if
+    the chance of the intersection of <span class="math">A</span> and <span class="math">B</span> is the product of
+    the chance of <span class="math">A</span> and the chance of <span class="math">B</span>:
+</p>
+
+<p class="math">
+    P(AB) = P(A)&times;P(B).
+</p>
+
+<p>
+    A random variable <span class="math">X</span> &quot;determines&quot; many events: all the events that can be
+    defined in terms of the value that <span class="math">X</span> takes in the experiment.
+    For example, the event
+</p>
+
+<p class="math">
+    A&nbsp;=&nbsp;{a&nbsp;&lt;&nbsp;X&nbsp;&le;&nbsp;b}
+</p>
+
+<p>
+    is determined by <span class="math">X</span>: <span class="math">A</span> occurs if and only if <span class="math">X</span> happens
+    to be larger than <span class="math">a</span> and no larger than <span class="math">b</span>.
+</p>
+
+<p>
+    Two <a class="glossRef" href="gloss.htm#random_variable">random variables</a>,
+    <span class="math">X</span> and <span class="math">Y</span>, are <a class="glossRef" href="gloss.htm#independent">independent</a>
+    if and only if every <a class="glossRef" href="gloss.htm#event">event</a> determined by <span class="math">X</span>
+    is independent of every event determined by <span class="math">Y</span>.
+    (Actually, it suffices for every event of the form
+    <span class="math">{a&lt;X&le;b}</span> to be
+    <a class="glossRef" href="gloss.htm#independent">independent</a>
+    of every <a class="glossRef" href="gloss.htm#event">event</a> of the form
+    <span class="math">{c&lt;Y&le;d}</span>.)
+    If two <a class="glossRef" href="gloss.htm#random_variable">random variables</a>
+    are not <a class="glossRef" href="gloss.htm#independent">independent</a>,
+    they are <a class="glossRef" href="gloss.htm#dependent">dependent</a>.
+    Heuristically, two <a class="glossRef" href="gloss.htm#random_variable">random variables</a> are
+    <a class="glossRef" href="gloss.htm#independent">independent</a>
+    if knowing the value of one does not help predict the value of the other.
+</p>
+
+
+<!-- ====================================================================== -->
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Independent and dependent random variables.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Consider tossing a fair coin 10 times:
+</p>
+<ul>
+    <li>
+    <p>
+          Let <span class="math">X</span> be the number of heads in the first 6 tosses and
+          let <span class="math">Y</span> be the
+          number of heads in the last 4 tosses.
+          Then <span class="math">X</span> and <span class="math">Y</span> are
+          <a class="glossRef" href="gloss.htm#independent">independent</a>:
+          the <a class="glossRef" href="gloss.htm#event">event</a> that <span class="math">X</span> is in any range of
+          values is independent of the <a class="glossRef" href="gloss.htm#event">event</a> that
+          <span class="math">Y</span> is in any range of values.
+          Knowing the value of <span class="math">X</span> does not help one predict the value of <span class="math">Y</span>.
+    </p>
+    </li>
+    <li>
+    <p>
+        Let <span class="math">X</span> be the number of heads in the first 6 tosses and let <span class="math">Y</span> be the
+        number of heads in the last 5 tosses.
+        Then <span class="math">X</span> and <span class="math">Y</span> are <a class="glossRef" href="gloss.htm#dependent">dependent</a>
+        because, for example, the <a class="glossRef" href="gloss.htm#event">event</a>
+        <span class="math">{5&lt; X &le; 6}</span>
+        and the <a class="glossRef" href="gloss.htm#event">event</a> 
+        <span class="math">{&minus;1 &lt; Y &le;0}</span> are
+        <a class="glossRef" href="gloss.htm#dependent">dependent</a>
+        (in fact, those events are <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a>).
+    </p>
+    </li>
+    <li>
+    <p>
+        Let <span class="math">X</span> be the number of heads in the first 6 tosses and let <span class="math">Y</span> be the
+        number of tails in the first 2 tosses.
+        Then <span class="math">X</span> and <span class="math">Y</span> are <a class="glossRef" href="gloss.htm#dependent">dependent</a>
+        because, for example, the <a class="glossRef" href="gloss.htm#event">event</a>
+        <span class="math">{5&lt; X &le;6}</span> and the <a class="glossRef" href="gloss.htm#event">event</a>
+        <span class="math">{1&lt; Y &le;2}</span> are <a class="glossRef" href="gloss.htm#dependent">dependent</a>
+        (in fact, those events are <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a>).
+    </p>
+    </li>
+</ul>
+</div>
+
+<p>
+    What sorts of experiments lead to independent random variables?
+    Sums and averages of non-overlapping sequences of draws with replacement from a box,
+    non-overlapping sequences of coin tosses, and non-overlapping sequences of die rolls
+    are some examples.
+    The second and third items in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr-1);
+// -->
+</script>
+    show why the sequences must not overlap.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var qStr = 'Consider the experiment of drawing two cards at random with replacement ' +
+         'from a deck of playing cards. <span class="qSpan">Which of the following ' +
+         'pairs of hands are independent? (select all that apply)</span></p>';
+     document.writeln(qStr);
+     var randCard = faces[(listOfRandInts(1,0,12))[0]];
+     var opt = ['at least one ' + randCard + '; at least one heart',
+          'exactly one ' + randCard + '; at least one heart',
+          'no ' + randCard + '; exactly one spade',
+          'at least one heart; at least one spade',
+          'a pair; both cards hearts',
+          'exactly one 8, exactly one face card'
+     ];
+     var aVal = 'a&b&c&e';
+     writeSelectExercise(true,qCtr++,opt,aVal);
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var replaceWord = ' without ';
+     var replace = randBoolean();
+     var aVal = 'g';
+     if (replace == 1) {
+         replaceWord = ' ';
+         aVal = 'a&b&c&d';
+     }
+     var qStr = 'Consider dealing two five-card hands from a well-shuffled deck of playing ' +
+                'cards, ' + replaceWord + ' replacing the cards and re-shuffling between hands. ' +
+                '<span class="qSpan">Which of the following pairs of random variables are ' +
+                'independent? (select all that apply)</span></p>';
+     document.writeln(qStr);
+     var opt = [
+          'the number of Aces in the first hand and the number of Aces in the second hand',
+          'the number of Aces in the first hand and the number of hearts in the second hand',
+          'the number of Aces in the first hand and the number of Kings in the second hand',
+          'the number of hearts in the first hand and the number of spades in the second hand',
+          'the number of Aces in the first hand and the total number of Aces in both hands',
+          'the number of Aces in the first hand and the total number of hearts in both hands',
+          'none of the above'
+     ];
+     writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+    An important fact about independent random variables is that the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> of a
+    product of independent random variables is the product of their expected values;
+    we shall use this result often.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Expected Value of the Product of Independent Random Variables</span>
+    </p>
+    <p>
+        If the
+        <a class="glossRef" href="gloss.htm#random_variable">random
+        variables</a> <span class="math">X</span> and <span class="math">Y</span> are 
+        <a class="glossRef" href="gloss.htm#independent">independent</a>, then
+    </p>
+    <p class="math">
+        E(X&times;Y) = E(X) &times; E(Y).
+    </p>
+    <p>
+       The <a class="glossRef" href="gloss.htm#converse">converse</a> is <em>not</em> true in general:
+       <span class="math">E(X&times;Y) =
+       E(X) &times; E (Y)</span>
+       does not imply that <span class="math">X</span> and <span class="math">Y</span> are independent.
+    </p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    The fact that the expected value of a product of independent random variables is the product
+    of the expected values of the random variables implies that the SE of a sum of independent random
+    variables is the square root of the sum of the squares of the individual standard errors of
+    the random variables.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'We establish the result for the sum of two independent random variables, ' +
+               'from which the general result follows. Let <span class="math">X</span> and <span class="math">Y</span> be ' +
+               'independent random variables. The square of the SE of the sum <span class="math">X+Y</span> ' +
+               'is</p><p class="math">SE<sup>2</sup>(X+Y ) = ' +
+               'E((X+Y )&minus;E(X+Y ))<sup>2</sup> ' +
+               '</p><p class="math"> = E(X+Y &minus; ' +
+               'E(X)&minus;E(Y))<sup>2</sup>' +
+               '</p><p class="math"> = E( (X&minus;E(X)) + ' +
+               '(Y&minus;E(Y)) )<sup>2</sup>' +
+               '</p><p class="math"> = E( (X&minus;E(X))<sup>2</sup> + ' +
+               '(Y&minus;E(Y))<sup>2</sup> + ' +
+               '2&times;(X&minus;E(X))&times;(Y&minus;E(Y)) )' +
+               '</p><p class="math"> = SE<sup>2</sup>(X) + SE<sup>2</sup>(Y) ' +
+               '+ 2E((X&minus;E(X))&times;(Y&minus;E(Y))) ' +
+               '</p><p class="math">= SE<sup>2</sup>(X) + SE<sup>2</sup>(Y) ' +
+               '+ 2[E(X&times;Y) &minus; E(X)&times;E(Y) ' +
+               '&minus; E(X)&times;E(Y) + E(X)&times;E(Y)] ' +
+               '</p><p class="math"> = SE<sup>2</sup>(X) + SE<sup>2</sup>(Y) + ' +
+               '2[E(X)&times;E(Y) &minus; E(X)&times;E(Y) &minus; ' +
+               'E(X)&times;E(Y) + E(X)&times;E(Y)] ' +
+               '</p><p class="math">= SE<sup>2</sup>(X) + SE<sup>2</sup>(Y), ' +
+               '</p><p> where the penultimate step used the fact that because <span class="math">X</span> and ' +
+               '<span class="math">Y</span> are independent, </p><p class="math">' +
+               'E(X&times;Y)=E(X)&times;E(Y).';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Standard Error of a Sum of Independent Random Variables</span>
+    </p>
+    <p>
+        If <span class="math">X<sub>1</sub>, X<sub>2</sub>,
+        X<sub>3</sub>, &hellip; ,
+        X<sub>n</sub></span>
+        are independent random variables, then
+    </p>
+    <p class="math">
+        SE( X<sub>1</sub> + X<sub>2</sub> +
+        X<sub>3</sub> + &hellip; + X<sub>n</sub> )
+        = <big>(</big> SE<sup>2</sup>(X<sub>1</sub>) +
+        SE<sup>2</sup>(X<sub>2</sub>) + SE<sup>2</sup>(X<sub>3</sub>) +
+        &hellip; +
+        SE<sup>2</sup>(X<sub>n</sub>) <big>)</big><sup>&frac12;</sup>.
+    </p>
+</div>
+
+
+
+<h2><a id="se_of_common_vars"></a>
+    Standard Errors of some common Random Variables
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/HcWrhV41hcQ?start=3095&end=4841" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This section presents the standard errors of several random variables we have already seen:
+    a draw from a box of numbered tickets, the sample sum and sample mean of n random draws
+    with and without replacement from a box of tickets, binomial and hypergeometric random
+    variables, geometric random variables, and negative binomial random variables.
+    Some of these results are derived directly; others are derived from each other using
+    the rules about the SE of
+    affine transformations and of sums of independent random variables.
+</p>
+
+<h3><a id="SE_of_draw_from_box"></a>
+    The SE of a single draw from a box of numbered tickets
+</h3>
+
+<p>
+    We saw in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + ', ');
+// -->
+</script>
+    that the <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of a random draw from a box of tickets
+    labeled with numbers is the average of the labels, Ave(box).
+    To find the <a class="glossRef" href="gloss.htm#se">SE</a>, we first need to find the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the square of the difference between the number drawn and the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> 
+    of the number drawn, then take the square-root.  
+    That is, we need to find the sum of the squares of the differences between
+    each label it is possible to draw and the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a>,
+    each times the chance of drawing that number.
+    The chance of drawing each possible label is
+    the number of tickets with that label, divided by the total number of tickets.
+    Let <span class="math">{x<sub>1</sub>, x<sub>2</sub>, 
+     &hellip;, x<sub>N</sub>}</span> be
+    the set of distinct numbers on the ticket labels.
+    We want to find the square-root of the following sum:
+</p>
+
+<p class="math">
+    (x<sub>1</sub>&minus;Ave(box))<sup>2</sup>&times;(#
+    tickets with x<sub>1</sub>on them)/(total # tickets) +
+</p>
+
+<p class="math">
+    (x<sub>2</sub>&minus;Ave(box))<sup>2</sup>&times;(#
+     tickets with x<sub>2</sub> on them)/(total # tickets) +
+</p>
+
+<p class="math">
+    (x<sub>3</sub>&minus;Ave(box))<sup>2</sup>&times;(#
+    tickets with x<sub>3</sub> on them)/(total # tickets) + &hellip;
+</p>
+
+<p class="math">
+    + (x<sub>N</sub>&minus;Ave(box))<sup>2</sup>&times;(#
+    tickets with x<sub>N</sub> on them)/(total # tickets),
+</p>
+
+<p>
+    where Ave(box) is the average of the list of the numbers on all the tickets.
+    If the numbers on the tickets are all different, then the
+    number of tickets with the number <span class="math">x</span> on them would be one for every possible value
+    <span class="math">x</span>, and
+</p>
+
+<p class="math">
+    (# tickets with x on them)/(total # tickets)
+</p>
+
+<p>
+    would be equal to
+</p>
+
+<p class="math">
+    1/(total # tickets).
+</p>
+
+<p>
+    The sum would then be the sum of the squares of the
+    <a class="glossRef" href="gloss.htm#deviation">deviations</a> between each ticket and the average of the box
+    (which is the average of the list of numbers on all the tickets in the box); taking the
+    square-root would give the <a class="glossRef" href="gloss.htm#rms">rms</a> of the
+    <a class="glossRef" href="gloss.htm#deviation">deviations</a>, which is how we define
+    the <a class="glossRef" href="gloss.htm#sd">SD</a> of the list of the numbers on the tickets.
+    If the number <span class="math">x</span>
+    appears on more than one ticket, then in computing the <a class="glossRef" href="gloss.htm#sd">SD</a> of
+    the list of numbers on the tickets, the term
+</p>
+
+<p class="math">
+    (x &minus; Ave(box))<sup>2</sup>&times;1/(total
+    # tickets)
+</p>
+
+<p>
+    would occur (# tickets with <span class="math">x</span> on them) times.
+    Adding those terms together gives
+</p>
+
+<p class="math">
+    (x &minus; Ave(box))<sup>2</sup>&times;(# tickets with x
+    on them)/(total # tickets).
+</p>
+
+<p>
+    As a result, the square-root of the sum displayed
+    above is still exactly the <a class="glossRef" href="gloss.htm#sd">SD</a> of the list of numbers on the
+    tickets: The <a class="glossRef" href="gloss.htm#se">SE</a> of a draw from a box is the
+    <a class="glossRef" href="gloss.htm#sd">SD</a> of the list of numbers on all the tickets in the box,
+    which we shall denote SD(box).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates numerically that this is true in a particular case.
+</p>
+
+
+<!-- ====================================================================== -->
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The SE of a draw from a box of tickets numbered &quot;1,&quot; ' +
+               '&quot;3,&quot; &quot;3,&quot; and &quot;5.&quot;';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the draw is
+</p>
+<p class="math">
+    1&times;(1/4) + 3&times;(2/4) + 5&times;(1/4) = 3,
+</p>
+<p>
+    which is also the average of the list of the numbers
+    on the tickets: (1 + 3 + 3 + 5)/4 = 3.
+</p>
+<p>
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+    square of the difference between the draw and the
+    <a class="glossRef" href="gloss.htm#expectation">expected
+    value</a> of the draw is
+</p>
+<p class="math">
+    (1&minus;3)<sup>2</sup>&times;(1/4) + (3&minus;3)<sup>2</sup>&times;(2/4) +
+    (5&minus;3)<sup>2</sup>&times;(1/4)
+</p>
+<p class="math">
+    = 4&times;(1/4) + 0&times;(2/4) + 4&times;(1/4)
+</p>
+<p class="math">
+    = 2.
+</p>
+<p>
+    The <a class="glossRef" href="gloss.htm#se">SE</a> of the draw is thus
+    2<sup>&frac12;</sup>.
+    The <a class="glossRef" href="gloss.htm#sd">SD</a> of the list of the numbers on the tickets is
+</p>
+<p class="math">
+    ( (1&minus;3)<sup>2</sup> + (3&minus;3)<sup>2</sup> + (3&minus;3)<sup>2</sup>
+     + (5&minus;3)<sup>2</sup>)/4 )<sup>&frac12;</sup>
+</p>
+<p class="math">
+    = ( (4 + 0 + 0 + 4)/4 )<sup>&frac12;</sup>
+</p>
+<p class="math">
+    = 2<sup>&frac12;</sup>,
+</p>
+<p>
+    which is the same as the <a class="glossRef" href="gloss.htm#se">SE</a>
+    of the draw (as it must be).
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<h3><a id="SE_of_sample_sum"></a>
+    SE of the Sample Sum of <span class="math">n</span> Random draws with Replacement from a Box of Tickets
+</h3>
+
+<p>
+    We just calculated the SE of a single draw; now we consider the SE of the sum of the labels on
+    <span class="math">n</span> tickets drawn at random with replacement from a box of tickets labeled with numbers.
+    Because the tickets are drawn with replacement, stirring between draws, the numbers on the
+    <span class="math">n</span> tickets drawn are <a class="glossRef" href="gloss.htm#independent">independent</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variables</a>.
+    The <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> is the sum of these
+    <a class="glossRef" href="gloss.htm#independent">independent</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variables</a>,
+    so, as we established earlier in the chapter, the SE of the sample sum is the square root
+    of the sum of the squares of the SEs of the individual draws.
+    They all have the same SE, namely, SD(box), so
+</p>
+
+<p class="math">
+    <a class="glossRef" href="gloss.htm#se">SE</a>(sample sum of n
+    draws with replacement) =
+    ( SD<sup>2</sup>(box) + SD<sup>2</sup>(box) + &hellip; +
+    SD<sup>2</sup>(box))<sup>&frac12;</sup>
+</p>
+<p class="math">
+    = (n&times;SD<sup>2</sup>(box))<sup>&frac12;</sup>
+</p>
+<p class="math">
+    = n<sup>&frac12;</sup> &times;SD(box).
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#expectation">expected
+    value</a> of the sum of <span class="math">n</span> random draws with replacement from a box is
+    <span class="math">n&times;Ave(box)</span>,
+    and the <a class="glossRef" href="gloss.htm#se">SE</a> of the sum of <span class="math">n</span>
+    draws with replacement from
+    a box is <span class="math">n<sup>&frac12;</sup> &times; SD(box)</span>.
+    (Refer to
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    for help interpreting the SE of the sample sum.)
+    As the <a class="glossRef" href="gloss.htm#sample_size">sample
+    size</a> <span class="math">n</span> grows, the 
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> grows
+    faster than the <a class="glossRef" href="gloss.htm#se">SE</a> (assuming that neither Ave(box) nor SD(box)
+    is zero): The variability of the sample sum increases with the sample size, but the
+    variability divided by the sample size decreases with the sample size.
+</p>
+
+<h3><a id="SE_of_sample_mean"></a>
+   The SE of the Sample Mean of <span class="math">n</span> random Draws from a Box of numbered Tickets
+</h3>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> of <span class="math">n</span> independent
+    random draws (with replacement)
+    from a box is the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> 
+    divided by <span class="math">n</span>.
+    This is an <a class="glossRef" href="gloss.htm#affine">affine transformation</a> of the
+    sample sum, so
+</p>
+
+<p class="math">
+    SE(sample mean) =
+    1/n &times; SE(sample sum)
+</p>
+
+<p class="math">
+    = 1/n &times; n<sup>&frac12;</sup> &times; SD(box)
+</p>
+
+<p class="math">
+    = SD(box)/n<sup>&frac12;</sup>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows the sampling distribution of the sample mean.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling distribution of the sample mean of draws from a box of numbered ' +
+               'tickets.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+<p align="left">
+    The SD of the observed values of the sample sum tends to approach the SE 
+    of the sample sum as the number of samples grows.
+</p>
+<p class="figure">
+    <applet code="SampleDist.class" codebase="../../Java/" align="baseline" width="640"
+       archive="PbsGui.zip" height="360">
+    <param name="variables" value="mean">
+    <param name="startWith" value="mean">
+    <param name="curveControls" value="false">
+    <param name="showCurve" value="false">
+    <param name="boxContents" value="0,1,2,3,4">
+    <param name="showBoxHist" value="false">
+    <param name="boxHistControl" value="false">
+    <param name="sources" value="box">
+    <param name="replaceControl" value="false">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Using
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    verify that the SD of the observed values of the sample mean tends to approach
+    <span class="math">SD(box)/n<sup>&frac12;</sup></span>, the SE of the sample mean of <span class="math">n</span>
+    random draws with replacement from the population box at the right of the figure,
+    as the number of samples of size <span class="math">n</span> grows.
+    Change <span class="appCtrlName">Sample size</span>
+    and contents of the population box (which initially contains
+    0, 1, 2, 3, and 4) and confirm that this result remains true.
+</p>
+
+<p>
+    As the sample size <span class="math">n</span> grows, the SE of the sample sum of <span class="math">n</span> independent
+    draws from a box of numbered tickets increases like
+    <span class="math">n<sup>&frac12;</sup></span>, and the SE of the sample mean of
+    <span class="math">n</span> independent draws decreases like
+    <span class="math">n<sup>&minus;&frac12;</sup></span>.
+    These facts are summarized in the <span class="termOfArt">square root law</span>.
+</p>
+
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+        <p>
+        <span class="calloutCaption"><a id="square_root_law"></a>
+            The Square-Root Law</span>
+        </p>
+        <p>
+            In drawing <span class="math">n</span> times at random with replacement from a
+            box of tickets labeled with numbers, the
+            <a class="glossRef" href="gloss.htm#se">SE</a> of the sum of the
+            draws is
+        </p>
+        <p class="math">
+            n<sup>&frac12;</sup> &times;SD(box),
+        </p>
+        <p>
+            and the SE of the
+            average of the draws is
+        </p>
+        <p class="math">
+            SD(box)/n<sup>&frac12;</sup>,
+        </p>
+        <p>
+            where SD(box) means the SD of the list of all the
+            numbers on all the tickets in the box.
+        </p>
+        <p>
+            The SE of the sample sum grows as the square-root of the sample size;
+            the SE of the sample mean shrinks as the square-root of the sample size.
+        </p>
+</div>
+
+<p>
+    Because the SE of the sample mean of <span class="math">n</span> draws with replacement
+    shrinks as <span class="math">n</span> grows, the sample mean is increasingly likely to be
+    extremely close to its expected value, the mean of the labels on all the
+    tickets in the box.
+    This is called the <span class="termOfArt">Law of Averages</span>.
+    The <a class="glossRef" href="gloss.htm#law_of_averages">Law of Large
+    Numbers</a> is a special case of the
+    Law of Averages for 0-1 boxes.
+    The Law of Averages can be proved using the Square-Root Law and
+    <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> for random variables,
+    which is discussed in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('clt') + '. ');
+// -->
+</script>
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+        <p>
+        <span class="calloutCaption"><a id="law_of_averages"></a>
+            The Law of Averages</span>
+        </p>
+        <p>
+            For every positive number <span class="math">e&gt;0</span>, as the
+            sample size <span class="math">n</span> grows, the chance that the sample mean of <span class="math">n</span>
+            random draws with replacement from a box of numbered tickets
+            is within <span class="math">e</span> of the average
+            of the numbers on the tickets in the box converges to 100%.
+        </p>
+        <p>
+            In symbols, as <span class="math">n</span> increases,
+        </p>
+        <p class="math">
+            P( | sample mean of n draws &minus; average of box |
+              &lt; e) approaches 100%.
+        </p>
+</div>
+
+<p>
+    It is extremely important to distinguish between
+    <a class="glossRef" href="gloss.htm#se">SE</a>(sample mean) and
+    <a class="glossRef" href="gloss.htm#sd">SD</a>(box); review
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    if the distinction is not clear to you.
+    The SE of the sample mean depends on the sample size&mdash;it is a measure of the chance
+    variability of the sample mean.
+    The SD of the box does not depend on the sample size&mdash;it is a property of the numbers
+    on all the tickets in the box.
+    The SE of the sample mean can be related to the sample size and the
+    SD of the list of numbers on the tickets in the box:
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The difference between SE and SD</span>
+    </p>
+    <p>
+        The SE is a property of a random variable; the SD is a property of a list
+        of numbers.
+    </p>
+    <p>
+        The SE of the sample mean and the SE of the sample sum of independent random draws from
+        a box of numbered tickets have simple relationships to SD(box), the SD of the
+        numbers on all the tickets in the box.
+        Those relationships are given by the square-root law.
+    </p>
+    <ul>
+        <li>
+            The sample mean and sample sum are 
+            <a class="glossRef" href="gloss.htm#random_variable">random variables</a>:
+            their values depend on the sample.
+            SE measures the typical size of
+            the <a class="glossRef" href="gloss.htm#chance_variability">chance variation</a>
+            of a random variable.
+            The SE of the sample mean gets smaller as the sample size increases,
+            and the SE of the sample sum gets larger as the sample size increases.
+        </li>
+        <li>
+            <a class="glossRef" href="gloss.htm#sd">SD</a>(box) is constant, regardless of the
+            sample size. It is a measure of the scatter of the numbers on all the
+            tickets in the box around their (population) average.
+        </li>
+    </ul>
+</div>
+
+<p>&nbsp;</p>
+
+<h3><a id="se_of_binomial"></a>
+    The SE of a Binomial Random Variable
+</h3>
+
+<p>
+    We can think of a binomial random variable with parameters <span class="math">n</span> and <span class="math">p</span>
+    as the sample sum of <span class="math">n</span>
+    <a class="glossRef" href="gloss.htm#independent">independent</a>
+    draws from a 0-1 box with a fraction <span class="math">p</span> of tickets labeled &quot;1.&quot;
+    Equivalently, a binomial random variable is the sum of <span class="math">n</span> independent
+    random variables <span class="math">{X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>,
+    &hellip;, X<sub>n</sub> }</span>
+    each of which takes the value 1 with probability <span class="math">p</span>, 
+    and the value 0 with probability <span class="math">(1&minus;p)</span>.
+    Random variables whose possible values are only 0 and 1 are called
+    <a class="glossRef" href="gloss.htm#indicator">indicator random variables</a>: They indicate whether or not
+    some <a class="glossRef" href="gloss.htm#event">event</a> occurs.
+    In this case, the <a class="glossRef" href="gloss.htm#indicator">indicator random variable</a>
+    <span class="math">X<sub>j</sub></span> indicates
+    whether the <span class="math">j</span>th trial results in &quot;success&quot; or &quot;failure.&quot;
+    If the <span class="math">j</span>th trial results in &quot;success,&quot; 
+    <span class="math">X<sub>j</sub> = 1</span>;
+    if the <span class="math">j</span>th trial results in &quot;failure,&quot; 
+    <span class="math">X<sub>j</sub> = 0</span>.
+    The sum
+</p>
+
+<p class="math">
+    X<sub>1</sub>+X<sub>2</sub>+X<sub>3</sub>+
+     &hellip;+ X<sub>n</sub>
+</p>
+
+<p>
+    is the total number of successes in the <span class="math">n</span> trials.
+</p>
+
+<p>
+    What is the <a class="glossRef" href="gloss.htm#se">SE</a> of each <span class="math">X<sub>j</sub></span>?
+    We saw in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + ', ');
+// -->
+</script>
+    that the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of each
+    <span class="math">X<sub>j</sub></span> is
+</p>
+
+<p class="math">
+    E(X<sub>j</sub>) = 0&times;(1&minus;p) + 1&times;p = p.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#se">SE</a> of <span class="math">X<sub>1</sub></span>
+    is the square-root of
+</p>
+
+<p class="math">
+    E( (X<sub>1</sub>&minus;E(X<sub>1</sub>))<sup>2</sup>
+     ) = E( (X<sub>1</sub>&minus; p)<sup>2</sup> )
+</p>
+
+<p class="math">
+    = (0 &minus; p)<sup>2</sup>&times;(1&minus;p)
+    + (1&minus;p)<sup>2</sup>&times;p
+</p>
+
+<p class="math">
+    = p<sup>2</sup>&times;(1&minus;p) +
+    (1&minus;p)<sup>2</sup>&times;p
+</p>
+
+<p class="math">
+    = p&times;(1&minus;p)&times;(p +
+    (1&minus;p))
+</p>
+
+<p class="math">
+    = p&times;(1&minus;p),
+</p>
+
+<p>
+    which is <span class="math">(p&times;(1&minus;p))<sup>&frac12;</sup></span>.
+    The random variables <span class="math">X<sub>1</sub>, X<sub>2</sub>,
+    X<sub>3</sub>, &hellip;, X<sub>n</sub></span>
+    all have the same probability distribution, so they all have the same
+    <a class="glossRef" href="gloss.htm#se">SE</a>.
+    These variables are <a class="glossRef" href="gloss.htm#independent">independent</a>
+    because the trials are independent, so the <a class="glossRef" href="gloss.htm#se">SE</a> of their sum,
+    the number of successes in <span class="math">n</span> independent trials each
+    with probability <span class="math">p</span> of success, is the square-root of the sum of the
+    squares of their SEs:
+</p>
+
+<p class="math">
+    <a class="glossRef" href="gloss.htm#se">SE</a>(
+    X<sub>1</sub>+X<sub>2</sub>+X<sub>3</sub>+
+    &hellip;
+    +X<sub>n</sub> )
+    = ( <a class="glossRef" href="gloss.htm#se">SE</a><sup>2</sup>(X<sub>1</sub>) +
+     <a class="glossRef" href="gloss.htm#se">SE</a><sup>2</sup>(X<sub>2</sub>) +
+     <a class="glossRef" href="gloss.htm#se">SE</a><sup>2</sup>(X<sub>3</sub>)+
+     &hellip;
+     + <a class="glossRef" href="gloss.htm#se">SE</a><sup>2</sup>(X<sub>n</sub>)
+    )<sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    = ( p&times;(1&minus;p) + p&times;(1&minus;p)
+    + p&times;(1&minus;p) + &hellip; +
+    p&times;(1&minus;p) )<sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    = ( n&times;p&times;(1&minus;p) )<sup>&frac12;</sup>
+</p>
+<p class="math"> =
+    n<sup>&frac12;</sup>&times;(p&times;(1&minus;p))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    This is a special case of drawing at random
+    with replacement from a box of numbered tickets&mdash;a 0-1 box.
+    If a proportion <span class="math">p</span> of the tickets are labeled &quot;1&quot;
+    and a proportion <span class="math">(1&minus;p)</span> are labeled &quot;0,&quot;
+    then the sum of <span class="math">n</span> random draws
+    with replacement from the box has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a>
+    with parameters <span class="math">n</span> and <span class="math">p</span>.
+    Because the SE of the sum of <span class="math">n</span> draws
+    from such a box is <span class="math">n<sup>&frac12;</sup>&times;SD(box)</span>, what we must have just
+    shown, then, is that the SD of such a box is
+    <span class="math">(p&times;(1&minus;p))<sup>&frac12;</sup></span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    <a id="SD_of_box_2_numbers"></a>
+    Something slightly more general is true:
+    If a box contains tickets labeled with only two distinct numbers,
+    <span class="math">a</span> and <span class="math">b</span>, the SD of the box is
+    <span class="math">|a&minus;b|&times;(p(1&minus;p))<sup>&frac12;</sup></span>,
+    where <span class="math">p</span> is the fraction of tickets labeled with the number <span class="math">a</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Suppose a box has a   ' +
+           'fraction <span class="math">p</span> of tickets with one number on them, say <span class="math">a</span>,  ' +
+           'and a fraction <span class="math">(1&minus;p)</span> of tickets with a different number on      ' +
+           'them, say <span class="math">b</span>. Let <span class="math">N</span> be the ' +
+           'total number of tickets in   ' +
+           'the box. Then the number of tickets labeled &quot;<span class="math">a</span>&quot; is    ' +
+           '<span class="math">N&times;p</span> and the number of tickets labeled  ' +
+           '&quot;<span class="math">b</span>&quot; is <span class="math">N&times;(1&minus;p)</span>. ' +
+           'The average of the numbers on the tickets in the box is <span class="math"><font  ' +
+           'size="+1">(</font>N&times;p&times;a+ N&times;(1&minus;p)&times;b<font ' +
+           'size="+1">)</font>/N = p&times;a + (1&minus;p)&times;b</font>. The SD is the square-root of the    ' +
+           'average of the squares of the deviations. </p> <p>               ' +
+           '<span class="math">N&times;p</span> of the deviations are </p> <p  ' +
+           'class="math"> a&minus;<font size="+1">(</font>p&times;a  ' +
+           '+(1&minus;p)&times;b<font size="+1">)</font> =   ' +
+           '(1&minus;p)&times;a + (1&minus;p)&times;b </p>   ' +
+           '<p class="math"> = (1&minus;p)&times;(a&minus;b), </p>  ' +
+           '<p> and <span class="math">N&times;(1&minus;p)</span> of the deviations are </p> <p    ' +
+           'align="center"> b&minus;(p&times;a+(1&minus;p)&times;b) =    ' +
+           'p&times;(b&minus;a). </p> <p> The average of the    ' +
+           'squared deviations is thus </p> <p class="math"> <big>         ' +
+           '(</big>N &times; p &times; (1&minus;p)<sup>2</sup>  ' +
+           '&times; (a&minus;b)<sup>2</sup> +                ' +
+           'N&times;(1&minus;p) &times; p<sup>2</sup> &times;   ' +
+           '(b&minus;a)<sup>2</sup> <big>)</big>/N </p> <p      ' +
+           'align="center"> = p &times; (1&minus;p)<sup>2</sup> &times;  ' +
+           '(a&minus;b)<sup>2</sup> +                    ' +
+           '(1&minus;p)&times;p<sup>2</sup> &times;              ' +
+           '(b&minus;a)<sup>2</sup></p> <p class="math"> = p  ' +
+           '&times; (1&minus;p) &times;                       ' +
+           '[(1&minus;p)&times;(a&minus;b)<sup>2</sup>+           ' +
+           'p&times;(b&minus;a)<sup>2</sup>] </p> <p        ' +
+           'align="center"> = p&times;(1&minus;p) &times;        ' +
+           '(a&minus;b)<sup>2</sup>, </p> <p> because            ' +
+           '(a&minus;b)<sup>2</sup> =                    ' +
+           '(b&minus;a)<sup>2</sup> and (1&minus;p) + p = 1. ' +
+           'The SD is the square-root of this average, namely </p> <p        ' +
+           'align="center"> [ p &times; (1&minus;p) &times;          ' +
+           '(a&minus;b)<sup>2</sup>]<sup>&frac12;</sup> = (p    ' +
+           '&times; (1&minus;p))<sup>&frac12;</sup> &times; |a&minus;b|. </p>  ' +
+           '<p>The special case we did before, a=1, b=0, gives     ' +
+           '</p> <p class="math">                          ' +
+           '(p&times;(1&minus;p))<sup>&frac12;</sup> &times; |1&minus;0| =     ' +
+           '(p&times;(1&minus;p))<sup>&frac12;</sup>, </p> <p> as it     ' +
+           'should. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+        <p>
+              <span class="calloutCaption"><a class="glossRef" href="gloss.htm#sd">SD</a> of 
+              a box with only two kinds of tickets</span>
+        </p>
+        <p>
+            If each ticket in a box has one of two numbers on it, <span class="math">a</span> or
+            <span class="math">b</span>,
+            and the fraction of tickets with <span class="math">a</span> on them is <span class="math">p</span>
+            (so the fraction of
+            tickets with <span class="math">b</span> on them is <span class="math">1&minus;p</span>), then
+        </p>
+        <p class="math">
+            SD(box) =
+            (p&times;(1&minus;p))<sup>&frac12;</sup>&times;|a&minus;b|,
+        </p>
+        <p>
+            where SD(box) is the <a class="glossRef" href="gloss.htm#sd">SD</a> of
+            the list of all the numbers on all the tickets.
+        </p>
+</div>
+
+
+<h3><a id="se_of_geometric"></a>
+    The SE of Geometric and Negative Binomial Random Variables
+</h3>
+
+<div class="indent">
+<p class="inline">
+    The SE of a
+    random variable with the <a class="glossRef" href="gloss.htm#geometric_distrib">geometric distribution</a>
+    with parameter <span class="math">p</span> is <span class="math">(1&minus;p)<sup>&frac12;</sup>/p</span>.
+    Verifying that this is true by calculating it directly is beyond the level of this text.
+    However, starting with the SE of the geometric distribution, we can calculate the
+    SE of the negative binomial distribution, because, as we saw in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + ', ');
+// -->
+</script>
+    a random variable with the negative binomial distribution with parameters <span class="math">r</span> and
+    <span class="math">p</span>
+    has the same distribution as the sum of <span class="math">r</span> independent geometric
+    random variables with parameter <span class="math">p</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'We can think of the number of trials until the <span class="math">r</span>th success ' +
+           'as occurring in stages: first we wait for the first success. After the ' +
+           'first success, we have an additional wait until the second success, ' +
+           '<em>etc.</em>, until the final wait between the <span class="math">r&minus;1</span>st. and ' +
+           '<span class="math">r</span>th successes. The total number of trials to the <span class="math">r</span>th ' +
+           'success is the sum of those <span class="math">r</span> different numbers of trials. ' +
+           'Each of those has a geometric distribution with parameter <span class="math">p</span>. ' +
+           'Furthermore, the individual waits are independent, because they involve ' +
+           'independent trials. Thus the sum of <span class="math">r</span> independent geometric ' +
+           'random variables with parameter <span class="math">p</span> has a negative binomial ' +
+           'distribution with parameters <span class="math">p</span> and <span class="math">r</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The SE of the sum of independent random variables is the square-root of the sum of the
+    squares of the SEs of those variables, so the SE of a random variable with the negative
+    binomial distribution with parameters <span class="math">r</span> and <span class="math">p</span> is
+    <span class="math">r<sup>&frac12;</sup>(1&minus;p)<sup>&frac12;</sup>/p</span>.
+</p>
+</div>
+
+<h2><a id="se_of_srs"></a>
+    SE of the Sample Sum and Mean of a Simple Random Sample
+</h2>
+
+<p>
+    When tickets are drawn at random from a box without replacement (by simple random sampling),
+    the numbers on the tickets drawn are dependent, not independent as they are for
+    sampling with replacement.
+    The dependence makes it harder to calculate the SE of the sample sum or sample mean of
+    <span class="math">n</span> draws without replacement&mdash;but we possess the tools to calculate
+    them nonetheless.
+    Formulae for the SE of the sample mean for random sampling without replacement,
+    for the SE of the sample percentage for random sampling without replacement,
+    and for the SE of the hypergeometric distribution all follow from the formula
+    for the SE of the sample sum for random sampling without replacement:
+</p>
+
+<ul>
+    <li>
+        The formula for the SE of the sample mean of a simple random sample follows from the
+        formula for the SE of the sample sum using the rule for the SE of an affine transformation,
+        because the sample mean is the sample sum dividied by the sample size.
+    </li>
+    <li>
+        The formula for the SE of a random variable with the hypergeometric distribution
+        is the special case of the SE of the sample sum when the box is a 0-1 box.
+    </li>
+    <li>
+        The formula for the SE of the sample percentage for a simple random sample is the
+        special case of the SE of the sample mean when the box is a 0-1 box.
+    </li>
+</ul>
+
+<p>
+    The following subsections present these formulae, which are derived in footnotes.
+</p>
+
+<h3><a id="se_of_sample_mean_srs"></a>
+    The SE of the Sample Sum of a Simple Random Sample
+</h3>
+
+<p>
+    The SE of the sample sum of the labels on simple random sample of <span class="math">n</span>
+    tickets from a box of <span class="math">N</span> tickets labeled with numbers has almost
+    the same formula as the SE of the sample sum of a random sample of size <span class="math">n</span>
+    drawn with replacement.
+    The difference is the <span class="termOfArt">finite population correction</span>
+    <span class="math">f = (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup></span>:
+</p>
+
+<p class="math">
+    SE(sample sum without replacement) = f&times;SE(sample sum with replacement) =
+</p>
+
+<p class="math">
+    (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> &times;
+    n<sup>&frac12;</sup>&times;SD(box),
+</p>
+
+<div class="indent">
+<p class="inline">
+    where SD(box) is the SD of the list of numbers on all the tickets in the box
+    (including repeated values as often as they occur).
+    This result is proved in a footnote.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<a id="fpc_deriv"></a>Here is the calculation of the SE of the sample ' +
+           'mean for sampling without ' +
+           'replacement. Multiplying by <span class="math">n</span> gives the SE of the sample sum ' +
+           'for sampling without replacement.  As a special case, it shows that the ' +
+           'SE of the hypergeometric ' +
+           'distribution is the finite population correction times the SE of the ' +
+           'corresponding binomial distribution.  We shall work with the square of the ' +
+           'SE, which simplifies the notation.</p><p>Let <span class="math">X</span> denote the sample mean of ' +
+           'a simple random sample of size <span class="math">n</span> from a population of <span class="math">N</span> ' +
+           'numbered tickets. Let <span class="math">m</span> denote the mean of the numbers in the ' +
+           'box.  We know that <span class="math">E(X) = m</span>.  Let <span class="math">X<sub>j</sub></span> ' +
+           'be the <span class="math">j</span>th datum in the sample, <span class="math">j = ' +
+           '1, &hellip; , n</span> .  Let <span class="math">x<sub>j</sub></span> be the ' +
+           'number on the <span class="math">j</span>th ticket in the box, ' +
+           '<span class="math">j = 1, &hellip; , N</span>. ' +
+           'Note that </p><p class="math">(x<sub>1</sub> &minus; m) + ' +
+           '(x<sub>2</sub> &minus; m) + &hellip; + ' +
+           '(x<sub>N</sub> &minus; m)' +
+           '= 0.</p><p> Each draw has the same distribution, but the draws are not ' +
+           'independent. Any pair of draws is equally likely to be the numbers on any ' +
+           'of the <span class="math">N(N&minus;1)</span> distinct ordered pairs of tickets. ' +
+           'Thus, for example, </p><p class="math"> ' +
+           'E( (X<sub>1</sub> &minus; m)(X<sub>2</sub> &minus; m) ) = ' +
+           '1/(N(N&minus;1)) &times; <big>(</big> ' +
+           '(x<sub>1</sub>&minus;m)(x<sub>2</sub>&minus;m) + ' +
+           '(x<sub>1</sub>&minus;m)(x<sub>3</sub>&minus;m) + &hellip; + ' +
+           '(x<sub>1</sub>&minus;m)(x<sub>N</sub>&minus;m) + ' +
+           '(x<sub>2</sub>&minus;m)(x<sub>1</sub>&minus;m) + ' +
+           '(x<sub>2</sub>&minus;m)(x<sub>3</sub>&minus;m) + &hellip; +' +
+           '(x<sub>2</sub>&minus;m)(x<sub>N</sub>&minus;m) + &hellip; + ' +
+           '(x<sub>N</sub>&minus;m)(x<sub>N&minus;1</sub>&minus;m) ' +
+           '<big>)</big></p><p class="math"> = 1/(N(N&minus;1)) &times; ' +
+           '<big>(</big> (x<sub>1</sub> &minus; m) + (x<sub>2</sub> &minus; m) ' +
+           '+ &hellip; + (x<sub>N</sub> &minus; m) ' +
+           '<big>)</big><sup>2</sup> &minus; ' +
+           '1/(N(N&minus;1)) &times; <big>(</big> ' +
+           '(x<sub>1</sub> &minus; m)<sup>2</sup> + &hellip; + ' +
+           '(x<sub>N</sub> &minus; m)<sup>2</sup> <big>)</big> </p>' +
+           '<p class="math"> = &minus;1/(N&minus;1) SD<sup>2</sup>, </p><p> where ' +
+           'SD is the standard deviation of the numbers on the tickets in the box. ' +
+           'The square of the SE of <span class="math">X</span> is ' +
+           '</p><p class="math">E<big>(</big> (X &minus; m)<sup>2</sup> ' +
+           '<big>)</big> = E( 1/n(X<sub>1</sub> + ' +
+           '&hellip; + X<sub>n</sub>) &minus; ' +
+           'm)<sup>2</sup> </p><p class="math"> = ' +
+           'E<big>(</big> 1/n<sup>2</sup>( (X<sub>1</sub> &minus; m) + ' +
+           '&hellip; + ' +
+           '(X<sub>n</sub> &minus; m) )<sup>2</sup> <big>)</big> ' +
+           '</p><p class="math"> = ' +
+           '1/n<sup>2</sup> E( (X<sub>1</sub> &minus; m)<sup>2</sup> + ' +
+           '&hellip; ' +
+           '+ (X<sub>n</sub> &minus; m)<sup>2</sup> ) + ' +
+           'n(n&minus;1)/n<sup>2</sup> ' +
+           'E( (X<sub>1</sub> &minus; m)(X<sub>2</sub> &minus; m) )</p>' +
+           '<p class="math"> = SD<sup>2</sup>/n &minus; ' +
+           '((n&minus;1)/n) &times; (1/(N&minus;1)) &times; ' +
+           'SD<sup>2</sup></p><p class="math"> = SD<sup>2</sup>/n &times; ' +
+           '<big>(</big> 1 &minus; (n&minus;1)/(N&minus;1) <big>)</big></p> ' +
+           '<p class="math"> = (SD<sup>2</sup>/n)&times; ' +
+           '(N &minus; n)/(N &minus; 1).</p><p>The SE of the sample ' +
+           'mean is the square-root of this last result; namely, the SE of the sample ' +
+           'mean for <span class="math">n</span> draws with replacement ' +
+           '(SD/n<sup>&frac12;</sup>), times the finite population ' +
+           'correction, </p><p class="math">' +
+           '(N &minus; n)<sup>&frac12;</sup>/(N &minus; ' +
+           '1)<sup>&frac12;</sup>,</p><p>as claimed.  The corresponding results for ' +
+           'the sample sum follow from the fact that </p><p class="math">' +
+           'SE( a&times; X) =  |a|&times; SE(X).';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The finite population correction <span class="math">f</span> captures the difference between
+    sampling with and without replacement.
+    When the sample size is <span class="math">n=1</span>, there is no difference between sampling
+    with and without replacement, so it should be the case that then <span class="math">f=1</span>,
+    which is true:
+</p>
+
+<p class="math">
+    f =  (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> =
+    (N&minus;1)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> = 1.
+</p>
+
+<p>
+    At the other extreme, if the sample size <span class="math">n</span>
+    equals the population size <span class="math">N</span>,
+    every member of the population is in the sample exactly once.
+    The sample is always equal to the population, and the sample sum is
+    always equal to the sum of the labels on all the tickets&mdash;the sample sum is
+    constant, so the SE of the sample sum is zero.
+    Thus it should be the case that then <span class="math">f=0</span>, which also is true:
+</p>
+
+<p class="math">
+     f =  (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> =
+     (N&minus;N)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> = 0.
+</p>
+
+<div class="indent">
+<p class="inline">
+    For intermediate values of <span class="math">n</span>, the SE of the sample mean for simple random
+    sampling is less than the SE of the sample mean for random sampling with
+    replacement, by a factor equal to the finite population correction <span class="math">f</span>.
+    Heuristically, for sampling without replacement, each additional
+    element in the sample gives information about a different ticket in the box,
+    while for sampling with replacement, there is some chance that the sample will
+    contain the same ticket twice, which would be less informative.
+    If the population is much larger than the sample, the chance that a
+    sample with replacement contains the same ticket twice is very small,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr =  'Consider a random sample of size <span class="math">n</span> with replacement from a ' +
+    'population of <span class="math">N</span> <a class="glossRef" href="gloss.htm#unit">units</a>. What is the chance ' +
+    'that at least one unit is in the sample more than once? It is easier to find the ' +
+    'chance of the complement of this event (that no unit is in the sample ' +
+    'more than once), and then to subtract that chance from 100%. ' +
+    'The chance that no unit is in the sample more than once is the chance that ' +
+    'each unit either is not in the sample at all, or is in the sample exactly once. ' +
+    'The draws are with replacement and are thus independent, so the number of ' +
+    'times each unit is in the sample has a binomial distribution with parameters ' +
+    '<span class="math">n</span> and <span class="math">p=1/N</span>. The chance that a given unit is ' +
+    'not in the sample at all is ' +
+    '<big>(</big>(N&minus;1)/N<big>)</big><sup>n</sup>. ' +
+    'The chance that a given unit is drawn exactly once is</p>' +
+    '<p class="math">' +
+    '<sub>n</sub>C<sub>1</sub> &times; (1/N) &times; ' +
+    '<big>(</big>(N&minus;1)/N<big>)</big><sup>n&minus;1</sup> ' +
+    '= n((N&minus;1)/N<big>)</big><sup>n&minus;1</sup>/N' +
+    ' = n(N&minus;1)<sup>n&minus;1</sup>/N<sup>n</sup>. ' +
+    '</p><p>The chance that a given unit is in the sample at most once ' +
+    'is thus</p><p class="math">' +
+    '<big>(</big>(N&minus;1)/N<big>)</big><sup>n</sup> ' +
+    '+ n(N&minus;1)<sup>n&minus;1</sup>/N<sup>n</sup> ' +
+    '= (N &minus;1 + ' +
+    'n)(N&minus;1)<sup>n&minus;1</sup>/N<sup>n</sup>' +
+    '.</p><p>The occurrences of different units in the sample are independent, so ' +
+    'the chance that all <span class="math">N</span> units are in the sample at most once is</p>' +
+    '<p class="math"><big>(</big>(N &minus;1 + ' +
+    'n)(N&minus;1)<sup>n&minus;1</sup>/N<sup>n</sup>' +
+    '<big>)</big><sup>N</sup> = <big>(</big>(N&minus;1)/N' +
+    '<big>)</big><sup>nN</sup> + <big>(</big>(n(N&minus;1)' +
+    '<big>)</big><sup>(n&minus;1)N</sup><big>)</big>/N<sup>nN</sup>.' +
+    '</p><p class="math"> = <big>(</big>1&minus;1/N<big>)</big><sup>nN</sup> + ' +
+    '<big>(</big>(n(N&minus;1)<big>)</big><sup>(n&minus;1)' +
+    'N</sup><big>)</big>/N<sup>nN</sup>.</p>' +
+    '<p>The first term on the right converges to one as <span class="math">N</span> grows, and the ' +
+    'second term goes to zero as <span class="math">N</span> grows, so the chance that every unit ' +
+    'is in the sample no more than once goes to 100% as <span class="math">N</span> grows. ' +
+    'The chance that any unit is in the sample more than once thus goes to zero ' +
+    'as <span class="math">N</span> grows.</p><p>The finite population correction <span class="math">f</span> also ' +
+    'converges to 1 as the size of the population grows with the sample size held fixed: ' +
+    'the ratio of <span class="math">N&minus;n</span> to <span class="math">N&minus;1</span> ' +
+    'approaches 1.  This is the ' +
+    'reason for the name <span class="termOfArt">finite population correction</span>: If the population size ' +
+    'were infinite, the finite population correction would not be necessary&mdash;it would ' +
+    'be equal to 1.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    so the SE for sampling with replacement should be nearly equal to
+    the SE for sampling without replacement.
+
+</p>
+</div>
+
+<h3><a id="se_of_hypergeometric"></a>
+    The SE of the Hypergeometric Distribution
+</h3>
+
+<p>
+    The distribution of the sample sum of <span class="math">n</span> draws without replacement from a 0-1 box
+    that contains <span class="math">N</span> tickets of which <span class="math">G</span> are labeled &quot;1&quot; has an
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric distribution</a>
+    with parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n</span>.
+    We saw previously in this chapter that the SD of a 0-1 box is
+</p>
+
+<p class="math">
+    (p&times;(1&minus;p))<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">p</span> is the fraction of tickets labeled &quot;1,&quot;
+    which is <span class="math">G/N</span>.
+    Therefore, the SE of a random variable with the hypergeometric distribution with
+    parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n</span> is
+</p>
+
+<p class="math">
+    f&times;n<sup>&frac12;</sup>&times;SD(box) =
+    (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> &times;
+    n<sup>&frac12;</sup> &times; (G/N &times;
+    (1&minus;G/N))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    But for the finite population correction, the formula is the same as the formula for the
+    SE of a <a class="glossRef" href="gloss.htm#binomial">binomial</a> random variable with parameters
+    <span class="math">n</span> and <span class="math">p= G/N</span>: the sample sum of 
+    <span class="math">n</span>
+    independent random draws with replacement from a 0-1 box with a fraction
+    <span class="math">p = G/N</span> of tickets labeled &quot;1.&quot;
+</p>
+
+<h3><a id="se_of_sample_mean_SRS"></a>
+    SE of the Sample Mean and Sample Percentage of a Simple Random Sample
+</h3>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
+    of a <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>
+    is the sample sum of a simple random sample,
+    divided by the sample size <span class="math">n</span>.
+    This is an <a class="glossRef" href="gloss.htm#affine">affine transformation</a> of the sample sum.
+    It follows that the SE of the sample mean of a simple random sample is the SE
+    of the sample sum of a simple random sample, divided by <span class="math">n</span>.
+    The SE of the sample mean of a simple random sample thus is the finite population
+    correction times the SE of the sample mean for a random sample with replacement:
+</p>
+
+<p class="math">
+    SE(sample mean of simple random sample) = f&times;SE(sample mean of sample with replacement)
+</p>
+
+<p class="math">
+    = f&times; SD(box)/n<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where SD(box) is the SD of the list of numbers on all the tickets, counting duplicated
+    values as often as they occur.
+    In the special case that the box is a 0-1 box with a fraction <span class="math">p</span> 
+    of tickets labeled &quot;1,&quot;
+    this implies that the SE of the sample percentage &phi; for
+    random sampling without replacement is
+</p>
+
+<p class="math">
+    SE(&phi;) = f &times;
+    (p&times;(1&minus;p))<sup>&frac12;</sup>/n<sup>&frac12;</sup>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    allows us to study the distribution of the sample sum and sample mean, with and without
+    replacement: the check box at the top of the figure controls whether the samples are drawn
+    with replacement.
+    Try taking a few thousand samples with and without replacement.
+    Notice that the SD of the observed values of the sample sum approaches the
+    number given as &quot;SE(sum),&quot; and that it is smaller for sampling without replacement
+    than for sampling with replacement.
+    (The tool calculates SE(sum) appropriately, using the finite population correction for
+    sampling without replacement.)
+    Vary the contents of the population box at the right of
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    to confirm that this does not depend on the numbers on the tickets.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling distribution of the sample sum for random ' +
+               'sampling with and without replacement.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="SampleDist.class" codebase="../../Java/" align="baseline" width="640"
+       archive="PbsGui.zip" height="360">
+    <param name="variables" value="sum,mean">
+    <param name="startWith" value="sum">
+    <param name="boxContents" value="0,1,2,2,3,4,4,7">
+    <param name="showBoxHist" value="false">
+    <param name="boxHistControl" value="true">
+    <param name="sources" value="box">
+    <param name="replaceControl" value="true">
+    <param name="curveControls" value="false">
+    <param name="showCurve" value="false">
+    <param name="sampleSize" value="3">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<!-- ====================================================================== -->
+
+<div class="callout">
+        <p>
+        <span class="calloutCaption"><a id="se_of_common_rvs"></a>
+            Standard Errors of Some Common Random Variables</span>
+        </p>
+        <p>
+            The SE of the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>
+            of <span class="math">n</span>
+            <a class="glossRef" href="gloss.htm#independent">independent</a> draws from a box of
+            tickets labeled with numbers is
+        </p>
+        <p class="math">
+            n<sup>&frac12;</sup> &times;SD(box).
+        </p>
+        <p>
+            The SE of the <a class="glossRef" href="gloss.htm#sample_mean">sample
+            mean</a> of <span class="math">n</span> <a class="glossRef" href="gloss.htm#independent">independent</a>
+            draws from a box of tickets labeled with numbers is</p>
+        <p class="math">
+            n<sup>&minus;&frac12;</sup> &times; SD(box).
+        </p>
+        <p>
+            The SE of the <a class="glossRef" href="gloss.htm#sample_sum">sample
+            sum</a> of a
+            <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a> of size
+            <span class="math">n</span> from a box of tickets labeled with numbers is
+        </p>
+        <p class="math">
+            <big>(</big> (N&minus;n)/(N&minus;1)
+            <big>)</big><sup>&frac12;</sup> &times;
+            n<sup>&frac12;</sup> &times;SD(box).
+        </p>
+        <p>
+            The SE of the <a class="glossRef" href="gloss.htm#sample_mean">sample
+            mean</a> of a
+            <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>
+            of size <span class="math">n</span> from a box of tickets labeled with numbers is
+        </p>
+        <p class="math">
+           (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup>
+           &times;
+           n<sup>&minus;&frac12;</sup> &times; SD(box).
+        </p>
+        <p>
+            The SE of the <a class="glossRef" href="gloss.htm#sample_percentage">sample
+            percentage</a> of a
+            <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>
+            of size <span class="math">n</span> from a box of tickets, each labeled either
+            &quot;0&quot;zero or &quot;1&quot; is
+        </p>
+        <p class="math">
+            <big>(</big>
+           (N&minus;n)/(N&minus;1)
+           <big>)</big><sup>&frac12;</sup> &times; <big>(</big> p &times;
+           (1&minus;p) <big>)</big><sup>&frac12;</sup>/
+           n<sup>&frac12;</sup>.
+        </p>
+        <p>
+            The SE of a <a class="glossRef" href="gloss.htm#random_variable">random variable</a> with the
+            <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with
+            parameters <span class="math">n</span> and <span class="math">p</span> is
+        </p>
+        <p class="math">
+            n<sup>&frac12;</sup> &times; <big>(</big> p&times;(1&minus;p)
+            <big>)</big><sup>&frac12;</sup>.
+        </p>
+        <p>
+            The SE of a <a class="glossRef" href="gloss.htm#random_variable">random
+            variable</a> with the <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric
+            distribution</a> with parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n</span> is
+        </p>
+        <p class="math">
+           (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup> &times;
+           n<sup>&frac12;</sup> &times; <big>(</big>G/N &times;
+           (1&minus; G/N) <big>)</big><sup>&frac12;</sup>.
+        </p>
+        <p>
+            The SE of a <a class="glossRef" href="gloss.htm#random_variable">random
+            variable</a> with the
+            <a class="glossRef" href="gloss.htm#geometric_distrib">geometric distribution</a>
+            with parameter <span class="math">p</span> is
+        </p>
+        <p class="math">
+            (1&minus;p)<sup>&frac12;</sup>/p.
+        </p>
+        <p>
+            The SE of a <a class="glossRef" href="gloss.htm#random_variable">random
+            variable</a> with the
+            <a class="glossRef" href="gloss.htm#negative_binomial">negative binomial distribution</a>
+            with parameters <span class="math">r</span> and <span class="math">p</span> is
+        </p>
+        <p class="math">
+            r<sup>&frac12;</sup>(1&minus;p)<sup>&frac12;</sup>/p.
+        </p>
+</div>
+
+<p>&nbsp;</p>
+
+<p>
+    The probability calculator in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    displays the standard errors of some common discrete distributions, in addition
+    to their expected values.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probabilities for common discrete distributions. This tool shows the ' +
+               'expected values and standard errors of the distributions as well.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<APPLET align="baseline" code="DistCalc.class" codeBase="../../Java"
+    height="360" width="640" archive="PbsGui.zip">
+    <param name="distributions" value="binomial,geometric,hypergeometric,negative binomial">
+    You need Java to see this.
+</APPLET>
+</p>
+</div>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Binomial Probability Histogram.  This figure might be useful in solving the ' +
+               'exercises that follow. ';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="HistHiLite.class" codeBase="../../Java" align="middle"
+    width="600" height="400" archive="PbsGui.zip">
+    <param name="n" value="5">
+    <param name="p" value="0.5">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to identify the distributions of random variables from
+    verbal descriptions, and to calculate their standard errors.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var deniedEx2 = 100*listOfRandInts(1,10,20)[0];
+    var trueEx2 = listOfRandInts(1,Math.ceil(deniedEx2*0.05),Math.ceil(deniedEx2*0.15))[0];
+    var ssizeEx2 = 50*listOfRandInts(1,1,4)[0];
+    var eErEx2 = ssizeEx2*trueEx2/deniedEx2;
+    var seErEx2 = Math.sqrt(((deniedEx2 - ssizeEx2)/(deniedEx2 - 1))*ssizeEx2*trueEx2*
+    (deniedEx2-trueEx2)/(deniedEx2*deniedEx2));
+    var aVal1 = numToRange(eErEx2);
+    var aVal2 = numToRange(seErEx2);
+    var qStr = 'Suppose that in determining eligibility for welfare, a particular state ' +
+           'denied disability status to ' + deniedEx2.toString()   +
+           ' people who claimed to have disabilities, of whom ' + trueEx2.toString()   +
+           ' truly were disabled (the decisions in their cases were erroneous). ' +
+           'A simple random sample of ' + ssizeEx2.toString()  + ' claims from the ' +
+           deniedEx2.toString()   + ' that were denied disability status will be ' +
+           'taken. </p><p><span class="qSpan">The expected number of erroneously ' +
+           'denied disability claims in the sample is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    var qStr = '</p><p><span class="qSpan">The SE of the number of erroneously denied ' +
+           'claims in the sample is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+    var ansStr = 'The number of erroneously denied claims in the sample has an ' +
+         'hypergeometric distribution with parameters <span class="math">N = ' +
+         deniedEx2.toString() + '</span>, <span class="math">G = ' + trueEx2.toString() +
+         '</span>, and <span class="math">n = ' + ssizeEx2.toString() + '</span>. The expected value is </p>' +
+         '<p class="math">n&times;G/N = ' +
+         ssizeEx2.toString() + ' &times; ' +  trueEx2.toString() + '/' +
+         deniedEx2.toString() + ' = ' + (roundToDig(eErEx2,3)).toString() +
+         ' erroneously denied claims, </p><p>and the SE is </p>' +
+         '<p class="math"><big>(</big>' +
+         '(N&minus;n)/(N&minus;1)<big>)</big><sup>&frac12;</sup>' +
+         ' &times; <big>(</big>n &times; ' +
+         ' G/N &times; ' +
+         '(1&minus; G/N)<font size="+1">)</font><sup>&frac12;</sup> ' +
+         ' = <big>(</big> ' + (deniedEx2 - ssizeEx2).toString()+ '/' +
+         (deniedEx2-1).toString() + '<big">)</big><sup>&frac12;</sup> &times; ' +
+         '<big>(</big>' + ssizeEx2.toString() + ' &times; ' +
+         (roundToDig(trueEx2/deniedEx2,2)).toString()   + '&times;' +
+         (roundToDig((deniedEx2-trueEx2)/deniedEx2,2)).toString()+
+         '<big>)</big><sup>&frac12;</sup> <br /> = ' +
+         (roundToDig(seErEx2,3)).toString()   + ' erroneously denied claims.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var draws = (listOfRandInts(1,40,60))[0];
+    var nTicks = (listOfRandInts(1,8,15))[0];
+    var pPrime = nPrimes[nTicks]/nTicks;
+    var ePrimes = draws*pPrime;
+    var sePrimes = Math.sqrt(draws*pPrime*(1-pPrime));
+    var qStr = 'A box contains tickets labeled 1 through ' + cardinals[nTicks]  + '. ' +
+        Cardinals[draws] + ' tickets are to be drawn from the box at random with ' +
+        'replacement. </p><p><span class="qSpan">The expected number of tickets ' +
+        'labeled with prime numbers among the sample of ' + draws.toString() +
+        ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(ePrimes));
+    var qStr = '</p><p><span class="qSpan">The SE of the number of tickets labeled with ' +
+           'prime numbers among the sample of ' + draws.toString() + ' is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(sePrimes));
+    document.writeln('</p>');
+    var ansStr = 'The prime numbers between 1 and ' + cardinals[nTicks] + ' are {';
+    var curPrim = 2;
+    var inx = 0;
+    for (i=0; i < nPrimes[nTicks]; i++) {
+    ansStr += primes[i] + ', ';
+    }
+    ansStr = ansStr.substr(0,ansStr.length-2) + '}: ' + cardinals[nPrimes[nTicks]] + ' of the ' +
+         nTicks.toString() + ' tickets have prime numbers on them. The number of ' +
+         ' prime numbers in the sample of size ' + draws.toString() +
+         ' is thus like the sum of ' + draws.toString() + ' draws at random with ' +
+         ' replacement from a box that contains ' + nPrimes[nTicks].toString() +
+         ' tickets labeled &quot;1&quot; and ' + (nTicks - nPrimes[nTicks]).toString() +
+         ' tickets labeled &quot;0.&quot; Equivalently, the number of primes in the ' +
+         ' sample has a binomial distribution with parameters <span class="math">n=' +
+         draws.toString() + '</span> and <span class="math">p = ' + roundToDig(100*pPrime,2) + '%</span>. ' +
+         'The expected value of the number of primes in the sample is thus ' +
+         '<span class="math">n&times;p = ' + roundToDig(ePrimes,2) + '</span>, and the SE of the ' +
+         'number of primes in the sample is ' +
+         '<span class="math">(np(1&minus;p))<sup>&frac12;</sup> = (' +
+         draws.toString() + '&times;' + roundToDig(pPrime,2) + '&times;' +
+         roundToDig(1-pPrime,2) + ')<sup>&frac12;</sup> = ' + roundToDig(sePrimes,3) + '</span>.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nSuits = suits.length;
+    var deckSize = listOfRandInts(1,2,3)[0];
+    var pVec = new Array();
+    var nCards = nSuits*deckSize;
+    var otherCards = (nSuits-1)*deckSize;
+    var ansStr = 'First we need to find the probability distribution of the number ' +
+         'of cards that must be dealt.  Because the deal is without replacement, ' +
+         'the draws are dependent, and the distribution is not ' +
+         '<a class="glossRef" href="gloss.htm#geometric_distrib">geometric</a>.  ' +
+         'Let <span class="math">X</span> denote the number ' +
+         'of cards that must be dealt.  The possible values of <span class="math">X</span> are ' +
+         '1, 2, &hellip; , ' +
+         (otherCards+1).toString() + '. The chance that <span class="math">x</span> cards must be ' +
+         'turned over is the chance that the first <span class="math">x&minus;1</span> cards are not ' +
+         suits[0] + ' and the <span class="math">x</span>th card is a ' +
+         suits[0].substring(0,suits[0].length-1) + '. ' +
+         'Because the deck is well shuffled, all <span class="math"><sub>' + nCards.toString() +
+         '</sub>C<sub>x&minus;1</sub></span> subsets of <span class="math">x&minus;1</span> of the ' +
+         nCards.toString() + ' cards are equally likely to be the first <span class="math">x&minus;1</span> ' +
+         'cards; of those, only <span class="math"><sub>' + otherCards.toString() + '</sub>C<sub>' +
+         'x&minus;1</sub></span> consist of cards other than ' + suits[0] + '. ' +
+         'The conditional chance that the <span class="math">x</span>th card is a ' +
+         suits[0].substring(0,suits[0].length-1) + ' given that the first ' +
+         '<span class="math">x&minus;1</span> are not is </p><p class="math">' +
+         '(#' + suits[0] + ')/(#cards remaining) = ' + deckSize.toString() +
+         '/(' + nCards.toString() + ' &minus; (x&minus;1)),</p><p> ' +
+         'so, by the <a class="glossRef" href="gloss.htm#multiplication_rule">multiplication rule</a>, ' +
+         'the chance that the first ' + suits[0].substring(0,suits[0].length-1) +
+         ' is dealt in the <span class="math">x</span>th place is </p><p class="math">' +
+         '(<sub>' + otherCards.toString() + '</sub>C<sub>x&minus;1</sub>/' +
+         '<sub>' + nCards.toString() + '</sub>C<sub>x&minus;1</sub>)&times;(' +
+         deckSize.toString() + '/(' + nCards.toString() + ' &minus; x + 1)), ' +
+         'for <span class="math">x = 1, &hellip; , ' +
+         (otherCards+1).toString() + '</span>. ' +
+         '</p><p>The probability distribution of <span class="math">X</span>, and the calculations ' +
+         'we need, are in the following table: </p><div align="center">' +
+         '<center><table class="dataTable"><caption>Calculation of E(X<sup>2</sup>)</caption>' +
+         '<th id="col0"><span class="math">x</span></th>' +
+         '<th id="col1"><span class="math">P(X=x)</span></th>' +
+         '<th id="col2"><span class="math">x&times;P(X=x)</span></th>' +
+         '<th id="col3"><span class="math">(x&minus;E(X))<sup>2</sup></span></th>' +
+         '<th id="col4"><span class="math">(x&minus;E(X))<sup>2</sup>&times;P(X=x)</span></th>' +
+         '</tr>';
+    var eCards = 0;
+    for (var i=0; i <= otherCards; i++) {
+        pVec[i] = binomialCoef(otherCards,i)/binomialCoef(nCards,i)*deckSize/(nCards-i);
+        eCards += pVec[i]*(i+1);
+    }
+    var seCards = 0;
+    var sePiece;
+    var sqPiece;
+    var ePiece;
+    for (var i=0; i < pVec.length; i++) {
+    ePiece = (i+1)*pVec[i];
+    sqPiece = (i+1-eCards)*(i+1-eCards);
+    sePiece = sqPiece*pVec[i];
+    seCards += sePiece;
+    ansStr += '<tr><td headers="col0">' + (i+1).toString() + '</td>' +
+              '<td headers="col1">' + roundToDig(pVec[i],3).toString() + '</td>' +
+              '<td headers="col2">' + roundToDig(ePiece,3).toString() + '</td>' +
+              '<td headers="col3">' + roundToDig(sqPiece,3).toString() + '</td>' +
+              '<td headers="col4">' + roundToDig(sePiece,3).toString() + '</td></tr>';
+    }
+    seCards = Math.sqrt(seCards);
+    ansStr += '</table></center></div><p>The expected value is the sum of the column ' +
+          'labeled <span class="math">x&times;P(X=x)</span>, which is ' +
+          roundToDig(eCards,3).toString() +
+          '; the SE is the square-root of sum of the column labeled ' +
+          '<span class="math">(x&minus;E(X))<sup>2</sup>&times;P(X=x)</span>, ' +
+          'which is ' + roundToDig(seCards,3).toString() + '. ';
+    var aVal1 = numToRange(eCards);
+    var aVal2 = numToRange(seCards);
+    var qStr = 'An unusual deck of playing cards has a total of ' + nCards.toString() +
+           ' cards in all; ' + cardinals[deckSize]  + ' cards in each of ' +
+           cardinals[nSuits]  + ' suits: ';
+    for (var i=0; i < nSuits-2; i++ ) {
+    qStr += suits[i] + ', ';
+    }
+    qStr += suits[nSuits-2] + ' and ' + suits[nSuits-1] + '. The deck will be shuffled ' +
+        'well, then one card at a time will be dealt from the top of the deck ' +
+        '(without replacement) until the first time a ' +
+        suits[0].substring(0,suits[0].length-1) + ' appears. <span class="qSpan">' +
+        'The expected number of cards that must be turned over before ' +
+        '(and including) the first ' + suits[0].substring(0,suits[0].length-1) +
+        ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal1);
+    var qStr = '</p><p><span class="qSpan">The standard error of the number of cards ' +
+           'that must be turned over before (and including) the first ' +
+           suits[0].substring(0,suits[0].length-1) + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="summary"></a> Summary
+</h2>
+
+<p>
+    Any random variable can be written as its expected value plus chance variability that has
+    expected value equal to zero.
+    The typical size of the chance variability is the standard error (SE) of the random variable.
+    The SE is a measure of the spread of the probability distribution of the random
+    variable, and is directly analogous to the SD of a list.
+    The SE of a random variable is the square-root of the expected value of the
+    square of the chance variability:
+</p>
+
+<p class="math">
+    SE(X) = ( E( (X&minus;E(X))<sup>2</sup> ) )<sup>&frac12;</sup>.
+</p>
+
+<p>
+    The SE of a random variable is completely determined by the probability distribution
+    of the random variable, and we speak of the SE of a random variable and of its
+    probability distribution interchangeably.
+    To calculate the SE of a random variable requires calculating the expected value of a
+    transformation of the random variable.
+    The expected value of a transformation <span class="math">Y=g(X)</span> of a discrete
+    random variable <span class="math">X</span> can be calculated directly from the definition of the
+    expected value of <span class="math">Y</span>, or by a shortcut method:
+    If <span class="math">Y=g(X)</span> and the possible values of <span class="math">X</span> are
+    <span class="math">x<sub>1</sub>, x<sub>2</sub>, x<sub>3</sub>, &hellip;</span> , then
+</p>
+
+<p class="math">
+    E(Y) = g(x<sub>1</sub>)&times;P(X=x<sub>1</sub>) +
+    g(x<sub>2</sub>)&times;P(X=x<sub>2</sub>) +
+    g(x<sub>3</sub>)&times;P(X=x<sub>3</sub>) + &hellip;
+</p>
+
+<p>
+    In many cases, to calculate the standard error of a random variable defined in terms
+    of other random variables requires starting from scratch, but some special cases are
+    particularly simple.
+    For example, if <span class="math">Y = a&times;X+b</span>, where <span class="math">a</span>
+    and <span class="math">b</span> are constants,
+    then
+</p>
+
+<p class="math">
+    SE(Y) = |a|&times;SE(X).
+</p>
+
+<p>
+    A collection of random variables is <span class="termOfArt">independent</span> if every event determined by a
+    sub-collection of the random variables is independent of every event determined by
+    the other random variables in the collection.
+    Examples of independent random variables include the numbers on tickets in different
+    random draws with replacement from a box of numbered tickets.
+    If a collection of random variables is not independent, it is <span class="termOfArt">dependent</span>.
+    The expected value of a product of independent random variables is the product
+    of their expected values, and the SE of a sum of independent random variables is the
+    square-root of the sum of the squares of their standard deviations.
+    (The expected value of a sum of random variables is the sum of their expected values,
+    whether the random variables are independent or dependent.)
+    The SE of the sample sum of <span class="math">n</span> independent random draws with replacement
+    from a box of tickets labeled with numbers is
+</p>
+
+<p class="math">
+    n<sup>&frac12;</sup>&times;SD(box),
+</p>
+
+<p>
+    where SD(box) is the standard deviation
+    of the list of labels on the tickets in the box, counting duplicates as
+    often as they occur.
+    For a 0-1 box with a fraction <span class="math">p</span> of tickets labeled &quot;1,&quot;
+</p>
+
+<p class="math">
+    SD(box) = (p&times;(1&minus;p))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    Because the sample sum of <span class="math">n</span> independent random draws with replacement from a
+    0-1 box with a fraction <span class="math">p</span> of tickets labeled &quot;1&quot; has a binomial
+    distribution with parameters <span class="math">n</span> and <span class="math">p</span>, the SE of the binomial
+    distribution with parameters <span class="math">n</span> and <span class="math">p</span> is
+</p>
+
+<p class="math">
+    n<sup>&frac12;</sup>&times;(p&times;(1&minus;p))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    The SE of the sample mean of <span class="math">n</span> independent random draws with replacement from a
+    box of tickets labeled with numbers is
+</p>
+
+<p class="math">
+    n<sup>&minus;&frac12;</sup>&times;SD(box).
+</p>
+
+<p>
+    The SE of the sample percentage &phi; of a random sample of size <span class="math">n</span>
+    with replacement from a 0-1 box is
+</p>
+
+<p class="math">
+    n<sup>&minus;&frac12;</sup>&times;(p&times;(1&minus;p))<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">p</span> is the fraction of tickets in the box labeled &quot;1.&quot;
+    For random samples without replacement, simple random samples, all these results are
+    modified by the finite population correction
+</p>
+
+<p class="math">
+    f = (N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">n</span> is the sample size and <span class="math">N</span> is the number of tickets in the box.
+    For example, the SE of the sample sum of the labels on a simple random sample of <span class="math">n</span>
+    tickets drawn from a box of N tickets labeled with numbers is
+</p>
+
+<p class="math">
+    f&times;n<sup>&frac12;</sup>&times;SD(box),
+</p>
+
+<p>
+    and the SE of the sample mean of the labels is
+</p>
+
+<p class="math">
+    f&times;n<sup>&minus;&frac12;</sup>&times;SD(box).
+</p>
+
+<p>
+    It follows that the SE of a random variable with an hypergeometric distribution
+    with parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n</span> is
+</p>
+
+<p class="math">
+    f&times;n<sup>&frac12;</sup>&times;(G/N &times;
+    (1&minus;G/N))<sup>&frac12;</sup>
+</p>
+
+<p>
+    and that the SE of the sample percentage &phi; of a simple random sample from a
+    0-1 box is
+</p>
+
+<p class="math">
+    f&times;n<sup>&minus;&frac12;</sup>&times;
+    (p&times;(1&minus;p))<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">p= G/N</span> is the fraction of tickets labeled &quot;1&quot;
+    in the box.
+    The SE of the geometric distribution with parameter <span class="math">p</span> is
+</p>
+
+<p class="math">
+    (1&minus;p)<sup>&frac12;</sup>/p.
+</p>
+
+<p>
+    A random variable with a negative binomial distribution with parameters
+    <span class="math">r</span> and <span class="math">p</span> can be written as a sum of <span class="math">r</span>
+    independent random variables with geometric distributions with the same parameter
+    <span class="math">p</span>, so the SE of the negative binomial distribution with parameters
+    <span class="math">r</span> and <span class="math">p</span> is
+</p>
+
+<p class="math">
+    r<sup>&frac12;</sup>&times;(1&minus;p)<sup>&frac12;</sup>/p.
+</p>
+
+<h2>
+    <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li> 0-1 box                         </li>
+    <li> affine transformation           </li>
+    <li> average                         </li>
+    <li> binomial                        </li>
+    <li> Chebychev’s Inequality          </li>
+    <li> converge                        </li>
+    <li> dependent                       </li>
+    <li> deviation                       </li>
+    <li> discrete                        </li>
+    <li> event                           </li>
+    <li> expectation                     </li>
+    <li> expected value                  </li>
+    <li> experiment                      </li>
+    <li> finite population correction    </li>
+    <li> geometric distribution          </li>
+    <li> hypergeometric distribution     </li>
+    <li> independent events              </li>
+    <li> independent random variables    </li>
+    <li> indicator random variable       </li>
+    <li> intersection                    </li>
+    <li> Law of Large Numbers            </li>
+    <li> location                        </li>
+    <li> mean                            </li>
+    <li> mutually exclusive              </li>
+    <li> negative binomial distribution  </li>
+    <li> population                      </li>
+    <li> probability                     </li>
+    <li> probability distribution        </li>
+    <li> random variable                 </li>
+    <li> rms                             </li>
+    <li> sample mean                     </li>
+    <li> sample percentage               </li>
+    <li> sample size                     </li>
+    <li> sample sum                      </li>
+    <li> sampling distribution           </li>
+    <li> simple random sample            </li>
+    <li> spread                          </li>
+    <li> standard deviation              </li>
+    <li> standard error                  </li>
+    <li> transformation                  </li>
+    <li> unit                            </li>
+</ul>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</form>
+</body>
+</html>

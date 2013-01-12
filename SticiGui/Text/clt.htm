@@ -1,0 +1,1742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "29 July 2011 11:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "clt";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>
+    The Normal Curve, the Central Limit Theorem, and Markov's
+    and Chebychev's Inequalities for Random Variables
+</h1>
+
+
+<p>
+    In many situations it is not practical or not possible to calculate probabilities exactly.
+    This chapter presents three ways to approximate the probability that a
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+    falls in a particular range of values, i.e., to approximate the area of part of a probability
+    histogram: the normal approximation, Markov's Inequality for random variables,
+    and Chebychev’s inequality for random variables.
+</p>
+
+<p>
+    The <span class="termOfArt">normal approximation</span> approximates a probability by the area
+    under part of a special curve, the <span class="termOfArt">normal curve</span>.
+    The appropriate part of the normal curve is found by transforming
+    values of the random variable to standard units&mdash;the number of standard errors above the
+    expected value.
+    The normal approximation is accurate for many probability distributions.
+    The Central Limit Theorem asserts that the normal approximations to the
+    probability distributions of the sample sum and sample mean of independent
+    random draws with replacement from a box of numbered tickets improve as the
+    number of draws grows, no matter what numbers are on the tickets in the box.
+</p>
+
+<p>
+    The normal approximation is not accurate for every random variable.
+    There are universal inequalities that limit the probability
+    that a random variable falls in various ranges, even when the normal approximation
+    is not accurate.
+    The inequalities presented in this chapter are analogues of Markov's
+    Inequality and Chebychev's Inequality for lists.
+    Markov's Inequality for random variables limits the probability that a
+    nonnegative random variable exceeds any multiple of its expected value.
+    Chebychev's inequality for random variables limits the probability that a
+    random variable differs from its expected value by any multiple of its SE.
+    The normal approximation and Chebychev's inequality are the foundations of
+    inferential techniques developed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('confidenceIntervals') + ', and ' +
+                     citeLinkChapter('zTest') + '. ' );
+// -->
+</script>
+</p>
+
+<h2>
+    <a id="norm_approx"></a>
+    The Normal Approximation
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=563&end=663" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    Some probabilities are hard to compute exactly.
+    For example, to calculate the chance of drawing 1,000 or fewer tickets labeled
+    &quot;1&quot; in 10,000 draws without replacement from 0-1 box that contains
+    100,000 tickets of which
+    30,000 are labeled &quot;1&quot; would require summing 1001 terms, each of
+    which involves ratios of combinations of 30,000, 70,000, and 100,000 things.
+    Computing the terms without causing overflow or underflow is a challenge.
+    Suppose we want to know the probability that the sample mean of independent
+    random draws from a box of numbered tickets falls in some range, but we do
+    not know the labels on all the tickets, only their mean and SD.
+    Could we find the probability?
+    This section develops a tool that allows us to solve both problems&mdash;approximately.
+    The tool, called the <span class="termOfArt">normal approximation</span>, involves two steps:
+    transforming the range of values whose probability is sought into
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>,
+    and finding the area under a special curve, the normal curve, over the
+    transformed range.
+    For some random variables, that area is close to the actual probability of the
+    original range; for others, it is not.
+    If the random variable is the sample sum or sample mean of a large number of
+    independent random draws from a box of numbered tickets, the normal
+    approximation tends to be accurate;
+    the accuracy increases as the number of draws increases.
+</p>
+
+<h3>
+    <a id="su_for_rv"></a>Standard Units for Random Variables
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=662&end=1056" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('correlation') + ', ');
+// -->
+</script>
+    we learned to transform
+    a list to <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+    (<a class="glossRef" href="gloss.htm#standardize">standardize</a>
+    the list) by subtracting the <a class="glossRef" href="gloss.htm#mean">mean</a> of the list from each
+    element of the list to get the list of <a class="glossRef" href="gloss.htm#deviation">deviations</a>
+    from the <a class="glossRef" href="gloss.htm#mean">mean</a>,
+    then dividing the list of <a class="glossRef" href="gloss.htm#deviation">deviations</a>
+    from the mean by the <a class="glossRef" href="gloss.htm#sd">standard deviation</a> of the original list.
+    A list element expressed in standard units is the number of standard deviations
+    by which the element exceeds mean.
+    The <a class="glossRef" href="gloss.htm#mean">mean</a> of a list in
+    <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a> is zero, and the <a class="glossRef" href="gloss.htm#sd">SD</a> of a list in
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a> is unity.
+    Transforming to standard
+    units is an <a class="glossRef" href="gloss.htm#affine">affine transformation</a>:
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">(original value) &minus; (original mean)</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">original value</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">original mean</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">(standardized value)</td>
+        <td valign="middle" align="center">= </td>
+        <td valign="middle" align="center">----------------------------------------</td>
+        <td valign="middle" align="center">= </td>
+        <td valign="middle" align="center">---------------------- </td>
+        <td valign="middle" align="center">&nbsp;&minus;&nbsp;</td>
+        <td valign="middle" align="center">---------------------- .</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">original SD</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">original SD</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">original SD</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>&nbsp;
+</p>
+<p>
+    Similarly, we can standardize a
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> X by
+    subtracting its <a class="glossRef" href="gloss.htm#expectation">expected value E(X)</a>
+    and dividing by its <a class="glossRef" href="gloss.htm#se">standard error SE(X)</a>:
+</p>
+<p>&nbsp;
+    
+</p>
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">X &minus; E(X)</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">X</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">E(X)</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">
+        (X in standard units)
+        </td>
+        <td valign="middle" align="center">
+        =
+        </td>
+        <td valign="middle" align="center">
+        ---------------
+        </td>
+        <td valign="middle" align="center">
+        =
+        </td>
+        <td valign="middle" align="center">
+        ---------------
+        </td>
+        <td valign="middle" align="center">
+        &nbsp;&minus;&nbsp;
+        </td>
+        <td valign="middle" align="center">
+        --------------- .
+        </td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">
+        SE(X)
+        </td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">SE(X)</td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center">SE(X)</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<div class="indent">
+<p class="inline">
+    This is an <a class="glossRef" href="gloss.htm#affine">affine
+    transformation</a> of X.
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of a
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> in
+    <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a> is zero, and the
+    <a class="glossRef" href="gloss.htm#se">SE</a> of a
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+    in <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a> is unity.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'The expected value of a random variable in standard units is zero, ' +
+               'and the SE of a random variable in standard units is 1.</p><p> Because ' +
+               '</p><p class="math">E(aX+b) = a&times;E(X)+b</p>' +
+               '<p>for any numbers <span class="math">a</span> and <span class="math">b</span>, </p><p class="math">' +
+               'E( (X&minus;E(X))/SE(X) ) = 1/SE(X) &times; ( E(X) &minus; E(E(X)) )</p><p class="math">' +
+               '= 1/SE(X) &times; ( E(X) &minus; E(X) )</p><p class="math">' +
+               '= 1/SE(X) &times; 0 = 0, </p><p> so the expected value of X in standard units ' +
+               'is 0.  Similarly, because </p><p class="math">SE(aX+b) = ' +
+               '|a|&times;SE(X),</p><p class="math">' +
+               'SE(  (X&minus;E(X))/SE(X) ) =  SE(X/SE(X) &minus; E(X)/SE(X)) </p><p class="math">' +
+               '= 1/SE(X) &times; SE(X) = 1,</p><p> so the SE of X in standard units is 1.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates converting a value of a random variable to standard units.
+    The example is dynamic: it will tend to change whenever you reload the page.
+</p>
+
+<!-- ====================================================================== -->
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Converting values of a random variable to standard units.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var n = listOfRandInts(1,10,100)[0];
+    var p = roundToDig((listOfRandInts(1,1,9)[0])/10,1);
+    var x = listOfRandInts(1,0,n)[0];
+    var qStr = '<p>Let X be the sample sum of ' + n.toString() + ' independent random draws ' +
+               'with replacement from a box of 100 tickets of which ' +
+               roundToDig(100*p,0).toString() + ' are labeled &quot;1,&quot; and the rest ' +
+               'are labeled &quot;0.&quot; What value in standard units corresponds to ' +
+               'X = ' + x.toString() + '?</p>';
+    document.writeln(qStr);
+    qStr = '<p><strong>Solution.</strong> X has a <a class="glossRef" href="gloss.htm#binomial">binomial</a> ' +
+           'distribution with parameters <span class="math">n = ' + n.toString() +
+           '</span> and <span class="math">p = ' +
+           (100*p).toString() + '%</span>. The expected value of <span class="math">X</span> ' +
+           'is <span class="math">E(X) = n&times;p = ' +
+           (roundToDig(n*p,3)).toString() +  '</span>, and the standard error of <span class="math">X</span> is ' +
+           '<span class="math">SE(X) = (n&times;p&times;(1&minus;p))<sup>&frac12;</sup> ' +
+           '= ' + (roundToDig(Math.sqrt(n*p*(1-p)),3)).toString() + '</span>, so in standard units, ' +
+           '<span class="math">X = ' + x.toString() + '</span> corresponds to </p>' +
+           '<p class="math">(' + x.toString() +
+           '&minus; E(X))/SE(X) = (' + x.toString() + ' &minus; ' + (roundToDig(n*p,3)).toString() + ')/' +
+           (roundToDig(Math.sqrt(n*p*(1-p)),3)).toString() + ' = ' +
+           (roundToDig((x - n*p)/Math.sqrt(n*p*(1-p)),3)).toString() + '. </p>';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<h3>
+    <a id="normal_curve"></a>The Normal Curve
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=1056&end=1134" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    The Normal Curve is the familiar
+    &quot;bell-shaped&quot; curve many people associate with Statistics.
+    It is also called the Gaussian curve.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows a section of the normal curve from &minus;5 to 5.
+    The curve is positive everywhere, but gets small rather quickly as <span class="math">x</span> moves away from 0:
+    The area under the curve between minus infinity and &minus;5 and between 5 and infinity is
+    about 0.00000057.
+    The scrollbars and text boxes in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    let you highlight any range of values within
+    &plusmn;5 and see the area under the normal curve for the highlighted range.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The Normal Curve';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+        align="baseline" width="600" height="280" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="0">
+    <param name="hiLiteLo" value="0">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#standard_normal">normal curve</a> has the form
+</p>
+<p class="math">
+    y = (2&times;&pi;)<sup>&minus;&frac12;</sup>
+    &times;e<sup>&minus;x<sup>2</sup>/2</sup>.
+</p>
+
+<p>
+    In this definition, <span class="math">&pi;</span> is the ratio
+    of the circumference of a circle to its diameter, 3.14159265&hellip;, and <span class="math">e</span>
+    is the base of the natural
+    logarithm, 2.71828&hellip; .
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> depends on
+    <span class="math">x</span> only through <span class="math">x<sup>2</sup></span>.
+    Because <span class="math">(&minus;x)<sup>2</sup> = x<sup>2</sup></span>, the curve has the same
+    height <span class="math">y</span> at <span class="math">x</span> as it does at
+    <span class="math">&minus;x</span>,
+    so the normal curve is symmetric about <span class="math">x=0</span>.
+    The total area under the normal curve is unity,
+    just as the total area under a <a class="glossRef" href="gloss.htm#histogram">histogram</a> must be.
+    Because the curve is symmetric, that implies
+    that the area under the curve from minus infinity to 0 is the same as
+    the area from 0 to
+    infinity, namely, &frac12;.
+    Because the curve is symmetric around zero, it balances at zero (to
+    use the analogy we used for the histogram).
+    If you think of the <a class="glossRef" href="gloss.htm#standard_normal">normal curve</a> as a
+    histogram, it would correspond to a distribution whose mean equals zero.
+    The <a class="glossRef" href="gloss.htm#sd">SD</a> of the
+    <a class="glossRef" href="gloss.htm#standard_normal">normal curve</a>,
+    suitably defined, is unity.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#standard_normal">normal curve</a> turns out to be a good
+    approximation to many <a class="glossRef" href="gloss.htm#probability_histogram">probability histograms</a>,
+    in the sense that the area under the <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histograms</a> over a given range of values is close to the area under the
+    <a class="glossRef" href="gloss.htm#standard_normal">normal curve</a> over that range of values
+    transformed to the corresponding range of <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a>, as we shall see presently.
+</p>
+
+<p>
+    The area under the normal curve between minus infinity and <span class="math">x</span>
+    is
+</p>
+<p class="math">
+    100% &minus; (area under the normal curve between x and infinity).
+</p>
+
+<p>
+    (This is essentially the Complement Rule&mdash;the area under the entire curve is 100%;
+    that area is the sum of the area under the curve to the left of <span class="math">x</span>
+    and the area under the curve to the right of <span class="math">x</span>.)
+    By symmetry, for <span class="math">x&ge;0</span>, the area under the normal
+    curve between <span class="math">&minus;x</span> and <span class="math">+x</span> is
+</p>
+<p class="math">
+    100% &minus; 2&times;(area under normal curve between x and infinity).
+</p>
+
+<p>&nbsp;
+    
+</p>
+
+<p>
+    Table
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    contains some facts to commit to memory:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Area under the normal curve for three intervals symmetric around zero';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+        <caption>Areas under the normal curve</caption>
+    <tr>
+        <th id="col0">
+        The area under the standard<br />
+        normal curve between &plusmn;
+        </th>
+        <th id="col1">
+        is approximately
+        </th>
+    </tr>
+    <tr>
+        <td headers="col0">1</td>
+        <td headers="col1">0.68</td>
+    </tr>
+    <tr>
+        <td headers="col0">2</td>
+        <td headers="col1">0.95</td>
+    </tr>
+    <tr>
+        <td headers="col0">3</td>
+        <td headers="col1">0.997</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    Many books tabulate areas under the normal curve
+    between <span class="math">&plusmn;x</span> or between minus infinity
+    and <span class="math">x</span> for closely
+    spaced values of <span class="math">x</span>.
+</p>
+
+<p>
+    To find other areas, you can either use the applet in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    (it is also available from the
+    <a href="../../Java/Html/index.htm" target="_top">Tools
+    page</a>), or you can calculate the areas using the
+    tabulated values and the following facts:
+</p>
+
+<ul>
+    <li>
+        The total area under the normal curve is 100%
+    </li>
+    <li>
+        The normal curve is symmetric.
+    </li>
+</ul>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates this approach.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Calculating areas under the normal curve from tabulated values.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose we want to know the area under the normal
+    curve between 2 and infinity.
+    That is half of the area between minus infinity and &minus;2 and
+    between 2 and infinity, by symmetry.
+    That, in turn, is the entire area under the curve
+    (namely, 1), minus the area between &minus;2 and 2, which is 0.95, so the area we want is
+    (&frac12;)&times; (1&minus;0.95) = 0.025.
+    In pictures, we have:
+</p>
+
+<div class="figure">
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/" align="baseline"
+      width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="5">
+    <param name="hiLiteLo" value="2">
+    You need Java to see this.
+    </applet>
+</p>
+
+<p class="math">
+    = half of
+</p>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+       align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="5">
+    <param name="hiLiteLo" value="-5">
+    You need Java to see this.
+    </applet>
+</p>
+
+<p class="math">
+    &minus; half of
+</p>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/" align="baseline" width="600"
+        height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="2">
+    <param name="hiLiteLo" value="-2">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Similarly, the area under the curve between &minus;1.5 and
+    +2.3 is half the area between &plusmn;1.5 plus half the area between &plusmn;2.3:
+</p>
+
+<div class="figure">
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/" align="baseline"
+         width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="2.3">
+    <param name="hiLiteLo" value="-1.5">
+    You need Java to see this.
+    </applet>
+</p>
+
+<p class="math">
+    = half of
+</p>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+        align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="1.5">
+    <param name="hiLiteLo" value="-1.5">
+    You need Java to see this.
+    </applet>
+</p>
+
+<p class="math">
+    + half of
+</p>
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/" align="baseline"
+      width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="2.3">
+    <param name="hiLiteLo" value="-2.3">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+</div>
+
+<h2>
+    <a id="normal_approx_to_distributions"></a>
+    The Normal Approximation to Probability Histograms
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=1134&end=2670" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    The normal curve approximates many probability histograms accurately,
+    in the following sense:
+    The area under the probability histogram over any given range of values is
+    close to the area under the normal curve for that range of values, if
+    the range is measured in standard units.
+</p>
+
+<p>
+    When the normal curve approximates a probability histogram well,
+    the expected value and the SE of the distribution are a nearly complete
+    description of the distribution.
+    More typically, the expected value and SE are not enough information to
+    characterize a probability distribution well.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    lets us look at the empirical distribution of the sample sum or sample mean
+    of draws at random with replacement from a box of tickets, this time, with the normal
+    curve superposed on the histogram of the values of the sample sum or sample mean.
+    The scale for the normal curve corresponds to standard units,
+    but only the original units are plotted.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Normal approximation to the sampling distribution of the sample mean and sample sum';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet width="600" height="300" code="SampleDist.class"
+      codebase="../../Java/" archive="PbsGui.zip">
+    <param name="bins" value="100">
+    <param name="variables" value="sum,mean">
+    <param name="startWith" value="sum">
+    <param name="sources" value="box">
+    <param name="toggleMean" value="true">
+    <param name="showBoxHist" value="false">
+    <param name="replaceControl" value="false">
+    <param name="boxContents" value="0,1,2,3,4">
+    <param name="boxHistControl" value="false">
+    <param name="curveControls" value="true">
+    <param name="curves" value="normal">
+    <param name="sampleSize" value="3">
+    <param name="showBoxHist" value="false">
+    <param name="showCurve" value="true">
+    <param name="replace" value="true">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    When you first open this chapter, the box in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    will contain 5 tickets, labeled &quot;0,&quot; &quot;1,&quot; &quot;2,&quot; &quot;3,&quot;
+    and &quot;4.&quot;
+    The sample size will be set to 3, so each time you click the Take
+    Sample button, the computer will draw three tickets at random,
+    <a class="glossRef" href="gloss.htm#independent">independently</a>, with replacement from the box, and update
+    the <a class="glossRef" href="gloss.htm#histogram">histogram</a> to include the corresponding value of the
+    <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>.
+    Click the Take Sample button a few
+    times to get the feel of the tool, then increase the Samples to Take to 1000,
+    and take ten thousand samples of size 3. The histogram of the values of the sample
+    sum will then approximate the probability distribution of the sample sum of 3
+    tickets drawn with replacement from the box reasonably well (according to the
+    <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a>).
+    Use the scrollbars to highlight different parts of the histogram, and
+    compare the area under the histogram with the area under the corresponding
+    part of the normal curve.
+    The two will agree roughly, but not extremely well.
+</p>
+
+
+<p>
+    Now change the Sample Size to 100 and repeat the experiment: draw 10,000
+    samples of size 100, so that
+    the empirical distribution of the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> is a good
+    approximation to the probability distribution of the sample sum.
+    Compare the area
+    under the histogram in various ranges with the area under the normal curve in the same
+    ranges.
+    You should find that they agree remarkably well.
+</p>
+
+<p>
+    Try changing the numbers in the box (delete the numbers and type new
+    numbers over them), and repeat the experiment.
+    Regardless of what numbers you put in the box, if the sample size is small,
+    the normal curve does not approximate the distribution of the sample sum well,
+    but if the sample size is large, the normal curve approximates the probability
+    histogram of the sum of the draws quite well.
+    Use the drop-down list to toggle from the sample sum to the sample mean and
+    repeat the experiment; you should find that the results are the same.
+    Both for the sample sum and for the sample mean, the sample size required for
+    the normal curve to approximate the probability histogram with a specified
+    accuracy depends on the numbers on the tickets in the box.
+    Because the random
+    variable is converted to standard units before comparing the histogram with the
+    normal curve, the expected value and SE of the random variable do not by themselves
+    affect the accuracy of the normal approximation&mdash;they cancel out of the approximation.
+</p>
+
+<p>
+    For example, if the normal approximation to the probability histogram of X is
+    accurate, so is the normal approximation to the probability histogram of
+    <span class="math">aX+b</span>.
+    Because the expected value of the sample mean is Ave(box) and the SE of the sample
+    mean is <span class="math">SD(box)/n<sup>&frac12;</sup></span>, this means that the accuracy of
+    normal approximation to the probability histogram of the sample mean does not
+    depend directly on the mean or SD of the list of numbers on the tickets in the box.
+    However, the accuracy depends critically on the skewness of the distribution
+    of the numbers on the tickets in the box.
+</p>
+
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">The Central Limit Theorem</span>
+        </p>
+        <p>
+            The <a class="glossRef" href="gloss.htm#probability_histogram">probability
+            histograms</a> of the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>
+            and <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> of
+            <span class="math">n</span> <a class="glossRef" href="gloss.htm#independent">independent</a>
+            draws from a box of tickets labeled with numbers are approximated
+            increasingly well by a <a class="glossRef" href="gloss.htm#normal_curve">normal
+            curve</a> as <span class="math">n</span> increases, in the sense that
+            the area under the histogram between <span class="math">a</span> and <span class="math">b</span> is
+            increasingly close to the area under the normal curve between
+            <span class="math">a</span> converted to
+            <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+            and <span class="math">b</span> converted to
+            <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+        </p>
+        <p>
+            For example, as <span class="math">n</span> increases, the chance that the
+            <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> of <span class="math">n</span>
+            <a class="glossRef" href="gloss.htm#independent">independent</a>
+            draws from a box of tickets labeled with numbers is between
+            <span class="math">a</span> and <span class="math">b</span> converges to the area under the
+            normal curve between
+        </p>
+        <p class="math">
+            n<sup>&frac12;</sup>&times;(a &minus; Ave(box))/SD(box) &nbsp;&nbsp; and &nbsp;&nbsp;
+            n<sup>&frac12;</sup>&times;(b &minus; Ave(box))/SD(box),
+        </p>
+        <p>
+            where Ave(box) is the mean of the labels on the
+            tickets in the box, and SD(box) is the standard deviation of the
+            labels on the tickets in the box.
+        </p>
+        <p>
+            The accuracy of the normal approximation to the probability distribution of the sample
+            sum or sample mean of draws at random with replacement from a box of numbered tickets
+            depends on the distribution of the numbers on the tickets in the box.
+        </p>
+        <p>
+            The accuracy is better when the distribution of
+            numbers on the tickets in the box is symmetric (versus skewed), unimodal (versus multimodal),
+            and smeared out (versus &quot;chunky&quot;).
+            The accuracy does not depend directly on the number of tickets in the box or on the
+            mean or SD of the numbers on the tickets.
+        </p>
+        <p>
+            For any given box of numbered tickets, the accuracy of the normal approximation tends to
+            improve as the number of draws increases.
+            But the number of draws needed to attain any particular level of accuracy depends on the
+            distribution of numbers in the box.
+        </p>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> of <span class="math">n</span>
+    <a class="glossRef" href="gloss.htm#independent">independent</a> draws with replacement from a box that
+    contains a fraction <span class="math">p</span> of tickets labeled &quot;1&quot;
+    and a fraction <span class="math">(1&minus;p)</span>
+    of tickets labeled &quot;0&quot; is a special case.
+    That sample sum has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with
+    parameters <span class="math">n</span> and <span class="math">p</span>.
+    When <span class="math">n</span> is large, the Central Limit Theorem says the
+    <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a> is approximated well by the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>
+    after <a class="glossRef" href="gloss.htm#transformation">transforming</a> the number of
+    successes to <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+    by subtracting the expected number of
+    successes, <span class="math">np</span>, and dividing
+    by the SE of the number of successes,
+    <span class="math">(np(1&minus;p))<sup>&frac12;</sup></span>.
+</p>
+
+<h3>
+    <a id="continuity_correction"></a>
+    The Continuity Correction
+</h3>
+
+<p>
+    In approximating the probability histogram of a
+    <a class="glossRef" href="gloss.htm#discrete">discrete random variable</a> by the
+    <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>, it usually helps to adjust the
+    endpoints of the range to reflect the possible values of the discrete
+    random variable.
+    For example, in approximating the <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a> by the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>, one can get more
+    accurate answers by finding the area under the <a class="glossRef" href="gloss.htm#normal_curve">normal
+    curve</a> corresponding to a slightly different range, ending at half-integers,
+    <a class="glossRef" href="gloss.htm#transformation">transformed</a> to <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a>.
+    The improvement is easiest to see in the normal approximation to the chance of a
+    single number of successes, rather than a range of numbers of successes.
+</p>
+
+<p>
+    Suppose we seek to approximate the chance of 10 successes in 25
+    <a class="glossRef" href="gloss.htm#independent">independent</a> trials, each with probability
+    <span class="math">p = 40%</span> of
+    success, using the <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>.
+    The number of successes has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with
+    parameters <span class="math">n&nbsp;=&nbsp;25</span> and <span class="math">p&nbsp;=&nbsp;40%</span>.
+    The <a class="glossRef" href="gloss.htm#expectation">expected</a> number of
+    successes is <span class="math">np&nbsp;=&nbsp;10</span>, and the
+    <a class="glossRef" href="gloss.htm#se">standard error</a> of the number of successes is
+</p>
+
+<p class="math">
+    (np(1&minus;p))<sup>&frac12;</sup>
+    = 6<sup>&frac12;</sup> = 2.45.
+</p>
+
+<p>
+    The area under the normal curve at the point 10 successes, transformed to
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>, is zero: The area under a
+    point is always zero.
+</p>
+<p>
+    We get a better approximation by considering 10 successes to be
+    the range from 9&frac12; to 10&frac12; successes. The only possible number of
+    successes between 9&frac12; and 10&frac12; is 10, so the two probabilities
+    are equal for the
+    <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a>.
+    Because the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> is
+    <a class="glossRef" href="gloss.htm#continuous">continuous</a>
+    and a <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> is
+    <a class="glossRef" href="gloss.htm#discrete">discrete</a>, we need to &quot;smear out&quot; the
+    <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    probability over an appropriate range.
+    The lower endpoint of the range, 9&frac12; successes,
+    is <span class="math">(9.5 &minus; 10)/2.45 = &minus;0.20</span>
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+    The upper endpoint of the range, 10&frac12; successes, is
+    <span class="math">(10.5 &minus; 10)/2.45 = +0.20</span>
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>.
+    The area under the <a class="glossRef" href="gloss.htm#normal_curve">normal
+    curve</a> between &minus;0.20 and +0.20 is about 15.8%.
+    The true <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    probability is
+    <span class="math"><sub>25</sub>C<sub>10</sub>&times;(0.4)<sup>10</sup>&times;(0.6)<sup>15</sup>
+    = 16%</span>.
+</p>
+
+<p>
+    Similarly, if we seek the
+    <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>
+    to the probability that a <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> is in the
+    range from <span class="math">i</span> successes to <span class="math">k</span>
+    successes, inclusive, we should find the
+    area under the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> from
+    <span class="math">i&minus;&frac12;</span> to <span class="math">k+&frac12;</span>
+    successes, transformed to standard units.
+    To find the approximate probability of more than <span class="math">i</span>
+    successes and fewer than <span class="math">k</span>
+    successes, we should find the area under the normal curve
+    corresponding to the range <span class="math">i+&frac12;</span> to <span class="math">k&minus;&frac12;</span>
+    successes, <a class="glossRef" href="gloss.htm#transformation">transformed</a> to
+    <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a>.
+    To find the approximate probability of more than <span class="math">i</span> but no more than
+    <span class="math">k</span> successes, we should find the area under the normal curve
+    corresponding to the range <span class="math">i+&frac12;</span> to <span class="math">k+&frac12;</span>
+    successes, transformed to standard units.
+    To find the approximate probability of at least <span class="math">i</span> but fewer than
+    <span class="math">k</span>
+    successes, we should find the area under the normal curve
+    corresponding to the range <span class="math">i&minus;&frac12;</span> to
+    <span class="math">k&minus;&frac12;</span> successes,
+    transformed to standard units.
+    Including or excluding the half-integer ranges at the ends of the interval in
+    this manner is called the
+    <a class="glossRef" href="gloss.htm#continuity_correction">continuity correction</a>.
+</p>
+
+<p>
+    The continuity correction is built into
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>,
+    because you can only highlight regions ending at half-integers.
+</p>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Binomial probability histogram and its normal approximation';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"
+    width="600" archive="PbsGui.zip" height="320">
+    <param name="n" value="10">
+    <param name="p" value="0.5">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    When is the <a class="glossRef" href="gloss.htm#normal_approximation">normal
+    approximation</a> to the <a class="glossRef" href="gloss.htm#binomial">binomial</a> reasonable?
+    The approximation is best when <span class="math">n</span> is large and <span class="math">p</span> is near 50%.
+    If <span class="math">n</span> is small, the binomial probability histogram
+    is too &quot;chunky&quot; to be approximated well by a smooth curve.
+    If <span class="math">p</span> is too close to 0% or to 100%, the binomial
+    probability histogram is too
+    <a class="glossRef" href="gloss.htm#skew">skewed</a> to be approximated well by the
+    <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>, which is symmetrical.
+    For small values of <span class="math">n</span>,
+    you might as well just compute the exact <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    probability&mdash;calculating the
+    <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a> is about as difficult.
+    The normal approximation is reasonably accurate when
+    <span class="math">np&nbsp;&gt;&nbsp;5</span> and
+    <span class="math">n(1 &minus; p)&nbsp;&gt;&nbsp;5</span>, if the range of values whose
+    probability is sought is near the <a class="glossRef" href="gloss.htm#expectation">expected value</a>.
+    In the &quot;tails&quot; of the <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a>, far from the <a class="glossRef" href="gloss.htm#expectation">expected value</a>, the
+    approximation generally is not as accurate.
+    To make the approximation as accurate as possible, use the
+    <a class="glossRef" href="gloss.htm#continuity_correction">continuity correction</a>.
+    Note that for <span class="math">n&nbsp;=&nbsp;10</span>, <span class="math">p&nbsp;=&nbsp;50%</span>,
+    the normal approximation with the continuity correction is accurate to about 0.4%.
+</p>
+
+<p>
+    The following exercises check your ability to use the normal approximation
+    with the continuity correction.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var tickVec = listOfDistinctRandInts(2,5,15).sort(numberLessThan);
+    var nTickets = tickVec[1];
+    var nOnes = tickVec[0];
+    var p = tickVec[0]/tickVec[1];
+    var nDraws = 100*listOfRandInts(1,4,10)[0];
+    var eSum = nDraws*p;
+    var sdTick = Math.sqrt(p*(1-p));
+    seSum = Math.sqrt(nDraws)*sdTick;
+    var thresh1Lo = roundToDig(-4*rand.next(),1);
+    var thresh1Hi = roundToDig(4*rand.next(),1);
+    var sumThreshLo = Math.floor(eSum + thresh1Lo*seSum);
+    var sumThreshHi = Math.ceil(eSum + thresh1Hi*seSum);
+    var thresh1Lo = (sumThreshLo-0.5 - eSum)/seSum;
+    var thresh1Hi = (sumThreshHi+0.5 - eSum)/seSum;
+    var prob1 = normCdf(thresh1Hi) - normCdf(thresh1Lo);
+    var ansStr = 'The sample sum of ' + nDraws.toString() + ' draws with replacement ' +
+         'from this box has a binomial distribution with parameters <span class="math">n = ' +
+         nDraws.toString() + '</span> and <span class="math">p = ' +
+         (roundToDig(100*p,2)).toString() + '%<span>. The expected value of the sum of ' +
+         'the draws is <span class="math">np = ' +
+         roundToDig(nDraws*p,3).toString() + '</span>, and the SE of the sum of the ' +
+         'draws is <span class="math">(np (1&minus;p))<sup>&frac12;</sup>  = ' +
+         roundToDig(Math.sqrt(nDraws*p*(1-p)),3).toString() + '</span>. Because the ' +
+         'distribution of the sum of the draws is binomial, we can improve the ' +
+         'normal approximation using the ' +
+         '<a class="glossRef" href="gloss.htm#continuity_correction">continuity correction</a>: ' +
+         'we should consider the area under the normal curve between ' +
+         roundToDig(sumThreshLo-0.5,1).toString() + ' and ' +
+         roundToDig(sumThreshHi + 0.5,1).toString() + ', converted to ' +
+         '<a class="glossRef" href="gloss.htm#standard_units">standard units</a>. The lower ' +
+         'endpoint in standard units is </p><p class="math"> (' +
+         roundToDig(sumThreshLo-0.5,1).toString() + ' &minus; ' +
+         roundToDig(eSum,2).toString() + ')/' + roundToDig(seSum,3).toString() +
+         ' = ' + roundToDig(thresh1Lo,3).toString() + ',</p><p>and the upper ' +
+         'endpoint in standard units is </p><p class="math">(' +
+         roundToDig(sumThreshHi+0.5,1).toString() + ' &minus; ' +
+         roundToDig(eSum,2).toString() + ')/' + roundToDig(seSum,3).toString() +
+         ' = ' + roundToDig(thresh1Hi,3).toString() + '.</p><p> The area under ' +
+         'the normal curve between ' + roundToDig(thresh1Lo,3).toString() + ' and ' +
+         roundToDig(thresh1Hi,3).toString() + ' standard units is:</p>' +
+         '<p class="figure"><applet code="NormHiLite.class" codebase="../../Java/" ' +
+         'align="baseline" width="600" archive="PbsGui.zip" height="320">' +
+         'You need Java to see this.  </applet>' + '</p><p>Thus the chance that ' +
+         'the sum of ' + nDraws.toString() + ' draws from this box is between ' +
+         roundToDig(sumThreshLo,3).toString() + ' and ' +
+         roundToDig(sumThreshHi,3).toString() + ' is about ' +
+         roundToDig(100*prob1,1).toString() + '%. ';
+    var qStr = 'A box contains ' + cardinals[nTickets] + ' tickets of which ' +
+        cardinals[nOnes] + ' are labeled &quot;1;&quot; the rest are ' +
+        'labeled &quot;0.&quot; <span class="qSpan">The normal approximation ' +
+        'to the chance that the sum of ' + nDraws.toString() +
+        ' draws with replacement from this box is between ' +
+        sumThreshLo.toString() + ' and ' + sumThreshHi.toString() +
+        ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(prob1,0.002));
+    document.writeln('</p>');
+    var prob1Applet = document.applets.length;
+    var setThisApplet = function(prob1Applet) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(prob1Applet,
+                                            function(){document.applets[prob1Applet].setLimits(thresh1Lo.toString(),thresh1Hi.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTickets = listOfRandInts(1,5,15)[0];
+    var tickVals = listOfRandInts(nTickets,0,4*nTickets).sort(numberLessThan);
+    var nDraws = 10*listOfRandInts(1,4,11)[0];
+    var meanTick = mean(tickVals);
+    var sdTick = sd(tickVals);
+    var tickList = tickVals.join(', ');
+    var eSum = nDraws*meanTick;
+    seSum = Math.sqrt(nDraws)*sdTick;
+    var thresh2 = roundToDig(3*rand.next(),1);
+    var sumThresh = Math.floor(eSum + thresh2*seSum);
+    var thresh2 = (sumThresh-0.5 - eSum)/seSum;
+    var tailProb = 1 - normCdf(thresh2);
+    var ansStr = 'The average of the labels on the tickets in the box is ' +
+           roundToDig(meanTick,3).toString()   + ', and the SD of the labels ' +
+           'on the tickets is ' + roundToDig(sdTick,3).toString() +
+           '. The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the sum of ' +
+           nDraws.toString() + ' draws from this box is ' +
+           nDraws.toString() + ' &times; ' + roundToDig(meanTick,3).toString() + ' = ' +
+           roundToDig(eSum,2).toString() + ', and the <a class="glossRef" href="gloss.htm#se">SE</a> ' +
+           'of the sum of ' + nDraws.toString() + ' draws from this box is ' +
+           nDraws.toString() + '<sup>&frac12;</sup>&times;' + roundToDig(sdTick,3).toString() +
+           ' = ' + roundToDig(seSum,3).toString() + '. The labels on the tickets are ' +
+           'all integers, so the sum of the draws must be an integer, and we can ' +
+           'improve the normal approximation using the continuity correction: we should ' +
+           'consider the area under the normal curve starting at ' +
+           roundToDig(sumThresh-0.5,1).toString() + ' converted to ' +
+           '<a class="glossRef" href="gloss.htm#standard_units">standard units</a>, which is ' +
+           '(' + roundToDig(sumThresh-0.5,1).toString() + ' &minus; ' +
+           roundToDig(eSum,2).toString() + ')/' + roundToDig(seSum,3).toString() +
+           ' = ' + roundToDig(thresh2,3).toString() + '. The area under the normal ' +
+           'curve from ' + roundToDig(thresh2,3).toString() + ' standard units up ' +
+           'to infinity is:</p><p class="figure">' +
+           '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
+           'width="600" archive="PbsGui.zip" height="320">You need Java to see this. ' +
+           '</applet></p><p>Thus the chance that the sum of ' + nDraws.toString() +
+           ' draws from this box is at least ' + roundToDig(sumThresh,3).toString() +
+           ' is about ' + roundToDig(100*tailProb,1).toString() + '%. ';
+    var qStr = 'A box contains ' + cardinals[nTickets] + ' tickets, labeled with the numbers ' +
+           tickList   + '. <span class="qSpan">The normal approximation to the chance ' +
+           'that the sum of ' + nDraws.toString() +
+           ' draws with replacement from this box is at least ' + sumThresh.toString() +
+           ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(tailProb,0.002));
+    document.writeln('</p>');
+    var prob2Applet = document.applets.length;
+    var setThisApplet = function(prob2Applet) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(prob2Applet,
+                                            function(){document.applets[prob2Applet].setLimits(thresh2.toString(),100)}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+
+<h3>
+    <a id="normal_approx_to_hypergeometric"></a>
+    The Normal Approximation to the Hypergeometric Distribution
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=3704&end=3770" frameborder="0" allowfullscreen></iframe></p>
+<p>
+    Recall that the number of &quot;good&quot; objects in
+    a <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a> of
+    <span class="math">n</span> objects
+    from a population of <span class="math">N</span> objects of which <span class="math">G</span>
+    are good has the
+    <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric distribution</a>
+    with parameters <span class="math">N</span>,
+    <span class="math">G</span>, and <span class="math">n</span>.
+    We saw in previous chapters that the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> of an
+    <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> is
+    <span class="math">n&times;G/N</span>,
+    and the <a class="glossRef" href="gloss.htm#se">SE</a> of an hypergeometric random variable is
+</p>
+
+<p class="math">
+    <font size="+2">(</font>
+    (N&minus;n)/(N&minus;1)
+    <font size="+2">)</font><sup>&frac12;
+    </sup>&times;
+    <font size="+2">(</font>n&times;G/N &times; (1&minus;G/N)
+    <font size="+2">)</font><sup>&frac12;</sup>.
+</p>
+
+<p>
+    If we transform to <a class="glossRef" href="gloss.htm#standard_units">standard
+    units</a> using these values of the expected value and SE, the
+    <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>
+    to the resulting <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a> is reasonably good if we
+    use the <a class="glossRef" href="gloss.htm#continuity_correction">continuity correction</a>.
+    Again, the
+    approximation tends to be better near the expected value, and tends to be worse far from
+    the expected value in the tails of the distribution.
+</p>
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = ' ';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    In a certain population of 1000
+    students, 100 have driven a car above the speed limit in the last two weeks. We plan to
+    take a simple random sample of 50 students. <br />
+    (a) What is the expected number of students in the sample who exceeded the speed limit?<br />
+    (b) What is the SE of the number of students in the sample who exceeded the speed limit?<br />
+    (c) What is the chance that at least 4 and no more than 6 of the students in the sample
+    are among the 100 who sped?<br />
+    (d) What is the normal aproximation to the chance in (c)?<br />
+    (e) What is the chance that 10 or more in the sample are among the 100 who exceeded the
+    speed limit? <br />
+    (f) What is the normal approximation to the chance in (e)?
+</p>
+<p>
+    <strong>Solution.</strong> <br />
+    (a) The expected number is <span class="math">n&times;G/N =
+     50&times;100/1000 = 5</span>.<br />
+    (b) The SE of the number is <span class="math"><font size="+2">(</font>
+     (N&minus;n)/(N&minus;1)<font size="+2">)</font><sup>&frac12;
+    </sup>&times; <font size="+2">(</font>n &times;
+    G/N &times; (1&minus;G/N)
+    <font size="+2">)</font><sup>&frac12;</sup> = (950/999)<sup>&frac12;
+    </sup>&times; (50 &times;
+    0.1 &times; 0.9)<sup>&frac12; </sup>= 2.07</span>.<br />
+    (c) The chance that between 4 and 6 students in the sample, inclusive, are among the 100
+    who sped is the sum of the chances that exactly 4, 5, or 6 students sped, because these
+    possibilities are mutually exclusive and exhaustive.
+</p>
+
+<p class="math">
+    P(at least 4 and no more than 6 students in the
+    sample sped)<br />
+    = P(exactly 4 in the sample sped) + P(exactly 5 in the sample sped) + P(exactly 6 in the
+    sample sped) <br />
+    = <sub>100</sub>C<sub>4</sub> &times;
+    <sub>900</sub>C<sub>46</sub>/<sub>1000</sub>C<sub>50</sub>
+    + <sub>100</sub>C<sub>5</sub> &times;
+     <sub>900</sub>C<sub>45</sub>/<sub>1000</sub>C<sub>50</sub>
+    + <sub>100</sub>C<sub>6</sub> &times;
+     <sub>900</sub>C<sub>44</sub>/<sub>1000</sub>C<sub>50</sub><br />
+    = 53.13%
+</p>
+
+<p>
+    We could also get this from the probability
+    calculator in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>.
+    To solve the problem using the calculator, select Hypergeometric from
+    the drop-down menu at the top of the figure; set the Population Size
+    to 1,000, #Good in Population to 100, and Sample Size to 50.
+    Tic the box in front of X&ge; and set that limit to 4.
+    Tic the box in front of X&le; and set that limit to 6.
+    The display should show that the probability is 53.13%.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability Calculator to solve part (c) of ' +
+                citeExample(xCtr-1, false);
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+<p class="figure">
+    <applet code="DistCalc.class"
+       codebase="../../Java/" align="middle" width="620"
+       archive="PbsGui.zip" height="300">
+       <param name="distributions" value="binomial,geometric,hypergeometric,negative binomial">
+       You need Java to see this
+    </applet>
+</p>
+</div>
+
+<p>
+    (d) To use the normal approximation, we first want to find the continuity correction.
+    The range &quot;4 to 6 speeders in sample&quot; is the
+    same range of possibilities as &quot;3.5 to 6.5 speeders.&quot; In standard units, 3.5
+    transforms to <span class="math">(3.5 &minus; 5)/2.068 = &minus;0.725</span>
+    standard units, and 6.5 transforms to <span class="math">(6.5 &minus; 5)/2.068 = 0.725</span> standard.
+    The area under the normal curve between &minus;0.725 and +0.725 is 53.2%:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The normal curve to solve part (d) of ' + citeExample(xCtr-1, false);
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+      align="middle" width="600" archive="PbsGui.zip" height="400">
+    <param name="hiLiteHi" value="0.725">
+    <param name="hiLiteLo" value="-0.725">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+  In this case, the normal approximation is accurate to
+  0.07%, with a relative accuracy of (53.2% &minus; 53.13%)/53.13% = 0.13%.
+</p>
+
+<p>
+  (e) The chance that 10 or more in the sample are among the 100
+  who sped is
+</p>
+
+<p class="math">
+    100% &minus; (chance that 9 or fewer in the sample are
+    among the 100 who sped) = <br />
+    100% &minus; P(0 in sample sped) &minus; P(1 in sample sped) &minus;
+    &hellip; &minus; P(9 in sample sped) =<br />
+    100% &minus; <sub>100</sub>C<sub>0</sub> &times;
+    <sub>900</sub>C<sub>50</sub>/<sub>1000</sub>C<sub>50</sub>
+    &minus; <sub>100</sub>C<sub>1</sub> &times;
+    <sub>900</sub>C<sub>49</sub>/<sub>1000</sub>C<sub>50</sub>
+    &minus; &hellip; &minus; <sub>100</sub>C<sub>9</sub> &times;
+    <sub>900</sub>C<sub>41</sub>/<sub>1000</sub>C<sub>50<br /> </sub>= 2.14%.
+</p>
+
+<p>
+    To use
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+// -->
+</script>
+    to solve to solve this problem, change the X&ge; text box to 10 and un-check
+    the box that precedes X&le;.
+    The display should show that the probability is 2.144%.
+</p>
+
+<p>
+    (f) We are interested in the area of the probability histogram from 10 to 50.
+    Because we want to include 10, the continuity correction would
+    have us start the range at 9.5.
+    In standard units, the range of interest is thus from
+</p>
+
+<p class="math">
+    (9.5 &minus; 5)/2.068 = 2.176 standard units
+</p>
+
+<p>
+    to infinity.
+    The area under the normal curve for that range is shown in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    to be 1.5%, which has an absolute error of only 0.64%, but a
+    relative error of <span class="math">(2.14 &minus; 1.5)/2.14 = 30%</span>.
+    The relative error of the normal approximation tends to
+    be largest in the &quot;tails.&quot;
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Area under the normal curve from 2.176 to infinity to solve part (f) ' +
+               ' of ' + citeExample(xCtr-1, false);
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+      align="middle" width="600" archive="PbsGui.zip" height="400">
+    <param name="hiLiteHi" value="10">
+    <param name="hiLiteLo" value="2.176">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+</div>
+
+<h2>
+    <a id="chebychev"></a> Markov's and Chebychev's Inequalities for Random Variables
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=3770&end=4400" frameborder="0" allowfullscreen></iframe></p>
+
+<p>
+    We have just seen that the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> is a good
+    approximation to the <a class="glossRef" href="gloss.htm#prob_distribution">probability distribution</a>
+    of some <a class="glossRef" href="gloss.htm#random_variable">random variables</a>, in particular, the
+    <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> and
+    <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
+    of a large number of <a class="glossRef" href="gloss.htm#independent">independent</a>
+    draws from a box of tickets labeled with numbers.
+    However, it is not a good approximation to every probability
+    distribution, and typically it is not possible to tell whether or not the normal
+    approximation is accurate without computing something that requires knowing the
+    distribution of the random variable.
+    In contrast, <a class="glossRef" href="gloss.htm#markov">Markov's inequality</a>
+    is true for every <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+    that must be at
+    least zero, and <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> is true for every
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a> that has finite
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> and finite
+    <a class="glossRef" href="gloss.htm#se">standard error</a>.
+</p>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('location') + ', ');
+// -->
+</script>
+    we saw that Markov's
+    Inequality for a list says that if every element of a list is zero or larger,
+    then for every <span class="math">a&gt;0</span>,
+</p>
+
+<p class="math">
+    (fraction of elements in the list that are greater
+    than or equal to a) &le;
+    (<a class="glossRef" href="gloss.htm#mean">mean</a> of list)/a.
+</p>
+
+<p>
+    Markov's inequality for random variables is directly
+    analogous: If the chance that X&ge;0 is 100% (if X is a <em>nonnegative random
+    variable</em>) then for every <span class="math">a&gt;0</span>,
+</p>
+
+<div class="indent">
+<p class="inlineMath">
+    <span class="math">P(X &ge; a) &le; E(X)/a</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<b>Proof of Markov\'s inequality</b>.' +
+           'The &quot;step function&quot; </p><p class="math">' +
+           '1<sub>x &ge; a</sub> (x) = {1, if x &ge; a; ' +
+           '0, otherwise}</p><p> is less than or equal to <span class="math">x/a</span> for ' +
+           '<span class="math">x &ge; 0</span>.  The chance that the ' +
+           'random variable X is less than zero is zero, by assumption.  ' +
+           'Because the expected value is a weighted average with positive ' +
+           'weights (the probabilities), it follows that the expected value of ' +
+           'the random variable <span class="math">X/a</span> is at least as large as the expected ' +
+           'value of the random variable <span class="math">1<sub>x &ge; a</sub>(X)</span>.  ' +
+           'However, the expected value of <span class="math">1<sub>x &ge; a</sub>(X)</span> is ' +
+           'just the chance that <span class="math">X</span> is greater than or equal to ' +
+           '<span class="math">a</span>, and the ' +
+           'expected value of <span class="math">X/a</span> is <span class="math">E(X)/a</span>. ' +
+           'Putting this together ' +
+           'gives Markov\'s inequality:</p><p class="math">P(X &ge; a) ' +
+           '&le; E(X)/a.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Chebychev's inequality for lists says that
+</p>
+
+<p class="math">
+    (fraction of elements in the list that are k
+    or more <a class="glossRef" href="gloss.htm#sd">SD</a>s away from the
+    <a class="glossRef" href="gloss.htm#mean">mean</a> of
+    the list) &le; 1/k<sup>2</sup>.
+</p>
+
+<p>
+    Chebychev's inequality for random variables is again
+    analogous:
+</p>
+
+<p class="math">
+    P(X is k or more <a class="glossRef" href="gloss.htm#se">SE</a>s
+    away from <a class="glossRef" href="gloss.htm#expectation">E</a>(X)) &le; 1/k<sup>2</sup>.
+</p>
+
+<p>
+    Equivalently,
+</p>
+
+<p class="math">
+    P<big>(</big>|X &minus; E(X)| &ge;
+    k&times;<a class="glossRef" href="gloss.htm#se">SE</a>(X)<big>)</big>
+    &le; 1/k<sup>2</sup>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Chebychev's inequality can be derived from Markov's inequality.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Chebychev\'s inequality follows from Markov\'s inequality. Consider ' +
+           'the random variable <span class="math">(X&minus;E(X))<sup>2</sup></span>, which is nonnegative. By ' +
+           'Markov\'s inequality, </p><p class="math">' +
+           'P<big>(</big> (X&minus;E(X))<sup>2</sup> &ge; a <big>)</big> &le; ' +
+           'E((X&minus;E(X))<sup>2</sup>)/a.</p><p>Note that </p><p class="math">' +
+           'E((X&minus;E(X))<sup>2</sup>) = (SE(X))<sup>2</sup>.</p><p>Let <span class="math">a = ' +
+           '(k&times;SE(X))<sup>2</sup></span>; then we have </p><p class="math"> ' +
+           'P<big>(</big> (X&minus;E(X))<sup>2</sup> &ge; (k SE(X))<sup>2</sup> ' +
+           '<big>)</big> &le; ' +
+           '(SE(X))<sup>2</sup>/(k&times;SE(X))<sup>2</sup> = ' +
+           '1/k<sup>2</sup>.</p><p>Finally, note that </p><p class="math"> ' +
+           'P<big>(</big> |X&minus;E(X)| &ge; k&times;SE(X) <big>)</big> = ' +
+           'P<big>(</big> (X&minus;E(X))<sup>2</sup> &ge; (k&times;SE(X))<sup>2</sup> ' +
+           '<big>)</big>, </p><p>so</p><p class="math">' +
+           'P<big>(</big> |X&minus;E(X)| &ge; k&times;SE(X) <big>)</big> &le; ' +
+           '1/k<sup>2</sup>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The Law of Large Numbers, introduced in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('expectation') + ', ');
+// -->
+</script>
+    can be proved using Chebychev's Inequality.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Proof of the Law of Large Numbers from Chebychev\'s Inequality.  The Law of ' +
+               'Large Numbers says that in a sequence of independent trials with the same ' +
+               'probability <span class="math">p</span> of success in each trial, the chance that the fraction ' +
+               'of successes differs from the probability of success by more than any positive ' +
+               'tolerance <span class="math">e</span> goes to zero as the number ' +
+               '<span class="math">n</span> of trials increases. ' +
+               'Here we prove the Law of Large Numbers from Chebychev\'s Inequality; first we ' +
+               'shall re-write the inequality slightly: </p><p class="math">' +
+               'P(|X&minus;E(X)| &ge; e) &le; SE<sup>2</sup>(X)/e<sup>2</sup>.</p>' +
+               '<p>(To see that this is just Chebychev\'s Inequality, make the substitution ' +
+               '<span class="math">e=k&times;SE(X)</span>, so that <span class="math">k=e/SE(X)</span>, and ' +
+               'thus <span class="math">1/k<sup>2</sup>= SE<sup>2</sup>(X)/e<sup>2</sup></span>.) ' +
+               'We assume that <span class="math">p</span> is a rational number, so that it is possible to have ' +
+               'a box with a fraction <span class="math">p</span> of tickets labeled &quot;1,&quot; but the result ' +
+               'holds generally.  The fraction of successes in <span class="math">n</span> independent trials with ' +
+               'probability <span class="math">p</span> of success in each trial is like the sample percentage ' +
+               '&phi; of <span class="math">n</span> independent draws from a 0-1 box with a ' +
+               'fraction <span class="math">p</span> ' +
+               'of tickets labeled &quot;1.&quot; The expected value of this sample percentage ' +
+               'is <span class="math">p</span>, and the SE of this sample percentage is ' +
+               '<span class="math">n<sup>&minus;&frac12;</sup>&times;(p(1&minus;p))<sup>&frac12;</sup></span>. ' +
+               'Chebychev\'s inequality implies that for any positive number <span class="math">e</span>, </p>' +
+               '<p class="math">P(|&phi;&minus;p| &ge; e) = ' +
+               'SE<sup>2</sup>(&phi;)/e<sup>2</sup> = n<sup>&minus;1</sup>&times;' +
+               '(p&times;(1&minus;p))/e<sup>2</sup>,</p><p>' +
+               'which converges to zero as <span class="math">n</span> increases, because ' +
+               '<span class="math">p</span> and <span class="math">e</span> ' +
+               'are constants.  Thus the chance that the fraction of successes in <span class="math">n</span> ' +
+               'independent trials with the same probability <span class="math">p</span> of success differs from ' +
+               '<span class="math">p</span> by more than <span class="math">e</span> converges to ' +
+               'zero as <span class="math">n</span> grows.';
+    writeFootnote(fCtr.toString(), fCtr++, fStr);
+// -->
+</script>
+</div>
+
+<p>
+    The following exercises check your ability to apply Markov's Inequality and Chebychev's
+    Inequality for random variables.
+    In some problems, it is possible to apply both Markov's Inequality and Chebychev's Inequality.
+    When that happens, you should use the better bound.
+    Recall that one upper bound is better than another upper bound if it is smaller,
+    and one lower bound is better than another lower bound if it is larger.
+    The exercises are dynamic:
+    The wording and the data tend to change when you reload the page.
+</p>
+
+<p>
+	An Example of Exercise 23-4 (Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)<br />
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/gOcFLcL7dik?start=4400&end=4760" frameborder="0" allowfullscreen></iframe>
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var meanTick =roundToDig(100*rand.next(),1);
+     var nDraws = listOfRandInts(1,5,20)[0];
+     var thresh3 = listOfRandInts(1,11,90)[0]/10;
+     var aVal2;
+     var opt = ["about","at most","at least"];
+     var wChoice = randBoolean();
+     var ineqWord;
+     var aVal1;
+     if (wChoice) {
+     ineqWord = " exceeds ";
+     aVal1 = 'b';
+     aVal2 = numToRange(1.0/thresh3);
+     } else {
+     ineqWord = " does not exceed ";
+     aVal1 = 'c';
+     aVal2 = numToRange(1.0 - 1.0/thresh3);
+     }
+    var qStr = 'A box contains 100 tickets labeled with numbers. None of the labels is ' +
+           'negative. The average of the labels is ' + meanTick.toString()  + '. ' +
+           nDraws.toString() + ' tickets will be drawn independently at random with ' +
+           'replacement from the box. <span class="qSpan"> The chance that the sample ' +
+           'sum of the labels on the tickets ' + ineqWord  + ' ' +
+           roundToDig(thresh3*nDraws*meanTick,2).toString() + ' is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    writeTextExercise(8,qCtr++,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var meanTick = roundToDig(200*(rand.next()-0.5),1);
+     var sdTick = roundToDig(10*rand.next(),1);
+     var nDraws = listOfRandInts(1,5,20)[0];
+     var thresh4 = listOfRandInts(1,11,90)[0]/10;
+     var aVal2;
+     var opt = ["about","at most","at least"];
+     var wChoice = randBoolean();
+     var ineqWord;
+     var aVal1;
+     if (wChoice) {
+     ineqWord = " exceeds ";
+     aVal1 = 'b';
+     aVal2 = numToRange(1/(thresh4*thresh4));
+     } else {
+     ineqWord = " does not exceed ";
+     aVal1 = 'c';
+     aVal2 = numToRange(1.0 - 1.0/(thresh4*thresh4));
+     }
+    var qStr = 'A box contains 100 tickets labeled with numbers. The average of the ' +
+           'labels is ' + meanTick.toString()  + ' and the SD of the labels is ' +
+           sdTick.toString() + '. ' + nDraws.toString() +
+           ' tickets will be drawn independently at random with replacement ' +
+           'from the box. <span class="qSpan">The chance that the absolute value ' +
+           'of the difference between the sample sum of the labels on the ' +
+           'tickets and ' + roundToDig(nDraws*meanTick,2).toString() + ineqWord  +
+           ' ' + roundToDig(thresh4*Math.sqrt(nDraws)*sdTick,2).toString() +
+           ' is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    writeTextExercise(8,qCtr++,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    The normal curve, <span class="math">y=(2&pi;)<sup>&minus;&frac12;</sup>e<sup>&minus;x<sup>2</sup>/2</sup></span>,
+    is symmetric about zero, where it has a single bump.
+    The total area under the normal curve is 100%.
+    The area under the normal curve between &plusmn;1 is about 68%;
+    the area under the normal curve between &plusmn;1.96 is about 95%,
+    and the area under the normal curve between &plusmn;3 is about 99.97%.
+    <span class="termOfArt">Standard units</span> for random variables are analogous standard units for lists.
+    A value of a random variable in standard units is the number of SEs by which it
+    exceeds the expected value of the random variable;
+    the value of an element of a list in standard units is the number of SDs by which it
+    exceeds the mean of the list.
+    To transform a random variable X to standard units, subtract E(X) and divide the result by SE(X).
+    Just as the mean of a list in standard units is zero and the SD of a list in standard units is 1,
+    the expected value of a random variable in standard units is 0 and the SE of a random variable
+    in standard units is 1.
+</p>
+
+<p>
+    The probability distributions of some random variables can be approximated by the normal curve,
+    in the sense that the area under the probability histogram for any range of values of the
+    random variable is approximately equal to the area under the normal curve for the same
+    range of values transformed to standard units.
+    This is called the <span class="termOfArt">normal approximation</span> to the probability distribution.
+    The normal approximation to the probability distribution of the sample sum and sample mean of
+    <span class="math">n</span> independent random draws with replacement from a box of numbered tickets grows
+    increasingly accurate as <span class="math">n</span> increases.
+    This is the <span class="termOfArt">Central Limit Theorem</span>.
+    The accuracy of the normal approximation to the distribution of the sample sum and sample
+    mean depends not only on <span class="math">n</span>&mdash;it depends on the numbers on the tickets too.
+    In general, the more skewed the distribution of the numbers on the tickets in the box,
+    the larger <span class="math">n</span> must be for the normal approximation to have a given accuracy.
+    In the special case of a 0-1 box, the Central Limit Theorem implies that binomial
+    probability distributions can be approximated increasingly well by a normal curve as
+    <span class="math">n</span> grows.
+    How large <span class="math">n</span> must be for the normal approximation to have a particular accuracy
+    depends on <span class="math">p</span>, the fraction of tickets in the box labeled &quot;1:&quot;
+    To attain a given level of accuracy, <span class="math">n</span> can be smaller if
+    <span class="math">p</span> is close to 50% than if <span class="math">p</span> is close to 0 or to 100%.
+    The normal approximation to the hypergeometric distribution is accurate if the sample
+    size <span class="math">n</span> is large, but still small compared with the population size
+    <span class="math">N</span>.
+    The approximation is most accurate when <span class="math">G/N</span>, the fraction of tickets
+    in the box labeled &quot;1,&quot; is close to 50%.
+</p>
+
+<p>
+    Even when the normal approximation to a probability distribution is not accurate,
+    the expected value and SE of the random variable contains a great deal of information
+    about the probability distribution of the random variable, just as the mean and SD
+    of a list contain a great deal of information about the distribution of the list.
+    Markov's Inequality and Chebychev's Inequality express some of that information.
+    Markov's inequality for random variables says that if <span class="math">P(X&ge;0)=100%</span>
+    (if <span class="math">X</span> is a nonnegative random variable), and the expected value of
+    <span class="math">X</span> is finite, then for any <span class="math">a&gt;0</span>,
+</p>
+
+<p class="math">
+    P(X&ge;a)&nbsp;&le;&nbsp;E(X)/a.
+</p>
+
+<p>
+    Chebychev's Inequality for random variables says that if SE(X) is finite,
+    then for any <span class="math">k&gt;0</span>,
+</p>
+
+<p class="math">
+    P(|X &minus; E(X)|&nbsp;&ge;&nbsp;k&times;SE(X))&nbsp;&le;&nbsp; 1/k<sup>2</sup>.
+</p>
+
+<p>
+    The normal approximation and Chebychev's Inequality will be used later in the
+    book to draw inferences about populations from random samples.
+</p>
+
+<h2>
+    <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>affine transformation      </li>
+    <li>binomial distribution      </li>
+    <li>Central Limit Theorem      </li>
+    <li>Chebychev’s inequality     </li>
+    <li>Complement Rule            </li>
+    <li>continuity correction      </li>
+    <li>continuous                 </li>
+    <li>deviation                  </li>
+    <li>discrete                   </li>
+    <li>expected value             </li>
+    <li>histogram                  </li>
+    <li>hypergeometric distribution</li>
+    <li>independent                </li>
+    <li>Law of Large Numbers       </li>
+    <li>Markov’s Inequality        </li>
+    <li>mean                       </li>
+    <li>normal approximation       </li>
+    <li>normal curve               </li>
+    <li>probability distribution   </li>
+    <li>probability histogram      </li>
+    <li>random variable            </li>
+    <li>sample mean                </li>
+    <li>Sample percentage          </li>
+    <li>sample sum                 </li>
+    <li>simple random sample       </li>
+    <li>skewed                     </li>
+    <li>standard deviation (SD)    </li>
+    <li>standard error (SE)        </li>
+    <li>standard normal curve      </li>
+    <li>standard units             </li>
+    <li>transform                  </li>
+</ul>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</form>
+</body>
+</html>

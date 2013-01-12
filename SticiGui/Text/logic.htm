@@ -1,0 +1,1498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "11 July 2011 11:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "logic";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<!-- logic problems script -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/logic.js"></script>
+
+<form method="POST">
+<h1><a id="logic"></a>
+    Propositional Logic
+</h1>
+
+<p>
+    This chapter reviews elementary propositional logic, the calculus of 
+    combining statements that
+    can be true or false using logical operations.
+    It also reviews the connection between logic and set theory.
+</p>
+
+<p>
+    The fundamental elements of propositional logic are 
+    <em>propositions</em>&mdash;statements that can be either
+    true or false&mdash;and logical operations that act on one proposition
+    (unary operations) or two propositions (binary operations).
+    A proposition is like a variable that can take two values, the
+    value &quot;true&quot; and the value &quot;false.&quot;
+    Logical operators combine propositions to make other propositions,
+    following rules that are outlined in this chapter.
+    In this chapter, lowercase italic letters like <span class="math">p</span>, <span class="math">q</span>,
+    and <span class="math">r</span> stand for propositions, the letter 
+    <span class="math">T</span> stands for true, and the
+    letter <span class="math">F</span> stands for false.
+    The letter <span class="math">T</span> also stands for a proposition that is always true,
+    and the letter <span class="math">F</span> stands for a proposition that is always false.
+    The logical operators we review are <span class="math">!</span>, 
+    <span class="math">|</span>, <span class="math">&amp;</span>, <span class="math">&rarr;</span>, and 
+    <span class="math">&harr;</span>.
+    We also review some simple identities for logical operators,
+    the order of operations for evaluating compound propositions,
+    and logical arguments.
+</p>
+
+<p>
+    Suppose we have two propositions, <span class="math">p</span> and <span class="math">q</span>.
+    The propositions are <em>equal</em> or 
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>
+    if they always have the same truth value.
+    That is, <span class="math">p</span> and <span class="math">q</span> are logically equivalent
+    if <span class="math">p</span> is true whenever <span class="math">q</span> is true, and vice versa,
+    and if <span class="math">p</span> is false whenever <span class="math">q</span> is false, and vice versa.
+    If <span class="math">p</span> and <span class="math">q</span> are logically equivalent, we
+    write <span class="math">p = q</span>.
+</p>
+
+<h2><a id="operations"></a>
+    Logical Operations
+</h2>
+
+<p>
+    Logical operations act on propositions, turning them into other 
+    propositions.
+    Unary operations act on a single proposition;
+    binary operations act on two propositions.
+</p>
+
+<p>
+    The simplest logical operation is negation.
+    Negation operates on a single proposition&mdash;it is unary.
+    The logical negation of the proposition <span class="math">p</span>, is 
+    <span class="math">!p</span>.
+    The operator <span class="math">!</span> is sometimes represented by
+    the symbol <span class="math">&not;</span>, a minus sign (<span class="math">&minus;</span>), a 
+    tilde (<span class="math">&tilde;</span>), or the word &quot;not.&quot;
+    The negation of <span class="math">p</span> is sometimes called the <span class="termOfArt">inverse</span>
+    of <span class="math">p</span>.
+    If <span class="math">p</span> is a proposition, so is <span class="math">!p</span>: 
+    <span class="math">!p</span> is true
+    when <span class="math">p</span> is false, and 
+    <span class="math">!p</span> is false when <span class="math">p</span> is true.
+    Another way to state this relation is <span class="math">!T = F</span>, and <span class="math">!F = T</span>.
+    Logical negation is like a negative sign in arithmetic (a negative sign,
+    not a minus sign, which operates on a pair of numbers),
+</p>
+
+<p>
+    The logical operation <span class="math">|</span>,
+    also called <span class="termOfArt">or</span> and <span class="termOfArt">logical disjunction</span>,
+    is an operation on two propositions (a binary operation)
+    that results in another proposition: the proposition <span class="math">(p | q)</span>
+    is true if <span class="math">p</span> is true or if <span class="math">q</span> is true 
+    or if both <span class="math">p</span> and <span class="math">q</span> are true.
+    The operation <span class="math">|</span> is sometimes represented by a vee 
+    (<span class="math">&or;</span>) or by the word &quot;or.&quot;
+    We can say what <span class="math">|</span> does by saying what value it takes for each of the four
+    combinations of true and false its arguments can have:
+</p>
+
+<p class="math">
+    (T | T) = T, (T | F) = T, (F | T) = T, (F | F) = F.
+</p>
+
+<p>
+    This can be summarized in a <span class="termOfArt">truth table</span>, which displays in 
+    tabular form the value of <span class="math">(p | q)</span> for each combination of values of
+    <span class="math">p</span> and <span class="math">q</span>:
+
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('(<em>p</em> | <em>q</em>)',['T','T','T','F']);
+// -->
+</script>
+
+<p>
+    The first two columns of the table show the truth values of 
+    <span class="math">p</span> and <span class="math">q</span> individually;
+    the third column gives the corresponding truth values of <span class="math">(p | q)</span>.
+    For example, the entry corresponding to <span class="math">p</span> being true and <span class="math">q</span>
+    being true is <span class="math">T</span>, because <span class="math">(T | T) = T</span>.
+    The logical operator <span class="math">|</span> is analogous to addition in arithmetic.
+</p>
+
+<p>
+    The logical operation <span class="math">&amp;</span>,
+    also called <span class="termOfArt">logical conjunction</span>, combines two propositions to produce
+    another.
+    The proposition <span class="math">(p &amp; q)</span>
+    is true if both <span class="math">p</span> is true and <span class="math">q</span> is true; it is false if either
+    <span class="math">p</span> is false or <span class="math">q</span> is false (or both):
+    <span class="math">(T &amp; T) = T, (T &amp; F) = F, (F &amp; T) = F, (F &amp; F) = F</span>.
+    The operation &amp; is sometimes represented by a wedge (&and;) or the word &quot;and.&quot;
+    Here is the truth table for <span class="math">&amp;</span>:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('(<em>p</em> &amp; <em>q</em>)',['T','F','F','F']);
+// -->
+</script>
+
+<p>
+    The logical operator &amp; is analogous to multiplication in arithmetic.
+    All the remaining logical operations can be defined in terms of <span class="math">!</span>, 
+    <span class="math">|</span>, and <span class="math">&amp;</span>;
+    for that reason (and their simplicity) the operations <span class="math">!</span>, <span class="math">|</span>
+    and <span class="math">&amp;</span> are 
+    considered fundamental while the others are not.
+</p>
+
+<p>
+    Just like putting a minus sign in front of an algebraic symbol, the operation of negation 
+    takes precedence over all other operations, so,
+    for example, <span class="math">(p | !q)</span> is
+    interpreted as <span class="math">(p | (!q))</span>.
+</p>
+
+<p>
+    The following identities are useful:
+</p>
+
+<ul>
+    <li>
+        <span class="math">(p | !p) = T</span>
+    </li>
+    <li>
+        <span class="math">(p &amp; !p) = F </span>
+    </li>
+    <li>
+        <span class="math">(p &amp; p) = (p | p) = p</span>.
+    </li>
+</ul>
+
+<p>
+    The last identity says that both <span class="math">(p &amp; p)</span> and
+    <span class="math">(p | p)</span> are 
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a> to 
+    <span class="math">p</span>:
+    If <span class="math">p</span> is true, so are 
+    <span class="math">(p &amp; p)</span> and  <span class="math">(p | p)</span>.
+    If <span class="math">p</span> is false, so are
+    <span class="math">(p &amp; p)</span> and <span class="math">(p | p)</span>.
+</p>
+
+
+<p>
+    The proposition <span class="math">(p &rarr; q)</span>, 
+    also written
+    <span class="math">(if p then q)</span> and <span class="math">(p implies q)</span>,
+    is true if <span class="math">p</span> is false, if <span class="math">q</span> is true, or both.
+    The proposition <span class="math">(p &rarr; q)</span>, called a <span class="termOfArt">conditional</span>, is
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>
+    to <span class="math">( (!p) | q)</span>.
+    Here is the truth table for <span class="math">(p &rarr; q)</span>:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('(<em>p</em> &rarr; <em>q</em>)',['T','T','F','T']);
+// -->
+</script>
+
+<div class="indent">
+<p class="inline">
+    In logic, the proposition <span class="math">(p &rarr; q)</span> is
+    true whenever <span class="math">p</span> is false, which some people find counter-intuitive.
+    In fact, that <span class="math">(F &rarr; T)</span> and <span class="math">(F &rarr; F)</span> are both true is
+    a matter of definition, but the definition does not disagree with common usage:
+    Think of <span class="math">(p &rarr; q)</span> as the assertion
+    <span class="math">(if p then q)</span>, that is, &quot;if <span class="math">p</span> is true, 
+    then <span class="math">q</span> is also true.&quot;
+    This assertion says nothing about the truth of <span class="math">q</span> when <span class="math">p</span> is false,
+    only that if <span class="math">p</span> is true, <span class="math">q</span> must also be true.
+    Therefore, when <span class="math">p</span> is false, the assertion cannot be wrong.
+    If <span class="math">p</span> is true, <span class="math">q</span> must also be true, or the assertion is incorrect.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'There is a humorous anecdote about the late British mathematician ' +
+          'Godfrey Harold Hardy (1877&ndash;1947). (I have also heard the story attributed ' +
+          'to the late British mathematician Bertrand Russell, who, with ' +
+          'A.N.&nbsp;Whitehead wrote a monumental ' +
+          'treatise on logic and the foundations of mathematics, called ' +
+          '<em>Principia Mathematica</em>.) ' +
+          'Supposedly, a colleague at the University ' +
+          'of Cambridge approached Prof. Hardy one evening at dinner, and a ' +
+          'conversation like the following ensued: ' +
+          '<blockquote><p><em>Colleague</em>: Professor Hardy, I\'ve heard that you ' +
+          'claim it is possible to prove anything starting with a false assumption. ' +
+          '</p><p><em>Hardy</em>: Yes, that is so.</p><p><em>Colleague</em>: In that ' +
+          'case, starting with the assumption that 0=1, prove to me that you are the ' +
+          'Pope. </p><p><em>Hardy</em>: 0 = 1.  Add 1 to both sides: 1 = 2. The ' +
+          'Pope and I are two; therefore, the Pope and I are one.</p></blockquote>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Finally,
+    the proposition <span class="math">(p &harr; q)</span>, also written
+    <span class="math">(p IFF q)</span> and
+    <span class="math">(p if and only if q)</span>,
+    is true if both <span class="math">p</span> and <span class="math">q</span> are true, or if both
+    <span class="math">p</span> and <span class="math">q</span> are false; otherwise, the proposition is false.
+    That is, <span class="math">(p &harr; q)</span> is 
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>
+    to
+</p>
+
+<p class="math">
+    (p &amp; q) | ( !p &amp; !q ).
+</p>
+
+<p>
+    <span class="math">p &harr; q</span> is also  
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>
+    to
+</p>
+
+<p class="math">
+    (p &rarr; q) &amp; (q &rarr; p).
+</p>
+
+<p>
+    Thus <span class="math">(T &harr; T) = T</span>, <span class="math">(T &harr; F) = F</span>, 
+    <span class="math">(F &harr; T) = F</span>, and <span class="math">(F &harr; F) = T</span>.
+    Here is the truth table for <span class="math">(p &harr; q)</span>:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('(<span class="math">p &harr; q</span>)',['T','F','F','T']);
+// -->
+</script>
+
+<p>
+    Recall that two propositions are equal (or 
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>),
+    <span class="math">p = q</span>, if they always have the same value.
+    Every proposition involving the operations <span class="math">!</span>, 
+    <span class="math">|</span>, 
+    <span class="math">&amp;</span>, 
+    <span class="math">&rarr;</span>>, and <span class="math">&harr;</span> 
+    has a logically equivalent proposition that uses only the operations 
+    <span class="math">!</span>, <span class="math">|</span>, and <span class="math">&amp;</span>.
+    Here are some identities:
+</p>
+
+
+<p class="math">
+       p &rarr; q = !p | q.
+</p>
+
+<p class="math">
+        p &harr; q = (p &amp; q) | 
+                                  (!p &amp; !q).
+</p>
+
+<p>
+    Here are some useful identities that combine <span class="math">!</span>
+    with <span class="math">&amp;</span> and <span class="math">|</span>:
+</p>
+
+<ul>
+    <li>
+        <span class="math">!(p | q) = !p &amp; !q</span>
+    </li>
+    <li>
+        <span class="math">!(p &amp; q) = !p | !q</span>.
+    </li>
+</ul>
+
+<p>
+   These are called <span class="termOfArt">de Morgan's Laws</span>.
+   They are analogous to de Morgan's Laws in set theory, discussed in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   document.writeln(citeChapter('sets') + '.');
+// -->
+</script>
+</p>
+
+<p>
+    The logical operations &amp; and | behave much like multiplication and addition,
+    respectively, and the operation ! behaves like a negative sign.
+    They are associative, distributive, and commute with themselves (but not each other).
+    Here are the associative relations: if <span class="math">p</span>, <span class="math">q</span>, 
+    and <span class="math">r</span>
+    are propositions, then both of the following are true:
+</p>
+
+<ul>
+    <li>
+        <span class="math">( (p &amp; q) &amp; r ) =
+        ( p &amp; ( q &amp; r ) ) =
+        ( p &amp; q &amp; r )</span>
+    </li>
+    <li>
+        <span class="math">( (p | q) | r ) =
+        ( p | ( q | r ) ) =
+        ( p | q | r )</span>.
+    </li>
+</ul>
+
+<p>
+    These are much like the arithmetic identities
+    <span class="math">(a&times;b)&times;c = a&times;(b&times;c) = a&times;b&times;c</span>
+    and <span class="math">(a+b)+c = a+(b+c) = a+b+c</span>.
+    <span class="math">&amp;</span> and <span class="math">|</span> 
+    also commute with themselves (but not with each other) as follows:
+</p>
+
+<ul>
+    <li>
+        <span class="math">( p | q ) = ( q | p )</span>
+    </li>
+    <li>
+        <span class="math">( p &amp; q ) = ( q &amp; p )</span>
+    </li>
+</ul>
+
+<p>
+    Those relations are like the arithmetic identities
+    <span class="math">a&times;b = b&times;a</span> and <span class="math">a+b = b+a</span>.
+    Moreover, <span class="math">&amp;</span> and <span class="math">|</span>
+    satisfy distributive relationships:
+</p>
+
+<ul>
+    <li>
+        <span class="math">( p &amp; (q | r) ) =
+        ( (p &amp; q) | (p &amp; r) )</span>
+    </li>
+    <li>
+        <span class="math">( p | (q &amp; r) ) =
+        ( (p | q) &amp; (p | r) )</span>.
+    </li>
+</ul>
+
+<p>
+    Those relationships are like the arithmetic identity
+    <span class="math">a&times;(b+c) = a&times;b + a&times;c</span>.
+</p>
+
+<p>
+    The <em>converse</em> of the proposition <span class="math">(p &rarr; q)</span> is the
+    proposition <span class="math">(q &rarr; p)</span>.
+    The <em>contrapositive</em> of the proposition <span class="math">(p &rarr; q)</span>
+    is <span class="math">( !q &rarr; !p )</span>.
+    The proposition <span class="math">(p &rarr; q)</span> is 
+    <a class="glossRef" href="gloss.htm#logicallyEquivalent">logically equivalent</a>
+    to its
+    contrapositive, which we can prove as follows, using the identities above:
+</p>
+
+<p class="math">
+    (p &rarr; q) = ( !p | q )
+</p>
+
+<p class="math">
+    = ( !p | !(!q) )
+</p>
+<p class="math">
+    = ( !(!q) | !p )
+</p>
+<p class="math">
+    = ( !q &rarr; !p ).
+</p>
+
+
+<h3>
+   <a id="compound"></a>Evaluating Compound Propositions
+</h3>
+
+<p>
+    There are at least two strategies to find a truth table for
+    complicated combinations of propositions: simply plug in
+    all combinations of values of true and false for the propositions
+    it is built from, or try to simplify the proposition using
+    the identities presented previously.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'Evaluating a compound proposition.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qTxt = [
+        ['<em>p</em> &amp; !' +
+            '(<em>q</em> &rarr; !<em>p</em> )',
+            [true,false,false,false]],
+        ['<em>p</em> | (<em>q</em> &rarr; <em>p</em>)',
+            true,false,true,true],
+        ['<em>p</em> &amp; (<em>p</em> &rarr; ' +
+            '<em>q</em>)',
+            [true,false,false,false]],
+        ['<em>p</em> | !<em>q</em>',
+            true,false,true,true],
+        ['(!<em>p</em>) &amp; <em>q</em>',
+            [false,true,false,false]],
+        ['!(<em>p</em> &amp; <em>q</em>)',
+            [false,true,true,true]],
+        ['!(<em>p</em> | <em>q</em>)',
+            [false,false,false,true]],
+        ['<em>p</em> &harr; !<em>q</em>',
+            [false,true,true,false]]
+           ];
+    var ansStr = [
+          'The proposition (' + qTxt[0][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p &amp; !' +
+            '(!q | ' +
+            '(!p) ) </p><p class="math"> ' +
+            '= p &amp; (q &amp; ' +
+            'p) </p><p class="math"> ' +
+            '= p &amp; q, </p>' +
+            '<p> so the truth table for this proposition is </p> ' +
+            truthTable(qTxt[0][0],['T','F','F','F']),
+          'The proposition (' + qTxt[1][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p | <big>(</big> (!' +
+            'q) | p <big>)</big></p>' +
+            '<p class="math">' +
+            '= p | (!q), ' +
+            '</p><p>so the truth table for this proposition is </p>' +
+            truthTable(qTxt[1][0],['T','F','T','T']),
+          'The proposition (' + qTxt[2][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p &amp; <big>(</big> (!' +
+            'p) | q)</p><p class="math">' +
+            '= (p &amp; !p) ' +
+            '| ((p &amp; q)' +
+            '</p><p class="math"> = F | ' +
+            '((p &amp; q)</p><p class="math">' +
+            '= p &amp; q,</p><p>' +
+            'so the truth table for this proposition is </p>' +
+            truthTable(qTxt[2][0],['T','F','F','F']),
+          'The proposition (' + qTxt[3][0] + ' ) can be evaluated by plugging ' +
+            'in the values of <span class="math">p</span> and <span class="math">q</span>.  The proposition ' +
+            'is true whenever <span class="math">p</span> is true, and is true whenever <span class="math">q</span> is ' +
+            'false.  It is false only when <span class="math">p</span> is false and <span class="math">q</span> is ' +
+            'true.  The truth table is thus </p>' +
+            truthTable(qTxt[3][0],['T','F','T','T']),
+          'The proposition (' + qTxt[4][0] + ' ) is true only when <span class="math">p</span> is ' +
+            'false and <span class="math">q</span> is true, simultaneously.  The truth table is ' +
+            'thus</p>' +
+            truthTable(qTxt[4][0],['F','T','F','F']),
+          'The proposition (' + qTxt[5][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '(!p) | ' +
+            '(!q), </p><p>which is true unless both ' +
+            '<span class="math">p</span> and <span class="math">q</span> are true.  The truth table is thus</p>' +
+            truthTable(qTxt[5][0],['F','T','T','T']),
+          'The proposition (' + qTxt[6][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '(!p) &amp; ' +
+            '(!q),</p><p>which is true only when both ' +
+            '<span class="math">p</span> and <span class="math">q</span> are false. The truth table is thus</p>' +
+            truthTable(qTxt[6][0],['F','F','F','T']),
+          'The proposition (' + qTxt[7][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '<big>(</big> p &amp; ' +
+            '(!q<big>)</big> | ' +
+            '<big>(</big> (!p) &amp; ' +
+            'q<big>)</big>,</p><p>so the truth table is ' +
+            truthTable(qTxt[7][0],['F','T','T','F'])
+         ];
+    var which = listOfDistinctRandInts(2,0, qTxt.length -1);
+    var qStr = '<p>Consider the proposition</p><p class="math">';
+    document.writeln(qStr);
+    document.writeln(qTxt[which[0]][0] + '.');
+    document.writeln('</p><p>');
+    document.writeln(ansStr[which[0]]);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h3><a id="howManyTables"></a>
+    How many truth tables are there?
+</h3>
+
+<p>
+    Since a 2 by 2 truth table has 4 cells, each of which can contain either
+    T or F, by the <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental
+    Rule of Counting</a> there are only 
+</p>
+
+<p class="math">
+      2&times;2&times;2&times;2&nbsp;=&nbsp;2<sup>4</sup>&nbsp;=&nbsp;16 
+</p>
+
+<p> possible 2 by 2 truth tables.
+    So, no matter how complicated a logical expression involving two propositions
+    might appear to be, it boils down to&mdash;is logically equivalent to&mdash;one of 
+    16 possibilities.
+    What are those possibilities?
+    We've seen many of them already.
+    For example, the proposition could be identically
+    true, no matter what <span class="math">p</span> and <span class="math">q</span> are.
+    The proposition 
+</p>
+
+<p class="math">
+     (p &harr; p) &amp; (q &harr; q) = T;
+</p>
+
+<p>
+    that is, its truth table has T in all four cells.
+    Similarly, a compound proposition involving <span class="math">p</span> and 
+    <span class="math">q</span> 
+    could be identically false&mdash;have F in all four cells of its truth
+    table.
+    An example is 
+</p>
+
+<p class="math">
+     (p &amp; !p) | (q &amp; !q) = F.
+</p>
+
+<p>
+    Or the proposition could be logically equivalent to <span class="math">p</span>, 
+    or to <span class="math">q</span>,
+    or to <span class="math">p|q</span>, or to <span class="math">p&amp;q</span>,
+    and so on.
+    Any compound proposition built from <span class="math">p</span> and <span class="math">q</span> using
+    the logical operations <span class="math">!</span>, <span class="math">|</span>, 
+    <span class="math">&amp;</span>, <span class="math">&rarr;</span>, and <span class="math">&harr;</span>
+    is logically equivalent to one of the following propositions:
+</p>
+
+<ol>
+    <li> <span class="math">T</span> </li>
+    <li> <span class="math">F</span> </li>
+    <li> <span class="math">p</span> </li>
+    <li> <span class="math">!p</span> </li>
+    <li> <span class="math">q</span> </li>  
+    <li> <span class="math">!q</span> </li>  
+    <li> <span class="math">(p&nbsp;&amp;&nbsp;q)&nbsp;|&nbsp;(!p&nbsp;&amp;&nbsp;!q)</span></li>
+    <li><span class="math">(p&nbsp;&amp;&nbsp;!q)&nbsp;|&nbsp;(!p&nbsp;&amp;&nbsp;q) </span></li>
+    <li> <span class="math">p&nbsp;|&nbsp;q</span> </li> 
+    <li> <span class="math">!p&nbsp;|&nbsp;q</span> </li>  
+    <li> <span class="math">p&nbsp;|&nbsp;!q</span> </li> 
+    <li> <span class="math">!p&nbsp;|&nbsp;!q</span> </li> 
+    <li> <span class="math">p&nbsp;&amp;&nbsp;q</span> </li>  
+    <li> <span class="math">!p&nbsp;&amp;&nbsp;q</span> </li> 
+    <li> <span class="math">p&nbsp;&amp;&nbsp;!q</span> </li> 
+    <li> <span class="math">!p&nbsp;&amp;&nbsp;!q</span> </li> 
+</ol>
+
+<p>
+    For example, 
+</p>
+
+<p class="math">
+   (q&nbsp;&rarr;&nbsp;p) = (p&nbsp;|&nbsp;!q), 
+</p>
+
+<p>
+    the eleventh of these.
+    And 
+</p>
+
+<p class="math">
+    (p&nbsp;&harr;&nbsp;!(q&nbsp;&rarr;&nbsp;!p))
+    = (!p&nbsp;|&nbsp;q),
+</p>
+
+<p>
+    the tenth proposition on the list.
+</p>
+
+<p>
+    There is only one way to fill all four cells with T and only
+    one way to fill all four with F; those correspond to the first two
+    propositions in the list.
+    There are <sub>4</sub>C<sub>2</sub>&nbsp;=&nbsp;6 ways to put T in two
+    cells and F in two; those correspond to propositions 3&ndash;8.
+    There are <sub>4</sub>C<sub>1</sub>&nbsp;=&nbsp;4 ways to put T in three
+    of the cells and F in one; those are propositions 9&ndash;12.
+    And there are <sub>4</sub>C<sub>1</sub>&nbsp;=&nbsp;4 ways to put T in one
+    of the cells and F in three: the last four propositions. 
+</p>
+
+<p>
+   If we start with three propositions, <span class="math">p</span>, 
+   <span class="math">q</span> and <span class="math">r</span>
+   (instead of just <span class="math">p</span> and <span class="math">q</span>)
+   and combine them using logical operations,
+   the truth table for the resulting proposition has 2&times;2&times;2&nbsp;=&nbsp;8 cells, 
+   one for each combination of T and F for each of the three propositions we start
+   with.
+   Each of those cells can contain either T or F, so there are 
+   2<sup>8</sup>&nbsp;=&nbsp;256 possible truth tables involving three basic propositions.
+   In general, the truth table for a compound proposition involving <em>k</em> basic
+   propositions has 2<sup><em>k</em></sup> cells, each of which can contain T or F, so there
+   are 2<sup>2<sup><em>k</em></sup></sup> possible truth tables for compound propositions
+   that combine <em>k</em> basic propositions.
+   Of those, there are <sub>2<sup>2<sup><em>k</em></sup></sup></sub>C<sub><em>t</em></sub> 
+   truth tables that have T in <em>t</em> of the cells and F in the rest.
+</p>
+
+<p>
+    The following exercise checks whether you can determine whether a logical proposition is
+    true or false.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var trueProps = ['2+2&nbsp;=&nbsp;4',
+                     '3 is an odd integer',
+                     '1&nbsp;&le;&nbsp;2',
+                     '4 is a perfect square',
+                     '&minus;1&times;&minus;1&nbsp;=&nbsp;1',
+                     'the U.S.A. elected its first Hawaiian president in 2008'
+                     ];
+    var falseProps = ['2+2&nbsp;=&nbsp;5',
+                      '3 is an even integer',
+                      '4 is prime',
+                      '&minus;1&times;&minus;1&nbsp;=&nbsp;&minus;1',
+                      'the moon is made of cheese',
+                      'Homer Simpson is President of the U.S.A.'
+                      ];
+    var whichTrue = listOfDistinctRandInts(4,0,trueProps.length-1);
+    var whichFalse = listOfDistinctRandInts(4,0,falseProps.length-1);
+    var rawOpt = [trueProps[whichTrue[0]],
+                  trueProps[whichTrue[1]] + ' &amp; ' + trueProps[whichTrue[2]],
+                  trueProps[whichTrue[2]] + ' | ' + trueProps[whichTrue[3]],
+                  trueProps[whichTrue[3]] + ' | ' + falseProps[whichFalse[0]],
+                  trueProps[whichTrue[2]] + ' &rarr; ' + trueProps[whichTrue[0]],
+                  falseProps[whichFalse[1]] + ' &rarr; ' + falseProps[whichFalse[2]],
+                  falseProps[whichFalse[1]] + ' &rarr; ' + trueProps[whichTrue[0]],
+                  falseProps[whichFalse[0]],
+                  falseProps[whichFalse[1]] + ' | ' + falseProps[whichFalse[2]],
+                  falseProps[whichFalse[1]] + ' &amp; ' + trueProps[whichTrue[3]],
+                  falseProps[whichFalse[2]] + ' &amp; ' + falseProps[whichFalse[3]],
+                  trueProps[whichTrue[2]] + ' &rarr; ' + falseProps[whichFalse[0]]
+                 ];            
+    var qStr = '<span class="qSpan">Which of the following propositions are true?</span> ' +
+               '(Select all that are.)</p>';
+    document.writeln(qStr);
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (var i=0; i < 7; i++) {
+        aVal = aVal + alphabet[optPerm[1][i]] + '&';
+    }
+    aVal = aVal.substring(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+//    document.writeln('</p>');
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The following exercises test your ability to find truth tables
+    for compound propositions built from the propositions 
+    <span class="math">p</span> and <span class="math">q</span>
+    and the operations !, |, &amp;, &rarr; and &harr;.
+</p>
+
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Fill in the following truth table:</span></p>';
+    document.writeln(qStr);
+    var qTxt = [
+        ['<em>p</em> &amp; !' +
+            '(<em>q</em> &rarr; (!<em>p</em>) )',
+            [true,false,false,false]],
+        ['<em>p</em> | (<em>q</em> &rarr; <em>p</em>)',
+            true,false,true,true],
+        ['<em>p</em> &amp; (<em>p</em> &rarr; ' +
+            '<em>q</em>)',
+            [true,false,false,false]],
+        ['<em>p</em> | (!<em>q</em>)',
+            true,false,true,true],
+        ['(!<em>p</em>) &amp; <em>q</em>',
+            [false,true,false,false]],
+        ['!(<em>p</em> &amp; <em>q</em>)',
+            [false,true,true,true]],
+        ['!(<em>p</em> | <em>q</em>)',
+            [false,false,false,true]],
+        ['<em>p</em> &harr; (!<em>q</em>)',
+            [false,true,true,false]]
+           ];
+    var ansStr = [
+          'The proposition (' + qTxt[0][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p &amp; !' +
+            '(!q | ' +
+            '(!p) ) </p><p class="math"> ' +
+            '= p &amp; (q &amp; ' +
+            'p) </p><p class="math"> ' +
+            '= p &amp; q, </p>' +
+            '<p> so the truth table for this proposition is </p> ' +
+            truthTable(qTxt[0][0],['T','F','F','F']),
+          'The proposition (' + qTxt[1][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p | <big>(</big> (!' +
+            'q) | p <big>)</big></p>' +
+            '<p class="math">' +
+            '= p | (!q), ' +
+            '</p><p>so the truth table for this proposition is </p>' +
+            truthTable(qTxt[1][0],['T','F','T','T']),
+          'The proposition (' + qTxt[2][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            'p &amp; <big>(</big> (!' +
+            'p) | q)</p><p class="math">' +
+            '= (p &amp; !p) ' +
+            '| ((p &amp; q)' +
+            '</p><p class="math"> = F | ' +
+            '((p &amp; q)</p><p class="math">' +
+            '= p &amp; q,</p><p>' +
+            'so the truth table for this proposition is </p>' +
+            truthTable(qTxt[2][0],['T','F','F','F']),
+          'The proposition (' + qTxt[3][0] + ' ) can be evaluated by plugging ' +
+            'in the values of <span class="math">p</span> and <span class="math">q</span>.  The proposition ' +
+            'is true whenever <span class="math">p</span> is true, and is true whenever <span class="math">q</span> is ' +
+            'false.  It is false only when <span class="math">p</span> is false and <span class="math">q</span> is ' +
+            'true.  The truth table is thus </p>' +
+            truthTable(qTxt[3][0],['T','F','T','T']),
+          'The proposition (' + qTxt[4][0] + ' ) is true only when <span class="math">p</span> is ' +
+            'false and <span class="math">q</span> is true, simultaneously.  The truth table is ' +
+            'thus</p>' +
+            truthTable(qTxt[4][0],['F','T','F','F']),
+          'The proposition (' + qTxt[5][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '(!p) | ' +
+            '(!q), </p><p>which is true unless both ' +
+            '<span class="math">p</span> and <span class="math">q</span> are true.  The truth table is thus</p>' +
+            truthTable(qTxt[5][0],['F','T','T','T']),
+          'The proposition (' + qTxt[6][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '(!p) &amp; ' +
+            '(!q),</p><p>which is true only when both ' +
+            '<span class="math">p</span> and <span class="math">q</span> are false. The truth table is thus</p>' +
+            truthTable(qTxt[6][0],['F','F','F','T']),
+          'The proposition (' + qTxt[7][0] + ' ) is equivalent to ' +
+            '</p><p class="math">' +
+            '<big>(</big> p &amp; ' +
+            '(!q<big>)</big> | ' +
+            '<big>(</big> (!p) &amp; ' +
+            'q<big>)</big>,</p><p>so the truth table is ' +
+            truthTable(qTxt[7][0],['F','T','T','F'])
+         ];
+    var opt = ['T','F'];
+    writeTruthTableProblem(qTxt[which[1]][0], qTxt[which[1]][1]);
+    writeSolution(pCtr-1, ansStr[which[1]]);
+    document.writeln('</p>');
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var strArr = randProp(3);
+    var fStr = buildLogicFn(strArr[1], 'f1');
+//alert(fStr);
+    eval(fStr);
+    document.writeln('<span class="qSpan">Fill in the following truth table:</span>');
+//alert(strArr[0]);
+    writeTruthTableProblem(strArr[0],f1);
+    var vals = ['F','F','F','F'];
+    for (var i=0; i < truthValues.length; i++) {
+        for (var j=0; j < truthValues.length; j++) {
+            if (f1(truthValues[i],truthValues[j])) {
+                 vals[i+2*j] = 'T';
+            }
+        }
+    }
+    var ansStr = 'The proposition ' + strArr[0] + ' is logically equivalent to ' +
+            whichTwoByTwoTruthTable(strArr[1]) + '. The truth table for the proposition is ' +
+            truthTable(strArr[0],vals);
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+   The following exercises check whether you can reduce a compound proposition
+   into a logically equivalent proposition that uses only the fundamental
+   logical operations !, | and &amp;.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var strArr = randProp(2);
+    var qStr = '<span class="qSpan">Write a proposition that is logically ' +
+               'equivalent to ' + strArr[0] + ' using only ' +
+               '<span class="math">p</span>, <span class="math">q</span>, T, F, and the fundamental logical operations ' +
+               '!, | and &amp;.  Do not use &harr; or &rarr;.</span>';
+    document.writeln(qStr);
+    var testFnStr = 'eval(wordsToLogicFunction(r, \'checkQ' + qCtr + '\', \'p,q\')); \n' +
+                    'function ans(p,q) { return(' + strArr[1] + ');}\n' +    
+                    'var correct = true;\n' +
+                    'for (i=0; i<truthValues.length; i++) { \n' +
+                    '  for (j=0; j<truthValues.length; j++) { \n' +
+                    '    if (ans(truthValues[i], truthValues[j])) { ' +
+                    '        whichTab = whichTab*primes[i+2*j]; ' +
+                    '    }\n ' +
+                    '    if (checkQ' + qCtr + '(truthValues[i],truthValues[j]) != ' +
+                    '           ans(truthValues[i],truthValues[j])){\n ' +
+                    '       correct = false;\n ' +
+                    '    }\n ' +
+                    '  }\n ' +
+                    '}\n ' +
+                    'return(correct);';
+    var whichTab = 1;
+    var ansStr = whichTwoByTwoTruthTable(strArr[1]);
+    var s = functionalGradeString(testFnStr, 'One example:  ' + ansStr +
+                '.  There are infinitely many others');
+    writeTextExercise(30, qCtr++, s);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var strArr = randProp(3,3);
+    var qStr = '<span class="qSpan">Write a proposition that is logically ' +
+               'equivalent to ' + strArr[0] + ' using only ' +
+               '<span class="math">p</span>, <span class="math">q</span>, <span class="math">r</span>, T, F, and the fundamental logical operations ' +
+               '!, | and &amp;.  Do not use &harr; or &rarr;.</span>';
+    document.writeln(qStr);
+    var testFnStr = 'eval(wordsToLogicFunction(r, \'checkQ' + qCtr + '\', \'p,q,r\')); \n' +
+                    'function ans(p,q,r) { return(' + strArr[1] + ');}\n' +          
+                    'correct = true;\n' +
+                    'for (i=0; i<truthValues.length; i++) { \n' +
+                    '  for (j=0; j<truthValues.length; j++) { \n' +
+                    '    for (k=0; k<truthValues.length; k++) { \n' +
+                    '       if (checkQ' + qCtr + 
+                                 '(truthValues[i],truthValues[j],truthValues[k]) != ' + 
+                                 'ans(truthValues[i],truthValues[j],truthValues[k])){\n ' +
+                    '          correct = false;\n ' +
+                    '       }\n' +
+                    '    }\n ' +
+                    '  }\n ' +
+                    '}\n ' +
+                    'return(correct);';
+    var s = functionalGradeString(testFnStr, 'One example:  ' + logicToWords(strArr[1]) + 
+                   '. There are infinitely many others');
+    writeTextExercise(30, qCtr++, s);
+// -->
+</script>
+</p>
+</div>
+
+
+<h3>
+   <a id="arguments"></a>Logical Arguments as Compound Propositions
+</h3>
+
+<p>
+   Recall from 
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       document.writeln(citeChapter('reasoning') + ', ');
+// -->
+</script>
+   that an argument is a sequence of statements.
+   One statement is the conclusion.
+   The other statements are 
+   <a class="glossRef" href="gloss.htm#premise">premises</a> given as evidence that 
+   the <em>conclusion</em> is true.
+   A logical argument is <a class="glossRef" href="gloss.htm#validArgument">valid</a>
+   if its premises <a class="glossRef" href="gloss.htm#IMPLIES">logically imply</a>
+   its conclusion; that is, the argument is valid if the conclusion must be true 
+   on the assumption that the premises are true.
+</p>
+
+<p>
+   An argument can be logically valid even if its premises are false.
+   If a logical argument is <em>invalid</em>, the conclusion can be false even if
+   the premises are true.
+   Logical arguments can be viewed as compound 
+   <a class="glossRef" href="gloss.htm#proposition">propositions</a>.
+   If the argument is valid, the compound proposition that the
+   <a class="glossRef" href="gloss.htm#AND">conjunction</a> of the premises 
+   <a class="glossRef" href="gloss.htm#IMPLIES">implies</a> the conclusion is always true.
+   That is, an argument with premises <span class="math">p<sub>1</sub>, p<sub>1</sub>, &hellip; 
+   p<sub>n</sub></span> and conclusion <span class="math">q</span> is logically valid if the compound
+   proposition
+</p>
+
+<p class="math">
+    (p<sub>1</sub> &amp; p<sub>2</sub> &amp; &hellip; &amp; p<sub>n</sub>&nbsp;)
+      &rarr; q
+</p>
+<p>
+   is <a class="glossRef" href="#logicallyEquivalent">logically equivalent</a> to T.
+   Otherwise, the argument is invalid.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'A valid logical argument.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+   <p>Here is an example of a valid logical argument:
+   </p>
+   <ul>
+      <li>If the weather forecast calls for rain, I will not wear sandals.</li>
+      <li>The forecast calls for rain.</li>
+      <li>Therefore, I will not wear sandals.</li>
+   </ul>
+   <p>
+	The structure of this argument is as follows.  
+        Let <span class="math">p</span> denote the proposition that the forecast calls for rain, 
+        and let <span class="math">q</span> denote the proposition that I will wear sandals.  
+        The argument has two premises:
+   </p>
+   <ol>
+        <li>
+             <span class="math">p &rarr; !q</span>
+        </li>
+        <li>
+             <span class="math">p</span>
+        </li>
+   </ol>
+   <p>
+         The conclusion of the argument is <span class="math">!q</span>.
+         The argument asserts that if these two premises are true, then the conclusion is
+         true.  
+         The argument is valid if the compound proposition
+   </p>
+   <p class="math">
+         <big>[</big>(p &rarr; !q) &amp; p <big>]</big>
+         &rarr; !q
+   </p>
+   <p>
+         is always true, whether or not <span class="math">p</span> and/or <span class="math">q</span> are true.
+   </p>
+   <p>
+         Here is the truth table for that compound proposition:
+   </p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('<big>[</big>(p &rarr; !q)&amp; ' +
+                    'p <big>]</big> &rarr; !q',['T','T','T','T']);
+// -->
+</script>
+   <p>
+	This compound proposition is always true, no matter the values of <span class="math">p</span> and
+        <span class="math">q</span>; therefore, this is a valid logical argument.
+   </p>
+</div>
+
+<div class="example">
+   <script language="JavaScript1.4" type="text/javascript"> <!--
+       var qStr = 'An invalid logical argument.';
+       writeExampleCaption(qStr);
+// -->
+</script>
+   <p>Here is an example of an invalid logical argument:
+   </p>
+   <ul>
+      <li>If the weather forecast calls for rain, I will not wear sandals.</li>
+      <li>The forecast does not call for rain.</li>
+      <li>Therefore, I will wear sandals.</li>
+   </ul>
+   <p>
+	The structure of this argument is as follows.  
+        Let <span class="math">p</span> denote the proposition that the forecast calls for rain, and 
+        let <span class="math">q</span> denote the proposition that I will wear sandals.  
+        The argument has two premises:
+   </p>
+   <ol>
+        <li>
+             <span class="math">p &rarr; !q</span>
+        </li>
+        <li>
+             <span class="math">!p</span>
+        </li>
+   </ol>
+   <p>
+         The conclusion of the argument is <span class="math">q</span>.
+         The argument asserts that if these two premises are true, then the conclusion is
+         true.  
+         The argument is valid if the compound proposition
+   </p>
+   <p class="math">
+         <big>[</big>(p &rarr; !q) &amp; (!p) <big>]</big>
+         &rarr; q
+   </p>
+   <p>
+         is always true, whether or not <span class="math">p</span> and/or <span class="math">q</span> are true.
+   </p>
+   <p>
+         That compound proposition is logically equivalent to <span class="math">p | q</span>;
+         the truth table for that is:
+   </p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeTruthTable('<span class="math"><big>[</big>(p &rarr; !q) &amp; ' +
+                    '(!p) <big>]</big> &rarr; q</span>',['T','T','T','F']);
+// -->
+</script>
+
+   <p>
+	The compound proposition is not always true&mdash;it is false if <span class="math">p</span>
+        and <span class="math">q</span> are both false
+        (i.e., if the forecast does not call for rain, and I do not wear sandals).
+        Therefore, this is an invalid argument.
+   </p>
+
+</div>
+
+<h2><a id="validSound"></a>
+   Valid Arguments versus Sound Arguments
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EU74gOLPoFM?start=4572&end=4867" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    For a review of what it means for an argument to be sound, see
+   Recall from 
+<script language="JavaScript1.4" type="text/javascript"> <!--
+       document.writeln(citeChapter('reasoning') + '. ');
+// -->
+</script>
+    An argument can be logically valid even if one or more of its premises are false.  
+    For example, consider the argument:
+</p>
+
+<ul>
+   <li>The Moon is made of cheese.</li>
+   <li>The Moon is more than a billion years old.</li>
+   <li>Anything more than a billion years old made from cheese is stale.</li>
+   <li>Therefore, the Moon is stale.</li>
+</ul>
+
+<p>
+   This argument is logically valid, though factually incorrect&mdash;because at least one
+   of its premises is false.
+   That is, the argument is logically valid, but not 
+   <a class="glossRef" href="#sound">sound</a>.
+   An argument is <em>sound</em> if its premises are in fact true, and the argument is 
+   logically valid.
+   The logical structure of the previous argument can be untangled in the following way.
+   Here are the propositions in the argument:
+</p>
+
+<ol>
+   <li><span class="math">p<sub>1</sub></span>. The Moon is made of cheese.</li>
+   <li><span class="math">p<sub>2</sub></span>. The Moon is more than a billion years old.</li>
+   <li><span class="math">p<sub>3</sub></span>. Anything made from cheese and more than a billion years 
+           old is stale.</li>
+   <li><span class="math">p<sub>4</sub></span>. Hidden premise: if the Moon is made from cheese and more than a 
+           billion years old, then the Moon is stale.
+           This premise is implied <em>mathematically</em> by <span class="math">p<sub>3</sub></span>,
+           but it is not derived by logical operations (<span class="math">!</span>, <span class="math">|</span>, 
+           <span class="math">&amp;</span>) from 
+           <span class="math">p<sub>1</sub>, p<sub>2</sub></span>, and <span class="math">p<sub>3</sub></span>.
+           That is, if <span class="math">p<sub>3</sub></span> is true, so is 
+           <span class="math">p<sub>4</sub></span>,
+           as a matter of mathematics.</li>
+   <li><span class="math">q</span>. The Moon is stale.</li>
+</ol>
+
+<p>
+   The argument is thus
+</p>
+
+<p class="math">
+   <big>(</big>p<sub>1</sub> &amp; p<sub>2</sub> &amp; 
+    p<sub>4</sub> <big>)</big>
+    &rarr; q.
+</p>
+
+<p>
+   But we can write
+</p>
+
+<p class="math">
+   p<sub>4</sub> =  <big>(</big> 
+       (p<sub>1</sub> &amp; p<sub>2</sub> ) &rarr; q <big>)</big>.
+</p>
+
+<p>
+    Clearly, 
+</p>
+
+<p class="math">
+   <big>(</big>p<sub>1</sub> &amp; p<sub>2</sub> &amp; 
+        <big>(</big> 
+       (p<sub>1</sub> &amp; p<sub>2</sub> ) &rarr; 
+       q <big>)</big><big>)</big>
+       &rarr; q
+</p>
+
+<p>
+   is always true, so the argument is logically valid.
+</p>
+
+<p>
+   A classical <em>syllogism</em>, a three-line argument, is as follows:
+</p>
+
+<ul>
+    <li>Socrates is a man.</li>
+    <li>All men are mortal.</li>
+    <li>Therefore, Socrates is mortal.</li>
+</ul>
+
+<p>
+   This argument also has a &quot;hidden premise,&quot; namely, that if
+   Socrates is a man then Socrates is mortal.
+   This premise is implied mathematically by the second premise in the argument,
+   but is it not derivable from the second premise using only the logical operations
+   !, | and &amp;.
+</p>
+
+<p>
+    The following exercise tests your ability to identify the structure of
+    a logical argument from a verbal description, and to determine whether
+    that argument is valid.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qArr = [['Either the Moon is made of cheese or the Sun orbits the Earth; ' +
+                   'The Moon is not made of cheese. ' +
+                   'Therefore, the Sun orbits the Earth.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'The Sun orbits the Earth. ' +
+                   'Therefore, the Moon is made of cheese.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'The Sun does not orbit the Earth. ' +
+                   'Therefore, the Moon is not made of cheese.', false],
+                ['If the Sun orbits the Earth or the Moon is made of cheese, then ' +
+                   'Homer Simpson is an alien; ' +
+                   'Homer Simpson is an alien. ' +
+                   'Therefore, either the Sun orbits the Earth or the Moon is made ' +
+                   'of cheese. ', false],
+                ['If the Sun orbits the Earth or the Moon is made of cheese, then ' +
+                   'Homer Simpson is an alien; ' +
+                   'Homer Simpson is not an alien. ' +
+                   'Therefore, the Sun does not orbit the Earth and the Moon is not made ' +
+                   'of cheese. ', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'If the Moon is made of cheese, then Homer Simpson is an alien; ' +
+                   'If Homer Simpson is an alien, then 2+2 = 5; ' +
+                   'The Sun orbits the Earth. ' +
+                   'Therefore, 2+2 = 5.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'If the Moon is made of cheese, then Homer Simpson is an alien; ' +
+                   'If Homer Simpson is an alien, then 2+2 = 5; ' +
+                   '2+2 = 4, not 5. ' +
+                   'Therefore, the Sun does not orbit the Earth.', true],
+                ['The Sun orbits the Earth and the Moon is made of cheese. ' +
+                   'Therefore, the Sun orbits the Earth or the Moon is made ' +
+                   'of cheese. ', true]
+                ];
+    var rawOpt = ['<em>p</em> | <em>q</em>; !<em>p</em>.  Therefore, <em>q</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; <em>p</em>.  Therefore, <em>q</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; !<em>p</em>.  Therefore, !<em>q</em>.',
+                  '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; <em>r</em>.  ' +
+                     'Therefore, <em>p</em> | <em>q</em>.',
+                  '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; !<em>r</em>.  ' +
+                     'Therefore, (!<em>p</em>) &amp; (!<em>q</em>).',
+                  '<em>p</em> &rarr; <em>q</em>; <em>q</em> &rarr; <em>r</em>; ' +
+                     '<em>r</em> &rarr; <em>s</em>; <em>p</em>. ' +
+                     'Therefore, <em>s</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; <em>q</em> &rarr; <em>r</em>; ' +
+                     '<em>r</em> &rarr; <em>s</em>; !<em>s</em>. ' +
+                     'Therefore, !<em>p</em>.',
+                  '<em>p</em> &amp; <em>q</em>. ' +
+                     'Therefore, <em>p</em> | <em>q</em>.'
+                  ];
+    var which = listOfRandInts(1, 0, qArr.length - 1)[0];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][which]];
+    var qStr = '<span class="qSpan">What is the structure of the following argument?</span>' +
+               '</p><p>' + qArr[which][0];
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var opt = ['no','yes'];
+    qStr = '</p><p><span class="qSpan">Is the argument logically valid?</span>';
+    document.writeln(qStr);
+    aVal = 'a';
+    if (qArr[which][1]) {
+        aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+</div>
+
+
+<p>
+    The following exercises test your ability to determine whether an
+    argument is logically valid.
+</p>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var raw1 = ['<em>p</em> &amp; <em>q</em>. Therefore, <em>p</em>.',
+               '<em>p</em> | <em>q</em>; !<em>q</em>. Therefore, <em>p</em>.',
+               '<em>p</em> &rarr; <em>q</em>; <em>p</em> &harr; <em>r</em>; <em>r</em>. Therefore, <em>q</em>.',
+               '<em>p</em> &rarr; <em>q</em>; !<em>q</em>.  Therefore, !<em>p</em>.',
+               '<em>p</em> &harr; <em>q</em>; <em>q</em>.  Therefore, <em>p</em>.',
+               '(<em>p</em> &amp; <em>q</em>) &rarr; <em>r</em>; !<em>r</em>. ' +
+                   'Therefore, (!<em>p</em>) | (!<em>q</em>).'
+              ];
+    var raw0 = ['<em>p</em> &rarr; <em>q</em>; !<em>p</em>.  Therefore, !<em>q</em>.',
+               '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; <em>p</em> &rarr; (!<em>q</em>); ' +
+                  '<em>r</em>. Therefore, <em>q</em>.',
+               '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; <em>p</em> &rarr; (!<em>q</em>); ' +
+                  '<em>r</em>. Therefore, (<em>p</em> &amp; (!<em>q</em>)) | ' +
+                  '(<em>q</em> &amp; (!<em>p</em>)).',
+               '(<em>p</em> &amp; <em>q</em>) &rarr; <em>r</em>; !<em>r</em>. ' +
+                   'Therefore, (!<em>p</em>) &amp; (!<em>q</em>).',
+               '<em>p</em> &rarr; <em>q</em>; <em>q</em>.  Therefore, <em>p</em>.',
+               '<em>p</em> | !<em>q</em>; !<em>q</em>.  Therefore, !<em>p</em>.'
+              ];               
+    var groups = 3;
+    var parts = breakTF(groups, raw1, raw0);
+    for (var qN = 0; qN < groups; qN++) {
+        var qStr = '<p><span class="qSpan">Which of the following are valid logical arguments?</span> ' +
+               '(Select all that are.)</p><p>';
+        document.writeln(qStr);
+        var optPerm = randPermutation(parts[0][qN],"inverse");
+        var opt = optPerm[0];
+        var aVal = '';
+        for (var i=0; i < parts[1][qN]; i++) {
+            aVal = aVal + alphabet[optPerm[1][i]] + '&';
+        }
+        aVal = aVal.substring(0, aVal.length-1);
+        writeSelectExercise(true, qCtr++, opt, aVal);
+        document.writeln('</p>');
+     }
+// -->
+</script>
+</p>
+</div>
+
+<h3><a id="logic_and_sets"></a>
+    Logic and set operations
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EU74gOLPoFM?start=4867&end=5010" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    There is an intimate connection between logical operations and set operations:
+    Every logical operation can be represented as an operation on sets by thinking
+    of propositions as subsets of the outcome space <strong>S</strong>.
+    The subset corresponding to <span class="math">p</span> is the collection of outcomes for
+    which <span class="math">p</span> is true.
+</p>
+
+<p>
+    Suppose we have two propositions, <span class="math">p</span> and <span class="math">q</span>.
+    Let <span class="math">P</span> be the subset of <strong>S</strong> corresponding to 
+    <span class="math">p</span>, and let
+    <span class="math">Q</span> be the subset of <strong>S</strong> corresponding to <span class="math">q</span>.
+    The subset corresponding to <span class="math">!p</span> is the complement of the subset
+    corresponding to <span class="math">p</span>, <span class="math">P<sup>c</sup></span>.
+    The subset corresponding to the proposition <span class="math">(p | q)</span>
+    is the union of the set
+    corresponding to <span class="math">p</span> and the set corresponding to <span class="math">q</span>,
+    <span class="math">(P &cup; Q)</span>.
+    The subset of <strong>S</strong> corresponding to the proposition
+    <span class="math">(p &amp; q)</span> is the intersection
+    of the set corresponding to <span class="math">p</span> and the set corresponding to
+    <span class="math">q</span>, <span class="math">PQ</span>.
+    The set corresponding to the proposition
+    <span class="math">(p &rarr; q)</span> is <span class="math">(P<sup>c</sup> &cup; Q)</span>.
+    If <span class="math">P</span> is a subset of <span class="math">Q</span>, then
+</p>
+
+<p class="math">
+    (P<sup>c</sup> &cup; Q) =
+    (Q<sup>c</sup> &cup; Q) = <strong>S</strong>,
+</p>
+
+<p>
+    because then <span class="math">P<sup>c</sup></span> contains <span class="math">Q<sup>c</sup></span>.
+    Thus if <span class="math">P</span> is a subset of <span class="math">Q</span>,
+    <span class="math">(p &rarr; q)</span> is always true.
+    The set corresponding to the proposition <span class="math">(p &harr; q)</span> is
+    <span class="math">(PQ &cup; (P<sup>c</sup>Q<sup>c</sup>))</span>.
+    If <span class="math">P = Q</span>, then
+</p>
+
+<p class="math">
+    (PQ &cup; P<sup>c</sup>Q<sup>c</sup>) =
+    (P &cup; P<sup>c</sup>) = <strong>S</strong>,
+</p>
+
+<p>
+    so in that case, <span class="math">(p &harr; q)</span> is always true.
+</p>
+
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    A proposition <span class="math">p</span> is a statement that can be true (T) or false (F).
+    Logical operations turn propositions into other propositions;
+    examples include !, |, &amp;, &rarr;, &harr;.
+    They operate as shown in the
+    following table:
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Logical Operations.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div class="plainTable"><center><table class="dataTable">
+    <th id="col0">operation name</th>
+    <th id="col1">values</th>
+    </tr>
+    <tr>
+        <td>!, &minus;, &tilde;, &not;, not</td>
+        <td>
+            !T = F; !F = T
+        </td>
+    </tr>
+    <tr>
+        <td>|, &or;, or</td>
+        <td>
+            (T | T) = T; (T | F) = T; (F | T) = T; (F  | F) = F
+        </td>
+    </tr>
+    <tr>
+        <td>&amp;, &and;, and</td>
+        <td>
+            (T &amp; T) = T; (T &amp; F) = F; (F &amp; T) = F; (F  &amp; F) = F
+        </td>
+    </tr>
+    <tr>
+        <td>&rarr;, implies, if-then</td>
+        <td>
+            (T &rarr; T) = T; (T &rarr; F) = F; (F &rarr; T) = T; (F &rarr; F) = T
+        </td>
+    </tr>
+    <tr>
+        <td>&harr;, IFF</td>
+        <td>
+            (T &harr; T) = T; (T &harr; F) = F; (F &harr; T) = F; (F &harr; F) = T
+        </td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    The logical operations satisfy associative, commutative, and distributive laws.
+    | is like addition and &amp; is like multiplication.
+    All the logical operations can be reduced to !, | and &amp;.
+</p>
+
+<p>
+    A logical argument consists of one or more 
+    <a class="glossRef" href="gloss.htm#premise">premises</a> and a conclusion.
+    The argument is <a class="glossRef" href="gloss.htm#logicallyValid">logically valid</a>
+    if the truth of the premises guarantees
+    that the conclusion is true;
+    that is, if the <a class="glossRef" href="gloss.htm#AND">conjunction</a>
+    of the premises <a class="glossRef" href="gloss.htm#IMPLIES">implies</a> the conclusion.
+    An argument can be logically valid even if its premises are false.
+    If an argument is logically valid and its premises are true, the argument
+    is <a class="glossRef" href="gloss.htm#sound">sound</a>.
+</p>
+
+<p>    
+    Logical propositions can be thought of as 
+    <a class="glossRef" href="gloss.htm#event">events</a>: The proposition is true
+    if and only if the event occurs.
+    Then logical ! becomes the set complement, logical &amp; becomes the set
+    intersection, logical | becomes the set union, and the rest of the
+    associations follow from these three.
+</p>
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>&amp;, &and;, logical conjunction, and</li>
+    <li>compound proposition</li>
+    <li>conclusion</li>
+    <li>contrapositive</li>
+    <li>converse</li>
+    <li>&harr;, IFF, if and only if</li>
+    <li>&rarr; implies, if-then</li>
+    <li>logically equivalent, =</li>
+    <li>logically valid</li>
+    <li>logical argument</li>
+    <li>logical operation</li>
+    <li>!, &tilde;, &minus;, &not;, not</li>
+    <li>|, &or;, |, logical disjunction, or</li>
+    <li>premise</li>
+    <li>proposition, logical proposition</li>
+    <li>sound argument</li>
+    <li>structure of a logical argument</li>
+    <li>syllogism</li>
+    <li>truth table</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

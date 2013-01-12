@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "logic";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+<h2>
+    Elementary Propositional Logic
+</h2>
+
+<!-- ==================================START PROBLEM=================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var trueProps = ['1+1&nbsp;=&nbsp;2',
+                     '3 is an odd integer',
+                     '0&nbsp;&le;&nbsp;1',
+                     '4 is a perfect square',
+                     '(&minus;1)&times;(&minus;1)&nbsp;=&nbsp;1',
+                     'the Earth is closer to the Moon than to the Sun'
+                     ];
+    var falseProps = ['1+1&nbsp;=&nbsp;1',
+                      '3 is an even integer',
+                      '4 is prime',
+                      '1+1&ge;3',
+                      '(&minus;1)&times;(&minus;1)&nbsp;&lt;&nbsp;&minus;1',
+                      'the Moon is made of cheese',
+                      'the Moon is hotter than the Sun'
+                      ];
+    var whichTrue = listOfDistinctRandInts(4,0,trueProps.length-1);
+    var whichFalse = listOfDistinctRandInts(4,0,falseProps.length-1);
+    var raw1 = [trueProps[whichTrue[0]],
+                trueProps[whichTrue[1]] + ' &amp; ' + trueProps[whichTrue[2]],
+                trueProps[whichTrue[2]] + ' | ' + trueProps[whichTrue[3]],
+                trueProps[whichTrue[3]] + ' | ' + falseProps[whichFalse[0]],
+                trueProps[whichTrue[2]] + ' &rarr; ' + trueProps[whichTrue[0]],
+                falseProps[whichFalse[1]] + ' &rarr; ' + falseProps[whichFalse[2]],
+                falseProps[whichFalse[1]] + ' &rarr; ' + trueProps[whichTrue[0]],
+                falseProps[whichFalse[3]] + ' &harr; ' + falseProps[whichFalse[0]]
+               ];
+    var raw0 = [falseProps[whichFalse[0]],
+                falseProps[whichFalse[1]] + ' | ' + falseProps[whichFalse[2]],
+                falseProps[whichFalse[1]] + ' &amp; ' + trueProps[whichTrue[3]],
+                falseProps[whichFalse[2]] + ' &amp; ' + falseProps[whichFalse[3]],
+                falseProps[whichFalse[2]] + ' &harr; ' + trueProps[whichTrue[3]],
+                trueProps[whichTrue[2]] + ' &rarr; ' + falseProps[whichFalse[0]],
+                trueProps[whichTrue[0]] + ' &harr; ' + falseProps[whichFalse[1]],
+                trueProps[whichTrue[1]] + ' &rarr; !(' + trueProps[whichTrue[3]] + ')'
+               ];
+    var groups = 4;
+    var parts = breakTF(groups, raw1, raw0);
+    for (var qN = 0; qN < groups; qN++) {
+        var qStr = '<span class="qSpan">Which of the following propositions are true?</span> ' +
+                   '(Select all that are.)</p><p>';
+        document.writeln(qStr);
+        var optPerm = randPermutation(parts[0][qN],"inverse");
+        var opt = optPerm[0];
+        var aVal = '';
+        for (var i=0; i < parts[1][qN]; i++) {
+            aVal = aVal + alphabet[optPerm[1][i]] + '&';
+        }
+        aVal = aVal.substring(0, aVal.length-1);
+        writeSelectExercise(true, qCtr++, opt, aVal);
+        document.writeln('</p><p>');
+     }
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    function f0(p, q) {
+        return( (!p || q) );
+    }
+
+    function f1(p, q) {
+        return( (p && !q) || (!p && q) );
+    }
+
+    function f2(p, q) {
+        return(!(p || q));
+    }
+
+    function f3(p, q) {
+        return( (p && !q) );
+    }
+
+    function f4(p, q) {
+            return( (p || !q ));
+    }
+
+    var qArr = [
+                  ["!<em>p</em> | <em>q</em>",  f0],
+                  ["!(<em>p</em> &harr; <em>q</em>)", f1],
+                  ["!(<em>p</em> | <em>q</em>)",  f2],
+                  ["<em>p</em> &amp; ( !<em>q</em> " +
+                    "| !<em>p</em> )",          f3],
+                  ["<em>p</em> | ( !<em>q</em> " +
+                              "&amp; !<em>p</em> )",
+                                                      f4]
+               ];
+    var which = listOfRandInts(1,0, qArr.length-1)[0];
+    var qStr = '<span class="qSpan">Fill in the following truth table:</span>';
+    document.writeln(qStr);
+    writeTruthTableProblem(qArr[which][0], qArr[which][1]);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    function f0(p, q) {
+        return(( p || !q));
+    }
+
+    function f1(p, q) {
+        return((p && q));
+    }
+
+    function f2(p, q) {
+        return((p || !q));
+    }
+
+    function f3(p, q) {
+        return( (p && q) );
+    }
+
+    var qArr = [
+                 ["<em>p</em> | (<em>q</em> &rarr; <em>p</em>)",
+                    f0],
+                 ["<em>p</em> &amp; (<em>p</em> &rarr; <em>q</em>)",
+                    f1],
+                 ["!<em>p</em> &rarr; " +
+                    "!<em>q</em>",
+                    f2],
+                 ["<em>p</em> &harr; (<em>p</em> &rarr; <em>q</em>)",
+                    f3]
+               ];
+    var which = (listOfRandInts(1,0, qArr.length -1))[0];
+    var qStr = '<span class="qSpan">Fill in the following truth table:</span></p>';
+    document.writeln(qStr);
+    writeTruthTableProblem(qArr[which][0],qArr[which][1]);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qArr = [['Either the Moon is made of cheese or the Sun orbits the Earth; ' +
+                   'The Moon is not made of cheese. ' +
+                   'Therefore, the Sun orbits the Earth.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'The Sun orbits the Earth. ' +
+                   'Therefore, the Moon is made of cheese.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'The Sun does not orbit the Earth. ' +
+                   'Therefore, the Moon is not made of cheese.', false],
+                ['If the Sun orbits the Earth or the Moon is made of cheese, then ' +
+                   'Homer Simpson is an alien; ' +
+                   'Homer Simpson is an alien. ' +
+                   'Therefore, either the Sun orbits the Earth or the Moon is made ' +
+                   'of cheese. ', false],
+                ['If the Sun orbits the Earth or the Moon is made of cheese, then ' +
+                   'Homer Simpson is an alien; ' +
+                   'Homer Simpson is not an alien. ' +
+                   'Therefore, the Sun does not orbit the Earth and the Moon is not made ' +
+                   'of cheese. ', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'If the Moon is made of cheese, then Homer Simpson is an alien; ' +
+                   'If Homer Simpson is an alien, then 2+2 = 5; ' +
+                   'The Sun orbits the Earth. ' +
+                   'Therefore, 2+2 = 5.', true],
+                ['If the Sun orbits the Earth, then the Moon is made of cheese; ' +
+                   'If the Moon is made of cheese, then Homer Simpson is an alien; ' +
+                   'If Homer Simpson is an alien, then 2+2 = 5; ' +
+                   '2+2 = 4, not 5. ' +
+                   'Therefore, the Sun does not orbit the Earth.', true],
+                ['The Sun orbits the Earth and the Moon is made of cheese. ' +
+                   'Therefore, the Sun orbits the Earth or the Moon is made ' +
+                   'of cheese. ', true]
+                ];
+    var rawOpt = ['<em>p</em> | <em>q</em>; !<em>p</em>.  Therefore, <em>q</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; <em>p</em>.  Therefore, <em>q</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; !<em>p</em>.  Therefore, !<em>q</em>.',
+                  '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; <em>r</em>.  ' +
+                     'Therefore, <em>p</em> | <em>q</em>.',
+                  '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; !<em>r</em>.  ' +
+                     'Therefore, !<em>p</em> &amp; !<em>q</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; <em>q</em> &rarr; <em>r</em>; ' +
+                     '<em>r</em> &rarr; <em>s</em>; <em>p</em>. ' +
+                     'Therefore, <em>s</em>.',
+                  '<em>p</em> &rarr; <em>q</em>; <em>q</em> &rarr; <em>r</em>; ' +
+                     '<em>r</em> &rarr; <em>s</em>; !<em>s</em>. ' +
+                     'Therefore, !<em>p</em>.',
+                  '<em>p</em> &amp; <em>q</em>. ' +
+                     'Therefore, <em>p</em> | <em>q</em>.'
+                  ];
+    var which = listOfRandInts(1, 0, qArr.length - 1)[0];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][which]];
+    var qStr = '<span class="qSpan">What is the structure of the following argument?</span>' +
+               '</p><p>' + qArr[which][0];
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var opt = ['no','yes'];
+    qStr = '</p><p><span class="qSpan">Is the argument logically valid?</span>';
+    document.writeln(qStr);
+    aVal = 'a';
+    if (qArr[which][1]) {
+        aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var raw1 = ['<em>p</em> &amp; <em>q</em>. Therefore, <em>p</em>.',
+                '<em>p</em> | <em>q</em>; !<em>q</em>. Therefore, <em>p</em>.',
+                '<em>p</em> &rarr; <em>q</em>; <em>p</em> &harr; <em>r</em>; <em>r</em>. Therefore, <em>q</em>.',
+                '<em>p</em> &rarr; <em>q</em>; !<em>q</em>.  Therefore, !<em>p</em>.',
+                '<em>r</em> &rarr; (<em>p</em> | <em>q</em>); <em>p</em> &rarr; !<em>q</em>; ' +
+                   '<em>r</em>. Therefore, (<em>p</em> &amp; !<em>q</em>) | ' +
+                   '(<em>q</em> &amp; !<em>p</em>).',
+                '<em>p</em> &harr; <em>q</em>; <em>q</em>.  Therefore, <em>p</em>.',
+                '(<em>p</em> &amp; <em>q</em>) &rarr; <em>r</em>; !<em>r</em>. ' +
+                   'Therefore, !<em>p</em> | !<em>q</em>.',
+                '(<em>p</em> &amp; <em>q</em>) | (!<em>p</em> &amp; !<em>q</em>). ' +
+                   'Therefore, <em>p</em> &rarr; <em>q</em>.'
+             ];
+    var raw0 = ['<em>p</em> &rarr; <em>q</em>; <em>p</em> &rarr; <em>r</em>; <em>r</em>. Therefore, <em>q</em>.',
+                '(<em>p</em> &amp; <em>q</em>) &rarr; <em>r</em>; !<em>r</em>. ' +
+                    'Therefore, !<em>p</em> &amp; !<em>q</em>.',
+                '<em>p</em> &rarr; <em>q</em>; !<em>p</em>.  Therefore, !<em>q</em>.',
+                '(<em>p</em> | <em>q</em>) &rarr; <em>r</em>; <em>p</em> &rarr; !<em>q</em>; ' +
+                    '<em>r</em>. Therefore, <em>q</em>.',
+                '<em>p</em> | <em>q</em> | <em>r</em>. Therefore, <em>p</em> | <em>q</em>.',
+                '<em>p</em> &rarr; <em>q</em>.  Therefore, <em>p</em> &harr; <em>q</em>.',
+                '<em>p</em> &rarr; <em>q</em>.  ' +
+                    'Therefore, (<em>p</em> &amp; <em>q</em>) | (!<em>p</em> &amp; !<em>q</em>).',
+                '(<em>p</em> &amp; <em>q</em>) | <em>r</em>.  ' +
+                    'Therefore, (<em>p</em> &amp; <em>r</em>) | (<em>q</em> &amp; <em>r</em>).'
+             ];
+    var groups = 4;
+    var parts = breakTF(groups, raw1, raw0);
+    for (var qN = 0; qN < groups; qN++) {
+        var qStr = '<span class="qSpan">Which of the following are valid logical arguments?</span> ' +
+               '(Select all that are.)</p>';
+        document.writeln(qStr);
+        var optPerm = randPermutation(parts[0][qN],"inverse");
+        var opt = optPerm[0];
+        var aVal = '';
+        for (var i=0; i < parts[1][qN]; i++) {
+            aVal = aVal + alphabet[optPerm[1][i]] + '&';
+        }
+        aVal = aVal.substring(0, aVal.length-1);
+        writeSelectExercise(true, qCtr++, opt, aVal);
+        document.writeln('</p><p>');
+     }
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+
+<p></p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

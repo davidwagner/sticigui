@@ -1,0 +1,993 @@
+/* default style file for SticiGui text.
+   Copyright 2006-2013 P.B. Stark, statistics.berkeley.edu/~stark 1/9/2013.
+   All rights reserved.
+*/
+
+
+body {
+    background-color: #ffffff;
+    counter-reset: fncounter;
+    counter-reset: h1counter;
+}
+
+h1,h2 {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: center;
+    margin-top: 2em;
+}
+
+h1.compact {
+    margin-top: 0;
+}
+
+h3,h4,h5,h6 {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: left;
+    margin-left: 5%;
+    margin-top: 2em;
+    margin-right:  0em;
+    padding-right: 0em;
+    /* display: run-in;  ELIMINATED FOR VIDEOS */
+}
+
+blockquote {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+p,table,li,dl,address {
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+dd {
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: 5%;
+    margin-right: 0%;
+    font-size: 80%;
+}
+
+fieldset.narrow {
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+legend {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 80%;
+}
+
+ul.noBullet {
+    list-style-type: none;
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: -3em;
+    margin-right: 0em;
+    font-size: 90%;
+}
+
+ul.noBulletExtraSpace {
+    list-style-type: none;
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: -3em;
+    margin-right: 0em;
+    margin-bottom: 1em;
+    font-size: 100%;
+}
+
+ul.noBulletExtraSpace li {
+    margin-bottom: 1em;
+}
+
+p,li,th,td {
+    font-size: 100%;
+}
+
+p.inline {
+    display: inline;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+div.boxContents {
+    text-align: center;
+    line-height: 2em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    padding-bottom: 10px;
+}
+
+p.boxTickets {
+    text-align: center;
+    display: inline;
+    padding: 10px 10px 10px 10px;
+    color: #000000;
+    background: #888888;
+    border: solid #888888;
+    border-width: thick;
+    border-style: outset;
+    line-height: 4em;
+}
+
+p.boxLabel {
+    text-align: center;
+    font-variant: small-caps;
+    padding-top: 10%;
+    color: #000055;
+}
+
+p.math {
+    font-family: helvetica, arial, 'sans serif';
+    color: #000085;
+    text-align: center;
+    font-style: italic;
+}
+
+p.inlineMath {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: center;
+    font-style: italic;
+    display: inline;
+}
+
+p.figure {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: center;
+}
+
+p.center {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: center;
+}
+
+p.big {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: left;
+    font-size: 130%;
+}
+
+p.bigCenter {
+    font-family: helvetica, arial, 'sans serif';
+    text-align: center;
+    font-size: 130%;
+}
+
+p.example {
+    font-family: helvetica, arial, 'sans serif';
+    margin-left: 10%;
+    margin-right: 10%;
+    font-style: italic;
+}
+
+table.dataTable {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 80%;
+    margin-left: 3%;
+    margin-right: 3%;
+    border: solid #555555;
+}
+
+table.dataTable th {
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+
+table.dataTable td {
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+
+table.truthTable {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 3%;
+    margin-right: 3%;
+    border: solid #0000FF;
+}
+
+table.truthTable th {
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+
+table.truthTable td {
+    border-right: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+
+table.truthTable caption {
+    font-weight: bold;
+}
+
+div.loginStub {
+    position: fixed;
+    top: 0;
+    left: 95%;
+    width: 5%;
+    height: 1.2em;
+    margin: 1px;
+    border-left: solid #000000;
+    border-bottom: solid #000000;
+    border-width: 2px;
+    background: #ddffdd;
+    color: #003300;
+    font-family: helvetica, arial, 'sans serif';
+    text-decoration: none;
+    font-variant: small-caps;
+    font-stretch: wider;
+    font-weight: bold;
+    z-index: 7;
+}
+
+#loginStub a {
+    display: block;
+    text-decoration: none;
+    font-variant: small-caps;
+    width: 11.5em;
+}
+
+div.loginBox {
+    position: fixed;
+    width: 90%;
+    height: 1.5em;
+    border-right: 1px solid #999999;
+    border-left: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+    background: #ddffdd;
+    font-family: helvetica, arial, 'sans serif';
+    text-decoration: none;
+    color: #000000;
+    top: 0;
+    left: 10%;
+    margin: 1px;
+    padding: 2px;
+    text-align: center;
+    z-index: 8;
+}
+
+div.boxModel {
+    display: block;
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 120%;
+    min-height: 6em;
+    margin-top: 1.5em;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-bottom: 2em;
+    border-width: thick;
+    border-top: none;
+    border-left: solid #000000;
+    border-right: solid #000000;
+    border-bottom: solid #000000;
+    background: #dedeff;
+}
+
+div.problem {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-top: 1.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: solid #009900;
+    background: #eeffee;
+}
+
+div.indent {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+div.code {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-top: 1.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: solid #0066ff;
+    background: #eeeedd;
+}
+
+
+div.table {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    border: solid #000099;
+    background: #ccccff;
+}
+
+div.plainTable {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+div.assignmentTable {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    border: solid #0000ff;
+}
+
+div.example {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-top: 1.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: solid #0000ff;
+    background: #eeeeff;
+}
+
+div.caption {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 120%;
+    font-weight: bold;
+    color: #000099;
+    margin-left: 0%;
+    margin-right: 5%;
+    text-align: left;
+}
+
+div.figure {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    border: solid #808080;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+div.solution {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 85%;
+    color: #000099;
+    margin-left: 0%;
+    margin-right: 0%;
+    display: block;
+}
+
+div.solutionLink {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 85%;
+    color: #000099;
+    margin-left: 0%;
+    margin-right: 0%;
+    display: block;
+}
+
+div.callout {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 105%;
+    font-weight: bold;
+    border: solid #ff0000;
+    background: #ffeeee;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding:     2% 0% 2% 0%;
+    text-align: left;
+}
+
+div.threeColumnLeft {
+    font-family: helvetica, arial, 'sans serif';
+    font-size:   95%;
+    font-weight: normal;
+    width:       30%;
+    padding:     0% 1% 2% 0%;
+    float:       left;
+}
+
+div.threeColumnMiddle {
+    font-family:  helvetica, arial, 'sans serif';
+    font-size:    95%;
+    font-weight:  normal;
+    padding:      1% 0% 0% 0%;
+    margin-left:  34%;
+    margin-right: 34%;
+}
+
+div.threeColumnRight {
+    font-family: helvetica, arial, 'sans serif';
+    font-size:   95%;
+    font-weight: normal;
+    padding:     0% 0% 2% 1%;
+    width:       30%;
+    float:       right;
+}
+
+div.columnFooter {
+    font-family: helvetica, arial, 'sans serif';
+    clear: both;
+}
+
+div.chapter {
+    opacity:0.9;
+    margin-top:5em;
+    margin-right: 5%;
+    margin-left: 5%;
+    position: static;
+    float: left;
+    z-index:1;
+}
+
+div.coursePage {
+    opacity:0.9;
+    margin-top:5em;
+    margin-right: 0%;
+    margin-left: 12%;
+    position: static;
+    float:left;
+    z-index:1;
+}
+
+div.floatMenuLeft {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 80%;
+    margin-left: 0%;
+    margin-right: 0%;
+    text-align: left;
+    float: left;
+    border-right: #333366;
+    position: fixed;
+}
+
+div.floatMenuTop {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 80%;
+    margin-left: 0%;
+    margin-right: 0%;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: left;
+    color: black;
+    position:fixed;
+    top:0;
+    left:0;
+    opacity:1;
+    clear: both;
+    background-color: #cccccc;
+    border-bottom: solid #ffffff;
+    border-width: thin;
+}
+
+div.floatMenuTopSplitLeft {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 100%;
+    margin-left: 0%;
+    margin-right: 90%;
+    padding: 0em 1em 0em 0.2em;
+    text-align: left;
+    color: black;
+    position:fixed;
+    top:0;
+    left:0;
+    opacity:1;
+    clear: both;
+    border-right: solid #00000f;
+    border-width: thin;
+}
+
+div.floatMenuTopSplitRight {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 80%;
+    margin-left: 90%;
+    margin-right: 0%;
+    padding: 0.2em 0.2em 0.2em 0.2em;
+    text-align: right;
+    color: black;
+    position:fixed;
+    top:0;
+    right:0;
+    opacity:1;
+    clear: both;
+    background-color: #dddccc;
+    border-bottom: solid #ffffff;
+    border-width: thin;
+}
+
+div.solution {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 85%;
+    color: #000099;
+    margin-left: 0%;
+    margin-right: 0%;
+    display: none;
+}
+
+
+h1,h2,h3{
+    color:#000000;
+}
+
+hr {
+    height: 3px;
+    color:#000000;
+    width: 70%;
+    text-align:center;
+}
+
+
+a:link    {
+    color:#0000ff;
+    text-decoration: none;
+}
+
+a:visited {color:#000fff}
+a:active  {color:#ff0033}
+a:hover   {
+    color: #000000;
+    background:silver;
+}
+
+a.glossRef:link {
+    color:#006600;
+    text-decoration: none;
+    font-variant: small-caps;
+    font-stretch: wider;
+    font-weight: bold;
+    font-size: 105%;
+}
+
+a.glossRef:visited {color:#107080}
+
+a.fnLink:link {color:#800080}
+
+a.solLink:link {color:#000099}
+
+a.solLink:visited {color:#000099}
+
+a.chapterLink:link {
+     text-decoration:none;
+     color: #000085;
+}
+
+a.chapterLink:visited {
+     text-decoration:none;
+     color: #000085;
+}
+
+a.chapterLink:hover {
+     text-decoration:none;
+     color: #000099;
+     background: silver;
+}
+
+span.ansSpan {
+     color:  #000099;
+     font-size: 85%;
+     margin-left: 0%;
+}
+
+span.defSpan {
+     font-size: 100%;
+}
+
+span.appCtrlName {
+     font-stretch: wider;
+     color:  #800000;
+     font-size: 100%;
+     margin-left: 0%;
+}
+
+span.chapterCite {
+     font-weight: bold;
+     font-variant: small-caps;
+     font-stretch: wider;
+     color:  #000085;
+     font-size: 100%;
+}
+
+span.calloutCaption {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 120%;
+    font-weight: bold;
+    color: #000000;
+}
+
+span.math {
+    font-family: helvetica, arial, 'sans serif';
+    color:  #000085;
+    text-align: center;
+    font-style: italic;
+}
+
+span.example {
+    font-family: helvetica, arial, 'sans serif';
+    font-style: italic;
+}
+
+span.qSpan {
+    font-family: helvetica, arial, 'sans serif';
+    color: #009900;
+}
+
+span.termOfArt {
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 105%;
+    font-stretch: wider;
+}
+
+
+.footnote {
+    font-family: helvetica, arial, 'sans serif';
+    color: #000000;
+    background-color: #ffddff;
+    border: solid #600060;
+    font-size: 85%;
+    margin-left: 6.03%;
+    margin-right: 6.03%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: none;
+}
+
+.footnoteLink {
+    font-family: helvetica, arial, 'sans serif';
+    color: #800080;
+    font-size: 85%;
+}
+pre { 
+    font-family: monospace; 
+}
+
+span.big {
+    font-size:        120%;
+}
+
+/*   CSS for drawing charts   */
+
+div.chart {
+    position:         relative;
+    clear:            both;
+    display:          block;
+    width:            90%;
+    min-height:       25em;
+    height:           auto !important;
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        100%;
+    text-align:       center;
+    margin:           auto;
+}
+
+div.chartCaption {
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        120%;
+    font-weight:      bold;
+    text-align:       center;
+    margin:           auto;
+    margin-bottom:    2em;
+}
+
+div.horizontalPipe {    
+    z-index:          0;
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        60%;
+    color:            #ffffff;
+    background-color: #000099;
+    border:           none;
+    margin:           auto;
+    text-align:       center;
+}
+
+div.verticalPipe {    
+    z-index:          0;
+    font-family:      helvetica, arial, 'sans serif';
+    font-size:        60%;
+    color:            #ffffff;
+    background-color: #000099;
+    border:           none;
+    margin:           auto;
+    text-align:       center;
+}
+
+a.chart {
+    display:          block;
+    color:            #000000;
+    background-color: #f0f0ff;
+    text-decoration:  none;
+}
+
+a.chart:hover {
+    color:            #900000;
+    background-color: #f0f0ff;
+    text-decoration:  none;
+}
+
+
+/*  Floating Navigation Menu */
+
+#navMenu {
+    position:fixed;
+    top:0;
+    left:0;
+}
+
+#navMenu, #navMenu ul {
+    font-family: helvetica, arial, 'sans serif';
+    margin: 1px;
+    padding: 2px;
+    text-align: left;
+    color: black;
+    opacity:1;
+    clear: both;
+    color: #000099;
+    background-color: #ccccff;
+    border-bottom: solid #000000;
+    border-right: solid #000000;
+    border-width: 2px;
+    list-style: none;
+    line-height: 1;
+    z-index: 7;
+}
+
+#navMenu ul li {
+    width: 12em;
+}
+
+#navMenu a {
+	display: block;
+        text-decoration: none;
+    font-variant: small-caps;
+	width: 11.5em;
+}
+
+#navMenu li { /* all list items */
+	float: left;
+	width: 3.5em; /* width needed for Opera */
+}
+
+#navMenu li ul { /* second-level lists */
+	position: absolute;
+	background: #ccccff;
+	width: 12em;
+	left: -999em; /* using left instead of display to hide menus because display: none isn't read by screen readers */
+}
+
+#navMenu li ul ul { /* third-level lists */
+	margin: -1em 0 0 11.5em;
+}
+
+#navMenu li:hover ul ul, #navMenu li.sfhover ul ul {
+	left: -999em;
+}
+
+#navMenu li:hover ul, #nav li.sfhover ul {
+ left: auto;
+}
+
+#navMenu li:hover ul, #navMenu li li:hover ul, #navMenu li.sfhover ul, #navMenu li li.sfhover ul {
+/* lists nested under hovered list items; sfhover for IE */
+ left: auto;
+}
+
+ul.videogroup  {
+    margin:0 0 20px 0;
+    padding:0;
+    list-style:none;
+}
+ul.videogroup li {
+    display:inline-block;
+    padding:0 20px 0 0;
+    margin:0;
+}
+
+/* Applet CSS */
+
+div.histogram {
+  width: 620px;
+  height: 400px;
+  border: 1px #000 solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stici {
+  position: relative;
+  pading: 0 0 0 0;
+  margin: 0 0 0 0;
+  height: 100%;
+  width: 100%;
+}
+.stici>.top_controls {
+  height: 30px;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 5px;
+}
+.stici>.stici_chart {
+  background: #fff;
+  margin-top: 30px;
+  margin-bottom: 75px
+}
+.stici .chart_box {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 10px;
+}
+.stici .chart_box rect {
+  fill: #6594ff;
+  stroke: black;
+  stroke-width: 1;
+}
+.stici .chart_box .overlay rect {
+  fill: #f8ff53;
+}
+.stici .axis path,
+.stici .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+.stici .axis text {
+  font-family: sans-serif;
+  font-size: 11px;
+}
+.stici .axis {
+  width: 100%;
+  height: 20px;
+}
+.stici>.area_info {
+  width: 100%;
+  height: 15px;
+  position: absolute;
+  bottom: 60px;
+  padding-left: 5px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 10pt;
+}
+.stici>.bottom_controls {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0px;
+  padding-left: 5px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.stici>.bottom_controls input[type="text"] {
+  width: 50px;
+}
+.stici>.bottom_controls .slider {
+  display: inline-block;
+  width: 100px;
+  height: 10px;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.stici>.bottom_controls .ui-slider-handle {
+  margin-top: 4px;
+  height: 10px;
+}
+.stici>.bottom_controls>span {
+  display: block;
+  height: 30px;
+}
+.stici>.bottom_controls .popbox {
+  margin: 0 0 0 0;
+  text-align: inherit;
+  display: inline-block;
+}
+.stici>.bottom_controls button.open {
+  padding: 3px 3px 3px 3px;
+  border-color: #888;
+}
+.stici>.bottom_controls .popbox button {
+  margin-right: 5px;
+  width: 100px;
+}
+.stici>.bottom_controls .popbox .box {
+  padding: 5px 5px 5px 5px;
+  font-size: 12pt;
+}
+.stici>.bottom_controls .popbox .box p {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  min-width: 200px;
+}
+.stici>.bottom_controls .popbox .box p td {
+  text-align: right;
+}
+.stici>.bottom_controls .popbox .box p table {
+}
+
+.tinyscrollbar .viewport {
+  height: 200px;
+  overflow-y: hidden;
+  position: relative;
+}
+.tinyscrollbar .overview {
+  list-style: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.tinyscrollbar .thumb .end,
+.tinyscrollbar .thumb {
+  background-color: #666;
+}
+.tinyscrollbar .scrollbar {
+  position: relative;
+  float: right;
+  width: 15px;
+}
+.tinyscrollbar .track {
+  background-color: #CCC;
+  height: 100%;
+  width:12px;
+  position: relative;
+  padding: 0 1px;
+  border-radius: 10px;
+}
+.tinyscrollbar .thumb {
+  height: 20px;
+  width: 8px;
+  margin-left: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+}
+.tinyscrollbar .thumb .end {
+  overflow: hidden;
+  height: 5px;
+  width: 13px;
+}
+.tinyscrollbar .disable {
+  display: none;
+}
+.noSelect {
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+
+
+
+/*   PRINTING   */
+
+@media print {
+  body{
+    background-color:#FFFFFF;
+    background-image:none;
+    color:#000000
+  }
+  #navMenu{ display:none;}
+  #chapterMenu{ display: none;}
+  .footnote {
+    font-family: helvetica, arial, 'sans serif';
+    color: #000000;
+    background-color: #ffddff;
+    border: solid #600060;
+    font-size: 85%;
+    margin-left: 6.03%;
+    margin-right: 6.03%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: inline;
+  }
+}

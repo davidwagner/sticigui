@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "regression";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+
+<h2>
+    Multivariate Data and Regression
+</h2>
+
+<div class="indent">
+<h3>
+    Part I
+</h3>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var aList = [" less than "," equal to "," greater than "];
+    var itsIt = Math.floor(3*rand.next());
+    var qStr = '<span class="qSpan">If the correlation coefficient of two variables is ' +
+               aList[itsIt] + ' zero, the slope of the regression line for the variables</span>';
+    document.writeln(qStr);
+    var aList = ["is zero",
+                 "is positive",
+                 "is negative",
+                 "could be positive or negative, if regression is Y on X or X on Y",
+                 "none of the above applies"
+                ];
+    var aVal;
+    if (itsIt == 0) {
+        aVal = 'c';
+    } else if (itsIt == 1) {
+        aVal = 'a';
+    } else if (itsIt == 2) {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,aList,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var r = roundToDig(0.1*((listOfRandInts(1,1,9))[0]),1);
+    if (rand.next() > 0.5) {
+        r = -r;
+    }
+    var qStr = 'The correlation coefficient of the variables X and Y is ' + r.toString() + ', ';
+    var giveSds = randBoolean();
+    if (giveSds){
+        var sds = (listOfDistinctRandInts(2,1,10)).sort(numberLessThan);
+        qStr += ' the SD of X is ' + (sds[1]).toString() + ', the SD of Y is ' +
+                (sds[0]).toString() + ', ';
+    }
+    qStr += ' and the regression line for regressing Y on X passes through the origin. ' +
+            '<span class="qSpan">The slope of the regression line</span>';
+    document.writeln(qStr);
+    var opt = [
+                "is " + roundToDig(-1/Math.abs(r),3).toString(),
+                "is " + roundToDig(-Math.abs(r),3).toString(),
+                "is 0",
+                "is " + roundToDig(Math.abs(r),3).toString(),
+                "is " + roundToDig(1/Math.abs(r),3).toString(),
+                "cannot be determined from the information given",
+                "none of the above"
+              ];
+    var aVal;
+    if (!giveSds) {
+        aVal = 'f';
+    } else {
+        aVal = 'g';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Suppose the SD of X and the SD of Y are greater than zero. <span class="qSpan">' +
+               'Unless <em>r</em> = &plusmn;1, the regression line for regressing Y on X is not ' +
+               'as steep as the SD line. </span>';
+    document.writeln(qStr);
+    var aList = ["false","true"];
+    var aVal = 'b';
+    writeSelectExercise(false,qCtr++,aList,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var thePoints = listOfDistinctRandInts(4,-6,6);
+    var slope = (thePoints[3] - thePoints[1] )/ (thePoints[2] - thePoints[0]);
+    var intercept = thePoints[1] - slope*thePoints[0];
+    var qStr = 'A line passes through the points (' + thePoints[0].toString() + ', ' +
+               thePoints[1].toString() + ') and (' + thePoints[2].toString() + ', ' +
+               thePoints[3].toString() + '). <span class="qSpan">The equation of the ' +
+               'line is</span></p><p class="math">Y = ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(slope,.01*Math.abs(slope)));
+    qStr =  '&times; X + ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(intercept,.01*Math.abs(intercept)));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+     Part II
+</h3>
+
+<p class="inline">
+   In the frame below is a
+   scatterplot of some 1990 US Census data population and housing. 
+   The variables, reported for each of the 50 states and the District of Columbia, are:
+</p>
+</div>
+
+<div align="center"><center>
+<table class="dataTable">
+    <caption>Abbreviations of Census variables</caption>
+    <tr>
+      <th id="col0">Variable</th>
+      <th id="col1">Abbreviation</th>
+    </tr>
+    <tr>
+      <td headers="col0">population in thousands</td>
+      <td headers="col1">persons/1000</td>
+    </tr>
+    <tr>
+      <td headers="col0">total housing units per 1000 people</td>
+      <td headers="col1">housing units/1000</td>
+    </tr>
+    <tr>
+      <td headers="col0">occupied rentals per 1000 people</td>
+      <td headers="col1">occupied rentals/1000</td>
+    </tr>
+    <tr>
+      <td headers="col0">vacant housing units per people</td>
+      <td headers="col1">vacancies/1000</td>
+    </tr>
+    <tr>
+      <td headers="col0">vacant rental units per 1000 people</td>
+      <td headers="col1">vacant rentals/1000</td>
+    </tr>
+    <tr>
+      <td headers="col0">median rent in dollars</td>
+      <td headers="col1">median rent($)</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var vacRange = [160,284];
+    var vacRentR = -.63;
+    var vacRentPoA = [243.21, 349.65];
+    var vacRentSds = [25.25, 95.7];
+    var predPoint = roundToDig(vacRange[0] + rand.next() * (vacRange[1] - vacRange[0]),0);
+    var predRent = vacRentPoA[1] +
+                   vacRentR*vacRentSds[1]*(predPoint - vacRentPoA[0])/vacRentSds[0];
+    var qStr = 'Look at the scatterplot of median rent versus vacancies per thousand people. ' +
+               '<span class="qSpan">The regression line for regressing median rent against ' +
+               'vacancies per thousand people, evaluated at (vacancies per thousand people) = ' +
+               predPoint.toString() + ' is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(predRent,0.01*predRent));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The &quot;law&quot; of supply and demand would ' +
+               'suggest that where there are fewer vacancies per capita than average, rents ' +
+               'would be ';
+    document.writeln(qStr);
+    var opt = ["below","equal to","above"];
+    var aVal = 'c';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' average. If so, the association between vacancy rate and median rent should be ';
+    document.writeln(qStr);
+    var opt = ["negative","0","positive"];
+    var aVal = 'a';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ', which it </span>';
+    document.writeln(qStr);
+    var opt = ["is not","is"];
+    var aVal = 'b';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part III
+</h3>
+<p class="inline">
+    Here is a table of (fictitious) IQ measurements of married couples. The
+    data are plotted in a scatterplot below the table (on this page).
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var r3 = roundToDig(.1 + .8*rand.next(),1);
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var fac2 = Math.round(7*rand.next()-3.5);
+    var n = 20;
+    var IQsd = 15;
+    var IQXsd = IQsd + 6*(rand.next()-1);
+    var IQYsd = IQsd + 6*(rand.next()-1);
+    var IQmean = 100;
+    var IQXmean = IQmean + 8*rNorm();
+    var IQYmean = IQmean + 8*rNorm();
+    var lists = cNormPoints(n,r3);
+    var husIQ = lists[0];
+    var wifIQ = lists[1];
+    var m1 = mean(husIQ);
+    var m2 = mean(wifIQ);
+    var s1 = sd(husIQ);
+    var s2 = sd(wifIQ);
+    for (i=0; i < husIQ.length; i++) {
+        husIQ[i] = Math.floor(IQXmean + IQXsd*(husIQ[i]-m1)/s1);
+        wifIQ[i] = Math.floor(IQYmean + IQYsd*(wifIQ[i]-m2)/s2);
+    }
+    var cc = roundToDig(corr(husIQ,wifIQ),2);
+    var aveHus = roundToDig(mean(husIQ),2);
+    var aveWif = roundToDig(mean(wifIQ),2);
+    var sdHus =  roundToDig(sd(husIQ),2);
+    var sdWif =  roundToDig(sd(wifIQ),2);
+    var husPredIQ = aveHus + fac1*sdHus;
+    var wifPredIQ2 = aveWif + fac2*sdWif;
+    var husMnMx = vMinMax(husIQ);
+    var wifMnMx = vMinMax(wifIQ);
+    if (husPredIQ > husMnMx[1]) {
+        husPredIQ += sdHus;
+    } else if (husPredIQ < husMnMx[0]) {
+        husPredIQ -= sdHus;
+    }
+    var wifPredIQ = aveWif + cc*(husPredIQ - aveHus)*sdWif/sdHus;
+    if (wifPredIQ2 > wifMnMx[1]) {
+        wifPredIQ2 += sdWif;
+    } else if (wifPredIQ2 < wifMnMx[0]) {
+        wifPredIQ2 -= sdWif;
+    }
+    var husPredIQ2 = aveHus + cc*(wifPredIQ2 - aveWif)*sdHus/sdWif;
+    var header = new Array('IQ of Husband','IQ of Wife');
+    listToTable(header,lists,'standard','center');
+    var qStr = '</p><p>The point of averages of these data is (' +
+               doubleToStr(aveHus,3) + ', ' + doubleToStr(aveWif,3) +
+               '), the SD  of the husbands\' IQs is ' + doubleToStr(sdHus,3) +
+               ', and the SD of the wives\' IQs is ' + doubleToStr(sdWif,3) +
+               '. The correlation coefficient of the IQs of husbands and wives is ' +
+               '<em>r</em> = ' + doubleToStr(cc,3) + '. (Use this value in your calculations.)';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<p align="center">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600"
+    height="320" name="randDataApplet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="title" value="Fictitious IQs of Wives vs. Husbands">You need Java to see this
+</applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables((husIQ.join().toString()),wifIQ.join().toString()); ' +
+                      'document.applets[' + appNum + '].showPlot();';
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the value of wife\'s IQ of the ' +
+               'regression line (for regressing the IQs of wives against the IQs ' +
+               'of their husbands) at husband\'s IQ= ' + doubleToStr(husPredIQ,2) + '?</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(wifPredIQ,.5));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan"> Using the regression line to estimate ' +
+               'the IQ of the wife of a man whose IQ is ' +
+               roundToDig(husPredIQ,2).toString() + ' is ';
+    document.writeln(qStr);
+    var opt = ["interpolation","extrapolation"];
+    var aVal;
+    if (husPredIQ < husMnMx[0] || husPredIQ > husMnMx[1]) {
+        aVal = 'b';
+    } else {
+        aVal = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ', so the estimate is </span>';
+    document.writeln(qStr);
+    var opt = ["rather dubious","possibly justified","quite reliable"];
+    if (husPredIQ < husMnMx[0] || husPredIQ > husMnMx[1]) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What is the value of husband\'s IQ of the regression ' +
+               'line (for regressing the IQs of husbands against the IQs of their wives) at ' +
+               'wife\'s IQ = ' + doubleToStr(wifPredIQ2,2) + '?</span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(husPredIQ2,.5));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan"> Using the regression line to estimate the IQ ' +
+               'of the husband of a woman whose IQ is ' + doubleToStr(wifPredIQ2,2) + ' is ';
+    document.writeln(qStr);
+    var opt = ["interpolation","extrapolation"];
+    var aVal;
+    if (wifPredIQ2 < wifMnMx[0] || wifPredIQ2 > wifMnMx[1]) {
+        aVal = 'b';
+    } else {
+        aVal = 'a';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = 'so the estimate is</span>';
+    document.writeln(qStr);
+    var opt = ["rather dubious","possibly justified","quite reliable"];
+    if (wifPredIQ2 < wifMnMx[0] || wifPredIQ2 > wifMnMx[1]) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The equation of the regression line for regressing ' +
+               'wives\' IQs against husbands\' IQs is</span></p><p class="math">' +
+               '(wife\'s IQ) = ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,numToRange(cc*sdWif/sdHus,.1));
+    qStr = ' &times; (husband\'s IQ) + ';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++, numToRange(aveWif - aveHus*cc*sdWif/sdHus,.1));
+    qStr = '.</p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>&nbsp;</p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Javajquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "abalone";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+
+
+<h1>
+  A Case Study in Natural Resource Legislation
+</h1>
+
+<p>
+    In 1997 I appeared before the California Senate Committee on Natural
+    Resources (Chaired by Sen. Tom Hayden) to give testimony regarding emergency legislation
+    to close the commercial Red Abalone fisheries in California, proposed by Sen. Thompson.
+</p>
+
+<p>
+    The legislation was largely a response to a study by K.A. Karpov and P.
+    Haaker, two biologists employed by the California Department of Fish and Game.
+    The report was presented
+    to an <em>ad hoc</em> committee on Abalone on January 25, 1997.
+    Karpov and Haaker painted a
+    dismal picture of the Red Abalone population throughout most of California, except for a
+    region off the north coast that is open only to sport divers, not commercial divers.
+    There has been an ongoing phase-out of commercial abalone diving by the California
+    Department of Fish and Game (DFG).
+    First, they stopped issuing new permits for abalone divers.
+    Then, they required that for a diver to acquire a permit, he or she had to buy two permits
+    from currently licensed divers, and give one back to DFG.
+    This reduced the
+    number of divers by one every time two retired or changed occupations.
+    Most recently, DFG prohibited any transfer of permits, so as divers retire or change
+    occupations, no new divers replace them.
+</p>
+
+<p>
+    There had been other limitations on commercial abalone fishing introduced
+    to protect the stocks.
+    For example, the abalone season had been shortened several
+    times, most recently in 1990, when the season became 9 months.
+    Also in 1990, a daily &quot;bag limit&quot; on catch was introduced: 7 dozen
+    in northern California, and 15 dozen in southern California.
+    In spite of these measures&mdash;or perhaps because of them&mdash;the annual landings have
+    generally decreased with time.
+</p>
+
+<p>
+    The two principal sources of evidence that the Red Abalone fisheries were
+    in trouble are:
+</p>
+
+<ul>
+<li>
+    The commerical catches of Red Abalone have fallen dramatically since the
+    early 1970's
+</li>
+<li>
+   Surveys of the Red Abalone population and of &quot;recruitment&quot;
+    (the number of new young Red Abalone) show lower recruitment in Southern California than
+    in the northern areas that are closed to commercial abalone divers.
+</li>
+</ul>
+
+<p>
+    Let's look at these two pieces of evidence in turn.
+</p>
+
+
+<h2>
+    Commercial Red Abalone Annual Landings Data
+</h2>
+
+<p>
+Here is a plot of the commercial landings (annual catch in pounds):
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Annual red abalone catch.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+     align="baseline" width="600" archive="PbsGui.zip" height="400">
+    <param name="title" value="Commercial Red Abalone Landings by year (lbs), 1975-1994">
+    <param name="x" value="1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,
+               1987,1988,1989,1990,1991,1992,1993,1994">
+    <param name="y" value="742769,739621,537450,489147,439469,516731,430315,431285,
+               231210,299759,388782,263302,391278,324835,469407,379143,328466,
+               452901,428749,309478">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showNBar" value="false">
+    <param name="showR" value="false">
+    <param name="showRBar" value="false">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+    There has clearly been a substantial decline in landings over the two
+    decades 1975-1994.
+    According to Karpov and Haaker, and M. Tegner, a marine biologist from
+    the Scripps Institution of Oceanography, this decline indicates that the resource has been
+    over-fished: that the commercial abalone divers have essentially destroyed the resource.
+</p>
+
+<p>
+    Do you find this a compelling argument?
+</p>
+
+<p>
+    What other factors might influence the total landings?
+</p>
+
+<p>
+    One factor that you might reasonably think would have a large influence on
+    the annual catch is the number of abalone divers. If the number of divers decreases by a
+    factor of four, you would expect the annual catch to decrease by a factor of four,
+    <em>ceteris paribus</em>.
+    (Unless, for example, some new technology is introduced that makes the
+    divers more efficient, or that lets them stay on the bottom longer&mdash;they are quite
+    limited in their diving time by the need to avoid &quot;the bends,&quot; which results
+    from long periods of breathing compressed air without coming up gradually (decompressing)
+    periodically to allow the gasses to excape from the flesh.
+    There have been no such technological innovations.)
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is a plot of the number of licensed commercial divers during the same
+    two decades:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Licensed commercial abalone divers as a function of time';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+     align="baseline" width="600" archive="PbsGui.zip" height="400">
+    <param name="title" value="Licensed Commercial Divers by year, 1975-1994">
+    <param name="x" value="1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,
+               1987,1988,1989,1990,1991,1992,1993,1994">
+    <param name="y" value="392,397,272,198,154,174,173,174,167,161,129,127,129,119,
+               125,124,123,117,124,116">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showNBar" value="false">
+    <param name="showR" value="false">
+    <param name="showRBar" value="false">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+     You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+&nbsp;
+</p>
+
+<p>
+Here is a <a class="glossRef" href="gloss.htm#scatterplot">scatterplot</a> of landings
+versus number of divers:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Landings versus Divers.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+     align="baseline" width="600" archive="PbsGui.zip" height="400">
+    <param name="title" value="Abalone Landings (100,000 pounds) versus No. Divers">
+    <param name="x" value="392,397,272,198,154,174,173,174,167,161,129,127,129,119,125,
+           124,123,117,124,116">
+    <param name="y" value="7.42769,7.39621,5.37450,4.89147,4.39469,5.16731,4.30315,4.31285,
+          2.31210,2.99759,3.88782,2.63302,3.91278,3.24835,4.69407,3.79143,3.28466,
+          4.52901,4.28749,3.09478">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showNBar" value="false">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+&nbsp;
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<p>
+    Note that the <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a>
+    is rather large: 0.84. The <a class="glossRef" href="gloss.htm#association">association</a> between the
+    number of divers and the annual landings is strong.
+    It is even more revealing to look at
+    landings and number of divers, on the same plot year by year, to see
+    the time-trends:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Landings and divers';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<img src="../Graphics/catchDiver.jpg" width="679" height="879">
+</p>
+</div>
+
+<p>
+    Some of the features of these curves have clear explanations, for example,
+    the large drop after the first two years. What happened was that the sea urchin market
+    opened up, and many abalone divers started diving for sea urchins instead. In 1976, there
+    were 397 abalone divers, in 1977 there were 272, and in 1978 there were only 198. Not too
+    surprisingly, the annual catch of Red Abalone dropped.
+    The number of commercial abalone divers this year (1996)
+    is 101; because permits are not being issued and existing permits are not
+    transferrable, there can never be more than 101 in the future, only fewer and fewer as
+    divers retire.
+</p>
+
+<p>
+    One might reasonably think that if divers are allowed to fish for only 9
+    months each year instead of 10, annual landings would fall.
+    To put years with different
+    length seasons on an equal footing, we should adjust for the length of the season.
+    Again, <em>ceteris paribus</em>, if the season were shortened by 10% one would
+    expect catches to decline by 10%, because the number of abalone a diver can collect
+    is limited by the amount of time he can spend on the bottom.
+    The next plot tries to put the 20 years 1975-1994 on an
+    equal footing, by weighting the landings by the number of divers and the length of the
+    season.
+    The totals figures are standardized to the number of divers and length of the
+    season in 1975.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Catch and catch per unit effort, with notable events';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<img src="../Graphics/all.jpg" width="679" height="879">
+</p>
+</div>
+
+<p>
+The adjustments were computed as follows:
+</p>
+
+<p class="math">
+Season Length adjustment
+</p>
+<p class="math">
+(adjusted catch) = (raw catch)&times;(length of 1975 season)/(length of season)
+</p>
+
+<p class="math">
+Number of Divers Adjustment
+</p>
+<p class="math">
+(adjusted catch) = (raw catch)&times;(# divers in 1975)/(#divers)
+</p>
+
+<p class="math">
+Adjustment for Both
+</p>
+<p class="math">
+(adjusted catch) = (raw catch)&times;((length of 1975 season)/(length of season)) &times; <br />
+((# divers in 1975)/(#divers))
+</p>
+
+<p>
+Does this seem like the right thing to do? What assumptions do you need to
+make for these adjustments to be reasonable? Are those assumptions justified on the basis
+of the other information we have?
+</p>
+
+<p>
+One measure of the health of the fishery is the &quot;catch per unit
+effort&quot; or &quot;CPUE:&quot; how many pounds of Red Abalone divers catch in a given
+period of time. The following plot shows the CPUE for the two decades 1975-1994.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Catch per unit effort (CPUE).';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/"
+     align="baseline" width="600" archive="PbsGui.zip" height="400">
+    <param name="title" value="Catch per unit effort by year, 1975-1994">
+    <param name="x" value="1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,
+               1987,1988,1989,1990,1991,1992,1993,1994">
+    <param name="y" value="1894.82,1863.03,1975.92,2470.44,2853.69,2969.72,2487.37,2478.65,
+               1384.49,1861.86,3013.81,2073.24,3033.16,2729.71,3755.26,3057.60,
+               2967.17,4301.05,3841.84,2964.35">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showNBar" value="false">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+This plot and the previous one, with the normalization by the number of
+divers and the length of the season, show that the catch per diver-year has fluctuated
+somewhat, but if anything shows a positive trend.
+</p>
+
+<p>
+When the sea otters, which are a protected species, returned to central
+California, they effectively razed the central California Red Abalone fishery. The density
+of abalone in sea otter range dropped by a factor of about 8. One would expect that to
+reduce the annual landings substantially; this effect is not accounted for in the plots
+above.
+</p>
+
+<p>
+I believe these considerations show that the decrease in annual landings
+can be accounted for completely by the decrease in the number of divers, and the
+shortening of the season.
+</p>
+
+<p>
+There remains the question of causality: did the decreasing catch lead
+divers to change profession, or did the exodus of divers cause the decrease in the
+landings, or neither. We actually know two of the important causes of the decrease in the
+number of divers: the opening of a lucrative sea urchin market in about 1977, and the DFG
+policies first of ceasing to issue new permits and requiring a two-for-one exchange of
+permits for transfer, and then of eliminating transfers completely, so that once a diver
+retires or changes profession, his or her permit is gone forever.
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<h2>
+Survey Data</h2>
+
+<h3>
+   <a id="recruitment"></a>
+    Recruitment
+</h3>
+
+<p>
+Recruitment is the word marine biologists use to mean the number of new
+animals in a population each year. Red Abalone recruitment has been measured in a number
+of ways, including
+</p>
+
+<ul>
+<li>
+    Abalone Recruitment Modules (ARMs), cement boxes on the ocean floor,
+    originally designed for kelp-bed studies
+</li>
+<li>
+   &quot;Emergent&quot; diver transects, where divers count the young
+    visible on the ocean floor
+</li>
+<li>
+    &quot;Invasive&quot; diver transects, where divers dig up the bottom for
+    a more thorough count of the young
+</li>
+</ul>
+
+<p>
+ARMs are the primary instrument used to measure recruitment in southern
+California. Most of the &quot;invasive&quot; diver surveys are in a part of northern
+California where everyone agrees the Red Abalone population is thriving.
+</p>
+
+<p>
+Which of these survey methods would you think is likely to show the
+highest recruitment? If recruitment were the same in northern and southern California,
+where would you expect the <em>measured</em> recruitment to be higher?
+</p>
+
+<p>
+If you want to compare measurements in different places made using
+different techniques, what should you do?
+</p>
+
+<p>
+It is known that abalone are very sensitive to bottom conditions, and that
+they &quot;don't like&quot; cement, because of its pH and possibly its color. What would
+that do to measurements of recruitment made using cement ARMs?
+</p>
+
+<p>
+Although individual abalone do not move far, abalone are
+&quot;broadcast&quot; propagators: their sperm and eggs mix in the sea and can be carried
+by currents some distance from the parents. When bottom conditions change, as a result of
+ocean currents, large-scale ocean circulation changes such as &quot;El Niño,&quot;
+pollution, or other factors, there tends to be a net migration of the population.
+</p>
+
+<p>
+Suppose one started by making measurements in a few places where Red
+Abalone population densities were high. After a few years of ocean changes, would you
+expect measurements at those same places to remain high, if the overall population were
+not changing size?
+</p>
+
+<p>
+We have been studying sampling for the last few weeks. How should the
+locations of the dives be chosen to get an unbiased estimate of the Red Abalone
+population? Of the Red Abalone population in regions that are fished commercially?
+</p>
+
+<p>
+In fact, relatively few of the survey dives are in regions fished
+commercially. One reason is that much of the commercial Red Abalone is taken in areas
+infested by white sharks. DFG divers are apparently reluctant to go down in those areas.
+</p>
+
+<p>
+In a recent survey of about 3200 Red Abalone (February 1997, a cruise off
+San Miguel Island), less than 2% were found to be of commercially legal size (7 3/4&quot;
+maximum diameter and larger). A 1993 survey by DFG showed less than 3% of Red Abalone at
+the Fitzgerald Marine Reserve to be commercially legal size. Abalone begin to spawn at
+about 1 1/2&quot; in size, and continue for many years. They spawn for 6-9 months a year.
+However, the viability of their spawn seems to decrease as the abalone get older: younger
+abalone are more effective spawners. Suppose, purely for the sake of argument, that
+</p>
+
+<ol>
+<li>
+   The &quot;instantaneous&quot; mortality rate for Red Abalone from
+    predation and disease before Red Abalone grow to be of commercially legal size is 5%/year
+    (Schultz, 1990; this figure is probably low in areas inhabited by sea otters). Predators
+    include worms, fish, and crabs.
+</li>
+<li>
+  The mortality rate is the same for Red Abalone of all sizes and ages.
+</li>
+<li>
+   Commercial divers are perfectly efficient: they harvest <em>every</em>
+    Red Abalone bigger than 8&quot; each year.
+</li>
+</ol>
+
+<p>
+What must the recruitment rate be for this state of affairs to be stable,
+that is, so that the overall population does not decline?
+</p>
+
+<p>
+Is the answer just that each abalone must have 2 viable offspring per
+year, or is it more complicated than that?
+</p>
+
+<p>
+Suppose every Red Abalone had two viable offspring each year.
+What would happen to the population?
+</p>
+
+<p>
+In the first year, there would be about 3 times as many Red Abalone, less
+the number that are caught by divers (about 2%) and the number that die of other causes
+(about 5%).
+This is clearly not stable&mdash;the population will grow very quickly.
+We need to think a bit more mathematically to answer the question.
+</p>
+
+<p>
+The assumption that the mortality rate is the same for Red Abalone of all
+sizes (once thay are established on the bottom) gives rise to an exponential distribution
+of lifetimes.
+The exponential distribution is the analog of the
+<a class="glossRef" href="gloss.htm#geometric_distrib">geometric distribution</a>
+for continuous time.
+For a mortality rate of 5%/year, and a growth rate of 0.7&quot;/year, one would expect the
+fraction of commercially legal Red Abalone to be 57%, if there were no fishing, but we are
+assuming that the divers are perfectly efficient in gathering the legal Red Abalone
+8&quot; and larger in size.
+</p>
+
+<p>
+The fraction of Red Abalone between 6 3/4&quot; and 7 3/4&quot; would be
+predicted to be about 10% of the total population. The fraction of Red Abalone between 7
+3/4&quot; and 8&quot; would be predicted to be about 2% of the total population (roughly
+what's observed in some surveys).
+</p>
+
+<p>
+The fraction between 1 1/2&quot; (the approximate size at which abalone
+begin to spawn) and 7 3/4&quot; (when they begin to be caught by commercial divers) would
+be predicted to be about 76%. Abalone of all sizes contribute to the mortality in
+proportion to their numbers, but only Red Abalone bigger than 1 1/2&quot; contribute to
+recruitment. Under the assumptions we have made, this yields the conclusion that the
+recruitment required for stability is about 5%/76% = 7%/year.
+</p>
+
+<p>
+Under the same assumptions, except pretending that there were no
+commercial abalone divers, what recruitment rate would be needed for the population to be
+stable? The answer is about 6% per year. The influence of the divers on the recruitment
+needed is an extra 1%, which is 17% of the recruitment needed for a stable population in
+the absence of divers.
+</p>
+
+<p>
+This is only a model, and many of the assumptions are false (but not
+necessarily bad approximations to the truth), but it gives the flavor of the kind of
+computation one needs to make to understand the influence of harvest on population
+stability, which one might consider in balancing the possible benefits of closing the
+fisheries on the Red Abalone population against the certain deleterious effect on the
+divers and their families.
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<h3><a id="adult_populations"></a>
+    Adult Populations
+</h3>
+
+<p>
+The &quot;fishery-independent&quot; measure of adult Red Abalone
+population is based primarily on emergent diver surveys. To the best of my knowledge,
+these surveys are carried out in more or less the same places in the years they are done,
+and the locations were not originally picked at random. In particular, because of white
+sharks, some of the most productive commercial Red Abalone fishing areas were not included
+in the emergent diver surveys.
+</p>
+
+<p>
+If the original surveys were in areas of particularly high Red Abalone
+concentration, what would you expect to see as you revisit the sites, assuming that the
+Red Abalone population is stable?
+</p>
+
+<p>
+From such surveys, what can someone conclude about the general adult Red
+Abalone population, including places not visited by the survey divers?
+</p>
+
+<p>
+In a 1993 survey, about 26 sites were visited. What is your estimate of
+the <a class="glossRef" href="gloss.htm#se">standard error</a> of the sample percentage based on 26
+samples, assuming that the sites were chosen randomly?
+</p>
+
+<p class="math">
+<a class="glossRef" href="gloss.htm#se">SE</a> = 50%/sqrt(26) = 10%.
+</p>
+
+<p>
+(26 data is too few to justify the <a class="glossRef" href="gloss.htm#bootstrap">bootstrap</a>
+estimate of the SE, in my opinion.) If the sites were not chosen randomly, would this SE
+mean anything?
+</p>
+
+<p>
+Suppose that DFG were estimating recruitment from these 26 dives, and
+pretend for the moment that (1) they represent a random sample from the potential Red
+Abalone habitat, and (2) the argument presented above about the recruitment needed to have
+a stable population is valid. Would it be possible to tell whether the recruitment is
+below the 7% threshold needed for stability (in our model) from a sample of size 26?
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<h2>
+   Digesting the Information
+</h2>
+
+<p>
+Given that the fishery-independent survey sites were not random and did
+not include some of the most productive commercial fishery sites, which measure would be a
+better indication of the overall status of the Red Abalone population, the CPUE, or the
+survey data?
+</p>
+
+<p>
+On the basis of these data, do you think the legislation should be passed?
+If you were a legislator, how would you vote? Would you allocate funds for further study?
+How would you trade off the certain interests of the commercial divers against the
+possible but uncertain benefits to the environment? Keep in mind that extinction of Red
+Abalone is not the issue, because the population in northern California is doing well; the
+issue is a possible decline in the range of Red Abalone habitat.
+</p>
+
+<p>
+&nbsp;
+</p>
+
+<hr />
+
+<p>
+By the way, the Senate Committee members present voted unanimously to pass
+the bill on to the full legislature for a vote. The bill ultimately passed.
+</p>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

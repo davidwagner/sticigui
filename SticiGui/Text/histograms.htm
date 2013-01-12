@@ -1,0 +1,1868 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "8 January 2013 20:53 PST";
+	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="../../sticigui.css" rel="stylesheet" type="text/css" />
+<link href="../../popbox.css" rel="stylesheet" type="text/css" />
+<script src="http://d3js.org/d3.v2.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="../../jquery.tinyscrollbar.js"></script>
+<script src="../../popbox.js"></script>
+<script src="../../sticigui.js"></script>
+
+<style>
+#chart {
+  width: 600px;
+  height: 400px;
+  border: 1px #000 solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div id="chart">
+</div>
+
+<script>
+jQuery(function() {
+  Stici_HistHiLite('chart', {
+    data: ['../../data/gmat.json'],
+    //showNormalButton: false,
+    bins: 10
+  });
+});
+</script>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "histograms";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<h1>
+    <a id="introduction"></a>Statistics
+</h1>
+
+<p>
+    Statistics is the science of drawing conclusions from data.
+    This chapter introduces a rough taxonomy of data, as well as tools for
+    presenting,
+    summarizing, and displaying data: tables, frequency tables, histograms,
+    and percentiles.
+    The tools are
+    illustrated using datasets from trade secret litigation and geophysics.
+</p>
+
+<h2><a id="data"></a>
+     Data
+</h2>
+
+<p>
+     In its broadest sense, Statistics is the science of
+     drawing conclusions about the world from data.
+     Data are observations (measurements) of
+     some quantity or quality of something in the world.
+     &quot;Data&quot; is a plural noun; the singular form is &quot;datum.&quot;
+     Our lives are filled with data: the weather, weights,
+     prices, our state of health, exam grades, bank balances, election results, and so on.
+     Data come in many forms, most of which are numbers, or can be translated into numbers for
+     analysis.
+     In this chapter, we will see several types of data, and tools for summarizing
+     data.
+</p>
+
+<p>
+     There are several important questions to keep in mind when you
+     evaluate quantitative evidence:
+</p>
+
+<ul>
+     <li>
+        Are the data relevant to the question asked?
+     </li>
+     <li>
+        Was the data collection fair, or might there have been some
+        conscious or unconscious <a class="glossRef" href="gloss.htm#bias">bias</a> that
+        influenced the results or made some cases less likely to be observed?
+     </li>
+     <li>
+        Do the data make sense?
+     </li>
+</ul>
+
+<p>
+     The answers to these questions are crucial to drawing conclusions
+     from data.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Data of little relevance.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+	Trident&reg; sugarless gum used to advertise that &quot;4 out of 5 dentists
+	surveyed recommend Trident&reg; sugarless gum for their patients who chew gum.&quot;
+</p>
+
+<div class="indent">
+<p class="inline">
+	Such a survey says little about whether Trident&reg; gum is better for your
+	teeth than other gum, with or without sugar.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var fStr = 'Other issues, such as how the dentists were selected, what questions were asked, ' +
+              'how missing data were treated, etc., may also lead to biased or unreliable results. ' +
+              'These issues are discussed in later chapters.';
+   writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+	It would be more relevant to study the effect on teeth of chewing
+	different kinds of gum, not the opinions of dentists who might not have
+	conducted (or even read) any empirical research on the effects of different
+	kinds of gum.
+</p>
+<p></p>
+</div>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Data with inadvertent bias.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<div class="indent">
+<p class="inline">
+	Course evaluation forms often ask students questions about the effectiveness of
+	the instructor.
+	At UC Berkeley, many students are absent from class when evaluation forms are
+	passed out and collected.
+	If students who do not find lectures helpful are more likely to skip class,
+	the evaluation form data will tend to be biased: on average, the forms will tend to
+	report that the instructor is more effective than students really think he really is.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var fStr = 'Moreover, the data might have little to with how effective ' +
+              'the instructor is.';
+   writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script></p>
+<p></p>
+</div>
+</div>
+
+<p>
+	For more on these topics, see <a href="./references.htm#hooke" target="_self">Hooke (1983)</a>,
+	<a href="./references.htm#huff" target="_self">Huff (1993)</a> and
+	<a href="./references.htm#taleb07" target="_self">Taleb (2007)</a>.
+</p>
+
+<h3>
+    <a id="variables"></a>Variables
+</h3>
+
+<p>
+  A <a class="glossRef" href="gloss.htm#variable">variable</a> is a value
+  or characteristic that can differ from individual to individual.
+  Data are generally recorded values of variables.
+  <a class="glossRef" href="gloss.htm#quantitative">Quantitative variables</a>
+  take numerical values whose &quot;size&quot; is meaningful.
+  <a class="glossRef" href="gloss.htm#quantitative">Quantitative</a> variables answer questions such as
+  &quot;how many?&quot; or &quot;how much?&quot;
+  For example, it makes sense to add, to subtract, and to
+  compare two persons' weights, or two families' incomes:
+  These are quantitative variables.
+  Quantitative
+  variables typically have measurement units, such as pounds, dollars, years, volts,
+  gallons, megabytes, inches, degrees, miles per hour, pounds per square inch, BTUs, and
+  so on.
+</p>
+
+<p>
+  Some <a class="glossRef" href="gloss.htm#variable">variables</a>, such as social
+  security numbers and zip codes, take numerical values, but are not
+  quantitative:
+  They are <a class="glossRef" href="gloss.htm#qualitative">qualitative</a> or
+  <a class="glossRef" href="gloss.htm#categorical">categorical</a> variables.
+  The sum of two zip codes or social security numbers is not meaningful.
+  The average of a list of zip codes is not meaningful.
+  <a class="glossRef" href="gloss.htm#qualitative">Qualitative</a> and
+  <a class="glossRef" href="gloss.htm#categorical">categorical</a> variables typically do not have units.
+  Qualitative or categorical variables&mdash;such as gender, hair
+  color, or ethnicity&mdash;group individuals.
+  Qualitative and categorical variables have neither a &quot;size&quot; nor, typically,
+  a natural ordering to their values.
+  They answer questions such as &quot;which kind?&quot;
+  The values categorical and qualitative variables take are typically adjectives
+  (for example, green, female, or tall).
+  Arithmetic
+  with <a class="glossRef" href="gloss.htm#qualitative">qualitative</a> variables usually does not
+  make sense, even if the variables take numerical values.
+  <a class="glossRef" href="gloss.htm#categorical">Categorical</a>
+  variables divide individuals into categories, such as gender, ethnicity, age group, or
+  whether or not the individual finished high school.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Examples of qualitative, quantitative, and categorical variables</span>
+    </p>
+	<div class="threeColumnLeft">
+		<p><strong>Qualitative</strong></p>
+            <ul class="noBullet">
+				<li>Hot/Warm/Cold</li>
+                                <li>Population density: low/medium/high</li>
+                                <li>Height: short/medium/tall</li>
+				<li>Under 5', 5'&ndash;6', Over 6'</li>
+				<li>Slender/Average/Overweight</li>
+                                <li>Young/Middle-aged/Old</li>
+                                <li>Social class: lower/middle/upper</li>
+                                <li>Family size: fewer than 3, 3&ndash;5, 5 or more</li>
+				<li>&nbsp;</li>
+				<li>&nbsp;</li>
+            </ul>
+    </div>
+    <div class="threeColumnRight">
+    	<p><strong>Categorical</strong></p>
+            <ul class="noBullet">
+				<li>Temperature: pleasant/unpleasant</li>
+				<li>Rural/Urban area</li>
+ 				<li>endomorph/mesomorph/ectomorph</li>
+                                <li>Type of climate</li>
+                                <li>Gender</li>
+				<li>Ethnicity</li>
+				<li>Zip code</li>
+				<li>Hair color</li>
+				<li>Country of origin</li>
+        	</ul>
+    </div>
+	<div class="threeColumnMiddle">
+		<p><strong>Quantitative</strong></p>
+		    <ul class="noBullet">
+				<li>Temperature in &deg;C</li>
+                                <li>Population density: people per square mile</li>
+                                <li>Height in inches</li>
+				<li>Height in centimeters</li>
+                                <li>Body mass index (BMI)</li>
+				<li>Age in seconds</li>
+				<li>Income in dollars</li>
+				<li>Family size (#people)</li>
+                                <li>&nbsp;</li>
+		    </ul>
+	</div>
+</div>
+ <div class="columnFooter">
+	<p>&nbsp;</p>
+ </div>
+
+
+<p>
+     The distinction between these types of variables is
+     somewhat blurry.
+     For example, we might group ages into categories such as under 5 years
+     old, between 5 and 15, between 15 and 25, between 25 and 40, and over 40.
+     Similarly,
+     whether gender or climate types are qualitative or categorical variables is not clear-cut.
+     Generally, if there is an implicit ordering of the values the variable can take (hot is
+     warmer than warm, which is warmer than cold), there is a tendency to call a variable
+     qualitative rather than categorical; some people call such variables
+     <a class="glossRef" href="gloss.htm#ordinal">ordinal</a>.
+     It is common to <em>code</em>
+     categorical and qualitative variables using numbers, for example, 1 for male and 0 for
+     female.
+     <em><strong>The fact that a category is labeled with a number does not make the
+     variable quantitative!</strong></em>
+     The real issue is whether arithmetic
+     with the values makes sense.
+</p>
+
+<p>
+  Individuals need not be people; for example, we might be
+  comparing microclimates in the San Francisco Bay Area, using variables such as
+</p>
+
+<ul>
+     <li>annual rainfall in inches (quantitative)</li>
+     <li>annual number of sunny days (quantitative, discrete)</li>
+     <li>A classification into &quot;very foggy,&quot; &quot;somewhat
+     foggy,&quot; and &quot;sunny.&quot; (qualitative, ordinal)</li>
+     <li>annual average temperature in degrees Fahrenheit. (quantitative)</li>
+</ul>
+
+<p>
+  Similarly, the &quot;individuals&quot; could be a single
+  &quot;individual&quot; at different times:
+  A variable might be the price of a share of
+  Microsoft stock at different times.
+</p>
+
+<div class="indent">
+<p class="inline">
+    It is sometimes useful to divide
+    <a class="glossRef" href="gloss.htm#quantitative">quantitative</a> variables further into
+    <a class="glossRef" href="gloss.htm#discrete">discrete</a> and
+    <a class="glossRef" href="gloss.htm#continuous">continuous</a>
+    variables. (This division is sometimes rather artificial.)
+    The set of possible values of a
+    <a class="glossRef" href="gloss.htm#discrete">discrete</a> variable is
+    <a class="glossRef" href="gloss.htm#countable">countable</a>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var fStr = 'A set is <em>countable</em> if it can be put in one-to-one ' +
+       'correspondence with a <a class="glossRef" href="gloss.htm#subset">subset</a> ' +
+       'of the counting numbers 1, 2, 3, &hellip;';
+     writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    Examples of discrete variables include ages measured to the
+    nearest year, the number of people in a family, and stock prices on the
+    New York Stock Exchange.
+    In the first two of these examples, the
+    variable can take only some positive integers as values.
+    In all three examples, there is a
+    minimum spacing between the possible values.
+    Most discrete variables are like this&mdash;they
+    are &quot;chunky.&quot;
+    Variables that count things are always discrete.
+</p>
+</div>
+
+<p>
+    Examples of continuous variables include things like the exact
+    ages or heights of individuals, the exact temperature of something, <em>etc</em>.
+    There is
+    no minimum spacing between the possible values of a continuous variable.
+    The possible
+    values of discrete variables don't necessarily have a minimum spacing.
+    (For example, the set of fractions&mdash;rational numbers&mdash;is
+    <a class="glossRef" href="gloss.htm#countable">countable</a>,
+    but there is no minimum spacing between fractions.)
+    One reason the distinction between
+    discrete and continuous variables is somewhat vague is that in practice there is always
+    a limit to the precision with which we can measure any variable.
+    The limit depends on the instrument
+    we use to make the measurement, how much time we take to make the measurement,
+    and so on.
+    For most purposes, the distinction between continuous and discrete variables
+    is not important.
+</p>
+
+<p>
+     The following exercise checks your understanding of the differences
+     among types of variables.
+     The exercise will tell you immediately whether you are right or wrong:
+     Each question is followed by an image.
+     Initially, the image is a question mark.
+     If you answer the question correctly, the question mark is replaced by a
+     check mark.
+     If you answer the question incorrectly, the question mark is replaced by an X.
+     Once you attempt the exercise, you can see the correct answer by clicking the image.
+     Clicking the image again will hide the answer.
+     Clicking the [+Solution] link (when there is one) reveals a more detailed answer.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     nQs = 3; // number of questions to ask in this table
+     var things = [ "species of tree:<br /> Oak, Pine, or Elm",
+        "per capita income in 100<br /> countries, in $US",
+        "weight: under 100 lbs.,<br />100&ndash;200 lbs., over 200 lbs.",
+        "eye color",
+        "number of children among<br /> women under 35 years old",
+        "state of residence",
+        "weight to the nearest<br /> pound",
+        "full years of education completed",
+        "bank account balances",
+        "price/earnings ratios of<br /> public corporations",
+        "income: &lt;$20,000/yr,<br />$20,000&ndash;$100,000/yr,<br />&gt;$100,000/yr",
+        "temperature by touch: cold,<br />lukewarm,<br />hot"
+     ];
+     var opt =  ["Categorical",
+        "Continuous quantitative",
+        "Discrete quantitative",
+        "Qualitative ordinal"
+     ];
+     var aVals = ["a","b|c","d","a","c","a","c","c","c","b|c","d","d"];
+     var inx = listOfDistinctRandInts(nQs,0,things.length-1);
+     var qStr = '<span class="qSpan">Identify the types of these variables:</span></p>' +
+          '<div align="center"><center><table class="dataTable"><tr>' +
+          '<th id="col0" align="center"><strong>Variable</strong></th>' +
+          '<th id="col1" align="center"><strong>Type</strong></th></tr>';
+    document.writeln(qStr);
+    for (var i=0; i< nQs; i++) {
+         qStr = '<tr><td align="left" headers="col0">' + things[inx[i]] +
+                     '</td><td align="left" headers="col1">';
+         document.writeln(qStr);
+         writeSelectExercise(false,qCtr++,opt,aVals[inx[i]]);
+         qStr = '</td></tr>';
+         document.writeln(qStr);
+    }
+    qStr = '</table></center></div>';
+    document.writeln(qStr);
+    var ansStr = '(Selected questions.) The type of tree is a categorical variable without ' +
+        'a natural order&mdash;it does not make sense to say that &quot;Elm&quot; is ' +
+        'larger than &quot;Oak.&quot; Per-capita incomes in different countries ' +
+        'could be viewed as a discrete or continuous quantitative variable. ' +
+        'Certainly, the number of people in a country is discrete (it is an ' +
+        'integer), and if you view money as having a smallest unit (for example, ' +
+        'a cent in the USA), then per-capita income is a rational number ' +
+        '(a fraction). Because fractions are ' +
+        '<a class="glossRef" href="gloss.htm#countable">countable</a>, ' +
+        'per-capita income would be discrete. For all practical purposes, however, ' +
+        'per-capita income could be treated as a continuous quantitative variable. ' +
+        'Weight, divided into ranges, is an ordinal variable: someone whose weight ' +
+        'is in the range 100 lbs to 200 lbs. weighs more than someone whose weight ' +
+        'is less than 100 lbs. Weight to the nearest pound is an integer, so that ' +
+        'variable is discrete. There is a smallest unit of currency in every ' +
+        'country, so bank account balances are discrete.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="sticigui_data_sets"></a>Sample Data Sets
+</h3>
+
+<p>
+    Throughout this book, as we learn new techniques we shall apply them to
+    real-world data from business, demography, education, law, medicine, and physics.
+    Applying the techniques to data will help us to understand the techniques and to
+    identify circumstances in which the techniques are appropriate.
+    The following sections introduce data we shall use to illustrate and to practice
+    using tables, frequency tables, histograms, and percentiles.
+</p>
+
+<h4>
+  <a id="trade_secret_data"></a>Trade Secret Data
+</h4>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=50&end=449" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The first data set is the Trade Secret Data, which
+    arose from a lawsuit alleging the theft of a customer list.
+    The names of the people and firms have been changed, but otherwise,
+    the facts are stated as I understand them.
+</p>
+
+<p>
+   On 1 May 1995, two former employees of WeeBee Hardware (WBH), a firm that sells
+   computer components to computer assemblers and retailers, opened the doors of a new
+   company, Weasel Drives (WD).
+   One of the former employees had worked at WBH up
+   to the day before WD opened its doors; the other had stopped working for WBH
+   about 18 months previously.
+   Both firms are in the greater San Francisco Bay Area.
+</p>
+
+<p>
+   From the time WD started business, it sold essentially the same kinds of computer
+   components that WBH did, mostly to former customers of one of the former employees, at
+   essentially the same prices and with essentially the same credit terms. Indeed, in the
+   first two days WD was in business, one of the former employees had called the top dozen
+   of her WBH accounts.
+   In its first month of business, WD sold about $1 million of equipment to
+   former customers of WBH; that amount increased to about $2&nbsp;million per
+   month in the course of a few months.
+</p>
+
+<p>
+   The principals of WBH sought an injunction against WD to prevent it from selling to
+   customers of WBH, alleging that their customer list was a trade secret and had been
+   misappropriated by its former employees.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var fStr = 'A further complication is that <em>another</em> former employee of WBH ' +
+              'and arch-rival of the principals of WBH apparently set up WD\'s business, ' +
+              'including renting facilities for them, financing their startup, and advancing ' +
+              'about $400,000 of inventory to them without collateral.';
+   writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+
+<p>
+    It is well established that a customer list can qualify as a trade secret: It has
+    economic value, and derives its value from not being generally known.
+    Customer lists can be the product of years of soliciting new business by advertising and
+    &quot;cold-calling&quot; tens of
+    thousands of potential customers and winnowing that list down to a few hundred
+    or a few thousand who actually do buy the kind of equipment the firm sells, who will buy
+    it from that firm, and who pay promptly.
+    With knowledge of a firm's list of customers, a competitor could avoid the time and expense of
+    some advertising, cold-calling, checking credit
+    references, bad debt, and so on.
+</p>
+<p>
+   In response to WBH's request for an injunction, WD asserted:
+</p>
+
+<ul>
+     <li>
+       They found the names of the customers in public sources,
+       such as CD-ROMs that contain lists of businesses, and from
+       computer magazines in which those customers advertise, <em>not</em>
+       from their knowledge of WBH's customers.
+     </li>
+     <li>
+       Such a large overlap with WBH's customer list was inevitable,
+       because WBH had so many customers.
+     </li>
+</ul>
+
+<p>
+   A California Court of Appeals decision (<u>ABBA Rubber Co. v. Seaquist</u> 286
+   Cal. Rptr. at 528) establishes that a &quot;readily ascertainable by proper
+   means&quot; affirmative defense to a claim of misappropriation is appropriate under
+   certain circumstances:
+</p>
+
+<blockquote>
+<p>
+    [I]f the defendants can convince the finder of fact &hellip;
+    (1) that it is a virtual
+    certainty that anyone who manufactures certain types of products uses rubber rollers,
+    (2) that the manufacturers of those products are easily identifiable, and (3) that the
+    defendants' knowledge of the plaintiff's customers <strong><u>resulted from
+    that identification process and not from the plaintiff's records</u></strong>,
+    then the defendants may establish a defense to the misappropriation
+    claim.
+</p>
+</blockquote>
+
+<p>
+    <u>ABBA Rubber Co.</u>, 286 Cal. Rptr. at 529, ftnt. 9.
+</p>
+<p>
+    WD would thus be in the clear if they could show that they identified
+    the customers they called from the CD-ROMs and/or magazines without
+    using their knowledge of WBH's customer list.
+    I was retained as an expert witness to calculate the probability that
+    certain subsets of WD customers would overlap with analogous subsets
+    of the active WBH customer list to the extent that they do, and that
+    WD would place as large a number of calls to WBH customers as they did,
+    under various assumptions.
+    The plaintiff's law firm matched the defendants' customer list against the
+    plaintiff's, and against advertisements in the magazines from which WD claimed
+    they obtained most of their customers.
+    The plaintiff agreed (stipulated) that essentially all the names in
+    question were in the CD-ROMs.
+    The plaintiff's law firm also went through the defendants'
+    telephone records and identified calls to WBH customers and others.
+    Only local toll calls and long distance calls result in telephone records,
+    so calls to WBH customers who are close to WD could not be identified.
+</p>
+
+<p>
+    WBH had 3310 active customers at the time in question; WD had 132.
+    They had 93 customers in common.
+    WD claimed to have found the names of 27 of their customers in local
+    trade magazine advertisements, and to have found the names of 31 of their customers in
+    the CD-ROMs.
+    A total of 469 potential buyers of the kind of equipment WD sells advertised
+    in the magazines in question; 152 of them were WBH customers.
+    Of the 27 customers WD claimed to have found in the magazines, 26 were customers of WBH.
+    Of the 31 customers WD claimed to have found in the CD-ROMs, 22 were customers of WBH.
+    Of the 3310 WBH customers, 1769 were outside the San Francisco Bay Area.
+    Of the 132 WD customers, 8 were outside the San Francisco Bay Area.
+    All 8 of the WD customers outside the Bay Area were also customers of WBH.
+    Other experts estimated that there were more than 90,000 potential buyers of the kinds of
+    equipment WBH and WD sell in the U.S. as a whole, and more than 60,000 outside the San
+    Francisco Bay Area (including Silicon Valley).
+    There were 2906 WBH customers to whom calls
+    by WD would have resulted in phone records, and 68 WD customers for whom there were phone
+    records, of whom 53 were customers of WBH.
+    In the month of May, 1995, WD placed a total of
+    1050 calls that produced phone records, and 1006 of them were to the 53 customers of WBH.
+</p>
+
+<p>
+    Presenting the data in a narrative is extremely hard to follow.
+    It is much easier to understand the data using a table:
+</p>
+<p>&nbsp;</p>
+<div align="center"><center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     qStr = 'Sizes of groups of purchasers and potential purchasers ' +
+       'of computer equipment of the type sold by WBH and WD.';
+     writeTableCaption(qStr);
+// -->
+</script>
+<table class="dataTable">
+     <tr>
+     <th id="col0">Customer Group</th>
+     <th id="col1" align="right">At Large</th>
+     <th id="col2" align="right">WBH</th>
+     <th id="col3" align="right">WD</th>
+     <th id="col4" align="right">Overlap</th>
+     </tr>
+     <tr>
+     <th align="left" id="row1" headers="col0">All Customers</th>
+     <td headers="row1,col1" align="right">&gt;90,000</td>
+     <td headers="row1,col2" align="right">3310</td>
+     <td headers="row1,col3" align="right">132</td>
+     <td headers="row1,col4" align="right">93</td>
+     </tr>
+     <tr>
+     <th align="left" id="row2" headers="col0">Customers outside Bay Area</th>
+     <td headers="row2,col1" align="right">&gt;60,000</td>
+     <td headers="row2,col2" align="right">1769</td>
+     <td headers="row2,col3" align="right">8</td>
+     <td headers="row2,col4" align="right">8</td>
+     </tr>
+     <tr>
+     <th align="left" id="row3" headers="col0">CD-ROM</th>
+     <td headers="row3,col1" align="right">&gt;90,000</td>
+     <td headers="row3,col2" align="right">3310</td>
+     <td headers="row3,col3" align="right">31</td>
+     <td headers="row3,col4" align="right">22</td>
+     </tr>
+     <tr>
+     <th align="left" id="row4" headers="col0">Magazine Ads</th>
+     <td headers="row4,col1" align="right">469</td>
+     <td headers="row4,col2" align="right">152</td>
+     <td headers="row4,col3" align="right">27</td>
+     <td headers="row4,col4" align="right">26</td>
+     </tr>
+     <tr>
+     <th align="left" id="row5" headers="col0">Phone Records</th>
+     <td headers="row5,col1" align="right">&gt;60,000</td>
+     <td headers="row5,col2" align="right">2,906</td>
+     <td headers="row5,col3" align="right">68</td>
+     <td headers="row5,col4" align="right">53</td>
+     </tr>
+</table>
+</center></div>
+<p>&nbsp; </p>
+<div align="center"><center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     qStr = 'Phone calls in WD phone records, May 1995.';
+     writeTableCaption(qStr);
+// -->
+</script>
+
+<table class="dataTable">
+     <tr>
+     <th id="col0" align="right">to the 53 WBH clients</th>
+     <th id="col1" align="right">to all 68 clients</th>
+     </tr>
+     <tr>
+     <td headers="col0" align="right">1006</td>
+     <td headers="col1" align="right">1050</td>
+     </tr>
+</table>
+</center>
+</div>
+<p>
+     These data are quantitative and discrete (they count various things).
+     In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('randomVariables') + ', ');
+// -->
+</script>
+     we shall use these data to test WD's claim that the large
+     overlap of the customer lists was inevitable given the number of customers WBH had.
+</p>
+
+<p>
+  Reading tables is an extremely important skill.
+  The following exercises may give you valuable practice.
+  (If you need a calculator, click the Calculator link in the drop-down menu at the top left of the screen.)
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What fraction of WD customers are also customers ' +
+   'of WBH?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'0.704:0.705');
+    document.writeln('</p>');
+    writeSolution(pCtr-1,
+    ' WD and WBH have 93 customers in common, and WD has 132 customers ' +
+    ' in all, so the percentage of WD customers who are customers of ' +
+    ' WBH is 93/132&times;100% = 70.45%. ');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The decimal fraction of WD customers outside the ' +
+      'Bay Area is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'0.06:0.061');
+    document.writeln('</p>');
+    var ansStr = 'WD has 8 customers outside the Bay Area, and 132 customers ' +
+    ' overall, so the (decimal) fraction that are outside the Bay Area ' +
+    ' is 8/132 = 0.0606.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What fraction of WD customers outside the Bay Area ' +
+      'are customers of WBH?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'.9999:1.0001');
+    document.writeln('</p>');
+    var ansStr = 'All 8 of WD\'s customers outside the Bay Area are WBH customers: 100%.';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Fill in the missing numbers in the following ' +
+      'table:</span></p><div align="center"><center><table class="dataTable"><tr>' +
+      '<th id="col0">Customers of WD or WBH</th>' +
+      '<th id="col1" align="right">Customer of WBH</th>' +
+      '<th id="col2" align="right">Not Customer of WBH</th></tr>' +
+      '<tr><th id="row0" align="left">Customer of WD</td>' +
+      '<td headers="col1,row0" align="center">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(93,.0001));
+    var qStr = '</td><td headers="col2,row0" align="center">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'39');
+    var qStr = '</td></tr><tr><th id="row1" align="left">Not Customer of WD</td>' +
+               '<td headers="col1,row1" align="center">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(3217,.0001));
+    var qStr = '</td><td headers="col2,row1" align="center">0</td></tr></table></center></div>';
+    document.writeln(qStr);
+    var ansStr = 'The number of customers WD and WBH have in common is 93, so that is ' +
+    ' the first entry in the table. The number of customers of WD who ' +
+    ' are not customers of WBH is 132&minus;93 = 39, so 39 is the second ' +
+    ' entry in the first row of the table. WBH has 3310 customers in ' +
+    ' all, of whom 93 are customers of WD, so the number of customers ' +
+    ' of WBH who are not customers of WD is 3310&minus;93 = 3217, so 3217 is ' +
+    ' the first entry in the second row of the table. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h4>
+  <a id="gravity_data"></a>Gravity Data
+</h4>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=449&end=731" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+   The second set of data is a collection of measurements of <span class="math">g</span>,
+   the acceleration due to gravity, made at Pi&ntilde;on Flat Observatory in 1989 (day 229, between
+   5:29:52pm and 5:48:08pm).
+   You might remember from a physics class that if you drop an
+   object, it falls faster and faster (it accelerates), until it hits the ground.
+   The rate at which it would accelerate, in the absence of air resistance, is <span class="math">g</span>.
+   At Earth's
+   surface, <span class="math">g</span> is about 9.8 meters per second per second (m/s<sup>2</sup>).
+   That is, each second an object falls, it gains about 9.8 meters per second of speed.
+   A meter per second (m/s) is about 2.24 miles per hour (mph), so the acceleration
+   due to Earth's gravity is about
+</p>
+
+<p class="math">
+    (9.8 m/s<sup>2</sup>)&times;(2.24 mph/(m/s)) = 22 miles per hour
+     per second.
+</p>
+<p>
+    If you go bungee jumping from high enough that you
+    fall for 2 seconds before the bungee starts to stretch, you will be going about
+</p>
+
+<p class="math">
+    (22 miles per hour per second)&times;(2 seconds) = 44
+     miles per hour.
+</p>
+<p>
+    This calculation neglects air resistance, which would slow you down a bit.
+</p>
+
+<p>
+    The table lists the <a class="glossRef" href="gloss.htm#deviation">deviations</a> of the 100
+    measurements from a base value of 9.792838 m/s<sup>2</sup>, times 10<sup>8</sup>.
+    That is, each entry in the table is
+</p>
+
+<p class="math">
+    100,000,000&times;(measured value of <span class="math">g</span> in m/s<sup>2</sup>
+  &minus;9.792838).
+</p>
+
+<p>
+    (Note that 10<sup>8</sup> =
+     10&times;10&times;10&times;10&times;10&times;10&times;10&times;10 =
+    100,000,000. If you need to review exponential notation,
+    see <a href="../Problems/index.htm" target="_self">Assignment</a> 1.)
+</p>
+
+<p>
+    The experimental apparatus used to collect these data is pretty slick:
+    It uses a laser and an accurate time
+    reference to determine the distance a mirrored corner of a cube falls in a vacuum chamber
+    as a function of time.
+    The cube is dropped in a vacuum to avoid air resistance, which
+    would make the measurements systematically too small.
+    These measurements were made at Pi&ntilde;on Flat Observatory by Glen
+    Sasagawa and Mark Zumberge of the Scripps Institution of Oceanography in La Jolla,
+    California.
+    Tiny fluctuations in gravity, like those this instrument can measure, allow
+    geophysicists to learn about the distribution of mass within the Earth,
+    about movements of the Earth associated with the tides,
+    and with stresses that lead to earthquakes.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var gData = [ -1, 2, -74, -44, -19, -60, -106, -83, -86, -79, -24, -12, 14, -74, -50,
+       41, 14, 72, -15, -107, -71, -128, -35, -120, 18, -101, -19, -67, 24, -27,
+       -106, 0, 150, 0, 14, -132, -14, 18, -14, 51, -37, -34, -59, -113, 29, -83,
+       -38, -108, -61, -16, 45, -69 , -34, -4, -71, -132, -89, -55, -24, 19, -99,
+       155, 1, -12, -67, 14, -112, -12, -16, -60, -43, -62, -19, -80, -19, -122,
+       -49, 29, -101, -74, 7, -18,-105,-121, -27, -16,-48,-29,-65,-48,-80,-152,-52,
+       -26,-87,-107, -54,-54,-47,-106
+       ];
+    var qStr = '<div align="center"><center>';
+    document.writeln(qStr);
+    qStr = 'One hundred measurements of g, the acceleration due to gravity, ' +
+     'at Pi&ntilde;on Flat Observatory. The entries are 10<sup>8</sup> times the deviations ' +
+     ' of g from a reference value of 9.792838 m/s<sup>2</sup>.';
+    writeTableCaption(qStr);
+    qStr = '<table class="dataTable">';
+    for (var i=0; i<10; i++) {
+     qStr += '<tr>';
+     for (var j=0; j<10; j++) {
+   qStr += '<td align=\"right\"><font size=\"-1\">' + gData[10*i+j] + '</font></td>';
+     }
+     qStr += '</tr>';
+    }
+    qStr += '</table></center></div>';
+    document.writeln(qStr);
+// -->
+</script>
+
+<p>
+    Here, the tabular representation does not mean anything special; it is
+    just a way of writing a list.
+</p>
+
+<p>
+   A reasonable mathematical model for the observations is that
+</p>
+
+<p class="math">
+    (observed value of <span class="math">g</span>) = (true value of <span class="math">g</span>)
+     + error,
+</p>
+
+<p>
+    where the error tends to be different for each measurement.
+</p>
+
+<p>
+    Why make so many measurements?
+</p>
+
+<ul>
+    <li>
+     To increase accuracy: Errors in different measurements tend to average out to some extent,
+     so one can estimate <span class="math">g</span> better using an average of a large number of measurements
+     than one can using a single measurement.
+    </li>
+    <li>
+     To assess uncertainty: The variability of the repeated measurements gives an
+     estimate of the uncertainty of a single measurement, or of the average of
+     the measurements.
+    </li>
+    <li>
+     To monitor the experiment: If the fluctuations get larger, or a measurement is
+    &quot;unusual,&quot; something might be going wrong with the experiment.
+    </li>
+</ul>
+
+<p>
+    In later chapters, we will illustrate the first and second points using these data.
+</p>
+
+<h2>
+    <a id="frequency_tables"></a>Frequency Tables
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=731&end=1044" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    It is hard to learn much by looking at this list;
+    it would be helpful to summarize the values in a more transparent way.
+    We shall begin by constructing a
+    <a class="glossRef" href="gloss.htm#frequency_table">frequency table</a>.
+    A <a class="glossRef" href="gloss.htm#frequency_table">frequency table</a>
+    lists the frequency (number) or
+    relative frequency (fraction) of observations that fall in various ranges,
+    called &quot;<a class="glossRef" href="gloss.htm#class_interval">class intervals</a>.&quot;
+    We also need an
+    &quot;<a class="glossRef" href="gloss.htm#endpoint_convention">endpoint convention</a>&quot;
+    to be able to construct
+    a <a class="glossRef" href="gloss.htm#frequency_table">frequency table</a>:
+    If an observation falls on the
+    boundary between two <a class="glossRef" href="gloss.htm#class_interval">class intervals</a>, in which
+    class interval do we count the observation?
+    The two standard choices are always to include
+    the left boundary and exclude the right, except for the rightmost class interval, or
+    always to include the right boundary and exclude the left, except for the
+    leftmost class interval.
+</p>
+
+<p>
+    Let us construct a relative frequency table for the gravity data.
+    There are no
+    hard-and-fast rules for determining appropriate
+    <a class="glossRef" href="gloss.htm#class_interval">class
+    intervals</a>, and the impression one gets of how the data are distributed depends on the
+    number and location of the intervals (more on this later in this chapter).
+    We shall use the following nine class intervals:
+</p>
+
+<div align="center">
+<center>
+    <ul class="noBullet">
+       <li>&minus;160 (inclusive) to &minus;110 (inclusive)</li>
+       <li>&minus;110 (exclusive) to &minus;90 (inclusive)</li>
+       <li>&minus;90 (exclusive) to &minus;70 (inclusive)</li>
+       <li>&minus;70 (exclusive) to &minus;40 (inclusive)</li>
+       <li>&minus;40 (exclusive) to &minus;10 (inclusive)</li>
+       <li>&minus;10 (exclusive) to 20 (inclusive)</li>
+       <li>20 (exclusive) to 50 (inclusive)</li>
+       <li>50 (exclusive) to 80 (inclusive)</li>
+       <li>80 (exclusive) to 160 (inclusive)</li>
+     </ul>
+</center></div>
+
+<p>
+    Note that the endpoint convention here is always to include the right
+    boundary and exclude the left, except for the leftmost class interval.
+    To construct the frequency table, the next step is to count the number
+    of data that fall in each <a class="glossRef" href="gloss.htm#class_interval">class
+    interval</a>.
+    Counting is much easier if we sort the data.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeTable(tCtr);
+// -->
+</script>
+    lists the gravity data sorted into increasing order: <a id="sorted_gravity_data"></a>
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var gData = [ -1, 2, -74, -44, -19, -60, -106, -83, -86, -79, -24, -12, 14, -74, -50,
+       41, 14, 72, -15, -107, -71, -128, -35, -120, 18, -101, -19, -67, 24, -27,
+       -106, 0, 150, 0, 14, -132, -14, 18, -14, 51, -37, -34, -59, -113, 29, -83,
+       -38, -108, -61, -16, 45, -69 , -34, -4, -71, -132, -89, -55, -24, 19, -99,
+       155, 1, -12, -67, 14, -112, -12, -16, -60, -43, -62, -19, -80, -19, -122,
+       -49, 29, -101, -74, 7, -18,-105,-121, -27, -16, -48, -29, -65, -48, -80, -152,-52,
+       -26,-87,-107, -54,-54,-47,-106
+       ];
+    var sortGdata = new Array(gData.length);
+    for (var i=0; i < gData.length; i++) {
+     sortGdata[i] = gData[i];
+    }
+    sortGdata.sort(numberLessThan);
+    var qStr = '<div align="center"><center>';
+    document.writeln(qStr);
+    qStr = 'Sorted gravity data.';
+    writeTableCaption(qStr);
+    qStr = '<table class="dataTable">';
+    for (var i=0; i<10; i++) {
+       qStr += '<tr>';
+       for (var j=0; j<10; j++) {
+          qStr += '<td align=\"right\"><font size=\"-1\">' +
+          sortGdata[10*i+j] + '</font></td>';
+       }
+       qStr += '</tr>';
+    }
+    qStr += '</table></center></div>';
+    document.writeln(qStr);
+// -->
+</script>
+
+<p>
+    The first class interval contains the 9 observations
+</p>
+
+<p class="math">
+    {&minus;152, &minus;132, &minus;132, &minus;128, &minus;122, &minus;121, &minus;120, &minus;113,
+   &minus;112}.
+</p>
+
+<p>
+    Nine is 9% of 100, so the relative frequency of observations in the
+    first class interval is 9%.
+    The second class interval contains the 10 observations
+</p>
+
+<p class="math">
+    {&minus;108, &minus;107, &minus;107, &minus;106, &minus;106, &minus;106, &minus;105, &minus;101, &minus;101,
+   &minus;99}.
+</p>
+
+<p>
+    Ten is 10% of 100, so the relative frequency of
+    observations in the second class interval is 10%.
+    The last class interval contains the two observations {150, 155}.
+    Two is 2% of 100, so the relative frequency of observations in
+    the last class interval is 2%.
+</p>
+
+<p>
+     The following exercise checks your understanding of frequency tables.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Fill in the missing numbers in the following ' +
+      '(relative) frequency table for the gravity data:</span></p>' +
+      '<div align="center"><center><table class="dataTable"><tr>' +
+      '<th id="col0">Class<br />Interval</th><th id="col1">Relative<br />' +
+      'Frequency</th></tr><tr><td headers="col0">&minus;160 to &minus;110</td>' +
+      '<td headers="col1" align="right">9%</td></tr><tr><td headers="col0">&minus;110 to &minus;90</td>' +
+      '<td headers="col1" align="right">10%</td></tr><tr><td headers="col0">&minus;90 to &minus;70</td>' +
+      '<td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.13));
+    var qStr = '</td></tr><tr><td headers="col0">&minus;70 to &minus;40</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.2));
+    var qStr = '</td></tr><tr><td headers="col0">&minus;40 to &minus;10</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.25));
+    var qStr = '</td></tr><tr><td headers="col0">&minus;10 to 20</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.14));
+    var qStr = '</td></tr><tr><td headers="col0">20 to 50</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.05));
+    var qStr = '</td></tr><tr><td headers="col0">50 to 80</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'2%');
+    var qStr = '</td></tr><tr><td headers="col0">80 to 160</td>' +
+      '<td headers="col1" align="right">2%</td></tr></table></center></div>';
+    document.writeln(qStr);
+    var ansStr = 'The first missing entry is the percentage of values between &minus;90 and &minus;70. ' +
+    ' There are 13 data in that range: </p><p class="math">{&minus;89, &minus;87, &minus;86, &minus;83, ' +
+    ' &minus;83, &minus;80, &minus;80, &minus;79, &minus;74 , &minus;74 , &minus;74 , &minus;71, &minus;71}.</p><p>Thirteen is 13% ' +
+    ' of 100, so the entry in the frequency table for the range &minus;90 to &minus;70 is 13%. ' +
+    ' Similarly, there are 20 observations in the range &minus;70 to &minus;40, so the ' +
+    ' corresponding entry in the frequency table is 20%. There are 25 ' +
+    ' observations in the range &minus;40 to &minus;10, so the corresponding entry ' +
+    ' is 25%. There are 14 obsevations between &minus;10 and 20, so the' +
+    ' corresponding entry is 14%. There are 5 observations between 20' +
+    ' and 50, so the corresponding entry is 5%. There are 2' +
+    ' observations between 50 and 80, so the corresponding entry is 2%.' +
+    ' As a double check, we can add together all the percentages in the' +
+    ' frequency table: they should total 100%. We have</p> ' +
+    ' <p class="math">9% + 10% + 13% + 20% + 25% + 14% ' +
+    ' + 5% + 2% + 2% = 100%.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+     <a id="histograms"></a>Histograms
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=1044&end=1475" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+  The frequency table is easier to interpret than the raw data, but it is
+  still hard to get an overall impression of the data from it.
+  The <a class="glossRef" href="gloss.htm#histogram">histogram</a> is an
+  excellent tool for studying the
+  distribution of a list of quantitative measurements.
+  A <a class="glossRef" href="gloss.htm#histogram">histogram</a>
+  is a way of visualizing a frequency table graphically&mdash;of making a picture from a
+  frequency table.
+  The fraction of data in each class interval is represented by a rectangle
+  (<a class="glossRef" href="gloss.htm#bin">bin</a>) whose base is the class interval
+  and whose area is the
+  fraction of data (relative frequency of data) that fall in the class interval:
+</p>
+
+<div align="center">
+<center>
+    <table border="0" cellspacing="1" bgcolor="#FFFFFF">
+     <tr>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td valign="middle" align="center">&nbsp;</td>
+     <td>&nbsp;</td>
+     <td valign="middle" align="center">#observations in the
+    <a class="glossRef" href="gloss.htm#class_interval">class
+     interval</a></td>
+     </tr>
+     <tr>
+     <td>(area of the <a class="glossRef" href="gloss.htm#bin">bin</a>)</td>
+     <td>&nbsp;=&nbsp;</td>
+     <td valign="middle" align="center">(fraction of data in the class interval) </td>
+     <td>=</td>
+     <td valign="middle" align="center">------------------------------------------------</td>
+     </tr>
+     <tr>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td valign="middle" align="center">&nbsp;</td>
+     <td>&nbsp;</td>
+     <td valign="middle" align="center">total number of observations</td>
+     </tr>
+    </table>
+</center></div>
+
+<p>
+    so that
+</p>
+<div align="center"><center>
+    <table border="0" cellspacing="1" bgcolor="#FFFFFF" cellpadding="0">
+     <tr>
+   <td>&nbsp;</td>
+   <td>&nbsp;</td>
+   <td valign="middle" align="center">fraction of data in the class interval</td>
+     </tr>
+     <tr>
+   <td>(height of the <a class="glossRef" href="gloss.htm#bin">bin</a>)</td>
+   <td>&nbsp;=&nbsp;</td>
+   <td valign="middle" align="center">------------------------------------------------ .</td>
+     </tr>
+     <tr>
+   <td>&nbsp;</td>
+   <td>&nbsp;</td>
+   <td valign="middle" align="center">width of class interval</td>
+     </tr>
+    </table>
+</center></div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig();
+// -->
+</script>
+     is a cartoon of a histogram:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    writeFigureCaption('Elements of a histogram.');
+// -->
+</script>
+<p class="math">
+    <img src="../Graphics/hist.jpg" width="450" height="400">
+</p>
+</div>
+
+<p>
+    The key to a <a class="glossRef" href="gloss.htm#histogram">histogram</a> is that it is
+    the <em>area</em> of the <a class="glossRef" href="gloss.htm#bin">bin</a>, not the height
+    of the <a class="glossRef" href="gloss.htm#bin">bin</a>, that represents the relative frequency of data
+    in the bin.
+    The area of the <a class="glossRef" href="gloss.htm#bin">bin</a> is proportional to the relative
+    frequency of observations in
+    the <a class="glossRef" href="gloss.htm#class_interval">class interval</a>.
+    The horizontal axis of a histogram needs a scale with units.
+    The vertical axis of a histogram always has units of percent per
+    unit of the horizontal axis, so that the areas of bins have units of
+</p>
+
+<p class="math">
+    (horizontal units) &times; (percent per horizontal unit) =
+    percent.
+</p>
+<p>
+  The scale of the vertical axis is automatically
+  imposed by the fact that the total area of the
+  <a class="glossRef" href="gloss.htm#histogram">histogram</a>
+  must be 100% (100% of the data fall somewhere on the plot).
+  The vertical scale is called a
+  <a class="glossRef" href="gloss.htm#density">density scale</a>.
+  The height of a <a class="glossRef" href="gloss.htm#bin">bin</a>
+  is the <a class="glossRef" href="gloss.htm#density" target="glossWin">density</a> of
+  observations in the <a class="glossRef" href="gloss.htm#bin">bin</a>: the percentage of observations
+  in the bin per unit of the
+  horizontal axis.
+  Typically it is <em>not</em> the percentage of observations in the bin.
+</p>
+
+<p>
+     A <a class="glossRef" href="gloss.htm#histogram">histogram</a> is not the same as
+     a <em>bar chart</em>: In a bar chart, the height of a rectangle (bar), rather
+     than the area of the bar, indicates the relative frequency of observations.
+     The width of the bar does not matter; it does not even need to have units.
+     This makes bar charts especially useful for displaying
+     <a class="glossRef" href="gloss.htm#categorical" target="glossWin">categorical</a> and
+     <a class="glossRef" href="gloss.htm#qualitative" target="glossWin">qualitative</a> data,
+     where the horizontal axis does not have a scale&mdash;it is just a way to separate
+     groups.
+     <a class="glossRef" href="gloss.htm#histogram">Histograms</a> are more appropriate for
+     <a class="glossRef" href="gloss.htm#quantitative" target="glossWin">quantitative</a> data.
+</p>
+
+<p>
+     For the gravity data, the first
+     <a class="glossRef" href="gloss.htm#class_interval">class interval</a> is from &minus;160 to
+     &minus;110, and has 9% of the data.
+     The height of the corresponding <a class="glossRef" href="gloss.htm#bin">bin</a> is thus
+</p>
+<div align="center"><center>
+<table border="0" cellspacing="1">
+<tr>
+<td align="center">9%</td>
+<td></td>
+<td align="center">9%</td>
+</tr>
+<tr>
+<td align="center">----------------------</td>
+<td>=</td>
+<td align="center">------------------------------------------</td>
+</tr>
+<tr>
+<td align="center">width of bin</td>
+<td></td>
+<td align="center">&minus;110&minus;(&minus;160) measurement units</td>
+</tr>
+</table>
+</center></div>
+<p>&nbsp;</p>
+<div align="center"><center><table border="0" cellspacing="1">
+<tr>
+<td></td>
+<td align="center">9%</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>=</td>
+<td align="center">------------------------------</td>
+<td>=</td>
+<td>0.18% per unit.</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">50 measurement units</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</center></div>
+
+<p>
+     (The unit is 10<sup>&minus;8</sup>m/s<sup>2</sup>.)
+</p>
+
+<p>
+     The second class interval has width (&minus;90 &minus; (&minus;110)) = 20
+     units, and has 10% of the observations, so the height of the
+     corresponding bin is
+</p>
+<div align="center"><center>
+<table border="0" cellspacing="1">
+<tr>
+<td align="center">10%</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">-------------</td>
+<td>=</td>
+<td>0.5% per unit.</td>
+</tr>
+<tr>
+<td align="center">20 units</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</center></div>
+
+<p>
+     The last class interval has width 160&minus;80 = 80 units,
+     and has 2% of the observations, so the height of the last bin is
+</p>
+
+<div align="center"><center>
+<table border="0" cellspacing="1">
+     <tr>
+     <td align="center">2%</td>
+     <td></td>
+     <td></td>
+     </tr>
+     <tr>
+     <td align="center">--------</td>
+     <td>=</td>
+     <td>0.025% per unit.</td>
+     </tr>
+     <tr>
+     <td align="center">80 units</td>
+     <td></td>
+     <td></td>
+     </tr>
+</table>
+</center></div>
+<p>
+    The height of the last bin is one twentieth (.025/.5)
+    that of the second bin.
+</p>
+
+<p>
+     The relative frequency of observations in the second class interval is five
+     times that of the last class interval (10% versus 2%), so the area of the second bin is
+     five times that of the last bin.
+     The width of the second class interval is 1/4 the width
+     of the last class interval (&minus;90&minus;(&minus;110) = 20, versus 160&minus;80 = 80; 20 is 1/4 of 80).
+     Thus the second bin is 5&times;4=20 times taller than the last bin.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     citeFig();
+// -->
+</script>
+    is a histogram of the <span class="math">g</span> deviations corresponding to these class
+    intervals (multiplied by 10<sup>8</sup> as before):
+</p>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var qStr = 'Histogram of deviations of g measured at Pi&ntilde;on Flat Observatory.';
+     writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+    align="middle" width="620" height="380" archive="PbsGui.zip">
+     <param name="bins" value="9">
+     <param name="counts" value="9,10,13,20,25,14,5,2,2">
+     <param name="ends" value="-160,-110,-90,-70,-40,-10,20,50,80,160">
+     <param name="univariateStats" value="false">
+     <param name="restrict" value="false">
+     <param name="title" value="Pinon Flat Gravity Data">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   citeFig(figCtr-1);
+// -->
+</script>
+  is the first
+  <a class="glossRef" href="gloss.htm#applet">applet</a> in this book&mdash;there are many
+  more to come.
+  This applet is a program with controls you can manipulate.
+  For example, try moving the scroll bars near the bottom of the plot, or
+  typing other numbers into the boxes next to the scroll bars and then pressing
+  the Enter or Return key.
+  If you set the Area from text box lower than the to text box, part of the
+  histogram will change color from blue to yellow, and the area of the
+  yellow part will be displayed under the histogram, as &quot;Selected area.&quot;
+</p>
+
+<h3>
+    <a id="skewness_and_modes"></a>Skewness and Modes
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=1475&end=2070" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+     The word &quot;<a class="glossRef" href="gloss.htm#distribution">distribution</a>&quot;
+     refers to how numerical data are &quot;distributed&quot; on the real line.
+     We can discover qualitative features of the
+     <a class="glossRef" href="gloss.htm#distribution">distribution</a> of the data from the
+     <a class="glossRef" href="gloss.htm#histogram">histogram</a>.
+     The &quot;center&quot; of the data is around &minus;50 to &minus;40.
+     Most of the observations are between &minus;110 and 20.
+     The observations are not distributed
+     <a class="glossRef" href="gloss.htm#symmetric_distribution">symmetrically</a> around the
+     center: They continue farther to the right of the center than to the left of the center.
+     The distribution is said to be <a class="glossRef" href="gloss.htm#skewed">skewed</a> to the right,
+     <em>right-skewed</em> or to have a <em>long right tail</em>.
+     Conversely, when the data are more spread out to the left of the
+     &quot;center&quot; than to the right, the distribution is said to be
+     <em><a class="glossRef" href="gloss.htm#skewed">skewed</a> to the
+     left</em>, <em>left-skewed,</em> or to have a <em>long left tail</em>.
+</p>
+
+<p>
+  Distributions of prices and incomes tend to be skewed to the right.
+  For example, consider house prices. Most homes cost under $100,000 to $200,000
+  (depending on the locality), but a relatively small number of homes sell for tens of
+  millions of dollars. Similarly, most family annual incomes are under $60,000, but a small
+  number of people have annual incomes exceeding tens of millions of dollars. Age distributions
+  also tend to be skewed to the right; for example, there is unlikely to be anyone in this
+  class younger than 14 years old, and most are between 17 and 22, but a few &quot;returning
+  students&quot; are likely to be in their 30s, 40s or older.
+</p>
+
+<p>
+  This histogram of the gravity data consists of only one &quot;bump:&quot; it is
+  said to be <a class="glossRef" href="gloss.htm#unimodal">unimodal</a>. In general, a
+  <a class="glossRef" href="gloss.htm#histogram">histogram</a> is said to be
+  <a class="glossRef" href="gloss.htm#multimodal">multimodal</a> if it has more than one bump, and
+  in particular <a class="glossRef" href="gloss.htm#bimodal">bimodal</a> if it has two bumps.
+</p>
+
+<p>
+     The following exercises check your ability to use the histogram applet in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     citeFig(figCtr-1);
+// -->
+</script>.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The area under the histogram between &minus;120 and 10 is ' +
+      '</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'79%:79.2%');
+    document.writeln('</p>');
+    var ansStr = 'The answer is 79.1%: just type the endpoints into the boxes in the ' +
+    'histogram applet.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The area under the histogram between &minus;160 and &minus;43 is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'49.9%:50.1%');
+    document.writeln('</p>');
+    var ansStr = 'The answer is 50%: type the endpoints into the boxes in the histogram applet.';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+   <a id="percentiles"></a>Percentiles and Quartiles
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=2398&end=2683" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Another way to characterize a list of numbers is using
+    <a class="glossRef" href="gloss.htm#percentile">percentiles</a>.
+    The <em>p</em>th percentile of a list is the
+    smallest number that is at least as large as <em>p</em>% of the numbers in the list.
+    For example, 10% of the gravity data are less than or equal to &minus;108, so &minus;108
+    is the 10th percentile of the gravity data.
+    The smallest number that is at least as large as 13% of
+    the data is &minus;106, so &minus;106 is the 13th percentile of the data,
+    even though in fact 15% of the observations are less than or equal to &minus;106.
+    The 13th through 15th percentiles of these data are all &minus;106.
+    <em>It is much easier to find
+    percentiles from the sorted list than from the original!</em>
+</p>
+
+<p>
+    Some percentiles have special names, as shown in
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var qStr = 'Table&nbsp;' + cNum + '-' + tCtr.toString() + '. ';
+     document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<div align="center">
+<center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var qStr = 'Common named percentiles.';
+     writeTableCaption(qStr);
+// -->
+</script>
+
+    <table class="dataTable">
+     <tr>
+   <th id="col0">Percentile</th>
+   <th id="col1">Special Name</th>
+   <th id="col2">Abbreviation</th>
+     </tr>
+     <tr>
+   <td headers="col0">25th</td>
+   <td headers="col1">Lower Quartile</td>
+   <td headers="col3">LQ</td>
+     </tr>
+     <tr>
+   <td headers="col0">50th</td>
+   <td headers="col1">Median</td>
+   <td headers="col3">M or MED</td>
+     </tr>
+     <tr>
+   <td headers="col0">75th</td>
+   <td headers="col1">Upper Quartile</td>
+   <td headers="col3">UQ</td>
+     </tr>
+    </table>
+</center></div>
+
+<p>
+    The lower quartile is the 25th percentile: the smallest number that is at least as
+    large as 25% of the data.
+    The median is the 50th percentile: the smallest number that is at least as
+    large as half the data.
+    We just saw that the median of the gravity data is &minus;47.
+    The upper quartile is the 75th percentile: the smallest number that is at least
+    as large as 75% of the data.
+    Approximately half the observations are between the lower quartile and the upper quartile.
+</p>
+
+<p>
+    The following exercises verify that you can calculate percentiles.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var questPctile = 50 + listOfRandInts(1,1,24)[0];
+    var qStr = '<span class="qSpan">Fill in the missing percentiles for the gravity ' +
+      'data: </span></p><div align="center"><center><table class="dataTable">' +
+      '<tr><td>25th percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(-80));
+    var qStr = '</td></tr><tr><td>50th percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(-47));
+    var qStr = '</td></tr><tr><td>' + numToOrdinal(questPctile)  + ' percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,(sortGdata[questPctile-1]).toString());
+    var qStr = '</td></tr><tr><td>75th percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(-12));
+    var qStr = '</td></tr><tr><td>90th percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(18));
+    var qStr = '</td></tr><tr><td>90.5th percentile</td><td>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(19));
+    var qStr = '</td></tr></table></center></div>';
+    document.writeln(qStr);
+    var ansStr = ' &minus;80 is the smallest number that at least 25% of the ' +
+    ' data are less than or equal to. (In fact, 26% of the data are ' +
+    ' less than or equal to &minus;80.) Thus &minus;80 is the 25th percentile of ' +
+    ' the data. &minus;47 is the smallest number that at least 50% of the ' +
+    ' data are less than or equal to, so &minus;47 is the 50th percentile of ' +
+    ' the data. ' + (sortGdata[questPctile-1]).toString() + ' is the ' +
+    numToOrdinal(questPctile) + ' percentile.  &minus;12 is the 75th percentile ' +
+    ' (it is every percentile between the 74th and 76th). The 90th ' +
+    ' percentile is 18. The smallest number such that at least 90.5% of ' +
+    ' the data are less than or equal to it is 19. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Here is a list of data to practice with. Every time ' +
+      'you re-visit or re-load the page, the data will be different.</p>';
+    document.writeln(qStr);
+    var n = 25;
+    var hi = 50;
+    var lo = -50;
+    var list = listOfRandInts(n,lo,hi);
+    var sortList = new Array(n);
+    for (i=0; i < n; i++) {
+     sortList[i] = list[i].valueOf();
+    }
+    sortList.sort(numberLessThan);
+    var nPercentiles = 5;
+    var percentileSought = (listOfDistinctRandInts(nPercentiles,1,100)).sort(numberLessThan);
+    var percentileFound = [];
+    var ppt
+    for (i=0; i < nPercentiles; i++) {
+		ppt = Math.ceil(percentileSought[i]*n/100);
+		ppt = Math.max(ppt,1);
+		percentileFound[i] = sortList[ppt-1];
+    }
+    var header = "Practice data";
+    listToTable(header,list,"standard","center");
+    var qStr = '<p>The table sorted into increasing order is </p>';
+    document.writeln(qStr);
+    listToTable(header,sortList,"standard","center");
+    var qStr = '<p><span class="qSpan">Fill in the following table of percentiles:</span>' +
+      '</p><div align="center"><center><table class="dataTable"><tr><th id="col0">' +
+      'Percentile</th><th id="col1">Value</th></tr>';
+    document.writeln(qStr);
+    for (i=0; i < nPercentiles; i++) {
+		document.writeln('<tr><td headers="col0">' + numToOrdinal(percentileSought[i]) +
+					  '</td><td headers="col1">');
+		writeTextExercise(6, qCtr++, percentileFound[i].toString());
+		document.writeln('</td></tr>');
+    }
+    var qStr = '</table></center></div>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>&nbsp;</p>
+<h3>
+   <a id="percentiles_from_histograms"></a>Estimating
+   Percentiles from Histograms
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/WWAvdTjW13A?start=2683&end=3020" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    To find a <a class="glossRef" href="gloss.htm#percentile">percentile</a> of a
+    set of measurements exactly, one needs the original data.
+    In plotting a <a class="glossRef" href="gloss.htm#histogram">histogram</a>, the data are grouped into
+    <a class="glossRef" href="gloss.htm#class_interval">class intervals</a>, which typically
+    makes it impossible to find exact <a class="glossRef" href="gloss.htm#percentile">percentiles</a>
+    from a histogram.
+    A histogram tells you the percentage of data each class interval contains, but not where in the class
+    interval each datum is.
+    However, one can find <em>approximate</em>
+    <a class="glossRef" href="gloss.htm#percentile">percentiles</a>
+    from a <a class="glossRef" href="gloss.htm#histogram">histogram</a>: The <em>p</em>th
+    <a class="glossRef" href="gloss.htm#percentile">percentile</a>
+    is approximately the point on the horizontal axis such that
+    the area under the <a class="glossRef" href="gloss.htm#histogram">histogram</a> to the left of the
+    point is <em>p</em>%.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     citeFig();
+// -->
+</script>
+    is another histogram of the Pi&ntilde;on Flat <span class="math">g</span> data, with
+    equal-width class intervals:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     var qStr = 'Histogram of deviations of g using equal-width bins.';
+     writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+   align="middle" width="620" height="380" archive="PbsGui.zip">
+     <param name="bins" value="9">
+     <param name="files" value="./Data/gravity.dat">
+     <param name="hiLiteHi" value="-44.2">
+     <param name="hiLiteLo" value="-152">
+     <param name="nFiles" value="1">
+     <param name="restrict" value="false">
+     <param name="univariateStats" value="false">
+   You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    This histogram has equal-width <a class="glossRef" href="gloss.htm#class_interval">class intervals</a>.
+    You can change the number of bins by typing a different value into the box labeled
+    &quot;Bins&quot; and
+    pressing the Return or Enter key&mdash;but don't do that yet.
+    If you click the List Data button, a new
+    window will pop up with a listing of the 100 numbers in the gravity data set.
+    This applet also
+    displays two numbers that are defined in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('location') + ': ');
+// -->
+</script>
+    the <a class="glossRef" href="gloss.htm#mean">mean</a>
+    (average) and the <a class="glossRef" href="gloss.htm#sd">SD</a> (standard deviation).
+    The range &minus;152 to &minus;44.2 is highlighted when you first
+    open this page, and the figure shows that the area under the histogram in that range is 50%.
+    Our estimate of the median from the histogram thus  would be &minus;44.2.
+    We saw earlier in this chapter that the median of the data is &minus;47:
+    The estimate of the median from the histogram is off by a bit
+    because the data have been grouped into
+    <a class="glossRef" href="gloss.htm#class_interval">class intervals</a> in the
+    <a class="glossRef" href="gloss.htm#histogram">histogram</a>.
+</p>
+
+<p>
+    Type &minus;47 into the <span class="appCtrlName">to</span> box, and press Return or Enter.
+    The selected area under the histogram should show 48%.
+    The difference between 48% and 50% is also caused by the grouping of data into
+    <a class="glossRef" href="gloss.htm#class_interval">class intervals</a> in the histogram.
+</p>
+
+<p>
+     The following exercise lets you practice estimating percentiles from histograms.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Estimate the following percentiles of the gravity data ' +
+      'from the histogram:</span></p><div align="center"><center>' +
+      '<table class="dataTable"><tr>' +
+      '<th id="col0">Percentile</td><th id="col1">Estimate from histogram</td>' +
+      '</tr><tr><td headers="col0">25th</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'-79.6:-79.4');
+    var qStr = '</td></tr><tr><td headers="col0">60th</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'-30.6:-30.4');
+    var qStr = '</td></tr><tr><td headers="col0">90th</td><td headers="col1">';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'18.4:18.8');
+    var qStr = '</td></tr></table></center></div>';
+    document.writeln(qStr);
+    var ansStr = 'The area under the histogram between &minus;160 and &minus;79.5 ' +
+    ' is 25%, so &minus;79.5 is the estimate of the lower quartile (25th ' +
+    ' percentile) from the histogram. The area under the histogram ' +
+    ' between &minus;160 and &minus;30.5 is 60%, so &minus;30.5 is the estimate of the ' +
+    ' 60th percentile from the histogram. The area under the histogram ' +
+    ' between &minus;160 and 18.5 is 90%, so 18.5 is the estimate of the 90th ' +
+    ' percentile from the histogram. ';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<p>
+    Now change the number of bins from 9 to 30 by typing 30 into
+    the <span class="appCtrlName">Bins</span> box and pressing Return or Enter.
+    The histogram is now rougher&mdash;it has more &quot;bumps&quot; or modes.
+    The appearance of a histogram depends crucially on how the class intervals are chosen.
+    If you estimate percentiles from the histogram with 30 bins and with 9 bins,
+    you will get different answers.
+</p>
+
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+     This chapter introduced <em>variables</em>, and distinctions among variables, according to the
+     kinds of values the variables can take: <em>quantitative</em>,
+     <em>qualitative</em>, and <em>categorical</em>.
+     Quantitative variables are classified further as either <em>discrete</em> or
+     <em>continuous</em>.
+     Data&mdash;observed values of variables&mdash;can be presented in many ways.
+     Tables often are easier to understand than words.
+     When the number of data is large, looking at the data provides little insight,
+     but summaries of the data can help.
+     Quantitative data can be summarized using <em>frequency tables</em>.
+     Constructing a frequency table requires specifying <em>class intervals</em> and an
+     <em>endpoint convention</em>.
+     Frequency tables can be presented graphically as <em>histograms</em>, which give an
+     impression of the distribution of the data.
+     In a histogram, relative frequency is represented by area.
+     Characteristics of the distribution that can be gleaned from a histogram include
+     <em>symmetry</em>, <em>skewness</em>, and the number and location of <em>modes</em>.
+     However, the appearance of those characteristics in a histogram depends on
+     the number and location of the class intervals.
+     <em>Percentiles</em> are another way to summarize the distribution of a list.
+     Calculating percentiles exactly requires the original data, but percentiles
+     can be estimated approximately from histograms.
+</p>
+
+<h2><a id="keyTerms"></a>
+     Key Terms
+</h2>
+
+<ul>
+     <li>applet</li>
+     <li>bias</li>
+     <li>bimodal</li>
+     <li>bin</li>
+     <li>categorical variable</li>
+     <li>class interval</li>
+     <li>continuous</li>
+     <li>countable</li>
+     <li>density</li>
+     <li>density scale</li>
+     <li>deviation</li>
+     <li>distribution</li>
+     <li>discrete</li>
+     <li>endpoint convention</li>
+     <li>frequency table</li>
+     <li>histogram</li>
+     <li>lower quartile</li>
+     <li>median</li>
+     <li>multimodal</li>
+     <li>ordinal variable</li>
+     <li>percentile</li>
+     <li>qualitative variable</li>
+     <li>quantitative variable</li>
+     <li>quartile</li>
+     <li>skewed</li>
+     <li>symmetrically</li>
+     <li>unimodal</li>
+     <li>upper quartile</li>
+     <li>variable</li>
+</ul>
+
+
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

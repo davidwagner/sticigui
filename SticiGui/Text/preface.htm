@@ -1,0 +1,684 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "10 August 2011 23:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "preface";
+    writeChapterHead('SeEd',cNum,'Preface');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle('Preface');
+// -->
+</script>
+
+<dl>
+  <dt><a href="#content" target="_self">Content, Philosophy, and Goals</a> </dt>
+    <dd><a href="#overview" target="_self">Overview</a></dd>
+      <dd><a href="#prerequisites" target="_self">Prerequisites</a> </dd>
+      <dd><a href="#design" target="_self">Design criteria and implementation</a> </dd>
+      <dd><a href="#javaAdvantages" target="_self">Advantages of Java over proprietary
+    Statistics Packages</a> </dd>
+      <dd><a href="#evaluating" target="_self">Suggestions for evaluating the materials</a> </dd>
+  <dt><a href="#aboutPBS" target="_self">About the Author</a></dt>
+  <dt><a href="#acknowledgments" target="_self">Acknowledgments</a></dt>
+</dl>
+
+<hr />
+
+<h2>
+    <a id="content"></a>Content, Philosophy and Goals
+</h2>
+
+<div class="indent">
+<p class="inline">
+    This text was written for a &quot;terminal&quot;
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Rumors to the contrary notwithstanding, most students survive the class.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+    // -->
+</script>
+       introductory class in Statistics suitable students in Business, Communications, 
+       Economics, Psychology, 
+       Social Science, or liberal arts;
+       that is, this is the first and last class in Statistics for most students who take it.
+       It also covers logic and reasoning at a level suitable for a general education course.
+       Accordingly, the text is not geared toward theory, numerical analysis, or
+       sophisticated
+       formulae; neither does it contain a bestiary of techniques or named probability
+       distributions.
+       Rather, I hope to help students to think logically about quantitative evidence
+       and to translate real-world situations into mathematical questions; and to
+       expose students to a few important statistical and probabilistic concepts and
+       to some of the difficulties, subjective decisions, and pitfalls, in analyzing
+       data and making inferences from numbers.
+       The text develops probability, estimation, and inference using
+       counting arguments: there is no calculus involved.
+</p>
+</div>
+
+<p>
+    I hope that students who study from these materials will:
+</p>
+
+<ul>
+    <li>
+        Read the newspaper with new eyes: become skilled, circumspect
+        consumers of qualitative and quantitative information.
+    </li>
+    <li>
+        Know that probability in particular, and numbers in general,
+        can be used to model some features of the physical world and human behavior.
+    </li>
+    <li>
+        Improve their skills in critical thinking and logical reasoning.
+    </li>
+    <li>
+        Appreciate the role Statistics plays in many fields, from
+        business to economics, law, politics, science and medicine.
+    </li>
+    <li>
+        Know that data can be manipulated to tell many inconsistent stories,
+        that data analysis is not clear cut, and that many subjective
+        judgments are involved in analyzing real data.
+    </li>
+    <li>
+        Know important questions to ask when faced with a quantitative argument&mdash;be
+        able to analyze arguments and find their strengths and weaknesses.
+    </li>
+    <li>
+        Understand that untutored intuition tends to produce faulty probability
+        judgments and know how to reason about probability.
+    </li>
+    <li>
+        Appreciate some of the philosophical difficulties in ascribing meaning
+        to probability and in inferring causal relationships from data.
+    </li>
+    <li>
+    	Be prepared for more advanced courses in Statistics&mdash;even though
+    	they might not take any.
+    </li>
+</ul>
+
+<p>
+    The text starts with reasoning and fallacies, which is perhaps a bit unusual for a Statistics
+    textbook&mdash;but logical reasoning is key to both theoretical and empirical work.
+    The text goes further with counting arguments and combinatorics than most
+    elementary textbooks do; it also goes further with logic and with data analysis.
+    The applets incorporated into the materials enable students to analyze
+    real datasets (the largest has 913
+    observations of 5 variables) without the pedagogical overhead of
+    teaching students to use a proprietary statistics package.
+    Students also reproduce numerical
+    experiments that demonstrate key concepts, such as sampling distributions,
+    confidence intervals, and the Law of Large Numbers.
+    Using applets also
+    eliminates the need to teach students to read arcane tables associated with
+    different distributions; instead, students type the relevant parameters into
+    textboxes, highlight a range of values, and read off the probability.
+</p>
+
+<p>
+    I have tried
+    to emphasize topics that can be taught most effectively with this sort of
+    interactive online tool. I have sought to provide enough variety in the material
+    that instructors can pick and choose from among the chapters to find material
+    appropriate to the level at which they desire to teach.  The most technical
+    material is in footnotes and sidebars, so that it does not interrupt the flow.
+    Many of the examples and datasets for exercises are real&mdash;they arose in my
+    consulting work, in experiments I am familiar with, or they are in the public
+    domain (for example, data on GMAT scores, undergraduate GPA, and MBA GPA).
+</p>
+
+<p>
+    Many of the inference problems are real, too.
+    For example, the Kassel Dowsing
+    Experiment is a real test of the ability of dowsers to determine whether water is
+    running in a buried pipe; the derivation of Fisher's exact test is in the context
+    of determining whether targeted Web advertising works, a problem I have studied
+    for a consulting client; the case studies about employment discrimination and
+    theft of trade secrets derive from my work as an expert witness.
+</p>
+
+<p>
+    I have tried to
+    motivate many of the computations by inference problems.
+    Probability, hypothesis
+    testing, randomization, and sampling error, are woven into the discussion of
+    experiments and sample surveys.
+    For some introductory courses, the probability in
+    those sections will suffice.
+    For instructors who desire a more quantitative text,
+    there are additional chapters on probability distributions, discrete random
+    variables, and expectation.
+</p>
+
+<p>
+    The book does not discuss continuous distributions:
+    The normal curve, Student's t-curve, and the chi-square curve appear as
+    approximations to the probability histograms of discrete random variables, not as
+    probability densities of continuous random variables.
+    These curves are motivated
+    by interactive experiments using applets that show empirically that the sampling
+    distributions of some random variables converge to the curves.
+    Probability is
+    developed by counting; inference is developed using counting and sampling
+    experiments that illustrate regularities.
+</p>
+
+<p>
+    Above all else, I strive to be
+    correct and not silly&mdash;I generally avoid presenting techniques I would
+    not use as a consultant or expert witness.
+    There are exceptions, but I have tried to mark
+    them clearly.
+    For example, I find little use for the t-test or Student t
+    confidence intervals for the mean, but as a concession to their popularity,
+    I have included them&mdash;isolated in a single chapter that I
+    usually do not cover.
+    (But I present conservative confidence intervals for population percentages based on
+    Chebychev's inequality, confidence intervals for percentiles, and Fisher's exact test.)
+    ANOVA is missing for that reason.
+    So is any use of regression as an inferential tool rather than a descriptive tool.
+    Such uses are generally shaky, if not misleading or simply wrong.
+</p>
+
+<p>
+	These materials have been used to teach large undergraduate courses at
+	UC Berkeley since 1997.
+	They are the basis of the first fully online course offered
+	by UC Berkeley, Statistics N21, Summer 2007.
+        They have been used at other schools, including Bard College, City University of New York,
+        John Jay College of Criminal Justice, 
+        University of California Santa Cruz, San Jose State University,
+        and Laney College.
+</p>
+
+<h3>
+   <a id="overview"></a>Overview of the Online Textbook
+</h3>
+
+<p>
+    If you are reading this in print, rather than in a Web browser,
+    the following does
+    not apply to the version you are reading.
+    The online version of the materials has
+    much more functionality than any print book can have:
+</p>
+
+<ul>
+    <li>
+        It is interactive: Students perform numerical experiments,
+        analyze data, and manipulate plots to learn fundamental statistical
+        and probabilistic concepts.
+        The text combines guided exploration with the presentation of new
+        material.
+        The format encourages students to practice and to ask themselves and
+        answer &quot;what if?&quot; questions&mdash;to learn through inquiry.
+        The practice exercises are graded instantly, and detailed solutions
+        are a click away.
+    </li>
+    <li>
+        It is dynamic: Many examples and exercises change every time a page
+        is reloaded, providing a practically unlimited number of practice
+        problems.
+    </li>
+    <li>
+        It is individual: Each student can work at his own pace, and can
+        emphasize those subjects he finds most challenging or most
+        interesting by reloading the chapter.
+        If the instructor desires, every student can be administered a
+        different version of the end of chapter quizzes.
+    </li>
+    <li>
+        It is efficient and convenient: Quizzes are graded automatically and
+        logged in on online database.
+        Each student can see the solution to his individual version of the
+        quizzes after the due date.
+    </li>
+    <li>
+        It is easy for students to use: The text is accessible through standard
+        web browsers.
+        There is none of the start-up cost associated with learning to use
+        a proprietary statistical software package.
+    </li>
+    <li>
+        It is easy for instructors to use: Assignment due dates and
+        enrollment lists are controlled over the Web using a browser.
+        Instructors do not have to write quizzes, collect quizzes,
+        record quiz grades, or return quizzes to students.
+        Moreover, instructors do not have to teach students to use
+        specialized software.
+    </li>
+</ul>
+
+<p>
+    The software empowers students to reproduce numerical experiments
+    themselves, without having to learn a statistical language
+    (using instead a standard Web browser), which encourages exploration
+    and inquiry-based learning.
+    The text uses the power of the Internet in many ways, including the following:
+</p>
+
+<ul>
+    <li>
+        Links to a <a href="gloss.htm" target="glossWin">glossary of terms</a>.
+    </li>
+    <li>
+        Dynamic examples and self-test exercises that change every time a
+        student visits a chapter.
+        Some self-test exercises parse student input to determine whether
+        student formulae are correct&mdash;a much more sophisticated notion of
+        correctness than multiple choice or numerical responses.
+    </li>
+    <li>
+        <a href="../Problems/index.htm">online, machine-graded assignments</a>
+        (using forms and applets),
+        constructed so that each student gets a different version of the assignment.
+        Grades are
+        posted automatically to the class website, and solutions are available
+        online after the due date.
+    </li>
+    <li>
+        <a href="../Review/index.htm">Reference and practice materials</a>
+        to prepare for exams.
+    </li>
+</ul>
+
+<h3>
+    <a id="prerequisites"></a>Prerequisites
+</h3>
+
+<p>
+    These materials do not assume that the reader has any previous
+    knowledge of statistics or probability. However, the reader needs
+    to be comfortable with percentages, exponentiation and square roots, and
+    &quot;scientific notation&quot; (numbers times powers of ten).
+    Assignment 0 is a review and quiz covering the prerequisite material.
+    The ultimate calculations are all simple, but the logical reasoning
+    needed to reduce the problems to those simple calculations are sometimes
+    subtle.
+</p>
+
+<p>
+    Some of the footnotes and sidebars rely on elementary calculus to find
+    stationary points of convex, continuously differentiable functions.
+    For example, the mean is characterized as the number from which the
+    rms of the residuals is smallest, and the regression line is characterized
+    as the least-squares line.
+    Those derivations can be skipped with impunity.
+</p>
+
+<h3>
+    <a id="design"></a>
+    Technical Design Criteria and Implementation
+</h3>
+
+<p>
+    These materials are comprised of XHTML, CSS, Java, and JavaScript.
+    As of 19 June 2011, they consisted of
+    217 XHTML files containing over 136,000
+    lines of XHTML and JavaScript,
+    63 Java classes containing about 16,000 lines of code,
+    27 JavaScript libraries containing about 14,900 lines of code,
+    34 data files containing about 5,600 records,
+    four cascading style sheets with about 2,200 lines,
+    and a handful of .jpg and .gif files.
+    The choice to use XHTML, CSS, Java and JavaScript was motivated by these design criteria:
+</p>
+
+<ol>
+  <li>
+    Maximize accessibility and portability.
+    Recent browsers allow this material to be
+    accessed from almost anywhere in the world, without adding &quot;plug-ins&quot; to the
+    browser, and without buying any proprietary software.
+    If a &quot;plug-in&quot; were required, downloading the
+    plug-in would itself present a considerable barrier to some students.
+    The software runs under every major
+    operating system (unix, linux, Windows 9x and NT, Mac OS), because Mozilla, Opera and/or
+    Microsoft have versions of their browsers that run on those operating systems.
+    Browsers come installed on all new personal computers, so this material is
+    immediately accessible to new computer owners. (Installing Java might be necessary.)
+    I have made a considerable effort to make the materials function well with screen reader
+    software for visually impaired students&mdash;but there is more work to be done.
+    (MathML seems to be the solution to the remaining problems, but as of this writing, only
+    Firefox can render MathML directly.)
+  </li>
+  <li>
+    Maximize interactivity and minimize technological barriers.
+    Students should be
+    able to explore data and to ask and answer &quot;what-if&quot; questions, without needing
+    to learn how to use a conventional statistical software package.
+    Tools should have a point-and-click interface whose use was fairly obvious --
+    no hidden menus, consistent GUI, <em>etc</em>.).
+  </li>
+  <li>
+    Minimize bandwidth and maximize speed. Using Java allows the figures and plots to be
+    generated on the client-side. The code and data download to the client, then the client
+    computes and creates the figures. This is by far the most efficient way to get dynamic
+    interaction with the data.
+    Otherwise, every time the user changed a parameter value, the
+    client would need to send a message to the server, and the server would have to compute
+    the new figure, and send the resulting figure over the Internet to the client.
+    Interactive real-time data exploration would not be possible.
+    There are a small number of figures that are stored as GIF or JPG files;
+    almost all the figures are computed by the client.
+    Sending just the data and the rules (programs) for generating
+    figures from the data substantially reduces the time it takes pages to load.
+    Many of the figures are pure CSS, which not only is very lightweight, but allows
+    the figures to re-size elegantly if the user changes
+    the dimensions of the page, and displays well even on mobile devices.
+  </li>
+  <li>
+    Make it easy to use the materials in lectures.
+    Because the software is free-standing (it
+    does not need a server for computations), it is easy to display the content in the
+    classroom without an Internet connection.
+    That allows the instructor to demonstrate
+    concepts and the use of the materials in class.
+  </li>
+  <li>
+    Make it easy for instructors to set due dates for assignments and manage a course, and
+    for students to track their own progress. Due dates are controlled by the instructor over
+    the Internet; similarly, the instructor can modify grades, compute course scores, enter
+    extra credit assignments, <em>etc</em>., using a browser. Perl-cgi routines update the
+    database when a student submits an assignment, and allow students and instructors to query
+    the database for grades over the Internet.
+    As an alternative to perl cgi, assignment due
+    dates can be controlled by modifying a simple ascii text file that is queried by a Java
+    applet, and assignment grades can be redirected to an email address instead of a database.
+  </li>
+  <li>
+    Maximize portability on the server side.
+    Rather than use proprietary solutions, such as
+    Microsoft active server pages (.asp pages) or server-side JavaScript, the &quot;back
+    end&quot; is a collection of perl cgi routines that access a standard
+    database file.
+    The server only needs to support perl scripts and serve static XHTML, JavaScript, text, CSS and
+    Java class files.
+    This makes the package
+    platform-independent on the server side as well as the client side: there is public-domain
+    software allowing perl cgi to run with every common web server, and there are
+    public-domain perl implementations for all popular operating systems.
+    Installing the materials on a new server is simple.
+  </li>
+</ol>
+
+<p>
+    Using XHTML with Java, JavaScript and CSS allowed me to make the content dynamic: many of the
+    examples and exercises in the text change whenever the page is reloaded, so students can
+    get unlimited practice at certain kinds of problems. Similarly, each student gets a
+    different version of each assignment and exam, but can see the solutions to his/her
+    version after the due date.
+</p>
+
+<h3>
+    <a id="javaAdvantages"></a>Advantages of Java over standard
+    Statistical Packages
+</h3>
+
+<p>
+    There are a number of advantages to using Java applets rather than an integrated
+    statistical package:
+</p>
+
+<ol>
+  <li>
+    The material can be accessed from any computer with an Internet
+    connection and a web browser.
+    The computer does not need to have any proprietary software installed.
+    Students therefore can access the material from university and public
+    libraries, Internet cafes, home, <em>etc</em>.
+    Students have even submitted homework using WebTV.
+  </li>
+  <li>
+    Some of the demonstrations would be extremely difficult, if not impossible, to code in a
+    standard statistical package.
+    For example, see the Venn Diagram applet.
+  </li>
+  <li>
+    If a standard package were used, the figures/demonstrations/calculations could not be
+    embedded in the text and the assignments. The student would have to navigate among
+    programs to see demonstrations or solve problems.
+  </li>
+  <li>
+    The intellectual start-up cost to the student is lower than it would be for a
+    general-purpose package.
+    Each tool illustrates a single concept, all the controls
+    are visible, and the interface is as intuitive as I have been able to make it.
+    The student does not need to learn much to get started.
+  </li>
+  <li>
+    I find it preferable pedagogically to use tools with a single function, with all the
+    controls visible.
+  </li>
+  <li>
+    The monetary cost to the student is minimized.
+  </li>
+</ol>
+
+<h3>
+    <a id="evaluating"></a>Suggestions for Evaluating the Materials
+</h3>
+
+<p>
+    I would recommend that instructors who wish to evaluate these materials
+    for possible adoption look first at 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('scatterplots') + ', ' +
+                     citeLinkChapter('correlation') + ', and ' +
+                     citeLinkChapter('regression') + '. ');
+// -->
+</script>
+    Those chapters illustrate several aspects of the text:
+    dynamic exercises, the use of real data in examples and exercises,
+    the histogram and scatterplot applets, and the gradual introduction of new
+    functionality (buttons and displayed statistics) into the applets as students
+    learn new concepts.
+    For example, when the scatterplot applet arrives in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('scatterplots') + ', ');
+// -->
+</script>
+    its only controls change the
+    variables plotted, list the data, show univariate statistics of the variables
+    in the dataset (summary statistics covered in the first two chapters),
+    and display the coordinates of the cursor.
+    (Selecting a row in the data listing highlights the corresponding point
+    in the scatterplot.)
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('correlation') + ', ');
+// -->
+</script> 
+    the scatterplot applet
+    acquires the correlation coefficient, and a button to show graphically
+    the standard deviations of the two variables plotted; it is also invoked to
+    display randomly generated data that attain a given value of the correlation
+    coefficient.
+    It also starts to allow students to add points by clicking on the plot,
+    to see the effect of additional data on the correlation coefficient.
+    In 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('regression') + ', ');
+// -->
+</script>
+    the same applet gains buttons to show the
+    graph of averages, the SD line, and the regression line.
+</p>
+
+<p>
+    After those chapters, I would recommend looking at the collection of Java applets to see
+    how various concepts are presented graphically; in particular, be sure to see the applets
+    for <a href="../../Java/Html/Venn.htm" target="lablet">Venn diagrams</a>, <a
+    href="../../Java/Html/SampleMean.htm" target="lablet">sampling distributions</a>, <a
+    href="../../Java/Html/Ci.htm" target="lablet">confidence intervals</a>, and the <a
+    href="../../Java/Html/lln.htm" target="lablet">Law of Large Numbers</a>.
+    To see how tables of
+    probabilities are eliminated, see the applets for the <a href="../../Java/Html/NormHiLite.htm"
+    target="lablet">Normal Distribution</a>,
+    <a href="../../Java/Html/tHiLite.htm" target="lablet">Student's
+    t-Distribution</a>, and the <a href="../../Java/Html/chiHiLite.htm" target="lablet">Chi-square
+    Distribution</a>.
+    I would recommend then looking at 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHall') + ', ' + 
+                     citeLinkChapter('montyHallTest') +  ', ' + 
+                     citeLinkChapter('experiments') + ', and ' +
+                     citeLinkChapter('percentageTests') + '. '
+                     );
+// -->
+</script>    
+    Instructors with an interest in logic or who teach general education courses might
+    enjoy 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('logic') + ', and ' + citeLinkChapter('fallacies') + '. ');
+// -->
+</script>
+    The first of those has exercises that parse logical expressions the students type in.
+</p>
+
+
+<h3>
+   <a id="aboutPBS"></a>About the Author
+</h3>
+
+<p>
+    Philip B. Stark is Professor of Statistics at the University
+    of California, Berkeley, where he has been on the faculty since 1988.
+    He received his bachelor's degree in Philosophy from Princeton University in 1980,
+    and his PhD in Earth Science from the Scripps Institution of Oceanography in 1986.
+    He received a National Science Foundation Postdoctoral Fellowship
+    in Mathematical Sciences in 1987 and the Presidential Young Investigator
+    Award in 1989.  He was elected a Fellow of the Institute of Physics in 1999.
+    Philip dropped out of high school and law school.
+    He has served on the editorial boards of journals in applied mathematics,
+    geophysics, and statistics, and has given over 130 invited lectures at
+    conferences and universities in 17 countries.
+    He is the author or co-author of over 100 publications.
+    Philip has done research in astrophysics, microwave cosmology, earthquake
+    prediction, geomagnetism, geochemistry, seismic tomography, signal recovery,
+    constrained confidence estimation, probability density estimation, spectrum
+    estimation, information retrieval, inverse problems, election auditing,
+    adjusting the U.S. Census,
+    causal inference, and human hearing.
+</p>
+
+<p>
+    He specializes in problems with very large datasets; software written by him and
+    his students performs part of the routine data reduction for a geomagnetic
+    satellite and a network of solar telescopes.
+    Philip has consulted in IC mask manufacturing, oil exploration, water treatment,
+    predicting e-mail spool fill, electrical activity of the brain, and targeted
+    Internet advertising.
+    He has served as an expert witness in litigation and
+    legislation on topics ranging from natural resources to agricultural import restrictions,
+    disaster relief, fairness in lending, the U.S. Census,
+    the Child Online Protection Act (sampling the Internet and testing content filters,
+    which involved the controversial subpoena of search records and indexed webpages
+    from Google, Yahoo! and MSN), consumer protection, contested elections,
+    employment discrimination, insurance, product liability, property tax assessment,
+    truth in advertising, marketing, equal protection, trade secrets, intellectual
+    property, risk assessment, wage and hour disputes, and anti-trust.
+</p>
+
+<p>
+    He has testified to the U.S. House of Representatives Subcommittee on the Census,
+    to the California State Senate, the California State Assembly,
+    and the California Department of Fish and Game.
+    He has consulted for the U.S. Department of Justice, the Federal Trade Commission,
+    the U.S. Department of Agriculture, the U.S. Census Bureau,
+    the U.S. Department of Housing and Urban Development,
+    the U.S. Attorney's Office of the Northern District of California,
+    the U.S. Department of Veterans Affairs, the Secretary of State of California,
+    the Los Angeles County Superior Court,
+    the National Solar Observatory, the California Secretary of State, public utilities,
+    major corporations, and numerous law firms, including about half of the 25 largest.
+    He won the Chancellor's Award for Public Service for Research in the Public Interest in 2011
+    for his work on election auditing, and he is currently working with the Secretary of State
+    of California and the Secretary of State of Colorado to implement risk-limiting election 
+    audits.
+</p>
+
+<p>
+    Philip has served on the Technical Advisory Boards of two online publishing
+    firms, an online data mining company and a photo search engine.
+    He was the Faculty Assistant for
+    Educational Technology at The University of California, Berkeley, from
+    2001&ndash;2003 and chaired the U.C. Berkeley Educational Technology Committee from
+    2001&ndash;2005.
+    Philip does not like to be called &quot;Phil.&quot;
+    He likes open-source software, dislikes email attachments,
+    runs 100 mile endurance trail races, roasts his own coffee,
+    and thinks this book is proof that obsessive-compulsive disorder is a job qualification.
+    Philip lives in Berkeley, California, with a laptop, an iPhone, an Olympia Cremina,
+    Porlex and Zassenhaus hand mills, muddy homemade huaraches, and an embarrassing 
+    number of LED flashlights.
+</p>
+</div>
+
+<p>
+
+<h3>
+    <a id="acknowledgments"></a>Acknowledgments
+</h3>
+
+<p>
+    This project would not have been possible without Ofer Licht, who gave
+    competent, intelligent, and congenial answers to my then-noobie questions about
+    Java and JavaScript, pointed me to lots of useful material, and who wrote the
+    original server-side Perl cgi scripts for grading homework and querying the grade
+    database.
+    Duncan Temple Lang was also
+    a helpful and sympathetic resource regarding the intricacies and nuisances of Java
+    1.0; in addition, he is primarily responsible for the multi-threaded data server
+    used to load large data sets (home-grown technology that anticipates Ajax).
+    I am grateful to Rudy Guerra, who co-wrote an earlier
+    version of the chapter on counting and the assignment on experiments.
+    My friend and mentor David A. Freedman, and the excellent &quot;dead-tree
+    book&quot; <em>Statistics</em> by Freedman, Pisani, and Purves, were inspirational.
+    Aviva Shimelman worked <em>all</em> the exercises and was instrumental in streamlining
+    the prose and visual style. 
+    Deirdre Lynch made several valuable suggestions regarding the user interface, and
+    Sydney Jones was extremely helpful in identifying problems with flow, organization,
+    consistency, and prose.
+    Faculty who taught from these materials and made valuable 
+    suggestions include Ani Adhikari, L. Jay Citron, Yehuda Klein, Mark Lindeman,
+    Aviva Shimelman and Margaret Smith.
+    I am grateful for their help and their courage to experiment with a new 
+    medium and new mode of teaching.
+    Many students have found typos over the years: Thank you!
+</p>
+</div>
+
+<p>
+    This book is dedicated to Alessandra and Naomi and to David Freedman.
+</p>
+
+<p>&nbsp;</p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

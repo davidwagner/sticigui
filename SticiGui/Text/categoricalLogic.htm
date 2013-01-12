@@ -1,0 +1,3046 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 16:55 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "categoricalLogic";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+
+
+<!-- logic problems script -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/logic.js"></script>
+
+<!-- Venn diagram css -->
+<link rel="stylesheet" type="text/css" href="../Graphics/venn.css" />
+
+<form method="POST">
+<h1><a id="language"></a>
+  Categorical Logic
+</h1>
+
+<p>
+    Categorical logic is the mathematics of combining statements about objects that can belong to one or
+    more <em>classes</em> or <em>categories</em> of things.
+    For instance:
+</p>
+
+<p class="example">
+    All cars require an energy source.  Not all cars use gasoline as an energy source.
+    Therefore, some cars use something other than gasoline as an energy source.
+</p>
+
+<p>
+   and
+</p>
+
+<p class="example">
+     All cows eat grass.
+     All grasses are plants.  
+     Therefore, all cows eat plants.
+</p>
+
+<p>
+    Categorical logic is intimately related to set theory, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sets') + '. ');
+// -->
+</script>
+    Categories are equivalent to sets.
+    Categorical statements can be expressed using three notions from logic and set theory:
+    the subset relation, the complement of a set, and logical negation, which is covered in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('reasoning') + ', and ' + citeLinkChapter('logic') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    <span class="termOfArt">Categorical syllogisms</span> are special three-line arguments about the
+    relationships among three categories that have been studied since antiquity.
+    The two arguments given above are categorical syllogisms.
+    The chapter examines categorical syllogisms and methods for testing whether they are valid.
+</p>
+    
+
+<h2><a id="sets_categories"></a>
+    Categories as Sets
+</h2>
+
+<p>
+    We assume there is some <em>domain of discourse</em>, a <em>universal set</em> or <em>universe</em>
+    <span class="math"><strong>S</strong></span>.
+    (This corresponds to <a class="glossRef" href="gloss.htm#outcome_space">outcome space</a> 
+    in a random experiment.)
+    The universe contains all the &quot;things&quot; that can belong to categories.
+    A category is any <a class="glossRef" href="gloss.htm#subset">subset</a> of the universe.
+</p>
+
+<p>
+    Suppose <span class="math">A</span> and <span class="math">B</span> are sets.
+    We will be concerned with statements like &quot;every element of 
+    <span class="math">A</span> is an element of <span class="math">B</span>,&quot; which we might 
+    write as &quot;every <span class="math">A</span> is a <span class="math">B</span>&quot; or
+    &quot;all <span class="math">A</span> are <span class="math">B</span>.&quot;
+    Of course, that is just what it means for <span class="math">A</span> to be a subset of
+    <span class="math">B</span>: <span class="math">A&sub;B</span>.
+    An example: If <span class="math">A</span> comprises all ravens and 
+    <span class="math">B</span> comprises all birds,
+    then <span class="math">A&sub;B</span> could be pronounced
+    <span class="example">everything that is a raven is a bird</span>,
+    <span class="example">every raven is a bird</span>, or
+    <span class="example">all ravens are birds</span>.
+</p>
+
+<p>
+    Another categorical statement is the denial of &quot;all <span class="math">A</span> are 
+    <span class="math">B</span>,&quot; namely, &quot;some <span class="math">A</span> are not
+    <span class="math">B</span>.&quot;
+    That is just what it means for <span class="math">A</span> not to be a subset of
+    <span class="math">B</span>: <span class="math">A&nsub;B</span>.
+    An example is <span class="example">some birds are not ravens</span>.
+    Note that <span class="example">some birds are not ravens</span> is not equivalent to
+    <span class="example">some ravens are not birds</span>:  <span class="math">A&nsub;B</span>
+    is not the same as <span class="math">B&nsub;A</span>.
+</p>
+
+<p>
+    Interestingly, the two statements, <span class="math">A&sub;B</span> and <span class="math">A&nsub;B</span>,
+    have a fundamental difference:  it can be true that <span class="math">A&sub;B</span> even if 
+    <span class="math">A</span> has no elements and <span class="math">B</span> has no elements,
+    because the empty set is a subset of every set.
+    For example, it is true that all immortal ravens are pink birds, because there are no immortal ravens.
+</p>
+
+<p>
+    In contrast, if <span class="math">A&nsub;B</span>, <span class="math">A</span> must have elements,
+    at least one of which is in <span class="math">B<sup>c</sup></span>.
+    For instance, it is not true that some immortal ravens are not pink birds, because that would require 
+    there to be some immortal ravens.
+    Hence <span class="math">A&nsub;B</span> lets us deduce that neither <span class="math">A</span>
+    nor <span class="math">B<sup>c</sup></span> is empty: the relationship <span class="math">&nsub;</span> 
+    has <span class="termOfArt">existential import</span> while the relationship <span class="math">&sub;</span>
+    does not.
+</p>
+
+<p>
+   Be careful not to assume that any set has a member unless the diagram 
+   represents &quot;some are&quot; or &quot;some are not.&quot;
+   To assume without justification that a set has at least one element (i.e., that an element of the set exists)
+   is called <span class="termOfArt">the existential fallacy</span>.
+</p>
+
+
+<p>
+    There are two other categorical statements, 
+    &quot;some <span class="math">A</span> are <span class="math">B</span>.&quot; and
+    &quot;no <span class="math">A</span> are <span class="math">B</span>.&quot;
+    The first can be rephrased as 
+    &quot;some <span class="math">A</span> are not non-<span class="math">B</span>,&quot;
+    that is, <span class="math">A&nsub;B<sup>c</sup></span>.
+    An example would be <span class="example">some birds are ravens</span>; equivalently,
+    <span class="example">not every bird is a non-raven</span>, or (even more geeky)
+    <span class="example">birds are not a subset of non-ravens</span>.
+    The second can be rephrased as
+    &quot;all <span class="math">A</span> are non-<span class="math">B</span>,&quot;
+    that is, <span class="math">A&sub;B<sup>c</sup></span>.
+    An example might be <span class="example">no invisible birds are ravens</span> or
+    <span class="example">every invisible bird is a non-raven</span>.
+</p>
+
+<p>
+    Later in this chapter we will look at other ways of expressing these four categorical relationships:
+    (i) all A are B, (ii) some A are not B, (iii) some A are B, (iv) all A are not B.
+    As just illustrated, the statements with the word <em>some</em> imply that something (a member of
+    <span class="math">A</span>, at least) exists&mdash;they have
+    existential import.
+    The statements with <em>all</em> do not imply that <span class="math">A</span> has any elements: they have
+    no existential import.
+</p>
+
+<p>
+    Recall from 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sets') + ', ');
+// -->
+</script>
+    that one way to specify a set <span class="math">A &sub;<strong>S</strong></span> is
+    to list its members: <span class="math">A = { a, b, c }</span>.
+    Another way is to find something that is true for members of the set <span class="math">A</span>
+    but false for all other elements of <span class="math"><strong>S</strong></span>.
+    Then we can identify <span class="math">A</span> as the those members of
+    <span class="math"><strong>S</strong></span> for which that thing&mdash;called a 
+    <em>predicate function</em> or <em>membership function</em>&mdash;is true.
+</p>
+
+<p>
+    For example, in the definition <span class="math">A = {all animals that are birds}</span>,
+    the thing that is true for the members of the set is that they are birds.
+    That is, the name of the category of things, &quot;birds&quot; is essentially the membership 
+    function: the function that is true for birds and false for everything else.
+</p>
+
+<p>
+    For instance, if <span class="math"><strong>S</strong></span> is the set of all numbers,
+    we could write the set of even numbers as 
+    <span class="math">{x&isin;<strong>S</strong>: x/2 is an integer}</span>.
+    The colon is pronounced &quot;such that.&quot;
+    This expression means &quot;the set of all
+    numbers <span class="math">x</span> such that when you divide <span class="math">x</span> by
+    <span class="math">2</span>, the result is an integer.
+    The membership function here is <span class="math">x/2 is an integer</span>, which is true
+    if <span class="math">x</span> is an even number and false otherwise.
+    In general, to specify a set by its membership function, we use an expression like 
+    <span class="math">{x&isin;<strong>S</strong>: (the membership function is true for x)}</span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    The membership function of a set <span class="math">A</span>
+    is like an oracle: you bring it an element <span class="math">x</span>
+    of <span class="math"><strong>S</strong></span> and the membership function says,
+    &quot;yes, this is an element of 
+    <span class="math">A</span>,&quot; or &quot;no, this is not an element of 
+    <span class="math">A</span>.&quot;
+    It assigns the value &quot;true&quot; or the value &quot;false&quot; to elements of 
+    <span class="math"><strong>S</strong></span>, according to whether they are elements of 
+    <span class="math">A</span>.
+    If <span class="math">P()</span> is the membership function for the set <span class="math">A</span>,
+    then <span class="math">A = { x&isin;<strong>S</strong>: P(x)}</span>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Strictly speaking, we might write ' +
+               '<span class="math">A = { x&isin;<strong>S</strong>: P(x) = true}</span>, ' +
+               'but there\'s a limit even to my pointy-headedness.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    When <span class="math"><strong>S</strong></span> is clear from context, we can omit it from the
+    notation and just write  <span class="math">A = {x: P(x)}</span>. 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'In these expressions, <span class="math">x</span> is just a placeholder (variable) that ' +
+               'stands for a generic element of <span class="math"><strong>S</strong></span>. ' +
+               'We could use a different symbol instead, as long as we use it consistently. ' +
+               'For instance, <span class="math">{x&isin;<strong>S</strong>: P(x)}</span> is exactly the ' +
+               'same set as <span class="math">{z&isin;<strong>S</strong>: P(z)}</span>. ' +
+               'However, the expression <span class="math">A = {x&isin;<strong>S</strong>: P(z)}</span> ' +
+               'is different: in it, the condition <span class="math">P(z)</span> has nothing to do with ' +
+               'the element <span class="math">x</span>: the occurrence of the variable ' +
+               '<span class="math">z</span> is &quot;free.&quot;  Depending on whether&mdash;for that ' +
+               'particular <span class="math">z</span>&mdash;<span class="math">P(z)</span> happens to be ' +
+               'true or false, either every element of <span class="math"><strong>S</strong></span> is ' +
+               'in the subset or no element of <span class="math"><strong>S</strong></span> is in the subset. </p>' +
+               '<p><p>A slightly more concrete example might help. Suppose that the domain of discourse ' +
+               'is the positive integers <span class="math"><strong>S</strong> = {0, 1, 2, 3, &hellip;}</span>. ' +
+               'The set <span class="math">E</span> of even positive integers could be written in many ways, ' +
+               'including :</p>' +
+               '<p class="math">E = { 0, 2, 4, 6, 8, &hellip; }.</p><p class="math"> ' +
+               'E = { j&isin;<strong>S</strong>: there is some k&isin;<strong>S</strong> for which j = 2k}.</p> ' +
+               '<p class="math">E = { j&isin;<strong>S</strong>: j/2&isin;<strong>S</strong>}.</p>' +
+               '<p>In the second of these, the predicate function is <span class="math">P(j) = there is some ' +
+               'k&isin;<strong>S</strong> for which j = 2k</span>. That is true if and only if ' +
+               '<span class="math">j</span> is an even positive integer.  The variables ' +
+               '<span class="math">j</span> and <span class="math">k</span> are placeholders.  Any other two ' +
+               'letters could have been used instead. But note that ' +
+               '<span class="math">{ j&isin;<strong>S</strong>: there is some k&isin;<strong>S</strong> ' +
+               'for which k = 2m}</span> is quite different, because the variable <span class="math">m</span> ' +
+               'occurs free.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    A set is equivalent to its membership function:  if you know one, you know the other.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'We\'ve already seen how a predicate function determines a set.  The other way around ' +
+               'is straightforward, too: if <span class="math">A</span> is a set, the function ' +
+               '<span class="math">A(x) = {true, if x&isin;A; false, if x&notin;A}</span> lets ' +
+               'us write <span class="math">A = { x: A(x)}.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Because of that equivalence, we will often use the same symbol to denote a set and its membership
+    function.
+    For instance, unadorned, <span class="math">A</span> might denote a set of elements of
+    <span class="math"><strong>S</strong></span>, while with parentheses, <span class="math">A()</span>
+    might denote a function that assigns the value &quot;true&quot; to elements of <span class="math">A</span>
+    and the value &quot;false&quot; to all other elements of <span class="math"><strong>S</strong></span>:
+    <span class="math">A = {x: A(x)}</span>.
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    To bring the discussion back to Earth,
+<script language=" JavaScript1.4" type="text/javascript"><!--
+   var fStr = 'Well, at least down to the sky.';
+   writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    suppose the domain of discourse 
+    <span class="math"><strong>S</strong></span> is birds.
+    Black birds comprise a subset of <span class="math"><strong>S</strong></span>.
+    Let <span class="math">B</span> be the class of black birds:
+</p> 
+</div>  
+
+<p class="math">
+    B = { x&isin;<strong>S</strong> : x is black}.
+</p>
+
+<p>
+    Let <span class="math">R</span> denote the set of ravens, a different class of birds. 
+</p>
+
+<p class="math">
+    R = { x&isin;<strong>S</strong> : x is a raven}.
+</p>
+
+<p>
+   Then we might ask whether the following argument is valid:
+</p>
+
+<p class="example">
+   Some ravens are black.  All ravens are birds.  Therefore, some birds are black.
+</p>
+
+<p>
+   Before answering the question, we will introduce some standard mathematical notation.
+</p>
+
+<h2><a id="quantifiers"></a>
+    Existential and Universal Quantifiers
+</h2>
+
+<div class="indent">
+<p class="inline">
+   We shall be concerned with statements like &quot;every element of <span class="math">A</span> is
+   an element of <span class="math">B</span>&quot; 
+   (informally, &quot;all A are B,&quot; &quot;every A is a B&quot;), 
+   &quot;some element of <span class="math">B</span> is not an element of <span class="math">A</span>&quot;
+   (informally, &quot;some B are not A,&quot; &quot;not all B are A,&quot;
+    &quot;not every B is an A&quot;), and the like.
+   As discussed more below, <em>every</em> and <em>all</em> do not presuppose that there are any.
+   In contrast, <em>some</em> means at least one.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<em>Every</em> and <em>all</em> is none, if there are none, but <em>some</em> means at least one. ' +
+               'If there are none, there cannot be some. Thus it can be true that every unicorn has purple spots, ' +
+               'and yet false that some unicorns have purple spots. <em>Yessir.  All unicorns have purple ' +
+               'spots. Every last none of them.</em>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+   The symbol <span class="math">&forall;</span> means <em>every</em> or <em>all</em>.
+   It is called the <em>universal quantifier</em>.
+   For instance, the statement <span class="example">all ravens are black (birds)</span> could be
+   symbolized as:
+</p>
+
+<p class="math">
+   &forall; x&isin;<strong>S</strong>, if x&isin;R then x&isin;B.
+</p>
+
+<p>
+   We could also write simply <span class="math">R&sub;B</span>.
+   Here is the corresponding Venn diagram:
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">All R are B</div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue right"><span class="math">B</span></div>
+   <div class="rect40x50_center_high yellow left" ><span class="math">R</span>&nbsp;</div>
+</div>
+
+<p>
+   Note that <span class="example">all ravens are black birds</span> is quite different from
+   <span class="example">all black birds are ravens</span>: <span class="math">R&sub;B</span> is
+   not the same as <span class="math">B&sub;R</span>.
+</p>
+
+<p>
+   The statement <span class="example">no ravens are black birds</span> could be
+   symbolized as:
+</p>
+
+<p class="math">
+   &forall; x&isin;<strong>S</strong>, if x&isin;R then x&notin;B.
+</p>
+
+<p>
+   We could also write simply <span class="math">R&cap;B={}</span>; that is, <span class="math">R</span>
+   and <span class="math">B</span> are <a class="glossRef" href="gloss.htm#disjoint">disjoint</a>.
+   Here is the corresponding Venn diagram:
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">No R is B</div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect40x50_left blue left"><span class="math">B</span></div>
+   <div class="rect40x50_right yellow right" ><span class="math">R</span>&nbsp;</div>
+</div>
+
+<p>
+   Here, in contrast, <span class="example">no ravens are black birds</span> describes the
+   same state of the world as <span class="example">no black birds are ravens</span>:
+   <span class="math">R&cap;B={}</span> if and only if <span class="math">B&cap;R={}</span>.
+</p>
+
+
+<p>
+   The symbol <span class="math">&exist;</span> means <em>there exists</em>, 
+   <em>some</em> or <em>at least one</em>.
+   It is called the <em>existential quantifier</em>.
+   <em>Some</em> means at least one, but not necessarily all.
+   The statement <span class="example">some raven is black</span> could be
+   symbolized as:
+</p>
+
+<p class="math">
+   &exist; x&isin;<strong>S</strong>: x&isin;R and x&isin;B.
+<p>
+
+<p>
+   We could write <span class="math">R&cap;B &ne; {}</span> (something is both in
+   <span class="math">R</span> and in <span class="math">B</span>: there is a black raven),
+   <span class="math">R&nsub;B<sup>c</sup></span> (not every element of <span class="math">R</span> 
+   is not in <span class="math">B</span>: not every raven is non-black), or
+   <span class="math">B&nsub;R<sup>c</sup></span>  (not every element of <span class="math">B</span> 
+   is not in <span class="math">R</span>: not every black thing is a non-raven).
+   Here is a Venn diagram illustrating the situation.
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">Some R is B</span>.</div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue left"><span class="math">B</span></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">R</span>&nbsp;</div>
+   <div class="rect28x50_right green right"><p class="math"><span class="math">&middot; x&isin;R&cap;B</span></p></div>
+</div>
+
+<p>
+   The statement <span class="example">some ravens are black birds</span> describes the same
+   situation as <span class="example">some black birds are ravens</span>: 
+   <span class="math">R&nsub;B<sup>c</sup></span> if and only if 
+   <span class="math">B&nsub;R<sup>c</sup></span>.
+   Both conditions are true exactly when the intersection of <span class="math">R</span> and 
+   <span class="math">B</span> has at least one element.
+</p>
+
+<p>
+   Let <span class="math">Y = { x&isin;<strong>S</strong> : x is yellow}</span> be the
+   set of yellow birds.
+   The assertion that no ravens are yellow could be written 
+   <span class="math">R&cap;Y = {}</span> (no bird is both a raven and yellow),
+   <span class="math">R&sub;Y<sup>c</sup></span> (every raven is non-yellow), or
+   <span class="math">Y&sub;R<sup>c</sup></span> (every yellow bird is a non-raven).
+</p>
+
+<p>
+   Naively, we might assume that if something is true for <em>every</em> element of some set, it
+   is true for at least <em>one</em> element of the set.
+   But for the fact that the set could be empty, that is true.
+   However, if the set in question is empty, something can be true for all of its elements and yet
+   not true for at least one of its elements.
+   This is an important difference between <span class="math">&exist;</span> and
+   <span class="math">&forall;</span>: the former asserts that something exists, while the latter
+   can be satisfied even if nothing exists.
+</p>
+
+<p>
+   Here is an example.
+   Let the universe be the set <span class="math"><strong>S</strong></span> of animals.
+   Let us suppose that unicorns do not exist.
+   Let <span class="math">U</span> be the set of animals that are unicorns.
+   Let <span class="math">E</span> be the set of animals that lay eggs.
+   Consider the assertion <span class="example">All unicorns lay eggs</span>.
+   In symbols, we could write that as 
+</p>
+
+<p class="math">
+   &forall; x&isin;<strong>S</strong>, if x&isin;U then x&isin;E.
+</p>
+
+<p>
+   Equivalently, it is the assertion <span class="math">U&sub;E</span>.
+   Since there are no unicorns, <span class="math">U</span> is the empty set, and the assertion that
+   all unicorns lay eggs is true.
+</p>
+
+<p>
+   Now consider the assertion <span class="example">Some unicorns lay eggs</span>.
+   In symbols, we could write that as 
+</p>
+
+<p class="math">
+   &exist; x&isin;<strong>S</strong>: x&isin;U and x&isin;E.
+</p>
+
+<p>
+   Equivalently, it is the assertion <span class="math">U &cap; E &ne; {}</span> or
+   <span class="math">U&nsub;E<sup>c</sup></span>.
+   Since there are no unicorns, <span class="math">U</span> is the empty set, which is
+   a subset of every set, including <span class="math">E<sup>c</sup></span>; similarly
+   <span class="math">U &cap; E</span> is also the empty set, and the assertion that
+   some unicorns lay eggs is false.
+</p>
+
+<p>
+   The assertion <span class="example">no unicorns lay eggs</span> can be written 
+   <span class="math">  &forall; x&isin;<strong>S</strong>, if x&isin;U then x&notin;E</span>,
+   or <span class="math">U&sub;E<sup>c</sup></span>.
+   Since there are no unicorns, this assertion is true.
+   The assertion <span class="example">some unicorns do not lay eggs</span> can be written
+   <span class="math">&exist; x&isin;<strong>S</strong>: x&isin;U and x&notin;E</span>,
+   <span class="math">U &cap; E<sup>c</sup> &ne; {}</span>, or 
+   <span class="math">U &nsub; E</span>
+   This assertion is false&mdash;it must be because <span class="math">U</span> is empty.
+</p>
+
+<p>
+   Here is a more mathematical explanation. 
+   Suppose that the set <span class="math">A</span> is empty.
+   Consider the assertion 
+   <span class="math">&forall; x&isin;<strong>S</strong>, if x&isin;A then x&isin;B</span>.
+   That is equivalent to the assertion that <span class="math">A&sub;B</span>, which is true because
+   the empty set <span class="math">{}</span> is a subset of every set, including,
+   in particular, <span class="math">B</span>.
+</p>
+
+<p>
+   Now consider the assertion
+   <span class="math">&exist; x&isin;<strong>S</strong>: x&isin;A and x&isin;B</span>.
+   That is equivalent to the assertion that <span class="math">A &cap; B &ne; {}</span> and
+   to the assertion <span class="math">A&nsub;B<sup>c</sup></span>.
+   The assertion is false if the set <span class="math">A</span> is empty.
+   It is true that every element of the set <span class="math">A</span> is an element of the set 
+   <span class="math">B</span>, and yet there is nothing that is an element of the set 
+   <span class="math">A</span> and also an element of the set <span class="math">B</span>.
+</p>
+
+
+<p>
+   In categorical logic, there are six basic assertions we can make regarding the relation 
+   between two classes, listed in the box below.
+</p>
+
+<div class="callout"><a id="relationships_2_categories"></a>
+
+<p>
+   <span class="calloutCaption">Relationships between Two Categories</span>
+</p>
+
+<p>
+   Suppose we have two categories, <span class="math">A</span> and <span class="math">B</span>, subsets of
+   a domain of discourse <span class="math"><strong>S</strong></span>.
+   We can express six categorical relations between <span class="math">A</span> and <span class="math">B</span>.
+   The relations can be written using universal and existential quantifiers, or using set notation:
+</p>
+
+<ul class="compact">
+   <li>  
+      <span class="math">Every A is a B</span>;&nbsp; <span class="math">All A are B</span>. <br />
+      <span class="math"> &forall; x, if x&isin;A then x&isin;B.</span><br />
+      <span class="math">A&sub;B.</span>     
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue right"><span class="math">B</span></div>
+   <div class="rect40x50_center_high yellow left" ><span class="math">A</span>&nbsp;</div>
+</div>
+   </li>
+
+   <li>       
+       <span class="math">Every B is an A</span>;&nbsp; <span class="math">All B are A</span>.<br />
+       <span class="math"> &forall; x, if x&isin;B then x&isin;A.</span><br />
+       <span class="math">B&sub;A.</span>   
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue right"><span class="math">A</span></div>
+   <div class="rect40x50_center_high yellow left" ><span class="math">B</span>&nbsp;</div>
+</div>
+    </li>
+
+    <li>       
+       <span class="math">No A is a B</span>;&nbsp; 
+       <span class="math">No B is an A</span>.<br />
+       <span class="math">&forall; x, if x&isin;A then x&notin;B.</span><br />
+       <span class="math">A&sub;B<sup>c</sup>.</span>   
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect40x50_left blue left"><span class="math">A</span></div>
+   <div class="rect40x50_right yellow right" ><span class="math">B</span>&nbsp;</div>
+</div>
+   </li>
+     
+   <li>
+       <span class="math">Some A is a B</span>;&nbsp; 
+       <span class="math">Some B is an A</span>.<br />
+       <span class="math">&exist; x: x&isin;A and x&isin;B.</span><br />
+       <span class="math">A &cap; B &ne; {}.</span><br />
+       <span class="math">A&nsub;B<sup>c</sup>.</span>
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue left"><span class="math">B</span></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">A</span>&nbsp;</div>
+   <div class="rect28x50_right green right"><p class="math"><span class="math">&middot; 
+           x&isin;A&cap;B</span></p></div>
+</div>
+   </li>
+ 
+   <li>
+       <span class="math">Some A is not a B</span>;&nbsp; <span class="math">Not all A are B</span>.<br />
+       <span class="math">&exist; x: x&isin;A and x&notin;B.</span><br />
+       <span class="math">A &cap; B<sup>c</sup> &ne; {}.</span><br />
+       <span class="math">A&nsub;B.</span>
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect70x70_left blue left"><span class="math">A</span><p class="left"><span class="math">&middot; 
+           x&isin;A&cap;B<sup>c</sup></span></p></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">B</span>&nbsp;</div>
+   <div class="rect24x50_right green right"></div>
+</div>   </li>
+          
+   <li>
+       <span class="math">Some B is not an A</span>;&nbsp; <span class="math">Not all B are A</span>.<br />
+       <span class="math">&exist; x: x&isin;B and x&notin;A.</span><br />
+       <span class="math">B &cap; A<sup>c</sup> &ne; {}</span>.<br />
+       <span class="math">B&nsub;A.</span>
+<div class="venn">
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect70x70_left blue left"><span class="math">B</span><p class="left"><span class="math">&middot; 
+           x&isin;A<sup>c</sup>&cap;B</span></p></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">A</span>&nbsp;</div>
+   <div class="rect24x50_right green right"></div>
+</div>
+   </li>
+</ul>
+
+<p>
+   As you can see, set notation is more compact.
+</p>
+</div>
+
+<p>
+   There is more than one way to express any quantified assertion.
+   For example, 
+   <span class="example">some <span class="math">A</span> is not a <span class="math">B</span></span>
+   can also be written 
+   <span class="example">not all <span class="math">A</span> are <span class="math">B</span></span>,
+   <span class="example"><span class="math">A &cap; B<sup>c</sup> &ne; {}</span></span> and
+   <span class="example"><span class="math">A&nsub;B</span></span>.
+   As you read this chapter, draw Venn diagrams to represent each assertion.
+   Use the Venn diagram to help you find other, equivalent assertions.
+   If the diagram involves <span class="math">A</span> and <span class="math">B</span>, think about the relationship
+   between <span class="math">A<sup>c</sup></span> and <span class="math">B</span>, between  
+   <span class="math">A</span> and <span class="math">B<sup>c</sup></span>,
+   and between <span class="math">A<sup>c</sup></span> and <span class="math">B<sup>c</sup></span>.
+</p>
+
+<p>
+   For instance, here is the Venn diagram for <span class="example">every A is a B</span>:
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">All A are B</div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue right"><span class="math">B</span></div>
+   <div class="rect40x50_center_high yellow left" ><span class="math">A</span>&nbsp;</div>
+</div>
+
+<p>
+   In the diagram, the area that represents 
+   <span class="math">A</span> is entirely contained in the area that represents <span class="math">B</span>.
+   The area that represents the complement of <span class="math">B</span> is entirely contained in the area that 
+   represents the complement of <span class="math">A</span>.
+   No part of <span class="math">A</span> is in the complement of <span class="math">B</span>.
+   The relationship <span class="example">every A is a B</span> is mathematically equivalent to the 
+   relationship <span class="example">every non-B is a non-A</span> and to the relationship
+   <span class="example">no A is a non-B</span>.
+</p>
+
+<p>
+   Similarly, here is the Venn diagram for <span class="example">some A are B</span>:
+</p>
+
+<div class="venn">
+   <div class="vennCaption">Venn Diagram for <span class="math">Some A are B</div>
+   <div class="vennUniverse left"><span class="math"><strong>S</strong></span></div>
+   <div class="rect60x70_center blue left"><span class="math">B</span></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">A</span>&nbsp;</div>
+   <div class="rect28x50_right green right"><p class="math"><span class="math">&middot; 
+           x&isin;A&cap;B</span></p></div>
+</div> 
+
+<p>
+   You can see from the diagram that the situation could also be described as
+   <span class="example">some B are A</span>,
+   <span class="example">not every A is a non-B</span>, and
+   <span class="example">not every B is a non-A</span>.
+</p>
+
+<p>
+   There is an art to translating English sentences into mathematical expressions.
+   The next few exercises check your ability to go back an forth.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nouns = ['unicorns','ravens','goats','gnus','wombats','lemurs'];
+    var verbs = [' have purple spots',
+                 ' play poker',
+                 ' lay eggs',
+                 ' live to a ripe old age',
+                 ' eat their young',
+                 ' suntan easily',
+                 ' are susceptible to flattery',
+                 ' refuse to pay income taxes'
+                ];
+    var firsts = [' All ',' Some ',' No '];
+    var seconds = [' ',' not '];
+    var whichNoun = listOfRandInts(1,0,nouns.length-1)[0];
+    var whichVerb = listOfRandInts(1,0,verbs.length-1)[0];
+    var whichFirst = listOfRandInts(1,0,firsts.length-1)[0]
+    var whichSecond = listOfRandInts(1,0,seconds.length-1)[0]
+    var verbFirst = randBoolean();
+    var qSentence = '<span class="example">' + firsts[whichFirst];
+    if (verbFirst) {
+         qSentence += ' animals that ' + verbs[whichVerb] + ' are ' + 
+                      seconds[whichSecond] + nouns[whichNoun];
+    } else {
+         qSentence +=  nouns[whichNoun];
+         if (whichSecond > 0) {  
+             qSentence += ' do not ';
+         }
+         qSentence += verbs[whichVerb];
+    }
+    qSentence += '.</span>';           
+    var quantOpt = [
+                      '<span class="math">&forall;x, if x&isin;A then x&isin;B</span>',
+                      '<span class="math">&exist;x: x&isin;A and x&isin;B</span>',
+                      '<span class="math">&forall;x, if x&isin;B then x&isin;A</span>',
+                      '<span class="math">&exist;x: x&isin;A and x&notin;B</span>',
+                      '<span class="math">&forall;x, if x&isin;A then x&notin;B</span>',
+                      '<span class="math">&exist;x: if x&isin;B and x&notin;A</span>'
+                   ];
+    if (!verbFirst) {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'a';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'd';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    } else {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'c';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'f';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    }
+    var qStr = 'Let the domain of discourse <span class="math"><strong>S</strong></span> be animals. ' +
+               'Let <span class="math">A</span> be ' + nouns[whichNoun] + 
+               ' and let <span class="math">B</span> be animals that ' + verbs[whichVerb] + '. ' +
+               '<span class="qSpan">In quantifier notation, what is the sentence ' + qSentence + '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, quantOpt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nouns = ['flight attendants',
+                 'statisticians',
+                 'runners',
+                 'celebrities',
+                 'artisan bakers'
+                ];
+    var verbs = [' love geeks',
+                 ' drink espresso',
+                 ' have a sick sense of humor',
+                 ' eat their young',
+                 ' bathe regularly',
+                 ' embarrass themselves on tv',
+                 ' live to a ripe old age',
+                 ' can count to five without using their fingers'
+                ];
+    var firsts = [' All ',' Some ',' No '];
+    var seconds = [' ',' not '];
+    var whichNoun = listOfRandInts(1,0,nouns.length-1)[0];
+    var whichVerb = listOfRandInts(1,0,verbs.length-1)[0];
+    var whichFirst = listOfRandInts(1,0,firsts.length-1)[0]
+    var whichSecond = listOfRandInts(1,0,seconds.length-1)[0]
+    var verbFirst = randBoolean();
+    var qSentence = '<span class="example">' + firsts[whichFirst];
+    if (verbFirst) {
+         qSentence += ' people who ' + verbs[whichVerb] + ' are ' + 
+                      seconds[whichSecond] + nouns[whichNoun];
+    } else {
+         qSentence +=  nouns[whichNoun];
+         if (whichSecond > 0) {  
+             qSentence += ' do not ';
+         }
+         qSentence += verbs[whichVerb];
+    }
+    qSentence += '.</span>';           
+    var quantOpt = [
+                      '<span class="math">A&sub;B</span>',
+                      '<span class="math">A&nsub;B<sup>c</sup></span>',
+                      '<span class="math">B&sub;A</span>',
+                      '<span class="math">A&nsub;B</span>',
+                      '<span class="math">A&sub;B<sup>c</sup></span>',
+                      '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>'
+                   ];
+    if (!verbFirst) {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'a';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'd';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    } else {
+         if (whichFirst == 0) {
+             if (whichSecond == 0) {
+                aVal = 'c';
+             } else {
+                aVal = 'e';
+             }
+         } else if (whichFirst == 1) {
+             if (whichSecond == 0) {
+                aVal = 'b';
+             } else {
+                aVal = 'f';
+             }
+         } else if (whichFirst == 2) {
+             if (whichSecond == 0) {
+                aVal = 'e';
+             } else {
+                aVal = 'a';
+             }
+         }
+    }
+    var qStr = 'Let the domain of discourse <span class="math"><strong>S</strong></span> be people. ' +
+               'Let <span class="math">A</span> be ' + nouns[whichNoun] + 
+               ' and let <span class="math">B</span> be people who ' + verbs[whichVerb] + '. ' +
+               '<span class="qSpan">In set notation, what is the sentence ' + qSentence + '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, quantOpt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No '];
+    var negs = [' ',' not '];
+    var whichQuant = listOfRandInts(1,0,quants.length-1)[0];
+    var whichNeg = listOfRandInts(1,0,negs.length-1)[0]
+    var qSentence = '<span class="example">' + quants[whichQuant] + ' <span class="math">A</span> are ' +
+                    negs[whichNeg] + ' <span class="math">B</span>?</span>'; 
+    var qStr = '<span class="qSpan">Identify all the expressions that are equivalent to ' +
+               qSentence + '</span> (select all that apply).';
+    document.writeln(qStr);
+    var quantOpt = [
+                      [ // 0, 1, 2
+                       '<span class="math">A&sub;B</span>',
+                       '<span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B<sup>c</sup> = {}</span>'
+                      ],
+                      [ // 3, 4, 5
+                       '<span class="math">A&nsub;B<sup>c</sup></span>',
+                       '<span class="math">B&nsub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B &ne; {}</span>'
+                      ],
+                      [ // 6, 7, 8
+                       '<span class="math">B&sub;A</span>',
+                       '<span class="math">A<sup>c</sup>&sub;B<sup>c</sup></span>',
+                       '<span class="math">A<sup>c</sup>&cap;B = {}</span>'
+                      ],
+                      [ // 9, 10, 11
+                       '<span class="math">A&nsub;B</span>',
+                       '<span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B<sup>c</sup> &ne; {}</span>'
+                      ],
+                      [ // 12, 13, 14
+                       '<span class="math">A&sub;B<sup>c</sup></span>',
+                       '<span class="math">B&sub;A<sup>c</sup></span>',
+                       '<span class="math">A&cap;B = {}</span>'
+                      ],
+                      [ // 15, 16, 17
+                       '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>',
+                       '<span class="math">B&nsub;A</span>',
+                       '<span class="math">A<sup>c</sup>&cap;B &ne; {}</span>'
+                      ]
+                   ];
+    var lookup = new Array();
+    if (whichQuant == 0) {
+       if (whichNeg == 0) {
+          lookup = [0, 1, 2];
+       } else {
+          lookup = [12, 13, 14];
+       }
+    } else if (whichQuant == 1) {
+       if (whichNeg == 0) {
+          lookup = [3, 4, 5];
+       } else {
+          lookup = [9, 10, 11];
+       }
+    } else if (whichQuant == 2) {
+       if (whichNeg == 0) {
+          lookup = [12, 13, 14];
+       } else {
+          lookup = [0, 1, 2];
+       }
+    }
+    var rawOpt = new Array();
+    var m = 0;
+    for (var i=0; i< quantOpt.length; i++) {
+        for (var j=0; j < quantOpt[i].length; j++) {
+            rawOpt[m++] = quantOpt[i][j];
+        }
+    }
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (var i=0; i < lookup.length; i++) {
+        aVal = aVal + alphabet[optPerm[1][lookup[i]]] + '&';
+    }
+    aVal = aVal.substring(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  never = ['Some <span class="math">A</span> are not <span class="math">A</span>.',
+                  'Not all <span class="math">A</span> are <span class="math">A</span>.',
+                  'Some <span class="math">A</span> are <span class="math">B</span>, and no ' +
+                         '<span class="math">B</span> are <span class="math">A</span>.',
+                  'Not all <span class="math">A</span> are <span class="math">B</span>, and no ' +
+                         '<span class="math">A</span> are not <span class="math">B</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">A&nsub;B</span>.',
+                 ];
+    var  canBe = ['All <span class="math">A</span> are not <span class="math">A</span>.',
+                  '<span class="math">A&cap;A<sup>c</sup> = A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> = A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> &sub; A</span>.',
+                  '<span class="math">A&cup;A<sup>c</sup> &nsub; A</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">B&sub;A</span>.',
+                  '<span class="math">A&sub;B</span> and <span class="math">B&nsub;A</span>.',
+                 ];
+    var always = ['<span class="math">A&cap;A<sup>c</sup> = {}.</span>',
+                  '<span class="math">A&cup;A<sup>c</sup> = <strong>S</strong>.</span>',
+                  'No <span class="math">A</span> are not <span class="math">A</span>.',
+                  'For any <span class="math">x</span>, either <span class="math">x</span> is in ' +
+                        '<span class="math">A</span> or <span class="math">x</span> is not in ' +
+                        '<span class="math">A</span>.',
+                  '<span class="math">A&sub;B</span> or <span class="math">A&nsub;B</span>.'
+                 ];
+    var which = listOfDistinctRandInts(3,0,2);
+    var stmt = new Array(3);
+    var aVals = new Array(3);
+    for (var i=0; i < 3; i++) {
+        switch (which[i]) {
+            case 0:
+                stmt[i] = randomSample(never, 1, true);
+                aVals[i] = 'a';
+                break;
+            case 1:
+                stmt[i] = randomSample(canBe, 1, true);
+                aVals[i] = 'b';
+                break;
+            case 2:
+                stmt[i] = randomSample(always, 1, true);   
+                aVals[i] = 'c';
+                break;
+         }
+    }       
+    var qStr = '<span class="qSpan">Are the following statements never true, sometimes true, or ' +
+               'always true?</span></p>';
+    document.writeln(qStr);
+    var stmt;
+    var opt = ['never true','sometimes true','always true'];
+    for (var i=0; i < 3; i++) {
+        switch (which[i]) {
+            case 0:
+                stmt = randomSample(never, 1, true);
+                aVal = 'a';
+                break;
+            case 1:
+                stmt = randomSample(canBe, 1, true);
+                aVal = 'b';
+                break;
+            case 2:
+                stmt = randomSample(always, 1, true);   
+                aVal = 'c';
+                break;
+         }
+         document.writeln('<p><span class="qSpan">' + stmt + '</span>');
+         writeSelectExercise(false, qCtr++, opt, aVal);
+         document.writeln('</p>');
+    }       
+// -->
+</script>
+</div>
+
+<h2><a id="syllogisms"></a>Categorical Syllogisms
+</h2>
+
+<p>
+   A <span class="termOfArt">categorical syllogism</span> is a three line argument with 
+   two premises and a conclusion, of the form:
+</p>
+
+<ul>
+   <li>
+   [quantifier] [category] are [category].
+   </li>
+   <li>
+   [quantifier] [category] are [category].
+   </li>
+   <li>
+   Therefore, [quantifier] [category] are [category].
+   </li>
+</ul>
+
+<p>
+   The quantifiers can be <em>all</em> (every one is), <em>no</em> (none is), <em>not all</em> (some are not), 
+   or <em>some</em> (at least one is).
+   In a valid syllogism, each of the premises and the conclusion involve two categories,
+   and there are three categories in all.
+   The category that occurs at the end of the conclusion is called <em>the major term</em>.
+   The category that occurs at the beginning of the conclusion is called <em>the minor term</em>.
+   The third category is called <em>the middle term</em>.
+</p>
+
+<p>
+   One premise involves the major term and the middle term; the other premise involves the minor term
+   and the middle term.
+   In each premise, the middle term can be first or second.
+</p>
+
+<p>
+   Here is an example of a valid categorical syllogism:
+</p>
+
+<ul>
+   <li>
+   All ravens are birds.
+   </li>
+   <li>
+   All birds are mortal creatures.
+   </li>
+   <li>
+   Therefore, all ravens are mortal creatures.
+   </li>
+</ul>
+
+<p>
+   In this example, <em>mortal creatures</em> is the major term.
+   The minor term is <em>ravens</em>.
+   The middle term is <em>birds</em>.
+   The major premise is <em>all birds are mortal creatures</em>.
+   The minor premise is <em>all ravens are birds</em>.
+</p>
+
+<p>
+   The syllogism is valid because it is of the form:
+<p>
+
+<ul>
+   <li>
+   <span class="math">A&sub;B</span>
+   </li>
+   <li>
+   <span class="math">B&sub;C</span>
+   </li>
+   <li>
+   Therefore, <span class="math">A&sub;C</span>
+   </li>
+</ul>
+
+<p>
+   where <span class="math">A</span> is ravens,  <span class="math">B</span> is birds and
+    <span class="math">C</span> is things that are mortal.
+   The logic is valid because the subset relationship is <em>transitive</em>: if 
+   <span class="math">A&sub;B</span> and <span class="math">B&sub;C</span> it is necessarily
+   true that <span class="math">A&sub;C</span>, as illustrated by the following Venn diagram:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center blue left"><span class="math">C</span></div>
+   <div class="rect40x50_center_high yellow right"><span class="math">B</span>&nbsp;</div>
+   <div class="rect20x30_center green center"><p class="math"><span class="math">A</span></p></div>
+</div>
+
+<p>
+    To put the previous syllogism in <span="termOfArt">standard form</span>, we write the 
+    major premise first, then the minor premise, then the conclusion:
+</p>
+
+<ul>
+   <li>
+   All birds are mortal creatures.
+   </li>
+   <li>
+   All ravens are birds.
+   </li>
+   <li>
+   Therefore, all ravens are mortal creatures.
+   </li>
+</ul>
+
+<p>
+   Not every syllogism is valid.  
+   For instance, consider:
+</p>
+
+<ul>
+   <li>
+   Some ravens are black birds.
+   </li>
+   <li>
+   Some black birds are swans.
+   </li>
+   <li>
+   Therefore, some ravens are swans.
+   </li>
+</ul>
+
+<p>
+   In set notation, if we take <span class="math">A</span> to represent ravens, 
+   <span class="math">B</span> to represent black birds, and <span class="math">C</span> to represent
+   swans, the argument is:
+</p>
+
+<div class="indent">
+<p class="math" class="inline">
+   <span class="math">A&nsub;B<sup>c</sup>.  C&nsub;B<sup>c</sup>.  Therefore, A&nsub;C<sup>c</sup>.</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'In other words, not every raven is non-black; not every swan is non-black; therefore, ' +
+               'not every raven is a non-swan.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+   This syllogism is invalid; the following Venn diagram shows a counterexample:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center blue left"><span class="math">B</span></div>
+   <div class="rect40x50_right_high yellow right"><span class="math">A</span>&nbsp;
+         <p align="left"><span class="math">&middot;a&isin;B&cap;A</span></p></div>
+   <div class="rect28x50_right"></div>
+   <div class="rect40x50_left_high green left"><span class="math">C</span>
+     <p align="right"><span class="math">&middot;c&isin;B&cap;C</span></p></div>
+   <div class="rect11x50_left_high"></div>
+</div>
+
+<p>
+   In this Venn diagram, <span class="math">a</span> is a black raven and <span class="math">c</span> is
+   a black swan.
+   The diagram shows that both can exist 
+   (that is, <span class="math">A&nsub;B<sup>c</sup></span> and 
+    <span class="math">C&nsub;B<sup>c</sup></span>) 
+   and still <span class="math">A&cap;C = {}</span>: there might not be
+   any &quot;raven-swans.&quot;
+   The truth of the assumptions does not guarantee that the conclusion is true, so the argument is invalid.
+</p>
+
+<p>
+   In fact, any syllogism that has the quantifier <em>some</em>
+   in both the major and minor premise is invalid.
+   And any syllogism that has the quantifier <em>some</em> or <em>not all</em> in the conclusion
+   must have either <em>some</em> or <em>not all</em> in one of the premises, or it is invalid.
+</p>
+
+<p>
+   Let's count the number of possible syllogisms: in the major premise, there are 4 possible quantifiers.
+   Either the major term or the middle term can come first in the major premise, giving 2 orders.
+   In the minor premise, there are 4 possible quantifiers, and either the minor term or the middle term can come
+   first.
+   And in the conclusion, there are 4 possible quantifiers&mdash;but the minor term must come first and the
+   major term must come last.
+   By the <a class="glossRef" href="gloss.htm#fundamental_rule">fundamental rule of counting</a>, there are
+   therefore
+</p>
+
+<p class="math">
+   4 &times; 2 &times; 4 &times; 2 &times; 4 = 256
+</p>
+
+<p>
+   possible syllogisms.  
+   But only 15 of the 256 are valid.
+   We have seen one valid syllogism already.
+   All 15 are given in the box below.
+</p>
+
+<div class="callout">
+<p><span class="calloutCaption">Valid Categorical Syllogisms</span></p>
+
+<p>
+   There are 256 possible categorical syllogisms.  
+   Only fifteen of them are valid.
+   The following are all written so that the 
+   <a class="glossRef" href="gloss.htm#major_premise">major premise</a> is first, 
+   the <a class="glossRef" href="gloss.htm#minor_premise">minor premise</a>
+   is second and the conclusion is third.
+   The <a class="glossRef" href="gloss.htm#major_term">major term</a>
+   is <span class="math">P</span> (predicate of the conclusion) , the 
+   <a class="glossRef" href="gloss.htm#middle_term">middle term</a> is <span class="math">M</span> (middle)
+    and the <a class="glossRef" href="gloss.htm#minor_term">minor term</a> is <span class="math">S</span> 
+   (subject of the conclusion).
+</p>
+
+<ol>
+   <li>
+       <span class="math">All M are P.     All S are M.  Therefore, all S are P.</span>
+   </li>
+   <li>
+       <span class="math">All M are P.     Some M are S.  Therefore, some S are P.</span>
+   </li>
+   <li>
+       <span class="math">All M are P.     Some S are M.  Therefore, some S are P.</span>
+   </li>
+   <li>
+       <span class="math">All P are M.     Not all S are M. Therefore, not all S are P.</span>
+   </li>
+   <li>
+       <span class="math">All P are M.     No M are S.  Therefore, no S are P.</span>
+   </li>
+   <li>
+       <span class="math">All P are M.     No S are M.  Therefore, no S are P.</span>       
+   </li>
+   <li>
+       <span class="math">No P are M.      All S are M.  Therefore, no S are P.</span>
+   </li>
+   <li>
+       <span class="math">No M are P.      All S are M.  Therefore, no S are P.</span>
+   </li>
+   <li>
+       <span class="math">No P are M.      Some M are S.  Therefore, not all S are P.</span>
+   </li>
+   <li>
+       <span class="math">No P are M.      Some S are M.  Therefore, not all S are P.</span>
+   </li>
+   <li>
+       <span class="math">No M are P.      Some M are S.  Therefore, not all S are P.</span>
+   </li>
+   <li>
+       <span class="math">No M are P.      Some S are M.  Therefore, not all S are P.</span>
+   </li>
+   <li>
+       <span class="math">Some M are P.    All M are S.  Therefore, some S are P.</span>
+   </li>
+   <li>
+       <span class="math">Some P are M.    All M are S.  Therefore, some S are P.</span>
+   </li>
+   <li>
+       <span class="math">Not all M are P. All M are S.  Therefore, not all S are P.</span>
+   </li>
+</ol>
+
+</div>
+
+<p>
+   Many of the syllogisms above differ in their language but not in the underlying mathematics.
+   For instance, there is no mathematical difference between 
+   <span class="math">some S are M</span> and <span class="math">some M are S</span>, between
+   <span class="math">no M are P</span> and <span class="math">no P are M</span>, or between
+   <span class="math">no M are S</span> and <span class="math">no S are M</span>.
+   So, of the 15 syllogisms above, 2 and 3 are the same; 5 and 6 are the same; 7 and 8 are the same;
+   9, 10, 11 and 12 are the same; and 13 and 14 are the same.
+</p>
+
+<p>
+   The following exercises check your ability to recognize categorical syllogisms, their premises and terms;
+   to determine whether a syllogism is in standard form; and to translate syllogisms from words 
+   into set notation.
+</p>
+   
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No ', ' Not all '];
+    var cats = [' A', ' B', ' C', ' D'];
+    var whichQuants = listOfRandInts(3, 0, quants.length-1);
+    var whichCats = listOfRandInts(6, 0, cats.length-1);
+    var repeat = false;
+    var noMiddle = false;
+    if (whichCats[0] == whichCats[1] || whichCats[2] == whichCats[3] || whichCats[4] == whichCats[5]) {
+        repeat = true;
+    } 
+    if (whichCats[0] != whichCats[2] && whichCats[0] != whichCats[3] 
+                && whichCats[1] != whichCats[2] && whichCats[1] != whichCats[3]) {
+        noMiddle = true;
+    }
+    var nMajor = 0;
+    var nMinor = 0;
+    var nMiddle = 0;
+    for (var i=0; i < 4; i++) {
+         if (whichCats[i] == whichCats[4]) {
+             nMinor++;
+         } else if (whichCats[i] == whichCats[5]) {
+             nMajor++;
+         } else {
+             nMiddle++;
+         }
+    }
+    var isSyll = false;
+    if (nMinor == 1 && nMajor == 1 && !noMiddle && !repeat) {
+         isSyll = true;
+    }
+    isStandard = false;
+    if (isSyll && (whichCats[0] == whichCats[5] || whichCats[1] == whichCats[5]) ) {
+         isStandard = true;
+    }
+    var theArgument = quants[whichQuants[0]] + cats[whichCats[0]] + ' are ' + cats[whichCats[1]] + '. ' + 
+                      quants[whichQuants[1]] + cats[whichCats[2]] + ' are ' + cats[whichCats[3]] + '. ' +
+                      'Therefore, ' + quants[whichQuants[2]].toLowerCase() + cats[whichCats[4]] + 
+                      ' are ' + cats[whichCats[5]] + '. ';
+    var qStr = 'Consider the following three line argument: <span class="example">' + theArgument + '</span>' +
+               '<span class="qSpan">Is the argument a categorical syllogism?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    var aVal = (isSyll)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Is the argument in standard form for a categorical syllogism?</span>';
+    document.writeln(qStr);
+    aVal = (isStandard)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var quants = [' All ',' Some ', ' No ', ' Not all '];
+    var cats = Alphabet;
+    var whichQuants = listOfRandInts(3, 0, quants.length-1);
+    var whichCats = listOfDistinctRandInts(3, 0, cats.length-1);
+    var majorFirst = randBoolean();
+    var firstFirst = randBoolean();
+    var secondFirst = randBoolean();
+    var premise1 = quants[whichQuants[0]] + ' ';
+    premise1 += (majorFirst)? 
+                      ((firstFirst)? 
+                         cats[whichCats[0]] + ' are ' + cats[whichCats[2]] + '. '
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[0]] + '. ')
+                    :
+                      ((firstFirst)? 
+                         cats[whichCats[1]] + ' are ' + cats[whichCats[2]] + '. ' 
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[1]] + '. ');
+    var premise2 = quants[whichQuants[1]] + ' ';
+    premise2 += (majorFirst)? 
+                      ((secondFirst)? 
+                         cats[whichCats[1]] + ' are ' + cats[whichCats[2]] + '. '
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[1]] + '. ')
+                    :
+                      ((secondFirst)? 
+                         cats[whichCats[0]] + ' are ' + cats[whichCats[2]] + '. ' 
+                         : 
+                         cats[whichCats[2]] + ' are ' + cats[whichCats[0]] + '. ');
+    var conclude = quants[whichQuants[2]] + cats[whichCats[1]] + ' are ' + cats[whichCats[0]] + '. ';
+    var qStr = 'Consider the following syllogism: <span class="example">' + premise1 + premise2 + 
+               ' Therefore, ' + conclude + '</span></p>';
+    document.writeln(qStr);
+    var aVal = 'a';
+    qStr = '<p><span class="qSpan">The major, minor and middle terms are, respectively:</span>';
+    document.writeln(qStr);
+    wcats = [cats[whichCats[0]], cats[whichCats[1]], cats[whichCats[2]]];
+    var rawOpt = [ wcats[0] + ', ' + wcats[1] + ', ' + wcats[2],
+                   wcats[0] + ', ' + wcats[2] + ', ' + wcats[1],
+                   wcats[1] + ', ' + wcats[0] + ', ' + wcats[2],
+                   wcats[1] + ', ' + wcats[2] + ', ' + wcats[0],
+                   wcats[2] + ', ' + wcats[0] + ', ' + wcats[1],
+                   wcats[2] + ', ' + wcats[1] + ', ' + wcats[0],
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">The major premise, minor premise and conclusion are, respectively:</span>';
+    document.writeln(qStr);
+    var majorP = (majorFirst)? premise1 : premise2;
+    var minorP = (majorFirst)? premise2 : premise1;
+    var pats = [ majorP, minorP, conclude];
+    var rawOpt = [ pats[0] + ', ' + pats[1] + ', ' + pats[2],
+                   pats[0] + ', ' + pats[2] + ', ' + pats[1],
+                   pats[1] + ', ' + pats[0] + ', ' + pats[2],
+                   pats[1] + ', ' + pats[2] + ', ' + pats[0],
+                   pats[2] + ', ' + pats[0] + ', ' + pats[1],
+                   pats[2] + ', ' + pats[1] + ', ' + pats[0],
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Is the argument in standard form for a categorical syllogism?</span>';
+    document.writeln(qStr);
+    var opt = ['no','yes'];
+    aVal = (majorFirst)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr = '</p><p><span class="qSpan">Which of the following represents the syllogism in set notation?</span>';
+    function quantToSet(s1, s2, q) {
+         var a = '';
+         switch(q) {
+             case 0:
+                 a = s1 + '&sub;' + s2;
+                 break;
+             case 1:
+                 a = s1 + '&nsub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 2:
+                 a = s1 + '&sub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 3:
+                 a = s1 + '&nsub;' + s2;
+                 break;
+          }
+          return(a);
+    }
+    var prem1Set = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[0])
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[0])
+                      );
+    var prem2Set = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[1])
+                       )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[1])
+                      );
+    var conclSet = quantToSet(cats[whichCats[1]], cats[whichCats[0]], whichQuants[2]);
+    var prem1SetA = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[0])
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[0])
+                         : 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[0])
+                      );
+    var prem2SetA = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], whichQuants[1])
+                      )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], whichQuants[1])
+                         : 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], whichQuants[1])
+                      );
+    var conclSetA = quantToSet(cats[whichCats[0]], cats[whichCats[1]], whichQuants[2]);
+    function twist(j, k) {
+        return((k+Math.floor(j/2)) % j);
+    }
+    var prem1SetB = (majorFirst)? 
+                      ((firstFirst)? 
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], twist(quants.length,whichQuants[0]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], twist(quants.length,whichQuants[0]))
+                      )
+                    :
+                      ((firstFirst)?
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], twist(quants.length,whichQuants[0]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], twist(quants.length,whichQuants[0]))
+                      );
+    var prem2SetB = (majorFirst)? 
+                      ((secondFirst)? 
+                         quantToSet(cats[whichCats[1]], cats[whichCats[2]], twist(quants.length,whichQuants[1]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[1]], twist(quants.length,whichQuants[1]))
+                      )
+                    :
+                      ((secondFirst)?
+                         quantToSet(cats[whichCats[0]], cats[whichCats[2]], twist(quants.length,whichQuants[1]))
+                         : 
+                         quantToSet(cats[whichCats[2]], cats[whichCats[0]], twist(quants.length,whichQuants[1]))
+                      );
+    var conclSetB = quantToSet(cats[whichCats[1]], cats[whichCats[0]], twist(quants.length,whichQuants[2]));
+    document.writeln(qStr);
+    var rawOpt = [ prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1Set + '. ' + prem2SetA + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1Set + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1Set + '. ' + prem2SetB + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetA + '. ' + prem2SetB + '. Therefore, ' + conclSet + '. ',
+                   prem1SetB + '. ' + prem2SetA + '. Therefore, ' + conclSet + '. ',
+                   prem1SetA + '. ' + prem2Set + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2Set + '. Therefore, ' + conclSetA + '. ',
+                   prem1SetA + '. ' + prem2SetA + '. Therefore, ' + conclSetB + '. ',
+                   prem1SetB + '. ' + prem2SetB + '. Therefore, ' + conclSetA + '. '
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h2><a id="testing_syllogisms"></a>
+   Testing syllogisms
+</h2>
+
+<p>
+   Many&mdash;but by no means all&mdash;valid three-line arguments about categories are categorical syllogisms.
+   For instance, the following three arguments are valid but are not categorical syllogisms:
+</p>
+
+<p class="example">
+   All <span class="math">S</span> are <span class="math">P</span>.  
+   Some <span class="math">S</span> are <span class="math">M</span>. 
+   Therefore, some <span class="math">S</span> are <span class="math">P</span>.
+</p> 
+
+<p class="example">
+   Some <span class="math">A</span> are <span class="math">B</span>.  
+   All <span class="math">B</span> are <span class="math">C</span>.  
+   Therefore, there are <span class="math">A</span>s, <span class="math">B</span>s and 
+   <span class="math">C</span>s.
+</p>
+
+<p class="example">
+   All <span class="math">A</span> are <span class="math">B</span>.  
+   <span class="math">x</span> is not <span class="math">B</span>.  
+   Therefore, <span class="math">x</span> is not <span class="math">A</span>.
+</p>
+
+<p>
+   Nonetheless, because categorical syllogisms are so common, for thousands of years philosophers have 
+   worked on rules to test whether a quantified argument is in fact one of the 15&nbsp;valid syllogisms.
+   We will look at three methods for doing this.
+</p>
+
+<p>
+   The first method is the most mechanical: try to put the argument in standard form.
+   If that is impossible, the argument is not a syllogism.
+   Game over.
+   If the argument can be put in standard form, check whether it is one of the 15 valid syllogisms.
+   If it is not, the syllogism is not valid.
+   We will also cover some rules of thumb that help us spot arguments that cannot be valid syllogisms.
+</p>
+
+<p>
+   The second method requires a bit more finesse but is much more rewarding.
+   We will see that there are really only two mathematically different syllogisms, one with
+   existential import, and one without.
+   If the argument we are testing can be transformed into one of the two canonical 
+   valid syllogisms by following the rules of set theory, the argument is a valid syllogism.  
+   Equivalently, if the Venn diagram for one of the two canonical valid syllogisms can be re-labelled so that it
+   is the Venn diagram for the argument we are testing, the argument is a valid syllogism.
+</p>
+
+<p>
+   The third method is to translate the syllogism into set notation and to prove directly that
+   the argument is valid, or to construct a counterexample (Venn diagrams help very much).
+   This approach is the most general.
+   It is not limited to syllogisms&mdash;it can be used to test any argument about sets.
+</p>
+
+<h3>
+   <a name="testByStandardizing"></a>
+   Testing syllogisms by putting them in standard form
+</h3>
+
+<p>
+   A syllogism is in standard form if it has the major premise first, the minor premise second, 
+   and then the conclusion.
+   The major premise either looks like
+</p>
+
+<p class="center">
+    [quantifier] [major term] are [middle term]
+</p>
+
+<p>
+   or
+</p>
+
+<p class="center"> 
+    [quantifier] [middle term] are [major term].
+</p>
+
+<p>
+   The minor premise either looks like
+</p>
+
+<p class="center">
+   [quantifier] [minor term] are [middle term]
+</p>
+
+<p>
+   or
+</p>
+
+<p class="center">
+   [quantifier] [middle term] are [minor term].
+</p>
+
+<p>
+   The conclusion looks like
+</p>
+
+<p class="center">
+    [quantifier] [minor term] are [major term].
+</p>
+
+<div class="indent">
+<p class="inline">
+   If a three-line argument cannot be put in this form, it is not a categorical syllogism.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="example">All valid categorical syllogisms are categorical syllogisms. ' +
+               'Therefore, if an argument is not a categorical syllogism, it is not a valid ' +
+               'categorical syllogism.</span> This seemed funnier when I wrote it.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>   
+   The tricky part is to translate plain language arguments into standard form.  
+   We will work some examples presently.
+   First we will look at some rules of thumb.
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+   The <span class="termOfArt">Conservation of Rabbits Principle</span> says that to pull a rabbit
+   out of a hat, a rabbit must first be put into the hat.
+   The application of the conservation of rabbits principle to 
+   categorical syllogisms says that if the conclusion is that something exists 
+   (some <span class="math">S</span> are <span class="math">P</span> or 
+   some <span class="math">S</span> are not <span class="math">P</span>), one of the premises must
+   guarantee that something exists (some <span class="math">P</span> are <span class="math">M</span>,
+   some <span class="math">M</span> are <span class="math">P</span>,
+   some <span class="math">S</span> are <span class="math">M</span>, or
+   some <span class="math">M</span> are <span class="math">S</span>).
+   Moreover, in a valid syllogism at most one premise says that something exists.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'For instance, if the premises are <span class="example">Some P are (or are not) M. ' +
+               'Some S are (or are not) M.</span>, the resulting argument is not a valid syllogism, ' +
+               'no matter what the conclusion is.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+   Another rule of thumb is that in a valid syllogism, one premise contains the middle term and the major term,
+   the other premise contains the middle term and the minor term, and the conclusion contains only the
+   minor term and the major term.
+   So an argument that looks like:
+</p>
+
+<p class="example">
+   [Quantifier] [minor term] are [major term]. [Quantifier] [minor term] are [middle term].
+   Therefore, [quantifier] [minor term] are [major term]
+</p>
+
+<div class="indent">
+<p class="inline">
+   is not a valid syllogism&mdash;although it could be a logically valid argument.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The example above, <span class="math">All S are P.  Some S are M.  ' +
+               'Therefore, some S are P.</span> is of this form.  It is valid and uses all its ' +
+               'premises, but is not a categorical syllogism.  To prove the conclusion from the premises, ' +
+               'note that the first premise says <span class="math">S&sub;P</span>.  The second says ' +
+               '<span class="math">S&nsub;M<sup>c</sup></span>, from which it follows that ' +
+               '<span class="math">S &ne; {}</span>, i.e., <span class="nath">S</span> has at least one ' +
+               'element, which&mdash;the first premise tells us&mdash;is also in <span class="math">P</span>. ' +
+               'Hence, <span class="math">S&nsub;P<sup>c</sup></span>: some <span class="math">S</span> are ' +
+               '<span class="math">P</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   Some systems of testing the validity of syllogisms are based on such rules of thumb.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'A syllogism that can be put in standard form is valid if it satisfies the rule that at most one ' +
+               'premise has existential import, and also the following four rules: </p><ol> ' +
+               '<li>The middle term must be &quot;distributed,&quot;: one or both of the premises must ' +
+                  'say that something is true for all <span class="math">M</span> or for ' +
+                  'no <span class="math">M</span>.</li>' +
+               '<li>If the minor term is distributed in the conclusion, it must be distributed in the ' +
+                  'minor premise.</li>' +
+               '<li>At least one premise must affirm something.  (<em>all are</em> or <em>some are</em>.)</li>' +
+               '<li>If a premise denies something, the conclusion must also.</li></ol>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   Here are examples of testing syllogisms by translating them into standard form.
+</p>
+</div>
+
+<p>
+   Consider the syllogism:
+</p>
+
+<p class="math">
+   All A are B.  No B are C.  Therefore, no A are C.
+</p>
+
+<p>
+   Since the conclusion is <span class="math">no A are C</span>, the major term is <span class="math">C</span>
+   and the minor term is <span class="math">A</span>.
+   To put this in standard form we would put the major premise (the one involving the major term,
+   <span class="math">C</span>) first.
+   Thus, in standard form, this is the eighth valid syllogism above:
+</p>
+
+<p class="math">
+   No M are P.      All S are M.  Therefore, no S are P.
+</p>
+
+<p>
+   Now consider the categorical syllogism:
+</p>
+
+<p class="math">
+   All A are B.  Some A are C.  Therefore, some B are C.
+</p>
+
+<p>
+   This syllogism asserts that the set <span class="math">A&cap;B</span> has at least one element, so
+   the syllogism has existential import.
+   Since the conclusion is <span class="math">some B are C</span>, the major term is 
+   <span class="math">C</span>
+   and the minor term is <span class="math">B</span>.
+   To put this in standard form we would put the major premise (the one involving the major term,
+   <span class="math">C</span>) first.
+   In standard form, this is thus the thirteenth valid syllogism above:
+</p>
+
+<p class="math">
+   Some M are P.    All M are S.  Therefore, some S are P.
+</p>
+
+<p>
+   Finally, consider the argument:
+</p>
+
+<p class="math">
+   All A are B.  All A are C.  Therefore, all B are C.
+</p>
+
+<p>
+   Since the conclusion is <span class="math">all B are C</span>, the major term is 
+   <span class="math">C</span>
+   and the minor term is <span class="math">B</span>.
+   To put this in standard form we would put the major premise (the one involving the major term,
+   <span class="math">C</span>) first.
+   In standard form, this is thus:
+</p>
+
+<p class="math">
+   All M are P.    All M are S.  Therefore, all S are P.
+</p>
+
+<p>
+   This is not one of the 15 valid syllogisms; it is not valid.
+   It is easy to construct a counterexample.
+   For instance, let <span class="math">A</span> stand for human beings,
+   <span class="math">B</span> for animals and
+   <span class="math">C</span> for vertebrates.
+   It is true that all humans are animals and that all humans are vertebrates.
+   It does not follow that all animals are vertebrates&mdash;and they are not.
+</p>
+
+<h3>
+   <a name="twoCanonical"></a>Testing by transforming to a canonical syllogism
+</h3>
+
+<div class="indent">
+<p class="inline">
+   Although the 15 valid categorical syllogisms look different when written in words, in fact, there are 
+   only two mathematically distinguishable syllogisms if no special significance is given to
+   which term is the major term and which is the minor term.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'We have already established that seven of the fifteen valid syllogisms are redundant. ' +
+       'That leaves us with the following eight syllogisms, which we shall reduce further: ' +
+       '</p><ol>' +
+       '<li><span class="math">M&sub;P.  S&sub;M.  Therefore, S&sub;P.</span></li>' +
+       '<li><span class="math">M&sub;P. M&nsub;S<sup>c</sup>. Therefore, S&nsub;P<sup>c</sup></span></li>' +
+       '<li><span class="math">P&sub;M.   S&nsub;M. Therefore, S&nsub;P.</span></li>' +
+       '<li><span class="math">P&sub;M.  M&sub;S<sup>c</sup>. Therefore, S&sub;P<sup>c</sup>.</span></li>' +
+       '<li><span class="math">P&sub;M<sup>c</sup>.  S&sub;M.  Therefore, S&sub;P<sup>c</sup>.</span></li>' +
+       '<li><span class="math">P&sub;M<sup>c</sup>.  M&nsub;S<sup>c</sup> Therefore, S&nsub;P.</span></li>' +
+       '<li><span class="math">M&nsub;P<sup>c</sup>, M&sub;S. Therefore, S&nsub;P<sup>c</sup>.</span></li>' +
+       '<li><span class="math">M&nsub;P. M&sub;S.  Therefore, S&nsub;P.</span></li>' +
+       '</ol><p>' +
+       'We will now reduce this list to two syllogisms, from which the rest can be derived. ' +
+       'One has no existential import&mdash;it does not conclude that anything exists. ' +
+       'The other does have existential import: it concludes that an element of <span class="math">S</span> ' +
+       'and an element of <span class="math">P<sup>c</sup></span> exist. ' +
+       'To show that there are really only two syllogisms, two identities from set theory ' +
+       'are particularly useful: ' +
+     '</p><p class="math"> ' +
+       '(1) A&sub;B if and only if B<sup>c</sup>&sub;A<sup>c</sup>  ' +
+       '(every A is a B if and only if every non-B is a non-A) ' +
+     '</p><p class="math"> ' +
+       '(2) A&nsub;B if and only if B<sup>c</sup>&nsub;A<sup>c</sup>  ' +
+       '(some As are non-Bs if and only if some non-Bs are As) ' +
+     '</p><p> ' +
+       'Consider the first syllogism in the list of eight: ' + 
+     '</p><p class="math"> ' +
+       'M&sub;P.  S&sub;M.  Therefore, S&sub;P. ' +
+     '</p><p> ' +
+       'If we apply the first identity to the first premise, it becomes ' +
+       '<span class="math">P<sup>c</sup>&sub;M<sup>c</sup></span>. ' +
+       'Now let us change variables, substituting <span class="math">Q</span> ' +
+       'for <span class="math">P<sup>c</sup></span>, and thus  ' +
+       '<span class="math">Q<sup>c</sup></span> for <span class="math">P</span>, ' +
+       'throughout the argument. ' +
+       'That relabeling does not change the validity of the argument. ' +
+       'The new argument is ' +
+     '</p><p> ' +
+       'Q&sub;M<sup>c</sup>. S&sub;M.  Therefore, S&sub;Q<sup>c</sup>.  ' +
+       '(No Q are M. All S are M.  Therefore, no S are Q.) ' +
+     '</p><p> ' +
+       'But the letter <span class="math">Q</span> is a variable&mdash;a placeholder. ' +
+       'We can change it to any other letter that does not appear in the argument, without ' +
+       'affecting the math. ' +
+       'So, we could change it to <span class="math">P</span>, for instance. ' +
+       'If we do, we get the fifth syllogism. ' +
+       'Thus the first syllogism and the fifth syllogism are mathematically equivalent. ' +
+     '</p><p> ' +
+       'Now consider the fourth syllogism, <span class="math">P&sub;M.   ' +
+       'M&sub;S<sup>c</sup>. Therefore, S&sub;P<sup>c</sup>.</span> ' +
+       'By the first identity above, the second premise in this syllogism is ' +
+       'equivalent to S&sub;M<sup>c</sup>. ' +
+       'That makes the syllogism look like  ' +
+       '<span class="math">P&sub;M.   ' +
+       'S&sub;M<sup>c</sup>. Therefore, S&sub;P<sup>c</sup>.</span> ' +
+       'Let\'s use the relabeling trick we just used: ' +
+       'let <span class="math">Q = M<sup>c</sup></span>, ' +
+       'and <span class="math">Q<sup>c</sup> = M</span>. ' +
+     '</p><p> ' +
+       'With that change of variables, the fourth syllogism becomes  ' +
+       '<span class="math">P&sub;Q<sup>c</sup>.   ' +
+       'S&sub;Q. Therefore, S&sub;P<sup>c</sup>.</span> ' +
+       'Again, <span class="math">Q</span> is a placeholder, and we can change the  ' +
+       'symbol to any other symbol that does not appear in that ' +
+       'expression&mdash;M, for instance. ' +
+       'That gives the fifth syllogism. ' +
+       'Thus the first, fourth and fifth syllogisms are identical mathematically, even  ' +
+       'though they differ notationally. ' +
+       'They are the syllogisms with no existential import; really there is only one. ' +
+     '</p><p> ' +
+       'Consider the second syllogism in the list of eight: ' +
+     '</p><p class="math"> ' +
+       'M&sub;P.   M&nsub;S<sup>c</sup>.  Therefore, S&nsub;P<sup>c</sup>. ' +
+     '</p><p> ' +
+       'Apply the first identity to the first premise and the second identity to ' +
+       'the second premise.  That gives ' +
+     '</p><p class="math"> ' +
+       'P<sup>c</sup>&sub;M<sup>c</sup>.   S&nsub;M<sup>c</sup>.  Therefore, S&nsub;P<sup>c</sup>. ' +
+     '</p><p> ' +
+       'Now let <span class="math">Q = P<sup>c</sup></span> (and <span class="math">Q<sup>c</sup> = P</span>) ' +
+       'throughout the argument. That gives ' +
+     '</p><p class="math"> ' +
+       'Q&sub;M<sup>c</sup>.   S&nsub;M<sup>c</sup>.  Therefore, S&nsub;Q. ' +
+     '</p><p> ' +
+       'As before, <span class="math">Q</span> is just a placeholder, and we can change it to ' +
+       '<span class="math">P</span>, since <span class="math">P</span> does not appear in the argument. ' +
+       'That shows ' +
+     '</p><p class="math"> ' +
+       'P&sub;M<sup>c</sup>.   S&nsub;M<sup>c</sup>.  Therefore, S&nsub;P, ' +
+     '</p><p> ' +
+       'which is the sixth syllogism. ' +
+       'Thus the second and sixth syllogisms are mathematically equivalent. ' +
+     '</p><p> ' +
+       'Consider the third syllogism, ' +
+       '<span class="math">P&sub;M.   S&nsub;M. Therefore, S&nsub;P.</span> ' +
+       'If we apply the second identity above, the second premise becomes ' +
+       '<span class="math">M<sup>c</sup>&nsub;S<sup>c</sup>.</span> ' +
+       'Now let <span class="math">Q = M<sup>c</sup></span>, so that  ' +
+       '<span class="math">Q<sup>c</sup> = (M<sup>c</sup>)<sup>c</sup>) = M</span>. ' +
+       'Then the third syllogism becomes ' +
+     '</p><p class="math"> ' +
+       'P&sub;Q<sup>c</sup>. Q&nsub;S<sup>c</sup>.  Therefore, S&nsub;P. ' +
+     '</p><p> ' +
+       'Again, <span class="math">Q</span> is just a placeholder.  ' +
+       'We can change the letter to any other letter that does not appear in the syllogism, ' +
+       'and that will not affect the mathematics. ' +
+       'For instance, we can change it to <span class="math">M</span>, and the result  ' +
+       'is mathematically identical. ' +
+       'We find ' +
+     '</p><p class="math"> ' +
+       'P&sub;M<sup>c</sup>. M&nsub;S<sup>c</sup>.  Therefore, S&nsub;P. ' +
+       '</p><p> ' +
+       'But that is exactly the sixth syllogism.  Thus the second, third and sixth syllogisms ' +
+       'are mathematically equivalent. ' +
+     '</p><p> ' +
+       'Similarly, the seventh and eighth syllogism differ only in notation. ' +
+       'A change of variables that replaces <span class="math">P</span> by  ' +
+       '<span class="math">P<sup>c</sup></span> changes the seventh to the eighth, or back. ' +
+     '</p><p> ' +
+       'Finally, consider the third syllogism again: ' +
+     '</p><p class="math"> ' +
+       'P&sub;M.   S&nsub;M. Therefore, S&nsub;P. ' +
+     '</p><p> ' +
+       'Apply the second identity to the second premise and to the conclusion: ' +
+     '</p><p class="math"> ' +
+       'P&sub;M.   M<sup>c</sup>&nsub;S<sup>c</sup>. Therefore, P<sup>c</sup>&nsub;S<sup>c</sup>. ' +
+     '</p><p> ' +
+       'Substitute <span class="math">Q</span> in place of <span class="math">P</span> and ' +
+       '<span class="math">R</span> in place of <span class="math">S</span>, throughout the ' +
+       'argument: ' +
+     '</p><p class="math"> ' +
+       'Q&sub;M.   M<sup>c</sup>&nsub;R<sup>c</sup>. Therefore, Q<sup>c</sup>&nsub;R<sup>c</sup>. ' +
+     '</p><p> ' +
+       'The order of the premises does not matter (because <span class="math">A and B</span> ' +
+       'is logically equivalent to <span class="math">B and A</span>), so this is the same argument as ' +
+     '</p><p class="math"> ' +
+        'M<sup>c</sup>&nsub;R<sup>c</sup>.  Q&sub;M.   Therefore, Q<sup>c</sup>&nsub;R<sup>c</sup>. ' +
+     '</p><p> ' +
+       'Now substitute <span class="math">P</span> for <span class="math">R</span> and ' +
+       '<span class="math">S</span> for <span class="math">Q</span> throughout the argument: ' +
+     '</p><p class="math"> ' +
+       'M<sup>c</sup>&nsub;P<sup>c</sup>.  S&sub;M.   Therefore, S<sup>c</sup>&nsub;P<sup>c</sup>. ' +
+     '</p><p>' +
+       'But that is exactly the seventh syllogism! ' +
+       'So, all five syllogisms with existential import are mathematically identical, and all three without ' +
+       'existential import are mathematically identical. ' +
+       'There are really only two mathematically distinct categorical syllogisms.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    One of those two syllogisms has existential import, the other does not. 
+    That is, all valid categorical syllogisms with 
+    existential import (that have <em>some</em> or <em>not all</em> as the quantifier in the conclusion)
+    are really the same, and all valid categorical syllogisms without existential
+    import (that have <em>all</em> or <em>no</em> in the conclusion) are really the same.
+</p>
+</div>
+
+<div class="callout">
+<p><span class="calloutCaption">The Two Canonical Valid Categorical Syllogisms</span></p>
+
+<div class="indent">
+<p class="inline">
+   There are only two mathematically distinct valid categorical syllogisms.
+   The other valid categorical syllogisms can be converted to these&mdash;or derived from 
+   these&mdash;by applying identities from set theory
+   or changing the names of variables.
+   The first canonical syllogism does not have 
+   <a class="glossRef" href="gloss.htm#existential_import">existential import</a>; the second does.
+</p>
+</div>
+
+<ol>
+   <li>
+       <span class="math">M&sub;P.  S&sub;M.  Therefore, S&sub;P.</span> 
+       (<span class="example">All <span class="math">M</span> are <span class="math">P</span>. 
+        All <span class="math">S</span> are <span class="math">M</span>. 
+        Therefore, all <span class="math">S</span> are <span class="math">P</span>.</span>) 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'An example: ' +
+               'All birds are animals.  All ravens are birds.  Therefore, all ravens are animals.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script> 
+    Here is the corresponding Venn diagram:
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center blue left"><span class="math">P</span></div>
+   <div class="rect40x50_center_high yellow right"><span class="math">M</span>&nbsp;</div>
+   <div class="rect20x30_center green center"><p class="math"><span class="math">S</span></p></div>
+</div>
+   </li>
+   <li>
+       <span class="math">P&sub;M.  S&nsub;M. Therefore, S&nsub;P.</span>
+       (<span class="example">All <span class="math">P</span> are <span class="math">M</span>. 
+        Some <span class="math">S</span> are not <span class="math">M</span>.  
+        Therefore, some <span class="math">S</span> are not <span class="math">P</span>.</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'An example: ' +
+               'All ravens are birds. Some animals are not birds. Therefore, some animals are not ravens. ' +
+               'One could pick a different example to be canonical, such as ' +
+               '<p class="math">M&sub;P.  S&nsub;M<sup>c</sup>. Therefore, S&nsub;P<sup>c</sup>,</p> ' +
+               '<p>which looks more complicated as mathematics but is simpler in English:</p>' +
+               '<p class="center"><span class="example">All <span class="math">M</span> are ' +
+               '<span class="math">P</span>. ' +
+               'Some <span class="math">S</span> are <span class="math">M</span>. ' +
+               'Therefore, some <span class="math">S</span> are <span class="math">P</span>.</span></p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   Here is the corresponding Venn diagram:
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center yellow left"><span class="math">M</span></div>
+   <div class="rect40x50_right_high green left">
+           <span class="math">S</span>&nbsp;
+            <p align="right">&middot;<br /><span class="math">x</span></p>
+   </div>
+   <div class="rect40x30_left_high blue left"><span class="math">P</span></p></div>
+   <div class="rect28x50_right"></div>
+</div>
+   </li>
+</ol>
+</div>
+
+<p>
+    Any valid syllogism can be transformed into one of these two by renaming
+    the categories and using two
+    equivalences:  
+</p>
+
+<p class="example">
+         <span class="math">A&sub;B</span> if and only if 
+          <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span> 
+         (every <span class="math">A</span> is a <span class="math">B</span> if and only if every 
+         non-<span class="math">B</span> is a non-<span class="math">A</span>)
+</p>
+
+<p>
+    and
+</p>
+
+<p class="example">
+         <span class="math">A&nsub;B</span> if and only if 
+         <span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>
+         (some <span class="math">A</span> are non-<span class="math">B</span> 
+         if and only if some non-<span class="math">B</span> are <span class="math">A</span>).
+</p>
+
+<p>
+    The first of these is the only option for transforming premises that involve the quantifiers
+    <em>all</em> or <em>no</em>.
+    The second is the only option for transforming premises that involve the quantifiers
+    <em>some</em> or <em>not all</em>.
+    Thus, there are a limited number of possibilities to consider.
+</p>
+
+<p>
+     If the syllogism is valid and has no existential import, it can be transformed into
+     the first canonical syllogism.
+     If it is valid and has existential import, it can be transformed into the
+     second canonical syllogism.
+</p>
+
+<p>
+     These transformations amount to relabeling the Venn diagrams, simply changing the names of 
+     categories.
+     The argument remains valid&mdash;or invalid&mdash;as long as the labels are changed consistently.
+     For instance, suppose category <span class="math">A</span> is in the original argument.
+     We can change <span class="math">A</span> to <span class="math">Q</span> provided:
+</p>
+
+<ul>
+   <li> 
+        <span class="math">Q</span> does not currently appear in either premise or the conclusion, and
+   </li>
+   <li>
+        We change <span class="math">A</span> to <span class="math">Q</span> everywhere
+        <span class="math">A</span> appears in the argument: in the premises and in the conclusion.
+        (We must also change <span class="math">A<sup>c</sup></span>
+        to <span class="math">Q<sup>c</sup></span> everywhere <span class="math">A<sup>c</sup></span> 
+        appears.)
+   </li>
+</ul>
+
+<p>
+    We could instead change <span class="math">A</span> to <span class="math">Q<sup>c</sup></span>
+    as long as <span class="math">Q</span> does not appear in the argument and we make the 
+    change everywhere, including changing <span class="math">A<sup>c</sup></span>
+    to <span class="math">Q</span> throughout.
+</p>
+   
+<p>
+    Let's do examples of transforming an argument with no existential import and an argument with existential
+    import.
+</p>
+
+<!-- ================================= Start Example =================================== -->
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Converting a categorical syllogism with no existential import into canonical set form.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Consider the argument:
+</p>
+
+<p class="example">
+    All <span class="math">A</span> are <span class="math">B</span>. 
+    No <span class="math">B</span> are <span class="math">C</span>. 
+    Therefore, no <span class="math">A</span> are <span class="math">C</span>.
+</p>
+
+<p>
+    This has no existential import, so&mdash;if it is valid&mdash;we should be able to show 
+    that it is equivalent to the
+    first of the two canonical syllogisms.
+</p>
+
+<p>
+    The first problem we face is that this argument has a premise and a conclusion of the form 
+    <span class="example">no <span class="math">Q</span> are <span class="math">R</span></span>,
+    while every statement in the canonical syllogism is of the form
+    <span class="example">all <span class="math">Q</span> are <span class="math">R</span></span>.
+    How can we get the argument into that form?
+</p>
+
+<p>
+    The simplest way to separate the abstract content from the words used to express the content is
+    to use mathematical notation instead of words.    
+    Both <span class="example">no <span class="math">Q</span> are <span class="math">R</span></span>
+    and <span class="example">all <span class="math">Q</span> are <span class="math">R<sup>c</sup></span></span>
+    describe the same situation: <span class="math">Q&sub;R<sup>c</sup></math>.
+    (Moreover, that is the same condition as <span class="math">R&sub;Q<sup>c</sup></math>.)
+    In set notation we have:
+</p>
+
+<p class="example">
+    <span class="math">A&sub;B</span>. <span class="math">B&sub;C<sup>c</sup></span>. 
+    Therefore, <span class="math">A&sub;C<sup>c</sup></span>.
+</p>
+
+<p>
+    This is in exactly the same form as the first canonical syllogism if we reverse the
+    order of the premises:
+</p>
+
+<p class="example">
+    <span class="math">B&sub;C<sup>c</sup></span>. <span class="math">A&sub;B</span>. 
+    Therefore, <span class="math">A&sub;C<sup>c</sup></span>.
+</p>
+
+<p>
+    We just need to match the categories in this argument to the major, minor and middle terms in the
+    canonical syllogism:
+    let <span class="math">M = B</span>, <span class="math">P = C<sup>c</sup></span> and
+    <span class="math">S = A</span>.
+    With these changes of variables, the syllogism becomes
+</p>
+
+<p class="example">
+    <span class="math">M&sub;P</span>. 
+    <span class="math">S&sub;M</span>.  
+    Therefore, <span class="math">S&sub;P</span>.
+</p>
+
+<p>
+    This is indeed the first canonical syllogism, so the syllogism we are testing is valid.
+</p>
+
+<p>
+   Here is a Venn diagram for this syllogism:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center blue left"><span class="math">C<sup>c</sup></span></div>
+   <div class="rect40x50_center_high yellow right"><span class="math">B</span>&nbsp;</div>
+   <div class="rect20x30_center green center"><p class="math"><span class="math">A</span></p></div>
+</div>
+
+<p>
+   This is exactly the Venn diagram for the first canonical syllogism, relabeled
+   as described (<span class="math">S = A</span>, <span class="math">M = B</span> and 
+    <span class="math">P = C<sup>c</sup></span>).
+</p>
+
+</div>
+
+<!-- ================================= Start Example =================================== -->
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Converting a categorical syllogism with existential import into canonical set form.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+   Consider the categorical argument:
+</p>
+
+<p class="example">
+   All <span class="math">A</span> are <span class="math">B</span>.  
+   Some <span class="math">A</span> are <span class="math">C</span>.  
+   Therefore, some <span class="math">B</span> are <span class="math">C</span>.
+</p>
+
+<p>
+   This argument asserts that the set <span class="math">B&cap;C</span> has at least one element, so
+   it has existential import.
+   If it is valid, we should be able to transform it into the second canonical syllogism.
+</p>
+
+<p>
+    <span class="example">Some are</span> means the same thing as <span class="example">not all are not</span>.
+    For instance, the second premise,
+    <span class="example">some <span class="math">A</span> are <span class="math">C</span></span>
+    means the same thing as 
+    <span class="example">not all <span class="math">A</span> are <span class="math">C<sup>c</sup></span></span>;
+    i.e., <span class="math">A&nsub;C<sup>c</sup></span>.
+</p>
+
+<p>
+    As in the previous example, we can avoid some of the distraction of the variety of ways of expressing
+    the same underlying situation in English by using set notation instead of words. 
+    The syllogism we are testing is
+</p>
+
+<p class="example">
+   <span class="math">A&sub;B</span>.  
+   <span class="math">A&nsub;C<sup>c</sup></span>.  
+   Therefore, <span class="math">B&nsub;C<sup>c</sup></span>.
+</p> 
+
+<p>
+    Where are we trying to go?
+    If this syllogism is valid, we should be able to write it in the form of the second canonical syllogism:
+</p>
+
+<p class="example">
+     <span class="math">P&sub;M</span>.  <span class="math">S&nsub;M</span>. 
+     Therefore, <span class="math">S&nsub;P</span>.
+</p>
+
+<p>
+    We are almost there.
+    In the syllogism we are testing, the set that appears in both premises (and which must therefore
+    be the middle term), <span class="math">A</span>,
+    is on the left hand side of both premises.
+    In the second canonical syllogism, the set that appears in both premises, the middle term
+    <span class="math">M</span>, is on the right hand side of both premises.
+    And in the canonical syllogism, the major term is on the right of the conclusion, while in
+    the syllogism we are testing, the term that is not the middle term and occurs in the first premise is
+    on the left of the conclusion.
+    We need to reverse all three relationships if we are going to make them match the pattern of the
+    second canonical syllogism.
+</p>
+
+<p>
+    We can &quot;flop&quot; all three of the relationships in the syllogism we are testing by taking 
+    complements.
+    Remember the identities:
+</p>
+
+<ul>
+   <li> 
+       <span class="math">Q<sup>c</sup>&sub;R<sup>c</sup></span> if and only if 
+       <span class="math">R&sub;Q</span>, and
+   </li>
+   <li>
+      <span class="math">Q<sup>c</sup>&nsub;R<sup>c</sup></span> if and only if
+      <span class="math">R&nsub;Q</span>.
+   </li>
+</ul>
+
+<p>
+   The first identity can be applied to the first premise of the argument we are testing
+   (which has &sub;).
+   The second identity can be applied to the second premise and the conclusion (both of which have &nsub;).
+   That changes the argument to:
+</p>
+
+<p class="example">
+   <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>.  
+   <span class="math">C&nsub;A<sup>c</sup></span>.  
+   Therefore, <span class="math">C&nsub;B<sup>c</sup></span>.
+</p> 
+<p>
+    Now the correspondence between this and the second canonical syllogism is plain:
+    let <span class="math">P = B<sup>c</sup></span>,
+    <span class="math">M = A<sup>c</sup></span>,  and 
+    <span class="math">S = C</span>.
+    With these changes of variables, the syllogism becomes
+</p>
+
+<p class="example">
+     <span class="math">P&sub;M</span>.  <span class="math">S&nsub;M</span>. 
+     Therefore, <span class="math">S&nsub;P</span>.
+</p>
+
+<p>
+   And <em>that</em> is the second canonical categorical syllogism.
+   Therefore, the argument is a valid categorical syllogism.
+</p>
+       
+<p>
+   Here is a Venn diagram for this syllogism:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse"></div>
+   <div class="rect60x70_center yellow left"><span class="math">A<sup>c</sup></span></div>
+   <div class="rect40x50_right_high green left">
+           <span class="math">C</span>&nbsp;
+            <p align="right">&middot;<br /><span class="math">x</span></p>
+   </div>
+   <div class="rect40x30_left_high blue left"><span class="math">B<sup>c</sup></span></p></div>
+   <div class="rect28x50_right"></div>
+</div>
+
+<p>
+   As you can see, this is just a relabeling of the Venn diagram for the second canonical syllogism,
+   as just described.
+</p>
+</div>
+
+
+<h3><a id="translating"></a>
+    Testing the validity of a syllogism directly
+</h3>
+
+<div class="indent">
+<p class="inline">
+     We can always test whether a syllogism is valid by putting it in standard form and checking whether it
+     is one of the 15 valid syllogisms.
+     But that is a fairly mindless
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'This class is about thinking, not about memorization.  Although having a memory helps, ' +
+               'I seem to recall.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+     undertaking that requires memorizing 15 special cases.
+     And we can test whether an argument is a valid syllogism by
+     seeing whether we can transform it into one of the two canonical valid syllogisms by changing
+     variable names and using set theory identities,
+     or show that its Venn diagram is just a consistent relabeling of the Venn diagram of one of the
+     two valid syllogisms.
+     This is more interesting, but still does not tell us 
+     <em>why</em> the syllogism is valid or invalid.
+     It is far more rewarding&mdash;and a better use of our brains&mdash;to learn the rules of set theory and
+     then to use logic to determine directly whether a syllogism is valid&mdash;to prove that it is 
+     valid or to find a counterexample.
+</p>
+</div>
+
+
+<p>
+     The first step is to express the syllogism using set notation.
+     For instance, if a premise or conclusion is of the form 
+     <span class="example">every <span class="math">A</span> is a <span class="math">B</span></span>,
+     <span class="example">all <span class="math">A</span> are <span class="math">B</span></span>,
+     or <span class="example">no <span class="math">A</span> are not <span class="math">B</span></span>,
+     we would write that as <span class="math">A&sub;B</span>, or as 
+     <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>.
+</p>
+
+<p>
+     If a premise or conclusion is of the form
+     <span class="example">no <span class="math">A</span> is a <span class="math">B</span></span>,
+     <span class="example">no <span class="math">A</span> are <span class="math">B</span></span>, or
+     <span class="example">every <span class="math">A</span> is not a <span class="math">B</span></span>,
+     we would write that as <span class="math">A&sub;B<sup>c</sup></span> or as 
+     <span class="math">B&sub;A<sup>c</sup></span>.
+</p>
+
+<p>
+     If a premise or conclusion is of the form
+     <span class="example">some <span class="math">A</span> is a <span class="math">B</span></span> or
+     <span class="example">some <span class="math">A</span> are <span class="math">B</span></span>,
+     we would write that as <span class="math">A&nsub;B<sup>c</sup></span> or as
+     <span class="math">B&nsub;A<sup>c</sup></span>.
+</p>
+
+<p>
+     To test whether the syllogism is valid, we see whether we can get from the two premises to the conclusion
+     using only rules of set theory, such as:
+</p>
+
+<ul>
+    <li>
+        <span class="math">A&sub;B</span> if and only if 
+        <span class="math">B<sup>c</sup>&sub;A<sup>c</sup></span>.  
+        (Complements reverse the subset relationship.)
+    </li>
+    <li>
+        <span class="math">A&nsub;B</span> if and only if 
+        <span class="math">B<sup>c</sup>&nsub;A<sup>c</sup></span>.  
+        (Complements reverse the non-subset relationship.)
+    </li>
+    <li>
+        If <span class="math">A&sub;B</span> and <span class="math">B&sub;C</span>, then 
+         <span class="math">A&sub;C</span>. 
+        (The subset relationship is <em>transitive</em>.)
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var fStr = '<span class="math">A&sub;B</span> means that if <span class="math">x&isin;A</span> ' +
+              'then <span class="math">x&isin;B</span>.  But <span class="math">B&sub;C</span> means ' +
+              'that if <span class="math">x&isin;B</span> then <span class="math">x&isin;C</span>. ' +
+              'So if <span class="math">x&isin;A</span> then <span class="math">x&isin;C</span>: ' +
+              '<span class="math">A&sub;B</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>    
+    </li>
+    <li>
+        If <span class="math">A&nsub;B</span> and <span class="math">C&sub;B</span>, then 
+         <span class="math">A&nsub;C</span>. (If something is not in a given set, it is not 
+         in any subset of that set.)
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var fStr = 'If there is some ' +
+              '<span class="math">x&isin;A</span> that is not in <span class="math">B</span>, then ' +
+              'that <span class="math">x</span> cannot be in a subset <span class="math">C</span> ' +
+              'of <span class="math">B</span> either, since every element of <span class="math">C</span> ' +
+              'is an element of <span class="math">B</span>.  Hence, <span class="math">A&nsub;C</span>. ' +
+              'By definition, a subset does not contain anything that is not in the set of which it is a subset.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>    
+     </li>
+</ul>
+
+<p>
+    Perhaps it is not surprising that the third rule is the first canonical syllogism, and the
+    fourth is equivalent to the second canonical syllogism!
+    The two canonical syllogisms are simply facts about the subset relationship.
+</p>
+
+<p>
+     Here are a few examples of testing the validity of natural language syllogisms by
+     translating them into set theory.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Testing a natural language syllogism.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+   Consider the following three-line quantified categorical argument:
+</p>
+
+<p class="example">
+   All ravens are black.  No animals that live in Antarctica are black.  
+   Therefore, no ravens live in Antarctica.
+</p>
+
+<p>
+   The three categories in this argument are ravens, black animals, and animals that live in Antarctica.
+   Let's call them <span class="math">R</span>, <span class="math">B</span> and 
+   <span class="math">A</span>, respectively.
+   Then the argument is:
+<p>
+
+<p class="example">
+   All <span class="math">R</span> are <span class="math">B</span>.
+   No <span class="math">A</span> are <span class="math">B</span>.
+   Therefore, no <span class="math">R</span> are <span class="math">A</span>.
+</p>
+
+<p>
+   In set notation, the premises are:
+</p>
+
+<p class="math">
+   R&sub;B and B&sub;A<sup>c</sup>.
+</p>
+
+<p>
+   The conclusion is <span class="math">R&sub;A<sup>c</sup></span>.
+</p>
+
+<p>
+   But the subset relationship is transitive, so
+   if <span class="math">R&sub;B</span> and <span class="math">B&sub;A<sup>c</sup></span> then
+   <span class="math">R&sub;A<sup>c</sup></span>; therefore, this argument is valid.
+</p>   
+</div>
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Testing another natural language syllogism.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+   Consider the following three-line quantified categorical argument:
+</p>
+
+<p class="example">
+   Some people run 100-mile mountain races through snow and nasty weather.
+   Anybody who would run a 100-mile mountain race through snow and nasty weather is crazy.
+   Therefore, some people are crazy.
+</p>
+
+<p>
+   The three categories in this argument are people, those who run 100-mile races in the mountains in bad
+   weather, and crazy people.
+   Let's call them <span class="math">P</span>, <span class="math">R</span> and <span class="math">C</span>, 
+   respectively.
+   Then the argument is:
+<p>
+
+<p class="example">
+   Some <span class="math">P</span> are <span class="math">R</span>.
+   All <span class="math">R</span> are <span class="math">C</span>.
+   Therefore, some <span class="math">P</span> are <span class="math">C</span>.
+</p>
+
+<p>
+   In set notation, the premises are:
+</p>
+
+<p class="math">
+   P&nsub;R<sup>c</sup> and R&sub;C.
+</p>
+
+<p>
+   The conclusion is <span class="math">P&nsub;C<sup>c</sup></span>.
+</p>
+
+<p>
+   Complements reverse the subset relationship, so <span class="math">R&sub;C</span> if and only if 
+   <span class="math">C<sup>c</sup>&sub;R<sup>c</sup></span>.
+   Thus, the second premise is equivalent to <span class="math">C<sup>c</sup>&sub;R<sup>c</sup></span>.
+   The first premise says there is some <span class="math">x&isin;P</span> that is not in
+   <span class="math">R<sup>c</sup></span>.  
+   But subsets are not bigger than the sets that contain them, so 
+   that <span class="math">x</span> cannot be in any subset of <span class="math">R<sup>c</sup></span>.
+   The second premise tells us that <span class="math">C<sup>c</sup>&sub;R<sup>c</sup></span>.
+   Hence <span class="math">x</span> is not in <span class="math">C<sup>c</sup></span>.
+   So, <span class="math">P&nsub;C<sup>c</sup></span>.
+   The syllogism is valid.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Testing a third natural language syllogism.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+   Consider the following syllogism:
+</p>
+
+<p class="example">
+   All balls are approximately spherical.
+   All planets are approximately spherical.
+   Therefore, all balls are planets.
+</p>
+
+<p>
+   The three categories in this argument are balls, approximately spherical objects, and planets.
+   Let's call them <span class="math">B</span>, <span class="math">S</span> and <span class="math">P</span>, 
+   respectively.
+   Then the argument is:
+<p>
+
+<p class="example">
+   All <span class="math">B</span> are <span class="math">S</span>.
+   All <span class="math">P</span> are <span class="math">S</span>.
+   Therefore, all <span class="math">B</span> are <span class="math">P</span>.
+</p>
+
+<p>
+   In set notation, the premises are:
+</p>
+
+<p class="math">
+   B&sub;S and P&sub;S.
+</p>
+
+<p>
+   The conclusion is <span class="math">B&sub;P</span>.
+</p>
+
+<p>
+   There is no logical way to get from the premises to the conclusion.
+   How can we see that mathematically?
+   Here is a Venn diagram that is consistent with the premises but for which the
+   conclusion is false:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse left"></div>
+   <div class="rect85x80_center blue right"><span class="math">S</span></div>
+   <div class="rect15x30_left yellow left" ><span class="math">B</span>&nbsp;</div>
+   <div class="rect40x50_center_high green left" ><span class="math">P</span>&nbsp;</div>
+</div>
+
+<p>
+   This is a counterexample to the argument.
+   The syllogism is not valid.
+</p>
+
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+   var qStr = 'Testing a fourth natural language syllogism.';
+   writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+   Consider the following syllogism:
+</p>
+
+<p class="example">
+   Some statisticians are funny.
+   No comedians are statisticians.
+   Therefore, some comedians are not funny.
+</p>
+
+<p>
+   The three categories in this argument are statisticians, funny people, and comedians.
+   Let's call them <span class="math">S</span>, <span class="math">F</span> and <span class="math">C</span>, 
+   respectively.
+   Then the argument is:
+<p>
+
+<p class="example">
+   Some <span class="math">S</span> are <span class="math">F</span>.
+   No <span class="math">C</span> are <span class="math">S</span>.
+   Therefore, some <span class="math">C</span> are <span class="math">F<sup>c</sup></span>.
+</p>
+
+<p>
+   In set notation, the premises are:
+</p>
+
+<p class="math">
+   S&nsub;F<sup>c</sup>.  C&sub;S<sup>c</sup>.
+</p>
+
+<p>
+   The conclusion is <span class="math">C&nsub;F</span>.
+</p>
+
+<p>
+   This Venn diagram shows a situation that is consistent with the premises but for which the
+   conclusion is false:
+</p>
+
+<div class="venn">
+   <div class="vennUniverse left"></div>
+   <div class="rect60x70_center blue left"><span class="math">F</span></div>
+   <div class="rect20x30_center_left yellow left" ><span class="math">C</span>&nbsp;</div>
+   <div class="rect40x50_right_high green left" ><span class="math">S</span>&nbsp;
+      <p class="left"><span class="math">&middot;x</span></p></div>
+   <div class="rect28x50_right"></div>
+</div>
+
+<p>
+   This is a counterexample to the argument.
+   So, the syllogism is not valid.
+</p>
+
+<p>
+   By saying that there are funny statisticians, the premises guarantee that there are statisticians 
+   and that there are funny people.
+   But the premises can be true even if there are no comedians; therefore, the premises cannot
+   possibly guarantee that there are un-funny comedians.
+</p>
+
+</div>
+
+<p>
+    To test the validity of a categorical argument (whether it is a syllogism or not), first try to think
+    of a counterexample.
+    Drawing pictures (Venn diagrams) can help enormously.
+    If you convince yourself that there can be no counterexample, ask yourself <em>why</em> there can
+    be no counterexample.
+    If your intuition is clear, it will lead you to a proof&mdash;a derivation of the conclusion from 
+    the premises, using the rules of set theory.
+</p>
+
+<p>
+    The following exercise checks your ability to test whether a categorical argument is valid.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var whichCats = listOfDistinctRandInts(3, 0, Alphabet.length-1);
+    var quints = [
+                  [0, 0, 0, 1, 1, 0],
+                  [0, 1, 1, 1, 0, 0],
+                  [0, 1, 1, 1, 1, 0],
+                  [0, 3, 3, 0, 1, 0],
+                  [0, 2, 2, 0, 0, 0],
+                  [0, 2, 2, 0, 1, 0],
+                  [2, 0, 2, 0, 1, 0],
+                  [2, 0, 2, 1, 1, 0],
+                  [2, 1, 3, 0, 0, 0],
+                  [2, 1, 3, 0, 1, 0],
+                  [2, 1, 3, 1, 0, 0],
+                  [2, 1, 3, 1, 1, 0],
+                  [1, 0, 1, 1, 0, 0],
+                  [1, 0, 1, 0, 0, 0],
+                  [3, 0, 3, 1, 0, 0],
+  //
+                  [0, 3, 3, 0, 0, 0],
+                  [0, 1, 1, 0, 0, 0],
+                  [0, 3, 1, 0, 0, 0],
+                  [1, 0, 3, 0, 0, 0],
+                  [1, 1, 1, 0, 0, 0],
+                  [1, 1, 3, 0, 0, 0],
+                  [1, 2, 0, 0, 0, 0],
+                  [1, 2, 1, 0, 0, 0],
+                  [1, 2, 0, 0, 0, 0],
+                  [1, 2, 3, 0, 0, 0],
+                  [0, 0, 0, 0, 0, 0],
+                  [0, 1, 1, 0, 1, 0],
+                  [0, 3, 3, 1, 0, 0],
+                  [0, 2, 2, 1, 0, 0],
+                  [0, 2, 2, 1, 1, 0],
+                  [2, 0, 2, 0, 0, 0],
+                  [2, 0, 1, 0, 0, 0],
+                  [2, 0, 1, 1, 0, 0],
+                  [2, 1, 1, 0, 0, 0],
+                  [2, 1, 1, 1, 0, 0],
+                  [2, 2, 0, 0, 0, 0],
+                  [2, 2, 2, 0, 0, 0],
+                  [2, 3, 1, 0, 0, 0],
+                  [2, 3, 1, 0, 1, 0],
+                  [2, 3, 3, 0, 0, 0],
+                  [2, 3, 3, 0, 1, 0],
+                  [3, 2, 1, 0, 0, 0],
+                  [3, 0, 3, 0, 1, 0],
+                  [3, 0, 3, 1, 1, 0]
+                 ];
+    var whichQuint = listOfDistinctRandInts(3, 0, quints.length-1);
+    function quantToSet(s1, s2, q) {
+         var a = '';
+         switch(q) {
+             case 0:
+                 a = s1 + '&sub;' + s2;
+                 break;
+             case 1:
+                 a = s1 + '&nsub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 2:
+                 a = s1 + '&sub;' + s2 + '<sup>c</sup>';
+                 break;
+             case 3:
+                 a = s1 + '&nsub;' + s2;
+                 break;
+          }
+          return(a);
+    }
+    var qStr = '<span class="qSpan">Are the following arguments valid or invalid?</span></p>';
+    document.writeln(qStr);
+    var p1 = (quints[whichQuint[0]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[0]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[0]][0]);
+    var p2 = (quints[whichQuint[0]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[0]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[0]][1]);
+    var concl = (quints[whichQuint[0]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[0]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[0]][2]);
+    var qStr = '<p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[0]< 15)? 'b':'a';
+    var opt = ['invalid','valid'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var p1 = (quints[whichQuint[1]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[1]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[1]][0]);
+    var p2 = (quints[whichQuint[1]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[1]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[1]][1]);
+    var concl = (quints[whichQuint[1]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[1]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[1]][2]);
+    var qStr = '</p><p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[1]< 15)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);    
+    var p1 = (quints[whichQuint[2]][3] == 0)?
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[1]], quints[whichQuint[2]][0])
+              :
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[0]], quints[whichQuint[2]][0]);
+    var p2 = (quints[whichQuint[1]][4] == 0)? 
+                 quantToSet(Alphabet[whichCats[1]], Alphabet[whichCats[2]], quints[whichQuint[2]][1])
+              :
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[1]], quints[whichQuint[2]][1]);
+    var concl = (quints[whichQuint[1]][5] == 0)? 
+                 quantToSet(Alphabet[whichCats[2]], Alphabet[whichCats[0]], quints[whichQuint[2]][2])
+              :
+                 quantToSet(Alphabet[whichCats[0]], Alphabet[whichCats[2]], quints[whichQuint[2]][2]);
+    var qStr = '</p><p><span class="qSpan"><span class="math">' + p1 + 
+               '</span>. <span class="math">' + p2 + '</span>. Therefore, <span class="math">' + concl + 
+               '</span>.</span> ';  
+    document.writeln(qStr);  
+    var aVal = (whichQuint[2]< 15)? 'b':'a';
+    writeSelectExercise(false, qCtr++, opt, aVal);    
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+<p>
+    Categories can be viewed as sets.
+    To say that <span class="math">x</span> is in category <span class="math">A</span> is equivalent to
+    saying <span class="math">x</span> is in the set <span class="math">A</span>, 
+    i.e., <span class="math">x &isin; A</span>.
+    If <span class="math">x</span> is in the category <span class="math">A</span>, we say
+    <span class="math">x</span> is in <span class="math">A</span>, 
+    <span class="math">x</span> is an <span class="math">A</span>, or, least formally,
+    <span class="math">x</span> is <span class="math">A</span>.
+</p>
+
+<p>
+    The basic quantified relationships between two categories are 
+    <em>all are</em> (every one is, none are not), <em>none is</em> (all are not), 
+    <em>some are</em> (at least one is, not all are not)
+    and <em>not all are</em> (some are not).
+    For instance, if <span class="math">A</span> consists of people who are over 100 years old and
+    <span class="math">B</span> consists of women, <span class="example">not all <span class="math">A</span>
+    are <span class="math">B</span></span> means not all people who are over 100 years old are women.
+</p>
+
+<p>
+    These four relationships also can be expressed as set relations.
+    <span class="example">All <span class="math">A</span> are <span class="math">B</span></span>
+    is equivalent to  <span class="math">A&sub;B</span>.
+    <span class="example">No <span class="math">A</span> is <span class="math">B</span></span>
+    is equivalent to  <span class="math">A&sub;B<sup>c</sup></span>.
+    <span class="example">Some <span class="math">A</span> are <span class="math">B</span></span>
+    is equivalent to  <span class="math">A&nsub;B<sup>c</sup></span>.
+    <span class="example">Not all <span class="math">A</span> are <span class="math">B</span></span>
+    is equivalent to  <span class="math">A&nsub;B</span>.
+</p>
+
+<p>
+    The empty set is a subset of every set, so <span class="math">A</span> can be a subset of 
+    <span class="math">B</span> or of <span class="math">B<sup>c</sup></span> even if <span class="math">A</span>
+    has no elements.
+    That is, <span class="math">A&sub;B</span> does not imply that there exists anything in
+    <span class="math">A</span>.
+    In contrast, for <span class="math">A</span> <em>not</em> to be a subset of <span class="math">B</span>
+    or of <span class="math">B<sup>c</sup></span>, <span class="math">A</span> must have at least one element.
+    Thus the relationships <em>some are</em> and <em>not all are</em> have 
+    <span class="termOfArt">existential import</span>&mdash;they imply that the first set has at least
+    one elements&mdash;while 
+    the relationships <em>all are</em> and <em>none is</em> do not have existential import.
+    The <span class="termOfArt">existential fallacy</span> consists of assuming, in the course of an argument,
+    that a set has elements when the premises do not guarantee that it has any elements.
+</p>
+
+<p>
+   <span class="termOfArt">Categorical syllogisms</span> are special three-line arguments about categories,
+   consisting of two premises and a conclusion.
+   They involve three categories and three quantified relationships among the three categories.
+   The premises and conclusion are of the form [quantifier] [category&nbsp;1] are [category&nbsp;2]. 
+   The category that plays the role [category&nbsp;2] in the conclusion is called the 
+   <span class="termOfArt">major term</span>.
+   The category that plays the role [category&nbsp;1] in the conclusion is called the 
+   <span class="termOfArt">minor term</span>.
+   One of the premises contains the major term and the third category, called the 
+   <span class="termOfArt">middle term</span>.
+   That premise is called the <span class="termOfArt">major premise</span>.
+   The other premise contains the minor term and the middle term; that premise is called the 
+   <span class="termOfArt">minor premise</span>.
+</p>
+
+<p>
+   When a categorical syllogism is in <span class="termOfArt">standard form</span>, the first premise is
+   the major premise and the second premise is the minor premise.
+   In standard form there are 256 possible categorical syllogisms, of which but 15 are valid.
+   The rest are fallacious: one can construct counterexamples to the arguments.
+   There is less to syllogisms than meets the eye: all valid syllogisms are mathematically
+   equivalent to one of two canonical syllogisms.
+   One of the canonical syllogisms has existential import; the other does not.
+</p>
+
+<p>
+   The validity of categorical arguments&mdash;including categorical syllogisms&mdash;can be tested by 
+   converting the argument into set notation and trying
+   to derive the conclusion from the premises using the rules of set theory.
+   If the argument is not valid, it is possible to draw a Venn diagram that satisfies the premises of the
+   argument but for which the conclusion of the argument is false.
+</p>
+
+
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>categorical syllogism</li>
+    <li>complement</li>
+    <li>domain of discourse</li>
+    <li>existential fallacy</li>
+    <li>existential import</li>
+    <li>existential quantifier (<span class="math">&exist;</span>)</li>
+    <li>element, member (<span class="math">&isin;</span>)</li>
+    <li>intersection (<span class="math">&cap;</span>)</li>
+    <li>major premise</li>
+    <li>major term</li>
+    <li>membership function</li>
+    <li>middle term</li>
+    <li>minor premise</li>
+    <li>minor term</li>
+    <li>mutually exclusive, disjoint</li>
+    <li>not a subset (<span class="math">&nsub;</span>)</li>
+    <li>predicate function</li>
+    <li>set</li>
+    <li>some (<span class="math">&exist;</span>)</li>
+    <li>subset (<span class="math">&sub;</span>)</li>
+    <li>union, (<span class="math">&cup;</span>)</li>
+    <li>universal quantifier (<span class="math">&forall;</span>)</li>
+    <li>universal set <span class="math"><strong>S</strong></span></li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

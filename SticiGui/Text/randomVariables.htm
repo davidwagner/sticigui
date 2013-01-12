@@ -1,0 +1,2201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "27 July 2011 15:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "randomVariables";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="post">
+<h1>
+    Random Variables and Discrete Distributions
+</h1>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHallTest') + ', ');
+// -->
+</script>    
+    introduced the sample sum of random draws with replacement from a box of tickets,
+    each of which is labeled &quot;0&quot; or &quot;1.&quot;
+    The sample sum is a random variable, and its probability distribution,
+    the binomial distribution, is a discrete probability distribution.
+    This chapter introduces several other random variables and
+    probability distributions that arise from drawing at random from
+    a box of tickets numbered &quot;0&quot; or &quot;1:&quot; the geometric distribution,
+    the negative binomial distribution, and the hypergeometric distribution.
+</p>
+
+<h2><a id="random_variable"></a>
+    Random Variables
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=718&end=1123" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    A <em>random variable</em> is an assignment of numbers to <a class="glossRef" href="gloss.htm#outcome">outcomes</a>
+    of a <a class="glossRef" href="gloss.htm#random_experiment">random experiment</a>.
+    For example, consider the experiment of drawing tickets at random
+    <a class="glossRef" href="gloss.htm#independent">independently</a> from a box of numbered tickets.
+    The possible outcomes of <em>n</em> such draws are <a class="glossRef" href="gloss.htm#sequence">sequences</a>
+    of <em>n</em> tickets in a particular order.
+    The <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> of the numbers on the tickets drawn,
+    which was introduced in the previous chapter, is a random variable.
+    Depending on the sequence of tickets drawn,
+    the sample sum takes different values.
+    To any particular sequence of <em>n</em> tickets, the sample sum assigns the sum of their
+    labels.
+    The sample sum does not distinguish between sequences of tickets in which other
+    tickets with the same labels were drawn, nor in which the tickets were
+    drawn in a different order: The sample sum depends only on the <a class="glossRef" href="gloss.htm#set">set</a>
+    of labels on the tickets drawn.
+</p>
+
+<p>
+    In this book, upper-case Roman letters are used to denote random variables; for example,
+    X might stand for the sample sum of 5 independent random draws with replacement
+    from a box containing one ticket labeled &quot;1&quot; and one ticket labeled &quot;0.&quot;
+    In that case, the random variable X would have a <a class="glossRef" href="gloss.htm#binomial">binomial
+    distribution</a> with parameters <em>n</em> = 5 and <em>p</em> = 50%.
+    A random variable is not a variable in the same sense the word is used in
+    calculus or algebra: It is something that takes a random value, depending on the
+    outcome of a random experiment.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#prob_distribution">probability distribution</a>
+    of a (discrete) random variable gives the chances that
+    the random variable takes each of its possible values.
+    That is, for every value <em>x</em> that the random variable X can take,
+    the probability distribution of X gives P(X=<em>x</em>).
+    The probability distribution can be written either as a formula
+    (a function of <em>x</em>), or a table.
+    For example, in the case just described, we might write the
+    probability distribution of X as
+</p>
+
+<p class="math">
+    P(X=<em>x</em>) = <sub>5</sub>C<sub><em>x</em></sub> &times;
+    (1/2)<sup>5</sup>, <em>x</em>=0, 1, 2, 3, 4, 5,
+</p>
+
+<p>
+    or as the following table:
+</p>
+
+<div align="center"><center>
+    <table class="dataTable">
+        <caption>Probability distribution of X</caption>
+        <tr>
+            <th id="col0"> <em>x</em> </th>
+            <th id="col1"> P(X = <em>x</em>)</th>
+        </tr>
+        <tr>
+            <td headers="col0"> 0 </td>
+            <td headers="col1">1/32 </td>
+        </tr>
+        <tr>
+             <td headers="col0"> 1 </td>
+             <td headers="col1">5/32 </td>
+        </tr>
+        <tr>
+             <td headers="col0">2 </td>
+             <td headers="col1">10/32 </td>
+        </tr>
+        <tr>
+             <td headers="col0">3 </td>
+             <td headers="col1">10/32 </td>
+        </tr>
+        <tr>
+             <td headers="col0">4 </td>
+             <td headers="col1">5/32 </td>
+        </tr>
+        <tr>
+             <td headers="col0">5 </td>
+             <td headers="col1">1/32 </td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    We proceed to investigate some discrete
+    probability distributions that arise frequently in practical problems.
+</p>
+
+<h2><a id="0_1_boxes"></a>Sampling from 0-1 Boxes</h2>
+
+<p>
+    Recall that a box of numbered tickets is a <em>0-1 box</em>
+    if each ticket in the box is numbered either &quot;0&quot; or &quot;1.&quot;
+    Suppose that a 0-1 box contains <em>N</em> tickets in all, of which <em>G</em> are labeled &quot;1&quot;
+    and the remaining <em>N</em>&minus;<em>G</em> are labeled &quot;0,&quot; so that the fraction of tickets
+    in the box labeled &quot;1&quot; is <em>p</em>=<em>G</em>/<em>N</em>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHallTest') + ', ');
+// -->
+</script>
+    shows
+    that the sample sum of <em>n</em> random draws with replacement from that box has a
+    binomial distribution with parameters <em>n</em> and <em>p</em>.
+    Many other interesting random variables arise in sampling from 0-1 boxes.
+    This section presents three: the number of random draws with replacement until
+    the first time a ticket labeled &quot;1&quot; is drawn (which has a <em>geometric</em> distribution),
+    the number of random draws with replacement until the <em>r</em>th time a ticket
+    labeled &quot;1&quot; is drawn (which has a <em>negative binomial</em> distribution),
+    and the sample sum of <em>n</em> random draws without replacement
+    (which has an <em>hypergeometric</em> distribution).
+
+<h3><a id="geometric_distribution"></a>
+    The Geometric Distribution
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=1123&end=1790" frameborder="0" allowfullscreen></iframe>
+</p>
+   
+<p>
+    The number of random draws with replacement from a 0-1 box until the first time a ticket
+    labeled &quot;1&quot; is drawn is a random variable with a geometric distribution with parameter
+    <em>p</em>=<em>G</em>/<em>N</em>, where <em>G</em> 
+    is the number of tickets labeled &quot;1&quot; in the box and <em>N</em> is the
+    total number of tickets in the box.
+    This subsection finds the geometric distribution.
+</p>
+
+<p>
+    Consider the number of times one must roll a fair die up to and including the
+    first time the die lands with one spot on top.
+    A box model for this experiment would be to draw tickets at random with
+    replacement from a 0-1 box that contains <em>N</em>=6 tickets of which <em>G</em>=1 are
+    labeled &quot;1&quot; and <em>N</em>&minus;<em>G</em>=5 are labeled &quot;0,&quot; until the first time the
+    ticket labeled &quot;1&quot; is drawn.
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box for a fair die to land showing 1 spot
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+   </div>
+</div>
+
+<p>
+    Let X denote the number of draws until the first time a ticket labeled &quot;1&quot; is drawn,
+    including the draw that yields the ticket labeled &quot;1.&quot;
+    The random variable X does not have a binomial distribution:
+    The number of draws is not fixed in advance, and the quantity of
+    interest is the number of draws, not the sample sum of the numbers on the tickets drawn.
+</p>
+
+<p>
+    Let us calculate the probability distribution of X.
+    It is impossible for X to be less than one: It takes at least one draw to get the
+    ticket labeled &quot;1.&quot;
+    The chance that it takes exactly one draw to get the ticket labeled &quot;1&quot;&mdash;the chance
+    that X=1&mdash;is 1/6.
+    What is the chance that X=2?
+    For X=2 to occur, the first draw must give a ticket labeled &quot;0&quot; and the
+    second draw must give the ticket labeled &quot;1.&quot;
+    Because the draws are independent, the chance that these two things occur
+    (draw &quot;0&quot; the first time and &quot;1&quot; the second time) equals the product
+    of their individual unconditional chances.
+    The chance of drawing &quot;0&quot; the first time is 5/6, and the chance of
+    drawing &quot;1&quot; the second time is 1/6, so the chance that it takes two
+    draws is 5/6&times;1/6 = 5/36.
+</p>
+
+<p>
+    What is the chance that X=3?
+    The event X=3 occurs if the first draw gives &quot;0,&quot; the second draw
+    gives &quot;0,&quot; and the
+    third draw gives &quot;1.&quot;
+    Because the draws are independent, the event X=3 has chance 5/6&times;5/6 &times;1/6=25/216.
+</p>
+
+<p>
+    For X to equal <em>x</em>, we first need to have <em>x</em>&minus;1 draws that
+    give a ticket labeled &quot;0&quot; (these each have probability 5/6), then a draw that
+    gives the ticket labeled &quot;1&quot; (which has probability 1/6).
+    Because the draws are <a class="glossRef" href="gloss.htm#independent">independent</a>,
+    we can multiply the chances of
+    these outcomes to determine the chance that they all happen together
+    (the chance of their <a class="glossRef" href="gloss.htm#intersection">intersection</a>).
+    Thus the general formula is
+</p>
+
+<p class="math">
+    P(X = <em>x</em>) = (5/6)<sup><em>x</em>&minus;1</sup> &times; (1/6),
+    <em>x</em> = 1, 2, 3, &hellip; .
+</p>
+
+
+<p>
+    Let X be the number of trials to the first success in
+    independent trials with the same probability <em>p</em> of success.
+    Then X behaves like the number of times one needs to draw
+    tickets at random with replacement from a 0-1 box that contains
+    a proportion <em>p</em>=<em>G</em>/<em>N</em> of tickets labeled &quot;1.&quot;
+    X is a random variable with a <em>geometric distribution with parameter</em> <em>p</em>, and
+</p>
+
+<p class="math">
+    P(X = <em>x</em>) = (1 &minus; <em>p</em>)<sup><em>x</em>&minus;1</sup> &times; <em>p</em>,
+    for <em>x</em> = 1, 2, 3,  &hellip;  .
+</p>
+
+<p>
+    The die-rolling example is the special case <em>p</em> = 1/6.
+    Note that a random variable that has the geometric distribution has an infinite
+    (but countable) number of possible values: all the positive integers.
+    The sum of the chances that a random variable with the geometric distribution
+    takes the values 0, 1, 2, 3,  &hellip; , is 100%:
+</p>
+
+<div class="indent">
+<p class="inlineMath">
+    P(X=1) + P(X=2) + P(X=3) + &nbsp;&hellip; = 100%.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'You might remember the geometric series from high school algebra: ' +
+           '</p><p class="math"> 1 + <em>q</em> + <em>q</em><sup>2</sup> + ' +
+           '<em>q</em><sup>3</sup> + &hellip; . </p><p>If <em>|q</em>| &lt; 1, the ' +
+           'geometric series sums to 1/(1&minus;<em>q</em>).</p> <p>Substituting ' +
+           '<em>q</em> = 1&minus;<em>p</em>, we can confirm that the sum of the chances ' +
+           'of all possible values of a Geometric random variable is 100%:</p>' +
+           '<p class="math"><em>p </em>+ (1 &minus; <em>p</em>)&times;<em>p</em> + ' +
+           '(1 &minus; <em>p</em>)<sup>2</sup>&times;<em>p</em>+ (1 &minus; ' +
+           '<em>p</em>)<sup>3</sup>&times;<em>p</em> + &hellip; = <em>p</em> ' +
+           '&times;<big>[</big>1 + (1 &minus; <em>p</em>) + (1 &minus; <em>p</em>)<sup>2</sup> ' +
+           '+ (1 &minus; <em>p</em>)<sup>3</sup> + &nbsp;&hellip; <big>]</big></p><p class="math">' +
+           '= <em>p</em>/[1&minus;(1&minus;<em>p</em>)] = <em>p</em>/<em>p</em> = 100%.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The essential requirement for a random variable to have the geometric distribution
+    is that it counts the number of trials to the first success
+    in independent trials with the same probability <em>p</em> of success
+    in each trial.
+    If we identify &quot;success&quot; with drawing a ticket labeled &quot;1&quot;
+    from a 0-1 box, and identify &quot;failure&quot; with drawing a ticket
+    labeled &quot;0&quot; from the box, each draw can be thought of as a trial
+    that results in success or failure.
+    If we draw at random independently with replacement, the trials are
+    independent and have the same probability <em>p</em> of success (the proportion
+    <em>p</em>=<em>G</em>/<em>N</em> of tickets labeled &quot;1&quot; does not
+    change from draw to draw).
+    If a random variable is not equivalent to the number of trials until the first
+    success in independent trials with the same probability of success, the random
+    variable does not have a geometric distribution.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The Geometric Distribution.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    Suppose I toss a fair coin over and over until it lands heads.
+    What is the chance I toss the coin fewer than 5 times?
+</p>
+
+<p>
+    <strong>Solution</strong>. A box model for the experiment is to draw at random with
+    replacement from a 0-1 box containing one ticket labeled &quot;1&quot; and one ticket
+    labeled &quot;0&quot; until the first time the ticket labeled &quot;1&quot; is drawn.
+    We seek the probability of drawing the ticket labeled &quot;1&quot; for
+    the first time on the first, second, third, or fourth draw.
+    In each draw, the chance of getting the ticket labeled &quot;1&quot; and
+    the chance of getting the ticket labeled &quot;0&quot; are both 50%.
+    The chance &quot;1&quot; is drawn on the first draw is 50%.
+    The chance &quot;1&quot; is drawn for the first time on the second draw is 1/2 &times;1/2 = 25%.
+    The chance &quot;1&quot; is drawn for the first time on the third draw is
+    1/2 &times;1/2 &times;1/2 = 12.5%.
+    The chance &quot;1&quot; is drawn for the first time on the fourth draw
+    is 1/2 &times;1/2 &times;1/2 &times;1/2 = 6.25%.
+    These events are mutually exclusive, so the chance &quot;1&quot; is drawn for the
+    first time before the fifth draw (the chance of the union of the events)
+    is the sum of their chances:
+</p>
+
+<p class="math">
+    50% + 25% + 12.5% + 6.25% = 93.75%.
+</p>
+
+<p>
+    That also must be the chance that I have to toss a fair coin fewer than five times
+    before it lands heads.
+    We could also find the probability more easily using the Complement Rule:
+    The chance that it takes fewer than five tosses is 100% minus the
+    chance that it takes at least five tosses.
+    The chance that it takes at least five tosses is the chance that the first four
+    tosses all yield tails, which is 1/2&times;1/2&times;1/2 &times;1/2  = 1/16 = 6.25%,
+    because the tosses are independent.
+    The chance that the first head occurs before the fifth toss is thus 100%&minus;6.25%=93.75%.
+</p>
+</div>
+
+<p>
+    The following exercise checks your ability to compute probabilities using
+    the geometric distribution.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nThrows = listOfDistinctRandInts(2,3,7);
+    nThrows.sort(numberLessThan);
+    var pBull = (listOfRandInts(1,1,9))[0];
+    var pBull = roundToDig(pBull/10,1);
+    var theProb = geoCdf(pBull,nThrows[1]);
+    var theOtherProb = geoTail(pBull,nThrows[0]);
+    var ansStr = 'The number of throws to the first bullseye has a geometric distribution ' +
+         'because the throws are independent, and every throw has the same ' +
+         'probability of hitting the bullseye.  Thus the chance that it takes ' +
+         '<em>k</em> throws to hit the bullseye for the first time is (' +
+         (roundToDig(1-pBull,1)).toString() + ')<sup><em>k</em>&minus;1</sup>&times;' +
+         pBull.toString() + '.  To find the probability that it takes no more than ' +
+         cardinals[nThrows[1]] + ' throws, add these probabilities for <em>k</em> = ' +
+         '1, &hellip; , ' + nThrows[1] +
+         '.  To find the probability that it takes at least ' +
+         nThrows[0].toString() + ' throws, subtract the chance that it takes fewer ' +
+         'than ' + nThrows[0].toString() + ' throws from 100%. ';
+    var qStr = 'A mechanical dart thrower hits the bullseye with probability ' +
+        (100*pBull).toString() + '% in each throw. Its throws are independent. ' +
+           '<span class="qSpan">The chance the dart thrower hits the bullseye on or ' +
+           'before the ' + ordinals[nThrows[1]] + ' throw is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(theProb));
+    var qStr = '</p><p><span class="qSpan">The chance it takes the mechanical dart thrower ' +
+           (nThrows[0]).toString() + ' or more throws to hit the bullseye for the ' +
+           'first time is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(theOtherProb));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="negative_binomial_distribution"></a>
+    Negative Binomial Distribution
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=&end=3305" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    In random draws with replacement from a 0-1 box that contains a fraction
+    <em>p</em>=<em>G</em>/<em>N</em> of tickets labeled &quot;1,&quot;
+    the number of draws needed to get a ticket
+    labeled &quot;1&quot; for the <em>r</em>th time has a negative binomial
+    distribution with parameters <em>p</em> and <em>r</em>.
+    (When <em>r</em>=1, the negative binomial distribution is the same as the
+    geometric distribution&mdash;the distribution of the number of draws until a ticket
+    labeled &quot;1&quot; is drawn for the first time.)
+    Suppose X is a random variable with the negative binomial distribution
+    with parameters <em>p</em> and <em>r</em>.
+    What is P(X = <em>k</em>)&mdash;the chance that it takes <em>k</em> draws to get a ticket labeled
+    &quot;1&quot; the <em>r</em>th time?
+</p>
+
+<p>
+    Clearly, it takes at least <em>r</em> draws, so if <em>k</em> &lt; <em>r</em>, P(X = <em>k</em>) = 0.
+    Consider, therefore, the chance for <em>k</em> &ge; <em>r</em>.
+    How can the <em>k</em>th draw give a ticket labeled &quot;1&quot; for the <em>r</em>th time?
+    The first <em>k</em>&minus;1 draws must give a ticket labeled &quot;1&quot; exactly <em>r</em>&minus;1
+    times and a ticket labeled &quot;0&quot;
+    (<em>k</em>&minus;1)&minus;(<em>r</em>&minus;1)&nbsp;=&nbsp;<em>k</em>&minus;<em>r</em> times, and the
+    <em>k</em>th draw must give a ticket labeled &quot;1.&quot;
+    We already know how to find the probability that <em>k</em>&minus;1 independent draws from a 0-1 box
+    give a ticket labeled &quot;1&quot; <em>r</em>&minus;1 times:
+    The number of tickets labeled &quot;1&quot; in <em>k</em>&minus;1 independent random draws with
+    replacement from a 0-1 box
+    has a binomial distribution with parameters <em>k</em>&minus;1 and <em>p</em>,
+    so the chance of getting a ticket labeled &quot;1&quot;
+    <em>r</em>&minus;1 times in <em>k</em>&minus;1 draws is
+</p>
+
+<p class="math">
+    <sub><em>k</em>&minus;1</sub>C<sub><em>r</em>&minus;1</sub>&times;<em>p</em><sup><em>r</em>&minus;1</sup>
+      &times; (1&minus;<em>p</em>)<sup>(<em>k</em>&minus;1)&minus;(<em>r</em>&minus;1)</sup> =
+    <sub><em>k</em>&minus;1</sub>C<sub><em>r</em>&minus;1</sub>&times;<em>p</em><sup><em>r</em>&minus;1</sup>
+      &times;(1&minus;<em>p</em>)<sup><em>k</em>&minus;<em>r</em></sup>.
+</p>
+
+<p>
+    The chance that the <em>k</em>th draw gives a ticket labeled &quot;1&quot; is <em>p</em>,
+    and because the draws are all independent, the chance that the
+    first <em>k</em>&minus;1 draws give exactly <em>r</em>&minus;1 tickets labeled &quot;1&quot; and
+    the <em>k</em>th draw also gives a ticket labeled &quot;1&quot; is the product
+    of the probability that the first <em>k</em>&minus;1 draws give <em>r</em>&minus;1 tickets
+    labeled &quot;1&quot; and the probability that the <em>k</em>th draw gives a
+    ticket labeled &quot;1;&quot; namely,
+</p>
+
+<p class="math">
+    <sub><em>k</em>&minus;1</sub>C<sub><em>r</em>&minus;1</sub> &times; <em>p</em><sup><em>r</em>&minus;1</sup>
+    &times;(1&minus;<em>p</em>)<sup><em>k</em>&minus;<em>r</em></sup> &times; <em>p</em> =
+   <sub><em>k</em>&minus;1</sub>C<sub><em>r</em>&minus;1</sub> &times; <em>p</em><sup><em>r</em></sup>
+    &times;(1&minus;<em>p</em>)<sup><em>k</em>&minus;<em>r</em></sup>,
+</p>
+
+<p>
+    for <em>k</em> = <em>r</em>, <em>r</em> + 1, <em>r</em>
+    + 2, &hellip; ; and 0 if <em>k</em> &lt; <em>r</em>.
+</p>
+
+<p>
+    This is the <em>negative binomial probability distribution
+    with parameters <em>p</em> and <em>r</em></em>.
+</p>
+
+<p>
+    The essential requirement for a random variable to have the negative binomial
+    distribution is that it count the number of trials to the <em>r</em>th success
+    in independent trials with the same probability <em>p</em> of success
+    in each trial.
+    As described earlier in this chapter, if we identify success with drawing a
+    ticket labeled &quot;1&quot; from a 0-1 box and identify failure with drawing a
+    ticket labeled &quot;0&quot; from the box, each draw can be thought of as a trial
+    that results in success or failure.
+    If we draw at random with replacement, the trials are independent and
+    have the same probability <em>p</em> of success&mdash;the proportion of tickets labeled
+    &quot;1&quot; does not change from draw to draw.
+    If a random variable is not equivalent to the number of trials it takes to
+    get the <em>r</em>th success in independent trials with the same probability <em>p</em>
+    of success in each trial, it does not have a negative binomial distribution.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    applies the negative binomial distribution.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The Negative Binomial Distribution.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    I shall toss a fair coin repeatedly (and independently) until the coin lands heads
+    the sixth time.
+</p>
+
+<ol>
+    <li>
+        What is the chance that it takes exactly ten tosses?
+    </li>
+    <li>
+        What is the chance that it takes more than 7 tosses?
+    </li>
+</ol>
+
+<p>
+    <strong>Solution</strong>.
+</p>
+
+<ol>
+    <li>
+        <p>The number of tosses it takes to get six heads is the number of trials to
+        the sixth success in independent trials each of which has probability
+        <em>p</em>=50% of success.
+        It therefore has the negative binomial distribution with parameters
+        <em>p</em> = 50% and <em>r</em> = 6, so the chance that it takes exactly 10 tosses is:
+        </p>
+        <p class="math">
+            <sub>9</sub>C<sub>5</sub> &times; 0.5<sup>6</sup> &times; (1&minus;0.5)<sup>4</sup>
+            = 126 &times; 0.5<sup>10</sup> = 12.30%.
+        </p>
+    </li>
+    <li>
+        <p>Notice that it takes at least 6 tosses to get heads for the sixth time;
+        applying the Complement Rule,
+        we see that the chance we seek is:
+        </p>
+        <p class="math">
+            100%&minus;(chance it takes 7 or fewer tosses) = 100% &minus; (chance it takes 6
+            tosses or 7 tosses)
+        </p>
+        <p class="math">
+            = 100% &minus; [(chance it takes exactly 6 tosses) + (chance it takes exactly 7 tosses)]
+        </p>
+        <p class="math">
+            = 100% &minus; (chance it takes exactly 6 tosses) &minus; (chance it takes exactly 7 tosses)
+        </p>
+        <p class="math">
+            = 100% &minus; <sub>6</sub>C<sub>6</sub> &times; 0.5<sup>6</sup> &times;
+            (1&minus;0.5)<sup>0</sup> &minus; <sub>6</sub>C<sub>5</sub> &times; 0.5<sup>6</sup>
+            &times; (1&minus;0.5)<sup>1</sup>
+        </p>
+        <p class="math">
+            = 100% &minus; 0.5<sup>6</sup> &minus; 6&times;0.5<sup>7</sup>
+        </p>
+        <p class="math">
+            = 93.75%.
+        </p>
+    </li>
+</ol>
+</div>
+
+<p>
+    The following exercise checks your ability to calculate with the
+    negative binomial distribution.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var pOil = (listOfRandInts(1,1,5))[0];
+    var nDrill = (listOfRandInts(1,3,8))[0];
+    var nFind = (listOfRandInts(1,1,nDrill))[0];
+    var pFind = 1 - negBinomialCdf(pOil/100,nFind,nDrill);
+    var aVal = numToRange(pFind);
+    var ansStr = 'Under these rather unrealistic assumptions, the number of holes has a ' +
+         'negative binomial distribution with parameters <em>p</em> = ' +
+         pOil.toString() + '% and <em>r</em> = ' + nFind.toString() + '.  The chance ' +
+         'that one must drill exactly <em>k</em> wells is thus ' +
+         '<sub><em>k</em>&minus;1</sub>C<sub>' + (nFind-1).toString() + '</sub> &times;' +
+         (roundToDig(pOil/100,2)).toString() + '<sup>' + nFind.toString() + '</sup> ' +
+         '&times; ' + (roundToDig(1 - pOil/100,2)).toString() +
+         '<sup><em>k</em> &minus; ' + nFind.toString() + '</sup>, for <em>k</em> &ge; ' +
+         nFind.toString() + '.  The chance that it ' +
+         'takes more than ' + nDrill.toString() + ' wells is 100% &minus; (chance it takes ' +
+         'at most ' + nDrill.toString() + ' wells), which is the sum of the negative ' +
+         'binomial probabilities for <em>k</em> = ' + nFind.toString() +
+         ', &hellip; , ' +
+         nDrill.toString() + ', which is ' + roundToDig(100*pFind,2).toString() + '%. ';
+    var qStr = 'Suppose that in a certain part of the world, there is a ' +
+        pOil.toString() + '% chance that a well drilled in a random place will ' +
+        'strike oil. <span class="qSpan">The chance that more than ' +
+        nDrill.toString() + ' wells must be drilled to strike oil for the the ' +
+        ordinals[nFind] + ' time is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="hypergeometric_distribution"></a>
+    The Hypergeometric Distribution
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=&end=4570" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    The sample sum of the labels on the tickets in a random sample without replacement
+    from a 0-1 box has the <em>hypergeometric distribution</em>.
+    A <em>random sample without replacement of size <em>n</em> from a population of
+    <em>N</em> units</em>,
+    also called <em>a simple random sample of size <em>n</em> from a population of
+    <em>N</em> units</em>,
+    is a sample drawn in such a way that every subset of <em>n</em> of the
+    <em>N</em> units in the population is equally likely to be the sample.
+    Equivalently, the sample has a uniform distribution on the
+    <sub><em>N</em></sub>C<sub><em>n</em></sub> subsets of <em>n</em>
+    of the <em>N</em> tickets.
+    One can think of a simple random sample as being drawn in <em>n</em> steps:
+    A unit is drawn at random from all <em>N</em> units in the population, then
+    a unit is drawn at random from the remaining <em>N</em>&minus;1 units, and so on.
+    In the last step, a unit is drawn at random from the remaining <em>N</em>&minus;<em>n</em>+1 units.
+    In each step, the draw is equally likely to yield each remaining unit.
+</p>
+
+<p>
+    Consider drawing a simple random sample of size <em>n</em> from a 0-1 box of <em>N</em> tickets
+    of which <em>G</em> are labeled &quot;1&quot; and the other <em>N</em>&minus;<em>G</em>
+    are labeled &quot;0.&quot;
+    What is the chance that the sample sum of the labels on the
+    tickets in the sample will equal <em>k</em>?
+    Equivalently, what is the chance that exactly <em>k</em> of the <em>n</em> tickets in
+    the sample will be labeled &quot;1&quot; (and the remaining <em>n</em>&minus;<em>k</em>
+    will be labeled &quot;0&quot;)?
+</p>
+
+<p>
+    We can solve this problem using the
+    <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental Rule of Counting</a>,
+    and what we know about combinations.
+    Let X be the (random) number of tickets labeled &quot;1&quot; in the
+    simple random sample of size <em>n</em>.
+    Clearly, X cannot exceed the smaller of <em>n</em> and <em>G</em>
+    (there cannot be more tickets labeled &quot;1&quot; in the sample than
+    there are tickets in the sample, and there cannot be more tickets
+    labeled &quot;1&quot; in the sample than there are in the box, because the
+    sample is drawn without replacement).
+    Furthermore, X must be at least the larger of zero and
+    <em>n</em>&nbsp;&minus;&nbsp;(<em>N</em>&minus;<em>G</em>):
+    We cannot get a negative number of tickets labeled &quot;1,&quot; and there
+    are only <em>N</em>&minus;<em>G</em> tickets labeled &quot;0&quot; in the population, so if the sample
+    is larger than <em>N</em>&minus;<em>G</em>, it must contain some of the tickets labeled &quot;1.&quot;
+</p>
+
+<p>
+    Subject to these restrictions, how can the sample contain <em>k</em> tickets
+    labeled &quot;1?&quot;
+    We can think of drawing such a sample as a sequence
+    of two experiments: drawing <em>k</em> tickets labeled &quot;1&quot; from the population
+    of <em>G</em> tickets labeled &quot;1,&quot; then drawing <em>n</em>&minus;<em>k</em> tickets
+    labeled &quot;0&quot; from the
+    population of <em>N</em>&minus;<em>G</em> tickets labeled &quot;0,&quot;
+    resulting in a subset of size <em>n</em>
+    from the population of size <em>N</em>.
+    By the Fundamental Rule of Counting, there are
+</p>
+
+<p class="math">
+    <sub><em>G</em></sub>C<sub><em>k</em></sub> &times;
+    <sub><em>N</em>&minus;<em>G</em></sub>C<sub><em>n</em>&minus;<em>k</em></sub>
+</p>
+
+<p>
+    ways of doing this (recall that <sub><em>G</em></sub>C<sub><em>k</em></sub>
+    is the number of <a class="glossRef" href="gloss.htm#combination">combinations</a>
+    of <em>k</em> of a set of <em>G</em> things).
+    The total number of possible outcomes of drawing <em>n</em> tickets without
+    replacement is the number of subsets of size <em>n</em> one can form from
+    the population of <em>N</em> tickets, which is <sub><em>N</em></sub>C<sub><em>n</em></sub>.
+    By assumption, our method of drawing samples makes each of these equally likely.
+    The chance that the simple random sample contains exactly <em>k</em> tickets
+    labeled &quot;1&quot; is thus
+</p>
+
+<div align="center">
+<center>
+    <table border="0" cellspacing="1">
+    <tr>
+    <td valign="middle" align="center"> <sub><em>G</em></sub>C<sub><em>k</em></sub>
+        &times; <sub><em>N</em>&minus;<em>G</em></sub>C<sub><em>n</em>&minus;<em>k</em></sub></td>
+    </tr>
+    <tr>
+    <td valign="middle" align="center">--------------------- ,</td>
+    </tr>
+    <tr>
+    <td valign="middle" align="center"><sub><em>N</em></sub>C<sub><em>n</em></sub></td>
+    </tr>
+    </table>
+</center></div>
+
+<p>
+    for max(0, <em>n</em> &minus; (<em>N</em>&minus;<em>G</em>)) &le;
+    <em>k</em> &le; min(<em>n</em>, <em>G</em>). (In case the notation is unfamiliar,
+    max(<em>a</em>, <em>b</em>) is the larger of <em>a</em> and <em>b</em>;
+    min(<em>a</em>, <em>b</em>) is the
+    smaller of <em>a</em> and <em>b</em>.)
+    The chance is 0 if <em>k</em> is outside that range
+    of possibilities.
+</p>
+
+<p>
+    This is the <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric
+    probability distribution</a> with parameters <em>N</em>, <em>G</em>, and <em>n</em>: It
+    gives for each <em>k</em> the chance that the sample sum of the labels on the tickets
+    equals <em>k</em>, for a simple random sample (a random sample without replacement) of
+    size <em>n</em> from a box of <em>N</em> tickets of which <em>G</em> are labeled
+    &quot;1&quot; and the rest are labeled &quot;0.&quot;
+</p>
+
+<p>
+    Sometimes it is convenient to think of the draws as being from
+    a population of <em>N</em> objects of which <em>G</em> are &quot;good&quot; and
+    <em>N</em>&minus;<em>G</em> are &quot;bad.&quot;
+    The number of good objects in a simple random sample of size <em>n</em> from such a
+    population has the hypergeometric probability distribution with parameters
+    <em>N</em>, <em>G</em>, and <em>n</em>.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Sampling Without Replacement.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Suppose a group of 1000 voters contains 5 members of the Libertarian party.
+    We shall take a simple random sample
+    of 100 voters from this group.
+</p>
+
+<ul>
+    <li>
+        What is the chance that the sample will contain no member of the Libertarian Party?
+    </li>
+    <li>
+        What is the chance that the sample will contain at most one Libertarian?
+    </li>
+</ul>
+
+<p>
+    <strong>Solution.</strong>
+</p>
+
+<ul>
+    <li>
+        <p>
+        Think of putting 1000 tickets in a box: five tickets labeled &quot;1,&quot;
+        one for each Libertarian, and 995 tickets labeled &quot;0,&quot; one for
+        each non-Libertarian.
+        Then the number of Libertarians in the sample is like the sample sum of 100 draws
+        without replacement from this box.
+        It has an hypergeometric distribution with parameters <em>N</em>=1000,
+        <em>G</em>=5, and <em>n</em>=100.
+        The chance that the number of Libertarians in the sample is zero is
+        </p>
+    <div align="center">
+    <center>
+        <table border="0" cellspacing="1">
+        <tr>
+        <td valign="middle" align="center"><sub>5</sub>C<sub>0</sub> &times;<sub>
+            995</sub>C<sub>100</sub></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        </tr>
+        <tr>
+        <td valign="middle" align="center">-------------------</td>
+        <td valign="middle" align="center">= </td>
+        <td valign="middle" align="center">59.98%.</td>
+        </tr>
+        <tr>
+        <td valign="middle" align="center"><sub>1000</sub>C<sub>100</sub></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        </tr>
+        </table>
+    </center>
+    </div>
+    </li>
+    <li>
+    <p>
+    The chance that there is at most one Libertarian
+    in the sample is the sum of the chance that there is no Libertarian in the sample and the
+    chance that there is exactly one Libertarian in the sample, because these events are
+    <a class="glossRef" href="gloss.htm#mutually_exclusive">mutually exclusive</a>.
+    The previous part of this example gave the chance of no
+    Libertarian in the sample; the chance there is exactly one Libertarian in the sample is
+    </p>
+    <div align="center">
+    <center>
+        <table border="0" cellspacing="1">
+        <tr>
+        <td valign="middle" align="center"><sub>5</sub>C<sub>1</sub>
+              &times; <sub>995</sub>C<sub>99</sub></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        </tr>
+        <tr>
+        <td valign="middle" align="center">-----------------</td>
+        <td valign="middle" align="center">= </td>
+        <td valign="middle" align="center">32.91%, </td>
+        </tr>
+        <tr>
+        <td valign="middle" align="center"><sub>1000</sub>C<sub>100</sub></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+        </tr>
+        </table>
+    </center>
+    </div>
+    <p>
+        so the chance there is at most one Libertarian in the
+        sample is 59.98% + 32.91% = 91.9%.
+    </p>
+    </li>
+</ul>
+</div>
+
+<p>
+    The following exercise checks your ability to
+    compute probabilities using the hypergeometric distribution.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nWidgets = (listOfRandInts(1,20,30))[0];
+    var nBad = (listOfRandInts(1,2,10))[0];
+    var theInts = listOfDistinctRandInts(2,1,nBad);
+    theInts.sort(numberLessThan);
+    var pSam = hyperGeoCdf(nWidgets,nBad,theInts[1],theInts[0]);
+    var ansStr = 'Under the stated assumptions, the number of defective widgets in the sample ' +
+         'has an hypergeometric distribution with parameters <em>N</em> = ' +
+         nWidgets.toString() + ', <em>G</em> = ' + nBad.toString() +
+         ', and <em>n</em> = ' + theInts[1].toString() + '.  The probability that the ' +
+         'sample contains exactly <em>k</em> bad widgets is thus </p><p align=\"center\">' +
+         '<sub>' + nBad.toString() + '</sub>C<sub><em>k</em></sub> &times <sub>' +
+         (nWidgets - nBad).toString() + '</sub>C<sub>' + theInts[1].toString() +
+         '&minus;<em>k</em></sub>/<sub>' + nWidgets.toString() + '</sub>C<sub>' +
+         theInts[1].toString() + '</sub>, for <em>k</em> = 0, 1, &hellip; , ' +
+         theInts[1].toString() + '.</p><p>  The chance that at most ' +
+         theInts[0].toString() + ' of the widgets are defective is the sum of these ' +
+         'probabilities for <em>k</em> = 0, 1, ';
+    if (theInts[0] > 1) {
+    ansStr += '&hellip; , ' + theInts[0].toString() + ', ';
+    }
+    ansStr += 'which is ' + roundToDig(100*pSam,2).toString() + '%. ';
+    var qStr = 'In a manufacturing lot of ' + nWidgets.toString() + ' widgets, ' +
+           nBad.toString() + ' are defective; the rest are good. ' +
+           '<span class="qSpan">What is the chance that in a simple random sample of ' +
+           (theInts[1]).toString() + ' of the widgets, at most ' +
+           (theInts[0]).toString() + ' will be defective?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pSam,.0005));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="indent">
+<p class="inline">
+    When the number of tickets in the box, <em>N</em>, is very large compared with
+    the number of tickets drawn from the box, <em>n</em>; the number of tickets labeled
+    &quot;1&quot; in the box, <em>G</em>, is large compared with the number of tickets labeled
+    &quot;1&quot; drawn from the box, <em>k</em>, and the number of tickets labeled
+    &quot;0&quot; in the box, <em>N&minus;G</em>, is large compared with the number of tickets
+    labeled &quot;0&quot; drawn from the box, <em>n</em>&minus;<em>k</em>, there is not much
+    difference between drawing with replacement and drawing without replacement.
+    Then the hypergeometric distribution and the binomial are close.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The hypergeometric probability can be re-written as follows: </p> ' +
+          '<div align="center"><center><table border="0" cellspacing="1"> <tr> ' +
+          '<td valign="middle" align="center">' +
+          '<sub><em>G</em></sub>C<sub><em>k</em></sub> &times;<sub><em>          ' +
+          'N</em>&minus;<em>G</em></sub>C<sub><em>n</em>&minus;<em>k</em></sub></td> <td      ' +
+          'valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"><em>n</em>!(<em>N</em>&minus;<em>n</em>)!<em>G</em>!          ' +
+          '(<em>N&minus;G</em>)!</td> </tr> <tr> <td valign="middle"            ' +
+          'align="center">---------------------</td> <td valign="middle"          ' +
+          'align="center">=</td> <td valign="middle"                  ' +
+          'align="center">---------------------------------</td> </tr> <tr> <td       ' +
+          'valign="middle"                                ' +
+          'align="center"><sub><em>N</em></sub>C<sub><em>n</em></sub></td> <td    ' +
+          'valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"><em>N</em>!                         ' +
+          '(<em>G&minus;k</em>)!<em>k</em>!(<em>N&minus;G&minus;</em>(<em>n&minus;k</em>))!(<em>n&minus;k</em>)!</  ' +
+          'td> </tr> </table> </center></div><p>&nbsp; </p> <div              ' +
+          'align="center"><center><table border="0" cellspacing="1"> <tr> <td     ' +
+          'valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"></td> <td valign="middle"                   ' +
+          'align="center">(<em>N</em>&minus;<em>n</em>)!<em>G</em>! (<em>N&minus;G</em>)!</td>    ' +
+          '</tr> <tr> <td valign="middle" align="center">=</td> <td valign="middle"   ' +
+          'align="center"><sub><em>n</em></sub>C<sub><em>k</em></sub> &times;</td>    ' +
+          '<td valign="middle" align="center">------------------------------- .</td>  ' +
+          '</tr> <tr> <td valign="middle" align="center"></td> <td valign="middle"    ' +
+          'align="center"></td> <td valign="middle"                   ' +
+          'align="center"><em>N</em>!(<em>G&minus;k</em>)!                  ' +
+          '(<em>N&minus;G&minus;</em>(<em>n&minus;k</em>))!</td> </tr> </table> </center></div> <p>If   ' +
+          '<em>N</em> is much larger than <em>n</em>,                 ' +
+          '(<em>N</em>&minus;<em>n</em>)!/<em>N</em>! is approximately              ' +
+          '1/<em>N<sup>n</sup></em>. If <em>G</em> is much larger than <em>k</em>,    ' +
+          '<em>G</em>!/(<em>G</em>&minus;<em>k</em>)! is approximately              ' +
+          '<em>G<sup>k</sup></em>. If <em>N&minus;G</em> is much larger than        ' +
+          '<em>n</em>&minus;<em>k</em>, (<em>N&minus;G</em>)!/(<em>N&minus;G&minus;</em>(<em>n&minus;k</em>))! is   ' +
+          'approximately (<em>N&minus;G</em>)<sup><em>n</em>&minus;<em>k</em></sup>. The      ' +
+          'hypergeometric probability above is thus approximately </p> <div       ' +
+          'align="center"><center><table border="0" cellspacing="1"> <tr> <td     ' +
+          'valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"></td> <td valign="middle"                   ' +
+          'align="center"><em>G<sup>k</sup></em> &times;                  ' +
+          '(<em>N&minus;G</em>)<sup><em>n</em>&minus;<em>k</em></sup></td> </tr> <tr> <td     ' +
+          'valign="middle" align="center">=</td> <td valign="middle"          ' +
+          'align="center"><sub><em>n</em></sub>C<sub><em>k</em></sub> &times;</td>    ' +
+          '<td valign="middle" align="center">-------------------</td> </tr> <tr>     ' +
+          '<td valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"></td> <td valign="middle"                   ' +
+          'align="center"><em>N<sup>n</sup></em></td> </tr> </table>          ' +
+          '</center></div><p>&nbsp; </p> <div align="center"><center><table       ' +
+          'border="0" cellspacing="1"> <tr> <td valign="middle" align="center"></td>  ' +
+          '<td valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"><em>G<sup>k</sup></em></td> <td valign="middle"         ' +
+          'align="center"></td> <td valign="middle"                   ' +
+          'align="center">(<em>N&minus;G</em>)<sup><em>n</em>&minus;<em>k</em></sup></td> </tr>   ' +
+          '<tr> <td valign="middle" align="center">=</td> <td valign="middle"     ' +
+          'align="center"><sub><em>n</em></sub>C<sub><em>k</em></sub> &times;</td>    ' +
+          '<td valign="middle" align="center">---------</td> <td valign="middle"      ' +
+          'align="center">&times;</td> <td valign="middle"                ' +
+          'align="center">-------------</td> </tr> <tr> <td valign="middle"       ' +
+          'align="center"></td> <td valign="middle" align="center"></td> <td      ' +
+          'valign="middle" align="center"><em>N<sup>k</sup></em></td> <td         ' +
+          'valign="middle" align="center"></td> <td valign="middle"           ' +
+          'align="center"><em>N<sup>n</em>&minus;<em>k</em></sup></td> </tr> </table>       ' +
+          '</center></div><p>&nbsp; </p> <div align="center"><center><table       ' +
+          'border="0" cellspacing="1"> <tr> <td valign="middle"               ' +
+          'align="center">=</td> <td valign="middle"                  ' +
+          'align="center"><sub><em>n</em></sub>C<sub><em>k</em></sub> &times;</td>    ' +
+          '<td valign="middle" align="center">                    ' +
+          '(<em>G</em>/<em>N</em>)<sup><em>k</em></sup></td> <td valign="middle"      ' +
+          'align="center">&times;</td> <td valign="middle" align="center">        ' +
+          '((<em>N</em>&minus;<em>G</em>)/<em>N</em>)<sup><em>n</em>&minus;<em>k</em></sup></td>  ' +
+          '</tr> </table> </center></div><p>&nbsp; </p> <div              ' +
+          'align="center"><center><table border="0" cellspacing="1"> <tr> <td     ' +
+          'valign="middle" align="center">=</td> <td valign="middle"          ' +
+          'align="center"><sub><em>n</em></sub>C<sub><em>k</em></sub> &times;</td>    ' +
+          '<td valign="middle" align="center"><em>p<sup>k</sup></em></td> <td     ' +
+          'valign="middle" align="center">&times;</td> <td valign="middle"        ' +
+          'align="center">(1&minus;<em>p</em>)<sup><em>n</em>&minus;<em>k</em></sup>,</td> </tr>  ' +
+          '</table> </center></div> <p>where <em>p</em> is the fraction of tickets    ' +
+          'labeled &quot;1&quot; in the box. This is just the corresponding binomial  ' +
+          'probability, which would be the exact probability for sampling         ' +
+          '<em>with</em> replacement.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<h3><a id="calculating"></a>Calculating Binomial, Geometric,
+    Hypergeometric, and Negative Binomial Probabilities
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=&end=4800" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is a calculator to find the chance that a random variable with a binomial,
+    geometric, negative binomial, or hypergeometric distribution falls in any range.
+    It also gives the expected value and standard error of these distributions,
+    which we shall study in the next few chapters.
+    To use the tool, select the distribution you want from the drop-down menu.
+    The display then prompts for the parameters of the
+    distribution, and for the range of values of which to find the probability.
+</p>
+
+<p>
+    The parameters are labeled slightly differently from the notation we have used so far:
+</p>
+
+<p>
+    For the binomial distribution:
+</p>
+<ul>
+    <li>&quot;Trials&quot; is the number <em>n</em> of draws from the box.</li>
+    <li>&quot;P(success)&quot; is the fraction <em>p</em> of tickets in the box
+        labeled &quot;1.&quot;</li>
+</ul>
+
+<p>
+    For the geometric distribution:
+</p>
+<ul>
+    <li>&quot;P(success)&quot; is the fraction <em>p</em> of tickets in the box
+       labeled &quot;1.&quot;</li>
+</ul>
+
+<p>
+    For the negative binomial distribution:
+</p>
+
+<ul>
+    <li>&quot;P(success)&quot; is the fraction <em>p</em> of tickets labeled &quot;1&quot;
+        in the box.</li>
+    <li>&quot;#successes&quot; is the number <em>r</em> of tickets labeled &quot;1&quot;
+        to draw before stopping.</li>
+</ul>
+
+<p>
+    For the hypergeometric distribution:
+</p>
+
+<ul>
+    <li>&quot;Population size&quot; is the number <em>N</em> of tickets in the box.<./li>
+    <li>&quot;Good in population&quot; is the number <em>G</em> of tickets
+        labeled &quot;1&quot; in the box.</li>
+</ul>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Probability Calculator.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+<p align="left">
+   Select the distribution from the drop-down menu. 
+   Set the parameter values in the text boxes. Use the tic boxes and the 
+   <span class="appCtrlName">&ge;</span> and <span class="appCtrlName">&le;</span>
+   text boxes to select the range for which you seek the probability.
+</p>
+<p class="figure">
+<applet code="DistCalc.class" codebase="../../Java/" align="baseline"
+  width="800" archive="PbsGui.zip" height="200">
+<param name="distributions" value="binomial,geometric,hypergeometric,negative binomial">
+</applet>
+</p>
+</div>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Using the Probability Calculator.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Seventeen tickets will be drawn at random without replacement from a 0-1
+    box containing 50 tickets of which 20 are labeled &quot;1.&quot;
+    What is the probability that the number of tickets labeled &quot;1&quot; in the sample
+    is between 5 and 15, inclusive?
+</p>
+
+<p>
+    <strong>Solution</strong>. The number of tickets labeled &quot;1&quot; in the sample
+    is the sample sum of a simple random sample of size <em>n</em>=17 from a 0-1 box
+    containing <em>N</em>=50 tickets of which <em>G</em>=20 are labeled &quot;1,&quot; so that it has
+    an hypergeometric distribution with parameters <em>N</em>=50, <em>G</em>=20, and <em>n</em>=17.
+    To find the probability, in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    select &quot;Hypergeometric&quot; in the top drop-down menu.
+    Set Population Size to 50,  #Good in Population to 20, and Sample Size to 17.
+    Tic the box that precedes X&ge;, type 5 into the box that follows X&ge;,
+    tic the box that precedes X&le;, and type 15 into the box that follows
+    X&le;.
+    The figure should show that the probability sought is 92.094%
+</p>
+</div>
+
+<h2>
+    <a id="discrete_distribution"></a>
+    Discrete Distributions
+</h2>
+<p>
+    The <a class="glossRef" href="gloss.htm#binomial">binomial</a>,
+    <a class="glossRef" href="gloss.htm#geometric_distrib">geometric</a>,
+    <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric</a>,
+    and <a class="glossRef" href="gloss.htm#negative_binomial">negative binomial</a>
+    distributions are examples of <a class="glossRef" href="gloss.htm#discrete">discrete</a>
+    probability distributions.
+    For discrete probability distributions, the number of values that
+    have nonzero probability is <a class="glossRef" href="gloss.htm#countable">countable</a>.
+    The binomial probability distribution assigns
+    positive probability to the integers {0, 1, &hellip;, <em>n</em>}.
+    The geometric distribution
+    assigns positive probability to the positive integers {1, 2, 3, &hellip; }.
+    The hypergeometric
+    distribution assigns positive probability to the integers between
+</p>
+<p class="math">
+    max{0, sample size &minus; (population size &minus; #good in population)} and
+</p>
+<p class="math">
+    min{sample size, #good in population}.
+</p>
+<p>
+    All these sets are <a class="glossRef" href="gloss.htm#countable">countable</a>.
+</p>
+<p>
+    There are many other discrete distributions. Some have names; some do not.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    presents a random variable with a discrete distribution that has no name
+    (as far as I am aware).
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A Discrete Distribution Without a Name.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+    Toss a fair coin twice and roll a fair die twice, all independently.
+    Let X be the sum of the number of heads in the two tosses and the number
+    of times the die shows one spot in the two rolls.
+    Even though the random variable X counts
+    &quot;successes&quot; in a fixed number (four) of independent trials,
+    it does not have a binomial probability distribution, because the
+    probability of success is not the same in every trial: It is 1/2 in the
+    trials that involve the coin, and 1/6 in the trials that involve the die.
+    Let us find the probability distribution of X.
+</p>
+
+<p>
+    The possible values of X are 0, 1, 2, 3, and 4.
+    What is the chance that X = 0?
+    For that to occur, the two die rolls need to show something other than ones,
+    and the coin needs to land tails-up on both tosses.
+    Because all the tosses and rolls are independent, the chance of this is
+</p>
+
+<p class="math">
+    P(no &quot;ones&quot; and no &quot;heads&quot;) =
+    <sub>2</sub>C<sub>0</sub> &times; (1/6)<sup>0</sup> &times;
+    (5/6)<sup>2</sup> &times; <sub>2</sub>C<sub>0</sub> &times;
+    (1/2)<sup>0</sup> &times; (1/2)<sup>2</sup>
+      = 25/144.
+</p>
+
+<p>
+    What is the chance that X = 1?
+    For that to occur, either exactly one die roll needs to give a one
+    and the coin needs to land tails both times, or exactly one coin toss
+    needs to give a head and the die rolls need to give something
+    other than a one both times.
+    These events are mutually exclusive, so we can find the chance of
+    their union by adding their chances.
+    Each of these events has two binomial components: the number of times a
+    one is rolled in the two die rolls, and the number of times the coin
+    lands &quot;heads&quot; in two tosses.
+    Because the rolls and tosses are independent, we can find the chance
+    that &quot;one&quot; is rolled a specific number of times and the coin lands
+    &quot;heads&quot; a certain number of times by multiplying the chances of the
+    number of ones and the number of heads.
+    We have
+</p>
+<p class="math">
+    P(one &quot;one&quot; and no &quot;heads&quot;) =
+    <sub>2</sub>C<sub>1</sub> &times; (1/6)<sup>1</sup> &times;
+    (5/6)<sup>1</sup> &times; <sub>2</sub>C<sub>0</sub> &times; (1/2)<sup>0</sup> &times;
+    (1/2)<sup>2</sup>
+</p>
+<p class="math">
+  = 5/72.
+</p>
+<p class="math">
+    P(no &quot;ones&quot; and one
+    &quot;head&quot;) = <sub>2</sub>C<sub>0</sub> &times;
+    (1/6)<sup>0</sup> &times; (5/6)<sup>2</sup> &times; <sub>2</sub>C<sub>1</sub>
+    &times; (1/2)<sup>1</sup> &times; (1/2)<sup>1</sup>
+</p>
+<p class="math">
+  = 25/72.
+</p>
+<p>
+    The chance that X = 1 is thus 5/72 + 25/72 = 5/12.
+</p>
+<p>&nbsp;
+</p>
+<p>
+    What is the chance that the X = 2?
+    That can occur three
+    ways: {two &quot;ones&quot; and no &quot;heads&quot;}, {two &quot;heads&quot; and no
+    &quot;ones&quot;}, and {one &quot;one&quot; and one &quot;head&quot;}.
+</p>
+<p class="math">
+    P(two &quot;ones&quot; and no &quot;heads&quot;) =
+    <sub>2</sub>C<sub>2</sub> &times; (1/6)<sup>2</sup> &times; (5/6)<sup>0</sup>
+    &times; <sub>2</sub>C<sub>0</sub> &times; (1/2)<sup>0</sup> &times; (1/2)<sup>2</sup>
+</p>
+<p class="math"> = 1/144.
+</p>
+<p class="math">
+    P(one &quot;one&quot; and one
+      &quot;head&quot;) =
+    <sub>2</sub>C<sub>1</sub> &times; (1/6)<sup>1</sup> &times; (5/6)<sup>1</sup> &times;
+    <sub>2</sub>C<sub>1</sub> &times; (1/2)<sup>1</sup> &times; (1/2)<sup>1</sup>
+</p>
+<p class="math">
+  = 5/36.
+</p>
+<p class="math">
+    P(no &quot;one&quot; and two
+    &quot;heads&quot;) =
+    <sub>2</sub>C<sub>0</sub> &times; (1/6)<sup>0</sup> &times; (5/6)<sup>2</sup> &times;
+    <sub>2</sub>C<sub>2</sub> &times; (1/2)<sup>2</sup> &times; (1/2)<sup>0</sup>
+</p>
+<p class="math">
+  = 25/144.
+</p>
+<p>
+    The chance that X = 2 is thus 1/144 + 5/36 + 25/144 =
+    23/72.
+</p>
+<p>
+    How can X = 3? That can happen two ways: {two &quot;ones&quot;
+    and one &quot;head&quot;} and {one &quot;one&quot; and two &quot;heads&quot;}.
+</p>
+<p class="math">
+    P(two &quot;ones&quot; and one &quot;head&quot;) =
+    <sub>2</sub>C<sub>2</sub> &times; (1/6)<sup>2</sup> &times; (5/6)<sup>0</sup> &times;
+    <sub>2</sub>C<sub>1</sub> &times; (1/2)<sup>1</sup> &times; (1/2)<sup>1</sup>
+</p>
+<p class="math">
+    = 1/72.
+</p>
+<p class="math">
+    P(one &quot;one&quot; and two
+      &quot;heads&quot;) = <sub>2</sub>C<sub>1</sub> &times;
+      (1/6)<sup>1</sup> &times; (5/6)<sup>1</sup> &times;
+    <sub>2</sub>C<sub>2</sub> &times; (1/2)<sup>2</sup> &times; (1/2)<sup>0</sup>
+</p>
+<p class="math">
+    = 5/72.
+</p>
+<p>
+    The chance that X = 3 is thus 1/72 + 5/72 = 1/12.
+</p>
+<p>
+    How can X = 4?
+    That can happen only one way: {two &quot;ones&quot; and two &quot;heads&quot;}.
+</p>
+<p class="math">
+    P(two &quot;ones&quot; and two &quot;heads&quot;) =
+    <sub>2</sub>C<sub>2</sub> &times; (1/6)<sup>2</sup> &times; (5/6)<sup>0</sup> &times;
+    <sub>2</sub>C<sub>2</sub> &times; (1/2)<sup>2</sup> &times; (1/2)<sup>0</sup>
+</p>
+
+<p class="math">
+  = 1/144.
+</p>
+
+<p>
+    These are the only possible values of X, so the
+    probability distribution of X is that given in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability Distribution of the Sum X of the Number of Times One Spot ' +
+               'Shows in Two Fair ' +
+               'Die Rolls and the Number of Heads in Two Tosses of a Fair Coin.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center"><center>
+    <table class="dataTable">
+        <caption>Probability distribution of X</caption>
+        <tr>
+            <th id="col0"><em>x</em></th>
+            <th id="col1">P(X=<em>x</em>)</th>
+        </tr>
+        <tr>
+            <td headers="col0">0</td>
+            <td headers="col1">25/144</td>
+        </tr>
+        <tr>
+            <td headers="col0">1</td>
+            <td headers="col1">5/12</td>
+        </tr>
+        <tr>
+            <td headers="col0">2</td>
+            <td headers="col1">23/72</td>
+        </tr>
+        <tr>
+            <td headers="col0">3</td>
+            <td headers="col1">1/12</td>
+        </tr>
+        <tr>
+            <td headers="col0">4</td>
+            <td headers="col1">1/144</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    As a quick check of our arithmetic, we should verify
+    that the probabilities of all the possibilities sum to 100%:
+</p>
+<p class="math">
+    25/144 + 5/12 + 23/72 + 1/12 + 1/144 = (25 + 60 + 46
+    + 12 + 1)/144
+</p>
+<p class="math">
+    = 144/144
+</p>
+<p class="math">
+    = 100%.
+</p>
+
+<p>
+    They do!
+</p>
+</div>
+
+<p>
+    The following exercises check your ability to compute probabilities
+    involving discrete distributions.
+    Use the probability calculator in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    if you need it to solve the problems.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTrials = (listOfRandInts(1,10,20))[0];
+    var ansStr = '(a) It is reasonable to assume that the rolls and tosses are independent ' +
+         'of each other. Call a trial in which the number of spots plus the number of ' +
+         'heads is at least 4 a &quot;success;&quot; otherwise, call the trial a ' +
+         '&quot;failure.&quot; The chance that a given trial is a success is the chance ' +
+         'that either the die shows 4 or more spots, or the die shows 3 spots and the ' +
+         'coin lands heads. The event that the die shows 4 or more spots is disjoint ' +
+         'from the event that the die shows 3 spots and the coin lands heads, so to ' +
+         'find the probability that either happens, we can add their individual ' +
+         'probabilities. The chance the die shows 4 or more spots is 50% ' +
+         '(4, 5, and 6 are the possibilities that work, and these comprise half ' +
+         'of the six possibilities). By the multiplication rule, the chance that ' +
+         'the die shows 3 spots and the coin lands heads is</p>' +
+         '<p align=\"center\">P(3 spots and heads) = ' +
+         'P(3 spots | heads)P(heads)</p><p align=\"center\">' +
+         ' = P(3 spots)P(heads)</p><p class="math"> = (1/6)(1/2) = 1/12. </p> ' +
+         '<p>The second step uses the assumption that the die roll and the coin ' +
+         'toss are independent, so that P(3 spots | heads) = P(3 spots). ' +
+         'The chance that a given trial results in success is thus 1/2+1/12 = 7/12. ' +
+         '</p><p>Because the random variable in question counts the number of trials to ' +
+         'the first success in independent trials with the same probability 7/12 of ' +
+         'success, it has a geometric distribution with parameter ' +
+         '<em>p</em> = 7/12. (Equivalently, it has a negative binomial distribution ' +
+         'with parameters <em>p</em> = 7/12 and <em>r</em>=1.)</p><p> ' +
+         '(b) For the first success to occur on the ' + ordinals[nTrials] +
+         ' trial requires the first ' + cardinals[nTrials-1] + ' trials to result in ' +
+         ' failure, and the ' + ordinals[nTrials] + ' trial to result in ' +
+         'success. The trials are independent, so the chance that it takes ' +
+         cardinals[nTrials] + ' trials is (5/12)<sup>' + (nTrials-1).toString() +
+         '</sup>(7/12) = ' + roundToDig(100*geoPmf(7/12, nTrials),4).toString() +
+         '%.';
+    var qStr = 'Consider rolling a fair die and tossing a fair coin at the same time, ' +
+           'over and over, until in one trial the number of spots showing plus the ' +
+           'number of heads showing is at least 4. </p><p><span class="qSpan">' +
+           '(a) What type of probability distribution does the required ' +
+           'number of trials have?</span>';
+    document.writeln(qStr);
+    var opt = ['Binomial',
+           'Geometric',
+           'Hypergeometric',
+           'Negative Binomial',
+           'None of the above'
+          ];
+    var aVal = 'b|d';
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">(b) What is the chance that it takes ' +
+           nTrials.toString()   + ' trials for this to happen?</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(geoPmf(7/12, nTrials));
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTrials = listOfDistinctRandInts(2,2,6);
+    var totTrials = vSum(nTrials);
+    var sumTarg = (listOfRandInts(1,0,totTrials-1))[0];
+    var minHeads = Math.max(0,sumTarg - nTrials[0]);
+    var maxHeads = Math.min(nTrials[1],sumTarg);
+    var ansStr = 'Although X is the number of successes in a fixed number (' +
+         cardinals[totTrials] + ') of independent trials, the resulting distribution ' +
+         'is <em>not</em> binomial, because the chance of success is not the same in ' +
+         'every trial: it is 1/6 in the trials that involve the die, and ' +
+         '1/2 in the trials that involve the coin. The random variable X is the ' +
+         'sum of two binomial random variables: the number of successes in ' +
+         cardinals[nTrials[0]] +
+         ' independent trials with probability 1/6 of success in each trial, and ' +
+         'the number of successes in ' + cardinals[nTrials[1]] + ' independent trials ' +
+         'with probability 1/2 of success in each trial.</p><p>' +
+         'Let X denote the sum of the number of times I roll a one and the number of ' +
+         'times I toss a &quot;head.&quot;. To find the chance that X = ' +
+         sumTarg.toString() + ', we need to identify all the different outcomes ' +
+         'for which X = ' + sumTarg.toString() + ' and add their probabilities. ' +
+         'We shall enumerate the possibilities systematically, starting with the ' +
+         'smallest number of heads required for the sum to be ' +
+         sumTarg.toString() + ', which is ' + minHeads.toString() + '. ' +
+         'We proceed, increasing the number of heads incrementally, until we reach ' +
+         'the maximum possible number of heads for which X can equal ' +
+         sumTarg.toString() + ', which is ' + maxHeads.toString() + '. ' +
+         'For each permissible number of heads, the number of die rolls that must ' +
+         'show one spot is ' +  sumTarg.toString() + ' &minus; (number of heads). ' +
+         'We use the independence of the tosses and rolls to find the probabilities ' +
+         'of the possibilities by multiplication. ' +
+         'The probability that X = ' + sumTarg.toString() + ' is thus the sum of ' +
+         'the following probabilities: </p>';
+    var aProb = 0;
+    var thisVal = 0;
+    for (var i = minHeads; i <= maxHeads; i++) {
+    thisVal = binomialPmf(nTrials[1], 0.5, i)*binomialPmf(nTrials[0], 1/6, sumTarg-i);
+    aProb += thisVal;
+    thisVal = roundToDig(100*thisVal,2);
+    var coinWord = ' \"heads\" ';
+    var dieWord = ' \"ones\" ';
+    if (i == 1 ) {coinWord = ' \"head\" ';}
+    if (sumTarg - i == 1) {dieWord = ' \"one\" ';}
+    ansStr += '<p align=\"center\">P( ' + i.toString() + coinWord + ' and ' +
+          (sumTarg - i).toString() + dieWord + ') = <sub>' +
+          nTrials[1].toString() + '</sub>C<sub>' +
+          i.toString() + '</sub>&times;(1/2)<sup>' + i.toString() + '</sup>&times;' +
+          '(1/2)<sup>' + (nTrials[1] - i).toString() + '</sup> &times; <sub>' +
+          nTrials[0].toString() + '</sub>C<sub>' + (sumTarg - i).toString() +
+          '</sub> &times; (1/6)<sup>' + (sumTarg - i).toString() + '</sup>&times;' +
+          '(5/6)<sup>' + (nTrials[0] - (sumTarg - i)).toString() + '</sup> = ' +
+          thisVal.toString() + '%.</p>';
+    }
+    ansStr += '<p>The sum of these probabilities, ' + (roundToDig(100*aProb,2)).toString() +
+          '%, is the chance that X = ' + sumTarg.toString() + '. ';
+    var qStr = 'I toss a fair coin ' + iteratives[nTrials[1]]  + ' and roll a fair die ' +
+           iteratives[nTrials[0]]   + ', all independently. Let the random variable ' +
+           'X be the sum of the number of times the coin lands &quot;heads&quot; ' +
+           'and the number of times the die lands showing one spot.</p>' +
+           '<p><span class="qSpan">(a) What type of probability distribution ' +
+           'does X have?</span>';
+    document.writeln(qStr);
+    var opt = ['Binomial',
+           'Geometric',
+           'Hypergeometric',
+           'Negative Binomial',
+           'None of the above'];
+    var aVal = alphabet[4];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">(b) What is the probability that X = ' +
+           sumTarg.toString()   + '?</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(aProb);
+    writeTextExercise(8,qCtr++,aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nSame = (listOfRandInts(1,3,8))[0];
+    var nTries = nSame + (listOfRandInts(1,1,nSame-1))[0];
+    var ansStr = 'Even though the trials are independent and the chances of heads ' +
+         'and tails are the same in every trial, this <em>does not</em> have a ' +
+         'negative binomial distribution, although its distribution is related to the ' +
+         'negative binomial. One way to see that the distribution cannot be negative ' +
+         'binomial is that it cannot take more than ' +
+         (roundToDig(2*nSame - 1, 0)).toString() +
+         ' trials to get either ' + nSame.toString() + ' heads or ' +
+         nSame.toString() + ' tails, so the maximum possible value of X is ' +
+         (roundToDig(2*nSame - 1, 0)).toString() + ', while there is no maximum ' +
+         'possible value for a random variable with a negative  binomial distribution: ' +
+         'it can take an arbitrarily large number of trials for the <em>r</em>th ' +
+         'success to occur.</p><p>' +
+         'We now find the chance that X = ' + nTries.toString() + '.  For that to occur, ' +
+         'either the first ' + (nTries-1).toString() + ' tosses must contain exactly ' +
+         (nSame-1).toString() + ' heads and the ' + ordinals[nTries] + ' toss must be a ' +
+         'head, or the first ' + (nTries-1).toString() + ' tosses must contain exactly ' +
+         (nSame-1).toString() + ' tails and the ' + ordinals[nTries] + ' toss must be a ' +
+         'tail.  These two possibilities are disjoint, so the probability of their union ' +
+         'is the sum of their probabilities.  Moreover, because the chance of ' +
+         'heads on each toss equals the chance of tails on each toss, it is clear that ' +
+         'the two probabilities are equal. Each can be computed using exactly the same ' +
+         'reasoning that led to the formula ' +
+         'for the negative binomial distribution: the chance of exactly ' +
+         cardinals[nSame-1] + ' heads in the first ' + (nTries-1).toString() +
+         ' tosses is <sub>' + (nTries-1).toString() + '</sub>C<sub>' +
+         (nSame-1).toString() + '</sub>&times;(1/2)<sup>' + (nTries-1).toString() +
+         '</sup> and the chance that the ' + ordinals[nTries] + ' toss is a head is ' +
+         '1/2; because the tosses are independent, the chance that both occur is ' +
+         '</p><p align=\"center\"><sub>' + (nTries-1).toString() + '</sub>C<sub>' +
+         (nSame-1).toString() + '</sub>&times;(1/2)<sup>' + nTries.toString() +
+         '</sup> = ' + roundToDig(100*negBinomialPmf(1/2, nSame, nTries),2) +
+         '%, </p><p> and the chance that either the ' + ordinals[nSame] +
+         ' head or the ' + ordinals[nSame] + ' tail occurs on the ' + ordinals[nTries] +
+         ' toss is twice that, ' + roundToDig(100*2*negBinomialPmf(1/2, nSame, nTries),2) +
+         '%. ';
+    var qStr = 'I toss a fair coin until I get either ' + cardinals[nSame]  +
+           ' heads or ' + cardinals[nSame] + ' tails, whichever comes first, then I stop. ' +
+           'Let the random variable X be the number of times I toss the coin. ' +
+           '<span class="qSpan">What type of probability distribution does X have?</span>';
+    document.writeln(qStr);
+    var opt = ['Binomial',
+           'Geometric',
+           'Hypergeometric',
+           'Negative Binomial',
+           'None of the above'];
+    var aVal = alphabet[4];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '</p><p><span class="qSpan">What is the probability that X = ' +
+           nTries.toString()   + '?</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(2*negBinomialPmf(1/2, nSame, nTries));
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="trade_secret"></a>
+    Case Study: Trade Secret Litigation
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/_ld1AeKfV5A?start=&end=5120" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This example is based on a true story.
+    The names of the people and firms have been changed, but otherwise,
+    the facts are stated as I understand them.
+    The data were presented previously in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('histograms') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    On 1 May 1995, Sue Mi and Leigh Teagate, two former employees of WeeBee Hardware (WBH),
+    a firm that sells computer components to computer assemblers and retailers,
+    opened the doors of a new company, Weasel Drives (WD).
+    Sue Mi had worked at WBH up to the day before WD opened its doors;
+    Leigh Teagate had stopped working for WBH about 18 months previously.
+    Both firms are in the greater San Francisco Bay Area.
+    From the time WD started business, it sold essentially the same kinds of
+    computer components that WBH did, mostly to former customers of Sue Mi,
+    at essentially the same prices and with essentially the same credit terms.
+    Indeed, in the first two days WD was in business, Sue Mi called the top dozen
+    of her former accounts at WBH.
+    In its first month of business, WD sold about $1 million of equipment to former
+    customers of WBH; that amount increased to about $2&nbsp;million/month in the
+    course of a few months.
+</p>
+
+<p>
+    The principals of WBH sought an injunction against WD to prevent it from selling
+    to customers of WBH, alleging that their customer list was a trade secret and
+    had been misappropriated by Sue Mi and Leigh Teagate.
+    (A further complication is that another former employee of WBH and
+    archrival of the principals of WBH apparently set up WD's business,
+    including renting facilities for them, financing their startup, and advancing
+    about $400,000 of inventory to them without collateral.)
+</p>
+
+<p>
+    It is well established that a customer list can qualify as a trade secret:
+    It has economic value, and derives its value from not being known generally.
+    Customer lists can be the product of years of soliciting new business by
+    cold-calling tens of thousands of potential customers and winnowing
+    that list down to a few hundred or a few thousand who actually do buy the
+    kind of equipment the firm sells, who will buy it from that firm, and
+    who pay promptly (or at least reliably).
+    With knowledge of a firm's list of customers, a competitor would not need to
+    make cold calls to find potential customers, check credit references, or
+    establish a credit history with a particular customer to learn whether it
+    was creditworthy.
+</p>
+
+<p>
+    WD asserted in response to WBH's request for an injunction that (1) they found
+    the names of the customers in public sources, such as CD-ROMs that contain
+    lists of businesses, and from computer magazines in which those customers
+    advertise, not from their knowledge of WBH's customers, and that (2) such
+    a large overlap with WBH's customer list was inevitable, because WBH had
+    so many customers.
+</p>
+
+<p>
+    A California Court of Appeals decision (<em>ABBA Rubber Co. v. Seaquist 286 Cal.
+    Rptr. at 528</em>) establishes that a &quot;readily ascertainable by proper
+    means&quot; affirmative defense to a claim of misappropriation is appropriate
+    under certain circumstances:
+</p>
+
+<blockquote>
+    [I]f the defendants can convince the finder of fact &hellip;
+    (1) that &quot;It is a virtual certainty that anyone who manufactures certain types of
+    products uses rubber rollers, (2) that the manufacturers of those products are
+    easily identifiable, and (3) that the defendants' knowledge of the plaintiff's
+    customers resulted from that identification process and not from the
+    plaintiff's records, then the defendants may establish a defense to
+    the misappropriation claim.&quot;
+</blockquote>
+<p>
+     <em>ABBA Rubber Co., 286 Cal. Rptr. at 529, ftnt. 9.</em>
+</p>
+
+<p>
+    WD thus would be in the clear if they could show that they identified the
+    customers they called from the CD-ROMs and/or magazines without using
+    their knowledge of WBHs customer list.
+    I was retained to calculate the probability that various subsets of
+    WD's customer list would overlap with analogous subsets of WBH's customer
+    list to the extent that they do, under various assumptions.
+    The data, which were introduced in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('histograms') + ', ');
+// -->
+</script> 
+    are repeated in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+    document.writeln(' and ');
+    citeTable(tCtr+1);
+// -->
+</script>.
+</p>
+
+<div align="center"><center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     qStr = 'Sizes of groups of purchasers and potential purchasers ' +
+       'of computer equipment of the type sold by WBH and WD.';
+     writeTableCaption(qStr);
+// -->
+</script>
+<table class="dataTable">
+     <tr>
+     <th id="col0">Customer Group</th>
+     <th id="col1" align="right">At Large</th>
+     <th id="col2" align="right">WBH</th>
+     <th id="col3" align="right">WD</th>
+     <th id="col4" align="right">Overlap</th>
+     </tr>
+     <tr>
+     <th align="left" id="row1" headers="col0">All Customers</th>
+     <td headers="row1,col1" align="right">&gt;90,000</td>
+     <td headers="row1,col2" align="right">3310</td>
+     <td headers="row1,col3" align="right">132</td>
+     <td headers="row1,col4" align="right">93</td>
+     </tr>
+     <tr>
+     <th align="left" id="row2" headers="col0">Customers outside Bay Area</th>
+     <td headers="row2,col1" align="right">&gt;60,000</td>
+     <td headers="row2,col2" align="right">1769</td>
+     <td headers="row2,col3" align="right">8</td>
+     <td headers="row2,col4" align="right">8</td>
+     </tr>
+     <tr>
+     <th align="left" id="row3" headers="col0">CD-ROM</th>
+     <td headers="row3,col1" align="right">&gt;90,000</td>
+     <td headers="row3,col2" align="right">3310</td>
+     <td headers="row3,col3" align="right">31</td>
+     <td headers="row3,col4" align="right">22</td>
+     </tr>
+     <tr>
+     <th align="left" id="row4" headers="col0">Magazine Ads</th>
+     <td headers="row4,col1" align="right">469</td>
+     <td headers="row4,col2" align="right">152</td>
+     <td headers="row4,col3" align="right">27</td>
+     <td headers="row4,col4" align="right">26</td>
+     </tr>
+     <tr>
+     <th align="left" id="row5" headers="col0">Phone Records</th>
+     <td headers="row5,col1" align="right">&gt;60,000</td>
+     <td headers="row5,col2" align="right">2,906</td>
+     <td headers="row5,col3" align="right">68</td>
+     <td headers="row5,col4" align="right">53</td>
+     </tr>
+</table>
+</center></div>
+<p>&nbsp; </p>
+<div align="center"><center>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+     qStr = 'Phone calls in WD phone records, May 1995.';
+     writeTableCaption(qStr);
+// -->
+</script>
+
+<table class="dataTable">
+     <tr>
+     <th id="col0" align="right">to the 53 WBH clients</th>
+     <th id="col1" align="right">to all 68 clients</th>
+     </tr>
+     <tr>
+     <td headers="col0" align="right">1006</td>
+     <td headers="col1" align="right">1050</td>
+     </tr>
+</table>
+</center>
+</div>
+
+<p>
+    The CD-ROMs and magazine advertisements contain information that would allow one to
+    determine whether a firm is a potential purchaser of the kinds of equipment both
+    WBH and WD sell, but no additional information that would identify one of the
+    potential purchasers as a better sales prospect than any other.
+    To test the claim of &quot;inevitability,&quot; we might just look at the chance that
+    the overlap would be so large if WD used simple random sampling to select from
+    the CD-ROMS and ads a smaller number of such potential customers to contact.
+    This is not to suggest that WD did use or should have used simple random sampling;
+    at issue is the inevitability of the overlap.
+</p>
+
+<p>
+    Consider the customers WD claimed to have found in magazines.
+    There were 469 advertisers of computer components in the magazines identified in the
+    discovery process, 27 of which were contacted by WD in the first months of business.
+    Suppose WD had selected 27 firms to contact at random without replacement from the 469.
+    The sample would be equally likely to be any subset of 27 of the 469 firms.
+    (There are <sub>469</sub>C<sub>27</sub> such subsets.
+    The subsequent analysis assumes that WD contacted 27 customers from among the
+    magazine advertisers&mdash;the number 27 is taken to be fixed, not random.)
+</p>
+
+<p>
+    Of the 27 firms whose names WD claim to have identified from the computer magazines,
+    26 were customers of WBH.
+    Of the 469 computer advertisers in the magazines, 152 were customers of WBH.
+    What is the chance that a simple random sample of 27 firms from 469, of which
+    152 are customers of WBH, would contain 26 or more WBH customers?
+</p>
+
+<p>
+    This is the same as the chance that a random sample of 27 tickets drawn with
+    replacement from a 0-1 box of 469 tickets, of which 152 are labeled &quot;1&quot; and
+    the remaining (469&nbsp;&minus;&nbsp;152) = 317 are labeled &quot;0,&quot; would contain
+    26 or 27 tickets labeled &quot;1&quot;.
+    The probability is given by the
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric distribution</a>:
+</p>
+
+<p class="math">
+    P(overlap is 26 or more) = P(overlap is 26 or 27)
+</p>
+
+<p class="math">
+    = P(overlap is 26) + P(overlap is 27)
+</p>
+
+<p class="math">
+        = (<sub>152</sub>C<sub>26</sub> &times;
+        <sub>469&minus;152</sub>C<sub>1</sub>)/<sub>469</sub>C<sub>27</sub> +
+        (<sub>152</sub>C<sub>27</sub> &times;
+        <sub>469&minus;152</sub>C<sub>0</sub>)/<sub>469</sub>C<sub>27</sub>
+</p>
+
+<p class="math">
+        = (<sub>152</sub>C<sub>26</sub> &times; 317 +
+        <sub>152</sub>C<sub>27</sub>)/<sub>469</sub>C<sub>27</sub>
+</p>
+
+<p class="math">
+        = 0.0000000000778%.
+</p>
+
+<p>
+    There are 10 zeros between the decimal point and the first &quot;7.&quot;
+    This is comparable to the chance of winning the grand prize in California Lotto two weeks
+    in a row.
+    The hypergeometric distribution also can be used to calculate the probability that if WD
+    had selected 31 firms from the CD-ROM at random, the 31 firms would contain as many of
+    WBH's customers as it did, or even more.
+    The CD-ROMs contain the names, phone numbers, and addresses of at least 90,000 firms
+    that would be potential purchasers of the kind of equipment WD and WBH both sell.
+    We shall assume that all 3310 of WBH's active customers are among the 90,000+
+    on the CD-ROM.
+    There were 22 WBH customers among the 31 firms whose names WD claimed to
+    have gotten from the CD-ROM.
+    The chance that a randomly selected set of 31 firms from the CD-ROM would contain 22 or
+    more of WBH's 3310 active customers is:
+</p>
+
+<p class="math">
+    P(overlap is 22 or more) = P(overlap is 22) + P(overlap is 23) +  &hellip;
+    + P(overlap is 31)
+</p>
+
+<p class="math">
+    &le; (<sub>3310</sub>C<sub>22</sub> &times;
+    <sub>86,690</sub>C<sub>9</sub>)/<sub>90,000</sub>C<sub>31</sub> +
+    (<sub>3310</sub>C<sub>23</sub> &times;
+    <sub>86,690</sub>C<sub>8</sub>)/<sub>90,000</sub>C<sub>31</sub> +
+    &hellip;
+    + (<sub>3310</sub>C<sub>31</sub> &times;
+    <sub>86,690</sub>C<sub>0</sub>)/<sub>90,000</sub>C<sub>31</sub>
+</p>
+
+<p class="math">
+    = 0.0000000000<br>0000000000<br>00038%.
+</p>
+
+<p>
+    (The inequality sign is because there are at least 90,000 computer firms on the CD-ROM.)
+    There are 23 zeros between the decimal point and the &quot;3.&quot;
+    This is less than the chance of winning the grand prize in California Lotto 3 weeks in a row.
+    We can also look at the overall overlap of the two firms' customer lists,
+    without regard to the source from which WD claimed to have gotten the names
+    of their customers.
+    In the United States, there are more than 90,000 firms that are potential purchasers of
+    the kind of equipment WBH and WD sell.
+    Of those, 3310 were active customers of WBH, and 132 are active customers of WD;
+    they have 93 customers in common.
+    If WD's 132 customers had been selected randomly from the 90,000+, the chance
+    their list would overlap with WBH's by 93 or more also would be given by the
+    hypergeometric distribution:
+</p>
+
+<p class="math">
+    P(overlap is 93 or more) = P(overlap is 93) + P(overlap is 94) + &hellip;
+    + P(overlap is 132)
+</p>
+
+<p class="math">
+    &le; ( <sub>3310</sub>C<sub>93</sub> &times;
+    <sub>86,690</sub>C<sub>39</sub>)/<sub>90,000</sub>C<sub>132</sub> +
+    (<sub>3310</sub>C<sub>94</sub> &times;
+    <sub>86,690</sub>C<sub>38</sub>)/<sub>90,000</sub>C<sub>132</sub> +
+    &hellip;
+    + ( <sub>3310</sub>C<sub>132</sub> &times;
+    <sub>86,690</sub>C<sub>0</sub>)/<sub>90,000</sub>C<sub>132</sub>
+</p>
+
+<p class="math">
+    = 0.0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000<br>
+      0000000000<br>0000000000<br>0000000000<br>0000000000<br>00000000013%.
+</p>
+
+<p>
+    (There are 99 zeros between the decimal point and the &quot;1.&quot;
+    The inequality sign is because there are at least 90,000 US computer firms who
+    potentially buy the kind of equipment WD and WBH sell.)
+    This is less than the chance of winning the grand prize in California Lotto 13 weeks in a row.
+</p>
+
+<p>
+    We can also look at whether WD selectively pursued WBH customers when they sought
+    business outside the San Francisco Bay Area.
+    There are at least 60,000 firms outside the Bay Area that potentially buy equipment
+    of the kind sold by WD and WBH. 1769 of these are customers of WBH; 8 are customers of WD;
+    all 8 of WD's customers are also customers of WBH.
+    If WD had selected 8 customers at random from the 60,000 or more outside the Bay Area,
+    the chance that all 8 would have been customers of WBH as well would be
+</p>
+
+<p class="math">
+    P(overlap is 8) = (<sub>1769</sub>C<sub>8</sub> &times;
+    <sub>58,231</sub>C<sub>0</sub>)/<sub>60,000</sub>C<sub>8</sub>
+</p>
+
+<p class="math">
+    = 0.000000000056%.
+</p>
+
+<p>
+    There are 10 zeros between the decimal point and the &quot;5.&quot;
+    WD's telephone billing records were also obtained in discovery.
+    Local calls do not result in specific telephone billing records, so it is not
+    possible to determine the fraction of WD's local calls to customers of WBH.
+    However, long distance and local toll calls&mdash;calls beyond a certain
+    radius from WD&mdash;do result in records that can be analyzed.
+    We shall denote such a call a &quot;recorded&quot; call.
+    In May, 1995, WD placed 1050 recorded calls to a total of 68 firms,
+    of which 53 were customers of WBH.
+    1006 of the 1050 recorded calls were to WBH customers.
+    Let us assume, for the moment, that WD derived their list of 132 customers
+    legitimately.
+    If WD were not specifically targeting customers of WBH, one would expect
+    that the fraction of WD's calls to customers of WBH would be approximately
+    in proportion to the fraction of WD's customers who are also WBH's customers.
+    I.e., one would expect about 93/132 of WD's calls to be to WBH customers, and
+    about 39/132 of their calls to be to non-WBH customers.
+    A plausible model for phone calls, if WD were not specifically targeting
+    WBH's customers, would be that each of WD's recorded calls is placed to a WBH
+    customer with probability 93/132, and to a non-WBH customer with probability
+    39/132, and that whether a call is to a WBH or non-WBH customer is independent
+    from call to call. In that case (and given that WD placed 1050 recorded calls
+    in all), the number of recorded calls by WD to WBH customers would have a
+    <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a>
+    with parameters <em>n</em> = 1050 and <em>p</em> = 93/132. Then
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls are to WBH customers | list of 132
+    customers overlaps by 93) = P(1006 calls to WBH customers | overlap) +
+    P(1007 calls to WBH customers | overlap) +  &nbsp;&hellip;  +
+    P(1050 calls to WBH customers | overlap)
+</p>
+
+<p class="math">
+    = <sub>1050</sub>C<sub>1006</sub> &times; (93/132)<sup>1006</sup> &times; (39/132)<sup>44</sup>
+    + <sub>1050</sub>C<sub>1007</sub> &times;
+    (93/132)<sup>1007</sup> &times; (39/132)<sup>43</sup> +  &nbsp;&hellip;
+    + <sub>1050</sub>C<sub>1050</sub> &times; (93/132)<sup>1050</sup>&times;(39/132)<sup>0</sup>
+</p>
+
+<p class="math">
+    = 0.0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000<br>
+        0000000000<br>0000000000<br>0000000000<br>0000000000<br>000000072%.
+</p>
+
+<p>
+    There are 97 zeros between the decimal point and the &quot;7.&quot;
+    This too is less than the chance of winning Lotto 13 weeks in a row.
+    And it assumes that the list of 132 customers was derived legitimately.
+</p>
+
+<p>
+    A different assumption that also seems reasonable is that the recorded calls to
+    WBH customers would be in proportion to the fraction of WBH customers among
+    those of WD to whom calls would be recorded: 53/68.
+    This would change the answer somewhat:
+    We might then model the number of recorded calls by WD to WBH customers using a
+    binomial distribution with parameters <em>n</em> = 1050 and <em>p</em> = 53/68,
+    which would give
+</p>
+
+<p class="math">
+    <sub>1050</sub>C<sub>1006</sub> &times; (53/68)<sup>1006</sup> &times; (15/68)<sup>44</sup> +
+    <sub>1050</sub>C<sub>1007</sub> &times; (53/68)<sup>1007</sup> &times; (15/68)<sup>43</sup> +
+    &nbsp;&hellip;
+    + <sub>1050</sub>C<sub>1050</sub> &times; (53/68)<sup>1050</sup> &times; (15/68)<sup>0</sup>
+</p>
+
+<p class="math">
+    = 0.0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000026%,
+</p>
+
+<p>
+    which is also rather small.
+</p>
+
+<p>
+    We can use the Multiplication Rule to combine this with the chance that the lists
+    overlap to the extent they do, to find the unconditional chance that WD would
+    make so many of its recorded calls to WBH customers, had it selected its customers
+    at random and placed phone calls independently with equal chance of calling
+    each of its customers. To make this calculation, we assume that there are at
+    least 60,000 potential customers to whom calls by WD would result in phone records,
+    and we use the fact that calls by WD to 2906 of WBH's customers would have
+    resulted in phone records.
+    In that case, under the assumptions already stated, with &quot;customers&quot;
+    taken to mean &quot;customers to whom calls by WD would result in phone records,&quot;
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers) =
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers & 0 of 132 customers shared) +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers & 1 of 132 customers shared) +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers & 2 of 132 customers shared) +
+</p>
+
+<p class="math">
+    + &hellip;   +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers & 132 of 132 customers shared) =
+</p>
+
+<p class="math">
+    = P(1006 or more of 1050 recorded calls to WBH customers | 0 of 132
+    customers shared) &times; P(0 of 132 customers shared) +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers | 1 of 132
+    customers shared) &times; P(1 of 132 customers shared) +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers | 2 of 132
+    customers shared) &times; P(2 of 132 customers shared) +
+</p>
+
+<p class="math">
+    + &hellip;   +
+</p>
+
+<p class="math">
+    P(1006 or more of 1050 recorded calls to WBH customers |
+    132 of 132 customers shared) &times; P(132 of 132 customers shared) =
+</p>
+
+<p class="math">
+    = 0.0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000<br>
+        0000000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000<br>
+        0000000000<br>0000000000<br>0000000000<br>0000000000<br>00000000013%
+</p>
+
+<p class="math">
+    = 1.261&times;10<sup>&minus;151</sup>.
+</p>
+
+<p>
+    This is less than the chance of winning the California Lotto jackpot 20 weeks in a row.
+</p>
+
+<p>
+    Although it is doubtful that anyone would choose customers to call randomly, and although
+    the probability model for telephone calls is not compelling, these calculations
+    clearly refute the defendants' claim that the large overlap of their customer
+    list with that of their former employer was inevitable.
+</p>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    A <em>random variable</em> is an assignment of
+    numbers to outcomes of a random experiment.
+    If a random variable has a <a class="glossRef" href="gloss.htm#countable">countable</a>
+    number of possible values, it is <em>discrete</em>.
+    The <em>probability distribution</em> of a random variable says, for each possible value of
+    the random variable, what the chance is that the random variable will equal that value.
+    Probability distributions can be given by formulae or tables.
+    If a probability distribution assigns probability 100% to the
+    <a class="glossRef" href="gloss.htm#union">union</a>
+    of a countable set of outcomes, the probability distribution is said to be <em>discrete</em>.
+    Probability distributions of discrete random variables are discrete.
+</p>
+
+<p>
+    Consider a box of <em>N</em> tickets of which <em>G</em> are labeled &quot;1&quot; and
+    <em>N</em>&minus;<em>G</em> are labeled &quot;0.&quot;
+    The sample sum of the labels on <em>n</em> tickets drawn at random with replacement
+    from the box has a <em>binomial distribution</em> with parameters <em>n</em> and
+    <em>p</em>=<em>G</em>/<em>N</em>;
+    the probability that the sample sum equals <em>k</em> is
+</p>
+
+<p class="math">
+    <sub><em>n</em></sub>C<sub><em>k</em></sub> &times;
+    <em>p</em><sup><em>k</em></sup> &times;(1&minus;<em>p</em>)<sup><em>n</em>&minus;<em>k</em></sup>,
+    for <em>k</em>=0, 1, &nbsp;&hellip; , <em>n</em>.
+</p>
+
+<p>
+    The number of tickets that must be drawn with replacement until the first
+    time a ticket labeled &quot;1&quot; is drawn has a <em>geometric distribution</em>
+    with parameter <em>p</em>=<em>G</em>/<em>N</em>.
+    The probability that the number equals <em>k</em> is
+</p>
+
+<p class="math">
+    <em>p</em>&times;(1&minus;<em>p</em>)<sup><em>k</em>&minus;1</sup>,
+    for <em>k</em>=1, 2, 3, &hellip;  .
+</p>
+
+<p>
+    The number of tickets that must be drawn with replacement until the <em>r</em>th time a
+    ticket labeled &quot;1&quot; is drawn has a <em>negative binomial distribution</em>
+    with parameters <em>r</em> and <em>p</em>=<em>G</em>/<em>N</em>.
+    The chance that the number equals <em>k</em> is
+</p>
+
+<p class="math">
+    <sub><em>k</em>&minus;1</sub>C<sub><em>r</em>&minus;1</sub>
+    &times; <em>p</em><sup><em>r</em></sup>
+    &times; (1&minus;<em>p</em>)<sup><em>k</em>&minus;<em>r</em></sup>,
+    for <em>k</em>=<em>r</em>, <em>r</em>+1, <em>r</em>+2, &hellip;  .
+</p>
+
+<p>
+    The sample sum of the labels on <em>n</em> tickets drawn at random without replacement
+    (the sample sum of a simple random sample of size <em>n</em>) has an
+    <em>hypergeometric distribution</em>
+    with parameters <em>N</em>, <em>G</em>, and <em>n</em>.
+    The chance that the sample sum equals <em>k</em> is
+</p>
+
+<p class="math">
+    <sub><em>G</em></sub>C<sub><em>k</em></sub> &times;
+    <sub><em>N</em>&minus;<em>G</em></sub>C<sub><em>n</em>&minus;<em>k</em></sub>/<sub><em>N</em></sub>C<sub><em>n</em></sub>, for
+    max(0, <em>n</em>&minus;(<em>N</em>&minus;<em>G</em>)) &le; <em>k</em> &le; min(<em>n</em>, <em>G</em>).
+</p>
+
+<p>
+    These are a few of the discrete distributions that have names; there are many other
+    named distributions, and infinitely many that do not have names.
+</p>
+
+<h2>
+    <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>0-1 box</em>
+    <li>binomial distribution</li>
+    <li>box model</li>
+    <li>combination</li>
+    <li>countable</li>
+    <li>discrete</li>
+    <li>disjoint</li>
+    <li>expected value</li>
+    <li>Fundamental Rule of Counting</li>
+    <li>geometric distribution</li>
+    <li>hypergeometric distribution</li>
+    <li>independent</li>
+    <li>intersection</li>
+    <li>Multiplication Rule</li>
+    <li>mutually exclusive</li>
+    <li>negative binomial distribution</li>
+    <li>probability distribution</li>
+    <li>random experiment</li>
+    <li>random sample with replacement</li>
+    <li>random sample without replacement</li>
+    <li>random variable</li>
+    <li>sample sum</li>
+    <li>set</li>
+    <li>simple random sample</li>
+    <li>standard error</li>
+    <li>subset</li>
+    <li>uniform distribution</li>
+    <li>union</li>
+    <li>unit</li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

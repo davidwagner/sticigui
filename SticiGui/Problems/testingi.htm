@@ -1,0 +1,569 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "5 August 2012 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = 'testing';
+    labSetUp('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Hypothesis Tests
+</h2>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'A man is on trial for murder.  <span class="qSpan">The jury is, in ' +
+               'effect, testing the null hypothesis that the man </span>';
+    var opt = ['is innocent',
+               'is guilty',
+               'was abused as a child',
+               'is mentally ill'
+              ];
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, alphabet[0]);
+    qStr =     ' <span class="qSpan">against the alternative hypothesis that the man ' +
+               '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, alphabet[1]);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   var rolls = 10*listOfRandInts(1,3,5)[0];
+   var eOnes = rolls/6;
+   var seOnes = Math.sqrt((5/6)*(1/6)*rolls);
+   var up = Math.floor(Math.min(eOnes + 2*seOnes,rolls));
+   var down = Math.floor(Math.max(eOnes - 2*seOnes,0));
+   var alpha = binomialCdf(rolls,1/6,down) + 1 - binomialCdf(rolls,1/6,up-1);
+   var timeWord = ' times or fewer';
+   if (down == 1) {timeWord = ' time or fewer';}
+   else if (down == 0) { timeWord = ' times';}
+   var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
+   var optPerm = randPermutation(rawOpt,'inverse');
+   var opt = optPerm[0];
+   opt[opt.length] = 'none of the above';
+   var aVal = alphabet[optPerm[1][0]];
+   var rawOpt = ['<em>n</em>=' + rolls.toString() + ', <em>p</em>=1/6',
+                '<em>p</em>=1/6',
+                '<em>p</em>=1/6, <em>r</em>=1',
+                '<em>N</em>=' + rolls.toString() + ', <em>G</em>=6, <em>n</em>=5',
+                'mean=6, SD=2.041'
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt2 = optPerm[0];
+    opt2[opt2.length] = 'none of the above';
+    var aVal2 = alphabet[optPerm[1][0]];
+   // -->
+</script>
+    An experimenter suspects that a certain die is &quot;loaded;&quot; that is,
+    the chances that the die lands on different faces are not all equal.
+    Recall that dice are made with the sum of the numbers of spots on opposite
+    sides equal to 7: 1 and 6 are opposite each other, 2 and 5 are opposite
+    each other, and 3 and 4 are opposite each other.</p>
+<p>
+    The experimenter decides to test the null hypothesis that the die is
+    fair against the alternative hypothesis that it is not fair, using the
+    following test. The die will be rolled
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( rolls.toString()  + ' ');
+// -->
+</script>
+    times, independently.
+    If the die lands with one spot showing
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( up.toString()   + ' ');
+// -->
+</script>
+    times or more, or
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( down.toString() + timeWord + ', ');
+// -->
+</script>
+    the null hypothesis will be rejected.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Under the null hypothesis, the distribution ' +
+               'of the number of times the die lands showing one spot is</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">with parameters</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt2,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Under the null hypothesis, the expected number of times the die ' +
+              'lands showing one spot is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(eOnes,0.1*eOnes));
+    qStr = ' <span class="qSpan">and the standard error of the number of times the die ' +
+           'lands showing one spot is</span> ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(seOnes,0.1*seOnes));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan"> The significance level of this test is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(alpha,0.005));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var alt = roundToDig(100*rand.next()*1/3,2);
+    var alt2 = roundToDig(100*1/3 - alt,2);
+    var beta = binomialCdf(rolls,alt/100,down) + 1 - binomialCdf(rolls,alt/100,up-1);
+    var qStr = '<span class="qSpan">The power of this test against the alternative ' +
+               'hypothesis that the chance the die lands with one spot showing is ' +
+               alt.toString()  + '%, the chance the die lands with six spots showing is ' +
+               alt2.toString() + '%, and the chances the die lands with two, three, four, ' +
+               'or five spots showing each equal 1/6, is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(beta,0.005));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var alt = roundToDig(100*rand.next()*1/3,2);
+    var alt2 = roundToDig(100*1/3 - alt,2);
+    var aVal = numToRange(alpha,.05*alpha);
+    var qStr = '<span class="qSpan">The power of this test against the alternative ' +
+               'hypothesis that the chance the die lands with two spots showing is ' +
+               alt.toString()  + '%, the chance the die lands with five spots showing is ' +
+               alt2.toString() + '%, and the chances the die lands with one, three, four, or ' +
+               'six spots showing each equal 1/6, is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    Suppose that to have power against a wider variety of alternatives,
+    the experimenter decides to base the test on the maximum
+    number of times any face shows, instead of just the number of times one spot shows.
+    That is, she will roll the die
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( rolls.toString()   + ' ');
+    var up = Math.ceil(rolls/3);
+    var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[5];
+    var rawOpt = ['<em>n</em>=' + rolls.toString() + ', <em>p</em>=1/6',
+            '<em>p</em>=1/6',
+            '<em>p</em>=1/6, <em>r</em>=1',
+            '<em>N</em>=' + rolls.toString() + ', <em>G</em>=6, <em>n</em>=5',
+            'mean=6, SD=2.041'
+            ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt2 = optPerm[0];
+    opt2[opt2.length] = 'none of the above';
+    var aVal2 = alphabet[5];
+// -->
+</script>
+    times and calculate
+</p>
+
+<p align="center">
+    (number of times die lands showing one spot)
+    <br />
+    (number of times die lands showing two spots)
+    <br />
+    (number of times die lands showing three spots)
+    <br />
+    (number of times die lands showing four spots)
+    <br />
+    (number of times die lands showing five spots)
+    <br />
+    and
+    (number of times die lands showing six spots).
+</p>
+
+<p>
+    She will reject the null hypothesis if the largest (maximum) of
+    those 6 random numbers is greater than
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( up.toString()   + '. ');
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Under the null hypothesis, the distribution of ' +
+               'the maximum number of times any face shows is </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">with parameters</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt2,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var draws = 100;
+    var rawOpt = ['a good lot is discarded',
+                'a good lot is not discarded',
+                'a bad lot is discarded',
+                'a bad lot is not discarded'
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][0]];
+    var nullBad = listOfRandInts(1,3,7)[0];
+    var altBad = 10*listOfRandInts(1,2,7)[0];
+    var aVal2 = alphabet[optPerm[1][3]];
+// -->
+</script>
+    A manufacturer of computer memory chips produces chips in lots
+    of 1000. If nothing has gone wrong in the manufacturing process,
+    at most
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln( nullBad.toString()   + ' ');
+// -->
+</script>
+    chips each lot would be defective, but if something does
+    go wrong, there could be far more defective chips. If something
+    goes wrong with a given lot, they discard the entire lot.
+    It would be prohibitively expensive to test every chip in every lot,
+    so they want to make the decision of whether or not to discard
+    a given lot on the basis of the number of defective chips in a simple
+    random sample.
+    They decide they can afford to test
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(  draws.toString()  + ' ');
+// -->
+</script>
+    chips from each lot.
+    You are hired as their statistician.
+</p>
+
+<p>
+    There is a tradeoff between the cost of eroneously discarding a good lot, and the cost
+    of warranty claims if a bad lot is sold.  The next few problems refer to this scenario.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '(Continues previous problem.) <span class="qSpan">A type I error occurs if</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var qStr = '(Continues previous problem.) <span class="qSpan">A type II error occurs if</span>';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
+   var optPerm = randPermutation(rawOpt,'inverse');
+   var opt = optPerm[0];
+   opt[opt.length] = 'none of the above';
+   var aVal = alphabet[optPerm[1][2]];
+   var rawOpt = ['<em>n</em>=' + draws.toString() + ', <em>p</em>=' +
+                    nullBad.toString() + '/1000',
+                '<em>p</em>=' + nullBad.toString() + '/1000',
+                '<em>N</em>=1,000, <em>G</em><=' + nullBad.toString() +
+                    ', <em>n</em>=' + draws.toString(),
+                '<em>p</em>=' + nullBad.toString() + '/1000, <em>r</em>=' + draws.toString(),
+                'mean=' + nullBad.toString() + '/1000 , SD=' +
+                    (roundToDig(Math.sqrt(draws*nullBad*(1000-nullBad)),3)).toString()
+                ];
+   var optPerm = randPermutation(rawOpt,'inverse');
+   var opt2 = optPerm[0];
+   opt2[opt2.length] = 'none of the above';
+   var aVal2 = alphabet[optPerm[1][2]];
+   var qStr = '(Continues previous problem.) <span class="qSpan">Under the null ' +
+              'hypothesis, the number of defective ' +
+              'chips in a simple random sample of size ' + draws.toString()  +
+              ' has a ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt,aVal);
+   qStr = ' distribution, with parameters</span> ';
+   document.writeln(qStr);
+   writeSelectExercise(false,qCtr++,opt2,aVal2);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var alpha = listOfRandInts(1,1,3)[0];
+    var pBlo = 0;
+    var up = 1;
+    while (pBlo < 1- alpha/100) {
+        pBlo = hyperGeoCdf(1000,nullBad,draws,up++);
+    }
+    var alphaAttain = 1-pBlo;
+    var aVal = numToRange(up,.001);
+    var qStr = '(Continues previous problem.) <span class="qSpan"> To have a chance of at most ' +
+               alpha.toString() +
+               '% of discarding a lot given that the lot is good, the test should reject ' +
+               'if the number of defectives in the sample of size ' + draws.toString() +
+               ' is greater than or equal to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+    var power = (1-hyperGeoCdf(1000,altBad,draws,up-1));
+    var aVal = numToRange(power,0.005);
+    var qStr = '(Continues previous problem.) <span class="qSpan"> In that case, the chance of rejecting the ' +
+               'lot if it really has ' + altBad.toString() + ' defective chips is</span>';
+    document.writeln(qStr)
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '(Continues previous problem.) <span class="qSpan">In the long run, ' +
+             'the fraction of lots with ' +
+             nullBad.toString() + ' defectives that will get discarded erroneously ' +
+             ' by this test is</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(alphaAttain,0.005);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var powerBad = nullBad;
+    var pBlo = 1-alpha/100;
+    while (pBlo > alpha/100) {
+        powerBad++;
+        pBlo = hyperGeoCdf(1000,powerBad,draws,up-1);
+    }
+    var aVal = numToRange(powerBad,0.01);
+    var qStr = '(Continues previous problem.) <span class="qSpan">The smallest number of defectives in ' +
+               'the lot for which this test has at least a ' +
+               (100-alpha).toString()  + '% chance of correctly detecting ' +
+               'that the lot was bad is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var pctGood = listOfRandInts(1,90,99)[0];
+    var fracPass = (1-alphaAttain)*pctGood/100 + (1-power)*(1-pctGood/100);
+    var fracBadInPass = (1-power)*(1-pctGood/100)/fracPass;
+    var pctGoodPass = pctGood*(1-alphaAttain);
+    var qStr = '(Continues previous problem.) Suppose that whether or not a lot is good is random, that the ' +
+               'long-run fraction of lots that are good is ' +  pctGood.toString() +
+               '%, and that whether each lot is good is independent of whether ' +
+               'any other lot or lots are good. Assume that the sample drawn from ' +
+               'a lot is independent of whether the lot is good or bad. ' +
+               'To simplify the problem even more, assume that good lots contain ' +
+               'exactly ' + nullBad  + ' defective chips, and that bad lots ' +
+               'contain exactly ' + altBad + ' defective chips.';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
+   var optPerm = randPermutation(rawOpt,'inverse');
+   var opt = optPerm[0];
+   opt[opt.length] = 'none of the above';
+   var aVal = alphabet[optPerm[1][1]];
+   var qStr = '(Continues previous problem.) ' +
+              '<span class="qSpan">The number of lots the manufacturer has ' +
+               'to produce to get one good lot <em>that is not rejected by the ' +
+               'test</em> has a </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">distribution, with parameters</span>';
+    document.writeln(qStr);
+   var rawOpt = ['<em>n</em>=100, <em>p</em>=' +
+                    roundToDig(100 - 100*alphaAttain,2).toString() + '%',
+                '<em>n</em>=100, <em>p</em>=' +
+                    roundToDig(100 - 100*alphaAttain - power,2).toString() + '%',
+                '<em>n</em>=100, <em>p</em>=' +
+                    roundToDig(pctGoodPass,2).toString() + '%',
+                '<em>p</em>=' +
+                    roundToDig(100 - 100*alphaAttain,2).toString() + '%',
+                '<em>p</em>=' +
+                    roundToDig(100 - 100*alphaAttain - power,2).toString() + '%',
+                '<em>p</em>=' +
+                    roundToDig(pctGoodPass,2).toString() + '%',
+                '<em>p</em>=' +
+                    roundToDig(100-100*alphaAttain,2).toString() + '%, <em>r</em>=100',
+                '<em>p</em>=' +
+                    roundToDig(100-100*alphaAttain-power,2).toString() + '%, <em>r</em>=100',
+                '<em>p</em>=' +
+                    roundToDig(pctGoodPass,2).toString() + '%, <em>r</em>=100',
+                '<em>N</em>=1,000, <em>G</em>=(' + nullBad.toString() + '+' +
+                        altBad.toString() + ')/2, <em>n</em>=100',
+                'mean=(' + nullBad.toString() + '+' +
+                    altBad.toString() + ')/2, SD=' +
+                    (roundToDig(Math.sqrt((nullBad + altBad)/2),2)).toString()
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    var aVal = alphabet[optPerm[1][5]];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var qStr = '(Continues previous problem.) ' +
+              '<span class="qSpan">The expected number of lots the manufacturer ' +
+              'must make to get one good lot that is not rejected by the test is</span>';
+   document.writeln(qStr);
+   var aVal = numToRange(100/pctGoodPass,.05*100/pctGoodPass);
+   writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '(Continues previous problem.) ' +
+               '<span class="qSpan">With this test and this mix of good and bad ' +
+               'lots, among the lots that pass the test, the long-run fraction of ' +
+               'lots that are actually bad is</span>';
+    document.writeln(qStr);
+    var aVal = numToRange(fracBadInPass);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+
+</html>

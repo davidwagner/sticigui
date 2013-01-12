@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "sets";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+<h2>
+    Elementary Set Theory
+</h2>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qArr = ['Let <span class="math">A</span> be the set {1, 3, 5, 7, 9} and let <span class="math">B</span> be ' +
+                  'the set containing the positive odd integers less than 10.',
+                'Let <span class="math">A</span> be the set {1, 4, 9, 16} and let <span class="math">B</span> be ' +
+                  'the set containing the squares of the first 4 integers greater than 0.',
+                'Let <span class="math">A</span> be the set {Canada, United States, Mexico} and let ' +
+                  '<span class="math">B</span> be the names of the three most populous countries in ' +
+                  'North America.',
+                ];
+    var which = listOfRandInts(1, 0, qArr.length-1)[0];
+    var qStr = qArr[which] + '</p>';
+    document.writeln(qStr);
+    qStr = '<p><span class="qSpan">Which of the following is/are true? ' +
+           '(Select all that apply.)</span>'
+    document.writeln(qStr);
+    var rawOpt = ['<span class="math">A</span>&sub;<span class="math">B</span>',
+                  '<span class="math">B</span>&sub;<span class="math">A</span>',
+                  '<span class="math">A</span>=<span class="math">B</span>',
+                  '<span class="math">A</span><span class="math">B</span>=<span class="math">A</span>',
+                  '<span class="math">A</span><span class="math">B</span>=<span class="math">B</span>',
+                  '<span class="math">A</span>&cup;<span class="math">B</span>=<span class="math">A</span>',
+                  '<span class="math">A</span>&cup;<span class="math">B</span>=<span class="math">B</span>',
+                  '<span class="math">A</span>&cup;<span class="math">B</span>=<span ' +
+                     'class="math">A</span><span class="math">B</span>',
+                  '<span class="math">A</span><span class="math">B</span>= {}'
+                  ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (i=0; i < rawOpt.length-1; i++) {
+         aVal = aVal + alphabet[optPerm[1][i]]+ '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var raw1 = ['<span class="math">A&sub;A</span>',
+                'If <span class="math">A&sub;B</span> and <span class="math">B&sub;A</span> then ' +
+                      '<span class="math">A = B</span>',
+                'If <span class="math">A&cup;B = {}</span> then <span class="math">B = {}</span>',
+                'If <span class="math">A&sub;B</span> and <span class="math">A&sub;B<sup>c</sup></span> then ' +
+                      '<span class="math">A = {}</span>',
+                'If <span class="math">A&sub;A<sup>c</sup></span> then <span class="math">A = {}</span>',
+                '<span class="math">A&cap;A = A</span>',
+                '<span class="math">A&cup;A = A</span>',
+                'If <span class="math">A<sup>c</sup> = B<sup>c</sup></span> then <span class="math">A = B</span>',
+                'If <span class="math">A&cup;B = A</span> then <span class="math">A&cap;B = B</span>'
+               ];
+    var raw0 = [
+                  'If <span class="math">A&sub;B</span> then <span class="math">B&sub;A</span>',
+                  'If <span class="math">A&cup;B = A</span> then <span class="math">A&cap;B = A</span>',
+                  'If <span class="math">A&sub;B</span> then <span class="math">A<sup>c</sup>&sub;B<sup>c</sup>',
+                  '<span class="math">A &isin; A</span>',
+                  'If <span class="math">A = {}</span> then <span class="math">B&sub;A</span>',
+                  'If <span class="math">A&sub;B</span> and <span class="math">B&sub;A</span> then ' +
+                        '<span class="math">A = {}</span> or <span class="math">B = {}</span>',
+                  'If <span class="math">A&cup;B = A</span> then <span class="math">A&sub;B</span>',
+                  'If <span class="math">{}&sub;A</span> then <span class="math">A = {}</span>'
+                 ];
+    var groups = 4;
+    var parts = breakTF(groups, raw1, raw0);
+    for (var qN = 0; qN < groups; qN++) {
+        var qStr = '<p><span class="qSpan">Which of the following is/are always true?</span> ' +
+               '(Select all that are.)</p><p>';
+        document.writeln(qStr);
+        var optPerm = randPermutation(parts[0][qN],"inverse");
+        var opt = optPerm[0];
+        var aVal = '';
+        for (var i=0; i < parts[1][qN]; i++) {
+            aVal = aVal + alphabet[optPerm[1][i]] + '&';
+        }
+        aVal = aVal.substring(0, aVal.length-1);
+        writeSelectExercise(true, qCtr++, opt, aVal);
+        document.writeln('</p>');
+     }
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<p><span class="qSpan">Which of the following is/are always true? ' +
+               '(Select all that apply.)</span>'
+    document.writeln(qStr);
+    var rawOpt = ['If <span class="math">A<sup>c</sup>&sub;B</span> and <span class="math">B&sub;C</span>, ' +
+                     'then <span class="math">C<sup>c</sup>&sub;A</span>',
+                  'If <span class="math">A&cup;B = C</span> and <span class="math">A&cap;C = {}</span>, ' +
+                     'then <span class="math">A = {}</span>',
+                  '<span class="math">B&sub; A</span>&cup;B</span>',
+                  '<span class="math">A&cap;B&sub;B</span>',
+                  'If <span class="math">A&cup;B = B</span>, then <span class="math">A&sub;B</span>',
+                  'If <span class="math">B&sub;A</span>, then <span class="math">A&cup;B = A</span>',
+                  '<span class="math">A&cup;B&sub;A</span>',
+                  '<span class="math">B&sub;A&cap;B</span>',
+                  'If <span class="math">B&sub;A</span>, then <span class="math">A&cup;B = B</span>',
+                  'If <span class="math">A&cap;B = {}</span> and <span class="math">B&cap;C = {}</span>, then ' +
+                     '<span class="math">A&cap;C = {}</span>'
+                 ];
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = '';
+    for (var i=0; i < rawOpt.length-4; i++) {
+         aVal = aVal + alphabet[optPerm[1][i]]+ '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var setChoices = [
+                       ['animals', 'birds', 'ravens', 'yellow birds'],
+                       ['spherical objects','balls','ping-pong balls','basketballs'],
+                       ['numbers','integers','even numbers','positive odd numbers'],
+                       ['professions', 'instructors', 'professors', 'kindergarten teachers'],
+                       ['sources of information', 'printed and electronic books', 'paperbacks', 'hard-cover books'],
+                       ['musical instruments', 'woodwinds', 'clarinets', 'oboes'],
+                       ['leisure activities','sports','adventure sports','ping-pong games']
+                     ];
+    var whichSet = listOfRandInts(1, 0, setChoices.length-1)[0];
+    var qStr = 'Let the universe <span class="math"><strong>S</strong></span> denote the set of all ' +
+               setChoices[whichSet][0] + '.  Let <span class="math">A</span> be the set of all ' +
+               setChoices[whichSet][1] + '; let <span class="math">B</span> be the set of all ' +
+               setChoices[whichSet][2] + '; and let <span class="math">C</span> be the set of all ' +
+               setChoices[whichSet][3] + '. ';
+    if (whichSet == 0 || whichSet == 3 || whichSet == 4) {
+          qStr += ' Assume that no ' + setChoices[whichSet[2]] + ' are ' + setChoices[whichSet[2]] + '. ';
+    }
+    qStr += '<span class="qSpan">Which of the following are true?</span> (Select all that apply.)';
+    document.writeln(qStr);
+    var rawOpt = [ 
+                  '<span class="math">B&sub;A</span>',
+                  '<span class="math">C&sub;A</span>',
+                  '<span class="math">A&nsub;B</span>',
+                  '<span class="math">A&nsub;C</span>',
+                  '<span class="math">B&nsub;C</span>',
+                  '<span class="math">B&sub;C<sup>c</sup></span>',
+                  '<span class="math">C&sub;B<sup>c</sup></span>',
+                  '<span class="math">B&cup;C&sub;A</span>',
+                  '<span class="math">A<sup>c</sup>&sub;B<sup>c</sup></span>',
+                  '<span class="math">A&cap;B = B</span>',
+                  '<span class="math">A&cup;B = A</span>',
+                  '<span class="math">B&cap;C = {}</span>', //
+                  '<span class="math">B&nsub;A</span>',
+                  '<span class="math">A&sub;C</span>',
+                  '<span class="math">A&sub;B</span>',
+                  '<span class="math">B&sub;C</span>',
+                  '<span class="math">B&nsub;C<sup>c</sup></span>',
+                  '<span class="math">C&nsub;B<sup>c</sup></span>',
+                  '<span class="math">A&sub; B&cup;C</span>',
+                  '<span class="math">A<sup>c</sup>&nsub;B<sup>c</sup></span>',
+                  '<span class="math">A&cap;B = A</span>',
+                  '<span class="math">A&cup;B = B</span>',
+                  '<span class="math">B&cup;C = <strong>S</strong></span>'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = '';
+    for (j = 0; j < 12; j++) {
+        aVal += alphabet[optPerm[1][j]] + '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+// -->
+</script>
+</div>
+
+<!-- ======================================  PROBLEM ================================= -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Which of the following are always true?</span> (Select all that ' +
+               'apply.)';
+    document.writeln(qStr);
+    var rawOpt = ['If every non-A is a non-B then every B is an A',
+                  'If x is in A&cap;B then x is in A and x is in B',
+                  'If x is not in A&cup;B then x is not in A and x is not in B',
+                  'If x is in A&cup;B and x is in C then x is in A&cap;C or x is in B&cap;C',
+                  'If x is in A&cap;B or x is in C then x is in A&cup;C and x is in B&cup;C',
+                  'If x is in A&cap;B or x is in B&cap;C then x is in B',
+//
+                  'If every non-A is a non-B then every A is an B',
+                  'If x is not in A&cap;B then x is not in A and x is not in B',
+                  'If x is not in A or x is not in B then x is not in A&cup;B',
+                  'If x is in A&cup;B or x is in C then x is in A&cup;C and x is in B&cup;C',
+                  'If x is in A&cap;B or x is in B&cap;C then x is in A&cap;C'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = '';
+    for (j = 0; j < 6; j++) {
+        aVal += alphabet[optPerm[1][j]] + '&';
+    }
+    aVal = aVal.substr(0, aVal.length-1);
+    writeSelectExercise(true, qCtr++, opt, aVal);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var highestTicket = (listOfRandInts(1,10,30))[0];
+    var ticketLb = (listOfRandInts(1,5,highestTicket-1))[0];
+    var sumLb = (listOfRandInts(1,8,3*highestTicket-3))[0];
+    var qStr = 'Consider the experiment of drawing 3 tickets without ' +
+               'replacement from a box of tickets labeled {1, 2, 3, ... , ' +
+                highestTicket.toString() + '}. Let <span class="math">A</span> be the event that at ' +
+               'least one of the tickets drawn is labeled with an even number, ' +
+               'let <span class="math">B</span> be the event that at least one of the tickets drawn is ' +
+               'labeled with a prime number, let <span class="math">C</span> be the event that at ' +
+               'least one of the tickets drawn is labeled with a number larger than ' +
+                ticketLb.toString() + ', and let <span class="math">D</span> be the event that the sum ' +
+               'of the numbers on the tickets drawn is at least ' + sumLb.toString() + 
+               '.</p>' +
+               '<p>(a) <span class="qSpan">What is the event <span class="math">A&cap;B</span> in words? <br />' +
+               'The labels of the 3 tickets drawn contain</span>';
+    document.writeln(qStr);
+    var aVal = 'e';
+    var opt = ['\"2\"',
+                 'an even number or a prime number, or both',
+                 'an even number or a prime number, but not both',
+                 'an even number and a prime number, on two different tickets',
+                 'none of the above'
+               ];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p>(b) <span class="qSpan">What is the event <span class="math">A&cup;B</span> in words?<br />' +
+           'The labels of the 3 tickets drawn contain </span>';
+    document.writeln(qStr);
+    var aVal = 'd';
+    var opt = [  "an even number and a prime number",
+                 "at least one even number or at least one prime number, but not both",
+                 "one even number, one prime number, and one number that is neither even nor prime",
+                 "one or more even numbers or one or more prime numbers, or both",
+                 "none of the above"
+              ];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p>(c) <span class="qSpan">Are <span class="math">A</span> and <span class="math">B</span> ' +
+           ' mutually exclusive?</span>';
+    document.writeln(qStr);
+    var aVal = 'a';
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p>(d) <span class="qSpan">Are <span class="math">A</span> and ' +
+           '<span class="math">B<sup>c</sup></span> mutually exclusive?</span>';
+    document.writeln(qStr);
+    var aVal = 'a';
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p>(e) <span class="qSpan"> Are <span class="math">C</span> and ' +
+           '<span class="math">D<sup>c</sup></span> mutually exclusive?</span>';
+    document.writeln(qStr);
+    var aVal = 'a';
+    if (ticketLb + 4 >= sumLb) {
+        aVal = 'b';
+     }
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '</p><p>(f) <span class="qSpan"> Which of the following is/are true ' +
+           '(select all that apply)?</span>';
+    document.writeln(qStr);
+    var aVal = "";
+    if (ticketLb+4 >= sumLb) {
+        aVal = 'c';
+    } else if (sumLb > 3*ticketLb - 3) {
+        aVal = 'd';
+    } else {
+        aVal = 'e';
+    }
+    if (aVal.lastIndexOf('&') == aVal.length - 1) {
+        aVal = aVal.substring(0,aVal.length-1);
+    }
+    var opt = ['<span class="math">A implies B</span>',
+               '<span class="math">B implies A</span>',
+               '<span class="math">C implies D</span>',
+               '<span class="math">D implies C</span>',
+               'none of the above'
+              ];
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    var theTickets = (listOfDistinctRandInts(3,1,highestTicket)).sort(numberLessThan);
+    var smallPrimes = [2,3,5,7,11,13,17,19,23,29];
+    var hasPrime = false;
+    var hasEven = false;
+    var biggerTickLb = false;
+    if (theTickets[theTickets.length - 1] > ticketLb) {
+        biggerTickLb = true;
+    }
+    var sumTickets = 0;
+    var biggerSumLb = false;
+    for (i=0; i < theTickets.length; i++){
+      halfVal = theTickets[i]/2;
+      if (halfVal == Math.floor(halfVal)) {
+          hasEven = true;
+      }
+      sumTickets += theTickets[i];
+      for (j=0; j < smallPrimes.length; j++){
+          if (theTickets[i] == smallPrimes[j]) {
+              hasPrime = true;
+          }
+      }
+    }
+    if (sumTickets >= sumLb) {
+        biggerSumLb = true;
+    }
+    var opt = ['<span class="math">A</span>',
+               '<span class="math">B</span>',
+               '<span class="math">C</span>',
+               '<span class="math">D</span>',
+               '<span class="math">A&cap;B</span>',
+               '<span class="math">A&cap;C</span>',
+               '<span class="math">A&cap;D</span>',
+               '<span class="math">A&cap;B&cap;C</span>',
+               '<span class="math">A&cap;B&cap;D</span>',
+               '<span class="math">A&cap;C&cap;D</span>',
+               '<span class="math">A&cap;B&cap;C&cap;D</span>',
+               '<span class="math">B&cap;C</span>',
+               '<span class="math">B&cap;D</span>',
+               '<span class="math">B&cap;C&cap;D</span>',
+               '<span class="math">C&cap;D</span>',
+               'none of the above'
+               ];
+    var aVal = '';
+    if (hasEven) {aVal += 'a&';}
+    if (hasPrime) {aVal += 'b&';}
+    if (biggerTickLb) {aVal += 'c&';}
+    if (biggerSumLb) {aVal += 'd&';}
+    if (hasEven && hasPrime) {aVal += 'e&';}
+    if (hasEven && biggerTickLb) {aVal += 'f&';}
+    if (hasEven && biggerSumLb) {aVal += 'g&';}
+    if (hasEven && hasPrime && biggerTickLb) {aVal += 'h&';}
+    if (hasEven && hasPrime && biggerSumLb) {aVal += 'i&';}
+    if (hasEven && biggerTickLb && biggerSumLb) {aVal += 'j&';}
+    if (hasEven && hasPrime && biggerTickLb && biggerSumLb) {aVal += 'k&';}
+    if (hasPrime && biggerTickLb) {aVal += 'l&';}
+    if (hasPrime && biggerSumLb) {aVal += 'm&';}
+    if (hasPrime && biggerTickLb && biggerSumLb) {aVal += 'n&';}
+    if (biggerTickLb && biggerSumLb) {aVal += 'o&';}
+    if (aVal.length == 0) aVal = 'p';
+    if (aVal.lastIndexOf('&') == aVal.length - 1) {aVal = aVal.substring(0,aVal.length-1);}
+    qStr = '</p><p>(g) Suppose the numbers on the tickets drawn are ' +
+             theTickets[0] + ', ' + theTickets[1] + ', and ' + theTickets[2] + 
+           '. <span class="qSpan">Which of the following events occurred (select all ' +
+           'that apply)?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p></p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

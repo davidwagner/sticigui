@@ -1,0 +1,257 @@
+The <em><a class="glossRef" href="gloss.xht#cdf">cumulative distribution function</a></em>
+    (<a class="glossRef" href="gloss.xht#cdf">cdf</a>)
+    of a random variable X, denoted F<sub>X</sub>(<em>x</em>), is
+</p>
+<p align="center">
+    F<sub>X</sub>(<em>x</em>) = P(X &le; <em>x</em>).
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.xht#cdf">cdf</a> of X is the chance that X is at most <em>x</em>,
+    as a function of <em>x</em>.
+</p>
+<p>
+    In 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('histograms') + ', ');
+// -->
+</script>
+    we saw <a class="glossRef" href="gloss.xht#percentile">percentiles</a> of lists: the
+    <em>p</em>th <a class="glossRef" href="gloss.xht#percentile">percentile</a> of a list is the smallest
+    number <em>x</em> such that at least <em>p</em>% of the numbers in the list
+    are less than or equal to <em>x</em>.
+    There is a similar definition of the <a class="glossRef" href="gloss.xht#percentile">percentile</a>
+    of the <a class="glossRef" href="gloss.xht#prob_distribution">probability distribution</a> of a
+    <a class="glossRef" href="gloss.xht#random_variable">random variable</a> X: the <em>p</em>th
+    percentile of the
+    distribution of X is the smallest number <em>x</em> such that the chance that
+    X is less than or equal to <em>x</em> is at least <em>p</em>%.
+    That is,
+</p>
+
+<div align="center">
+<center>
+<table BORDER="1">
+    <tr>
+    <td WIDTH="100%">
+        <h4>
+        Percentiles of Probability Distributions
+        </h4>
+        <p>
+        <em>x</em> is the <em>p</em>th <a class="glossRef" href="gloss.xht#percentile">percentile</a>
+        of the <a class="glossRef" href="gloss.xht#prob_distribution">probability distribution</a>
+        of a <a class="glossRef" href="gloss.xht#random_variable">random variable</a> X if and only
+        if <em>x</em> is the smallest number such that
+        </p>
+        <p align="center">
+        P(X &le; <em>x</em>) &ge; <em>p</em>%;
+        </p>
+        <p>
+        equivalently, it is the smallest number <em>x</em> such that
+        </p>
+        <p align="center">
+        F<sub>X</sub>(<em>x</em>) &ge; <em>p</em>%,
+        </p>
+        where F<sub>X</sub>(<em>x</em>) is the
+        <a hrefr="gloss.xht#cdf">cumulative distribution function</a>
+        of X.
+    </td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    One can define the <a class="glossRef" href="gloss.xht#lq">lower
+    quartile</a>, <a class="glossRef" href="gloss.xht#median">median</a>, and <a class="glossRef" href="gloss.xht#uq">upper
+    quartile</a> of a <a class="glossRef" href="gloss.xht#prob_distribution">probability distribution</a>
+    analogously. For example, the <a class="glossRef" href="gloss.xht#lq">lower quartile</a> of the
+    distribution of X is the smallest number <em>x</em> such that
+    P(X&le;<em>x</em>) &ge; 25%.
+    Similarly, the <a class="glossRef" href="gloss.xht#IQR">inter-quartile range</a> of the probability
+    distribution of X is the upper quartile of the distribution of X minus the lower quartile
+    of the distribution of X.
+    It is a measure of how &quot;spread out&quot; the probability distribution of X is.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var nTosses1 = listOfRandInts(1, 5, 20)[0];
+    var p1 = listOfRandInts(1, 40, 60)[0];
+    if (p1 == 50) {
+    p1 = 51;
+    }
+    var med1 = binomialInv(nTosses1, p1/100.0, 0.5);
+    var qStr = '<strong>Example.</strong> Consider tossing a biased coin ' + nTosses1.toString() +
+           ' times, independently.  In each toss, the chance that the coin lands heads is ' +
+           p1.toString() +  '%. What is the median of the probability distribution of the ' +
+           'number of heads?</p>';
+    document.writeln(qStr);
+    var ansStr = '<p><strong>Solution.</strong> The number of times the coin lands heads ' +
+         'has a binomial probability distribution with parameters ' +
+         '<em>n</em>&nbsp;=&nbsp;' + nTosses1.toString() +
+         ' and <em>p</em>&nbsp;=&nbsp;' + p1.toString() +
+         '%. The median of the probability distribution is thus ' +
+         med1.toString() + ':</p><p align="center">' +
+         '<applet width="600" height="400" code="HistHiLite.class" ' +
+         'codebase="../../Java/" archive="PbsGui.zip"><param name="n" value="' +
+         nTosses1.toString() + '"><param name="normalControls" value="false">' +
+         '<param name="p" value="0.5"><param name="hiLiteLo" value="-0.5">' +
+         '<param name="hiLiteHi" value="1.5">' +
+         'You need Java to see this.</applet></p>';
+    document.writeln(ansStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+                'setNP(nTosses1.toString(), (p1/100.0).toString());\n' +
+              'document.applets[' + appNum + '].' +
+                'setLimits( (-0.5).toString(),(med1 + 0.5).toString());\n';
+// -->
+</script>
+
+<p>
+    <strong>Example.</strong> Let X be the <a class="glossRef" href="gloss.xht#sample_sum">sample
+    sum</a> of two <a class="glossRef" href="gloss.xht#independent">independent</a> random draws with
+    replacement from a box of three tickets containing one ticket labeled &quot;0,&quot; one
+    ticket labeled &quot;1,&quot; and one ticket labeled &quot;2.&quot;
+    What is the
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var pct = 5*listOfRandInts(1,1, 19)[0];
+    document.writeln(ordinals[pct] + ' ');
+// -->
+</script>
+    percentile of the probability distribution of X?
+    What is the inter-quartile range of the
+    probability distribution of X?
+</p>
+<p>
+    <strong>Solution.</strong>
+    First we need to find the probability distribution of X.
+    There are 5 possible values X can take: 0, 1, 2, 3, and 4.
+    The chance that X is 0 is the chance that we draw the ticket labeled &quot;0&quot;
+    in both draws:  1/3&times;1/3 = 1/9.
+    The chance that X is 1 is the chance we draw the ticket labeled
+    &quot;0&quot; on one of the two draws and the ticket labeled &quot;1&quot; on one of the
+    two draws; there are two ways this can happen, each has chance 1/3&times;1/3=1/9,
+    so the chance that X is 1 is 2/9.
+    Reasoning this way, we can find that the
+    probability distribution of X is
+</p>
+
+<div align="center">
+<center>
+    <table BORDER="2">
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER"><em>x</em></td>
+    <td ALIGN="CENTER" VALIGN="CENTER">P(X =<em> x</em>)</td>
+    </tr>
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER">0</td>
+    <td ALIGN="CENTER" VALIGN="CENTER">1/9 = 11.11%</td>
+    </tr>
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER">1</td>
+    <td ALIGN="CENTER" VALIGN="CENTER">2/9 = 22.22%</td>
+    </tr>
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER">2</td>
+    <td ALIGN="CENTER" VALIGN="CENTER">3/9 = 33.33%</td>
+    </tr>
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER">3</td>
+    <td ALIGN="CENTER" VALIGN="CENTER">2/9 = 22.22%</td>
+    </tr>
+    <tr>
+    <td ALIGN="CENTER" VALIGN="CENTER">4</td>
+    <td ALIGN="CENTER" VALIGN="CENTER">1/9 = 11.11%</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    As a double-check, we can verify that the sum of all
+    the chances is 100%: 1/9 + 2/9 + 3/9 + 2/9 + 1/9 = 9/9 = 100%.
+    The smallest number <em>x</em>
+    such that the chance X is less than or equal to <em>x</em> is at least
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var pVec = [1/9, 2/9, 3/9, 2/9, 1/9];
+    var valVec = [0, 1, 2, 3, 4];
+    var i = 0;
+    var p = pVec[0];
+    while (p < pct/100.0 && i < pVec.length) {
+    i++;
+    p += pVec[i];
+    }
+    var pctile = valVec[i];
+    document.writeln(pct.toString() + '% is ' + pctile.toString() + ', so ' +
+     pctile.toString() + ' is the ' + pct.toString() + 'th percentile');
+// -->
+</script>
+    of the probability distribution of X.
+    The upper quartile of the
+    distribution of X is 3, and the lower quartile of the probability distribution of X is 1,
+    so the inter-quartile range of the probability distribution of X is 3-1=2.
+</p>
+
+<!--==========================================START PROBLEM==================================-->
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var pctile = listOfRandInts(1,1,99)[0];
+    var pct = Math.ceil(6*pctile/100);
+    var aVal = numToRange(pct,.01);
+    var qStr = 'A fair die will be rolled once. <font color="#009900">The ' +
+        ordinals[pctile] + ' percentile of the number of spots that show on ' +
+        'the top face of the die is</font>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+    writeSolution(pCtr-1,
+       'The ' + ordinals[pctile] + ' percentile is the smallest number <em>x</em> ' +
+       'such that the chance that the number of spots that show is at most <em>x</em> ' +
+       'is at least ' + pctile.toString() + '%. ' +
+       'That value is ' + pct.toString() + ': the chance that the ' +
+       'number of spots is less than or equal to ' + pct.toString() +
+       ' is  ' + roundToDig(pct*100/6,2) + '%, while the chance that ' +
+       'the number of spots is less than or equal to ' + (pct-1).toString() +
+       ' is only ' + roundToDig((pct-1)*100/6,2) + '%. '
+       );
+// -->
+</script>
+</p>
+
+<!--==========================================START PROBLEM==================================-->
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var n = listOfRandInts(1,3,8)[0];
+    var p = 10*(listOfRandInts(1,2,8)[0]);
+    var pVec = new Array();
+    for (i=0; i < n+1; i++) {
+    pVec[i] = binomialCdf(n,p/100,i);
+    }
+    var lTarget = 0.25;
+    var uTarget = 0.75;
+    var lq = 0;
+    while (pVec[lq] < lTarget && lq <= n) {lq++;}
+    var uq = lq;
+    while (pVec[uq] < uTarget && uq <= n) {uq++;}
+    var aVal = numToRange(uq-lq,.01);
+    var qStr = 'A box contains 100 tickets, of which ' + p.toString() +
+           ' are labeled &quot;1;&quot; the rest are labeled &quot;0.&quot; ' +
+           '<font color="#009900">The inter-quartile range of the sample sum of ' +
+           n.toString() + ' independent random draws with replacement from the ' +
+           'box is</font>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+    ansStr = 'The sample sum of ' + n.toString() + ' draws with replacement from this box ' +
+         'has a binomial distribution with parameters <em>n</em>=' + n.toString() +
+         ' and <em>p</em>=' + p.toString() + '%. One can use the binomial histogram tool ' +
+         'to find that the upper quartile of this distribution is ' + roundToDig(uq,0) +
+         ' and the lower quartile of the distribution is ' + roundToDig(lq,0) + ', so the ' +
+         'inter-quartile range is ' + roundToDig(uq,0) + '-' + roundToDig(lq,0) + '=' +
+         roundToDig(uq-lq,0) + '. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</p>

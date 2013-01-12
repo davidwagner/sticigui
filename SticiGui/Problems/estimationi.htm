@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "estimation";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Estimating Means and Percentages
+</h2>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var popSize = 100*listOfRandInts(1,2,9)[0];
+    var samSize = 10*listOfRandInts(1,1,8)[0];
+    var gpa = roundToDig(listOfRandUniforms(1,2.5,3.5)[0],3);
+    var sd = roundToDig((listOfRandInts(1,1000,2500)[0])/1000, 3);
+    var fpcRtn = Math.sqrt((popSize-samSize + 0.0)/((popSize-1.0)*samSize));
+    var se = sd*fpcRtn;
+    var qStr = [['A simple random sample of ','a','a','a'],
+                ['A stratified random sample of ','b','a','b'],
+                ['A systematic random sample of ','a','a','b'],
+                ['A random cluster sample of ','b','a','b'],
+                ['A sample of ','b','b','b'],
+                ['A systematic sample of ','b','b','b']
+              ];
+    var which = listOfRandInts(1,1,qStr.length-1)[0]; // SRS excluded
+    var which2 = listOfRandInts(1,0,1)[0];
+    document.write( qStr[which][0] + cardinals[samSize] +
+        ' students is selected from a population of ' +
+        popSize.toString() + ' students');
+    if ( (which > 0) && (which <= 3) && (which2 > 0) ) {
+        document.writeln(' in such a way that every student in the population ' +
+                        'has the same chance of being in the sample. ');
+    } else {
+        document.writeln('. ');
+    }
+    document.writeln('The average GPA of the students in the population is ' +
+        gpa.toString() + ', and the SD of the GPAs of the students in the population is ' +
+        sd.toString() + '.</p><p><span class="qSpan">The mean GPA of students in the ' +
+        'sample is an unbiased estimator of the average GPA in the population of ' +
+        popSize.toString() + ' students. </span>');
+    writeSelectExercise(false, qCtr++, ['true','not necessarily, or bias not defined'],
+        qStr[which][1+which2]);
+    document.writeln('</p><p><span class="qSpan">The standard error of the mean GPA of ' +
+        'students in the sample is approximately ' +
+        roundToDig(se,4).toString() + '. </span>');
+    writeSelectExercise(false, qCtr++, ['true','not necessarily, or SE not defined'],
+        qStr[which][3]);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var popSize = 100*listOfRandInts(1,2,20)[0];
+    var samSize = 10*listOfRandInts(1,1,12)[0];
+    var samYes = listOfRandInts(1,3,samSize-3)[0];
+    var samPct = roundToDig(100*samYes/samSize,2);
+    var samSd = Math.sqrt(((samYes+0.0)/samSize)*(1.0 - (samYes+0.0)/samSize));
+    var fpc = Math.sqrt((popSize-samSize + 0.0)/(popSize-1.0));
+    var fpcRtn = fpc/Math.sqrt(samSize + 0.0);
+    var seHat = samSd*fpcRtn;
+    var seBnd = 0.5*fpcRtn;
+    document.writeln('A simple random sample of ' + samSize.toString() +
+        ' widgets is drawn from a manufacturing lot of ' + popSize.toString() +
+        ' widgets.  The widgets in the sample are run until they fail. ' +
+        samYes.toString() + ' of the widgets in the sample last more than 3,000 hours.</p><p>' +
+        '<span class="qSpan">An unbiased estimate of the fraction of widgets in ' +
+        'the manufacturing lot that will last more than 3,000 hours is </span>');
+    writeTextExercise(8,qCtr++,numToRange((samYes+0.0)/samSize));
+    document.writeln('</p><p><span class="qSpan">The finite population correction ' +
+        'for the standard error of the sample percentage is </span>');
+    writeTextExercise(8,qCtr++,numToRange(fpc));
+    document.writeln('</p><p><span class="qSpan">The largest the standard error ' +
+        'of the sample percentage could be is </span>');
+    writeTextExercise(8,qCtr++,numToRange(seBnd));
+    document.writeln('</p><p><span class="qSpan">The bootstrap estimate of the ' +
+        'standard error of the sample percentage is </span>');
+    writeTextExercise(8,qCtr++,numToRange(seHat));
+    document.writeln('</p><p><span class="qSpan">The bootstrap estimate of the ' +
+            'standard error of the sample percentage is </span>');
+    var opt = ['unbiased','biased'];
+    var aVal = alphabet[1];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var sizes = listOfDistinctRandInts(2,2,6).sort(numberLessThan);
+    var popSize = 1000*sizes[1];
+    var samSize = 9; // Fix size to make difficulty even.   3*sizes[0];
+    var wts = normPoints(samSize,100,15,2);
+    var wtMean = mean(wts);
+    var wtSd = sampleSd(wts);
+    var fpc = Math.sqrt((popSize - samSize)/(popSize - 1.0));
+    var aVal0 = alphabet[1];
+    var aVal1 = alphabet[0];
+    var aVal2 = alphabet[1];
+    var opt = ['biased','unbiased'];
+    var qStr = 'A simple random sample of size ' + cardinals[samSize] +
+               ' is drawn from a population of ' + popSize.toString() +
+               ' high school students. The students in the sample are administered ' +
+               'IQ tests; the other students are not. The IQs of the students in the ' +
+               'sample are</p><p>';
+    document.writeln(qStr);
+    var header = "IQ";
+    listToTable(header,wts,"transpose","center");
+    qStr = '</p><p><span class="qSpan">The sample mean of the IQ scores is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(wtMean));
+    qStr = '</p><p><span class="qSpan">The collection of IQ scores of all ' +
+           popSize.toString() + ' students is a' ;
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, ['real','fictitious'],aVal2);
+    qStr = 'population.</span></p><p><span class="qSpan"> The sample mean is a(n) ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal0);
+    qStr = 'estimator of the mean IQ score of the population of students.</span></p><p>' +
+           '<span class="qSpan">The sample standard deviation of the IQ scores is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(wtSd));
+    qStr = '</p><p><span class="qSpan"> The sample standard deviation is a(n)';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    qStr = ' estimator of the standard deviation of the population.</span></p><p> ' +
+           '<span class="qSpan">The finite population correction is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(fpc));
+    qStr = '</p><p><span class="qSpan">The estimated standard error of the sample mean ' +
+           'of the IQ scores is </span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(fpc*sampleSd(wts)/Math.sqrt(samSize)));
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var smalln = 10*(listOfRandInts(1,5,15))[0];
+   var popSize = smalln*(listOfRandInts(1,10,20))[0];
+   var fracs = (listOfDistinctRandInts(2,2,5)).sort(numberLessThan);
+   var fSq = fracs[0]/fracs[1];
+   fSq *= fSq; //
+   fSq = (N-n2)*n1/((N-n1)*n2)
+   n2*fSq = (N*n1 - n2*n1)/(N-n1)
+   n2*(fSq - n1/(N-n1)) = N*n1/(N-n1)
+   n2 = N*n1/((N-n1)*(fSq -n1/(N-n1)))
+   n2 = N/(((N/n1 - 1)*(
+   var fracSize = Math.ceil(popSize/(1.0 + fSq*( ((popSize+0.0)/smalln) - 1.0) ) );
+// debug
+alert(popSize/(1.0 + fSq*( ((popSize+0.0)/smalln) - 1.0) ));
+   var qStr = 'I wish to estimate a population percentage using the sample ' +
+              'percentage computed from a simple random sample. The population has ' +
+               popSize.toString()  + ' units. </p>' +
+               '<p><span class="qSpan"> How large would a simple random sample need ' +
+               'to be for the SE of the sample percentage to be no more than ' +
+               fracs[0].toString() + '/' + fracs[1].toString()  + ' of the SE of the ' +
+               'sample percentage for a simple random sample of size ' +
+               smalln.toString()   + '? </span>';
+   document.writeln(qStr);
+   writeTextExercise(8, qCtr++, numToRange(fracSize,.01));
+   document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "zTest";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+<div class="indent">
+<h2>
+    The <em>z</em> test, the <em>t</em> test, and confidence intervals using
+    Student's <em>t</em>-curve.
+</h2>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var samSizes = vMult(50, listOfDistinctRandInts(2, 3, 8).sort(numberLessThan));
+    var theMeans = new Array(2);
+    theMeans[0] = listOfRandInts(1, 200, 500)[0]; // slow
+    var theSds = listOfDistinctRandInts(2, 60, 150).sort(numberLessThan); // smaller for DSL
+    var sigLevels = [1, 5, 10];
+    var sigInx = listOfDistinctRandInts(2, 0, sigLevels.length - 1);
+    var sig = sigLevels[sigInx[0]];
+    var zCrit = normInv(1.0 - sig/100.0);
+    var seHat = Math.sqrt(theSds[0]*theSds[0]/samSizes[0] + theSds[1]*theSds[1]/samSizes[1]);
+    var rawScore = 0.5*listOfRandInts(1,1,7)[0];
+    theMeans[1] = Math.floor(theMeans[0] + rawScore*seHat);
+    var zScore = (theMeans[1] - theMeans[0])/seHat;
+    var pValue = 1.0 - normCdf(zScore);
+    var qStr = 'An internet service provider (ISP) provides internet connections to 100,000 ' +
+                'customers. 10,000 of the customers have high-speed connections and ' +
+                '90,000 of the customers have low-speed connections.  The ISP wants to know ' +
+                'whether, on the average, customers who have high-speed connections use ' +
+                'email more frequently than customers who have low-speed connections. ' +
+                'To find out, the ISP takes a simple random sample of ' + samSizes[0] +
+                ' high-speed-connection customers and an independent random sample of ' +
+                samSizes[1] + ' low-speed-connection customers.  For each customer in the ' +
+                'sample, they find the number of email messages sent and received ' +
+                'in the previous month. Then they compute the sample mean and sample ' +
+                'standard deviation of each of the two sets of numbers. </p>' +
+                '<p>Let <em>h</em> denote the average number of emails ' +
+                'sent and received in the previous month among all customers with high-speed ' +
+                'connections, and let <em>l</em> denote the average ' +
+                'number of emails sent and received in the previous month among all ' +
+                'customers with low-speed connections. ' +
+                'Let <em>H</em> and <em>L</em> be the corresponding sample means. ' +
+                'Let <em>S</em><sub><em>h</em></sub> be the ' +
+                'sample standard deviation of the number of emails sent and received in ' +
+                'the previous month by customers with high-speed connections, and let ' +
+                '<em>S</em><sub><em>l</em></sub> be the sample standard deviation of the ' +
+                'number of emails sent and received in the previous month by customers ' +
+                'with low-speed connections.</p>' +
+                '<p><span class="qSpan">Which of these hypotheses ' +
+                'is the most appropriate null hypothesis for this problem? </span>';
+    document.writeln(qStr);
+    var rawOpt = ['<em>h</em> = <em>l</em>',
+                  '<em>h</em> &gt; <em>l</em>',
+                  '<em>h</em> &lt; <em>l</em>',
+                  '<em>H</em> = <em>L</em>',
+                  '<em>H</em> &gt; <em>L</em>',
+                  '<em>H</em> &lt; <em>L</em>'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p><span class="qSpan">Which of these hypotheses is the most appropriate ' +
+               'alternative hypothesis for this problem?</span>';
+    document.writeln(qStr);
+    var rawOpt = ['<em>h</em> = <em>l</em>',
+                  '<em>h</em> &gt; <em>l</em>',
+                  '<em>h</em> &lt; <em>l</em>',
+                  '<em>H</em> = <em>L</em>',
+                  '<em>H</em> &gt; <em>L</em>',
+                  '<em>H</em> &lt; <em>L</em>'
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][1]];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p>Suppose that the population distributions of the number of emails ' +
+               'sent in the by high-speed-connection customers and by low-speed-connection ' +
+               'customers both are nearly normal. ' +
+               '<span class="qSpan">Which of the following have probability histograms ' +
+               'that can be approximated well by a normal curve, after transforming to ' +
+               'standard units? (select all that apply)</span></p><p>';
+    document.writeln(qStr);
+    var rawOpt = ['<em>H</em>',
+                  '<em>L</em>',
+                  '<em>H</em> - <em>L</em>',
+                  '<em>h</em>',
+                  '<em>l</em>',
+                  '<em>h</em> - <em>l</em>'
+                 ];
+     var optPerm = randPermutation(rawOpt,'inverse');
+     var opt = optPerm[0];
+     var aVal = '';
+     for ( var i=0; i < 3; i++) {
+         aVal += alphabet[optPerm[1][i]] + '&';
+     }
+     aVal = aVal.substr(0, aVal.length-1);
+     writeSelectExercise(true, qCtr++, opt, aVal);
+     var qStr = '</p><p>Suppose we construct a <em>Z</em> statistic by transforming ' +
+                '<em>H</em>&nbsp;-&nbsp;<em>L</em> to standard units (approximately). ' +
+                '<span class="qSpan">Under the alternative hypothesis, the expected value ' +
+                'of <em>Z</em> would be </span>';
+     document.writeln(qStr);
+     var opt = ['negative', 'zero', 'positive'];
+     var aVal = alphabet[2];
+     writeSelectExercise(false, qCtr++, opt, aVal);
+     var qStr = '<span class="qSpan">, so we should </span>';
+     document.writeln(qStr);
+     var rawOpt = ['use a left-tail test',
+                   'use a two-tail test',
+                   'use a right-tail test',
+                   'consult a statistician'
+                  ];
+     var optPerm = randPermutation(rawOpt,'inverse');
+     var opt = optPerm[0];
+     var aVal = alphabet[optPerm[1][2]];
+     writeSelectExercise(false, qCtr++, opt, aVal);
+     var qStr = '</p><p><span class="qSpan">To test the null hypothesis at significance ' +
+                'level ' + sig.toString() + '%, we should reject the null hypothesis if ' +
+                '</span>';
+     document.writeln(qStr);
+     var opt = ['the <em>z</em>-score','the absolute value of the <em>z</em>-score'];
+     aVal = alphabet[0];
+     writeSelectExercise(false, qCtr++, opt, aVal);
+     var opt = ['is less than',
+                'is greater than'
+               ];
+     aVal = alphabet[1];
+     writeSelectExercise(false, qCtr++, opt, aVal);
+     writeTextExercise(8, qCtr++, numToRange(zCrit));
+     var qStr = '</p><p>For high-speed-connection customers, the sample mean number of ' +
+                'emails in the month is ' + theMeans[1].toString() +
+                ', and the sample standard deviation of the number of emails in the ' +
+                'the month is ' + theSds[0].toString() +
+                '. For low-speed-connection customers, the sample mean number of emails ' +
+                ' in the month is ' + theMeans[0].toString() + ', and the sample standard ' +
+                'deviation of the number of emails in the month is ' + theSds[1].toString() +
+                '.</p>' +
+                '<p><span class="qSpan">The estimated standard error of ' +
+                '<em>H</em>&nbsp;-&nbsp;<em>L</em> is </span>';
+     document.writeln(qStr);
+     writeTextExercise(8, qCtr++, numToRange(seHat));
+     var qStr = '</p><p><span class="qSpan">The <em>z</em>-score is </span>';
+     document.writeln(qStr);
+     writeTextExercise(8, qCtr++, numToRange(zScore));
+     var qStr = '</p><p><span class="qSpan">The <em>P</em>-value of the null hypothesis is ' +
+                '</span>';
+     document.writeln(qStr);
+     writeTextExercise(8, qCtr++, numToRange(pValue,.001));
+     var qStr = '</p><p><span class="qSpan">The ISP should reject the null hypothesis.</span>';
+     document.writeln(qStr);
+     var opt = ['false','true'];
+     if (pValue < sig/100.0) {
+         aVal = 'b';
+     } else {
+         aVal = 'a';
+     }
+     writeSelectExercise(false, qCtr++, opt, aVal);
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var samSize = listOfRandInts(1, 26, 39)[0];
+    var sig = sigLevels[sigInx[1]]; // WARNING!  pieces set in previous problem!
+    var subRent = 10*listOfRandInts(1,55,70)[0];
+    var targRent = subRent/0.8;
+    var samSd = listOfRandInts(1, 50, 125)[0];
+    var seHat = samSd/Math.sqrt(samSize);
+    var tRaw = listOfRandInts(1, -4, 5)[0];
+    if (tRaw == 0) {
+        tRaw = 1;
+    }
+    var samMean = roundToDig(targRent + tRaw*seHat, 0);
+    samMean = Math.min(Math.max(.5*targRent, samMean), 1.5*targRent);
+    var tScore = (samMean - targRent)/seHat;
+    var pValue = tCdf(samSize-1, tScore);
+    var tCrit = tInv(sig/100.0, samSize-1);
+    var tCrit2 = -tInv(sig/200.0, samSize-1);
+    var loEnd = samMean - tCrit2*seHat;
+    var hiEnd = samMean + tCrit2*seHat;
+    var qStr = 'At a particular university in an urban area, official policy mandates that ' +
+               'university-owned student housing shall rent for no more than 80% of the market ' +
+               'rate for comparable housing. Rent for all two-bedroom university-owned student ' +
+               'apartments is $' + subRent.toString() + '/month. All the university-owned ' +
+               'two-bedroom student apartments have one bathroom, no view, and are ' +
+               'comparable in construction, size, age, amenities, <em>etc</em>. To determine ' +
+               'whether the rent satisfies the rules, an administrator proposes to compile ' +
+               'as complete a list as he can of two-bedroom apartments for rent in the area, ' +
+               'using sources including newspaper ads, commercial rental listing services, and ' +
+               'bulletin boards.  Then, he ' +
+               'will take a simple random sample of 150 of the apartments in the list, and ' +
+               'visit each one to determine ' +
+               'whether it is comparable to the university-owned apartments in size, number ' +
+               'of bathrooms, state of repair, amenities (such as laundry facilities, ' +
+               'bathtub/shower), <em>etc</em>. He will compute the sample mean rent of those ' +
+               'apartments he finds to be comparable to the university-owned apartments. ' +
+               'Let <em>r</em> denote the mean rent of all comparable two-bedroom apartments ' +
+               'in the area, and let <em>R</em> denote the sample mean rent of the comparable ' +
+               'two-bedroom apartments the administrator finds.  The administrator will ' +
+               'approach the problem of determining whether the university is complying with ' +
+               'the mandate as an hypothesis test. </p>' +
+               '<p><span class="qSpan">The most appropriate alternative hypothesis is</span>';
+    document.writeln(qStr);
+    var opt = ['<em>r</em>',
+               '<em>R</em>'
+              ];
+    writeSelectExercise(false, qCtr++, opt, alphabet[0]);
+    var opt = [  '&lt;',
+                 '=',
+                 '&gt;'
+              ];
+    writeSelectExercise(false, qCtr++, opt, alphabet[0]);
+    document.writeln('$');
+    writeTextExercise(8, qCtr++, numToRange(targRent,0.001));
+    var qStr = '.</p><p>Suppose that the administrator finds that ' +
+               samSize.toString() + ' of the apartments are comparable to two-bedroom ' +
+               'university-owned student apartments. Assume that </p>' +
+               '<ul><li> these ' + samSize.toString() + ' apartments can be treated as a ' +
+               'random sample of size ' + samSize.toString() + ' with replacement from ' +
+               'the population of comparable two-bedroom apartments for rent in the area, ' +
+               'and </li>' +
+               '<li>the distribution of rents for comparable apartments in the area ' +
+               'is approximately normal. </li></ul>' +
+               '<p>Suppose that the sample mean of the rents is $' + samMean.toString() +
+               ' and the sample standard deviation of the rents is $' + samSd.toString() +
+               '.</p><p><span class="qSpan">The estimated standard error of the sample ' +
+               'mean is $</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(seHat));
+    var qStr = '</p><p><span class="qSpan">The number of degrees of freedom for Student\'s ' +
+               '<em>t</em>-curve to approximate the probability histogram of the <em>T</em> ' +
+               'statistic is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(samSize-1));
+    var qStr = '</p><p><span class="qSpan">The observed value of the <em>T</em> statistic ' +
+               'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(tScore));
+    var qStr = '</p><p><span class="qSpan">The <em>P</em>-value of the null hypothesis ' +
+               'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pValue,.001));
+    var qStr = '</p><p><span class="qSpan">The null hypothesis should be rejected at ' +
+               'significance level ' + sig.toString() + '%.</span>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    if (pValue > sig/100.0) {
+        aVal = 'a';
+    } else {
+        aVal = 'b';
+    }
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p><span class="qSpan">A (two-sided) ' + (100-sig).toString() +
+               '% confidence interval for the mean rent of comparable two-bedroom ' +
+               'apartments in the area is from $';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(loEnd));
+    document.writeln(' (low) to $');
+    writeTextExercise(8, qCtr++, numToRange(hiEnd));
+    document.writeln(' (high).</span></p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+
+</html>

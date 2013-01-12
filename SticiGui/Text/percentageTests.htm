@@ -1,0 +1,1575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2011 15:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "percentageTests";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<h1>
+    Testing Equality of Two Percentages
+</h1>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('testing') + ', ');
+// -->
+</script>
+    introduced a conceptual framework for statistical hypothesis testing.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('experiments') + ', ');
+// -->
+</script>
+    presented important
+    statistical considerations for determining whether a 
+    <a class="glossRef" href="gloss.htm#treatment">treatment</a>
+    has an effect.
+    Treatment is meant loosely&mdash;it could be a drug, an advertising campaign, a car wax,
+    a test preparation course, a fertilizer, <em>etc</em>.
+    The best way to determine whether a treatment has an effect is to use the
+    <a class="glossRef" href="gloss.htm#method_of_comparison">method of comparison</a> in an
+    <a class="glossRef" href="gloss.htm#experiment">experiment</a> in which 
+    <a class="glossRef" href="gloss.htm#subject">subjects</a>
+    are assigned at random to the <a class="glossRef" href="gloss.htm#treatment_group">treatment group</a>
+    or the <a class="glossRef" href="gloss.htm#control_group">control group</a>.
+</p>
+
+<p>
+    When the measurement of each subject can be represented by 0 or 1 (<em>e.g.</em>,
+    subject's condition improves or not, subject buys something or not, subject clicks a
+    link or not, subject passes an exam or not), deciding whether the treatment has an effect
+    is essentially testing the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+    that two percentages are equal&mdash;which is the problem this chapter addresses.
+</p>
+
+<p>
+    Different ways of drawing samples lead to different tests.
+    In one sampling design (the <em>randomization model</em>), the entire
+    collection of subjects is allocated randomly between treatment and control,
+    which makes the samples <a class="glossRef" href="gloss.htm#dependent">dependent</a>.
+    <a class="glossRef" href="gloss.htm#conditional_probability">Conditioning</a>
+    on the total number of ones in the treatment and control groups leads to
+    <em>Fisher's exact test</em>, which is based on the
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric distribution</a>
+    of the number of ones in the treatment group if the null hypothesis is true.
+    When the sample sizes are large, calculating the rejection region for
+    Fisher's Exact Test is cumbersome, but the
+    <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>
+    to the hypergeometric distribution gives an <em>approximate test</em>&mdash;a test
+    whose <a class="glossRef" href="gloss.htm#significance">significance level</a>
+    is approximately what it claims to be.
+</p>
+
+<p>
+    In a second sampling design (the <em>population model</em>), the two samples are
+    <a class="glossRef" href="gloss.htm#independent">independent</a> random samples with replacement
+    from two populations; conditioning on the total number of ones in the two samples
+    again leads to Fisher's exact test, which can be approximated as before.
+</p>
+
+<p>
+    There is another approximate approach to testing the null hypothesis in the
+    population model: If the sample sizes are large (but the samples are drawn with
+    replacement or are small compared to the two population sizes), the
+    normal approximation to the distribution of the difference between the two
+    <a class="glossRef" href="gloss.htm#sample_percentage">sample percentages</a> tends to be accurate.
+    If the null hypothesis is true, the <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the difference between the sample percentages is zero, and the
+    <a class="glossRef" href="gloss.htm#se">SE</a> of the difference in sample percentages can be
+    estimated by pooling the two samples.
+    That allows one to transform the difference of sample percentages approximately into
+    <a class="glossRef" href="gloss.htm#standard_units">standard units</a>, and to base an hypothesis
+    test on the normal approximation to the probability distribution of the approximately
+    standardized difference.
+    Surprisingly, the resulting approximate test is essentially the normal
+    approximation to Fisher's exact test, even though the assumptions of
+    the two tests are different.
+</p>
+
+<h2><a id="fisher_dependent"></a>
+    Fisher's Exact Test for an Effect&mdash;Dependent Samples
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/gae9DXAcXU4?start=&end=790" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Suppose we own a start-up company that offers e-tailers a service for targeting their
+    Web advertising.
+    Consumers register with our service by filling out a form indicating their likes
+    and dislikes, gender, age, etc. We store cookies on each consumer’s computer to keep
+    track of who he is.
+    When a consumer with one of our cookies visits the Web site of any of our clients,
+    we use the consumer's likes and dislikes to select (from a collection of the client's ads)
+    the advertisement we think he is most likely to respond to.
+    This is called <em>targeted advertising</em>.
+    The targeting service is free to consumers; we charge the e-tailers.
+    We can raise venture capital if we can show that targeting makes e-tailers'
+    advertisements more effective.
+</p>
+
+<p>
+    We offer our service free to a large e-tailer. The e-tailer has a collection of
+    advertisements that it usually uses in rotation: Each time a consumer arrives at
+    the site, the server selects the next ad in the sequence to show to the consumer;
+    the cycle starts over when all the ads have been shown.
+</p>
+
+<p>
+    To test whether targeting works, we implement a <a class="glossRef" href="gloss.htm#randomized">randomized, controlled</a>,
+    <a class="glossRef" href="gloss.htm#blind">blind experiment</a> by installing our software on the e-tailer's
+    server to work as follows: Each time a consumer arrives at the site, with probability 50%
+    the server shows the consumer the ad our targeting software selects, and with probability
+    50% the server shows the consumer the next ad in the rotation&mdash;the control ad.
+    The decision of whether to show a consumer the targeted ad or the control ad is
+    independent from consumer to consumer.
+    For each consumer, the software records which strategy was used (target or rotation),
+    and whether the consumer buys anything.
+    The consumers who were shown the targeted ad comprise the treatment group;
+    the other consumers comprise the control group.
+    If a consumer visits the site more than once during the trial period, we ignore all of
+    that consumer's visits but the first.
+    Each subject (consumer) is assigned at random either to treatment or to control,
+    and no subject knows which group he is in, so this is a controlled, randomized,
+    blind experiment.
+    There is no subjective element to determining whether a subject purchased something,
+    so the lack of a double blind does not introduce bias.
+</p>
+
+<p>
+    Suppose that <span class="math">N</span> consumers visit the site during the trial, that
+    <span class="math">n<sub>t</sub></span> of
+    them are assigned to the treatment group, that <span class="math">n<sub>c</sub></span>
+    of them are assigned
+    to the control group, and that <span class="math">G</span> of the consumers buy something.
+    (The mnemonic is that <span class="math">c</span> stands for control, 
+    <span class="math">t</span> for treatment,
+    and <span class="math">G</span> for the number of <em>good</em> 
+    customers&mdash;customers who buy something.)
+    We want to know whether the targeting affects whether subjects buy anything.
+    Only some of the consumers see the targeted ad, and only some see the
+    control ad, so answering this question involves hypothetical
+    counterfactual situations&mdash;what would have happened had the all the
+    consumers been shown a targeted ad, and what would have happened
+    had all the consumers been shown a control ad.
+    We treat the <span class="math">N</span> consumers as a fixed group, without regard for how
+    they were drawn from the more general population of people who shop online.
+    Any conclusions we draw about the consumers who visited the site might not
+    hold for the general population: We should be wary of extrapolating the
+    results to consumers who were not in the sample unless we know that the
+    randomized group is itself a random sample from the larger population.
+    This set-up, in which the <span class="math">N</span> subjects are a fixed group and the only
+    random element is in allocating some of the subjects to the treatment
+    group and the rest to the control group, is called the <em>randomization model</em>.
+    Later in this chapter we consider a <em>population model</em>, in which the
+    treatment group and the control group are random samples from a much larger
+    population.
+    In the population model, the null hypothesis will be slightly different,
+    but we shall be able to extrapolate the results from the samples to the
+    populations from which they were drawn, because they were drawn at random.
+</p>
+
+<p>
+    We can think of the experiment in the following way: The <span class="math">i</span>th
+    consumer has a ticket with two numbers on it: 
+    The first number,
+    <span class="math">c<sub>i</sub></span>, is 1 if the consumer would have bought something if shown the
+    control ad, and 0 if not.
+    The second number, <span class="math">t<sub>i</sub></span>, is 1 if the consumer would have bought something
+    if shown the targeted ad, and 0 if not.
+    There are <span class="math">N</span> tickets in all.
+    Under the null hypothesis that targeting has no effect,
+    <span class="math">t<sub>i</sub>=c<sub>i</sub></span> for each
+    <span class="math">i=1, 2, &nbsp;&hellip;</span> , <span class="math">N</span>.
+    That is, each consumer either will buy or will not buy,
+    regardless of the ad he is shown: Whether he will buy is determined
+    before he is assigned to treatment or control.
+</p>
+
+<p>
+    For the <span class="math">i</span>th consumer, we observe either <span class="math">c<sub>i</sub></span>
+    or <span class="math">t<sub>i</sub></span>, but not both.
+    The percentage of consumers who would have purchased something
+    if every consumer had been shown the control ads is
+</p>
+
+<p class="math">
+    p<sub>c</sub> = ( c<sub>1</sub> + c<sub>2</sub> +  &hellip;  +
+    c<sub>N</sub> )/N.
+</p>
+
+<p>
+    The percentage of consumers who would have bought something if all had
+    been shown the targeted ads is
+</p>
+
+<p class="math">
+    p<sub>t</sub> = ( t<sub>1</sub> + t<sub>2</sub>
+    + &hellip; + t<sub>N</sub> )/N.
+</p>
+
+<p>
+    Let
+</p>
+
+<p class="math">
+    &mu; = p<sub>t</sub> &minus; p<sub>c</sub>
+</p>
+
+<p>
+    be the difference between the percentage of consumers who would have
+    bought had all been shown the targeted ad, and the percentage of
+    consumers who would have bought had all been shown the control ad.
+    Under the null hypothesis that targeting does not make a difference,
+    <span class="math">t<sub>i</sub> = c<sub>i</sub></span> for all
+    <span class="math">i=1, 2, &hellip;</span> , <span class="math">N</span>.
+    Thus if the null hypothesis is true, <span class="math">&mu;  =  0</span>, but the
+    hypothesis that <span class="math">&mu;&nbsp;= &nbsp;0</span> is weaker than the null
+    hypothesis: If <span class="math">&mu;&nbsp;&ne;&nbsp;0</span>, the null hypothesis is
+    false, but the null hypothesis can be false and yet still <span class="math">&mu;  =  0</span>.
+    (That occurs if the number of consumers who would have bought something
+    if all had been shown the targeted ads is equal to the number of consumers
+    who would have bought something if all had been shown the control ads,
+    but the purchases were made by a different subset of consumers.)
+    The alternative hypothesis, that targeting helps, is that <span class="math">&mu;&nbsp;&gt;&nbsp;0</span>.
+    We would like to test the null hypothesis at significance level 5%.
+</p>
+
+
+<p>
+    Let <span class="math">X<sub>t</sub></span> be the number of sales to consumers
+    in the treatment group,
+    the sum of the observed values of <span class="math">t<sub>i</sub></span>.
+    If the null hypothesis is true, the same <span class="math">G</span> consumers would have bought
+    whether they were assigned to treatment or to control, and the number
+    of the consumers in the treatment group who bought something is the
+    number of those <span class="math">G</span> in a simple random sample of size
+    <span class="math">n<sub>t</sub></span> from the population of <span class="math">N</span> consumers.
+    Thus, for any fixed values of <span class="math">N</span>, <span class="math">G</span>, and
+    <span class="math">n<sub>t</sub></span>, <span class="math">X<sub>t</sub></span> has an
+    hypergeometric distribution with parameters <span class="math">N</span>, <span class="math">G</span>,
+    and <span class="math">n<sub>t</sub></span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    If the alternative hypothesis <span class="math">&mu;&nbsp;&gt;&nbsp;0</span> is true,
+    <span class="math">X<sub>t</sub></span> tends to
+    be larger than it would if the null hypothesis is true,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Technically, it is <em>stochastically larger</em>: for every <span class="math">x</span>, ' +
+           'the chance that <span class="math">X<sub>t</sub>&nbsp;&gt;&nbsp;x</span> is at least as large ' +
+           'if the alternative hypothesis is true as it is if the null hypothesis is true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    so we should design our test to reject the null hypothesis for large
+    values of <span class="math">X<sub>t</sub></span>.
+    That is, our rejection region should contain all values exceeding
+    some threshold value <span class="math">x<sub>0</sub></span>: We will reject the null hypothesis if
+    <span class="math">X<sub>t</sub>  &gt; x<sub>0</sub></span>.
+    We need to pick <span class="math">x<sub>0</sub></span> so that the test has the desired significance level, 5%.
+</p>
+</div>
+
+<p>
+    We cannot calculate the threshold value <span class="math">x<sub>0</sub></span> until we know
+    <span class="math">N</span>, <span class="math">n<sub>t</sub></span>, and <span class="math">G</span>.
+    Once we observe them, we can find the smallest value <span class="math">x<sub>0</sub></span> so that the
+    probability that <span class="math">X<sub>t</sub></span> is larger than 
+    <span class="math">x<sub>0</sub></span> if the
+    null hypothesis is true
+    is at most 5%, the chosen significance level.
+    Our rule for testing the null hypothesis then is to reject the null
+    hypothesis if <span class="math">X<sub>t</sub> &gt; x<sub>0</sub></span>,
+    and not to reject the null hypothesis otherwise.
+    This is called <em>Fisher's exact test</em> for the equality of two
+    percentages (against a <a class="glossRef" href="gloss.htm#sides">one-sided alternative</a>).
+    The test is called <em>exact</em> because its probability of a
+    <a class="glossRef" href="gloss.htm#type_error">Type I error</a> can be computed exactly.
+</p>
+
+<h2>
+    <a id="norm_approx_fisher"></a>The Normal Approximation to Fisher's Exact Test
+</h2>
+
+<p>
+    If <span class="math">N</span> is large and <span class="math">n<sub>t</sub></span>
+    is neither close to zero nor close to <span class="math">N</span>,
+    computing the hypergeometric probabilities will be difficult,
+    but the <a class="glossRef" href="gloss.htm#normal_approximation">normal approximation</a>
+    to the probability distribution of <span class="math">X<sub>t</sub></span>
+    should be accurate provided <span class="math">G</span>
+    is neither too close to zero nor too close to <span class="math">n<sub>t</sub></span>.
+    To calculate the normal approximation, we need to convert <span class="math">X<sub>t</sub></span>
+    to standard units, which requires that we know the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> and <a class="glossRef" href="gloss.htm#se">SE</a>
+    of <span class="math">X<sub>t</sub></span>.
+    The expected value of <span class="math">X<sub>t</sub></span> is
+</p>
+
+<p class="math">
+    E(X<sub>t</sub>) = n<sub>t</sub>&times;G/N,
+</p>
+
+<p>
+    and the SE of <span class="math">X<sub>t</sub></span> is
+</p>
+
+<p class="math">
+    SE(X<sub>t</sub>) = f
+    &times;n<sub>t</sub><sup>&frac12;</sup>&times;SD,
+</p>
+
+<p>
+    where <span class="math">f</span> is the finite population correction
+</p>
+
+<p class="math">
+    f = (N &minus; n<sub>t</sub>)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup>,
+</p>
+
+<p>
+    and SD is the standard deviation of a list of <span class="math">N</span> values of which
+    <span class="math">G</span> equal 1 and <span class="math">(N&minus;G)</span> equal 0:
+</p>
+
+<p class="math">
+    SD = ( G/N &times; (1 &minus; G/N) )<sup>&frac12;</sup>.
+</p>
+
+<p>
+    In standard units, <span class="math">X<sub>t</sub></span> is
+</p>
+
+<p class="math">
+    Z = (X<sub>t</sub> &minus;
+    E(X<sub>t</sub>))/SE(X<sub>t</sub>) =
+    (X<sub>t</sub> &minus; n<sub>t</sub>&times;G/N
+    )/(f&times;n<sub>t</sub><sup>&frac12;</sup>&times;SD).
+</p>
+
+<div class="indent">
+<p class="inline">
+    Recall that we want to test the null hypothesis at significance level 5%.
+    The area under the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>
+    to the right of 1.645 standard units is 5%,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Here is the picture:</p><div class="figure"><p class="figure">' +
+           '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
+           'width="600" archive="PbsGui.zip" height="320">' +
+           '<param name="hiLiteLo" value="-10">' +
+           '<param name="hiLiteHi" value="1.645">You need Java to see this</applet></p></div>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    which corresponds to the threshold value
+</p>
+</div>
+
+<p class="math">
+    x<sub>0</sub> = E(X<sub>t</sub>) +
+    1.645&times;SE(X<sub>t</sub>) = n<sub>t</sub>&times;G/N  +
+    1.645&times;f&times;n<sub>t</sub><sup>&frac12;</sup>&times;SD
+</p>
+
+<p class="math">
+    = n<sub>t</sub>&times;G/N  +
+    1.645&times;f&times;n<sub>t</sub><sup>&frac12;</sup>&times;
+    ( G/N &times; (1 &minus; G/N) )<sup>&frac12;</sup>
+</p>
+
+<p>
+    in the original units.
+    Thus if we reject the null hypothesis when
+</p>
+
+<p class="math">
+    Z&gt;1.645,
+</p>
+
+<p>
+    or equivalently when
+</p>
+
+<p class="math">
+    X<sub>t</sub> &gt; n<sub>t</sub>&times;G/N  +
+    1.645&times;f&times;n<sub>t</sub><sup>&frac12;</sup>&times;(
+        G/N &times; (1 &minus; G/N) )<sup>&frac12;</sup>,
+</p>
+
+<p>
+    the result is an (approximate) 5% significance level test of the null
+    hypothesis that targeting has no effect, against the alternative
+    hypothesis that targeting increases the fraction of consumers who buy.
+    This is the <em>normal approximation to Fisher's exact test</em>; <span class="math">Z</span> is called the
+    <em>Z-statistic</em>, and the observed value of <span class="math">Z</span> is called the <em>z-score</em>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('zTest') + ', ');
+// -->
+</script>
+    examines in more generality the normal approximation to test
+    statistics transformed approximately to standard units.
+    Later in this chapter we shall see another example, the <em>z</em> test for
+    equality of two percentages from independent samples.
+</p>
+
+<p>
+    To test at a significance level other than 5%, reject when <span class="math">Z</span> exceeds a
+    different threshold; choose the threshold so that the area under
+    the normal curve to the right of the threshold is equal to the desired
+    significance level.
+    For example, to test at significance level 0.1, reject if <span class="math">Z&gt;1.282</span>.
+    Some new notation will make it easier to express the general strategy.
+    Recall that the normal curve is positive, and the total area under the
+    normal curve is 100%, so the normal curve is like a histogram.
+    Quantiles of the normal curve are defined thusly: For any number &alpha; between 0 and 100%,
+    the &alpha; quantile of the normal curve, <span class="math">z<sub>&alpha;</sub></span>, 
+    is the unique number such
+    that the area under the normal curve to the left of <span class="math">z<sub>&alpha;</sub></span>
+    is <span class="math">&alpha;</span>.
+    For example, <span class="math">z<sub>50%</sub>  =  0</span>, because the area under the normal curve
+    to the left of zero is 50%.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    shows other commonly used quantiles of the normal curve.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Commonly Used Quantiles of the Normal Curve.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var header = ['<span class="math">&alpha;</span>', '<span class="math">z<sub>&alpha;</sub></span>'];
+    var listPct = ['0.5%', '1%', '2.5%', '5%', '10%', '50%', '90%', '95%', '97.5%', '99%', '99.5%'];
+    var listZ = [-2.576, -2.326, -1.960, -1.645, -1.282, 0.000, 1.282, 1.645, 1.960, 2.326, 2.576];
+    var list = new Array(2);
+    list[0] = listPct;
+    list[1] = listZ;
+    listToTable(header, list, 'standard','right');
+// -->
+</script>
+
+<p>
+    Because the normal curve is symmetric about zero, 
+    <span class="math">z<sub>100%&minus;&alpha;</sub>  = &minus;z<sub>&alpha;</sub></span>.
+    Note that the area under the normal curve between <span class="math">z<sub>&alpha;</sub></span> and
+    <span class="math">z<sub>100%&minus;&alpha;</sub></span> is 
+    <span class="math">100% &minus; 2&times;&alpha;</span>.
+    Combining these two results shows that the area under the normal
+    curve over the interval
+</p>
+
+<p class="math">
+    [&minus;z<sub>100%&minus;&alpha;/2</sub>, z<sub>100%&minus;&alpha;/2</sub>]
+</p>
+
+<p>
+    is <span class="math">100%&nbsp;&minus;&nbsp;&alpha;</span>, and thus the area under the normal curve outside the
+    interval (the area under the normal curve over the
+    <a class="glossRef" href="gloss.htm#complement">complement</a> of the interval) is 
+    <span class="math">&alpha;</span>.
+    This complement also can be written
+</p>
+
+<p class="math">
+    all values z such that |z| &gt; z<sub>100%&minus;&alpha;/2</sub>.
+</p>
+
+<p>
+    With this notation for quantiles of the normal curve, it is easier to write down the
+    rejection region of the normal approximation to Fisher's exact test for a general
+    significance level: The significance level of the rule
+    <span class="math">{Reject the null hypothesis if Z&gt;z<sub>100%&minus;&alpha;</sub>}</span>
+    is approximately <span class="math">&alpha;</span>.
+</p>
+
+<p>
+    The following exercise checks your ability to use the normal approximation to
+    Fisher's exact test.
+    The exercise is dynamic: The data will tend to change when you reload the page,
+    so you can practice as much as you wish.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    document.writeln(startProblem(pCtr++));
+    var N = 1000*listOfRandInts(1,8,14)[0];
+    var sdt = Math.sqrt(N)/2;
+    var Nt = Math.floor(N/2 + sdt*rNorm());
+    var Nc = N - Nt;
+    var pctBuy = listOfRandInts(1,7,20)[0]/10;
+    var Ns = Math.floor(N*pctBuy/100);
+    var pAlt = 0.6;
+    var eNull = Ns*Nt/N;
+    var fpc = Math.sqrt( (N - Nt)/(N - 1.0));
+    var sdBox = Math.sqrt( (Ns/(N+0.0))*(1.0 - Ns/(N+0.0)) );
+    var seNull = fpc*sdBox*Math.sqrt(Nt);
+    var stdUnit = 0.5*listOfRandInts(1,0,8)[0];
+    var Nst = Math.min( Ns, Math.floor(eNull+stdUnit*seNull) );
+    stdUnit = roundToDig((Nst - eNull)/seNull,3);
+    var ineqWord = ' less ';
+    var rejWord = ' not ';
+    var rej = false;
+    var aVal = alphabet[0];
+    if (stdUnit > 1.645) {
+        rej = true;
+        ineqWord = ' more ';
+        var rejWord = '';
+        aVal = alphabet[1];
+    }
+    var qStr = 'Suppose that during the trial period, <span class="math">N=' +
+           commify(N) + '</span> consumers visit the site, of whom ' + commify(Nt) +
+           ' are shown targeted ads and ' + commify(Nc) + ' are shown the ' +
+           'control ads. ' + Ns.toString() + ' of the customers make purchases, of whom ' +
+           Nst.toString() + ' received targeted ads.</p><p><span class="qSpan">Should ' +
+           'we reject the null hypothesis at significance level 5%?</span>';
+    document.writeln(qStr);
+    var ansStr = 'The number of consumers <span class="math">N</span> is large, the number of targeted ' +
+           'consumers <span class="math">N<sub>t</sub></span> is large but not too close to ' +
+           '<span class="math">N</span>, and the number of purchasers <span class="math">N<sub>S</sub></span> is ' +
+           'neither close to zero nor to <span class="math">N</span>, so the normal approximation to ' +
+           'the hypergeometric distribution should be accurate.</p><p>' +
+           'Under the null hypothesis, the expected value of <span class="math">X<sub>t</sub></span>, ' +
+           'the number of purchasers among the consumers who received targeted ads, is </p>' +
+           '<p class="math">E(X<sub>t</sub>) = N<sub>S</sub> &times; ' +
+           'N<sub>t</sub>/N</p><p class="math"> = ' +
+           Ns.toString() + ' &times; ' + Nt.toString() + '/' + N.toString() + ' = ' +
+           roundToDig(eNull,3).toString() + ',</p><p>and the ' +
+           'standard error of <span class="math">X<sub>t</sub></span> is </p>' +
+           '<p class="math">SE(X<sub>t</sub>) = ' +
+           'f &times; N<sub>t</sub><sup>&frac12;</sup> ' +
+           '&times; SD = <big>(</big> ( ' + N.toString() + ' &minus; ' + Nt.toString() +
+           ' )/( ' + N.toString() + ' &minus; 1 ) <big>)</big><sup>&frac12;</sup> ' +
+           '&times; ' + Nt.toString() + '<sup>&frac12;</sup> &times; <big>(</big> (' +
+           Ns.toString() + '/' +
+           N.toString() + ') &times; (1 &minus; ' + Ns.toString() + '/' + N.toString() +
+           ') <big>)</big><sup>&frac12;</sup></p><p class="math"> = ' +
+           roundToDig(seNull,3).toString() + '.</p><p>' +
+           'In standard units, <span class="math">X&nbsp;=&nbsp;' + Nst.toString() +
+           '</span> is </p><p class="math"><big>(</big> X<sub>t</sub> &minus; ' +
+           'E(X<sub>t</sub>) <big>)</big>' +
+           '/SE(X<sub>t</sub>) = <big>(</big> ' + Nst.toString() + ' &minus; ' +
+           roundToDig(eNull,3).toString() + ' <big>)</big>/' +
+           roundToDig(seNull,3).toString() +
+           ' = ' + roundToDig(stdUnit,3).toString() + '.</p><p>This is ' +
+           ineqWord + ' than 1.645, so we would ' + rejWord +
+           ' reject the null hypothesis at significance level 5%.';
+    var opt = ['no','yes'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="equality_indep_samples"></a>Testing the Equality of Two Percentages Using
+    Independent Samples
+</h2>
+
+<p>
+    In the experiment to test the effectiveness of targeted advertising using the
+    randomization model described previously in this chapter,
+    the samples from the populations of control and treatment values are dependent:
+    Individual <span class="math">i</span> has two numbers, <span class="math">c<sub>i</sub></span> and
+    <span class="math">t<sub>i</sub></span>, and if we observe <span class="math">c<sub>i</sub></span>
+    we cannot observe <span class="math">t<sub>i</sub></span>, and vice versa.
+    If individual <span class="math">i</span> is in the treatment group, he or she is not
+    in the control group, and vice versa. Under the null hypothesis,
+    the purchasers would have bought whether they were assigned
+    to treatment or to control, and the non-purchasers would not have bought
+    whether they were assigned to treatment or control, so the total number
+    of purchasers does not depend on which consumers were assigned to treatment.
+    That constancy led to an hypergeometric distribution for the number of
+    purchasers in the treatment group under the null hypothesis.
+    In this section, we see that Fisher's exact test allows us to test a
+    slightly weaker null hypothesis when the data are two independent random
+    samples with replacement from separate populations, a control group and a
+    treatment group.
+    This is the <em>population model</em> for comparing two percentages.
+</p>
+
+<p>
+    The weaker hypothesis is that the population percentage of the treatment
+    group is equal to the population percentage of the control group.
+    We also develop an approximate test for the equality of two percentages based
+    on the sample percentages of independent random samples with replacement from
+    two populations.
+    The approximate test is essentially equivalent to the normal approximation
+    to Fisher's exact test when the sample sizes are large.
+</p>
+
+<h3>
+    <a id="fisherExactIndep"></a>Fisher's Exact Test Using Independent Samples
+</h3>
+
+<p>
+    Suppose there are two populations of tickets labeled 0 and 1, a control
+    group and a treatment group, with corresponding population percentages
+    <span class="math">p<sub>c</sub></span> and <span class="math">p<sub>t</sub></span>.
+    We want to test the null hypothesis that
+</p>
+
+<p class="math">
+    p<sub>c</sub>  =  p<sub>t</sub>;
+</p>
+
+<p>
+    <em>i.e.</em>, that
+</p>
+
+<p class="math">
+    &mu;  =  p<sub>t</sub> &minus; p<sub>c</sub> = 0.
+</p>
+
+<p>
+    We draw a random sample of size <span class="math">n<sub>c</sub></span> with replacement from the
+    control group, and compute
+    the sample sum <span class="math">X<sub>c</sub></span>.
+    <span class="math">X<sub>c</sub></span> has a binomial distribution with parameters
+    <span class="math">n<sub>c</sub></span> and <span class="math">p<sub>c</sub></span>.
+    We draw another random sample of size <span class="math">n<sub>t</sub></span> with
+    replacement from the treatment group,
+    and compute the sample sum <span class="math">X<sub>t</sub></span>.
+    <span class="math">X<sub>t</sub></span> has a binomial distribution with parameters
+    <span class="math">n<sub>t</sub></span> and <span class="math">p<sub>t</sub></span>.
+    We draw the two random samples independently of each other, so
+    <span class="math">X<sub>c</sub></span> and <span class="math">X<sub>t</sub></span> are
+    independent random variables.
+    This scenario could correspond to an observational study, to a
+    non-randomized experiment, or to a randomized experiment, depending upon how individuals
+    came to be in the treatment group and the control group.
+    The randomness in the problem at this point is in drawing the samples
+    from the control group and the treatment group, not in assigning subjects
+    to treatment or to control&mdash;that assignment occurred before we
+    arrived on the scene.
+    In this population model, we might be able to conclude from the data
+    that the population percentages differ for the treatment and control
+    groups (that <span class="math">p<sub>t</sub> &ne;p<sub>c</sub></span>),
+    but even then we should not conclude that treatment has an effect unless the
+    assignment of subjects to treatment and control was randomized.
+    Otherwise, any real difference between <span class="math">p<sub>t</sub></span>
+    and <span class="math">p<sub>c</sub></span> could be the result of confounding,
+    rather than the result of the treatment.
+</p>
+
+<p>
+    In contrast, in the randomization model described earlier in the
+    chapter, we might be able to conclude that the treatment has an
+    effect for the <span class="math">N</span> subjects in the randomization, but even then we
+    should not extrapolate from those <span class="math">N</span> subjects to conclude that
+    treatment has an effect in the larger population from which they the
+    subjects were drawn, because we did not know <em>how</em> they were drawn.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Let <span class="math">N  = n<sub>c</sub> + n<sub>t</sub></span>.
+    Let <span class="math">G = X<sub>c</sub>+X<sub>t</sub></span>
+    be the sum of both the samples&mdash;the total number of ones.
+    Given the value of <span class="math">G</span>, the distribution of <span class="math">X<sub>t</sub></span>
+    is <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric</a> with parameters
+    <span class="math">N</span>, <span class="math">G</span>,  and <span class="math">n<sub>t</sub></span> if the null
+    hypothesis is true.
+    This is proved in a footnote,
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'The conditional distribution of <span class="math">X<sub>t</sub></span> given ' +
+           '<span class="math">G</span> is hypergeometric. If the null hypothesis is true, <span class="math">G</span> ' +
+           'is the number of successes in ' +
+           '<span class="math">n<sub>c</sub>+n<sub>t</sub></span> ' +
+           'independent trials with the same probability ' +
+           '<span class="math">p = p<sub>c</sub>=p<sub>t</sub></span> ' +
+           'of success, so it has a binomial distribution with parameters ' +
+           '<span class="math">N=n<sub>c</sub>+ n<sub>t</sub></span> ' +
+           'and <span class="math">p</span>.  The conditional probability that ' +
+           '<span class="math">X<sub>t</sub>=x</span> given that ' +
+           '<span class="math">X<sub>c</sub>+X<sub>t</sub> = G</span> ' +
+           'is </p><p class="math">P(X<sub>t</sub>=x | ' +
+           'X<sub>c</sub>+X<sub>t</sub> = ' +
+           'G) =  P(X<sub>t</sub>=x and ' +
+           'X<sub>c</sub>+X<sub>t</sub> ' +
+           '= G)/P(X<sub>c</sub>+X<sub>t</sub> ' +
+           '= G)</p><p class="math"> = P(X<sub>t</sub>=x ' +
+           'and X<sub>c</sub> = ' +
+           'G&minus;x )/P(X<sub>c</sub>+X<sub>t</sub> ' +
+           '= G)</p><p class="math"> = P(X<sub>t</sub>=x)&times; ' +
+           'P(X<sub>c</sub> = ' +
+           'G&minus;x )/P(X<sub>c</sub>+X<sub>t</sub> ' +
+           '= G)</p><p class="math"> = ' +
+           '<sub>n<sub>t</sub></sub>C<sub>x</sub> ' +
+           'p<sup>x</sup>' +
+           '(1&minus;p)<sup>n<sub>t</sub>&minus;x</sup> &times; ' +
+           '<sub>n<sub>c</sub></sub>C<sub>G&minus;x</sub>' +
+           'p<sup>G&minus;x</sup>(1&minus;p)<sup>' +
+           'n<sub>c</sub>&minus;G+x</sup> / ' +
+           '(<sub>N</sub>C<sub>G</sub> p<sup>G</sup>' +
+           '(1&minus;p)<sup>N&minus;G</sup>) </p><p class="math">' +
+           ' = <sub>n<sub>t</sub></sub>C<sub>x</sub>&times;' +
+           '<sub>n<sub>c</sub></sub>C<sub>G&minus;x</sub>' +
+           '/<sub>N</sub>C<sub>G</sub>, </p><p>' +
+           'which is the probability that the sample sum of <span class="math">n<sub>t</sub></span> ' +
+           'random draws without replacement from a 0-1 box of <span class="math">N</span> tickets of which ' +
+           '<span class="math">G</span> are labeled &quot;1&quot; will equal <span class="math">x</span>. Thus the conditional ' +
+           'distribution of X<sub>t</sub> given <span class="math">G</span> is hypergeometric ' +
+           'with parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n<sub>t</sub></span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    but here is an explanation:
+    If the null hypothesis is true, there is no difference between drawing with
+    replacement from the treatment group and drawing with replacement from the
+    control group, so every way of allocating the <span class="math">N</span> observed values
+    into a group of size <span class="math">n<sub>t</sub></span> and a group of size
+    <span class="math">n<sub>c</sub></span> is equally likely.
+    There are <span class="math"><sub>G</sub>C<sub>n<sub>t</sub></sub></span>
+    such ways, of which
+</p>
+</div>
+
+<p class="math">
+    <sub>G</sub>C<sub>x</sub>&times;
+    <sub>N&minus;G</sub>C<sub>n<sub>t</sub>&minus;x</sub>
+</p>
+
+<p>
+    result in <span class="math">x</span> ones and <span class="math">n<sub>t</sub> &minus; x</span> zeros among the
+    <span class="math">n<sub>t</sub></span> values drawn from the treatment group,
+    so the chance that <span class="math">X<sub>t</sub>=x</span> is
+</p>
+
+<p class="math">
+    <sub>G</sub>C<sub>x</sub> &times;
+    <sub>N&minus;G</sub>C<sub>n<sub>t</sub>&minus;x</sub>/<sub>G</sub>C<sub>n<sub>t</sub></sub>:
+</p>
+
+<p>
+    given the value of <span class="math">G</span>, <span class="math">X<sub>t</sub></span> has an hypergeometric
+    distribution with parameters <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n<sub>t</sub></span>
+    if the null hypothesis is true.
+    Thus, under the null hypothesis that
+    <span class="math">p<sub>c</sub>=p<sub>t</sub></span>,
+    given the total number <span class="math">G</span> of ones in the sample,
+    the <a class="glossRef" href="gloss.htm#test_statistic">test statistic</a>
+    <span class="math">X<sub>t</sub></span> has the same distribution for this
+    sampling design that the test statistic <span class="math">X<sub>t</sub></span>
+    did for a population of <span class="math">N</span> subjects assigned randomly to
+    treatment or control.
+    Therefore, the same testing procedure, Fisher's exact test, can be
+    used to test the null hypothesis that
+    <span class="math">p<sub>c</sub>=p<sub>t</sub></span>
+    using independent random samples from two populations.
+    In the previous section, the null hypothesis and the sampling design
+    were different: Each subject <span class="math">i</span> had two values, 
+    <span class="math">t<sub>i</sub></span>
+    and <span class="math">c<sub>i</sub></span>; the null
+    hypothesis was that
+</p>
+
+<p class="math">
+    t<sub>i</sub> = c<sub>i</sub> for all
+    i=1, 2, &hellip; ,N;
+</p>
+
+<p>
+    and each of the <span class="math">N</span> subjects was assigned at
+    random either to treatment or to control.
+</p>
+
+<p>
+    As noted previously, it is hard to perform the calculations needed to find the
+    rejection region for this test when <span class="math">N</span> is large; the normal approximation
+    to Fisher's exact test described in the previous section is a computationally
+    tractable way to construct the rejection region.
+    The approximation is accurate under the same assumptions.
+</p>
+
+<h3>
+    <a id="ztestindep">The <em>Z</em> Test for the Equality of Two Percentages using
+    Independent Samples</a>
+</h3>
+
+<p>
+    In this section, we develop another approximate test of the null hypothesis that
+    <span class="math">p<sub>t</sub>=p<sub>c</sub></span>
+    in the population model; it turns out that this test is essentially the same
+    as the normal approximation to Fisher's exact test, although it is motivated
+    quite differently.
+</p>
+
+<p>
+    Let <span class="math">&phi;<sub>c</sub></span> be the sample percentage of the random
+    sample from the control group, and let <span class="math">&phi;<sub>t</sub></span> be the
+    sample percentage of the random sample from the treatment group.
+    Suppose that the two sample sizes <span class="math">n<sub>c</sub></span> and
+    <span class="math">n<sub>t</sub></span> are large (say, over 100 each).
+    Then the normal approximations to the two sample percentages should be
+    accurate (provided neither <span class="math">p<sub>c</sub></span> nor
+    <span class="math">p<sub>t</sub></span> is too close to 0 or to 1).
+    The expected value of the sample percentage of a random sample with
+    replacement is the population percentage, so the expected value of
+    <span class="math">&phi;<sub>c</sub></span> is <span class="math">p<sub>c</sub></span>,
+    and the expected value of <span class="math">&phi;<sub>t</sub></span> is
+    <span class="math">p<sub>t</sub></span>.
+    The SE of <span class="math">&phi;<sub>c</sub></span> is
+</p>
+
+<p class="math">
+    SE(&phi;<sub>c</sub>) = (
+    p<sub>c</sub>&times;(1&minus;p<sub>c</sub>)
+    )<sup>&frac12;</sup>/n<sub>c</sub><sup>&frac12;</sup>,
+</p>
+
+<p>
+    and the SE of <span class="math">&phi;<sub>t</sub></span> is
+</p>
+
+<p class="math">
+    SE(&phi;<sub>t</sub>) = (
+        p<sub>t</sub>&times;(1&minus;p<sub>t</sub>)
+        )<sup>&frac12;</sup>/n<sub>t</sub><sup>&frac12;</sup>.
+</p>
+
+<p>
+    Consider the difference of the two sample percentages
+</p>
+
+<p class="math">
+    &phi;<sub>t&minus;c</sub> =
+    &phi;<sub>t</sub> &minus; &phi;<sub>c</sub>.
+</p>
+
+<p>
+    The difference <span class="math">&phi;<sub>t&minus;c</sub></span> is a random variable.
+    The expected value of <span class="math">&phi;<sub>t&minus;c</sub></span> is
+</p>
+
+<p class="math">
+    &mu; = p<sub>t</sub> &minus; p<sub>c</sub>.
+</p>
+
+<p>
+    Because the samples from the treatment and control groups are independent of
+    each other,  <span class="math">&phi;<sub>t</sub></span> and <span class="math">&phi;<sub>c</sub></span>
+    are independent, so the SE of <span class="math">&phi;</span> is
+</p>
+
+<p class="math">
+    SE(&phi;<sub>t&minus;c</sub>) = ( SE<sup>2</sup>(&phi;<sub>t</sub>) +
+    SE<sup>2</sup>(&phi;<sub>c</sub>) )<sup>&frac12;</sup>.
+</p>
+
+<p>
+    If the null hypothesis is true, the two population percentages are
+    equal&mdash;<span class="math">p<sub>t</sub>=p<sub>c</sub>=p</span>&mdash;and
+    the two samples are like one larger sample from a single 0-1 box with a percentage <span class="math">p</span>
+    of tickets labeled &quot;1.&quot;
+    Let us call that box the <em>null box</em>.
+    If the null hypothesis is true, the expected value of <span class="math">&phi;<sub>t&minus;c</sub></span>,
+    <span class="math">E(&phi;<sub>t&minus;c</sub>)</span>, is zero, and
+</p>
+
+<p class="math">
+    SE(&phi;<sub>t&minus;c</sub>) =
+    (p&times;(1&minus;p)/n<sub>t</sub> +
+    p&times;(1&minus;p)/n<sub>c</sub> )<sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    = ( 1/n<sub>t</sub> + 1/n<sub>c</sub> )<sup>&frac12;</sup>
+    &times; (p&times;(1&minus;p))<sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    = ( N/(n<sub>t</sub>&times;n<sub>c</sub>) )<sup>&frac12;</sup>
+    &times; (p&times;(1&minus;p))<sup>&frac12;</sup>.
+</p>
+
+<p>
+    The first factor depends only on the sample sizes <span class="math">n<sub>t</sub></span> and
+    <span class="math">n<sub>c</sub></span>, which we know.
+    The second factor is the SD of the labels on the tickets in the null box.
+    That factor depends only on <span class="math">p</span>, the percentage of tickets labeled &quot;1&quot;
+    in the null box.
+    We do not know <span class="math">p</span>, so we do not know the SD of the null box.
+    However, we can use the bootstrap estimate of the SD of the
+    null box because the sample size is large: let <span class="math">&phi;</span> be
+    the pooled sample percentage
+</p>
+
+<p class="math">
+    &phi; = (total number of &quot;1&quot;s in both samples)/(total sample size)
+</p>
+
+<p class="math">
+    = (n<sub>c</sub>&times;&phi;<sub>c</sub> +
+    n<sub>t</sub>&times;&phi;<sub>t</sub>)/N.
+</p>
+
+<p>
+    The pooled bootstrap estimate of the SD of the null box is the
+    estimate we get by pretending that the percentage of ones in the null box
+    is equal to the percentage of ones in the pooled sample:
+</p>
+
+<p class="math">
+    s<sup>*</sup> = (pooled bootstrap estimate of SD of the null box) =
+    ( &phi;&times;(1&minus;&phi;) )<sup>&frac12;</sup>.
+</p>
+
+<p>
+    If the sample sizes are large and the null hypothesis is true,
+    this will tend to be close to the true SD of the null box, and
+</p>
+
+<p class="math">
+    SE*(&phi;<sub>t&minus;c</sub>) =
+    ( N/(n<sub>t</sub>&times;n<sub>c</sub>)
+    )<sup>&frac12;</sup>&times;s<sup>*</sup>
+</p>
+
+<p>
+    will tend to be quite close to SE(<span class="math">&phi;<sub>t&minus;c</sub></span>).
+    The normal approximation to the probability distribution of
+    <span class="math">&phi;<sub>t&minus;c</sub></span> tells us that the chance
+    that <span class="math">&phi;<sub>t&minus;c</sub></span> is in a given range is
+    approximately equal to the area under the normal curve for the same range,
+    converted to standard units. Under the null hypothesis, the expected
+    value of <span class="math">&phi;<sub>t&minus;c</sub></span> is zero,
+    and <span class="math">SE(&phi;<sub>t&minus;c</sub>)</span> is approximately
+    <span class="math">SE*(&phi;<sub>t&minus;c</sub>)</span>, so
+</p>
+
+<p class="math">
+    Z  =  &phi;<sub>t&minus;c</sub>/SE*(&phi;<sub>t&minus;c</sub>)
+</p>
+
+<p>
+    is approximately <span class="math">&phi;<sub>t&minus;c</sub></span> in standard units:
+    The chance that <span class="math">Z</span> is in the range of values 
+    <span class="math">[a, b]</span> is approximately the
+    area under the normal curve between <span class="math">a</span> and <span class="math">b</span>.
+</p>
+
+<p>
+    Under the alternative hypothesis that
+    <span class="math">p<sub>t</sub>&gt;p<sub>c</sub></span>,
+    <span class="math">Z</span> will tend to be larger than it would under the null hypothesis.
+    We can test the null hypothesis that
+    <span class="math">p<sub>t</sub>=p<sub>c</sub></span>
+    against the one-sided alternative hypothesis that
+    <span class="math">p<sub>t</sub>&gt;p<sub>c</sub></span>
+    using
+</p>
+
+<p class="math">
+    Z  =
+    &phi;<sub>t&minus;c</sub>/SE*(&phi;<sub>t&minus;c</sub>)
+</p>
+
+<p>
+    as the test statistic.
+    To test at approximate significance level <span class="math">&alpha;</span>, reject the null hypothesis if
+    <span class="math">Z&nbsp;&gt;&nbsp;z<sub>1&minus;&alpha;</sub></span>.
+</p>
+
+<p>
+    This is called the (one-sided) <em><em>z</em> test for equality of two percentages using
+    independent samples</em>.
+    The random variable <span class="math">Z</span> is called the  <em>Z</em>-statistic, and the observed value of
+    <span class="math">Z</span> is called the <em>z</em>-score.
+    To test the null hypothesis against the other
+    one-sided alternative hypothesis that
+    <span class="math">p<sub>t</sub>&lt;p<sub>c</sub></span>
+    at approximate significance level <span class="math">&alpha;</span>, reject the null hypothesis if
+    <span class="math">Z&lt;z<sub>&alpha;</sub></span>.
+    To test the null hypothesis against the a two-sided alternative hypothesis that
+    <span class="math">p<sub>t</sub>&ne;p<sub>c</em></sub></span>
+    at approximate significance level <span class="math">&alpha;</span>, reject when
+    <span class="math">|Z|&nbsp;&gt;&nbsp;z<sub>1&minus;a/2</sub></span>.
+</p>
+
+<p>
+    This test is based on transforming the difference of sample percentages
+    (the test statistic) approximately to standard units, under the assumption
+    that the null hypothesis is true.
+    Because the null hypothesis specifies that the two population percentages
+    are equal, the expected value of the difference between the sample percentages
+    is zero&mdash;the expected values of both sample percentages is <span class="math">p</span>.
+    However, the null hypothesis does not specify the value of <span class="math">p</span>,
+    and the SE of the difference of sample percentages depends on <span class="math">p</span>,
+    so we cannot calculate the SE of the test statistic under the null
+    hypotheses&mdash;we have to estimate 
+    <span class="math">SE(&phi;<sub>t &minus; c</sub>)</span>
+    from the data.
+    When the combined sample size
+    <span class="math">N=n<sub>t</sub>+n<sub>c</sub></span> is
+    sufficiently large,
+    the pooled bootstrap estimate of the SD of the null box is likely
+    to be quite accurate, and the estimated SE is likely to be very closet to the
+    true SE.
+    When the individual sample sizes are large, the probability histogram of
+    the difference of sample percentages can be approximated well by the normal curve.
+</p>
+
+<p>
+    When the sample is not large, the estimated SE will tend to differ from the
+    true SE, and the normal approximation to the distribution of the difference
+    of sample percentages will not be accurate.
+    Then, the actual significance level of the <em>z</em> test can be very different from its 
+    nominal significance level,
+    and we need to be more circumspect; see 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('zTest') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    The following exercise checks your ability to calculate the <em>z</em> test for
+    equality of two percentages from independent samples.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    document.writeln(startProblem(pCtr++));
+    var tosses = listOfDistinctRandInts(2, 10, 20);
+    var tossCoin = 10*tosses[0];
+    var tossTack = 10*tosses[1];
+    var ps = listOfDistinctRandInts(2,50,70);
+    var nCoin = Math.floor(ps[0]*tossCoin/100);
+    var nTack = Math.floor(ps[1]*tossTack/100);
+    var pCoin = roundToDig(100*nCoin/tossCoin,2);
+    var pTack = roundToDig(100*nTack/tossTack,2);
+    var poolP = (nCoin+nTack)/(tossCoin + tossTack);
+    var sigLvls = [1, 5, 10];
+    var sig = sigLvls[listOfRandInts(1,0, sigLvls.length-1)[0]];
+    var zThresh = normInv(1- sig/200);
+    var sdBox = Math.sqrt( poolP * (1.0 - poolP) );
+    var samSize2 = tossCoin + tossTack;
+    var sePhat = sdBox*Math.sqrt(1.0/tossTack + 1.0/tossCoin);
+    var z2 = (nTack/tossTack - nCoin/tossCoin)/sePhat;
+    var aVal;
+    if (Math.abs(z2) > zThresh) {
+       aVal = 'a';
+    } else {
+       aVal = 'b';
+    }
+    var qStr = 'I have a thumbtack and a bent coin.  Let <span class="math">p<sub>t</sub></span> ' +
+           'be the probability that the thumbtack lands point up when I toss it, and let ' +
+           '<span class="math">p<sub>c</sub></span> be the probability that the coin lands head up ' +
+           'when I toss it. I want to test the null hypothesis that ' +
+           '<span class="math">p<sub>t</sub>&nbsp;=&nbsp;p<sub>c</sub></span> against ' +
+           'the alternative hypothesis that ' +
+           '<span class="math">p<sub>t</sub></span> is not equal to <span class="math">p<sub>c</sub></span>, ' +
+           'at significance level ' + sig.toString() + '%. To test the hypothesis, ' +
+           'I will toss the thumbtack ' + tossTack.toString() + ' times and the coin ' +
+           tossCoin.toString() + ' times, all independently.  I decide to use a ' +
+           '<em>z</em> test for equality of two percentages from independent samples. ' +
+           '</p><p><span class="qSpan">Should I use a one-sided or two-sided test?</span>';
+    document.writeln(qStr);
+    var opt = ['one sided','two sided'];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    qStr =     '</p><p><span class="qSpan">I should reject the null hypothesis if</span>';
+    document.writeln(qStr);
+    var opt = ['<span class="math">Z</span>','<span class="math">|Z|</span>'];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    var opt = ['<','>'];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    writeTextExercise(8, qCtr++, numToRange(zThresh));
+    qStr =    '</p><p>I toss the coin and the tack.  The tack lands point up ' +
+          nTack.toString() + ' times and the coin lands heads ' + nCoin.toString() +
+          ' times. </p><p><span class="qSpan">The sample percentage of times the ' +
+          'tack lands points up is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pTack/100));
+    qStr =    ' <span class="qSpan">and the sample percentage of times the coin lands ' +
+          'heads is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pCoin/100));
+    qStr =    '</p><p><span class="qSpan">The pooled bootstrap estimate of the SD of the ' +
+          'null box is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(sdBox));
+    qStr =    '</p><p>Let <span class="math">&phi;</span> denote the sample percentage of times the tack ' +
+          'lands points up minus the sample percentage of times the coin lands heads. ' +
+          '</p><p><span class="qSpan">If the null hypothesis be true, ' +
+          'the expected value of <span class="math">&phi;</span> is </span> ';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(0));
+    qStr =    '</p><p><span class="qSpan">The estimated standard error of <span class="math">&phi;</span> ' +
+          'under the null hypothesis is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(sePhat));
+    qStr =    '</p><p>Let <span class="math">Z</span> be the observed value of ' +
+          '<span class="math">&phi;</span>, minus its ' +
+          'expected value under the null hypothesis, divided by the estimated standard ' +
+          'error of <span class="math">&phi;</span> under the null hypothesis.</p><p><span class="qSpan">' +
+          'The <em>z</em> score is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(z2));
+    qStr =    '</p><p><span class="qSpan">I';
+    document.writeln(qStr);
+    opt =     ['should','should not'];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    qStr =    ' reject the null hypothesis</span>.</p>';
+    document.writeln(qStr);
+    var ansStr = 'If the null hypothesis be true, we would expect the two sample percentages ' +
+         'to be close to each other, within chance variation.  If the null hypothesis ' +
+         'be false, we would expect the difference in sample percentages to be larger ' +
+         '(in absolute value).  The alternative hypothesis is two sided, so we will ' +
+         'reject the null hypothesis if <span class="math">Z</span> is too big (positive) or too small ' +
+         '(negative). The area under the normal curve between &plusmn;' +
+         roundToDig(zThresh,3).toString() + ' is ' + (100-sig).toString() +
+         '%, so the chance that <span class="math">|Z|&nbsp;&gt;&nbsp;' +
+         roundToDig(zThresh,3).toString() + '</span> is about ' + sig.toString() +
+         ' if the null hypothesis be true. Thus we should reject the null hypothesis ' +
+         'if <span class="math">|Z|&nbsp;&gt;&nbsp;' + roundToDig(zThresh,3).toString() +
+         '</span>. </p><p>The sample percentage of times the tack lands point up is ' +
+         nTack.toString() + '/' + tossTack.toString() + ' = ' + pTack.toString() +
+         '%, and the sample percentage of times the coin lands heads is ' +
+         nCoin.toString() + '/' + tossCoin.toString() + ' = ' + pCoin.toString() +
+         '%.  The pooled sample percentage is ( ' +
+         nTack.toString() + ' + ' + nCoin.toString() + ' )/( ' + tossTack.toString() +
+         ' + ' + tossCoin.toString() + ') = ' + roundToDig(100*poolP,2).toString() +
+         '%, so the pooled bootstrap estimate of the SD of the null box is </p>' +
+         '<p class="math"><big>(</big> ' + roundToDig(100*poolP,2).toString() +
+         '% &times; ' + roundToDig(100-100*poolP,2).toString() +
+         '% <big>)</big><sup>&frac12;</sup> = ' + roundToDig(100*sdBox,2).toString() +
+         '%.</p><p>The estimated standard error of the difference in percentages is ' +
+         '</p><p class="math">' + roundToDig(100*sdBox,2).toString() +
+         '%&times;<big>(</big> 1/' + tossTack.toString() + ' + 1/' + tossCoin.toString() +
+         ' <big>)</big><sup>&frac12;</sup> = ' + roundToDig(100*sePhat,2).toString() +
+         '%.</p><p>The observed value of <span class="math">Z</span> is </p><p class="math">' +
+         '( ' + pTack.toString() + '% &minus; ' + pCoin.toString() + '% )/' +
+         roundToDig(100*sePhat,2).toString() + '% = ' + roundToDig(z2,3).toString() +
+         '.</p><p>The absolute value of the <em>z</em> score is ';
+    if (Math.abs(z2) <= zThresh) {
+    ansStr += 'not greater than ' + roundToDig(zThresh,3).toString() +
+         ', so we should not reject the null hypothesis.';
+    } else {
+    ansStr += 'greater than ' + roundToDig(zThresh,3).toString() +
+         ', so we should reject the null hypothesis.';
+    }
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="fisherApproxZtest">The Normal Approximation to Fisher's Exact Test and the <em>z</em> Test
+    for Equality of Two Percentages</a>
+</h2>
+
+<p>
+    We derived the <em>z</em> test for equality of two percentages using the assumption
+    that the two samples are independent and that their sizes are fixed in advance.
+    We derived Fisher's exact test by conditioning on the total number of tickets
+    in the sample labeled &quot;1,&quot; and found that the test could be used in
+    two quite different situations: to test the hypothesis that treatment has no
+    effect when a fixed collection of individuals are randomized into treatment
+    and control groups, so the treatment and control samples are dependent;
+    and to test the hypothesis that two population percentages are equal from
+    independent samples from the two populations.
+</p>
+
+<p>
+    Somewhat surprisingly, the normal approximation to Fisher's exact test is
+    essentially the <em>z</em> test when the sample sizes are all large.
+    (The difference is just the &minus;1 in the denominator of the finite
+    population correction, which is negligible if the samples are large.)
+    That is, the <em>z</em> score in the normal approximation to Fisher's exact
+    test is almost exactly equal to the <em>z</em> score in the <em>z</em>-test for
+    equality of two percentages using independent samples:
+    The two tests reject for essentially the same observed data values.
+</p>
+
+<p>
+    The following example illustrates the approximate equivalence between the <em>z</em> test
+    and the normal approximation to Fisher's exact test.
+    The example is dynamic:
+    The data will tend to change when you reload the page, to provide more
+    examples of the computations involved.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var qStr = 'Approximate Tests that Two Percentages are Equal, ' +
+               'Using Dependent and Independent Samples';
+    writeExampleCaption(qStr);
+    var N = 1000*listOfRandInts(1,8,14)[0];
+    var sdt = Math.sqrt(N)/2;
+    var Nt = Math.floor(N/2 + sdt*rNorm());
+    var Nc = N - Nt;
+    var pctBuy = listOfRandInts(1,7,20)[0]/10;
+    var Ns = Math.floor(N*pctBuy/100);
+    var eNull = Ns*Nt/N;
+    var fpc = Math.sqrt( (N - Nt)/(N - 1.0));
+    var sdBox = Math.sqrt( (Ns/(N+0.0))*(1.0 - Ns/(N+0.0)) );
+    var seNull = fpc*sdBox*Math.sqrt(Nt);
+    var stdUnit = 0.5*listOfRandInts(1,0,8)[0];
+    var Nst = Math.min( Ns, Math.floor(eNull+stdUnit*seNull) );
+    var pctTrt = roundToDig(100*Nst/Nt, 2);
+    var pctCon = roundToDig(100*(Ns - Nst)/Nc, 2);
+    var poolP = Ns/N;
+    var poolSd = Math.sqrt(poolP*(1.0-poolP));
+    var bootSe = Math.sqrt(1.0/Nt + 1.0/Nc) * poolSd;
+    var z3 = roundToDig((Nst/Nt - (Ns - Nst)/Nc)/bootSe, 3);
+    var qStr = '<p>Consider the targeted web advertising example earlier in the ' +
+               'chapter.  Suppose that ' + N.toString() + ' consumers visited the site during ' +
+               'the trial period, that ' + Nt.toString() + ' were shown the targeted ad, of whom ' +
+               Nst.toString() + ' bought something, and that ' + Nc.toString() + ' were shown the ' +
+               'control ad, of whom ' + (Ns - Nst).toString() + ' bought something. ' +
+               'Then the sample percentage of of purchasers in the treatment group is ' +
+               '<span class="math">&phi;<sub>c</sub>&nbsp;=&nbsp;' + Nst.toString() + '/' +
+               Nt.toString() + '&nbsp;=&nbsp;' + pctTrt.toString() +
+               '%</span>, the sample percentage of purchasers in the control group is ' +
+               '<span class="math">&phi;<sub>c</sub>&nbsp;=&nbsp;' +
+               (Ns - Nst).toString() + '/' + Nc.toString() + '&nbsp;=&nbsp;' +
+               pctCon.toString() +
+               '</span>, and the pooled bootstrap estimate of the SD of the null box is </p>' +
+               '<p class="math">s<sup>*</sup> = <big>(</big> (' + Ns.toString() + '/' +
+               N.toString() + ') &times; (1 &minus; ' + Ns.toString() + '/' + N.toString() +
+               ') <big>)</big><sup>&frac12;</sup> = ' + roundToDig(100*poolSd,2).toString() +
+               '.</p><p>The estimated SE of the difference in sample percentages is </p>' +
+               '<p class="math">' +
+               'SE<sup>*</sup>(&phi;<sub>t</sub> &minus; ' +
+               '&phi;<sub>c</sub>) ' +
+               '= <big>(</big> 1/' + Nt.toString() + ' + 1/' + Nc.toString() +
+               ' <big>)</big><sup>&frac12;</sup> &times; s<sup>*</sup> = ' +
+               roundToDig(100*bootSe,2).toString() +
+               '%.</p><p>Thus the <em>z</em> score we would get from blindly applying ' +
+               'the <em>z</em> test for independent samples to this situation with dependent ' +
+               'samples is</p><p class="math"> z score = (' +
+               '&phi;<sub>t</sub> &minus; ' +
+               '&phi;<sub>c</sub>)/SE<sup>*</sup> ' +
+               '= ' + z3.toString() + ',</p><p>compared with the value ' + stdUnit.toString() +
+               ' for the normal approximation to Fisher\'s exact test.';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+<p>
+    It is rather surprising that tests derived under different assumptions behave so similarly.
+    Generally, when the assumptions of a test are violated, the nominal significance level
+    will be incorrect and the test should not be used.
+    This is a rare exception.
+</p>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    Suppose two variables, <span class="math">C</span> and <span class="math">T</span>, 
+    are defined for a group of <span class="math">N</span>
+    individuals: <span class="math">c<sub>i</sub></span>
+    is the value of <span class="math">C</span> for the <span class="math">i</span>th 
+    individual, and <span class="math">t<sub>i</sub></span> is the
+    value of <span class="math">T</span> for the <span class="math">i</span>th individual,
+    <span class="math">i=1, 2, &hellip;, N</span>.
+    Suppose each <span class="math">c<sub>i</sub></span> and each <span class="math">t<sub>i</sub></span>
+    can equal either 0 or 1, so that
+</p>
+
+<p class="math">
+    p<sub>c</sub>=(c<sub>1</sub> + c<sub>2</sub> +
+    &hellip; + c<sub>N</sub>)/N
+</p>
+
+<p>
+    is the population percentage of the values of <span class="math">C</span>, and
+</p>
+
+<p class="math">
+    p<sub>t</sub>=(t<sub>1</sub> + t<sub>2</sub> +
+    &hellip; + t<sub>N</sub>)/N
+</p>
+
+<p>
+    is the population percentage of the values of <span class="math">T</span>.
+    A simple random sample of size <span class="math">n<sub>t</sub></span> will be taken from the population.
+    The values of <span class="math">t<sub>i</sub></span> are observed for the units in the sample;
+    for the <span class="math">N&minus;n<sub>t</sub></span> units not in the sample,
+    the values of <span class="math">c<sub>i</sub></span> are observed instead.
+    This is the <em>randomization model</em> for evaluating whether a treatment has
+    an effect in an experiment in which a fixed set of <span class="math">N</span> units are
+    assigned at random either to treatment or to control.
+    The response of individual <span class="math">i</span> is 
+    <span class="math">t<sub>i</sub></span> if he is treated
+    and <span class="math">c<sub>i</sub></span> if not.
+    At issue is whether the treatment has an effect.
+    The null hypothesis is that treatment does not matter at all:
+    <span class="math">c<sub>i</sub>=t<sub>i</sub></span>, for every individual <span class="math">i</span>.
+    Let <span class="math">G</span> be the sum of all the observations, the observed values of
+    <span class="math">c<sub>i</sub></span> plus the observed values of
+    <span class="math">t<sub>i</sub></span>.
+    Let <span class="math">X<sub>t</sub></span> be the sum of the observed values
+    of <span class="math">t<sub>i</sub></span>.
+</p>
+
+<p>
+    If the null hypothesis is true, the <span class="math">n<sub>t</sub></span> observed values of
+    <span class="math">t<sub>i</sub></span> are like
+    a random sample from a 0-1 box of <span class="math">N</span> tickets of which 
+    <span class="math">G</span> are labeled 1.
+    Thus <span class="math">X<sub>t</sub></span> has an hypergeometric distribution with parameters
+    <span class="math">N</span>, <span class="math">G</span>, and <span class="math">n<sub>t</sub></span>.
+    Fisher’s exact test uses <span class="math">X<sub>t</sub></span> as the test statistic, and this
+    hypergeometric distribution to select the rejection region.
+    If the alternative hypothesis is that
+    <span class="math">p<sub>t</sub> &gt; p<sub>c</sub></span>, then if the alternative
+    hypothesis is true <span class="math">X<sub>t</sub></span> would tend to be larger than it would be if the
+    null hypothesis is true, so the hypothesis test should be of the form
+    <span class="math">{Reject if X<sub>t</sub>&gt;x<sub>0</sub>}</span>, 
+    with <span class="math">x<sub>0</sub></span>
+    chosen so that the test has the
+    desired significance level.
+    If the sample sizes are large, it can be difficult to calculate the
+    rejection region for Fisher's exact test; then the normal approximation
+    to the hypergeometric distribution can be used to construct a test
+    with approximately the correct significance level.
+    In the normal approximation to Fisher's exact test, the rejection
+    region for approximate significance level a uses the threshold for
+    rejection
+</p>
+
+<p class="math">
+    x<sub>0</sub>=n<sub>t</sub>&times;G/N +
+    z<sub>1 &minus; &alpha;</sub>&times;f&times;n<sub>t</sub><sup>&frac12;</sup>&times;(G/N
+    &times;(1 &minus; G/N))<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">f</span> is the finite population correction
+    <span class="math">(N&minus;n<sub>t</sub>)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup></span>
+    and <span class="math">z<sub>1&minus;&alpha;</sub></span> is the 
+    <span class="math">1 &minus; &alpha;</span>
+    quantile of the normal curve.
+    The <span class="math">&alpha;</span> quantile of the normal curve, 
+    <span class="math">z<sub>&alpha;</sub></span>, is the number for which
+    the area under the normal curve from minus infinity to
+    <span class="math">z<sub>&alpha;</sub></span> equals <span class="math">&alpha;</span>.
+    For example, <span class="math">z<sub>0.05</sub>=&minus;1.645</span>, and
+    <span class="math">z<sub>0.95</sub>=1.645</span>.
+</p>
+
+<p>
+    A <em>Z</em>-statistic is a test statistic whose 
+    <a class="glossRef" href="gloss.htm#prob_histogram">probability histogram</a>
+    can be approximated well by a normal curve if the null hypothesis is true.
+    The observed value of a <em>Z</em>-statistic is called the <em>z</em>-score.
+    In Fisher's exact test,
+</p>
+
+<p class="math">
+    Z =
+    (X<sub>t</sub>&minus;n<sub>t</sub> &times;
+    G/N)/(f&times;n<sub>t</sub><sup>&frac12;</sup>&times;(G/N &times;(1&minus;G/N))<sup>&frac12;</sup>)
+</p>
+
+<p>
+    is a <em>Z</em> statistic.
+</p>
+
+<p>
+    Suppose one wants to test the null hypothesis that two population percentages
+    are equal, <span class="math">p<sub>t</sub>=p<sub>c</sub></span>, on
+    the basis of independent random samples with replacement
+    from the two populations.
+    This is the <span class="termOfArt">population model</span> for comparing two population percentages.
+    Let <span class="math">n<sub>t</sub></span> denote the size of the random sample from the first population;
+    let <span class="math">n<sub>c</sub></span> be the size of the sample from the second population; and
+    let <span class="math">N=n<sub>t</sub>+n<sub>c</sub></span> be the
+    total sample size.
+    Let <span class="math">X<sub>t</sub></span> denote the sample sum of the first sample;
+    let <span class="math">X<sub>c</sub></span> denote the sample
+    sum of the second sample; and let
+</p>
+
+<p class="math">
+    G=X<sub>t</sub>+X<sub>c</sub>
+</p>
+
+<p>
+    denote the sum of the two samples.
+    Conditional on the value of <span class="math">G</span>, the probability distribution of 
+    <span class="math">X<sub>t</sub></span> is
+    hypergeometric with parameters <span class="math">N</span>, 
+    <span class="math">G</span>, and <span class="math">n<sub>t</sub></span>,
+    so Fisher's exact test can be used to test the null hypothesis.
+    There is a different approximate approach based on the normal approximation
+    to the probability distribution of the sample percentages:
+    Let <span class="math">&phi;<sub>t</sub></span> denote the sample percentage of the sample from the
+    first population;
+    let <span class="math">&phi;<sub>c</sub></span> denote the sample percentage of the sample from the
+    second population; and let <span class="math">&phi;</span> denote the overall sample percentage of the two
+    samples pooled together,
+</p>
+
+<p class="math">
+    &phi;=(total number of &quot;1&quot;s in the two samples)/(total sample size) = G/N.
+</p>
+
+<p>
+    Then, if the null hypothesis is true,
+</p>
+
+<p class="math">
+    E(&phi;<sub>t</sub>&minus;&phi;<sub>c</sub>)=0.
+</p>
+
+<p>
+    If in addition <span class="math">n<sub>t</sub></span> and 
+    <span class="math">n<sub>c</sub></span>
+    are large, 
+    <span class="math">SE(&phi;<sub>t</sub>&minus;&phi;<sub>c</sub>)</span> is approximately
+</p>
+
+<p class="math">
+    s<sup>*</sup>&times;(1/n<sub>t</sub> +
+    1/n<sub>c</sub>)<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where
+</p>
+
+<p class="math">
+    s<sup>*</sup>=(&phi;&times;(1&minus;&phi;))<sup>&frac12;</sup>
+</p>
+
+<p>
+    is the <em>pooled bootstrap estimate</em> of the SD of the null box.
+    Under the null hypothesis, for large sample sizes <span class="math">n<sub>t</sub></span>
+    and <span class="math">n<sub>c</sub></span>, the probability histogram of
+</p>
+
+<p class="math">
+    Z =
+    (&phi;<sub>t</sub>&minus;&phi;<sub>c</sub>)/(s<sup>*</sup> &times;
+    (1/n<sub>t</sub>
+    + 1/n<sub>c</sub>)<sup>&frac12;</sup>)
+</p>
+
+<p>
+    can be approximated accurately by the normal curve, so <span class="math">Z</span> is a 
+    <span class="math">Z</span>-statistic.
+    To test the null hypothesis against the one-sided alternative that
+    <span class="math">p<sub>t</sub>&lt;p<sub>c</sub></span>
+    at approximate significance level <span class="math">&alpha;</span>, use a one-sided test that rejects
+    the null hypothesis when 
+    <span class="math">Z&lt;z<sub>&alpha;</sub></span>.
+    To test the null hypothesis against the one-sided alternative that
+    <span class="math">p</span><sub>t</sub>&gt;p<sub>c</sub></span> at approximate
+    significance level <span class="math">&alpha;</span>, use a one-sided test
+    that rejects the null hypothesis when <span class="math">Z&gt;z<sub>1&minus;&alpha;</sub></span>.
+    To test the null hypothesis against the two-sided alternative that
+    <span class="math">p<sub>t</sub>&ne;p<sub>c</sub></span> at
+    approximate significance level <span class="math">&alpha;</span>, use a
+    two-sided test that rejects the null hypothesis when
+    <span class="math">|Z|&ge;z<sub>1&minus;&alpha;/2</sub></span>.
+    The <em>Z</em> test for the equality of two percentages is essentially equivalent
+    to the normal approximation to Fisher's exact test when the sample sizes
+    are all large, even though the assumptions of the tests differ.
+</p>
+
+
+
+<h2>
+    <a id="key_terms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>0-1 box                            </li>
+    <li>alternative hypothesis             </li>
+    <li>binomial distribution              </li>
+    <li>bootstrap estimate                 </li>
+    <li>complement                         </li>
+    <li>control group                      </li>
+    <li>dependent                          </li>
+    <li>expected value                     </li>
+    <li>experiment                         </li>
+    <li>finite population correction       </li>
+    <li>Fisher’s exact test                </li>
+    <li>histogram                          </li>
+    <li>hypergeometric distribution        </li>
+    <li>hypothesis testing                 </li>
+    <li>independent                        </li>
+    <li>independent random sample          </li>
+    <li>normal approximation               </li>
+    <li>normal curve                       </li>
+    <li>null hypothesis                    </li>
+    <li>one-sided                          </li>
+    <li>one-sided                          </li>
+    <li>parameter                          </li>
+    <li>pooled bootstrap estimate of the SD</li>
+    <li>population model                   </li>
+    <li>population percentage              </li>
+    <li>probability                        </li>
+    <li>probability distribution           </li>
+    <li>probability histogram              </li>
+    <li>probability histogram              </li>
+    <li>quantile of the normal curve       </li>
+    <li>random sample                      </li>
+    <li>random variable                    </li>
+    <li>randomization model                </li>
+    <li>rejection region                   </li>
+    <li>sample percentage                  </li>
+    <li>sample size                        </li>
+    <li>significance level                 </li>
+    <li>simple random sample               </li>
+    <li>standard deviation                 </li>
+    <li>standard error                     </li>
+    <li>standard unit                      </li>
+    <li>symmetric                          </li>
+    <li>test statistic                     </li>
+    <li>treatment                          </li>
+    <li>treatment group                    </li>
+    <li>two-sided                          </li>
+    <li><em>Z</em> statistic               </li>
+    <li><em>z</em>-score                   </li>
+    <li><em>z</em> test                    </li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

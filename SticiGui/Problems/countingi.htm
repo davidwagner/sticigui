@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "counting";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>
+    Counting
+</h2>
+
+<p>
+    A certain baseball team has
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  var nPlayers = (listOfRandInts(1, 15, 25))[0];
+  document.write(nPlayers.toString() + " ");
+  // -->
+</script>
+  players. Only nine can be on
+  the field at a time. Each of the nine players on the field has a distinct field position:
+  pitcher, catcher, first baseman, second baseman, third baseman, short stop,
+  left field, right field, or center field.
+  Assume for the moment that every player is qualified to
+  play every position.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nField = roundToDig(binomialCoef(nPlayers,9),0);
+    var qStr = '<span class="qSpan">How may ways are there to select nine of the ' +
+               nPlayers.toString() + ' players to be on the field (without regard to which ' +
+               'position each player will have)?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nField));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nOrder = roundToDig(factorial(9),0);
+    var qStr = '<span class="qSpan">How many ways are there to assign field positions ' +
+               'to a given set of nine players?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nOrder));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many ways are there to fill the nine field ' +
+               'positions from among the ' + nPlayers.toString() + ' players (taking ' +
+               'account of the position each player will have)?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nField*nOrder));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+      Now suppose that not every player can play in every position.
+      The outfielders (left field, center field, right field) can play any
+      outfield position, the infielders (1st base, 2nd base, 3rd base, short stop) can
+      play any infield position, the pitchers can only pitch, and the catchers can only
+      catch. Suppose a certain team has
+<script language="JavaScript1.4" type="text/javascript" ><!--
+      var theInts = listOfDistinctRandInts(4,3,7);
+      theInts.sort(numberLessThan);
+      var nCatch = theInts[0];
+      var nOut = theInts[1];
+      var nIn = theInts[2];
+      var nPitch = theInts[3];
+      var nPlayers = vSum(theInts);
+      var nWays = roundToDig(nCatch*nPitch*permutations(nIn,4)*permutations(nOut,3),0);
+      document.writeln(nPlayers.toString() + " players, of whom ");
+      document.writeln(nCatch.toString() + " are catchers, ");
+      document.writeln(nOut.toString() + " are outfielders, ");
+      document.writeln(nIn.toString() + " are infielders, and ");
+      document.writeln(nPitch.toString() + " are pitchers. ");
+      // -->
+</script>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many ways can the team assign field ' +
+               'positions to 9 of the ' + nPlayers.toString() + ' players, putting ' +
+               'each of the 9 selected players in a position he can play, and ensuring ' +
+               'that all 9 field positions are filled?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(nWays));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<p>
+  Our genetic material, DNA, is formed from a 4 letter &quot;alphabet&quot; of bases: A,
+  T, G, C (adenine, thymine, guanine, and cytosine). 
+  The order in which the letters are
+  arranged is important, but because a molecule can move, there is no difference between a
+  sequence and the same sequence reversed. For example, the sequence (A, A, T, A, G, A, T)
+  is the same as the sequence (T, A, G, A, T, A, A).
+  (In reality, DNA molecules have identifiable ends, but ignore that in this problem.)
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nBases = (listOfRandInts(1,6,12))[0];
+    var qStr = '<span class="qSpan"> How many distinct DNA sequences of ' + nBases.toString() + 
+               ' bases are there?</span>';
+    document.writeln(qStr);
+    var halfBases = Math.floor(nBases/2);
+    var nSeqSym = Math.pow(4,halfBases);   // symmetrical sequences for even number of bases
+    if (halfBases != nBases/2) {        // even number of bases
+       nSeqSym = 4*nSeqSym;
+    }
+    var nSeqAsym = Math.pow(4,nBases) - nSeqSym;
+    var nSeq = roundToDig(nSeqAsym/2 + nSeqSym,0);
+    writeTextExercise(18,qCtr++,numToRange(nSeq,1.e-8*nSeq));
+    document.writeln('</p>');
+// -->
+</script>
+<p>
+  (You can use exponential notation here, and in any other
+  question in these assignments.
+  For example, you can write 1.23456789e20
+  for 1.23456789&times;10<sup>20</sup> = 123,456,789,000,000,000,000.  
+  Do not leave a space between the last digit and the "e."
+  The answer to this particular question needs to be correct to one part in ten million.)
+</p>
+</div>
+
+
+<p>
+  To get her BA in Statistics, a student at the University of California at Berkeley must
+  satisfy the following course requirements in the Statistics Department: Statistics 101 and
+  102, or 134 and 135, plus 133 and three courses chosen from among 150, 151A, 151B,
+  152, 153, 155,
+  and 156. <em>At least one of the three courses taken from among the 15x series must have a
+  laboratory</em>. The prerequisites and whether a course has a lab are tabulated below:</p>
+  <div align="center"><center>
+  <table class="dataTable">
+    <caption>Upper division Statistics courses</caption>
+    <tr>
+      <th id="col0">Course</th>
+      <th id="col1">Prerequisites</th>
+      <th id="col2">Lab</th>
+    </tr>
+    <tr>
+      <td headers="col0">101</td>
+      <td headers="col1">none</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">102</td>
+      <td headers="col1">101</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">133</td>
+      <td headers="col1">none</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">134</td>
+      <td headers="col1">none</td>
+      <td headers="col2">no</td>
+    </tr>
+    <tr>
+      <td headers="col0">135</td>
+      <td headers="col1">101 or 134</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">150</td>
+      <td headers="col1">101 or 134</td>
+      <td headers="col2">no</td>
+    </tr>
+    <tr>
+      <td headers="col0">151A</td>
+      <td headers="col1">102 or 135</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">151B</td>
+      <td headers="col1">102 or 135</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">152</td>
+      <td headers="col1">101 or 134</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">153</td>
+      <td headers="col1">101 or 134</td>
+      <td headers="col2">yes</td>
+    </tr>
+    <tr>
+      <td headers="col0">155</td>
+      <td headers="col1">101 or 134</td>
+      <td headers="col2">no</td>
+    </tr>
+    <tr>
+      <td headers="col0">156</td>
+      <td headers="col1">102 or 135</td>
+      <td headers="col2">no</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nPaths = roundToDig(2*((4*3) + (6*3) + 4),0);
+    var qStr = '<span class="qSpan">How many different ways are there to choose from ' +
+             'these twelve courses a set of six courses that satisfies the Statistics ' +
+                 'degree requirements?</span>';
+    document.writeln(qStr);
+    writeTextExercise(10,qCtr++,numToRange(nPaths));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+  A computer hacker is trying to break into a computer system by
+  guessing the system administrator's password. The hacker can try
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  var theInts = listOfRandInts(2,5,15);
+  var triesPerMin = theInts[0];
+  var minPerDay = theInts[1];
+  var minChars = (listOfRandInts(1,4,6))[0];
+  var maxChars = (listOfRandInts(1,9,12))[0];
+  var nLett = 26*2;
+  var nAlphanum = nLett + 10;
+  var numMinLength = nLett*Math.pow(nAlphanum,minChars-1);
+  var numMaxLength = nLett*Math.pow(nAlphanum,maxChars-1);
+  var numTot = 0;
+  for (i=minChars-1; i < maxChars; i++){
+        numTot += nLett*Math.pow(nAlphanum,i);
+  }
+  var years = (listOfRandInts(1,5,10))[0];
+  document.writeln(triesPerMin.toString() + " ");
+  var yearFrac = triesPerMin*minPerDay*years*365.25/numTot;
+  // -->
+</script>
+  passwords a minute,
+  but if he tries unsuccessfully for more than
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(minPerDay.toString() + " ");
+  // -->
+</script>
+  minutes a day, he will get caught. If he
+  limits his attempts to less time each day, he will not get caught.
+  The hacker knows that the
+  administrator's password is at least
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(minChars.toString() + " and at most " + maxChars.toString() + " ");
+  // -->
+</script>
+  characters long, does not contain any character that is not a
+  number, an uppercase letter, or a lowercase letter (no special characters such as spaces,
+  punctuation marks, dollar signs, <em>etc.</em>), and that the first character is a letter.
+  Case matters, and characters can be repeated.
+  </p>
+
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many passwords are there that start with a ' +
+               'letter, contain only numbers and upper and lowercase letters, and ' +
+               'are exactly ' + minChars.toString() + ' characters long?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(numMinLength));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many passwords are there that start with ' +
+               'a letter, contain only numbers and upper and lowercase letters, and ' +
+               'are exactly ' + maxChars.toString() + ' characters long?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(numMaxLength));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many passwords are there that start with ' +
+               'a letter, contain only numbers and upper and lowercase letters, and ' +
+               'are at least ' + minChars.toString() + ' and at most ' + 
+                maxChars.toString() + ' characters long?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(numTot));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM=================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">What fraction of the passwords that start with ' +
+               'a letter, contain only numbers and upper and lowercase letters, ' +
+               'and are at least ' + minChars.toString() + ' and at most ' +
+                maxChars.toString() + ' characters long can the hacker try in ' +
+                years.toString() + ' years without getting caught?</span> (Assume ' +
+               'that every year lasts 365.25 days.)';
+    document.writeln(qStr);
+    writeTextExercise(18,qCtr++,numToRange(yearFrac));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+
+</html>

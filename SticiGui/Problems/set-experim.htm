@@ -1,0 +1,782 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="http://www.w3.org/Math/XSL/mathml.xsl"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+              "http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd" [
+ <!ENTITY mathml "http://www.w3.org/1998/Math/MathML">
+]>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Friday 1 February 2008 20:07 PST";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+     // All rights reserved.
+// -->
+</script>
+
+<title>
+    SticiGui Assignment 24
+</title>
+
+<base target="_self">
+</head>
+
+<body onload="setApplets()" onUnload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/course.js"></script>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    labSetUp("SeEd",24);
+    function setApplets(){
+        recoverResponses();
+    }
+// -->
+</script>
+
+
+<h2 align="center">
+    The Method of Comparison, Experiments, and Observational Studies
+</h2>
+
+<p>
+    The next few questions refer to a research article by W.J. Spangler, B.S., G.R. Cosgrove,
+    M.D., H.T. Ballantine Jr., M.D., E.H. Cassem, M.D., S.L. Rauch, M.D., A. Nierenberg, M.D.,
+    and B.H. Price, M.D., 1996. Magnetic Resonance Image-guided Cingulotomy for Intractable
+    Psychiatric Disease, <em>Neurosurgery</em>, <em>38</em>, 1071-1078.
+    The article reports on 34
+    patients who underwent MRI-guided cingulotomies to treat refractory psychiatric disease at
+    Massachusetts General Hospital between May, 1991, and February, 1995.
+</p>
+
+<p>
+    The 34 patients, 18 male, 16 female, ages 16-71, mean age 37, had all been referred by
+    their treating psychiatrists and reviewed by the MGH Cingulotomy Assessment Committee
+    (comprised principally of a subset of the authors) to become candidates for the procedure.
+    The committee had to agree unanimously that the patient should undergo the procedure, and
+    the patient had to give his or her informed consent. Prerequisites for the committee to
+    favor treatment included patient's resistance to pharmacotherapy, psychotherapy, behavior
+    therapy, and electro-convulsive therapy (when applicable), and the symptoms had to be
+    severe and unremitting for at least one year. All patients had a documented DSM III-R
+    disease that interfered significantly with normal functioning (<i>e.g</i>., major
+    affective disorder with unipolar depression (10 patients), or bipolar depression (5
+    patients), undiagnosible developmental disorders (1 patient), and obsessive-compulsive
+    disorder with major depression (15 patients)). For some patients whose condition failed to
+    improve 6 months after surgery, additional cingulotomies were performed.
+</p>
+
+<p>
+    The
+    cingulotomy procedure is to insert a pair of electrodes into holes drilled in the skull
+    just above the hairline, to a pre-determined position in the brain (guided by MRI).
+    Radio-frequency electricity is passed through the electrodes, to raise the temperature in
+    the part of the brain between the electrodes to 85°C (185°F) for 90 seconds, essentially
+    cooking part of the brain between them. (This causes what is called a radio-frequency
+    thermocoagulation lesion). The basic procedure was changed in 1993 to include a larger
+    part of the brain.
+</p>
+
+<p>
+    Of the 34 subjects, 31 were available for follow-up assessment of some sort; of the 31,
+    two had committed suicide. Follow-up assessment was done two ways: either the referring
+    psychiatrist or the treating psychiatrist completed two questionnaires---the Clinical
+    Global Improvement Scale, and the Current, Global, Psychiatric-Social Status Scale---or,
+    if the patient was no longer seeing a psychiatrist, the most recent correspondence with
+    the patient was used to assign ratings. I could not find a reference to the number of
+    patients who were in each of these categories. On the basis of these ratings, each patient
+    was classified as a &quot;responder&quot; (R), a &quot;possible responder&quot; (P), or a
+    &quot;non-responder&quot; (N).
+</p>
+
+<p>
+    Fourteen of the patients who had not responded six months after the initial procedure
+    underwent multiple procedures. The categorized responses were as follows:
+</p>
+
+<div align="center">
+<center>
+    <table border="1" bgcolor="#FFFFFF" bordercolor="#000000">
+        <tr>
+          <td>procedure</td>
+          <td align="right">%R</td>
+          <td align="right">%P</td>
+          <td align="right">%N</td>
+        </tr>
+        <tr>
+          <td>single singulotomy, procedure 1 (11)</td>
+          <td align="right">33</td>
+          <td align="right">33</td>
+          <td align="right">33</td>
+        </tr>
+        <tr>
+          <td>single singulotomy, procedure 2 (23)</td>
+          <td align="right">38</td>
+          <td align="right">0</td>
+          <td align="right">62</td>
+        </tr>
+        <tr>
+          <td>multiple procedures (14 of initial N)</td>
+          <td align="right">36</td>
+          <td align="right">36</td>
+          <td align="right">28</td>
+        </tr>
+        <tr>
+          <td>overall (31 patients, single and multiple) </td>
+          <td align="right">38</td>
+          <td align="right">23</td>
+          <td align="right">38</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The article breaks down the responses further by type of mental illness.
+</p>
+
+<li>The cingulotomy research is<br />
+<script language="JavaScript1.4" type="text/javascript" ><!--
+var aVal = "b";
+var opt = ["an observational study.",
+           "an experiment.",
+           "a controlled experiment.",
+           "a randomized, controlled experiment.",
+           "a randomized, controlled, blind or double-blind experiment."
+           ];
+writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</li>
+<li>
+    Which of the following reasonably might be expected to bias the results of the
+    cingulotomy research?<br />
+    i) the placebo effect <br />
+    ii) the expectations/hopes of the surgeons and psychiatrists
+<br />
+<script language="JavaScript1.4" type="text/javascript" ><!--
+var aVal = "a";
+var opt = ["both (i) and (ii)",
+           "neither (i) nor (ii)",
+           "(i) but not (ii)",
+           "(ii) but not (i)"
+           ];
+writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</li>
+
+<!-- ================================= START PROBLEM =================================== -->
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<font color="#009900">In the cingulotomy research, which of the following ' +
+               'would be important to know to assess the effectiveness of an MRI-guided ' +
+               'cingulotomy for treating psychiatric disease?</font> ' +
+               '(select all that apply)</p><p>';
+    document.writeln(qStr);
+    var rawOpt = ['The overall fraction of psychiatric patients who recover from severe ' +
+                     'psychiatric symptoms that last a year or longer.',
+                  'The number of patients whose follow-up evaluations were based on letters ' +
+                      'from them, rather than assessments by a psychiatrist.',
+                  'The effect of a cingulotomy on people without mental illness.'
+
+                 ];
+    var optPerm = randPermutation(rawOpt, 'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]] + '&' + alphabet[optPerm[1][1]] ;
+    writeSelectExercise(true, qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'In the cingulotomy research, 38% of the 31 patients were classified as ' +
+               'responders. <font color="#009900">An approximate 95% confidence interval ' +
+               'for the fraction of patients with severe psychiatric symptoms lasting a ' +
+               'year or longer who would respond to single or multiple cingulotomies is ' +
+               '</font></p><p>';
+    document.writeln(qStr);
+    var aVal = alphabet[4];
+    var opt = ['38% &plusmn; 2&times;31<sup>&frac12;</sup>&times;' +
+                    '(0.38&times;0.62)<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;(0.38&times;0.62)<sup>&frac12;</sup>/' +
+                    '31<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;31<sup>&frac12;</sup>&times;' +
+                    '(0.5&times;0.5)<sup>&frac12;</sup>.',
+               '38% &plusmn; 2&times;(0.5&times;0.5)<sup>&frac12;</sup>/' +
+                    '31<sup>&frac12;</sup>.',
+               'cannot be determined from the information given.'
+               ];
+    writeRadioExercise(qCtr++,opt,aVal);
+// -->
+</script>
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<p>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'I wish to study the effect of daily consumption of small amounts of ' +
+               'alcohol (say, two glasses of wine) on the incidence of heart disease. ' +
+               'In several European countries, it is customary to drink wine with dinner, ' +
+               'while in most Islamic countries, it is not. I therefore decide to compare ' +
+               'the average incidence of heart disease for several European countries in ' +
+               'which the average daily consumption of wine is two glasses, with the ' +
+               'incidence of heart disease in Saudi Arabia, where the consumption of ' +
+               'alcohol is negligable (it is a capital offense).  It turns out that the ' +
+               'incidence of heart disease is lower in Saudi Arabia. Consider the non-drinkers ' +
+               'to be the control group, and the drinkers to be the treatment group.</p>' +
+               '<p><font color="#009900">Because individual drinking patterns vary, the ' +
+               'assignment of subjects to treatment and control is effectively random. ' +
+               '</font>';
+    document.writeln(qStr);
+    var opt = ['false','true'];
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p><font color="#009900">Because the nationality is essnetially an ' +
+               'accident of birth, assignment of subjects to treatment and control is ' +
+               'effectively random.</font>';
+    documnent.writeln(qStr);
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p><font color="#009900">Because the sample sizes are very large, I ' +
+               'should be able to detect even a small effect (a test will have good ' +
+               '&quot;power&quot; to detect that the null hypothesis is false if it is ' +
+               'false).</font>';
+    document.writeln(qStr);
+    var aVal = alphabet[0];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+    var qStr = '</p><p><font color="#009900">This is an observational study.</font>';
+    document.writeln(qStr);
+    var aVal = alphabet[1];
+    writeSelectExercise(false, qCtr++, opt, aVal);
+// -->
+</script>
+</p>
+
+
+
+<p><b>Problem A. Therapy for Smoking Cessation</b>
+
+<p>
+    This problem refers to an article by RD Hurt, LC Dale, PA Fredrickson,
+    CC Caldwell, GA Lee, KP Offord, GG Lauger, Z Marusic, LW Neese, and TG
+    Lundberg, 1994, &quot;Nicotine patch therapy for smoking cessation combined
+    with physician advice and nurse follow-up,&quot; <i>Journal of the American
+    Medical Association</i>, v. 271, 595-600.
+</p>
+
+<p>
+    There is no longer any doubt that smoking cigarettes is hazardous to
+    your health and the health of those around you.
+    Therefore, with the accumulating
+    evidence that smoking is bad for you, millions of people have either quit
+    smoking or are trying to quit.
+    Yet despite the many efforts that some people
+    make to quit, it is often very difficult for those addicted to smoking.
+    Nicotine patches are one popular form of medication prescribed by doctors
+    to help people quit smoking. One of the objectives of the study by Hurt
+    <i>et al.</i> was to determine the efficacy of a 22-mg nicotine patch combined
+    with the National Cancer Institute program for physician advice and nurse
+    follow-up in 1-year cessation outcome.
+</p>
+
+<p>
+    Subjects were randomly selected from among volunteers who responded
+    to a news release in the local media. 240 of those selected passed the
+    physical and psychological screening and were included in the study. Subjects
+    had to be between ages 20 and 65, ahve a history of smoking at least 20
+    cigarettes per day for the last year, have expired carbon monoxide levels
+    of 10ppm or greater, be motivated to stop smoking, be in &quot;good health&quot;
+    according to a doctor's examination, have no non-nicotine chemical dependencies,
+    and use no other forms of nicotine besides cigarettes.
+    Subjects were randomly
+    assigned either to recieve an active nicotine patch combined with physician
+    advice and nurse follow-up or to receive an inactive (placebo) patch combined
+    with physician advice and nurse follow-up; 120 in each group.
+    Patch therapy was completed at the end of 8 weeks.
+    The nurse follow-up was face-to-face
+    once a week during the patch phase, and a weekly phone call for the remainder
+    of the study.
+    Neither the subjects nor the doctors and nurses knew who
+    had been assigned to which groups.
+</p>
+
+<p>
+    Smoking cessation was defined as self-reported abstinance (not even
+    a puff) since the last visit and an expired air carbon monoxide level of
+    8ppm or less.
+    Subjects with missing information or who dropped out of the
+    study for any reason were considered smokers.
+    For the first 8 weeks, this represented weekly point prevalence, and
+    for 3, 6, 9, and
+    12 months this represented 3-month point prevalence.
+</p>
+
+<p>
+    Some of the baseline characteristics (i.e., characteristics after random
+    assignment, but before the stop-smoking date) are shown in the following
+    table.
+</p>
+
+<br />&nbsp;
+<center><table BORDER COLS="3" WIDTH="57%" BGCOLOR="#FFCC33">
+<caption><b>Table 1: Baseline Characteristics</b></caption>
+
+<tr BGCOLOR="#33CCFF">
+<td WIDTH="60%">Characteristic</td>
+
+<td WIDTH="60">
+<center>Active Patch</center>
+</td>
+
+<td WIDTH="60">
+<center>Inactive&nbsp;</center>
+
+<center>Patch</center>
+</td>
+</tr>
+
+<tr>
+<td>% female</td>
+
+<td>
+<center>52</center>
+</td>
+
+<td>
+<center>52</center>
+</td>
+</tr>
+
+<tr>
+<td>% HS graduate or less</td>
+
+<td>
+<center>46</center>
+</td>
+
+<td>
+<center>47</center>
+</td>
+</tr>
+
+<tr>
+<td>% employed</td>
+
+<td>
+<center>85</center>
+</td>
+
+<td>
+<center>73</center>
+</td>
+</tr>
+
+<tr>
+<td>% previous stop smoking attempts</td>
+
+<td>
+<center>89</center>
+</td>
+
+<td>
+<center>92</center>
+</td>
+</tr>
+
+<tr>
+<td>% other smokers in household</td>
+
+<td>
+<center>43</center>
+</td>
+
+<td>
+<center>36</center>
+</td>
+</tr>
+
+<tr>
+<td>% previously treated for depression</td>
+
+<td>
+<center>8</center>
+</td>
+
+<td>
+<center>13</center>
+</td>
+</tr>
+
+<tr>
+<td>average age</td>
+
+<td>
+<center>43</center>
+</td>
+
+<td>
+<center>44</center>
+</td>
+</tr>
+
+<tr>
+<td>average years smoking</td>
+
+<td>
+<center>24</center>
+</td>
+
+<td>
+<center>26</center>
+</td>
+</tr>
+
+<tr>
+<td>carbon monoxide (ppm)</td>
+
+<td>
+<center>28</center>
+</td>
+
+<td>
+<center>30</center>
+</td>
+</tr>
+</table></center>
+&nbsp;
+
+<p>
+The following table shows smoking cessation rates for different point
+prevalences.
+<br />&nbsp;
+<br />&nbsp;
+<center><table BORDER COLS="3" WIDTH="30%" BGCOLOR="#FF9900">
+<caption><b>Table 2: Percent nonsmoking since last visit.</b>&nbsp;</caption>
+
+<tr BGCOLOR="#33CCFF">
+<td>
+<center>Period</center>
+</td>
+
+<td>
+<center>Active&nbsp;</center>
+
+<center>Patch</center>
+</td>
+
+<td>
+<center>Placebo&nbsp;</center>
+
+<center>Patch</center>
+</td>
+</tr>
+
+<tr>
+<td>8-week</td>
+
+<td>
+<center>47</center>
+</td>
+
+<td>
+<center>20</center>
+</td>
+</tr>
+
+<tr>
+<td>3-month</td>
+
+<td>
+<center>37</center>
+</td>
+
+<td>
+<center>18</center>
+</td>
+</tr>
+
+<tr>
+<td>6-month</td>
+
+<td>
+<center>30</center>
+</td>
+
+<td>
+<center>16</center>
+</td>
+</tr>
+
+<tr>
+<td>9-month</td>
+
+<td>
+<center>32</center>
+</td>
+
+<td>
+<center>17</center>
+</td>
+</tr>
+
+<tr>
+<td>12-month</td>
+
+<td>
+<center>28</center>
+</td>
+
+<td>
+<center>14</center>
+</td>
+</tr>
+</table></center>
+&nbsp;
+<ol>
+<li>
+<font COLOR="#006600">The nicotine patch study was</font></li>
+
+<br /><select name="001" size="1"><option value="exp"><font COLOR="#006600">an
+uncontrolled experiment</option>&nbsp;<option value="cont exp">a controlled
+experiment</option>&nbsp;<option value="rand exp">a randomized experiment</option>&nbsp;
+<option value="rand cont exp">a
+randomized, controlled experiment</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">The purpose of the study was to determine how smoking
+cessation is effected by</font></li>
+
+<br /><select name="002" size="1">
+<option value="phy nurse"><font COLOR="#006600">physician
+advice and nurse follow-up</option>&nbsp;<option value="patch">a nicotine
+patch</option>&nbsp;<option value="rand exp">a randomized experiment</option>&nbsp;
+<option value="phy nurse patch">a
+nicotine patch combined with physician advice and nurse follow-up</option>&nbsp;
+<option value="baseline">baseline
+characteristics</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">The doctors required a carbon monoxide test as part
+of the smoking cessation criterion most likely to</font></li>
+
+<br /><select name="003" size="1"><option value="verify"><font COLOR="#006600">verify
+abstinance from smoking</option>&nbsp;<option value="rand">check on the
+success of the randomization</option>&nbsp;<option value="patch">determine
+if the patch was working</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">The numbers in table 1 show that the random assignment
+did not work because they are not exactly the same for each characteristic.</font></li>
+
+<br /><select name="004" size="1"><option value="true"><font COLOR="#006600">True</option>
+&nbsp;<option value="false">False</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">The numbers in table 2 do not steadily decrease because</font></li>
+
+<br /><select name="005" size="1">
+<option value="mistake"><font COLOR="#006600">there
+was an error in the calculations of percentages</option>&nbsp;
+<option value="cum">the
+percentages are not cumalative</option>&nbsp;
+<option value="drop">there
+were a lot of dropouts</option>&nbsp;
+<option value="lie">people lied about
+their smoking cessation</option>&nbsp;
+</font></select>
+<li>
+<font COLOR="#006600">A reasonable conclusion of the study is that</font></li>
+
+<br /><select name="006" size="1"><option value="invalid">
+<font COLOR="#006600">the
+randomization failed and thus no valid results are available</option>&nbsp;
+<option value="nodiff">the
+combined patch and counseling therapy made no difference</option>&nbsp;
+<option value="worked">significant
+smoking cessation can be achieved using combined patch and counseling therapy</option>&nbsp;
+</font></select></ol>
+
+<b>Problem B. A Case Study on Cholera</b>
+
+<p><i>Reading</i>:
+In 1853-54 the
+<a HREF="http://www.nationalgeographic.com/resources/ngo/education/ideas912/912choleraho1.html">cholera</a>
+epidemic in London, England, claimed the lives of more than 500 people
+- all from the Soho section of London - within a 10-day period.
+John
+Snow, a local physician, had been studying cholera and believed that
+the disease was being spread through food or water.
+Link to the Centers
+for Disease Control and Prevention
+<a HREF="http://www.state.de.us/govern/agencies/dhss/irm/dph/hmpc/snow1.htm">(CDC)
+web page on Snow </a>and read the background to his investigation on the
+cause and transmission of cholera.
+
+<p>
+To aid his investigation on his theory that cholera was waterborne,
+Snow made
+<a HREF="http://www.nationalgeographic.com/resources/ngo/education/ideas912/912choleraho2.html">a
+map of every death</a> in the Soho district.
+For every death he determined
+the water company that was serving the deceased individual. Snow found
+that those being served by the Southwark and Vauxhall company had a higher
+death rate than those served by the Lambeth company.
+This was very suggestive evidence of cholera being waterborne.
+
+<p>
+Now link to Snow's
+<a HREF="http://www.nationalgeographic.com/resources/ngo/education/ideas912/912choleraho3.html">map
+showing deaths and locations of water pumps</a>.
+There you can see that
+most of the deaths were clustered around the water pump at Broad Street
+and Lexington Street.
+As told in the CDC article, once the handle to this
+water pump was removed the epidemic was contained.
+However, this was not
+the end of the story, for it seemed that the number of deaths per day due
+to cholera was dropping anyway.
+According to John Snow:
+</p>
+
+<p>
+<blockquote><small>
+    Although the
+    above facts shown in the table above afford very strong evidence of the
+    powerful influence which the drinking of water containing the sewage of
+    a town exerts over the spread of cholera, when that disease is present,
+    yet the question does not end here; for the intermixing of the water supply
+    of the Southwark and Vauxhall Company with that of the Lambeth Company,
+    over an extensive part of London, admitted of the subject being sifted
+    in such a way as to yield the most incontrovertible proof on one side or
+    the other.
+    In the subdistricts enumerated in the above table as being supplied
+    by both Companies, the mixing of the supply is of the most intimate kind.
+    The pipes of each company go down all the streets, and into nearly all
+    the courts and alleys.
+    A few houses are supplied by one Company and a few
+    by the other, according to the decision of the owner or occupier at that
+    time when the Water Companies were in active competition.
+    In many cases
+    a single house has a supply different from that on the either side.
+    Each
+    Company supplies both rich and poor, both large houses and small; there
+    is no difference either in the condition or occupation of the persons receiving
+    the waters of the different Companies.
+    </small>
+</p>
+
+<p>
+    <small>Now it must be evident
+    that, if the dimunition of cholera in the districts partly supplied with
+    improved water, depended on this supply, the houses receiving it would
+    be the houses enjoying the whole benefit of the dimunitions of the malady,
+    whilst the houses supplied by the water from Battersea Fields would suffer
+    the same mortality as they would if the improved water supply did not exist
+    at all.
+    As there is no difference whatever in the houses or the people
+    receiving the supply of the two Water Companies, or in any of the physical
+    conditions with which they are surrounded, it obvious that no experiment
+    could have been devised which would more thoroughly test the effect of
+    water supply on the progress of cholera than this, which circumstances
+    placed ready made before the observer.</small>
+</p>
+</blockquote>
+
+
+<p>
+    With these observations John Snow was convinced that cholera was indeed
+    waterborne.
+</p>
+
+<ol>
+<li>
+    <font COLOR="#006600">Based on the given information, what data did Snow
+    collect on each cholera case? (Select all choices that apply--use the &quot;shift&quot;
+    or &quot;control&quot; key to make multiple selections.)</font>
+</li>
+
+<br /><select name="007" multiple size="4">
+<option value="res"><font COLOR="#006600">residency</option>&nbsp;
+<option value="age">age</option>&nbsp;<option value="water">water
+provider</option>&nbsp;<option value="clin">clinical symptoms</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">What did Snow compare to support his research hypothesis
+that choloera is water-borne?</font></li>
+
+<br /><select name="008" size="1"><option value="water amt"><font COLOR="#006600">water
+consumption by cholera cases and non-cholera cases</option>&nbsp;
+<option value="raw cnt">number
+of cholera cases served by each of the water companies</option>&nbsp;
+<option value="rates">death
+rates of cholera cases among each of the water companies' customers</option>&nbsp;
+<option value="rand cont exp">death
+rates along each street in the Soho section</option>&nbsp;</font></select>
+<li>
+<font COLOR="#006600">Snow found that the customers of the Southwark and
+Vauxhall company had a higher death rate than those of the Lambeth company.
+If Snow has based his conclusions on just this information, he would have
+been wrong in concluding that the difference in death rates was caused
+by water because</font></li>
+
+<p>
+<select name="009" size="1"><option value="cfnd"><font COLOR="#006600">of
+possible confounding factors, such as socioeconomic status</option>&nbsp;
+<option value="not know">people
+really didn't know which company provided their water</option>&nbsp;
+<option value="river">both
+companies were served by the Thames River</option>&nbsp;
+<option value="chlo">Snow
+knew chloroform could have been causing the cholera</option>&nbsp;</font>
+</select>
+
+<li>
+    <font COLOR="#006600">Snow was convinced that the difference in death rates
+    between the two water companies was due to their water supply becuase</font>
+</li>
+
+<br /><select name="011" size="1">
+<option value="lab">
+    he had proved it in his lab
+</option>
+<option value="quasi expt">
+he recognized
+that the customers of the companies essentially differed only with respect
+to their water supplier
+</option>&nbsp;
+<option value="river">both companies
+were served by the Thames River</option>&nbsp;<option value="autopsy">of
+autopsy records</option>&nbsp;<option value="sewage">the Southwark and
+Vauxhall company was downstream of sewage deposits</option>&nbsp;</font>
+</select>
+<li>
+    <font color="#009900">Suppose Snow had not collected any data on cholera
+    cases, but simply removed the handle from the water pump on Broad Street.
+    True or false: The subsequent diesease containment would have been convincing
+    evidence that cholera was waterborne.
+    </font>
+</li>
+
+<p>
+<select name="012" size="1">
+    <option value="true">
+        True
+    </option>
+    <option value="false">
+        False
+    </option>
+</select>
+</p>
+
+</ol>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+
+</body>
+</html>

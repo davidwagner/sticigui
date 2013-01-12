@@ -1,0 +1,703 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference" pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "28 June 2011 14:48 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "association";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>
+   Association
+</h1>
+
+<div class="indent">
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=&end=1525" frameborder="0" allowfullscreen></iframe></p>
+<p class="inline">
+    Many interesting questions about multivariate data involve association.
+    For example, within the United States, there is a <em>negative association</em>
+    between the amount of money an individual spends on healthcare in a given year
+    and the number of years he survives beyond that year: the more spent on
+    healthcare, the shorter the life expectancy.
+    What does this mean?
+    Could it be true?
+    Does healthcare shorten your life?
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Who spends the most on healthcare? Those who are sickest (and who can ' +
+           'afford healthcare). Their life expectancies are short, whether or ' +
+           'not they receive healthcare. Healthcare probably increases their life ' +
+           'expectancies, but the effect of prior illness is <em>confounded</em> ' +
+           'with the effect of healthcare.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    <a class="glossRef" href="gloss.htm#association">Association</a> is a property of two or more
+    variables. 
+    In this example, the two variables are the amount
+    an individual spends on healthcare, and the number of additional years the individual
+    survives.
+    Association is not the same as causation: Two variables can be strongly associated but have no
+    causal connection, or can have a causal connection and no discernible association.
+    Concluding that association implies a causal relationship is the <span class="termOfArt">post hoc ergo propter hoc</span>
+    fallacy discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('reasoning') + '. ');
+// -->
+</script>
+    This chapter presents tools for studying more than one variable at a time,
+    and the relationships among variables, including association.
+</p>
+
+<h2>
+    <a id="association"></a>
+    Association of Pairs of Variables
+</h2>
+
+<p>
+    We augmented measures of location for single variables by measures of spread,
+    and we shall do the same for pairs of variables.
+    A measure of the horizontal spread is the <a class="glossRef" href="gloss.htm#sd">SD</a> of the variable
+    plotted on the horizontal or x axis.
+    We shall write this as SD<sub>X</sub>.
+    Similarly, the SD of the variable plotted on the vertical or y axis is a measure of the
+    vertical spread.
+    We'll write this as SD<sub>Y</sub>.
+</p>
+<p>
+  The SD is a measure of the scatter in a list.
+  The typical deviation of the x coordinate of a point from the mean of the x coordinates is
+  SD<sub>X</sub>.
+  The typical deviation of the y coordinate of a point from the mean of the y
+  coordinates is SD<sub>Y</sub>.
+  We know from Chebychev's inequality that, for example, the x coordinates of at
+  least 75% of the points will be within &plusmn;2SD<sub>X</sub> of the x coordinate of the
+  <a class="glossRef" href="gloss.htm#point_of_averages">point of averages</a>, and that the
+  y coordinates of at least 75% of the points will be within &plusmn;2&times;SD<sub>Y</sub> of the
+  y coordinate of the point of averages.
+  However, in narrow ranges of x (vertical slices), the scatter in y might
+  typically be smaller than SD<sub>Y</sub>, and in narrow ranges of y (horizontal slices),
+  the scatter in x might typically be smaller than SD<sub>X</sub>.
+  If so, the two variables are <a class="glossRef" href="gloss.htm#association">associated</a>.
+</p>
+
+<p>
+    If individuals with larger than average values of one variable tend to have larger
+    than average values of the other, and individuals with smaller than average values
+    of one variable tend to have smaller than average values of the other, the scatter
+    of the values of Y in vertical slices through the scatterplot will be smaller than
+    SD<sub>Y</sub>.
+    Such a scatterplot shows <em>positive</em>
+    <a class="glossRef" href="gloss.htm#association">association</a>.
+    If individuals with larger than average values of one variable tend to have
+    smaller than average values of the other, and individuals with smaller than
+    average values of one variable tend have larger than average values of the other,
+    the scatter of the values of Y in vertical slices through the scatterplot also will
+    be smaller than SD<sub>Y</sub>; this is called <em>negative association</em>.
+    Positive and negative associations are examples of <em>linear association</em>;
+    variables can be associated <em>nonlinearly</em> as well.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is the scatterplot of the GMAT data again, but this time with four new lines:
+    two vertical lines at the mean value of X, plus and minus the SD of X, the
+    variable plotted on the horizontal axis; SD<sub>X</sub>, and two horizontal
+    lines at the mean value of Y, plus and minus the SD of Y, the variable plotted
+    on the vertical axis.
+    There is also a new button, labeled &quot;No SDs.&quot;
+    Click the button.
+    The label will change to &quot;SDs,&quot; and the lines will go away.
+    Buttons on figures in this book usually say what will happen when you click them.
+    If the figure does not show the scatterplot of Verbal GMAT versus Quantitative
+    GMAT, change the variables using the drop-down menus at the top of the figure.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The GMAT data with a button to view SD<sub>X</sub> and SD<sub>Y</sub>.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Bivariate.class" codebase="../../Java/"
+       align="baseline" width="640" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="files" value="./Data/gmat.dat">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="true">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="showSDs" value="true">
+    <param name="Xinit" value="Verbal GMAT">
+    <param name="Yinit" value="Quant. GMAT">
+    You need Java to see this.
+    </applet>
+</p>
+
+<p>
+    The cloud of points in the scatterplot tilts slightly upward towards the right.
+    Individuals with larger than average Quantitative GMAT scores tend to have larger
+    than average Verbal GMAT scores, and individuals with smaller than average Quantitative
+    GMAT scores tend to have smaller than average Verbal GMAT scores, so these variables
+    are <em>positively associated</em>.
+    The association between the Verbal and Quantitative GMAT scores of these students is
+    not very strong. Knowing that a particular student scored above average on the
+    Verbal GMAT does not let us guess how well the student did on the Quantitative GMAT
+    much more accurately than we could have without knowing the student's Verbal
+    GMAT score.
+    For example, the student with the highest Quantitative GMAT score didn't do nearly
+    as well on the Verbal GMAT as many other students, and the student with the lowest
+    Quantitative GMAT score did above average on the Verbal portion of the exam.
+    The overall vertical scatter in the scatterplot, SDy, is the SD of the Quantitative
+    GMAT scores, which is about 6.77.
+    Now consider just those students whose Verbal GMAT scores are between 43 and 45
+    (there are 77 such students).
+    The SD of the Quantitative GMAT scores of those students was only about 5.91, rather less
+    than the overall SD of the Quantitative GMAT scores, because there is an association
+    between the variables.
+    If we took other &quot;slices&quot; through the data&mdash;other narrow ranges of
+    Verbal GMAT&mdash;we would typically find something similar: the SD of the Quantitative
+    GMAT scores for students whose Verbal GMAT scores are in narrow ranges tends to be
+    a bit smaller than the overall SD of the Quantitative GMAT scores.
+</p>
+
+<p>
+    Two variables are <em>associated</em> if knowing the value of one of them tells us
+    something about the value of the other.
+    Slightly more precisely, X and Y are associated if the SD of the values of Y of points
+    whose X coordinates are in a narrow range of values (a vertical slice through the
+    scatterplot) is smaller than the overall SD of Y, or if the SD of the values of X of
+    points whose Y coordinates are in a narrow range of values (horizontal slice through
+    the scatterplot) is smaller than the overall SD of X.
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    the SD of values of Quantitative GMAT in narrow ranges of Verbal
+    GMAT is about 5% smaller than the overall SD of Quantitative GMAT: They are associated,
+    but only weakly.
+</p>
+
+<p>
+    Use the drop-down menus to plot first-year MBA GPA versus undergraduate GPA.
+    Again, there is a slight positive association between these variables: The cloud of
+    points tilts upward to the right.
+    Students who had higher than average GPAs as undergraduates tended to have higher than
+    average GPAs in their first year of business school.
+    This is not surprising.
+    What is perhaps surprising is how much scatter there is: The undergraduate GPA really
+    does not predict the graduate GPA very well.
+    If it did, the scatterplot would have less scatter in any vertical slice through the
+    plot than it does.
+    The association between these variables is even weaker than the association between
+    Verbal and Quantitative GMAT.
+</p>
+
+<p>
+    If the association were strong, we could do a good job of predicting the first-year
+    MBA GPA of a student from his or her undergraduate GPA.
+    Because the association is weak, knowing a student's undergraduate GPA doesn't help
+    us very much to predict his or her performance in the first year of an MBA program.
+    This is part of what makes the admissions screening process difficult, and why schools
+    combine several criteria in making admissions decisions.
+</p>
+
+<p>
+    There is a good reason the undergraduate GPA might not be a good predictor of MBA
+    GPA for these students.
+    How does a student get into the data set? He or she must have been admitted to an
+    MBA program.
+    If the admissions process balances undergraduate GPA with other factors that might
+    predict whether a student will succeed, such as letters of recommendation,
+    GMAT scores, etc., you might expect that the students with below average
+    (for this group) undergraduate GPAs were admitted precisely because there were other
+    reasons for thinking the student would succeed, as reflected in the first year MBA GPA.
+    Indeed, this seems to be the case: The association between undergraduate GPA and
+    first year MBA GPA is weaker for those students whose undergraduate GPA was significantly
+    below average.
+</p>
+
+<p>
+    <script language="JavaScript1.4" type="text/javascript"><!--
+        citeFig();
+    // -->
+    </script>
+    lets you look at the distribution of one variable for subsets of a multivariate data
+    set defined by restricting some of the variables to various ranges.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'A histogram superposed with a histogram of a subset of the data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+         align="baseline" width="640" height="380" archive="PbsGui.zip">
+    <param name="binControl" value="false">
+    <param name="bins" value="15">
+    <param name="files" value="./Data/gmat.dat">
+    <param name="nFiles" value="1">
+    <param name="restrict" value="true">
+    <param name="univariateStats" value="true">
+    You need Javato see this.
+    </applet>
+</p>
+
+<p>
+    Use the drop-down menu at the top of
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    to select &quot;1st year MBA GPA&quot; as the variable to show in the histogram.
+    You should now see a green histogram of all the first year MBA GPAs.
+    Now do the following:
+</p>
+
+<ol>
+    <li>
+        In the Restrict to list box, select Undergrad. GPA.
+    </li>
+    <li>
+        Click the >= check box.
+    </li>
+    <li>
+        Type 3.8 into the text box after >= and press Return or Enter.
+    </li>
+</ol>
+
+<p>
+    Now you will see two histograms superposed on one another.
+    The blue histogram is that of all 913 students' first-year MBA GPAs.
+    The green histogram is that of the first year MBA GPAs of just those 59 students whose
+    undergraduate GPA was 3.8 or above.
+    For each class interval, the shorter bin is plotted in front, so you can see the height
+    of every bin for both the original data and the restricted data.
+    The bottom line of the tool, after the List Data button, shows the number of individuals
+    in the full data set (913), the mean of their first-year MBA GPAs (3.1088), the SD of
+    their first-year MBA GPAs (0.492), the number of individuals in the restricted data
+    set (59), the mean of just their first-year MBA GPAs (3.5167), and the SD of just their
+    first-year MBA GPAs (0.3853).
+</p>
+
+<p>
+    Notice that the first-year MBA GPAs of the 59 students who did really well as
+    undergraduates (GPA 3.8 or above) is higher on the average than that of the overall group
+    of 913 students, and the scatter in their scores is smaller: The association between
+    these variables is positive.
+</p>
+
+<p>
+    Change the restrictions on the undergraduate GPA as follows:
+</p>
+
+<ol>
+    <li>
+        Type 2.6 into the >= text box and press Return or Enter.
+    </li>
+    <li>
+        Click  the <= check box.
+    </li>
+    <li>
+        Type 2.8 into the <= text box and press Return or Enter.
+    </li>
+</ol>
+
+<p>
+    The blue histogram remains as it was, but the green histogram is that of the first-year
+    MBA GPAs of just those 82 students whose undergraduate GPA was between 2.6 and 2.8.
+    In the last line of the tool, you can see that the SD of the first-year MBA GPAs of
+    the students in this slice is larger (0.5489) than that of the entire group of
+    913 students (0.492).
+    That is the case in many such slices through the scatterplot, so the association is weak.
+</p>
+
+<p>
+    The following exercises address assessing association from scatterplots and
+    superposed histograms.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Look at the scatterplot of first-year MBA GPA ' +
+           'versus quantitative GMAT scores. The association between these ' +
+           'variables is</span>';
+    document.writeln(qStr);
+    var opt = ["negative", "positive", "there is no association"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+// -->
+</script>
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How does the association compare with that between ' +
+           'MBA GPA and undergraduate GPA? </span>';
+    document.writeln(qStr);
+    var opt = ["much weaker","about the same","much stronger"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+// -->
+</script>
+</p>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = ' Use ';
+    document.writeln(qStr);
+    citeFig(figCtr-1);
+    qStr = 'to look at the distribution of MBA GPA scores for students whose quantitative ' +
+           'GMAT scores were between 45 and 55.</p><p><span class="qSpan">There are </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,'77');
+    qStr = '<span class="qSpan"> students with quantitative GMAT scores in that ' +
+        'range. </span></p>';
+    document.writeln(qStr);
+    qStr = '<p><span class="qSpan">The distribution of their first-year MBA GPAs ' +
+           'is </span>';
+    document.writeln(qStr);
+    var opt = ["skewed to the left","symmetric","skewed to the right"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    qStr = '<p><span class="qSpan">The mean of those first-year MBA GPAs is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++, numToRange(3.402,.003));
+    qStr = '</p><p><span class="qSpan">The SD of those first-year MBA GPA scores is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(.3805, .005));
+    qStr = '<span class="qSpan">, which is </span>';
+    document.writeln(qStr);
+    var opt = ["less than","the same as","more than"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var qStr = '<span class="qSpan">the SD of all 913 students\' first-year MBA GPAs.</span>';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!---
+    document.writeln(startProblem(pCtr++));
+// set up hetero/homo and linear/nonlinear data, outlier...; plot; ask questions.
+    var parms = new Array(4);
+    var examplePoints = 100;
+    parms[0] = [["polynomial", .5, rand.next(), 1], 1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5)];
+    parms[1] = [["polynomial", rand.next() - .5, 1], 1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5) ];
+    parms[2] = [["polynomial", .5, rand.next(), rand.next(), 1],
+    1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5)];
+    var thePermutation = randPermutation([0,1,2]);
+    var data1 = fakeBivariateData(examplePoints,parms[thePermutation[0]][0],
+    parms[thePermutation[0]][1],parms[thePermutation[0]][2]);
+    var opt = ["linear","nonlinear","homoscedastic","heteroscedastic","weak or no association",
+        "strong association"];
+    var qStr = '<span class="qSpan">Select those attributes that describe the following ' +
+           'plot:</span></p><p>';
+    document.writeln(qStr);
+    var k;
+    if (thePermutation[0] == 1) {
+        k = "a";
+    } else {
+        k = "b";
+    }
+    if (parms[thePermutation[0]][1] > 1) {
+        k += "&d";
+    } else {
+        k += "&c";
+    }
+    if (parms[thePermutation[0]][2] < 2) {
+        k +="&e";
+    } else {
+        k+= "&f";
+    }
+    writeSelectExercise(true,qCtr++,opt,k);
+    var qStr = '</p><p class="figure"><applet code="Correlation.class" codebase="../../Java/" ' +
+           'align="baseline" width="600" height="320" name="q1applet" archive="PbsGui.zip">' +
+           '<param name="addPoints" value="false">' +
+           '<param name="graphAveButton" value="false">' +
+           '<param name="x" value="1,2,3">' +
+           '<param name="y" value="1,2,3">' +
+           '<param name="regressButtons" value="false">' +
+           '<param name="sdButton" value="false">' +
+           '<param name="sdLineButton" value="false">' +
+           '<param name="showR" value="false">' +
+           '<param name="title" value="Faux Data">You need Java to ' +
+           'see this</applet>';
+     document.writeln(qStr);
+     appNum = (document.applets.length - 1).toString();
+     sectionContext += 'document.applets[' + appNum + '].' +
+               'setVariables(data1[0].join(),data1[1].join() );\n' +
+               'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+<h2><a id="post_hoc"></a>
+    <em>Post Hoc Ergo Propter Hoc</em>
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=1525&end=1642" frameborder="0" allowfullscreen></iframe>
+</p>   
+	
+<p>
+    Association between variables often is used as evidence that there is a causal
+    relationship between variables&mdash;erroneously.
+    The introduction to this chapter noted that there is a negative association
+    between money spent on healthcare, and life expectancy: The more one spends
+    on healthcare in a given year, the fewer additional years he tends to survive.
+    Does that mean that spending money on healthcare tends to shorten one's life?
+</p>
+
+<div class="indent">
+<p class="inline">
+    Certainly not. As noted in the introduction, it is generally the sickest individuals
+    who spend the most on healthcare in a given year.
+    Their life expectancies are short, whether or not they get healthcare.
+    Healthcare probably lengthens their lives.
+    The negative association of these variables has little to do with any causal relationship
+    between them.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'It might be argued that having a short life expectancy causes ' +
+           'one to spend more on healthcare.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    More generally, association does not measure causation.
+    There is a fallacy of logic known since ancient times: <em>post hoc ergo propter hoc</em>,
+    which translates as &quot;after this, therefore because of this.&quot;
+    It is common to assume that if two things are associated, there is some causal
+    relationship between them: One causes the other.
+</p>
+
+<p>
+    That is simply fallacious.
+    For example, the Moon and Earth are gradually getting further apart.
+    Similarly, the Dow-Jones Industrial Average (DJIA) generally has had an upward trend on a
+    time scale of decades: both have positive secular trends.
+    Does the increase in the DJIA cause the Earth and Moon to separate?
+    Does the increased distance between Earth and Moon cause the DJIA to go up?
+    Does some other single thing make them both increase?
+    I think none of these is plausible.
+</p>
+
+<p>
+    As another example, consider the quantitative GMAT scores and first-year MBA GPAs of the
+    students in the GMAT data set.
+    Even though students with higher than average quantitative GMAT scores tended to have
+    higher than average first-year MBA GPAs, getting higher quantitative GMAT scores did
+    not cause the GPA to be higher.
+    If a student takes a GMAT preparation class, that might help his or her GMAT score.
+    Will it also improve the student's first-year MBA GPA?
+    Probably not.
+    Can doing better in the first year of business school cause a student's GMAT score to go up?
+    Certainly not if the GMAT was taken before the first year of business school.
+</p>
+
+<p>
+    Work the following exercises to check your understanding of the difference between
+    association and causation.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<p class="videos">
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=1642&end=2042" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=2042&end=2300" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">Across countries, there is a strong ' +
+           'positive association between per capita dietary sugar intake and ' +
+           'various cancers. Therefore, sugar probably causes cancer. </span>';
+    document.writeln(qStr);
+    var opt = ["false","true"];
+    writeSelectExercise(false,qCtr++,opt,'a');
+    var ansStr = 'This is not a sound inference.  Association does not imply causation.  ' +
+         'There are countless <a class="glossRef" href="gloss.htm#confounding">confounding</a> ' +
+         'factors that could also account for the association.  For example, per ' +
+         'capita sugar consumption is associated with the general affluence of ' +
+         'the population: in more affluent countries, ' +
+         'people tend to consume more sugar.  More affluent countries tend to be more ' +
+         'industrialized, and their populations tend to have longer life ' +
+         'expectancies. Industrialization is associated with pollution, and many ' +
+         'pollutants are carcinogenic. Cancer tends to be a disease of old age: ' +
+         'in a population with short life expectancy, fewer people live long enough ' +
+         'to develop cancer.  Moreover, in poorer countries, cancer ' +
+         'is less likely to be diagnosed.';
+     writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="problem">
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'There are a variety of methods that ' +
+           'claim to predict earthquakes from other observations, including the ' +
+           'behavior of pets and insects, electrical signals, the locations of ' +
+           'Moon and the planets, and many other things. Some of the predictions ' +
+           'occasionally have high associations with the occurrence of ' +
+           'earthquakes, but in a direction that is not so useful: The predictions ' +
+           'tend to come shortly <em>after</em> moderate earthquakes more often than they come ' +
+           'shortly <em>before</em> moderate earthquakes. ' +
+           '<span class="qSpan">What do you think is going on? Do you ' +
+           'think there is a cause-and-effect relationship?</span>';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+</div>
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+   Two variables are <a class="glossRef" href="gloss.htm#association">associated</a>
+    if the scatter of one variable in <em>slices</em> defined by restricting the other
+    variable to a small range is generally less than the overall scatter of the first variable.
+    (A <em>vertical slice</em> is a set of points with x coordinates that are in a
+    restricted range.
+    A <em>horizontal slice</em> is a set of points with y coordinates that are in a
+    restricted range.
+    Vertical scatter is the <a class="glossRef" href="gloss.htm#sd">SD</a> of the y coordinates of a
+    collection of points; horizontal scatter is the SD of the x coordinates of a
+    collection of points.)
+</p>
+
+<p>
+    One can detect association by comparing the <a class="glossRef" href="gloss.htm#histogram">histogram</a>
+    of one variable for the entire
+    data set with the histogram of subsets of the data defined by restricting
+    the other variable to small ranges: If the variables are associated, the
+    histograms for the subsets
+    will have less spread than the histogram for the entire data set has.
+    It is easier to see association between pairs of variables with
+    <a class="glossRef" href="gloss.htm#scatterplot">scatterplots</a>.
+    Association can be <em>linear</em> or <em>nonlinear</em>.
+    If two variables are linearly associated,
+    the points in their scatterplot are scattered more or less symmetrically around a
+    straight line.
+    If two variables are nonlinearly associated, the points in their scatterplot
+    are scattered around a curve.
+</p>
+
+<p>
+    Two variables are <em>positively associated</em> if individuals with higher
+    than average values of one variable also tend to have higher than average
+    values of the other variable, and individuals with lower than average values
+    of one variable tend to have lower than average values of the other variable.
+    Two variables are <em>negatively associated</em> if individuals with higher
+    than average values of one variable tend to have lower than average
+    values of the other variable, and <em>vice versa</em>.
+    Linear association is always positive or negative.
+    Nonlinear association need not be positive or negative.
+</p>
+
+<p>
+    Association is not causation: two variables can have strong association and
+    have no causal connection, and two variables can have a causal
+    (deterministic) connection and no association.
+    <em>Post hoc ergo propter hoc</em> is the fallacy of concluding from
+    association between two variables that the variables have a
+    cause-and-effect relationship.
+</p>
+
+<h2>
+   <a id="keyTerms"></a>Key Terms
+</h2>
+
+<ul>
+    <li>association</li>
+    <li>bin</li>
+    <li>bivariate</li>
+    <li>Chebychev's inequality</li>
+    <li>football-shaped</li>
+    <li>heterosedastic</li>
+    <li>homoscedastic</li>
+    <li>horizontal slice</li>
+    <li>linear association</li>
+    <li>mean</li>
+    <li>multivariate</li>
+    <li>nonlinear association</li>
+    <li>negative association</li>
+    <li>nonlinearity</li>
+    <li>outlier</li>
+    <li>point of averages</li>
+    <li>positive association</li>
+    <li><em>post hoc ergo propter hoc</em></li>
+    <li>range</li>
+    <li>scatterplot</li>
+    <li>secular trend</li>
+    <li>variable</li>
+    <li>vertical slice</li>
+</ul>
+
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

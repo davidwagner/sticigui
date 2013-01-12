@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "binomial";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>Probability Meets Data: The Sample Sum and the Binomial Distribution</h2>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var fishPop = listOfRandInts(1,30,50)[0];
+    var tagFish = listOfRandInts(1,2,10)[0];
+    var nCatch = listOfRandInts(1,5,15)[0];
+    var limits = listOfDistinctRandInts(2,0,nCatch).sort(numberLessThan);
+    var pCatch = binomialCdf(nCatch,tagFish/fishPop,limits[1]) -
+                binomialCdf(nCatch,tagFish/fishPop,limits[0]-1);
+    var aVal = numToRange(pCatch);
+    var qStr = 'A pond contains ' + fishPop.toString() + ' fish. ' + Cardinals[tagFish] +
+               ' are caught, tagged, and released back into the pond. After the tagged ' +
+               'fish have had a chance to mingle with the others, ' + cardinals[nCatch] +
+               ' fish are caught and released, one at a time. Assume that every fish in ' +
+               'the pond is equally likely to be caught each time, regardless of which ' +
+               'fish have been caught (and released) previously (this is not a realistic ' +
+               'assumption for real fish in a real pond).<span class="qSpan"> ' +
+               'The chance that among the fish caught in the second stage (after the tagging), ' +
+               'at least ' + cardinals[limits[0]] + ' and at most ' + cardinals[limits[1]] +
+               ' were previously tagged is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+// This exercise checks the ability to find the chance that the sample sum
+// of nDraws (=3) draws with replacement from a box of boxSize (=3 or 4)
+// tickets with different labels equals a given constant.
+// There are at most boxSize^nDraws (<= 64) possible values of the sample sum.
+// Strategy: check whether a given selection of tickets gives the sample sum;
+// if so, increment the probability by the number of ways of selecting that
+// subset of the tickets.  Divide ultimate result by boxSize^nDraws.
+// Enumerate all possibilities; count those that give the correct sum.
+document.writeln(startProblem(pCtr++));
+    var boxSize = (listOfRandInts(1,3,4))[0];
+    var theBox = (listOfDistinctRandInts(boxSize,0,10)).sort(numberLessThan);
+    var nDraws = 3; // (listOfRandInts(1,2,3))[0];
+    var repeat = (listOfRandInts(1,0,boxSize-2))[0];
+    var nRep = (listOfRandInts(1,1,nDraws))[0];
+    var theSum = nRep*theBox[repeat] + (nDraws - nRep)*theBox[boxSize-1];
+    var nWays = 0;
+    var drawEnum = new Array(boxSize);
+    for (i=0; i < boxSize; i++) { // brute force. Works only for nDraws==3.
+        for (j=0; j < boxSize; j++) {
+            for (k=0; k < boxSize; k++) {
+                if (theBox[i] + theBox[j] + theBox[k] == theSum) {nWays++;}
+            }
+        }
+    }
+    var theProb = nWays/Math.pow(boxSize,nDraws);
+    var aVal = numToRange(theProb);
+    var qStr = '<span class="qSpan">A box contains ' + cardinals[boxSize] + ' tickets, labeled ' +
+               theBox.join().toString() + '. The chance that the sample sum of the labels on ' +
+               'the tickets in three independent random draws with replacement from this box ' +
+               'equals ' + theSum.toString() + ' is </span>';
+    document.writeln(qStr);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nTosses = listOfRandInts(1,10,20)[0];
+    var nRolls = listOfRandInts(1,2,3)[0];
+    var totTries = nTosses + nRolls;
+    var badTries = nTosses + 6*nRolls;
+    var maxMatch = Math.min(6*nRolls,nTosses) - 1;
+    var matchVal = listOfRandInts(1,Math.floor(maxMatch/2)+1,maxMatch)[0];
+    var pCoins = binomialPmf(nTosses,.5,matchVal);
+    var pDice = pDieRolls(nRolls,matchVal);
+    var rawOpt = [
+        "has a Binomial distribution with n=" + totTries.toString() + " and p=50%" ,
+        "has a Binomial distribution with n=" + badTries.toString() + " and p=50%" ,
+        "has a Binomial distribution with n=" + totTries.toString() + " and p=1/6" ,
+        "has a Binomial distribution with n=" + badTries.toString() + " and p=1/6" ,
+        "does not have a Binomial distribution"
+        ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    var aVal = alphabet[optPerm[1][0]];
+    var qStr = 'Consider rolling a fair die ' + iteratives[nRolls].toString() +
+               ' and tossing a fair coin ' + (iteratives[nTosses]).toString() +
+               '. Assume that all the tosses and rolls are independent.</p><p>' +
+               '<span class="qSpan">The chance that the total number of heads in all ' +
+               'the coin tosses equals ' + matchVal.toString() + ' is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pCoins));
+    qStr = '<span class="qSpan">, and the chance that the total number of spots showing ' +
+           'in all the die rolls equals ' + matchVal.toString() + ' is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pDice));
+    qStr = '</p><p><span class="qSpan">The number of heads in all the tosses ' +
+           'of the coin plus the total number of times the die lands with an even number ' +
+           'of spots showing on top</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nPop = 10000;
+    var sample = 50;
+    var infectNull = listOfRandInts(1,1,5)[0];
+    var infectAlt = 3*infectNull;
+    var eNull = sample*infectNull/100;
+    var nFound = listOfRandInts(1,Math.floor(eNull),Math.floor(2*eNull))[0];
+    var pAlt = binomialPmf(sample,infectAlt/100,nFound);
+    var pNull = binomialPmf(sample,infectNull/100,nFound);
+    var pRat = pAlt/pNull;
+    var opt = ['keep the old theory','adopt the new theory'];
+    var aVal;
+    if (pRat <= 1) {
+        aVal = 'a';
+    } else if (pRat > 1) {
+        aVal = 'b';
+    }
+    var perStr = ' have ';
+    if (nFound <= 1) {
+        perStr = ' has ';
+    }
+     var qStr = 'A biomedical researcher has a new theory that a certain disease has ' +
+               'genetic roots. If his theory is correct, in a town of ' + nPop.toString() +
+               ' people with an unusually high incidence of the disease, ' + infectAlt.toString() +
+               '% should have a particular genetic marker. According to the old theory, only ' +
+               infectNull.toString() + '% should have the marker. The researcher plans to draw ' +
+               'a sample of ' + sample.toString() + ' people from that town at random, independently, ' +
+               'with replacement. He will decide that his new theory is correct if the number of ' +
+               'people in the sample found to have the genetic marker is more likely assuming his ' +
+               'theory is true than it would be assuming the old theory is true. Otherwise, he will ' +
+               'stick with the old theory. He draws the sample, and finds that ' + cardinals[nFound] +
+               ' of the people in the sample ' + perStr + ' the genetic marker.</p><p>' +
+               '<span class="qSpan"> The chance that the sample would contain exactly ' +
+               cardinals[nFound];
+    var perStr = ' people ';
+    if (nFound == 1) {
+        perStr = ' person ';
+    }
+    qStr += perStr + ' with the genetic marker if the new theory is correct is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pAlt));
+    qStr = '</p><p><span class="qSpan">The chance that the sample would contain exactly ' +
+           cardinals[nFound] + perStr + ' with the genetic marker if the old theory is correct ' +
+           'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pNull));
+    qStr = '</p><p><span class="qSpan">The researcher should</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var nTosses = listOfRandInts(1,2,10)[0];
+    var rawOpt = [
+            "has a Binomial distribution with n=" + nTosses.toString() + " and p=12.5%" ,
+            "has a Binomial distribution with n=" + (nTosses).toString() + " and p=25%" ,
+            "has a Binomial distribution with n=" + (nTosses).toString() + " and p=75%" ,
+            "has a Binomial distribution with n=" + (2*nTosses).toString() + " and p=12.5%" ,
+            "has a Binomial distribution with n=" + (2*nTosses).toString() + " and p=25%" ,
+            "has a Binomial distribution with n=" + (2*nTosses).toString() + " and p=75%" ,
+            "has a Binomial distribution with n=" + (5*nTosses).toString() + " and p=12.5%" ,
+            "has a Binomial distribution with n=" + (5*nTosses).toString() + " and p=25%" ,
+            "has a Binomial distribution with n=" + (5*nTosses).toString() + " and p=75%" ,
+            "does not have a Binomial distribution"
+            ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][0]];
+    var qStr = 'A <em>tetrahedron</em> is a regular 4-sided solid; each of its faces is an ' +
+               'equilateral triangle. That is, it is a pyramid with a triangular base; all of ' +
+               'its faces have the same triangular shape. Consider a fair, well balanced ' +
+               'tetrahedral die, with one spot on one face, two spots on another, three on ' +
+               'another, and four spots on the fourth face. Such a die will not land showing a ' +
+               'face on top---it would not balance. Rather, we shall think about the face on ' +
+               'the bottom.  A fair coin and this die are tossed/rolled together ' +
+               nTosses.toString() + ' times. Assume that the number of spots that show on the ' +
+               'bottom of the die and the face that shows on the top of the coin are independent ' +
+               'in each trial, and are independent from trial to trial.</p><p><span class="qSpan">' +
+               'The number of trials among these ' + cardinals[nTosses] + ' in which the coin ' +
+               'lands &quot;heads&quot; and the die lands on the face with one spot on the ' +
+               'bottom</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

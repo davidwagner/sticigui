@@ -1,0 +1,2224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "25 July 2013 16:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "expectation";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+<h1>
+    The Long Run and the Expected Value
+</h1>
+
+<p>
+    Random experiments and random variables have long-term regularities.
+    The <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a>
+    says that in repeated <a class="glossRef" href="gloss.htm#independent">independent</a> trials,
+    the relative frequency
+    of each outcome of a random experiment tends to approach the
+    <a class="glossRef" href="gloss.htm#probability">probability</a> of that outcome.
+    That implies that the long-term average value of a
+    <a class="glossRef" href="gloss.htm#discrete">discrete</a>
+    <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+    in repeated experiments tends to approach a limit, called the <em>expected value</em>
+    of the random variable.
+</p>
+
+<p>
+    The expected value of a random variable depends only on the
+    <a class="glossRef" href="gloss.htm#prob_distribution">probability distribution</a> of the random variable.
+    The expected value has properties that can be exploited to find the expected
+    value of some complicated random variables in terms of simpler ones.
+    These properties allow us to find the expected value of the
+    <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> and
+    <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
+    of random draws with and without replacement from a box of numbered tickets.
+    Special cases include the expected values of random variables with
+    <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    and <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric</a> distributions.
+    We also find the expected values of random variables with
+    <a class="glossRef" href="gloss.htm#geometric">geometric</a> and
+    <a class="glossRef" href="gloss.htm#negative_binomial">negative binomial</a> distributions.
+</p>
+
+<h2>
+    <a id="law_of_large_numbers"></a>The Law of Large Numbers
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=613&end=1675" frameborder="0" allowfullscreen></iframe>
+</p>
+<p>
+    The Law of Large Numbers says that in repeated <a class="glossRef" href="gloss.htm#independent">independent</a>
+    trials with probability <span class="math">p</span> of success in each trial, the chance that the fraction
+    of successes is close to <span class="math">p</span> grows as the number of trials grows.
+    More precisely, for any tolerance <span class="math">e&gt;0</span>,
+</p>
+
+<p class="math">
+    P(| (fraction of successes in <em>n</em> trials) - <em>p</em> | &lt; e)
+</p>
+
+<p>
+    approaches 100% as the number <span class="math">n</span> of trials grows.
+    This expresses a long-term regularity of repeated
+    independent trials with a shared probability of success.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Law of Large Numbers</span>
+    </p>
+    <p>
+        The chance that the fraction of successes in <span class="math">n</span> independent
+        trials with probability <span class="math">p</span> of success is close to <span class="math">p</span>
+        approaches 100% as <span class="math">n</span> grows.
+    </p>
+
+    <p>
+        More precisely, as <span class="math">n</span> increases, for every number
+        <span class="math">e &gt; 0</span>,
+    </p>
+
+    <p class="math">
+        P( | (fraction of successes in n trials) &minus; p | &lt; e ) approaches 100%.
+    </p>
+</div>
+
+<p>
+    The Law of Large Numbers does not say that the <em>number of successes</em> in repeated independent
+    trials tends to be increasingly close to the chance of success times the number of trials,
+    only that the <em>fraction of successes</em> in repeated independent
+    trials tends to be increasingly close to the probability of success in each trial.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    illustrates the Law of Large Numbers.
+    Let <span class="math">X</span> denote the number of successes in <span class="math">n</span>
+    independent trials with the same
+    chance <span class="math">p</span> of success in each trial.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    plots either of two variables:
+</p>
+
+<ul>
+    <li>
+        (number of successes) &minus; (number of trials)&times;( the chance of success in each trial)
+        = <span class="math">X &minus; np</span>.
+        This is identified in the plot title as Successes &minus; Expected.
+    </li>
+    <li>
+        (fraction of successes) &minus; (chance of success in each trial) =
+        <span class="math">X/n &minus; p = 100%&times;(X &minus; np)/n</span>.
+        This is identified in the plot title as %Successes &minus; %Expected.
+    </li>
+</ul>
+
+<p>
+    To toggle between these two plots, click the button near the bottom of the figure.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    has two scrollbars.
+    One controls the number of trials, which you can increase to 20,000;
+    the other controls the chance of success in each trial.
+    Increase the number of trials to 20,000; verify that the the simulation agrees with
+    the Law of Large Numbers:
+    The difference
+    <span class="math"> X &minus; np</span> tends to grow as the number
+    of trials <span class="math">n</span> grows, and that the difference
+    <span class="math">100%&times;(X &minus; np)/n</span> tends to shrink as the number of trials
+    <span class="math">n</span> grows.
+    Change the chance <span class="math">p</span> of success in each trial using the
+    scrollbar and verify that the result remains true.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Law of Large Numbers Simulation.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Lln.class" codebase="../../Java/"
+        align="baseline" width="600" archive="PbsGui.zip" height="420">
+    <param name="percent" value="true">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The Law of Large Numbers says that the probability distribution of the
+    fraction of successes in repeated independent trials with the same
+    probability <span class="math">p</span> of success gets more and more concentrated near
+    <span class="math">p</span> as the number of trials increases.
+    As the number of trials increases, the chance that a given range of
+    values around <span class="math">p</span> contains the fraction of successes increases.
+    Conversely, as the number of trials increases, narrower and narrower
+    intervals around <span class="math">p</span> have the same chance of containing the
+    observed fraction of successes.
+</p>
+
+<h3><a id="lln_implications"></a>
+    Implications of the Law of Large Numbers
+</h3>
+
+<p>
+    In games of chance, you should not expect the number of times you win to
+    approach (the number of times you play)&times;(the chance of winning in each game).
+    However, you should expect the fraction of times you win to approach the
+    chance of winning each game.
+    There is no such thing as &quot;odds pressure&quot; tending to make winning more
+    likely after a losing streak.
+    Rather, a string of losses tends to be &quot;diluted&quot; over a
+    larger and larger number of trials.
+    Once you get behind, you are not likely to catch up in absolute
+    terms (i.e., to reduce your losses).
+    You are only likely to reduce your average loss per play of the game.
+    Your losses can continue to mount even as the average loss per play shrinks.
+    In fact, once you are behind by much, that is what tends to happen.
+</p>
+
+<p>
+    As a thought experiment, suppose we agree to play a coin-tossing
+    game in which if the coin lands heads, you pay me $1, and
+    if the coin lands tails, I pay you $1.
+    If I asked for an advantage of 25 tosses (i.e., starting $25 ahead),
+    I doubt you would agree to play.
+</p>
+
+<p>
+    On the other hand, suppose that we played this game, starting even
+    (without the advantage I asked for), and that in the course of
+    play, by chance I developed a lead of $25.
+    Would you feel that the coin now &quot;owes&quot; you 25 tails?
+    Can the coin tell the difference between an advantage of $25
+    that you give me, and an advantage of $25 that occurs by chance during the game?
+    In either case, the $25 advantage is likely to be diluted as we
+    play the game longer and longer, so that as a percentage of the total,
+    the $25 becomes tiny, and the relative frequency with which each of us
+    wins approaches 50%.
+    However, the difference between, say, 50.5% of $1,000,000 and 49.5% of $1,000,000
+    is $10,000, which is still a lot of money, even if it is only a small
+    fraction of the total we have wagered.
+</p>
+
+<p>
+    The Law of Large Numbers implies that in repeated
+    <a class="glossRef" href="gloss.htm#simple_random_sample">random sampling with replacement</a>
+    from a box of tickets, as the number of samples increases, the fraction of
+    times each ticket is drawn is increasingly likely to be <span class="math">1/(#tickets in the box)</span>.
+    If the tickets are labeled with numbers, the fraction of times each label
+    appears is increasingly likely to be close to the probability of drawing
+    a ticket with that label (the fraction of tickets in the box that have
+    that label).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    shows how the Law of Large Numbers can be used to reason about real-world situations.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Consequences of the Law of Large Numbers.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    The fraction of children born who are girls is a very stable demographic variable
+    across societies and geography: about 49% of children born are girls and about
+    51% are boys.
+    (Because their mortality rate is lower, women outnumber men later in life.)
+    Suppose that the gender of children is determined at random at the
+    time of conception, with probability 49% of being female and probability 51%
+    of being male.
+    Suppose the genders of different children are independent.
+    Consider a city in which about 10,000 children are born each year,
+    and a town in which about 100 children are born each year.
+    In a given year, is it more likely that of the children born in the city,
+    the percentage of who are female will exceed 55%, or that of the children
+    born in the town, the percentage who are female will exceed 55%?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    The fraction of girl children born in the city is like the fraction of
+    successes in about 10,000 independent trials with the same
+    49% chance of success in each trial.
+    The fraction of girl children born in the town is like the fraction of successes
+    in about 100 independent trials with the same 49% chance of success in each trial.
+    The larger the number of trials, the less likely it is that the fraction of
+    successes differs from the chance of success by any given amount
+    (such as 55%&minus;49%=6%).
+    It is more likely that the fraction of girl children born in the town will exceed 55%.
+</p>
+</div>
+
+
+<h2><a id="expectation"></a>
+   The Expected Value
+</h2>
+
+<p>
+    The Law of Large Numbers says that in repeated independent trials,
+    the relative frequency with which an event occurs tends to approach the
+    probability that the event occurs (the precise statement is slightly
+    different: The chance that the two differ finitely goes to zero as
+    the number of trials increases).
+    For example, in repeated draws with replacement from a box of tickets,
+    the fraction of times each ticket is drawn will tend to approach
+    1/(#tickets in the box).
+    If the tickets are labeled with numbers, the average number on the
+    tickets drawn will tend to approach the average of list of the
+    labels on all the tickets, including repeated labels as many times as
+    they occur.
+</p>
+
+<p>
+    Suppose a box contains one ticket labeled &quot;0,&quot; two tickets
+    labeled &quot;1,&quot; and one ticket labeled &quot;4:&quot;
+</p>
+
+<div class="boxModel">
+   <p class="boxLabel">
+      Box to illustrate expected value
+   </p>
+   <div class="boxContents">
+      <p class="boxTickets">0</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">1</p>
+      <p class="boxTickets">4</p>
+   </div>
+</div><p>
+    Repeated random draws with replacement from the box will yield the ticket
+    labeled &quot;0&quot; about one fourth of the time, a ticket labeled &quot;1&quot; about half
+    the time, and the ticket labeled &quot;4&quot; about one fourth of the time.
+    In the long run, the average of the draws will tend to approach
+    <span class="math">(0+1+1+4)/4&nbsp;=&nbsp;6/4&nbsp;=&nbsp;1.5</span>,
+    the average of the numbers on the tickets.
+    This long-run average outcome of a draw from a box is called the
+    <em>expected value</em> of the draw.
+    The expected value of a random variable <span class="math">X</span> is the long-run limiting average of the
+    values <span class="math">X</span> takes in repeated trials.
+</p>
+
+<p>
+    The expected value of a random variable is analogous to the <a class="glossRef" href="gloss.htm#mean">mean</a>
+    of a list: It is the balance point of the
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability histogram</a>,
+    just as the mean is the balance point of the histogram of the list.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    lets us investigate the distribution of the sample sum empirically.
+</p>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Simulated Empirical Distribution of the Sample Sum.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+ </p>
+
+ <p class="figure">
+     <applet code="SampleDist.class" codebase="../../Java/" align="baseline" width="640"
+        archive="PbsGui.zip" height="360">
+     <param name="variables" value="sum">
+     <param name="startWith" value="sum">
+     <param name="boxContents" value="0,1,1,4">
+     <param name="sources" value="box">
+     <param name="boxHistControl" value="false">
+     <param name="showCurve" value="false">
+     <param name="curveControls" value="false">
+     <param name="toggleMean" value="false">
+     <param name="showBoxHist" value="false">
+     <param name="replaceControl" value="false">
+     <param name="sampleSize" value="1">
+         You need Java to see this.
+     </applet>
+ </p>
+</div>
+
+<p>
+    Draw a ticket a few times by clicking the Take Sample button in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>.
+    Sometimes the ticket drawn will be labeled &quot;0,&quot; sometimes it will be
+    labeled &quot;1,&quot; and sometimes it will be labeled &quot;4.&quot;
+    You will see a histogram of the labels on the tickets drawn evolve
+    as you take more samples.
+    In repeated draws, about one-fourth of the draws will give the ticket
+    labeled &quot;0,&quot; about half of the draws will give a ticket labeled &quot;1,&quot;
+    and about one-fourth of the draws will give a the ticket labeled &quot;4.&quot;
+    Change the Take ________ samples to 1000, and click the Take Sample
+    button a few times.
+</p>
+
+<p>
+    The empirical distribution of the draws will tend to stabilize with
+    about 1/4 of the draws giving the ticket labeled &quot;0,&quot; about 1/2 of
+    the draws giving the ticket labeled &quot;1,&quot; and about 1/4 of the
+    draws giving the ticket labeled &quot;4.&quot;
+    That the empirical fraction of the draws that give &quot;0&quot; tends towards
+    the probability of drawing the ticket labeled &quot;0,&quot; and the
+    empirical fraction of the draws that give &quot;1&quot; tends towards
+    the probability of drawing a ticket labeled &quot;1,&quot; etc. is a consequence
+    of the <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a>.
+    Because the tickets in the box tend to be represented in equal proportion
+    in the samples, the average of the draws will tend to be close to the
+    average of the list of labels on the tickets in the box:
+</p>
+
+<p class="math">
+    0&times;(1/4) + 1&times;(1/2) + 4&times;(1/4) = 1.5.
+</p>
+
+<p>
+    This is the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the number on a ticket
+    drawn at random from the box.
+</p>
+
+<p>
+    The quantity &quot;Mean(values),&quot; shown on the left, is the
+    <a class="glossRef" href="gloss.htm#mean">mean</a>
+    of the observed values of the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a>,
+    and &quot;SD(values)&quot; is the <a class="glossRef" href="gloss.htm#sd">SD</a> of
+    the observed values of the sample sum.
+    Once you have drawn a few thousand samples, Mean(values) should be very close to 1.5.
+</p>
+
+<p>
+    Change the Sample Size to 2 in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    and click the Take Sample button a few times to take a few thousand samples
+    of size 2 with replacement from the box.
+    The possible values of the sample sum of two draws with replacement from the box
+    are 0, 1, 4, 5, and 8.
+    The sample sum is zero if both tickets drawn are labeled &quot;0.&quot;
+    That happens with probability 1/4&times;1/4=1/16.
+    The sample sum is one 1 if one of the tickets drawn is labeled &quot;0&quot;
+    and one is labeled &quot;1.&quot;
+    That can happen by drawing a ticket labeled &quot;0&quot; on the first draw and a
+    ticket labeled &quot;1&quot; on the second draw, which occurs with probability
+    1/4&times;1/2=1/8.
+    It also can happen by drawing a ticket labeled &quot;1&quot; on the first draw and
+    a ticket labeled &quot;0&quot; on the second draw, which occurs with probability
+    1/2&times;1/4=1/8, so the total chance that the sample sum of two draws
+    with replacement equals one 1 is <span class="math">1/8+1/8=1/4</span>.
+    The sample sum is two 2 if both draws give tickets labeled &quot;1,&quot;
+    which occurs with probability 1/2&times;1/2=1/4.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    shows the probability distribution of the sum of two draws with replacement
+    from the box:
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability distribution of the sample sum <span class="math">X</span> of two draws with ' +
+               'replacement from a box containing tickets labeled 0, 1, 1, and 4.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+        <caption>Probability distribution of <span class="math">X</span></caption>
+    <tr>
+        <th id="col0"><span class="math">x</span></th>
+        <th id="col1"><span class="math">P(X = x</span>)</th>
+    </tr>
+    <tr>
+        <td headers="col0">0</td>
+        <td headers="col1">1/16</td>
+    </tr>
+    <tr>
+        <td headers="col0">1</td>
+        <td headers="col1">1/4</td>
+    </tr>
+    <tr>
+        <td headers="col0">2</td>
+        <td headers="col1">1/4</td>
+    </tr>
+    <tr>
+        <td headers="col0">4</td>
+        <td headers="col1">1/8</td>
+    </tr>
+    <tr>
+        <td headers="col0">5</td>
+        <td headers="col1">1/4</td>
+    </tr>
+    <tr>
+        <td headers="col0">8</td>
+        <td headers="col1">1/16</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    If you draw samples of size two with replacement from the box repeatedly,
+    the fraction of the time that the sample sum is 0 will tend to approach the
+    probability that the sample sum is 0, 1/16.
+    The fraction of the time that the sample sum is 1 will tend to approach the
+    probability that the sample sum is 1, 1/4.
+    The fraction of the time that the sample sum is 2 will tend to approach the
+    probability that the sample sum is 2, 1/4 &hellip; ,
+    and the fraction of the time that the sample sum is 8 will tend to approach
+    the probability that the sample sum is 8, 1/16.
+    The average of the values of the sample sum that occur will tend to
+    approach
+</p>
+
+<p class="math">
+    0&times;1/16 + 1&times;1/4 + 2&times;1/4 + 4&times;1/8 + 5&times;1/4 + 8&times;1/16 = 3 = 2&times;1.5,
+</p>
+
+<p>
+    twice the average of the labels on all the tickets in the box.
+    This is the expected value of the sum of two random draws with replacement from the box.
+    The expected value of the sum of three random draws from the box with replacement is
+</p>
+
+<p class="math">
+    3&times;1.5 = 4.5,
+</p>
+
+<p>
+    three times the average of the labels on the tickets in the box.
+    The expected value of the sum of <em>n</em> random draws from the box with replacement is
+    <em>n</em>&times;1.5, <em>n</em> times the average of the labels on the tickets in the box.
+    If you change the sample size in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    and draw a few thousand samples, Mean(samples) should be quite close to the
+    expected value of the sample sum.
+</p>
+
+<p>
+    In general, the expected value of a discrete random variable <span class="math">X</span>
+    can be calculated
+    from the <a class="glossRef" href="gloss.htm#probability_distribution">probability distribution</a>
+    of <span class="math">X</span>:
+    The expected value of <span class="math">X</span> is a weighted average of the values
+    <span class="math">X</span> can take.
+    The weight of each possible value of <span class="math">X</span> is the probability that
+    <span class="math">X</span> equals that value.
+    This is exactly how we would calculate the mean of a list that has repeated entries:
+    We would sum the distinct numbers in the list, each times its relative frequency
+    in the list.
+    If there were no repeated numbers, the relative frequencies would all
+    be 1/(#items in the list), which gives the ordinary arithmetic mean, the sum of the
+    values divided by the number of values.
+</p>
+
+<p>
+    In symbols, one writes <span class="math">E(X)</span> for the expected value of the
+    random variable <span class="math">X</span>.
+    The expected value of <span class="math">X</span> depends only on the probability
+    distribution of <span class="math">X</span>:
+    If two random variables have the same probability distribution,
+    they have the same expected value.
+    For example, the expected number of times a fair coin lands heads in five tosses is
+    the same as the expected number of times a fair die lands showing an even
+    number of spots in five rolls, because both have a
+    <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a>
+    with parameters <em>n</em>=5 and <em>p</em>=50%.
+    Because the expected value of a random variable depends only on its probability
+    distribution, we can speak of the expected value of a random variable or the
+    expected value of a probability distribution interchangeably.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">The Expected Value of a Discrete Random Variable</span>
+    </p>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+        of a <a class="glossRef" href="gloss.htm#discrete">discrete</a>
+        <a class="glossRef" href="gloss.htm#random_variable">random variable</a>
+        <span class="math">X</span>, denoted <span class="math">E(X)</span>,
+        is a weighted average of the values that <span class="math">X</span> can take, where the weight
+        of each value is the probability that <span class="math">X</span> takes that value.
+    </p>
+    <p>
+        If the values <span class="math">X</span> can take are denoted
+       <span class="math">x<sub>1</sub>, x<sub>2</sub>, x</em><sub>3</sub>, &hellip;</span> , then
+    </p>
+    <p class="math">
+        (expected value of X) =
+        <em>x</em><sub>1</sub>&times;P(X = <em>x</em><sub>1</sub>)
+          + <em>x</em><sub>2</sub>&times;P(X = <em>x</em><sub>2</sub>) +
+        <em>x</em><sub>3</sub>&times;P(X = <em>x</em><sub>3</sub>)
+          + &hellip; .
+    </p>
+    <p>
+        The expected value of <span class="math">X</span> is sometimes called the
+          &quot;expectation of <span class="math">X</span>.&quot;
+    </p>
+</div>
+
+<p>
+    Let <span class="math">X</span> denote the label on a ticket drawn
+      at random from the box containing four tickets, numbered 0, 1, 1, and 4.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    shows the probability distribution of <span class="math">X</span>.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability distribution of the number <span class="math">X</span> ' +
+               ' on one ticket drawn at random from a box ' +
+               'containing tickets numbered 0, 1, 1, and 4.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+
+<div align="center">
+<center>
+    <table class="dataTable">
+        <caption>Probability distribution of <span class="math">X</span></caption>
+        <tr>
+            <th id="col0"><span class="math">x</span></th>
+            <th id="col1"><span class="math">P(X=x)</span></th>
+        </tr>
+        <tr>
+            <td headers="col0">0</td>
+            <td headers="col1">1/4</td>
+        </tr>
+        <tr>
+            <td headers="col0">1</td>
+            <td headers="col1">1/2</td>
+        </tr>
+        <tr>
+            <td headers="col0">4</td>
+            <td headers="col1">1/4</td>
+        </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of <span class="math">X</span> is the weighted average of its possible values,
+    taking the probability of each value as its weight:
+</p>
+<p class="math">
+    (Expected value of X) = 0&times;P(X=0) + 1&times;P(X=1) +
+    4&times;P(X=4)
+</p>
+<p class="math">
+    = 0&times;1/4 + 1&times;(1/2) + 4&times;(1/4)
+</p>
+<p class="math">
+    = 1.5,
+</p>
+
+<p>
+    the average of the numbers on the tickets (counting
+    repeated values), just as we found before.
+</p>
+
+<p>
+   <span class="termOfArt">Expected value</span> is a technical term.
+   It has little to do with the ordinary English usage of the word &quot;expect.&quot;
+   The expected value of a random variable does not have to be a possible value of the random
+   variable.
+   In particular, a random variable that only takes integer values can have an expected value that
+   has a fractional part.
+   For instance, suppose you invite 3 friends over for dinner.
+   They each toss a fair coin, independently, to decide whether to come: Heads they come, tails they don't.
+   (Your friends are <em>such</em> geeks.  Time to make friends with some humanities majors &hellip;)
+</p>
+
+<p>
+   You invite them all many many many many times.
+   Sometimes, all three friends' coins land heads; then you have 3 guests.
+   That happens about 1/8 of the time, in the long run.
+   Sometimes all three coins land tails; then nobody shows up.
+   That also happens about 1/8 of the time, in the long run.
+   Sometimes one or two friends come; that happens about 3/8 of the time each.
+</p>
+
+<p>
+   On average, in the long run, the number of friends who come over is
+</p>
+
+<p class="math">
+       0&times;1/8 + 1&times;3/8 + 2&times;3/8 + 3&times;1/8 = 12/8 = 1.5.
+</p>
+
+<p>
+    That's the expected number of friends who come over.
+    It is impossible for a fraction of a dinner guest show up, but the expected value has
+    a fractional part.
+</p>
+
+<p>
+    The following exercise asks you to calculate the expected value of a
+    random variable from its probability distribution.
+</p>
+
+<!--==========================================START PROBLEM==================================-->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nVals = listOfRandInts(1,4,8)[0];
+    var theVals = listOfDistinctRandInts(nVals,-2*nVals,2*nVals).sort(numberLessThan);
+    var thePs = listOfRandInts(nVals,1,10);
+    var sumP = vSum(thePs);
+    var eX = 0;
+    for (var i=0; i < nVals; i++) {
+        thePs[i] = roundToDig(thePs[i]/sumP,3);
+        eX += theVals[i]*thePs[i];
+    }
+    var aVal = numToRange(eX,0.05);
+    var header = ['<span class="math">x</span>','<span class="math">P(X=x)</span>'];
+    var list = new Array(2);
+    list[0] = theVals;
+    list[1] = thePs;
+    var qStr = 'A random variable <span class="math">X</span> has the following probability distribution:</p>' +
+           listToTable(header,list,"transpose","right",false) +
+           '<p><span class="qSpan">The expected value of <span class="math">X</span> is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    list[2] = new Array(list[0].length);
+    for (var i=0; i < list[0].length; i++) {
+        list[2][i] = roundToDig(list[0][i]*list[1][i],5);
+    }
+    header[2] = '<span class="math">x&times;P(X=x)</span>';
+    ansStr = 'The computation is given by the sum of the rightmost column of the following ' +
+         'table:</p>' + listToTable(header,list,"transpose","right",false) +
+         '<p>which is ' + roundToDig(eX,3) + '. ';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="expected_sum"></a>
+    Expected Value of the Sample Sum
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=&end=2404" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<a id="expected_sum_with_replacement"></a>
+<p>
+    What is the expected value of the sample sum of two draws with replacement from the
+    box that contains one ticket labeled &quot;0,&quot; two labeled &quot;1,&quot;
+    and one labeled &quot;4&quot;?
+</p>
+
+<p>
+    By the <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a>, in
+    repeated draws, the fraction of times a particular
+    ticket (say the <em>j</em>th ticket) appears is increasingly likely to be close to
+    1/(#tickets in the box).
+    Drawing a pair of tickets with replacement <em>M</em> times gives 2<em>M</em> tickets in all.
+    As <em>M</em> grows, the fraction of times the <em>j</em>th ticket appears is
+    increasingly likely to be close to 2/(#tickets in the box),
+    so the <em>j</em>th ticket is increasingly likely to contribute about
+</p>
+
+<div align="center">
+<center>
+    <table COLS="1">
+    <tr ALIGN="CENTER" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        2&times;<em>M</em>&times;(number on <em>j</em>th ticket)
+        </td>
+    </tr>
+    <tr ALIGN="center" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        --------------------------------&nbsp;
+        </td>
+    </tr>
+    <tr ALIGN="center" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        (#tickets in box)
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    to the sample sum.
+    The total of the contributions from all the tickets to
+    the sum of <em>M</em> draws of a pair of tickets is thus increasingly
+    likely to be close to
+</p>
+
+<div align="center">
+<center>
+    <table>
+    <tr ALIGN="CENTER" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        2&times;<em>M</em>&times;(sum of the labels on all the tickets)
+        </td>
+        <td align="center">
+        </td>
+        <td align="center">
+        </td>
+    </tr>
+    <tr ALIGN="center" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        -----------------------------------------------------------------
+        </td>
+        <td ALIGN="center" VALIGN="CENTER">
+        =
+        </td>
+        <td ALIGN="center" VALIGN="CENTER">
+        2&times;<em>M</em>&times;(average of the labels on all the
+          tickets).
+        </td>
+    </tr>
+    <tr ALIGN="center" VALIGN="CENTER">
+        <td ALIGN="CENTER" VALIGN="CENTER">
+        (#tickets in box)
+        </td>
+        <td align="center">
+        </td>
+        <td align="center">
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The average of the sum of two draws is thus
+    increasingly likely to be close to 2&times;(average of the numbers on all the tickets).
+    Indeed, this is the expected value of the sample sum of two random draws from the
+    box.
+    Similar reasoning shows that in general the expected value of the sample sum of
+    <em>n</em> draws with replacement from a box of numbered tickets is
+</p>
+
+<p class="math">
+    <em>n</em>&times;(average of the numbers on all the tickets).
+</p>
+
+<div class="indent">
+<p class="inline">
+    Perhaps surprisingly, that is also the expected value
+    of the sample sum of <em>n</em> draws without replacement (of course, then the number of
+    draws, <em>n</em>, can not be larger than the number of tickets in the box, <em>N</em>).
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = '<p>Let us see why the expected value of the sample sum is the same, whether ' +
+               'or not we replace tickets between draws. ' +
+                'Let <em>N</em> denote the number of tickets in the box. ' +
+                'A simple random sample of size <em>n</em> ' +
+                'from the box (without replacement), is equally likely to be any of the ' +
+                '<em><sub>N</sub></em>C<em><sub>n</sub></em> ' +
+                'subsets of <em>n</em> of the <em>N</em> tickets. ' +
+                'Each such subset corresponds to a possible ' +
+                'value of the sample sum of <em>n</em> tickets from the box (typically, ' +
+                'many subsets will give the same value of the sample sum). ' +
+            '</p><p> ' +
+                'The number of those subsets in which a particular ticket (say the <em>j</em>th ticket) ' +
+                'appears is <sub><em>N</em>-1</sub>C<sub><em>n</em>-1</sub>: If one specifies that ' +
+                'the <em>j</em>th ' +
+                'ticket is in the sample, there are <sub><em>N</em>-1</sub>C<sub><em>n</em>-1</sub> ways to ' +
+                'pick the other <em>n</em>-1 tickets in the sample from the remaining <em>N</em>-1 tickets in ' +
+                'the box. ' +
+                'The contribution of the <em>j</em>th ticket to the total of all the values of the ' +
+                'sample sum for all <sub><em>N</em></sub>C<sub><em>n</em></sub> equally ' +
+                'likely samples of size <em>n</em> is thus ' +
+            '</p> ' +
+            '<p class="math"> ' +
+                '(label of <em>j</em>th ticket)&times;<sub><em>N</em>-1</sub>C<sub><em>n</em>-1</sub>. ' +
+            '</p> ' +
+            '<p> ' +
+                'The total contribution of all the tickets to the total of all the values of the sample sum ' +
+                'for all&nbsp; <em><sub>N</sub></em>C<em><sub>n</sub></em> different (equally likely) samples ' +
+                'of size <em>n</em> is ' +
+            '</p> ' +
+            '<p class="math"> ' +
+                '(sum of the labels on all the tickets) ' +
+                '&times; <sub><em>N</em>-1</sub>C<sub><em>n</em>-1</sub>. ' +
+            '</p> ' +
+            '<p> ' +
+                'Because each sample of size <em>n</em> is equally likely, ' +
+                'the expected value of the sample sum is the average of ' +
+                'the values of the sample sum for all samples of size <em>n</em>: ' +
+            '</p> ' +
+            '<div align="center"> ' +
+            '<center> ' +
+                '<table> ' +
+                '<tr ALIGN="CENTER" VALIGN="CENTER"> ' +
+                    '<td ALIGN="CENTER" VALIGN="CENTER"> ' +
+                    '(sum of the labels on all the tickets) &times; ' +
+                    '<sub><em>N</em>-1</sub>C<sub><em>n</em>-1</sub> ' +
+                    '</td> ' +
+                    '<td></td> ' +
+                    '<td align="center"> ' +
+                    '(sum of all the labels)&times;(<em>N</em>-1)!/[(<em>n</em>-1)! &times; ' +
+                    '((<em>N</em>-1)-(<em>n</em>-1))!] ' +
+                    '</td> ' +
+                    '<td align="center"> ' +
+                    '</td> ' +
+                '</tr> ' +
+                '<tr align="center"> ' +
+                    '<td align="center" valign="center"> ' +
+                    '---------------------------------------------------------- ' +
+                    '</td> ' +
+                    '<td align="center" valign="center"> ' +
+                    '= ' +
+                    '</td> ' +
+                    '<td align="center" valign="center"> ' +
+                    '---------------------------------------------------------- ' +
+                    '</td> ' +
+                    '<td align="center" valign="center"> ' +
+                    '= ' +
+                    '</td> ' +
+                '</tr> ' +
+                '<tr align="center"> ' +
+                    '<td align="center" valign="center"> ' +
+                    '<em><sub>N</sub></em>C<em><sub>n</sub></em> ' +
+                    '</td> ' +
+                    '<td align="center"> ' +
+                    '</td> ' +
+                    '<td align="center" valign="center"> ' +
+                    '<em>N</em>!/[<em>n</em>!&times;(<em>N</em>-<em>n</em>)!] ' +
+                    '</td> ' +
+                    '<td align="center" valign="center"> ' +
+                    '</td> ' +
+                '</tr> ' +
+                '</table></center></div><div align="center"><center><table> ' +
+                '<tr ALIGN="CENTER" VALIGN="CENTER"> ' +
+                '<td ALIGN="CENTER" VALIGN="CENTER"> ' +
+                      '(sum of all the labels)&times;(<em>N</em>-1)!&times;<em>n</em>!</td> ' +
+                '<td></td> ' +
+                '<td align="center" valign="center">(sum of all the labels)&times;<em>n</em></td> ' +
+                '<td align="center"></td> ' +
+                '</tr> ' +
+                '<tr align="center"> ' +
+                '<td align="center" valign="center">-----------------------------------------------</td> ' +
+                '<td align="center" valign="center">=</td> ' +
+                '<td align="center" valign="center">---------------------------------------</td> ' +
+                '<td align="center" valign="center">=</td> ' +
+                '</tr> ' +
+                '<tr align="center"> ' +
+                '<td align="center" valign="center"><em>N</em>!&times;(<em>n</em>-1)! </td> ' +
+                '<td align="center"></td> ' +
+                '<td align="center" valign="center"><em>N</em> </td> ' +
+                '<td align="center"></td> ' +
+                '</tr> ' +
+                '</table> ' +
+            '</center> ' +
+            '</div> ' +
+            '<p class="math"> ' +
+               '(average of the labels on all the tickets)&times;<em>n</em>.  ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    citeFig()
+    // -->
+</script>
+    shows the sampling tool again, but now with a check box that lets you
+    control whether the sampling is with or without replacement.
+    If the box is checked, the sample is drawn with replacement.
+    In sampling without replacement, the size of each sample cannot exceed
+    the number of tickets in the box.
+    Experiment by looking at the average of the values of the sample sum
+    for a large number of samples, with and without replacement.
+    Try putting different lists of numbers in the box.
+    Whether the sampling is with or without replacement, the average of the
+    sample sums (Mean(values)) will be close to (sample size)&times;(average of box)
+    after a few thousand draws.
+    If the sample size is greater than one, the SD of the values of the sample sum
+    will tend to be smaller for sampling without replacement than for sampling
+    with replacement.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Simulated empirical distribution of the sample sum of draws from a box ' +
+               'with and without replacement.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="SampleDist.class" codebase="../../Java/" align="baseline" width="640"
+       archive="PbsGui.zip" height="360">
+    <param name="variables" value="sum">
+    <param name="startWith" value="sum">
+    <param name="boxContents" value="0,1,1,4">
+    <param name="sources" value="box">
+    <param name="boxHistControl" value="false">
+    <param name="showCurve" value="false">
+    <param name="curveControls" value="false">
+    <param name="toggleMean" value="false">
+    <param name="showBoxHist" value="false">
+    <param name="replaceControl" value="true">
+    <param name="sampleSize" value="2">
+        You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<a id="expectation_of_sample_sum"></a>
+    <div class="callout">
+    <p>
+        <span class="calloutCaption">The Expected Value of the Sample Sum of <em>n</em> random Draws from a Box</span>
+    </p>
+    <p>
+        If a box contains tickets labeled with numbers, the
+        <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+        <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> of the labels on <em>n</em>
+        tickets drawn at random with or without replacement from the box is
+    </p>
+    <p class="math">
+        <em>n</em>&times;(average of the labels on the tickets in the box),
+    </p>
+    <p>
+        where (average of the labels on the tickets in the box) means the
+        average of the list of numbers on <em>all</em> the labels,
+        including repeated values as many times as they occur on different tickets.
+    </p>
+    <p>
+        (If the draws are without replacement, the number of draws cannot exceed
+        the number of tickets in the box.)
+    </p>
+</div>
+
+<p>
+    The following exercise checks your ability to compute the expected value of the
+    sample sum of random draws from a box of numbered tickets.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nTickets = listOfRandInts(1,6,12)[0];
+    var theTickets = listOfRandInts(nTickets,-10,10).sort(numberLessThan);
+    var nDraws = listOfRandInts(1,2,nTickets-1)[0];
+    var boxMean = mean(theTickets);
+    var aVal = numToRange(nDraws*boxMean);
+    var ansStr = 'The expected value of the sum of the numbers on the tickets in ' +
+         '<em>n</em> draws with replacement from a box of ' +
+         'numbered tickets is <em>n</em>&times;(average of the numbers on the ' +
+         'tickets).  The average of the numbers on the tickets in this box is ' +
+         roundToDig(boxMean,2).toString() + ' and the number <em>n</em> of draws ' +
+         'is ' + nDraws.toString() + ', so the expected value is </p>' +
+         '<p class="math">(' +
+         nDraws.toString() + ')&times;(' + roundToDig(boxMean,2).toString() + ') = ' +
+         roundToDig(nDraws*boxMean,2).toString() + '.</p> ';
+    var qStr = 'A box contains ' + nTickets.toString() + ' tickets labeled with numbers. ' +
+           'The number on the tickets are</p><p class="math">' +
+        theTickets.join(', ').toString() + ' .</p><p><span class="qSpan">' +
+        'The expected value of the sample sum of the ticket labels in ' +
+        nDraws.toString() + ' independent random draws with replacement from the ' +
+        'box is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    var qStr = '</p><p><span class="qSpan">The expected value of the sample sum of ' +
+           'the ticket labels in a simple random sample (without replacement) of size ' +
+           nDraws.toString() + ' from the box is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h3>
+    <a id="expectation_of_binomial"></a>
+    Boxes with tickets labeled only &quot;0&quot; and &quot;1;&quot;
+    The Expected Value of the Binomial and Hypergeometric Distributions
+</h3>
+
+<p>
+    When the tickets in the box are labeled only &quot;0&quot; or &quot;1,&quot; the
+    the sum of <em>n</em> random draws with replacement has a
+    <a class="glossRef" href="gloss.htm#binomial">binomial</a> distribution,
+    and the sum of <em>n</em> random draws without replacement has an
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric</a> distribution.
+    These special cases of the expected value of the sum of random draws from a box
+    are particularly simple.
+</p>
+
+<div class="callout">
+        <p>
+           <span class="calloutCaption">Boxes with Tickets labeled &quot;0&quot; and &quot;1&quot; (0-1 boxes)</span>
+        </p>
+        <p>
+            If a box has a fraction <em>p</em> of tickets labeled &quot;1&quot;
+            and a fraction (1-<em>p</em>) of tickets labeled &quot;0,&quot; the
+            average of the labels on the
+            tickets in the box is
+        </p>
+        <p class="math">
+            0&times;(1-<em>p</em>) + 1&times;<em>p</em> = <em>p</em>.
+        </p>
+
+        <p>
+            If a box has a fraction <em>p</em> of tickets labeled &quot;1&quot;
+            and a fraction (1-<em>p</em>) of tickets labeled &quot;0,&quot; the
+            <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the sum of
+            <em>n</em> random draws with
+            or without replacement from the box is
+        </p>
+        <p class="math">
+            <em>n</em>&times;(average of the labels on all the tickets in the
+            box) = <em>n</em>&times;<em>p</em>.
+        </p>
+</div>
+
+<p>
+    Because the sum of <em>n</em> random draws with
+    replacement from a box that contains a fraction <em>p</em> of tickets
+    labeled &quot;1&quot;
+    and a fraction (1-<em>p</em>) of tickets labeled &quot;0&quot; has a
+    <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a> with parameters
+    <em>n</em> and <em>p</em>,
+    this means that the <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of (a random
+    variable with) a binomial distribution with parameters <em>n</em> and
+    <em>p</em> is <em>n</em>&times;<em>p</em>.
+    You can also confirm this from the formula for binomial probabilities
+    (but the algebra is complicated):
+</p>
+
+<p class="math">
+    0&times;<em><sub>n</sub></em>C<sub>0</sub>
+    <em>p</em><sup>0</sup>(1-<em>p</em>)<sup><em>n</em>-0</sup>
+      + 1&times;<em><sub>n</sub></em>C<sub>1</sub>
+    <em>p</em><sup>1</sup>(1-<em>p</em>)<sup><em>n</em>-1</sup>
+      + 2&times;<em><sub>n</sub></em>C<sub>2</sub>
+    <em>p</em><sup>2</sup>(1-<em>p</em>)<sup><em>n</em>-2</sup>
+      + &hellip; +
+    <em>n</em>&times;<em><sub>n</sub></em>C<em><sub>n</sub></em>
+    <em>p<sup>n</sup></em>(1-<em>p</em>)<sup>0</sup>
+      = <em>n</em>&times;<em>p</em>.
+</p>
+
+<p>
+    On average, each draw results in <em>p</em> tickets
+    labeled &quot;1.&quot;
+</p>
+
+<p>
+    Similarly, because the sum of <em>n</em> random draws without replacement from a box of
+    <em>N</em> tickets of which <em>G</em> are labeled &quot;1&quot; and
+    (<em>N</em>-<em>G</em>) are labeled &quot;0&quot; has an
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric</a> distribution with parameters
+    <em>N</em>, <em>G</em>, and <em>n</em>, the expected value of (a random variable with)
+    an hypergeometric distribution with parameters <em>N</em>, <em>G</em>, and <em>n</em> is
+    <em>n</em>&times;<em>G</em>/<em>N</em>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is the <a class="glossRef" href="gloss.htm#binomial">binomial</a>
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a>.
+    Vary <em>n</em> and <em>p</em> in the figure and verify by eye that the balance
+    point of the probability histogram is <em>n</em>&times;<em>p</em>.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Binomial probability histogram. Is <em>n</em>&times;<em>p</em> the balance ' +
+               'point of the histogram?';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+          align="baseline" width="600" archive="PbsGui.zip" height="320">
+    <param name="n" value="10">
+    <param name="normalControls" value="false">
+    <param name="p" value="0.5">You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The following exercise checks your ability to calculate the expected
+    value of a random variable with an hypergeometric distribution.
+    The wording of the problem might change when you reload the page.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var deckSize = 52;
+    var hands = ["nines","even-numbered cards","diamonds"];
+    var theHand = listOfRandInts(1,0,hands.length - 1)[0];
+    var handSize = listOfRandInts(1,4,10)[0];
+    var nNums = [4,20,13];
+    var eNum = nNums[theHand]*handSize/deckSize;
+    var aVal = numToRange(eNum,.05);
+    var ansStr = 'There are ' + nNums[theHand].toString() + ' ' + hands[theHand] +
+         ' in the deck. ' +
+         'The number of ' + hands[theHand] + ' in a hand of ' + handSize.toString() +
+         ' cards dealt from a well-shuffled deck has an hypergeometric distribution with ' +
+         '<em>N</em> = 52, <em>G</em> = ' + nNums[theHand].toString() + ', and ' +
+         '<em>n</em> = ' + handSize.toString() + ': it is like the number of tickets ' +
+         'labeled &quot;1&quot; in ' + handSize.toString() + ' random draws without ' +
+         'replacement from a box of 52 tickets of which ' + nNums[theHand].toString() +
+         ' are labeled &quot;1&quot; and the rest are labeled &quot;0.&quot;. ' +
+         'The expected value of such a ' +
+         'random variable is <em>n</em>&times;<em>G</em>/<em>N</em> = ' +
+         roundToDig(eNum,2).toString() + ' ' + hands[theHand] + '. ';
+    var qStr = 'Consider dealing a hand of ' + handSize.toString() +
+           ' cards from a well shuffled standard deck of playing cards. ' +
+           '<span class="qSpan">The expected value of the number of ' +
+           hands[theHand] + ' in the hand is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="properties_of_expectation"></a>
+    Properties of the Expected Value
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=&end=3570" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The expected value satisfies several quite useful
+    rules that make it easy to find the expected value of sums of random variables and
+    constants times random variables. These properties follow from the facts that
+</p>
+
+<ol>
+    <li>
+    The average of a list of numbers that are all equal is just
+    their common value.
+    </li>
+    <li>
+    If you add two lists together, the average of the sum is
+    the sum of the averages of the separate lists.
+    </li>
+    <li>
+    If you multiply every element of a list by some constant,
+    the average of the new list is the average of the old list, multiplied by the same constant.
+    </li>
+</ol>
+
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Properties of the Expected Value</span>
+        </p>
+        <p>
+            The <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+           of a constant (a constant random variable) is that
+            constant: for any number <em>a</em>,
+        </p>
+        <p class="math">
+            E(<em>a</em>) = <em>a</em>.
+        </p>
+        <p>
+            The expected value of the sum of two or more random variables is the sum
+            of their expected values: If <span class="math">X, Y, Z, &hellip;</span> are
+            random variables, then
+        </p>
+        <p class="math">
+            E(X+Y+Z+ &hellip;) = E(X) + E(Y) + E(Z) + &hellip; .
+        </p>
+        <p>
+            The expected value of a constant times a random variable is that
+            constant times the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the random
+            variable: for any constant <span class="math">a</span> and any random variable
+            <span class="math">X</span>,
+        </p>
+        <p class="math">
+            E(a &times; X) = a &times; E(X).
+        </p>
+</div>
+
+<p>
+    These rules can be summarized as follows: if <span class="math">a</span>
+    and <span class="math">b</span> are any two numbers, and <span class="math">X</span> and
+    <span class="math">Y</span> are any two random variables, then
+</p>
+
+<p class="math">
+    E(<em>a</em> &times; X + <em>b</em> &times; Y) = <em>a</em> &times; E(X) +
+    <em>b</em> &times; E(Y).
+</p>
+
+<p>
+    In general, <span class="math">E(X &times; Y)</span> is <em>not</em> equal to
+    <span class="math">E(X) &times; E(Y)</span> (but see
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('standardError') + '). ');
+// -->
+</script>
+</p>
+
+<p>
+    Recall that a transformation of <em>x</em> of the form <em>y</em> = <em>a&times;x</em>+<em>b</em>,
+    where <em>a</em> and <em>b</em> are fixed numbers, is called an
+    <a class="glossRef" href="gloss.htm#affine">affine transformation</a>.
+    A graph of an affine transformation is a straight line.
+    The properties
+    above show that the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of an
+    <a class="glossRef" href="gloss.htm#affine">affine transformation</a> of a
+    <a class="glossRef" href="gloss.htm#random_variable">random
+    variable</a> is just the same <a class="glossRef" href="gloss.htm#affine">affine transformation</a>
+    of the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+    <a class="glossRef" href="gloss.htm#random_variable">random
+    variable</a>:
+</p>
+
+<p class="math">
+    E(<em>a</em>&times;X+<em>b</em>) = <em>a</em>&times;E(X) + <em>b</em>.
+</p>
+
+<h3>
+    <a id="expected_mean"></a>
+    Expected Value of the Sample Mean and Sample Percentage
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=&end=4018" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> is the
+    <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> divided by the sample size, <em>n</em>.
+    Dividing by the sample size is the same as multiplying by its reciprocal, 1/<em>n</em>,
+    so we can use the properties of expectation to find the expected value of the sample
+    mean from the expected value of the sample sum:
+    The expected value of
+    the sample mean is the expected value of the sample sum, times 1/<em>n</em>.
+    Because the expected value of the sample sum is
+</p>
+
+<p class="math">
+    <em>n</em>&times;(average of the numbers on all the tickets in box),
+</p>
+
+<p>
+    whether the sampling is with or without replacement, the expected value of the
+    sample mean is the average of the numbers on all the tickets in the box,
+    for random sampling with or without replacement.
+</p>
+
+<p>
+    Consider a 0-1 box of tickets.
+    The <a class="glossRef" href="gloss.htm#population_percentage">population percentage</a> is the fraction
+    of tickets labeled &quot;1.&quot;
+    Equivalently, it is the mean of the list of the numbers on all the tickets.
+    The <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage</a> <em>&phi;</em>
+    is the fraction of
+    tickets labeled &quot;1&quot; in a random sample of size <em>n</em> from such a box;
+    equivalently, it is the sample mean of a random sample of size <em>n</em> from such
+    a box:
+</p>
+
+<p class="math">
+    <em>&phi;</em> = (#tickets in the sample labeled &quot;1&quot;)/<em>n</em>.
+</p>
+
+<p>
+    It follows that the expected value of the sample percentage <em>&phi;</em>
+    is the population percentage <em>p</em>,
+    for random sampling with or without replacement.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Expected value of the Sample Mean and the Sample Percentage</span>
+        </p>
+        <p>
+            The expected value of the sample mean of <em>n</em> random draws with or
+            without replacement from a box of tickets labeled with numbers is
+        </p>
+        <p class="math">
+            (average of the numbers on all the tickets in the box).
+        </p>
+        <p>
+            The expected value of the sample percentage <em>&phi;</em>
+            of tickets labeled
+            &quot;1&quot; in <em>n</em> random draws
+            with or without replacement from a box of tickets each labeled
+            &quot;0&quot; or &quot;1&quot; is
+        </p>
+        <p class="math">
+            (percentage of tickets
+            in the box labeled &quot;1&quot;).
+        </p>
+</div>
+
+
+<h2>
+    <a id="bets"></a>
+    Gambling and fair Bets
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=4018&end=4080" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    In games of chance, the expected value of the payoff (taking into
+    account the cost of the bet) determines whether a bet is favorable.
+    If the expected value of the payoff is negative, in the long run,
+    you will tend to lose money.
+    If the expected payoff is positive, you will tend to win money
+    in the long run.
+    If the expected payoff is zero, you tend to break even in the long run.
+    In casino games, the expected payoff is always negative.
+    The expected amount you lose to the house (the casino) for each $1 bet is called the
+    <a class="glossRef" href="gloss.htm#house_edge">house edge</a>.
+</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'The House Edge for a Bet on Red in Roulette';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    In roulette, a bet of $1 on red pays $2 if you win.
+    There are 18 red positions on the wheel, out of a total of 38 positions.
+    By assumption, the ball is equally likely to land in any of the 38 positions;
+    you win the bet on red if the ball lands in a red position.
+    The expected payoff for a $1 bet is thus $2&times;(18/38) - $1 = -$.0526, so the
+    <a class="glossRef" href="gloss.htm#house_edge">house edge</a> is 5.26 cents, the expected loss
+    to you for each $1 you bet.
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Fair bets</span>
+    </p>
+    <p>
+          A <a class="glossRef" href="gloss.htm#fair_bet">fair bet</a>
+          is one for which the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of
+          the payoff is zero, after accounting for the cost of the bet.
+    </p>
+    <p>
+        If a bet is fair, you should expect to break even in the long run in repeated play.
+    </p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Determining whether a Bet is fair';
+    writeExampleCaption(qStr);
+// -->
+</script>
+<p>
+    Consider playing the following dice game: we roll a pair of dice five times.
+    We lose $100 each time the pair of
+    dice does not land showing double ones, and win $1000 each time the pair lands showing
+    double ones.
+    What is the <a class="glossRef" href="gloss.htm#expectation">expected</a> net profit or loss?
+    Is this a fair bet?
+</p>
+
+<p>
+    <strong>Solution</strong>.
+    Let <span class="math">X</span> be the number of double ones in five rolls of a pair of fair dice.
+    Then <span class="math">X</span> has a <a class="glossRef" href="gloss.htm#binomial">binomial distribution</a>
+    with parameters <span class="math">n = 5</span> and <span class="math">p = 100%/36</span>, so
+</p>
+
+<p class="math">
+    E(X) = 5/36 = 0.138 pairs of ones.
+</p>
+
+<p>
+    Your winnings are
+</p>
+
+<p class="math">
+    W = X &times; $1000 - (5 - X) &times; $100.
+</p>
+
+<p>
+    <span class="math">W</span> is a constant times <span class="math">X</span>,
+    plus another constant; that is, <span class="math">W</span> is an
+    <a class="glossRef" href="gloss.htm#affine">affine transformation</a> of <span class="math">X</span>:
+</p>
+
+<p class="math">
+    W = $1100 &times; X - $500.
+</p>
+
+<p>
+    Thus the <a class="glossRef" href="gloss.htm#expectation">expected value</a> of W is
+</p>
+
+<p class="math">
+    E(W) = $1100 &times; E(X) - $500 = -$347.22.
+</p>
+
+<p>
+    This is not a fair bet&mdash;you should expect to lose money in the long run in repeated play.
+</p>
+
+<p>
+    Here is another way to calculate your expected net winnings.
+    The net winnings in this game
+    is the sum of the winnings in five shorter games, each of which consists of rolling the
+    pair of dice once.
+    Your expected winnings in each of the smaller games is
+</p>
+
+<p class="math">
+    $1000 &times; 1/36 - $100 &times; 35/36 = -$69.44.
+</p>
+<p>
+    Your expected total winnings from the 5 games is the sum
+    of my expected winnings from each game:
+</p>
+
+<p class="math">
+    -$69.44 - $69.44 - &hellip; - $69.44 = 5 &times; -$69.44
+     = -$347.22.
+</p>
+</div>
+
+
+<h2><a id="some_expectations"></a>Expected values
+    of some common distributions
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/QIGjhiGRWe4?start=&end=4666" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This section summarizes some earlier results of the chapter, and presents
+    without proof
+    the expected values of some other common discrete random variables we have seen
+    earlier in the book.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Expected
+           Values of some discrete Random Variables</span>
+    </p>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of a
+        <a class="glossRef" href="gloss.htm#binomial">binomial random variable</a> with
+        parameters <em>n</em> and <em>p</em>
+        is <em>n</em>&times;<em>p</em>.
+    </p>
+
+<div class="indent">
+<p class="inline">
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of a
+        <a class="glossRef" href="gloss.htm#geometric_distrib">geometric random variable</a>
+        with parameter <em>p</em>
+        is 1/<em>p</em>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'The expected value of a random variable <span class="math">X</span> with a ' +
+               'geometric distribution with ' +
+               'parameter <span class="math">p</span> is the sum of its possible values, 1, 2, 3, ' +
+               '&nbsp;&hellip; , weighted by the probabilities of those values:' +
+               '</p><p class="math">' +
+               'E(X) = 1&times;P(X=1) + 2&times;P(X=2) + 3&times;P(X=3) + &hellip; ' +
+               '</p><p class="math"> = 1&times;<em>p</em> + 2<em>p</em>(1-<em>p</em>) + ' +
+               '3<em>p</em>(1-<em>p</em>)<sup>2</sup> + 4<em>p</em>(1-<em>p</em>)<sup>3</sup> + ' +
+               '&hellip;  ' +
+               '</p><p class="math"> = <em>p</em> + <em>p</em>(1-<em>p</em>) + ' +
+               '<em>p</em>(1-<em>p</em>)<sup>2</sup> + <em>p</em>(1-<em>p</em>)<sup>3</sup> +  ' +
+               '&hellip;  + </p><p class="math">' +
+               ' + <em>p</em>(1-<em>p</em>) + <em>p</em>(1-<em>p</em>)<sup>2</sup> + ' +
+               '<em>p</em>(1-<em>p</em>)<sup>3</sup> +  &hellip;  + </p><p class="math">' +
+               ' + <em>p</em>(1-<em>p</em>)<sup>2</sup> + <em>p</em>(1-<em>p</em>)<sup>3</sup> +  ' +
+               ' &hellip;  + </p><p class="math">' +
+               ' + <em>p</em>(1-<em>p</em>)<sup>3</sup> +  &hellip; </p><p class="math">' +
+               '= <em>p</em>(1 + (1-<em>p</em>) + (1-<em>p</em>)<sup>2</sup> + (1-<em>p</em>)<sup>3</sup> + ' +
+               '&hellip;)&times;(1 + (1-<em>p</em>) + ' +
+               '(1-<em>p</em>)<sup>2</sup> + (1-<em>p</em>)<sup>3</sup> +  &hellip;) ' +
+               '</p><p class="math"> = <em>p</em>&times;1/(1-(1-<em>p</em>)) &times; ' +
+               ' 1/(1-(1-<em>p</em>)) </p><p class="math"> ' +
+               '= <em>p</em> &times; 1/<em>p</em> &times; 1/<em>p</em> ' +
+               '</p><p class="math">= 1/<em>p</em>. </p><p> ' +
+               'Heuristically, if the number of successes per trial is <em>p</em> on the ' +
+               'average, the number of trials per success is 1/<em>p</em> on the average. ' +
+               'For example, if I repeat over and over the experiment of tossing a fair coin ' +
+               'until I first see heads, the number of tosses will vary. The long-term limiting average ' +
+               'number of tosses until the first head is 2.</p><p>' +
+               'We can use this to find the expected value of a ' +
+               '<a class="glossRef" href="gloss.htm#negative_binomial">negative binomial random variable</a>. ' +
+               'Recall that the number of trials to the <em>r</em>th success in independent ' +
+               'trials with the same probability <em>p</em> of success in each trial has ' +
+               'the negative binomial distribution. We can think of the number of trials to ' +
+               'the <em>r</em>th success as the sum of the number of trials to the first success, ' +
+               'the number of trials between the first and second successes, &hellip;, ' +
+               'and the number of trials between the <em>r</em>-1st and the <em>r</em>th ' +
+               'successes. Each of these has a geometric distribution with parameter <em>p</em>, so ' +
+               'the expected value of each is 1/<em>p</em>. Because the negative binomial is the sum ' +
+               'of <em>r</em> such variables, its expected value is 1/<em>p</em> + 1/<em>p</em> + ' +
+               '&hellip; + 1/<em>p</em> = <em>r</em>/<em>p</em>.';
+    writeFootnote(fCtr, fCtr++, fStr);
+    // -->
+</script>
+    </p>
+</div>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of a
+        <a class="glossRef" href="gloss.htm#negative_binomial">negative binomial random variable</a>
+        with parameters <em>p</em>
+        and <em>r</em> is <em>r</em>/<em>p</em>.
+    </p>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of an
+        <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric random variable</a>
+        with parameters
+        <em>N</em>, <em>G</em>, and <em>n</em> is <em>n</em>&times;(<em>G</em>/<em>N</em>).
+    </p>
+    <p>
+        The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the
+        <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> of <em>n</em> random
+        draws with or without
+        replacement from a box of labeled tickets is
+    </p>
+    <p class="math">
+        <em>n</em>&times;(average of the
+          labels on all the tickets in the
+          box).
+    </p>
+    <p>
+        (If the draws are without replacement, the number of draws cannot exceed the number of
+          tickets in the box.)
+    </p>
+</div>
+
+<p>
+    The following exercises check your ability to determine the distribution of a random
+    variable from a verbal description, to find the expected value
+    of the random variable, and to determine whether a bet is fair.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+     document.writeln(startProblem(pCtr++));
+     var pOil = listOfRandInts(1,1,5)[0];
+     var nHits = listOfRandInts(1,1,10)[0];
+     var aVal = numToRange(100*nHits/pOil,.05);
+     var ansStr = 'Under the stated assumptions, the number of wells that must be drilled ' +
+          'has a negative binomial distribution with parameters <em>p</em> = ' +
+          pOil.toString() + '% and <em>r</em> = ' + nHits.toString() +
+          '.  The expected value of such a random variable is ' +
+          '<em>r</em>/<em>p</em> = ' + roundToDig(100*nHits/pOil,2).toString() +
+          ' wells. ';
+     var qStr = 'Suppose that in a certain part of the world, a well drilled in a random ' +
+        'location will strike oil with probability ' + pOil.toString() +
+        '%. <span class="qSpan">The expected number of wells that must be drilled ' +
+        '(at independent, random locations) to strike oil for the ' +
+        ordinals[nHits]  + ' time is </span>';
+     document.writeln(qStr);
+     writeTextExercise(8,qCtr++,aVal);
+     document.writeln('</p>');
+     writeSolution(pCtr-1,ansStr);
+// -->
+</script>.
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var nRolls = listOfRandInts(1,3,7)[0];
+    var oneProb = roundToDig((1/3)*rand.next(),3);
+    var sixProb = roundToDig(1/3 - oneProb,3);
+    var eOneRoll = oneProb + (2+3+4+5)/6 + 6*sixProb;
+    var eSpots= nRolls*eOneRoll;
+    var aVal = numToRange(eSpots);
+    var ansStr = 'The expected number of spots that show in a single roll of this die is ' +
+         '</p><p class="math">1&times;' + oneProb +
+         ' + 2&times;(1/6) + 3&times;(1/6) + 4&times;(1/6) + 5&times;(1/6) + ' +
+         '6&times;' + sixProb + ' = ' + roundToDig(eOneRoll,2).toString() +
+         '.</p><p>By the properties of the expected value, the expected number ' +
+         'of spots that show in ' + nRolls.toString() + ' rolls ' +
+         ' is ' + nRolls.toString() + '&times (expected number that show in ' +
+         'one roll) = ' + roundToDig(eSpots,2).toString() + ' spots. ';
+    var qStr = 'A particular die is &quot;loaded&quot; (weighted) in such a way that ' +
+           'the chance of rolling a one is ' + oneProb.toString() +
+           ', the chance of rolling a 6 is ' + sixProb.toString() +
+           ', and the chances of rolling 2, 3, 4, or 5, are each 1/6. ' +
+           '<span class="qSpan">The expected value of the total number of spots ' +
+           'that show in ' + cardinals[nRolls]  + ' rolls of this die is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var thresh = (listOfRandInts(1,0,4))[0];
+    var bucks = (listOfDistinctRandInts(2,2,7)).sort(numberLessThan);
+    var winWays = 6;
+    for (var i=1; i <= thresh; i++ ) {
+       winWays += 2*(6-i);
+    }
+    var pWin = winWays/36;
+    eWin = pWin*bucks[1] - bucks[0];
+    var isFair = false;
+    aVal1 = "a";
+    if (eWin == 0) {
+       isFair = true;
+       aVal1 = "b";
+    }
+    var opt=["no","yes"];
+    var nPlays = 10*listOfRandInts(1,5,15)[0];
+    var eDiff = (10*1 + 8*2 + 6*3 + 4*4 + 2*5)/36;
+    eWin2 = eDiff - bucks[0];
+    var isFair2 = false;
+    if (eWin2 == 0) {
+       isFair2 = true;
+    }
+    var ansStr = '(a) We need to find the expected payoff of the bet, taking into account ' +
+        'the ante. The assumptions imply that the 36 possible pairs of die rolls are ' +
+        'equally likely. Let <strong>D</strong> denote the absolute value of the ' +
+        'difference in the number of spots that show on the two dice.  Here is a ' +
+        'table showing the values of <strong>D</strong> corresponding to the 36 ' +
+        'possible (and equally likely) outcomes:</p>' +
+        '<div align="center"><center><table class="dataTable"><caption>Values of D by dice outcomes</caption><tr>' +
+        '<td>(1,1) <strong>D</strong>=0</td>' +
+        '<td>(1,2) <strong>D</strong>=1</td>' +
+        '<td>(1,3) <strong>D</strong>=2</td>' +
+        '<td>(1,4) <strong>D</strong>=3</td>' +
+        '<td>(1,5) <strong>D</strong>=4</td>' +
+        '<td>(1,6) <strong>D</strong>=5</td></tr>' +
+        '<tr><td>(2,1) <strong>D</strong>=1</td>' +
+        '<td>(2,2) <strong>D</strong>=0</td>' +
+        '<td>(2,3) <strong>D</strong>=1</td>' +
+        '<td>(2,4) <strong>D</strong>=2</td>' +
+        '<td>(2,5) <strong>D</strong>=3</td>' +
+        '<td>(2,6) <strong>D</strong>=4</td></tr>\n' +
+        '<tr><td>(3,1) <strong>D</strong>=2</td>' +
+        '<td>(3,2) <strong>D</strong>=1</td>' +
+        '<td>(3,3) <strong>D</strong>=0</td>' +
+        '<td>(3,4) <strong>D</strong>=1</td>' +
+        '<td>(3,5) <strong>D</strong>=2</td>' +
+        '<td>(3,6) <strong>D</strong>=3</td></tr>\n' +
+        '<tr><td>(4,1) <strong>D</strong>=3</td>' +
+        '<td>(4,2) <strong>D</strong>=2</td>' +
+        '<td>(4,3) <strong>D</strong>=1</td>' +
+        '<td>(4,4) <strong>D</strong>=0</td>' +
+        '<td>(4,5) <strong>D</strong>=1</td>' +
+        '<td>(4,6) <strong>D</strong>=2</td></tr>\n' +
+        '<tr><td>(5,1) <strong>D</strong>=4</td>' +
+        '<td>(5,2) <strong>D</strong>=3</td>' +
+        '<td>(5,3) <strong>D</strong>=2</td>' +
+        '<td>(5,4) <strong>D</strong>=1</td>' +
+        '<td>(5,5) <strong>D</strong>=0</td>' +
+        '<td>(5,6) <strong>D</strong>=1</td></tr>\n' +
+        '<tr><td>(6,1) <strong>D</strong>=5</td>' +
+        '<td>(6,2) <strong>D</strong>=4</td>' +
+        '<td>(6,3) <strong>D</strong>=3</td>' +
+        '<td>(6,4) <strong>D</strong>=2</td>' +
+        '<td>(6,5) <strong>D</strong>=1</td>' +
+        '<td>(6,6) <strong>D</strong>=0</td></tr></table></center></div>\n' +
+        '<p>The probability of each of these outcomes is 100%/36. ' +
+        'In ' + winWays.toString() + ' of the 36 outcomes, the ' +
+        'absolute value of the difference (<strong>D</strong>) is no larger than ' +
+        thresh.toString() +
+        ', so the chance of winning is ' + winWays.toString() + '/36 = ' +
+        roundToDig(100*pWin,2).toString() + '%. The expected winnings in one ' +
+        'bet is thus $' + bucks[1].toString() + '&times;' +
+        roundToDig(100*pWin,2).toString() + '% - $' + bucks[0].toString() +
+        ' = $' + roundToDig(eWin,3).toString() + '.  The expected winnings ';
+    if (isFair) {
+       ansStr += 'equal zero, so the bet is fair. ';
+    } else {
+       if (eWin < 0) {
+       ansStr += 'are negative, so the bet is not fair: it favors me. ';
+       } else {
+       ansStr += 'are positive, so the bet is not fair: it favors you. ';
+       }
+    }
+    ansStr += '</p><p>(b) The expected winnings in ' + nPlays.toString() +
+          ' plays of the game is, by the properties of the expected value, ' +
+          'the sum of the expected values in the ' + nPlays.toString() +
+          ' games.  Those expected values each equal $' +
+          roundToDig(eWin,3).toString() + ', so the expected total winnings is $' +
+          roundToDig(nPlays*eWin,3).toString() + '.</p><p> ' +
+         '(c) We can calculate the expected difference <strong>D</strong> from ' +
+         'the same table. The probability that <strong>D</strong> = 0 is 6/36; ' +
+         'the probability that <strong>D</strong> = 1 is 10/36; ' +
+         'the probability that <strong>D</strong> = 2 is 8/36; ' +
+         'the probability that <strong>D</strong> = 3 is 6/36; ' +
+         'the probability that <strong>D</strong> = 4 is 4/36; and ' +
+         'the probability that <strong>D</strong> = 5 is 2/36.  The expected value ' +
+         'of <strong>D</strong> is thus </p><p class="math">' +
+         '0&times;(6/36) + 1&times;(10/36) + 2&times;(8/36) + 3&times;(6/36) + ' +
+         '4&times;(4/36) + 5&times;(2/36) = ' + roundToDig(eDiff,3).toString() +
+         '.</p><p>' +
+         '(d) The expected winnings in this bet is $' +
+         roundToDig(eDiff,3).toString() + ' - $' + bucks[0] + ' = $' +
+         roundToDig(eWin2,3).toString() + '.  This is ';
+    if (!isFair2) {
+       ansStr += 'not a fair bet; it favors ';
+       if (eWin2 < 0) {
+       ansStr += 'me. ';
+       } else {
+       ansStr += 'you. ';
+       }
+    } else {
+       ansStr += 'a fair bet. ';
+    }
+    var qStr = 'Consider rolling two fair dice independently. </p><p>' +
+           '(a) I offer you the following bet: I will pay you $' +  bucks[1].toString() +
+           ' if the absolute value of the difference between the number of spots ' +
+           'showing on the two dice is at most ' + thresh.toString()   +
+           '. I require you to pay me $' + bucks[0].toString() +
+           ' <a class="glossRef" href="gloss.htm#ante">ante</a> to play the game.</p><p>' +
+           '<span class="qSpan"> The chance that you win is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pWin));
+    var qStr = '</p><p><span class="qSpan">Is this a fair bet?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    var qStr = '</p><p>(b) <span class="qSpan">In ' + nPlays.toString() +
+           ' plays of the game, you should expect to </span>';
+    document.writeln(qStr);
+    var opt = ["lose","win"];
+    if (eWin < 0) {
+      aVal = "a";
+    } else if (eWin > 0) {
+      aVal = "b";
+    } else {
+      aVal = "a|b";
+    }
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '<span class="qSpan">$</span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(nPlays*Math.abs(eWin)));
+    var qStr = '</p><p>(c)<span class="qSpan">The expected value of the absolute value ' +
+           'of the difference between the numbers of spots that show on the two ' +
+           'dice (in one roll of the dice) is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(eDiff));
+    var qStr = '</p><p>(d) Suppose I offer to pay you an amount in dollars equal to ' +
+           'the absolute value of the difference between the number of spots showing ' +
+           'on the two dice. For example, if one die shows one spot and the other ' +
+           'shows 4 spots, I pay you $(4-1) = $3. If one die shows 6 spots and the ' +
+           'other shows 1 spot, I pay you $(6-1)=$5. I require you to pay me $' +
+           bucks[0] + ' <a class="glossRef" href="gloss.htm#ante">ante</a> to play the game.</p><p>' +
+           '<span class="qSpan">The expected net winnings in this game is </span>';
+    document.writeln(qStr);
+    var aVal = numToRange(eDiff - bucks[0]);
+    writeTextExercise(8, qCtr++, aVal);
+    var qStr = '</p><p><span class="qSpan">Is this a fair game?</span>';
+    document.writeln(qStr);
+    var opt = ["no","yes"];
+    writeSelectExercise(false,qCtr++,opt,aVal1);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var eSpots = 3.5;
+    var aVal = numToRange(eSpots*eSpots);
+    var qStr = 'I roll a fair die once. I then roll as many fair dice as there are spots ' +
+           'on the top face of that die when it lands. That is, if the first roll ' +
+           'shows one spot, I roll one die. If the first roll shows two spots, I ' +
+           'roll two dice, <em>etc</em>.</p><p><span class="qSpan">The expected value ' +
+           'of the total number of spots on the die/dice rolled in the second ' +
+           'part of the experiment (<em>i.e.</em>, not including the number of ' +
+           'spots that showed on the first roll that determines how many dice I roll ' +
+           'in the second stage) is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal);
+    document.writeln('</p>');
+    var ansStr = 'The expected number of spots that show when one rolls a fair die is</p>' +
+         '<p class="math">1&times;1/6 + 2&times;1/6 + 3&times;1/6 + 4&times;1/6 + ' +
+         '5&times;1/6 + 6&times;1/6 = 3&frac12;.</p>\n' +
+         '<p>Thus on the average, the second stage will involve rolling 3&frac12; dice. ' +
+         'Each of those &quot;average&quot; dice contributes 3&frac12; spots to the ' +
+         'sum, on the average, so the answer &quot;ought&quot; to be ' +
+         '3&frac12; &times; 3&frac12; = 12 1/4. Let us see whether this logic is ' +
+         'right. Unfortunately, that requires a bit of algebra.</p>' +
+         '<p>The possible outcomes of the second part are {1, 2, 3, ' +
+         '&hellip; , 36}. ' +
+         'Think about how these outcomes can arise. We can partition the outcomes ' +
+         'using the number of spots that show on the die in the first stage. ' +
+         'Let <strong>F</strong> be the number of spots that show on the die rolled ' +
+         'in the first stage, and let <strong>T</strong> be the total number of ' +
+         'spots on the dice rolled in the second stage. Then</p><p class="math">' +
+         '{<strong>T</strong>=1} = {<strong>T</strong>=1 and <strong>F</strong>=1}' +
+         '&cup;{<strong>T</strong>=1 and ' +
+         '<strong>F</strong>=2}&cup; ' +
+         '&hellip;&cup;' +
+         '{<strong>T</strong>=1 and <strong>F</strong>=6}.</p>' +
+         '<p>The events on the right are mutually exclusive. (In fact, only the first ' +
+         'event on the right has positive probability&mdash;the other events are impossible.) ' +
+         'We can partition the events that {<strong>T</strong>=2}, ' +
+         '{<strong>T</strong>=3}, &hellip; , and ' +
+         '{<strong>T</strong>=36} similarly. By the multiplication rule,</p>\n' +
+         '<p class="math">P(<strong>T</strong>=1 and <strong>F</strong>=1) = ' +
+         'P(<strong>T</strong>=1 | <strong>F</strong>=1)' +
+         '&times;P(<strong>F</strong>=1)<br />\n P(<strong>T</strong>=1 and ' +
+         '<strong>F</strong>=2) = ' +
+         'P(<strong>T</strong>=1 | <strong>F</strong>=2)&times;P(<strong>F</strong>=2) ' +
+         '<br />&hellip; <br />' +
+         'P(<strong>T</strong>=36 and <strong>F</strong>=6) = ' +
+         'P(<strong>T</strong>=36 | <strong>F</strong>=6)&times;' +
+         'P(<strong>F</strong>=36).' +
+         '</p><p>The expected value of <strong>T</strong> is</p>' +
+         '<p class="math">E(<strong>T</strong>) = 1&times;P(<strong>T</strong>=1) + ' +
+         '2&times;P(<strong>T</strong>=2) + ' +
+         '&hellip; + 36&times;P(<strong>T</strong>=36) <br />' +
+         '= 1&times;P(<strong>T</strong>=1 | <strong>F</strong>=1)&times;' +
+         'P(<strong>F</strong>=1) + 1&times;P(<strong>T</strong>=1 | ' +
+         '<strong>F</strong>=2)&times;P(<strong>F</strong>=2) + ' +
+         '&hellip; + ' +
+         '1&times;P(<strong>T</strong>=1 | ' +
+         '<strong>F</strong>=6)&times;P(<strong>F</strong>=6) + ' +
+         '<br />2&times;P(<strong>T</strong>=2 | ' +
+         '<strong>F</strong>=1)&times;P(<strong>F</strong>=1) + ' +
+         '2&times;P(<strong>T</strong>=2 | ' +
+         '<strong>F</strong>=2)&times;P(<strong>F</strong>=2) + ' +
+         '&hellip; + ' +
+         '2&times;P(<strong>T</strong>=2 | ' +
+         '<strong>F</strong>=6)&times;P(<strong>F</strong>=6) + ' +
+         '<br />3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=1)&times;P(<strong>F</strong>=1) + ' +
+         '3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=2)&times;P(<strong>F</strong>=2) + ' +
+         '&hellip; + ' +
+         '3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=6)&times;P(<strong>F</strong>=6) + ' +
+         '&hellip; <br /> ' +
+         '+ 36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=1)&times;P(<strong>F</strong>=1) + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=2)&times;P(<strong>F</strong>=2) + ' +
+         '&hellip; + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=6)&times;P(<strong>F</strong>=6).</p>\n<p>' +
+         '(Note that many of the conditional ' +
+         'probabilities are zero. For example, P(<strong>T</strong>=1 | ' +
+         '<strong>F</strong>=<em>k</em>) = 0 ' +
+         'for <em>k</em>&gt;1; similarly, P(<strong>T</strong>=36|' +
+         '<strong>F</strong>=<em>k</em>) = 0 for ' +
+         '<em>k</em>&lt;6.) If we read down the right side, looking ' +
+         'at the first term in each ' +
+         'row, then the second term in each row, <em>etc</em>., we see ' +
+         'that all the terms in ' +
+         'the first column are conditional on the event {<strong>F</strong>=1}, ' +
+         'and contain the ' +
+         'factor P(<strong>F</strong>=1); all the terms in the second column are ' +
+         'conditional on ' +
+         '{<strong>F</strong>=2} and contain the factor P(<strong>F</strong>=2), ' +
+         '<em>etc.</em> We can rearrange the terms to get</p>\n<p class="math">' +
+         'E(<strong>T</strong>) = <font size="+2">(</font>1&times;P(<strong>T</strong>=1 ' +
+         ' | <strong>F</strong>=1) + 2&times;P(<strong>T</strong>=2 | ' +
+         '<strong>F</strong>=1) + 3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=1) + &hellip; + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=1)<font size="+2">)' +
+         '</font>&times;P(<strong>F</strong>=1) + <br />+ ' +
+         '<font size="+2">(</font>1&times;P(<strong>T</strong>=1 ' +
+         '| <strong>F</strong>=2) + 2&times;P(<strong>T</strong>=2 | ' +
+         '<strong>F</strong>=2) + 3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=2) + &hellip; + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=2)<font size="+2">)' +
+         '</font>&times;P(<strong>F</strong>=2)+ <br />\n + ' +
+         '<font size="+2">(</font>1&times;' +
+         'P(<strong>T</strong>=1 | <strong>F</strong>=3) + ' +
+         '2&times;P(<strong>T</strong>=2 | <strong>F</strong>=3) + ' +
+         '3&times;P(<strong>T</strong>=3 | <strong>F</strong>=3) + ' +
+         '&hellip; + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=3)<font size="+2">)</font> &times; ' +
+         'P(<strong>F</strong>=3) + <br /> + &hellip; + <br />\n' +
+         '+ <font size="+2">(</font>1&times;P(<strong>T</strong>=1 | ' +
+         '<strong>F</strong>=6) + ' +
+         '2&times;P(<strong>T</strong>=2 | <strong>F</strong>=6) + ' +
+         '3&times;P(<strong>T</strong>=3 | ' +
+         '<strong>F</strong>=6) + &hellip; + ' +
+         '36&times;P(<strong>T</strong>=36 | ' +
+         '<strong>F</strong>=6)<font size="+2">)' +
+         '</font>&times;P(<strong>F</strong>=6)<br /> = ' +
+         '<big>(</big>expected number of ' +
+         'spots when you roll one die<big>)</big>&times;P(first ' +
+         'die showed 1 spot) + <br /><big>(</big>expected number of ' +
+         'spots when you roll two dice<big>)</big>&times;P(first ' +
+         'die showed 2 spots) + <br /><big>(</big>expected ' +
+         'number of spots when ' +
+         'you roll three dice<big>)</big>&times;P(first die showed 3 spots) + ' +
+         '<br />+ &hellip; + ' +
+         '<br /><big>(</big>expected number of spots when you ' +
+         'roll six dice<big>)</big>&times;P(first die showed 6 spots).</p>' +
+         '<p>Now by properties of expectation,</p><p class="math">(expected total ' +
+         'number of spots when you roll <em>k</em> dice) = <br /> ' +
+         '=(expected number of spots ' +
+         'for first die) + (expected number for second die) + ' +
+         '&hellip; + (expected number for ' +
+         '<em>k</em>th die) <br /><em>=k</em>&times;(expected number of spots for one die) ' +
+         '<br />\n = <em>k</em>&times;(3&frac12;).</p><p>This gives us</p> ' +
+         '<p class="math">E(<strong>T</strong>) = 1&times;(3&frac12;)&times;P(first ' +
+         'die showed 1 spot) + <br />2&times;(3&frac12;)&times;' +
+         'P(first die showed 2 spots) + <br />3&times;' +
+         '(3&frac12;)&times;P(first die showed 3 spots) + <br /> ' +
+         '&hellip; <br />' +
+         '+ 6&times;(3&frac12;)&times;P(first die showed 6 spots) <br />= 1&times;' +
+         '(3&frac12;)&times;1/6 + 2&times;(3&frac12;)&times;1/6 + ' +
+         '&hellip; + ' +
+         '6&times;(3&frac12;)&times;1/6 <br /> = (3&frac12;)&times;(1+2+3+4+5+6)/6 <br />' +
+         '= (3&frac12;)&times;(3&frac12;) = 12 1/4,</p><p>as we had guessed.</p>\n';
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="summary"></a>
+    Summary
+</h2>
+
+<p>
+    In repeated <a class="glossRef" href="gloss.htm#independent">independent</a>
+    trials with the same probability of success,
+    as the number of trials increases, the fraction of successes is
+    increasingly likely to be close to the probability of success in each trial.
+    This is the <a class="glossRef" href="gloss.htm#law_of_large_numbers">Law of Large Numbers</a>.
+    As a consequence of the Law of Large Numbers, if a <a class="glossRef" href="gloss.htm#discrete">discrete</a>
+    random variable is observed repeatedly in independent experiments,
+    the fraction of experiments in which the random variable equals any
+    of its possible values is increasingly likely to be close to the
+    probability that the random variable equals that value.
+    The mean of the observed values of the random variable in repeated
+    independent experiments is thus increasingly likely to be close to a
+    weighted average of the possible values, where the weights are the
+    probabilities of the values.
+    That weighted average is called the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the random variable.
+    The expected value of a random variable depends only on the probability
+    distribution of the random variable, so we can speak interchangeably of the
+    expected value of a random variable or of its probability distribution.
+</p>
+
+<p>
+    The expected value of the sample sum of <em>n</em> random draws with or without
+    replacement from a box of numbered tickets is <em>n</em> times the mean of the
+    numbers on all the tickets in the box, including duplicates as often as they occur.
+    For the special case of a 0-1 box, this implies that the expected value of the
+    binomial distribution with parameters <em>n</em> and <em>p</em> is <em>n</em>&times;<em>p</em>,
+    and that the expected value of the hypergeometric distribution with parameters
+    N, G, and <em>n</em> is <em>n</em>&times;G/N.
+    The expected value of a constant times a random variable is that constant times
+    the expected value of the random variable.
+    The expected value of the sum of two or more random variables is the sum of their
+    expected values.
+    It follows that the expected value of the sample mean of <em>n</em>
+    draws with or without replacement from a box of numbered tickets is the mean of the
+    numbers on all the tickets in the box; as a special case, the expected value of the
+    sample percentage of <em>n</em> random draws with or without replacement from a
+    0-1 box is the population percentage of tickets in the box labeled &quot;1.&quot;
+    The expected value of the geometric distribution with parameter <em>p</em> is 1/<em>p</em>.
+    The expected value of the negative binomial distribution with parameters <em>r</em> and <em>p</em>
+    is <em>r</em>/<em>p</em>.
+    The house edge in a bet is the expected value of the net loss to the bettor per
+    $1 bet.
+    A bet is fair if the expected net payoff (accounting for the ante) is zero.
+</p>
+
+<h2><a id="keyTerms"></a>
+    Key Terms
+</h2>
+
+<ul>
+    <li>
+        0-1 Box
+    </li>
+    <li>
+        affine transformation
+    </li>
+    <li>
+        arithmetic mean
+    </li>
+    <li>
+        average
+    </li>
+    <li>
+        binomial distribution
+    </li>
+    <li>
+        discrete
+    </li>
+    <li>
+        event
+    </li>
+    <li>
+        expected value
+    </li>
+    <li>
+        experiment
+    </li>
+    <li>
+        geometric distribution
+    </li>
+    <li>
+        histogram
+    </li>
+    <li>
+        house edge
+    </li>
+    <li>
+        hypergeometric distribution
+    </li>
+    <li>
+        independent
+    </li>
+    <li>
+        Law of Large Numbers
+    </li>
+    <li>
+        mean
+    </li>
+    <li>
+        negative binomial distribution
+    </li>
+    <li>
+        parameter
+    </li>
+    <li>
+        population percentage
+    </li>
+    <li>
+        probability
+    </li>
+    <li>
+        probability distribution
+    </li>
+    <li>
+        probability histogram
+    </li>
+    <li>
+        random sample with replacement
+    </li>
+    <li>
+        random sample without replacement (simple random sample)
+    </li>
+    <li>
+        random variable
+    </li>
+    <li>
+        sample mean
+    </li>
+    <li>
+        sample percentage
+    </li>
+    <li>
+        sample sum
+    </li>
+    <li>
+        simple random sample
+    </li>
+    <li>
+        standard deviation
+    </li>
+    <li>
+        subset
+    </li>
+    <li>
+        transformation
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

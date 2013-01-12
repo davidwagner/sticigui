@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    function setApplets() {
+    return(true);
+    }
+    chapterSetUp('SeEd',"recapture");
+// -->
+</script>
+
+
+<h2>
+   <a id="capture-recapture"></a>
+</h2>
+
+<p>&nbsp;
+
+<dl>
+  <hr />
+  <h2>Exercises</h2>
+  <p>Suppose you want to know how many fish there are in a (small) pond. You
+  could try to catch all of them, but you could never be completely sure that you had. There
+  is a method called <em>capture-recapture</em> that estimates the number of fish in a
+  different way, using simple random sampling twice.</p>
+  <p>Here is the idea. You go to random places in the pond and catch 10 fish
+  (without replacement), tag them, and release them. Some time later, after the fish have
+  had a chance to mix with those who were not caught, you go to a set of random places in
+  the pond, and catch 10 fish (without replacement), and record the number of those fish
+  that were tagged. The crucial assumptions are that </p>
+  <ul>
+    <li>
+    At the second stage of catching fish, every fish in the pond is equally
+      likely to be caught; the fish caught the second time comprise a
+      <a class="glossRef" href="gloss.xht#simple_random_sample">simple random sample</a>
+      from the population of fish
+      in the pond.
+    </li>
+    <li>
+    The number of tagged fish in the pond does not change between samples.
+    </li>
+  </ul>
+  <p>
+  The assumption basically is that the fish behave like tickets in a box,
+  but tickets that mix themselves up by swimming around. At the second stage, one thinks of
+  the fish that were tagged at the first stage as tickets labeled &quot;1,&quot; and the
+  fish that were not tagged as tickets labeled &quot;0.&quot;</p>
+  <p>Suppose there really are <em>N</em> = 50 fish in the pond.&nbsp; At the
+  second stage, the fraction of the fish caught that were previously tagged would have an
+  hypergeometric distribution with parameters <em>N</em> = 50 (the number of fish in the
+  pond), <em>n</em> = 10 (the number of fish caught the second time), and <em>G</em> = 10
+  (the number of tagged fish in the pond). We actually know <em>n</em> and <em>G</em>. Once
+  we catch the fish the second time, we will know <em>g</em>, the number of tagged fish in
+  the second sample. How might we estimate <em>N</em>?
+  </p>
+  <p>
+  We can make an analogy with the rule in
+  <a href="ch11.htm" target="_self">Chapter
+  11</a> for deciding which box we were drawing from in the &quot;Let's Make a Deal&quot;
+  problem. There we considered drawing with replacement from one of two possible boxes. (One
+  of the boxes had one ticket labeled &quot;1&quot; and one ticket labeled &quot;0;&quot;
+  the other had two tickets labeled &quot;1&quot; and one ticket labeled &quot;0.&quot; Here
+  we might be drawing from any one of an infinite number of boxes. The number of tickets
+  labeled &quot;1&quot; in each possible box is 10, the number of tagged fish. The number of
+  tickets labeled &quot;0&quot; is at least the number of untagged fish caught at the second
+  stage, but could also be any larger number. In <a href="ch11.htm" target="_self">Chapter
+  11</a>, we decided we were drawing from whichever of the two boxes made the data more
+  likely, that is we decided we were drawing from Box 1 if
+  </p>
+  <p align="center">
+  P(drawing observed number of tickets labeled &quot;1&quot; from Box 1)
+  </p>
+  <p>was greater than</p>
+  <p align="center">P(drawing observed number of tickets labeled &quot;1&quot;&nbsp; from
+  Box 2).
+  </p>
+  <p>
+  Here, we have an infinite number of possible boxes, but we can use the
+  same rule: decide we are drawing from which ever box would make drawing the observed
+  number of tickets labeled &quot;1&quot; most probable.
+  This rule is called the <em>maximum likelihood estimate</em> of the number of tickets
+  in the box.</p>
+  <p>In Chapter 11, we were drawing with replacement; here we are drawing
+  without replacement, but the principle still makes sense. The chance of drawing <em>g</em>
+  tickets labeled &quot;1&quot; in a <a class="glossRef" href="gloss.xht#simple_random_sample">simple random
+  sample</a> of <em>n</em> tickets from a box with <em>N</em> tickets in all, of which <em>G</em>
+  are labeled &quot;1&quot; and <em>N</em>-<em>G</em> are labeled &quot;0&quot; is given by
+  the hypergeometric distribution: </p>
+  <div align="center"><center><table border="0" cellspacing="1">
+    <tr>
+      <td></td>
+      <td></td>
+      <td valign="middle" align="center"><em><sub>G</sub></em>C<em><sub>g</sub></em>
+     &times; <em><sub>N-G</sub></em>C<em><sub>n-g</sub></em></td>
+    </tr>
+    <tr>
+      <td>P(draw <em>g</em> tickets labeled &quot;1&quot;) </td>
+      <td>=</td>
+      <td valign="middle" align="center">--------------------- .</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td valign="middle" align="center"><em><sub>N</sub></em>C<em><sub>n</sub></em></td>
+    </tr>
+</table>
+</center>
+</div>
+<p>
+  A reasonable rule for estimating <em>N</em> (deciding which
+  box we are drawing from) would to pick <em>N</em> so that the probability of observing
+  what we do observe is as large as possible.
+  That is called the <a class="glossRef" href="gloss.xht#mle"><em>maximum
+  likelihood estimate</em></a> of <em>N</em>.
+  Maximum likelihood estimates are used very
+  widely in Statistics, but they are not the only ones used widely.
+</p>
+<p>
+  We can work out what the maximum likelihood estimate would be: if we
+  expand the combinations into expressions in terms of factorials, we get
+</p>
+  <div align="center"><center><table border="0" cellspacing="1">
+    <tr>
+      <td></td>
+      <td></td>
+      <td valign="middle" align="center">
+      <em>G</em>!(<em>N-G</em>)!(<em>N</em>-<em>n</em>)!<em>n</em>!</td>
+    </tr>
+    <tr>
+      <td>P(draw <em>g</em> tickets labeled &quot;1&quot;) </td>
+      <td>=</td>
+      <td valign="middle" align="center">---------------------------------- </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td valign="middle" align="center">
+      <em>g</em>!(<em>G</em>-<em>g</em>)!(<em>n</em>-<em>g</em>)!(<em>N</em>-<em>G</em>-<em>n</em>+<em>g</em>)!<em>N</em>!</td>
+    </tr>
+</table>
+</center>
+</div>
+</dl>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    pageModDate="2:32 PM 6/2/00";
+    writeChapterFooter();
+// -->
+</script>
+<div align="center"><center>
+
+<table border="0" cellspacing="1">
+  <tr>
+    <td></td>
+    <td></td>
+    <td valign="middle" align="center">(<em>N-G</em>)!(<em>N</em>-<em>n</em>)!</td>
+  </tr>
+  <tr>
+    <td>=</td>
+    <td>constant &times;</td>
+    <td valign="middle" align="center">---------------------</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td valign="middle" align="center">(<em>N</em>-<em>G</em>-<em>n</em>+<em>g</em>)!<em>N</em>!</td>
+  </tr>
+</table>
+</center></div>
+
+<p>&nbsp;</p>
+
+<div align="center">
+<center>
+
+<table border="0" cellspacing="1">
+  <tr>
+    <td></td>
+    <td></td>
+    <td valign="middle" align="center">
+      (<em>N-G</em>)&times;(<em>N-G</em>-1)&times;(<em>N-G</em>-2)&times;
+    &nbsp;&hellip;&nbsp; &times;(<em>N-G</em>-<em>n</em>+<em>g</em>+1)</td>
+  </tr>
+  <tr>
+    <td>=</td>
+    <td>constant &times;</td>
+    <td valign="middle" align="center">---------------------------------------------------- .</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td valign="middle" align="center"><em>N</em>&times;(<em>N</em>-1)&times;(<em>N</em>-2)&times; &nbsp;&hellip;&nbsp;
+       &times;(<em>N</em>-<em>n</em>+1)</td>
+  </tr>
+</table>
+</center>
+</div>
+
+<p>
+  This is largest when <em>N</em> = <em>n</em>&times;<em>G</em>/<em>g</em>
+  (suitably rounded to an integer&nbsp;&hellip;&nbsp;).
+</p>
+
+<h3>
+    <a id="census"></a>
+    Example: Sampling to adjust the U.S. Census for undercount
+</h3>
+
+
+<p>
+    The U.S. Census, mandated by the Constitution, tries to
+    enumerate all inhabitants of the United States every ten years. State and
+    sub-state counts matter for apportioning the House of Representatives,
+    allocating Federal funds, congressional redistricting, urban planning, and
+    so forth.
+</p>
+
+<p>
+    The Census makes two kinds of errors--gross omissions (GOs) and erroneous
+    enumerations (EEs).  A GO is a failure to count a person in the block
+    containing his or her usual place of residence as of census day; an EE
+    results from counting a non-existent person, counting someone in the wrong
+    block, or counting someone twice. Generally, GOs slightly exceed EEs. This
+    net undercount is uneven, demographically and geographically. For example,
+    the 1990 census missed blacks about four times as often as non-blacks.
+</p>
+
+<p>
+    The Census Bureau tried to adjust the 1980 and 1990 censuses using "dual
+    system estimation" (DSE). DSE involves taking a sample of blocks after the
+    census, enumerating the residents of those blocks (Post-Enumeration Survey,
+    PES), trying to match PES records to census records, inferring undercount
+    within demographic groups, and extrapolating to all blocks in the country,
+    assuming that undercount rates are constant across geography within those
+    demographic groups.
+    The keys to DSE are matching PES records to census
+    records accurately and the constancy assumption, not counting better.
+    In 1980, the Bureau did not adjust, because missing PES data made the
+    uncertainty of the adjustment too big.
+    In 1990, the Bureau sought to adjust, but Secretary
+    of Commerce Mosbacher overruled the Bureau, finding their technical
+    justification inadequate.
+    The Clinton Administration plans to adjust the 2000 census.
+    The 2000 version of DSE, the sampling and estimation procedure,
+    is called Accuracy and Coverage Evaluation (ACE).
+    The sampling design for ACE is described in more detail
+    <a href="#ACE" target="_self">below</a>, but here is an overview.
+</p>
+
+<p>
+    The population from which the Bureau of the Census ideally would like to sample
+    is the population of U.S. residents as of Census Day.  Because we do not
+    have a list of U.S. residents, that cannot be done directly.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var str = 'If there were such a list, we would not need the Census.';
+    writeFootnote(fCtr++, fCtr.toString(), str);
+// -->
+</script>
+    What the Census Bureau does, in sketch, is to take a random sample of blocks of
+    different types (urban, rural, Indian Reservation, &nbsp;&hellip;&nbsp;),
+    then try to list all the housing units in those blocks, then try to list all
+    occupants of those housing units.
+    This is a <em>multistage stratified cluster sample</em>.
+    The <a class="glossRef" href="gloss.xht#frame">frame</a> for sampling blocks is a well defined
+    list of blocks within the U.S., but the
+    <a class="glossRef" href="gloss.xht#frame">frame</a> for sampling
+    individuals is not well defined: it involves hypothetical counterfactuals such as
+    lists of people that would have been compiled had certain blocks not in the
+    sample of blocks in fact been in the sample of blocks.
+    If the list of blocks omits any blocks where people live, the implicit frame for people
+    does not contain the entire population.
+</p>
+
+</body>
+</html>

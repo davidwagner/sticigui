@@ -1,0 +1,2762 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "8 October 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "testing";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+
+<h1>
+   Hypothesis Testing:
+    Does Chance explain the Results?
+</h1>
+
+<p>
+    An important branch of Statistics, <em>Statistical Decision Theory</em>,
+    addresses the problem of making decisions&mdash;such as choosing between two competing
+    hypotheses about the world&mdash;on the basis of uncertain data.
+    In 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHallTest') + ', ');
+// -->
+</script>
+    we treated the &quot;Let's Make a Deal&quot; problem
+    as a decision between two hypotheses: the hypothesis that switching
+    one's guess of which door hides the prize improves the chance of winning, and the
+    hypothesis that switching one's guess makes no difference to the chance of winning.
+    We saw that there were two kinds of possible errors: deciding that switching was better
+    when in fact it was not, and <em>vice versa</em>.
+</p>
+
+<p>
+    This chapter discusses rules for deciding between competing hypotheses on the basis
+    of data that have a random component (such as draws from a box of tickets).
+    The competing hypotheses are called the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+    and the <a class="glossRef" href="gloss.htm#alternative_hypothesis">alternative hypothesis</a>.
+    The rules are called <a class="glossRef" href="gloss.htm#hypothesis_test">hypothesis tests</a> or
+    <em>hypothesis testing procedures</em>.
+    Typically, the null hypothesis is that something is not present,
+    that a treatment has no effect, or that there is no difference between two
+    <a class="glossRef" href="gloss.htm#parameter">parameters</a>.
+    Typically, the alternative hypothesis is that some effect is present,
+    that a treatment has an effect, or that two parameters differ.
+    The main requirement of the null hypothesis is that it must be
+    possible to compute the probability that the test rejects the null hypothesis when the null
+    hypothesis is true.
+    That probability is called
+    the <a class="glossRef" href="gloss.htm#significance">significance level</a> of the test.
+    (When in doubt, choose the simpler of the hypotheses to be the null hypothesis&mdash;usually that
+    will lead to easier computations.)
+</p>
+
+<p>
+    The two types of error are as follows:
+</p>
+
+<ul>
+    <li>
+        Rejecting a true null hypothesis. This is called a <a class="glossRef" href="gloss.htm#type_error">Type I error</a>.
+        In ordinary language, a Type I error is a false alarm.
+    </li>
+    <li>
+        Failing to reject a false null hypothesis. This is called a
+        <a class="glossRef" href="gloss.htm#type_error">Type II error</a>.
+    </li>
+</ul>
+
+<p>
+    Controlling the chances of these two kinds of error is crucial.
+</p>
+
+
+<h2> <a id="test_examples"></a>
+    Examples of Hypothesis Testing Problems
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=4431&end=4792" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Many questions we encounter daily can be cast as hypothesis testing problems.
+    Here are some examples:
+</p>
+
+<ul>
+    <li>
+        Airport security systems are designed to detect weapons and bombs.
+        When you walk through an airport metal detector, the system
+        is trying to discriminate between the hypothesis &quot;this person is not carrying a
+        weapon&quot; and the hypothesis &quot;this person is carrying a weapon,&quot; on the basis of
+        electromagnetic field measurements.
+        The measurements are subject to various uncertainties,
+        and other objects you might be carrying can perturb the field in ways that are
+        hard to distinguish from the perturbations produced by weapons.
+        As a result, the system cannot determine with perfect accuracy whether you are
+        carrying a weapon.
+        The security system can make two kinds of error: setting off the alarm
+        when you do not have a weapon, and failing to set off the alarm when you are
+        carrying a weapon.
+    </li>
+
+    <li>
+        At a dental check-up, the dentist tries to discriminate between the hypothesis that
+        your teeth are fine, and the hypothesis that you have one or more cavities, on the basis
+        of data collected by looking in your mouth, poking and prodding, and perhaps taking X-rays.
+        These measurements are subject to uncertainties. As a result, the dentist can make two
+        kinds of errors: concluding you have a cavity when you do not (usually this is cleared
+        up by X-rays), or failing to notice a cavity that you do have.
+        The null hypothesis is that you do not have a cavity; the alternative hypothesis is that
+        you have one or more cavities.
+        A Type I error occurs if the dentist concludes you have a cavity, but you do not.
+        A Type II error occurs if the dentist fails to notice a cavity.
+    </li>
+
+    <li>
+        A drug company wants to determine whether a new headache remedy works.
+        The conclusion will be based on what happens when a group of subjects use the
+        remedy or a placebo to treat headaches.
+        Most headaches eventually go away on their own, and some headaches (or some peoples' headaches)
+        are hard to relieve, so the company can make two kinds of mistake: incorrectly concluding that
+        the remedy works when in fact it does not, and failing to notice that an effective remedy works.
+        The null hypothesis is that the remedy does not relieve headaches; the alternative hypothesis is
+        that it does.
+        A Type I error occurs if the company concludes that the remedy works when in fact it does not.
+        A Type II error occurs if the remedy is effective, but the company concludes that it is not.
+    </li>
+ 
+    <li>
+        A seismologist claims to be able to predict earthquakes.
+        She issues some predictions; some of them come true.
+        How might we decide whether the method has merit?
+        There are two kinds of errors we could make: erroneously concluding that the method has
+        merit when it does not, and failing to recognize that the method has merit when it does.
+        The null hypothesis is that the prediction method does not work&mdash;that its successes are
+        coincidental.
+        The alternative hypothesis is that the method works.
+        A Type I error occurs if we conclude that the prediction method has merit when it does not.
+        A Type II error occurs if we fail to conclude that the prediction method has merit when it works.
+    </li>
+
+    <li>
+        A user runs a query on a search engine to look for information on the web.
+        For each document in its index, the search engine tries to decide between the hypothesis
+        &quot;this document is not interesting to the user&quot; and the hypothesis
+        &quot;this document is interesting to the user.&quot;
+        There are two kinds of errors the search engine can make: showing the user a document
+        the user is not interested in, and failing to show the user a document that the user
+        would have found interesting.
+        The null hypothesis is that the document is not interesting to the user; the alternative
+        hypothesis is that the document is interesting to the user.
+        A Type I error occurs if the engine shows the user a document that is not interesting.
+        A Type II error occurs if the engine fails to show the user a document the user
+        would find interesting.
+        (The fraction of retrieved documents that are in fact interesting is called the
+        <em>precision</em>.
+        The fraction of all interesting documents the search engine in fact retrieves is
+        called the <em>recall</em>.
+        Precision and recall are related to the rates of Type I and Type II errors.)
+    </li>
+
+    <li>
+        Internet content filters try to block users from seeing web pages deemed objectionable
+        or harmful according to some standard.
+        When a user requests a given page, the content filter tries to decide between the
+        hypothesis &quot;this page should not be blocked&quot; and the hypothesis
+        &quot;this page should be blocked.&quot;
+        There are two kinds of errors the filter can make: showing someone a
+        page that should be blocked according to the standard, and blocking a page
+        that should not be blocked according to the standard.
+        The null hypothesis is that the page should not be blocked; the alternative is that
+        the page should be blocked.
+        A Type I error occurs if the filter blocks a page that should not be blocked.
+        (This is called <em>overblocking</em>.)
+        A Type II error occurs if the filter fails to block a page that should be blocked.
+        (This is called <em>underblocking</em>.)
+    </li>
+
+    <li>
+        Post-election audits try to determine whether the apparent outcome of an election is the same outcome
+        that a complete manual count of the paper audit trail would show.
+        Post-election audits hand count the votes in a random sample of precincts and compare those counts with 
+        the original machine counts.
+        The goal of a risk-limiting audit is to ensure that the chance of a full manual count is high whenever
+        the full manual count would change the winner.
+        It is virtually inevitable that a hand count will find at least some difference in the number of
+        votes for each candidate.
+        There are two kinds of mistake that the audit can make: concluding that the right person won
+        when in fact he or she did not, and requiring a full manual count when in fact that will show the same
+        answer as the machine count.
+        The null hypothesis is that a full manual count would show a different winner than the machine count did;
+        the alternative is that the hand and machine counts would show the same winner.
+        A Type I error occurs if the audit does not require a full manual count when that would show a different
+        winner&mdash;if the audit does not detect a problem that is really there.
+        A Type II error occurs if the audit requires a full manual count that results in the same winner the
+        machine count shows&mdash;if the audit requires an unnecessary full manual count.
+    </li>  
+        
+</ul>
+
+<div class="indent">
+<p class="inline">
+    There is a tradeoff between Type I and Type II errors: within a given &quot;technology&quot;
+    for testing hypotheses, decreasing the rate of Type I errors increases the rate of
+    Type II errors, and <em>vice versa</em>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'In rare exceptions, an hypothesis test can have significance level 0 ' +
+           'and power 100%: let <span class="math">B</span> be the set of ' +
+           'possible values of the data when the null hypothesis is true, and ' +
+           'let <span class="math">C</span> be the set of possible values of the data when the ' +
+           'alternative hypothesis is true.  If <span class="math">B</span> and <span class="math">C</span> are ' +
+           'disjoint, then there is a decision rule that never makes a mistake; ' +
+           'namely, do not reject the null hypothesis whenever the data are ' +
+           'in <span class="math">B</span>, and reject the null hypothesis whenever the data are ' +
+           'in <span class="math">C</span>.  This rule never makes a Type I or Type II error, but ' +
+           'it is unusual for there to be no overlap of possible data values when ' +
+           'the null hypothesis is true and when the alternative hypothesis is ' +
+           'true.</p><p>See ' + citeExample(xCtr, false) + ' later in this chapter.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Consider the airport metal detector, for example.
+    To increase the chance of detecting a weapon, one needs to increase the sensitivity
+    of the detector.
+    This will lead to more false alarms.
+    (The detector will be triggered more frequently by belt buckles, watches, pens, <em>etc</em>.)
+    To decrease the rate of false alarms, one must decrease the sensitivity, which makes
+    it easier for someone to get a weapon through the system without setting off the alarm.
+    There might be some other technology for detecting weapons that could be more sensitive
+    to weapons and simultaneously have a lower false alarm rate (for example, searching every
+    bag by hand, and frisking the passengers);
+    the tradeoff is within a given technology.
+</p>
+</div>
+
+<p>
+    <em>How to Tell the Liars from the Statisticians</em> (R. Hooke, 1983. Marcel Dekker, Inc.,
+    NY, 173pp) characterizes the difference between liberal and
+    conservative politics in terms of Type I and Type II errors.
+    In offering public assistance, such as welfare, a Type I error is to give public
+    assistance to someone who is not really deserving, and a Type II error is to fail
+    to give support to someone who really needs it.
+    In this context, conservatives tend to find Type I errors intolerable, and
+    liberals tend to find Type II errors intolerable.
+    In punishing crime, the opposite is true: our legal system holds that someone is
+    innocent until proven guilty, so a Type I error occurs if an innocent person is
+    punished, and a Type II error occurs if a guilty person is not punished.
+    Here, liberals tend to find Type I errors intolerable, and
+    conservatives tend to find Type II errors intolerable.
+    Because it is not possible to eliminate one type of error without
+    increasing the frequency of the other type of error, the two political
+    philosophies are at odds because they advocate
+    opposite extremes of the error tradeoff.
+</p>
+
+<p>
+    The following exercises check your ability to identify null and alternative
+    hypotheses, and Type I and Type II errors.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The highway patrol sometimes use a <em>speed trap</em> to catch ' +
+           'drivers who exceed the speed limit.  In speed traps, officers ' +
+           'hide in a place from which they can monitor traffic with a radar gun. ' +
+           'For each vehicle that goes by, the officers in essence perform ' +
+           'a hypothesis test regarding whether the vehicle is speeding.</p><p> ' +
+           '<span class="qSpan">The null hypothesis of the test is </span>';
+    var opt = [
+           'the vehicle is not speeding',
+           'the vehicle is speeding',
+           'the vehicle is stolen'
+          ];
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, alphabet[0]);
+    var qStr = '</p><p><span class="qSpan">A type I error occurs if the officers</span>';
+    var opt = [
+           'fail to ticket a driver who was speeding',
+           'ticket a driver who was not speeding',
+           'fail to check the driver\'s license and registration',
+           'fail to notice that the vehicle is stolen'
+          ];
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, alphabet[1]);
+    var qStr = '</p><p><span class="qSpan">A type II error occurs if the officers</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false, qCtr++, opt, alphabet[0]);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="significance"></a><a id="power"></a>
+    Significance Level and Power
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=409&end=620" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    The <a class="glossRef" href="gloss.htm#significance">significance level</a> of an hypothesis
+    test is the chance that it makes a Type I error&mdash;the chance that it rejects a true
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The Grammar of Conditional and Counterfactual Statements. ' +
+            'In this chapter and later chapters on hypothesis testing, we study ' +
+            'hypothetical situations. I use conditional statements, such as ' +
+            '&quot;if the null hypothesis is true, &hellip; &quot; to ' +
+            'indicate that the truth value of the null hypothesis is not known. ' +
+            'If I know the null hypothesis is false and want to imagine a ' +
+            'counterfactual world in which the null hypothesis is true, I write ' +
+            '&quot;if the null hypothesis were true [but it is not]&hellip; ' +
+            '&quot; This use of the subjunctive mood in a counterfactual statement ' +
+            'is like the expression &quot;if I were you [but I am not you],  ' +
+            '&hellip; &quot; In the present chapter, often we do not know ' +
+            'what the null and alternative hypotheses are, much less whether they are ' +
+            'true or false. Sometimes I avoid the subjunctive mood by writing ' +
+            '&quot;under the null hypothesis,&quot; which means &quot;under the ' +
+            'assumption that the null hypothesis is true,&quot; or &quot;if the null ' +
+            'hypothesis be true.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The <a class="glossRef" href="gloss.htm#significance">significance
+    level</a> of a test often is denoted by the lowercase Greek letter alpha
+    (which is not available in html).
+</p>
+</div>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#power">power</a> of an hypothesis test against a specific
+    <a class="glossRef" href="gloss.htm#alternative">alternative hypothesis</a> is the chance that
+    the test correctly rejects the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> when that
+    <a class="glossRef" href="gloss.htm#alternative">alternative hypothesis</a> is true; that is, the
+    power is 100% minus the chance of a Type II error when that alternative
+    hypothesis is true.
+    The chance of a Type II error is often denoted by the lowercase Greek letter
+    beta (<span class="math">&beta;</span>), so the power is 
+    <span class="math">(100% &minus; &beta;)</span>.
+</p>
+
+<p>
+    The <a class="glossRef" href="gloss.htm#significance">significance level</a> and the
+    <a class="glossRef" href="gloss.htm#power">power</a> of a test are the probability of the same event,
+    the event that the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> is rejected.
+    The difference between significance level and power is the assumption about the
+    world we use to compute the probability: to compute the
+    <a class="glossRef" href="gloss.htm#significance">significance level</a>, we assume that the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> is true; to compute
+    the <a class="glossRef" href="gloss.htm#power">power</a>, we assume that the
+    <a class="glossRef" href="gloss.htm#alternative">alternative hypothesis</a> is true.
+</p>
+
+<div class="callout">
+        <p>
+           <span class="calloutCaption">Significance Level and Power</span>
+        </p>
+        <p>
+            The <a class="glossRef" href="gloss.htm#significance">significance level</a> of an
+            hypothesis test is the chance that the test rejects
+            the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>,
+            on the assumption that the
+            <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+            is true.
+         </p>
+         <p>
+            The <a class="glossRef" href="gloss.htm#power">power</a> of an
+            hypothesis test against a particular
+            <a class="glossRef" href="gloss.htm#alternatice">alternative hypothesis</a>
+            is the chance that the test rejects
+            the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>,
+            on the assumption that that
+            <a class="glossRef" href="gloss.htm#alternative">alternative hypothesis</a>
+            is true.
+         </p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    What makes a test good?
+    Small significance and high power do.
+    We want the significance level to be small, so that a Type I error is unlikely.
+    And we want the power to be as large as possible, so that a Type II error is unlikely.
+    As noted previously, in most problems there is a tradeoff between these goals:
+    Decreasing the chance of a Type I error tends to increase the chance of a Type II
+    error, and <em>vice versa</em>, but there are exceptions.
+    One way statisticians develop hypothesis tests is to consider all tests with
+    a given significance level, and choose the one with the largest power against
+    all plausible alternatives
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Such a test is called <em>uniformly most powerful</em>. Uniformly most ' +
+               'powerful tests exist in many common problems.  We do not worry about such ' +
+               'niceties in this text, although several of the tests we study in this text ' +
+               'are in fact uniformly most powerful.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    (this is not always possible).
+</p>
+</div>
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Testing Whether a Gun Is Loaded.';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<div class="indent">
+<p class="inline">
+        A statistician of dubious judgement wants to determine whether a revolver
+        that can hold six cartridges is loaded.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'An ammunition cartridge has four principal components: the <em>bullet</em> ' +
+           '(the part that does the dirty work, usually made of lead or lead '+
+           'covered with copper); the <em>powder</em> or <em>propellant</em>, whose ' +
+           'combustion produces the gas that forces the bullet through the gun barrel; ' +
+           'the <em>primer</em>, which produces a flash that ignites the powder when ' +
+           'it is struck by the firing pin (part of the gun); and the <em>casing</em> ' +
+           'or <em>shell</em> (the part that holds the other parts together, usually ' +
+           'made of brass).  The casing is essentially a cup with a small hole in the ' +
+           'bottom.  The primer fits into the small hole at the bottom, the powder goes ' +
+           'inside the cup, and the bullet plugs the top of the cup.</p>' +
+           '<p>A <em>revolver</em> is a type of pistol that holds cartridges in a ' +
+           '<em>cylinder</em>.  Typically, the cylinder of a revolver has six ' +
+           '<em>chambers</em>, each of which can be empty or loaded with a cartridge. ' +
+           'When the trigger is pulled, the cylinder rotates to align a new chamber with ' +
+           'the barrel, and the hammer falls, hitting the firing pin. ' +
+           'If there is a cartridge in the chamber aligned with the barrel, the ' +
+           'the firing pin strikes the primer of the cartridge, igniting the ' +
+           'powder in the cartridge, propelling the bullet through the barrel. ' +
+           'If the chamber aligned with the barrel when the hammer falls is empty, ' +
+           'the gun does not go off.  The cylinder also can be moved manually to ' +
+           'align any of the six chambers with the barrel.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+        He proposes to test the null hypothesis that the gun is not
+        loaded by &quot;spinning&quot; the cylinder to align one of the six chambers
+        with the barrel at random, then pulling the trigger twice in succession.
+        If the gun goes off either time the trigger is pulled, he will conclude that the
+        gun was loaded (reject the null hypothesis).
+        If the gun does not go off, he will conclude that the gun was not loaded.
+        We shall find the significance level of this test, and the power of the test against
+        the alternative hypothesis that the gun has 1 chamber loaded and against
+        the alternative hypothesis that the gun has 5 chambers loaded.
+    </p>
+</div>
+
+    <p>
+        If the gun is not loaded, it will not go off either time the trigger is pulled,
+        so the test cannot reject the null hypothesis erroneously:
+        the significance level of the test is zero.
+    </p>
+
+    <p>
+        Suppose one chamber is loaded.
+        The chance that the gun goes off is 100% minus the chance that it does not go off.
+        It does not go off if the loaded chamber is one of the four that are not tried.
+        The chance of that is 4/6, so the chance that the gun does go off if one chamber is
+        loaded is 2/6&nbsp;=&nbsp;1/3.
+        Thus the power of the test against the alternative that one chamber is loaded is 1/3.
+    </p>
+
+    <p>
+        If five chambers are loaded, there is only one empty chamber, so if the trigger is
+        pulled twice, the gun will go off at least once.
+        Thus the power of the test against the alternative that five chambers are loaded
+        is 100%.
+    </p>
+
+</div>
+
+<h2>
+    <a id="test_statistic"></a> <a id="p-value"></a>
+    Test Statistics and <em>P</em>-values
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=620&end=1055" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<div class="indent">
+<p class="inline">
+    The most common way to test an hypothesis is to choose a
+    <a class="glossRef" href="gloss.htm#test_statistic">test statistic</a> to compute from the data,
+    then to reject the null hypothesis if the value of the test statistic is
+    outside some range, or exceeds some threshold.
+    The set of values of the test statistic for which we would reject the null hypothesis
+    is called the <a class="glossRef" href="gloss.htm#rejection_region">rejection region</a>.
+    The rejection region is chosen (before collecting the data) so that
+    if the null hypothesis is true, the chance that the test statistic is in the
+    rejection region is at most the desired significance level.
+    Typical values for the significance level are 10%, 5%, and 1%, but the choice is
+    arbitrary.
+    In some circumstances, no fixed rejection region will give
+    exactly the desired significance level; in that case, one should choose the rejection
+    region so that the chance of rejecting the null hypothesis if it be true is as
+    large as possible without exceeding the significance level.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Some more advanced courses present methods for constructing a test with ' +
+           'desired significance level.  Those methods can require auxiliary randomization: ' +
+           'for some values of the test statistic, one might need to toss a coin, for ' +
+           'example, to decide whether or not to reject the null hypothesis.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    Suppose we have a family of tests that let us test the null hypothesis
+    at any significance level <span class="math">p</span> between 0 and 100%.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'There is another technical condition: The <span class="termOfArt">rejection regions</span> ' +
+               'for the tests must nest.  That is, if the significance level <span class="math">p</span> ' +
+               'test would reject the null hypothesis on the basis of a particular set of data, then all the ' +
+               'tests with significance levels larger than <span class="math">p</span> must also reject ' +
+               'the null hypothesis for that same set of data.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The <a class="glossRef" href="gloss.htm#p-value"><em>P</em>-value</a>
+    of the null hypothesis given the data is the smallest
+    <a class="glossRef" href="gloss.htm#significance">significance level</a>
+    among the tests that would reject the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>.
+    For example, let <span class="math">X</span> be a test statistic, and for 
+    <span class="math">p</span> between
+    0 and 100%, let <span class="math">x<sub>p</sub></span> be the smallest number 
+    <span class="math">x</span>
+    such that, if the null hypothesis be true,
+</p>
+</div>
+
+<p class="math">
+    P( X &ge; x ) &le; p.
+</p>
+
+<p>
+    Then for any <span class="math">p</span> between 0 and 100%, the rule
+</p>
+
+<p class="math">
+    reject the null hypothesis if X &ge; x<sub>p</sub>
+</p>
+
+<p>
+    tests the null hypothesis at significance level <span class="math">p</span>.
+    If we observed <span class="math">X&nbsp;=&nbsp;x</span>, the <em>P</em>-value of
+    the null hypothesis given the data would be the smallest <span class="math">p</span> such that
+    <span class="math">x&nbsp;&ge;&nbsp;x<sub>p</sub></span>.
+</p>
+
+<p>
+    The smaller the <a class="glossRef" href="gloss.htm#p-value"><em>P</em>-value</a>, the
+    stronger the evidence against the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>.
+</p>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr-1);
+// -->
+</script>, which tests whether a gun is loaded, the test statistic is the number
+    of times the gun goes off when the cylinder is spun and the trigger is pulled twice.
+    The statistician rejects the null hypothesis if the test statistic is one or greater:
+    The rejection region is the set {1, 2}.
+    The <em>P</em>-value is 100% if the gun does not go off (if the test statistic equals
+    zero); it is zero if the gun goes off (if the test statistic equals one or two).
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr);
+// -->
+</script>
+    illustrates designing a test using a test statistic, choosing a rejection region,
+    and calculating a <em>P</em>-value.
+    The example is dynamic: The data tend to change when you reload the page.
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Testing an Hypothesis about the Population Percentage Using the ' +
+               'Sample Sum of a Simple Random Sample';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var nPop = listOfRandInts(1, 20, 50)[0];
+    var nSam = listOfRandInts(1, 10, nPop)[0];
+    nPop *= 10;
+    var popP = 10*listOfRandInts(1, 3, 6)[0]; // percentage good in population
+    var good = Math.ceil(nPop*popP/100);
+    var popP = roundToDig(100*good/nPop, 2);
+    var pAlt = 10*listOfRandInts(1, 7, 9)[0]; // alternative hypothesis
+    var goodAlt = Math.ceil(nPop*pAlt/100);
+    var pAlt = roundToDig(100*goodAlt/nPop, 2);
+    var thresh = Math.floor(popP*nSam/100);
+    var currP = hyperGeoTail(nPop, good, nSam, thresh);
+    var sig = 5;
+    var sigDec = sig/100.0;
+    while ( (currP > sigDec) && (thresh <= nSam) ) {
+        currP -= hyperGeoPmf(nPop, good, nSam, thresh++);
+    }
+    var power = hyperGeoTail(nPop, goodAlt, nSam, thresh);
+    var obs = listOfRandInts(1, Math.floor(popP*nSam/100), nSam-1)[0];
+    var pValue = hyperGeoTail(nPop, good, nSam, obs);
+    var rejWord = ' ';
+    var ltWord = ' greater than ';
+    if (obs < thresh) {
+        rejWord = ' not ';
+        ltWord = ' not greater than ';
+    }
+    var qStr = 'Consider a population of <span class="math">N&nbsp;=&nbsp;' + nPop.toString() +
+           '</span> units, each labeled either &quot;0&quot; or &quot;1.&quot; ' +
+           'Let <span class="math">p</span> denote the percentage of units labeled &quot;1.&quot; ' +
+           'Suppose we want to test the hypothesis that <span class="math">p&nbsp;=&nbsp;' +
+           popP.toString() + '%</span>, against the alternative hypothesis that ' +
+           '<span class="math">p&nbsp;&gt;&nbsp;' + popP.toString() + '%</span>, at significance level ' +
+           sig.toString() + '%, using a simple random sample of size ' +
+           '<span class="math">n&nbsp;=&nbsp;' + nSam.toString() + '</span> from the population.</p>' +
+           '<p>We could use the <a class="glossRef" href="gloss.htm#sample_sum">sample sum</a> as the ' +
+           'test statistic. Under the null hypothesis, the sample sum has an ' +
+           '<a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric distribution</a> with ' +
+           'parameters <span class="math">N&nbsp;=&nbsp;' + nPop.toString() +
+           '</span>, <span class="math">n&nbsp;=&nbsp;' + nSam.toString() +
+           '</span>, and </p><p class="math">' +
+           'G&nbsp;=&nbsp;N&nbsp;&times;&nbsp;p&nbsp;=&nbsp;' +
+           good.toString() + '.</p><p>We expect the ' +
+           'sample sum to be larger if the alternative hypothesis be true than ' +
+           'if the null hypothesis be true, because the ' +
+           'alternative hypothesis is that the fraction of units labeled &quot;1&quot; ' +
+           'is larger than ' + popP.toString() + '%.  Thus it makes sense to design the ' +
+           'test to reject the null hypothesis for large values of the sample sum: the ' +
+           'rejection region will include all values greater than some threshold. ' +
+           'To have significance level ' + sig.toString() + '%, we need to pick the ' +
+           'threshold value of the sample sum so that the chance of exceeding the ' +
+           'threshold if the null hypothesis be true is at most ' + sig.toString() +
+           '%.  You can type the values for the population size, the number ' +
+           '&quot;good&quot; in the population, and the sample size into the ' +
+           'probability calculator to see that the appropriate threshold ' +
+           'value is ' + thresh.toString() + ':</p><p class="figure">' +
+           '<applet code="DistCalc.class" align="middle" width="740" height="230" ' +
+           'archive="PbsGui.zip" codebase="../../Java">' +
+           '<param name="distributions" value="hypergeometric">' +
+           'You need Java to see this.</applet></p>' +
+           '<p>Let us calculate the <a class="glossRef" href="gloss.htm#power">power</a> of this test ' +
+           'against the alternative hypothesis that <span class="math">p&nbsp;=&nbsp;' +
+           pAlt.toString() + '%</span>.  That is the probability that the sample sum exceeds ' +
+           thresh.toString() + ' if the number of tickets labeled &quot;1&quot; is ' +
+           goodAlt.toString() + '.  By changing the number of &quot;good&quot; in the ' +
+           'tool above, we can find that the chance is ' + roundToDig(100*power,2) +
+           '%.</p><p>Suppose we draw the sample, and the sample sum turns out to be ' +
+           obs.toString() + '.  Then we would ' + rejWord + ' reject the null hypothesis, ' +
+           'because the observed value is ' + ltWord + ' the threshold value. The ' +
+           '<em>P</em>-value is the probability that the sample sum would be ' +
+           obs.toString() + ' or greater if the null hypothesis be true; namely, ' +
+           roundToDig(100*pValue,2).toString() + '%. ';
+    document.writeln(qStr);
+// -->
+</script>
+</p>
+
+</div>
+
+
+
+<p>
+    The basic steps in statistical hypothesis testing are:
+</p>
+
+<ol>
+    <li>
+        Formulate the <a class="glossRef" href="gloss.htm#null_hypothesis">null</a> and
+        <a class="glossRef" href="gloss.htm#alternative">alternative</a> hypotheses.
+    </li>
+    <li>
+        Specify the maximum permissible chance of a
+        <a class="glossRef" href="gloss.htm#type_error">Type I error</a>
+        (the <a class="glossRef" href="gloss.htm#significance">significance level</a> of the test).
+    </li>
+    <li>
+        Choose the procedure that will be used to test the hypothesis.
+        Typically, the procedure is to compute a
+        <a class="glossRef" href="gloss.htm#test_statistic">test statistic</a> from
+        the data, and to reject the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+        if the value of the test statistic is in some
+        <a class="glossRef" href="gloss.htm#rejection_region">rejection region</a>.
+        The rejection region is determined by insisting
+        that the <a class="glossRef" href="gloss.htm#significance">significance level</a> be the value
+        chosen in the previous step: the chance that the statistic is in the rejection region
+        if the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> be true must
+        be no larger than the <a class="glossRef" href="gloss.htm#significance">significance level</a>.
+    </li>
+    <li>
+        Collect the data.
+    </li>
+    <li>
+        Compute the test statistic.
+        Reject the
+        <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> if the test statistic
+        falls in the rejection region; otherwise, do not reject the null hypothesis.
+        (Alternatively, report the <a class="glossRef" href="gloss.htm#p-value"><em>P</em>-value</a> of the
+        <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>.)
+    </li>
+</ol>
+
+
+<div class="example">
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Testing ESP using Zener Cards';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<!-- ===========================  START OF ZENER EXAMPLE  ============================== -->
+<p>
+    <em>Zener cards</em> often are used to test
+    claims of extra-sensory perception (ESP), such as telepathy
+    (mind reading) and clairvoyance
+    (knowing something without perceiving it with the usual five senses).
+    Each Zener card has one of five geometric figures on it: a star, a square, a circle,
+    wavy lines, or a plus sign.
+    Zener cards were developed by Dr. Karl Zener, of Duke University, and
+    were first used to study ESP by
+    Dr. J.B. Rhine (1895&ndash;1980), who allegedly coined the term <em>extra-sensory
+    perception</em>.
+</p>
+
+<p>
+    Consider using Zener cards to test a psychic's claimed ability to sense what
+    card someone is looking at.
+    Imagine shuffling the five cards well, then looking at each one in turn
+    (without showing the card to the psychic).
+    Each time we look at a card, the psychic writes down which of the five cards
+    she thinks we are looking at.
+</p>
+
+<h3><a id="zener_test_rules"></a>
+    Rules
+</h3>
+
+<ol>
+    <li>
+    The psychic does not get to learn the actual symbol on the card,
+    nor whether she was right in any particular case,
+    until we have gone through the whole deck.
+    <li>
+    We do not look at what the psychic wrote until we have gone through
+    the whole deck.
+    </li>
+    <li>
+    The psychic must assign every symbol to exactly one card.
+    For example, the psychic cannot say that the first card and the
+    third card both are labeled with circles.
+    </li>
+</ol>
+
+<p>
+    We do not reveal the correct answer to the psychic, nor tell her whether her
+    determination was right or wrong, until we have passed through the entire deck.
+    Otherwise, she could use that information to improve subsequent
+    guesses.
+    For example, if the psychic gets to see each card after making her determination,
+    she is guaranteed to be able to get the last card right by a process of
+    elimination.
+    We should not learn the psychic's determinations until
+    the test is over, so that we do not inadvertantly give information away
+    through facial expressions, <em>etc</em>.
+    We insist that the psychic not repeat a symbol; otherwise, the psychic could
+    be certain to identify at least one card correctly, merely by repeating a single
+    determination five times (for example, saying every card is marked with the
+    circle).
+</p>
+
+<div class="indent">
+<p class="inline">
+    Our null hypothesis will treat the psychic's determinations as a fixed
+    <a class="glossRef" href="gloss.htm#permutation">permutation</a> of the five cards.
+    The order of the shuffled deck is equally likely to be any of the 5!
+    permutations of the cards.
+    The test statistic will be the number <span class="math">X</span> of cards that are
+    in the same place in the psychic's permutation as they are in the shuffled deck.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'There is another way to interpret the calculation we will do, corresponding ' +
+           'to a slightly different null hypothesis. Namely, we can think of the ' +
+           'shuffled deck as being a fixed permutation, and compare ' +
+           'the psychic\'s success rate determining the order of the cards ' +
+           'with the success rate of determining the order by shuffling another ' +
+           'deck of Zener cards. The distribution of the number of cards that are ' +
+           'in the same place in the first deck as they are in the second shuffled ' +
+           'deck is the same as the distribution we shall compute.  The corresponding ' +
+           'null hypothesis is that the psychic does no better at determining the cards ' +
+           'than one would do by guessing randomly.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    We will use the observed value of <span class="math">X</span> to decide between the
+    hypothesis that the psychic has ESP, and the hypothesis that the
+    psychic does not have ESP.
+</p>
+</div>
+</div>
+
+<p>
+    The following exercises test your understanding of the Zener card example.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li>Example: Testing an Hypothesis about the Population Percentage Using the Sample Sum of a Simple Random Sample<br />
+ 		 <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=1055&end=2511" frameborder="0" allowfullscreen></iframe>
+ </li>
+ <li>Example: Testing ESP using Zener Cards<br /> <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=2513&end=3402" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">In testing whether the psychic has ESP, ' +
+           'the null hypothesis is </span>';
+    document.writeln(qStr);
+    var opt = [
+           'The psychic does not have ESP.',
+           'The psychic has ESP.'
+          ];
+    writeSelectExercise(false,qCtr++,opt,alphabet[0]);
+    var qStr = '</p><p>In a single pass through the deck, we should expect the ' +
+           'psychic to identify some of the cards correctly, even if she does ' +
+           'not have ESP. <span class="qSpan">If the psychic does not have ESP, ' +
+           'the expected number of cards she identifies correctly, <span class="math">E(X)</span>, ' +
+           'is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(1.0));
+    var qStr = '</p><p><span class="qSpan">The probability distribution of the ' +
+           'number of cards the psychic identifies correctly in a single pass ' +
+           'through the deck, under the assumption that the psychic does not ' +
+           'have ESP, is</span>';
+    document.writeln(qStr);
+    var opt = [
+               'binomial',
+               'hypergeometric',
+               'geometric',
+               'negative binomial',
+               'multinomial',
+               'none of the above'
+              ];
+    writeSelectExercise(false, qCtr++, opt, alphabet[5]);
+    document.writeln('</p>');
+    var ansStr = 'If the psychic has ESP, there is no way to know the probability ' +
+         'distribution of the number of correct identifications, because we ' +
+         'do not know the strength of the effect.  Under the assumption that ' +
+         'the psychic does not have ESP, we can figure out the probability ' +
+         'distribution of the ' +
+         'number of successful identifications, because the randomness from ' +
+         'shuffling the deck is the only effect.  Therefore, we should take the ' +
+         'null hypothesis to be that the psychic does not have ESP.</p><p> ' +
+         'We can write <span class="math">X</span> as the sum of 5 indicator random variables, ' +
+         '<span class="math">X<sub>1</sub>, &hellip; , X<sub>5</sub></span>, where ' +
+         '<span class="math">X<sub><em>j</em></sub> = 1</span> if the <span class="math">j</span>th card in the ' +
+         'shuffled deck matches the psychic\'s <span class="math">j</span>th choice, ' +
+         'and equals zero otherwise. ' +
+         'These five variables have the same probability distribution: each ' +
+         'equals one with probability 20%, and equals zero with probability 80%. ' +
+         'Each has expected value</p><p class="math"> ' +
+         'E X<sub>j</sub> = 0 &times; 0.8 + 1 &times; ' +
+         '0.2 = 0.2.</p><p>Therefore, the expected value of <span class="math">X</span> is</p> ' +
+         '<p class="math">EX = E(X<sub>1</sub> + ' +
+         'X<sub>2</sub> + &hellip; + X<sub>5</sub>)</p> ' +
+         '<p class="math"> = EX<sub>1</sub> + ' +
+         'EX<sub>2</sub> + &hellip; + EX<sub>5</sub></p>' +
+         '<p class="math"> = 0.2 + 0.2 + &hellip; + 0.2 = 1.</p>' +
+         '<p>The five indicator random variables have the same distribution. ' +
+         'If they were independent as well, their sum would have a Binomial ' +
+         'distribution with parameters <span class="math">n&nbsp;=&nbsp;5</span> and ' +
+         '<span class="math">p&nbsp;=&nbsp;0.2</span>. However, the five indicator variables ' +
+         'are not independent. For example, if four of them equal ' +
+         'one, the fifth also must equal one (if four of the cards are in the ' +
+         'right places, the fifth also must be in the right place&mdash;there is ' +
+         'nowhere else for it to be). Therefore, the sum of the five variables, ' +
+         '<span class="math">X</span>, does not have a Binomial distribution.  Its distribution ' +
+         'does not have a name; see the derivation of the probability distribution ' +
+         'in the footnotes.</p>';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<div class="indent">
+<p class="inline">
+    Calculating the probability distribution is complicated; the calculation appears in a footnote.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'We shall calculate the probability distribution of <span class="math">X</span>. The ' +
+           'possible values of <span class="math">X</span> are 0, 1, 2, 3, and 5. <span class="math">X</span> cannot ' +
+           'equal 4 because, as we noted above, if four of the cards are in the ' +
+           'right places, the fifth must also be in its correct place. <span class="math">X = ' +
+           '5</span> if the random ordering of the shuffled deck matches the psychic\'s ' +
+           'ordering exactly. Under the hypothesis that the psychic does not have ' +
+           'ESP, there are 5! equally ' +
+           'likely permutations of the shuffled cards, one of which matches the ' +
+           'psychic\'s ordering, so ' +
+           '<span class="math">P(&nbsp;X&nbsp;=&nbsp;5)&nbsp;=&nbsp;1/5!</span>. ' +
+           '<span class="math">X&nbsp;=&nbsp;3</span> if the orderings match in three places, but ' +
+           'not in the other two. There are <span class="math"><sub>5</sub>C<sub>2</sub></span> ways ' +
+           'to pick the two places in which the permutations do not match; having ' +
+           'picked the places, there is only one way to ensure that the ' +
+           'permutations do not match: swap the cards in those two positions. Thus ' +
+           '</p><p class="math">' +
+           'P( X = 3) = <sub>5</sub><em>C</em><sub>2</sub>/5!. </p>' +
+           '<p> <span class="math">X&nbsp;=&nbsp;2</span> if the permutations match in two places, but ' +
+           'not the other three.  There are <span class="math"><sub>5</sub>C<sub>3</sub></span> ways ' +
+           'to pick the three places where the permutations do not match. Having ' +
+           'chosen those three places, there are two ways to assign the three cards ' +
+           'among those places so that none of the cards is in the same position as ' +
+           'it is in the psychic\'s permutation, as we shall show by counting. Let ' +
+           '<span class="math">a</span>, <span class="math">b</span> and <span class="math">c</span> ' +
+           'be the three cards.  There are ' +
+           'six permutations of the three cards, but most of them leave at least ' +
+           'one of the cards in the same place: </p> ' +
+           '<div align="center"> <center> <table class="dataTable"> <tr> <td align="center"> ' +
+           '<span class="math">(a, b, c)</span> </td> <td align="center"> <span class="math">(a, ' +
+           'c, b)</span> </td> </tr> <tr> <td align="center"> <span class="math">(b, ' +
+           'a, c)</span> </td> <td align="center"> <span class="math">(b, c, ' +
+           'a)</span> </td> </tr> <tr> <td align="center"> <span class="math">(c, a, ' +
+           'b)</span> </td> <td align="center"> <span class="math">(c, b, a)</span> ' +
+           '</td> </tr> </table> </center> </div> ' +
+           '<p> Of the six permutations of three cards, only ' +
+           '<span class="math">(b, c, a)</span> and <span class="math">(c, ' +
+           'a, b)</span> move all three cards, so </p> <p class="math"> ' +
+           'P( X = 2 ) = <sub>5</sub>C<sub>3</sub> &times; 2/5!.</p> ' +
+           '<p>Here is another way to count the permutations that move all three of ' +
+           'the cards; this way will generalize to the other cases we need to solve the ' +
+           'problem.  There are 3!&nbsp;=&nbsp;6 permutations of three things.  From the ' +
+           '6, we need to subtract those that leave one card fixed, those that leave 2 ' +
+           'cards fixed, and those that leave all three cards fixed.</p><p>There are ' +
+           'three that leave one card fixed: there are three ways to pick the card ' +
+           'that is left alone; for each choice, there is only one thing to do to the ' +
+           'other two cards: swap their locations. ' +
+           'There is no permutation that leaves exactly two cards fixed: if two cards are ' +
+           'left alone, there is nowhere for the third card to go.  There is one that ' +
+           'leaves all three cards in place.  Thus the number of permutations of three ' +
+           'cards that move all three is</p><p class="math">6 &minus; 3 &minus; 1 = 2,</p><p> ' +
+           'as we found by counting directly.</p><p>This approach can be used recursively: ' +
+           'Let <span class="math">P<sub>k</sub></span> denote the number of permutations of ' +
+           '<span class="math">k</span> things that move all <span class="math">k</span> things ' +
+           'from their original places. ' +
+           'Then </p><p class="math"> P<sub>k</sub> = ' +
+           'k! &minus; (# permutations that leave 1 in place) &minus; ' +
+           '(# permutations that leave 2 in place) &minus; &hellip; &minus; (# permutations that leave ' +
+           'k in place).</p>' +
+           '<p>The number of permutations that leave one item in place is ' +
+           '<span class="math">k&nbsp;&times;&nbsp;P<sub>k&minus;1</sub></span>, because there ' +
+           'are <span class="math">k</span> ways to pick the one that is not moved, and for each such ' +
+           'choice, there are <span class="math">P<sub>k&minus;1</sub></span> permutations that move ' +
+           'the other <span class="math">k&minus;1</span> items. Similarly, ' +
+           '<span class="math"><sub>k</sub>C<sub>2</sub>&nbsp;&times;&nbsp;' +
+           'P<sub>k&minus;2</sub></span> permutations leave two items in place,  ' +
+           '<span class="math"><sub>k</sub>C<sub>3</sub>&nbsp;&times;&nbsp;' +
+           'P<sub>k&minus;3</sub></span> permutations leave three items in ' +
+           'place, <em>etc</em>. ' +
+           'No permutation leaves <span class="math">k&nbsp;&minus;&nbsp;1</span> items in place, and one ' +
+           'permutation leaves all <span class="math">k</span> items in place.</p><p>Using this ' +
+           'observation, we can find the rest of the probability distribution of ' +
+           '<span class="math">X</span>. The number of permutations of four things that move all ' +
+           'four is </p><p class="math">4! &minus; 4&times;2 &minus; ' +
+           '<sub>4</sub>C<sub>2</sub>&times;1 &minus; 0 &minus; 1 = 9,</p><p>so the probability that ' +
+           '<span class="math">X&nbsp;=&nbsp;1</span> is</p><p class="math">' +
+           'P(&nbsp;X&nbsp;=&nbsp;1)&nbsp;=&nbsp;5&times;9/5!. </p><p>' +
+           'The number of permutations of five things that move all five is</p>' +
+           '<p class="math">5! &minus; 5&times;9 &minus; <sub>5</sub>C<sub>2</sub>&times;2 &minus; ' +
+           '<sub>5</sub>C<sub>3</sub>&times;1 &minus; 0 &minus; 1 = 44.</p><p>' +
+           'Therefore, </p><p class="math">' +
+           'P(&nbsp;X&nbsp;=&nbsp;0)&nbsp;=&nbsp;44/5!.</p><p>This shows that ' +
+           'the probability distribution of <span class="math">X</span> given above is correct.</p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>
+    shows the probability distribution of X if the null hypothesis is true.
+</p>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Probability Distribution of X, the Number of Zener Cards the ' +
+               'Psychic Identifies Correctly, Assuming the Null Hypothesis Is True.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>Null probability distribution of the number of &quot;hits&quot; in the Zener card test</caption>
+    <tr>
+        <th id="col0">
+        <span class="math">x</span>
+        </th>
+        <th id="col1">
+        <span class="math">P(X = x)</span>
+        </th>
+    </tr>
+    <tr>
+        <td headers="col0">0</td>
+        <td headers="col1">44/5! = 11/30</td>
+    </tr>
+    <tr>
+        <td headers="col0">1</td>
+        <td headers="col1">45/5! = 3/8</td>
+    </tr>
+    <tr>
+        <td headers="col0">2</td>
+        <td headers="col1">20/5! = 1/6</td>
+    </tr>
+    <tr>
+        <td headers="col0">3</td>
+        <td headers="col1">10/5! = 1/12</td>
+    </tr>
+    <tr>
+        <td headers="col0">5</td>
+        <td headers="col1">1/5! = 1/120</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    The following exercises check your ability to use
+    this probability distribution to construct an hypothesis test for ESP.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'Suppose we reject the null hypothesis if the psychic determines ' +
+           '3 or more cards correctly. <span class="qSpan">The significance level of ' +
+           'the resulting test is </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(1.0/12.0 + 1.0/120.0));
+    var qStr = '</p><p>Suppose we pass through the deck thrice, shuffling between ' +
+           'the three passes, so that the psychic has a total of 15 attempts to ' +
+           'identify cards. Suppose we reject the null hypothesis if the psychic ' +
+           'determines 9 or more cards correctly.  <span class="qSpan">The ' +
+           'significance level of the resulting test is </span>';
+    document.writeln(qStr);
+    var p = 0.0;
+    var ansStr = 'We need to find the chance that the sum of three independent random ' +
+         'variables, each with the distribution tabulated above, is 9 or greater. ' +
+         'The sets of values in the three passes that produce a sum of at ' +
+         'least 9, and their probabilities, are as follows:</p><div align="center">' +
+         '<center><table class="dataTable"><caption>Finding the probability of 9 or more ' +
+         '&quot;hits&quot; in the Zener test for three passes through the deck if the null hypothesis ' +
+         'is true</caption>' +
+         '<tr><th id="col0">set</th>' +
+         '<th align="center">P(set)</th>' +
+         '</tr><tr>' +
+         '<td headers="col0">{0, 5, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>>C<sub>1</sub>&times;11/30&times;1/120&times;1/120</span>' +
+         ' = ';
+    var pInc = 3*11/(30*120*120);
+    p += pInc;
+    ansStr += roundToDig(100*pInc, 6).toString() + '%</td></tr>' +
+         '<tr><td headers="col0">{1, 3, 5}</td>' +
+         '<td headers="col1">3!&times;3/8&times;1/12&times;1/120';
+    pInc = 6*3/(8*12*120);
+    p += pInc;
+    ansStr += roundToDig(100*pInc, 6).toString() + '%</td></tr>' +
+         '<tr><td headers="col0">{1, 5, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>C<sub>1</sub>&times;3/8&times;1/120&times;1/120 = ';
+    pInc = 3*3/(8*120*120);
+    p += pInc;
+    ansStr +=  roundToDig(100*pInc, 6).toString() + '%</span></td></tr>' +
+         '<tr><td headers="col0">{2, 2, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>C<sub>1</sub>&times;1/6&times;1/6&times;1/120 = ';
+    pInc = 3/(6*6*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</span></td></tr>' +
+         '<tr><td headers="col0">{2, 3, 5}</td>' +
+         '<td headers="col1">3!&times;1/6&times;1/12&times;1/120 = ';
+    pInc = 6/(6*12*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</td></tr>' +
+         '<tr><td headers="col0">{2, 5, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>C<sub>1</sub>&times;1/6&times;1/120&times;1/120 = ';
+    pInc = 3/(6*120*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</span></td></tr>' +
+         '<tr><td headers="col0">{3, 3, 3}</td>' +
+         '<td headers="col1">1/12&times;1/12&times;1/12 = ';
+    pInc = 1/(12*12*12);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</td></tr>' +
+         '<tr><td headers="col0">{3, 3, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>C<sub>1</sub>&times;1/12&times;1/12&times;1/120 = ';
+    pInc = 3/(12*12*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</span></td></tr>' +
+         '<tr><td headers="col0">{3, 5, 5}</td>' +
+         '<td headers="col1">' +
+         '<span class="math"><sub>3</sub>C<sub>1</sub>&times;1/12&times;1/120&times;1/120 = ';
+    pInc = 3/(6*6*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</span></td></tr>' +
+         '<tr><td headers="col0">{5, 5, 5}</td>' +
+         '<td headers="col1">1/120&times;1/120&times;1/120 = ';
+    pInc = 1/(120*120*120);
+    p += pInc;
+    ansStr +=    roundToDig(100*pInc, 6).toString() + '%</td></tr>' +
+         '</table></center></div>' +
+         '<p>The probability of 9 or more correct guesses in three passes through ' +
+         'the deck is the sum of the probabilities in the right column, which is ' +
+         roundToDig(100*p, 6).toString() + '%.</p>';
+    writeTextExercise(8, qCtr++, numToRange(p));
+    document.writeln('</p>');
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+</div>
+<!-- ===========================  END OF ZENER EXAMPLE  ================================ -->
+
+
+
+
+<h2>
+    <a id="sides"></a>
+    Hypotheses about parameters:
+    One-sided and Two-sided
+    Alternative Hypotheses.
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=3402&end=3663" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    Quite commonly, the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+    is that a <a class="glossRef" href="gloss.htm#parameter">parameter</a> 
+    <span class="math">&mu;</span> equals
+    some particular value <span class="math">a</span> (the <em>null value</em>), and the
+    <a class="glossRef" href="gloss.htm#alternative">alternative hypothesis</a> is that 
+    <span class="math">&mu;</span> is
+    greater than <span class="math">a</span>, 
+    that <span class="math">&mu;</span> is
+    less than <span class="math">a</span>, 
+    or simply that <span class="math">&mu;</span> is not equal to <span class="math">a</span>.
+    (The first two are <a class="glossRef" href="gloss.htm#one-sided_test">one-sided</a> alternative
+    hypotheses; the last is a <a class="glossRef" href="gloss.htm#two-sided_test">two-sided</a>
+    alternative hypothesis.)
+    Many of the examples from the beginning of this chapter can be written this way.
+</p>
+
+<ul>
+    <li>
+        In the airport security example, the null hypothesis could be
+        written (number of weapons = 0).
+        The alternative hypothesis could be written (number of weapons &gt; 0).
+    </li>
+    <li>
+        In the dental examination, the null hypothesis could be written
+        (number of cavities = 0).
+        The alternative hypothesis could be written
+        (number of cavities &gt; 0).
+    </li>
+    <li>
+        In the headache remedy example, the null hypothesis could be
+        written (effect on headache duration = 0).
+        The alternative hypothesis could be written
+        (effect on headache duration&nbsp;&lt;&nbsp;0) [the remedy decreases the duration of
+        headaches].
+    </li>
+    <li>
+        In the manufacturing example, the null hypothesis could be written
+        (old defect rate&nbsp;&minus;&nbsp;new defect rate&nbsp;=&nbsp;0).
+        The alternative hypothesis could be written
+        (old defect rate&nbsp;&minus;&nbsp;new defect rate&nbsp;&gt;&nbsp;0).
+    </li>
+</ul>
+
+<p>
+    In these examples, all the alternative hypotheses are
+    <a class="glossRef" href="gloss.htm#one-sided_test"><em>one-sided</em></a>:
+    they assert that the value of the parameter <span class="math">&mu;</span> is on one side of the
+    null value <span class="math">a</span>.
+    That is, each null hypothesis asserts that <span class="math">&mu;&nbsp;=&nbsp;a</span>,
+    and each alternative hypothesis either asserts
+    that <span class="math">&mu;&nbsp;&lt;&nbsp;a</span>,
+    or it asserts that <span class="math">&mu;&nbsp;&gt;&nbsp;a</span>.
+    In contrast, if we wanted to test whether
+    a coin was fair, the null hypothesis would be (chance of tails&nbsp;=&nbsp;50%), and
+    the alternative hypothesis could be (chance of tails &gt;50% or &lt;50%).
+    That is a <a class="glossRef" href="gloss.htm#two-sided_test"><em>two-sided</em></a>
+    alternative hypothesis: it asserts that <span class="math">&mu;</span>
+    is not equal to <span class="math">a</span>.
+</p>
+
+<p>
+    A good test has as much power as it can against every plausible alternative&mdash;while
+    maintaining its significance level.
+    An hypothesis test about the value of a parameter
+    that is designed to have as much power as possible against alternative values
+    of the parameter on both sides of the null value is called a <em>two-sided test</em>.
+    A test that is designed to have as much power as possible against alternative
+    values of the parameter on only one side of the null value is called a
+    <em>one-sided test</em>.
+</p>
+
+<p>
+    To pick a <a class="glossRef" href="gloss.htm#rejection_region">rejection region</a> given a test
+    statistic <span class="math">X</span>, a null hypothesis, and an alternative hypothesis, we think
+    about how the distribution of the test statistic under the null hypothesis
+    differs from its distribution under the alternative hypothesis.
+    If the test statistic is likely to be larger if the alternative hypothesis be true
+    than if the null hypothesis be true, it makes sense to use a rejection region
+    of the form <span class="math">{X&nbsp;&gt;&nbsp;x<sub>0</sub>}</span>;
+    we would choose <span class="math">x<sub>0</sub></span> so that if the null hypothesis is true, the chance
+    that <span class="math">X&nbsp;&gt;&nbsp;x<sub>0</sub></span> is at most the significance level.
+    If the test statistic is likely to be smaller if the alternative hypothesis is true
+    than if the null hypothesis is true, it makes sense to use a rejection region
+    of the form <span class="math">{X&nbsp;&lt;&nbsp;x<sub>0</sub>}</span>;
+    we would choose <span class="math">x<sub>0</sub></span> so that if the null hypothesis is true,
+    the chance that <span class="math">X&nbsp;&lt;&nbsp;x<sub>0</sub></span>
+    is at most the significance level.
+    If the test statistic is likely to be further from some reference point
+    <span class="math">x<sub>0</sub></span> if the alternative hypothesis be true
+    than if the null hypothesis be true, it makes sense to use a rejection region
+    of the form
+</p>
+
+<p class="math">
+    {X&nbsp;&lt;&nbsp;x<sub>1</sub> &cup; &nbsp;
+     X&nbsp;&gt;&nbsp;x<sub>2</sub>}.
+</p>
+
+<p>
+    we would choose <span class="math">x<sub>1</sub></span> and 
+    <span class="math">x<sub>2</sub></span>
+    so that the chance that <span class="math">X</span> is in the rejection region if the
+    null hypothesis is true is at most the significance level; we would also tend
+    to choose them so that the probability that
+    <span class="math">X&nbsp;&lt;&nbsp;x<sub>1</sub></span> is equal to the probability
+    that <span class="math">X&nbsp;&gt;&nbsp;x<sub>2</sub></span> if the null hypothesis
+    is true.
+    The following exercises check whether you understand when to use a one-sided
+    test and when to use a two-sided test.
+</p>
+
+<p>
+	An Example of Exercise 27-4	(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)<br />
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=3663&end=4560" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var ansStr = '(a) We can think of the null hypothesis as the hypothesis that the chance ' +
+    'this coin lands heads when it is tossed is 50%. The alternative hypothesis is ' +
+    'two-sided (probability of heads not equal to 50%), so we want to reject ' +
+    '  if the observed number of heads is too large or too small&mdash;we want a ' +
+    '  two-sided test.</p><p>(b) The null hypothesis is  ' +
+    '  that the chance of heads for this coin is 50%. Under the null        ' +
+    '  hypothesis, the expected number of heads in 30 tosses is 15. Because we  ' +
+    '  want to test against the two-sided alternative that the chance of heads  ' +
+    '  is really larger or smaller than 50%, and the probability histogram of   ' +
+    '  a binomial with <span class="math">p=50%</span> is symmetrical around the expected    ' +
+    '  number of heads, we want the rejection region to be symmetric around     ' +
+    '  the expected number of heads. (That is, we want to find a number     ' +
+    '  <span class="math">h</span> so that if we reject whenever either </p><p class="math">   ' +
+    ' {(number of heads) &le; 15&minus;h} or {(number of heads) &ge;       ' +
+    '  15+h}, </p><p> the                          ' +
+    '  chance that we reject when the null hypothesis is true is at most 10%.)  ' +
+    '  We can find the region from the binomial histogram with parameters       ' +
+    '  <span class="math">n=30</span> and <span class="math">p=50%</span>:</p> <p class="figure">         ' +
+    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
+    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
+    '    <param name="hiLiteHi" value="19.5">                   ' +
+    '    <param name="hiLiteLo" value="10.5">                   ' +
+    '    <param name="n" value="30">                        ' +
+    '    <param name="normalControls" value="false">                ' +
+    '    <param name="p" value="0.5">                       ' +
+    '    <param name="showNormal" value="false">                ' +
+    '    <param name="toggleNormal" value="false">                  ' +
+    '    You need Java to see this.                         ' +
+    '  </applet></p><p>                             ' +
+    '  The chance of between 11 and 19 heads in 30 tosses is 90.1% if the       ' +
+    '  chance of heads is 50% in each toss. Thus if we reject whenever the      ' +
+    '  number of heads is less than 11, or greater than 18, the chance of falsely ' +
+    '  rejecting the null hypothesis is 9.9%. (This corresponds to the value    ' +
+    '  <span class="math">h=5</span>.) This gives a significance level 9.9% test, which is       ' +
+    '  adequate. </p> <p>(c) If we base a test on that rejection region, what is ' +
+    '  the chance that we would correctly reject the null hypothesis if the     ' +
+    '  chance of heads were actually 45% or 55%? We can calculate that chance   ' +
+    '  from the binomial probability histogram with parameters <span class="math">n=30</span> ' +
+    '  and <span class="math">p=45%</span> or <span class="math">p=55%</span>: </p> <p>&nbsp;</p>         ' +
+    '  <p class="figure">                               ' +
+    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
+    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
+    '    <param name="hiLiteHi" value="19.5">                   ' +
+    '    <param name="hiLiteLo" value="10.5">                   ' +
+    '    <param name="n" value="30">                        ' +
+    '    <param name="normalControls" value="false">                ' +
+    '    <param name="p" value="0.45">                      ' +
+    '    <param name="showNormal" value="false">                ' +
+    '    <param name="toggleNormal" value="false">                  ' +
+    '    You need Java to see this.                         ' +
+    '  </applet></p><p>The chance of fewer than 11 or more than 19 heads would  ' +
+    '  be <span class="math">100%&minus;85.1% = 14.9%</span> if the chance of heads were 45% or 55% in each     ' +
+    '  trial. The power against these two alternatives is thus 14.9%.</p> ' +
+    '  <p>(d) To have power 50% against those two alternatives, we need to use ' +
+    '  more than 30 tosses, because with 30 tosses a ' +
+    '  test with the desired significance level did not have as much power as   ' +
+    '  we required. By trial and error, we can find the minimum number such     ' +
+    '  that a significance level 10% test will have at least 50% power against  ' +
+    '  the alternatives <span class="math">p=45%</span> and <span class="math">p=55%</span>. The following    ' +
+    '  picture shows that if the number of tosses is 270, the chance of     ' +
+    '  between 122 and 148 heads is 90.0% if the coin is fair (the null     ' +
+    '  hypothesis). (The interval from 122 to 148 is symmetrical around the     ' +
+    '  expected number of heads, 135.) Thus rejecting the null hypothesis if    ' +
+    '  the number of heads in 270 tosses is less than 122 or more than 148      ' +
+    '  gives a significance level 10% test.</p><p class="figure"> ' +
+    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
+    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
+    '    <param name="hiLiteHi" value="148.5">                  ' +
+    '    <param name="hiLiteLo" value="121.5">                  ' +
+    '    <param name="n" value="270">                       ' +
+    '    <param name="normalControls" value="false">                ' +
+    '    <param name="p" value="0.5">                       ' +
+    '    <param name="showNormal" value="false">                ' +
+    '    <param name="toggleNormal" value="false">                  ' +
+    '    You need Java to see this.                         ' +
+    '  </applet></p><p>                             ' +
+    '  On the other hand, if the true chance of heads were 45% or 55% (rather   ' +
+    '  than 50%), the chances that this test would not reject the null      ' +
+    '  hypothesis are the areas highlighted below:</p><p class="figure">    ' +
+    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
+    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
+    '    <param name="hiLiteHi" value="148.5">                  ' +
+    '    <param name="hiLiteLo" value="121.5">                  ' +
+    '    <param name="n" value="270">                       ' +
+    '    <param name="normalControls" value="false">                ' +
+    '    <param name="p" value="0.45">                      ' +
+    '    <param name="showNormal" value="false">                ' +
+    '    <param name="toggleNormal" value="false">                  ' +
+    '    You need Java to see this.                         ' +
+    '  </applet></p><p class="figure">   ' +
+    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
+    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
+    '    <param name="hiLiteHi" value="148.5">                  ' +
+    '    <param name="hiLiteLo" value="121.5">                  ' +
+    '    <param name="n" value="270">                       ' +
+    '    <param name="normalControls" value="false">                ' +
+    '    <param name="p" value="0.55">                      ' +
+    '    <param name="showNormal" value="false">                ' +
+    '    <param name="toggleNormal" value="false">                  ' +
+    '    You need Java to see this.                         ' +
+    '  </applet></p><p>                             ' +
+    '  The chance of correctly rejecting the null hypothesis            ' +
+    '  is thus 100%&minus;49.9% = 50.1%, so this test has the power against the       ' +
+    '  alternatives <span class="math">p=45%</span>      ' +
+    '  and <span class="math">p=55%</span> that we required.                     ' +
+    '  The minimum number of tosses required for the test to            ' +
+    '  have the significance level and power requested is thus 270.</p><p>      ' +
+    ' (e) For <span class="math">n=270</span> tosses, we would reject if the number of       ' +
+    '  heads were less than 122, or greater than 148.';
+    var qStr = 'I wish to test the hypothesis that a particular coin is fair against ' +
+           'the alternative that it is not fair. I will base my test on the ' +
+           'number times the coin lands &quot;heads&quot; in a specified number ' +
+           '<span class="math">n</span> of tosses of the coin. I desire a 10% ' +
+           '<a class="glossRef" href="gloss.htm#significance">significance level</a> test.</p><p>' +
+           'a) <span class="qSpan">Should I use a one-sided test or a two-sided ' +
+           'test?</span>';
+    document.writeln(qStr);
+    var opt = ['one-sided',
+           'two-sided'
+          ];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    var qStr = '</p><p>b) <span class="qSpan">If the number of tosses ' +
+           '<span class="math">n&nbsp;=&nbsp;30</span>, I should reject the null hypothesis if the ' +
+           'observed number of heads is less than</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(11));
+    document.writeln('<font> or greater than </font>');
+    writeTextExercise(8, qCtr++, numToRange(19));
+    var qStr = '</p><p>c) <span class="qSpan">If the number of tosses ' +
+           '<span class="math">n&nbsp;=&nbsp;30</span>, how much power does the test have against ' +
+           'the alternatives that the chance of heads is 55% or that the chance ' +
+           'of heads is 45%?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(0.149) );
+    var qStr = '</p><p>d) <span class="qSpan">What is the smallest number of tosses ' +
+           'needed to have 50% power against the alternatives that the chance of ' +
+           'heads is 45% or the chance of heads is 55%?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(270,0.01) );
+    var qStr = '</p><p>e) <span class="qSpan"> If I base a test on the number of tosses ' +
+           'in part (d), I should reject the null hypothesis if the observed number ' +
+           'of heads is less than </span>';
+    document.writeln(qStr);writeTextExercise(8, qCtr++, numToRange(122,0.0001) );
+    var qStr = '<font color="#009900">or if the observed number of heads is greater than</font>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(148,.0001));
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var ansStr = '(a) If the list contains 100 numbers, and                  ' +
+     '     no two of them are equal, and the 75th percentile of the list is 10,     ' +
+     '     exactly 75 of the 100 numbers are less than or equal to 10. The chance       ' +
+     '     that a single number drawn at random from the list is no larger than 10      ' +
+     '     is thus 75/100 = 75%. In 100 draws with replacement from such a list,    ' +
+     '     getting a number that is no larger than 10 in a given draw is        ' +
+     '     independent of whether or not I got a number no larger than 10 in any    ' +
+     '     other draw, and has chance 75%. The number of numbers that are at most       ' +
+     '     10 in a sample of size 100 with replacement from the list thus has a     ' +
+     '     binomial distribution with parameters <span class="math">n=100</span> and             ' +
+     '     <span class="math">p=75%</span>.</p> <p>(b) Because the alternative hypothesis is that    ' +
+     '     the 75th percentile is greater than 10 (as opposed to simply not equal       ' +
+     '     to 10), I should use a one-sided test. If the 75th percentile is greater than 10, ' +
+     '     the chance a draw will give a number no larger than 10 is less than 75%.  That is, ' +
+     '     if the alternative hypothesis is true, <span class="math">p&lt;75%</span>. ' +
+     '     I therefore should reject if the number of      ' +
+     '     numbers in the sample that are at most 10 is substantially less than     ' +
+     '     expected under the null hypothesis. (The expected value under the null       ' +
+     '     hypothesis is <span class="math">np=75</span>.)</p> <p>(c) The following applet shows     ' +
+     '     that I should reject the null hypothesis if the number of numbers in     ' +
+     '     the sample that are less than or equal to 10 is less than 68, which      ' +
+     '     gives a test with significance level 4.5%:                   ' +
+     '   </p><p class="figure">                             ' +
+     '   <applet code="HistHiLite.class" codebase="../../Java/"             ' +
+     '       align="baseline" width="600" height="360" archive="PbsGui.zip">        ' +
+     '       <param name="hiLiteHi" value="67.5">                       ' +
+     '       <param name="hiLiteLo" value="-0.5">                       ' +
+     '       <param name="n" value="100">                           ' +
+     '       <param name="normalControls" value="false">                ' +
+     '       <param name="p" value="0.75">                          ' +
+     '       <param name="showNormal" value="false">                    ' +
+     '       <param name="toggleNormal" value="false">                  ' +
+     '       You need Java to see this.                         ' +
+     '   </applet></p><p>                                   ' +
+     '     (d) If 10 were in fact the 60th percentile of the list, the chance that      ' +
+     '     each draw would result in a number less than or equal to 10 would be     ' +
+     '     60%. The chance of correctly rejecting the null hypothesis is the        ' +
+     '     chance of fewer than 68 successes in 100 independent trials with         ' +
+     '     probability 60% of success in each trial:                    ' +
+     '   </p><p class="figure">                             ' +
+     '   <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"    ' +
+     '       width="600" height="360" archive="PbsGui.zip">             ' +
+     '       <param name="hiLiteHi" value="67.5">                   ' +
+     '       <param name="hiLiteLo" value="-0.5">                   ' +
+     '       <param name="n" value="100">                       ' +
+     '       <param name="normalControls" value="false">                ' +
+     '       <param name="p" value="0.6">                       ' +
+     '       <param name="showNormal" value="false">                ' +
+     '       <param name="toggleNormal" value="false">                  ' +
+     '       You need Java to see this.                         ' +
+     '   </applet></p><p>The power against that alternative is 93.8%';
+    var qStr = 'I wish to test the hypothesis that the 75th percentile of a particular ' +
+           'list of 100 numbers is equal to 10, against the alternative hypothesis ' +
+           'that it is greater than 10, at significance level 5%. I know that no ' +
+           'two of the numbers are equal. I want to base the test on the number of ' +
+           'values that are less than or equal to 10 in a random sample of size ' +
+           '100 with replacement from the list. (The test statistic <span class="math">X</span> ' +
+           'is the number of values in the random sample that are at most 10.)</p>' +
+           '<p>a) <span class="qSpan">Under the null hypothesis, what is the ' +
+           'probability distribution of <span class="math">X</span>?</span>';
+    document.writeln(qStr);
+    var opt = ['binomial with n=10, p=5%',
+               'binomial with n=10, p=75%',
+               'binomial with n=100, p=5%',
+               'binomial with n=100, p=75%',
+               'geometric with p=5%',
+               'geometric with p=75%',
+               'hypergeometric with N=100, G=75, n=10',
+               'hypergeometric with N=100, G=75, n=100'
+              ];
+    writeSelectExercise(false, qCtr++, opt, 'd');
+    var qStr = '</p><p>b) <span class="qSpan">Should I use a one-sided or a two-sided ' +
+           'test?</span>';
+    document.writeln(qStr);
+    var opt = ['one-sided',
+           'two-sided'
+          ];
+    writeSelectExercise(false, qCtr++, opt, 'a');
+    var qStr = '</p><p>c) <span class="qSpan">I should reject the null hypothesis if ' +
+           '<span class="math">X</span> is less than</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(68));
+    document.writeln('<span class="qSpan"> or greater than</span> ');
+    writeTextExercise(8, qCtr++, numToRange(100));
+    var qStr = '</p><p>d) <span class="qSpan">What is the power of the resulting test ' +
+           'against the alternative hypothesis that 10 is the 60th percentile of the ' +
+           'list?</span>';
+    document.writeln(qStr);
+    var opt = ['binomial with n=10, p=5%',
+               'binomial with n=10, p=75%',
+               'binomial with n=100, p=5%',
+               'binomial with n=100, p=75%',
+               'geometric with p=5%',
+               'geometric with p=75%',
+               'hypergeometric with N=100, G=75, n=10',
+               'hypergeometric with N=100, G=75, n=100'
+              ];
+    writeTextExercise(8, qCtr++, numToRange(.938) );
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="discrimination"></a>
+    Case Study: Employment Discrimination Arbitration
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/qW8qkre30v4?start=4560&end=4851" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    This example is based on a true story. The names have been changed, but other
+    than that, the facts are stated as I understand them.
+</p>
+
+<p>
+    Service, Inc., provides janitorial services under contract to large organizations.
+    Because of the nature of their business, the turnover of their service employees tends to
+    be somewhat high.
+    A number of people who had been fired from service positions at a
+    particular branch of Service, Inc., between 22 June 1996 and 8 September, 1997, filed suit
+    against Service, Inc., claiming that they were discriminated against on the basis of
+    gender, age, and/or ethnicity.
+    In particular, the suit alleged that women over the age of 40 were
+    fired more often than other groups.
+    I was retained in late 1997 to examine summary
+    employment data for evidence of discrimination on the basis of gender, age, and ethnicity.
+</p>
+
+<p>
+    I was given summary employment listings for 143 service employees who had worked
+    for Service, Inc., at that location, at any time between 22 June 1996 and 8 September
+    1997.
+    The summary listings included age, gender, and ethnicity, for all but two of the
+    employees.
+    Those employees had Hispanic surnames; I imputed their ethnicity to be Hispanic.
+    The summary listings also indicated whether the employee was still working for
+    Service, and if not, whether their termination was voluntary (resignation,
+    leave-of-absence, etc.) or involuntary (the person was fired).
+    Among the 143 entries, 24 recorded involuntary terminations; the remaining 119
+    were for individuals who were still employed, on leave, or had left voluntarily.
+</p>
+
+<p>
+    I divided the employees into two groups by age: those whose employment by Service,
+    Inc., ended before their 40th birthday, or who were still employed but were not yet 40
+    years old as of 8 September 1997; and those whose employment ended after their 40th
+    birthday, or who were still employed but were at least 40 years old as of 8 September
+    1997.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+    var qStr = ' through ';
+    document.writeln(qStr);
+    citeTable(tCtr+5);
+// -->
+</script>
+    show the genders, ethnicity groups, and age groups of the 143
+    employees, broken down by whether or not they were terminated involuntarily (fired).
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by Gender';
+    writeTableCaption(qStr);
+// -->
+</script>
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>Termination by gender</caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="col1">Female</th>
+        <th id="col2">Male</th>
+        <th id="col3">Total</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="col1,row1">14</td>
+        <td headers="col2,row1">10</td>
+        <td headers="col3,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="col1,row2">67</td>
+        <td headers="col2,row2">52</td>
+        <td headers="col3,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="col1,row3">81</td>
+        <td headers="col2,row3">62</td>
+        <td headers="col3,row3">143</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by <a href="#ethnicity_list">Ethnicity</a>: ' +
+               'White versus Other';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center"><center>
+    <table class="dataTable">
+    <caption>Termination by <a href="#ethnicity_list">ethnicity</a>: white versus other</caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="col1">1</th>
+        <th id="col2">2, 3, 4, 5</th>
+        <th id="col1">Total</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="col1,row1">8</td>
+        <td headers="col2,row1">16</td>
+        <td headers="col3,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="col1,row2">44</td>
+        <td headers="col2,row2">75</td>
+        <td headers="col3,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="col1,row3">52</td>
+        <td headers="col2,row3">91</td>
+        <td headers="col3,row3">143</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by <a href="#ethnicity_list">Ethnicity</a>: ' +
+               'All Ethnicity Categories';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+<table class="dataTable">
+    <caption>Termination by <a href="#ethnicity_list">ethnicity</a>: all ethnicity categories</caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="col1">1</th>
+        <th id="col2">2</th>
+        <th id="col3">3</th>
+        <th id="col4">4</th>
+        <th id="col5">5</th>
+        <th id="col6">Total</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="col1,row1">8</td>
+        <td headers="col2,row1">8</td>
+        <td headers="col3,row1">3</td>
+        <td headers="col4,row1">0</td>
+        <td headers="col5,row1">5</td>
+        <td headers="col6,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="col1,row2">44</td>
+        <td headers="col2,row2">23</td>
+        <td headers="col3,row2">29</td>
+        <td headers="col4,row2">3</td>
+        <td headers="col5,row2">20</td>
+        <td headers="col6,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="col1,row3">52</td>
+        <td headers="col2,row3">31</td>
+        <td headers="col3,row3">32</td>
+        <td headers="col4,row3">3</td>
+        <td headers="col5,row3">25</td>
+        <td headers="col6,row3">143</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by Age Group: Under 40 Versus 40 and Over';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center"><center>
+<table class="dataTable">
+    <caption>Termination by age group</caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="col1">Under 40</th>
+        <th id="col2">40 and Over</th>
+        <th id="col3">Total</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="col1,row1">14</td>
+        <td headers="col2,row1">10</td>
+        <td headers="col3,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="col1,row2">61</td>
+        <td headers="col1,row2">58</td>
+        <td headers="col1,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="col1,row3">75</td>
+        <td headers="col1,row3">68</td>
+        <td headers="col1,row3">143</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by Gender and Age Group';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption>Termination by gender and age group</caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="colF" colspan="2">Female</th>
+        <th id="colM" colspan="2">Male</th>
+        <th id="colT">Total</th>
+    </tr>
+    <tr>
+        <th id="col1"></th>
+        <th id="colUF">Under 40</th>
+        <th id="colOF">40 and over</th>
+        <th id="colUM">Under 40</th>
+        <th id="colOM">40 and over</th>
+        <th id="col2">&nbsp;</th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="colF,colUF,row1">7</td>
+        <td headers="colF,colOF,row1">7</td>
+        <td headers="colM,colUM,row1">7</td>
+        <td headers="colM,colOM,row1">3</td>
+        <td headers="colT,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="colF,colUF,row2">25</td>
+        <td headers="colF,colOF,row2">42</td>
+        <td headers="colM,colUM,row2">36</td>
+        <td headers="colM,colOM,row2">16</td>
+        <td headers="colT,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="colF,colUF,row3">32</td>
+        <td headers="colF,colOF,row3">49</td>
+        <td headers="colM,colUM,row3">43</td>
+        <td headers="colM,colOM,row3">19</td>
+        <td headers="colT,row3">143</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>&nbsp;</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Termination by Gender and <a href="#ethnicity_list">Ethnicity</a>';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center"><center>
+<table class="dataTable">
+    <caption>Termination by gender and <a href="#ethnicity_list">ethnicity</a></caption>
+    <tr>
+        <th id="col0">Termination</th>
+        <th id="colF" colspan="5">Female</th>
+        <td id="colM" colspan="5">Male</th>
+        <th id="colT">Total</th>
+    </tr>
+    <tr>
+        <th id="col1"></th>
+        <th id="eth1F">1</th>
+        <th id="eth2F">2</th>
+        <th id="eth3F">3</th>
+        <th id="eth4F">4</th>
+        <th id="eth5F">5</th>
+        <th id="eth1M">1</th>
+        <th id="eth2M">2</th>
+        <th id="eth3M">3</th>
+        <th id="eth4M">4</th>
+        <th id="eth5M">5</th>
+        <th id="col2"></th>
+    </tr>
+    <tr>
+        <th id="row1" scope="row">Involuntary</th>
+        <td headers="colF,eth1F,row1">3</td>
+        <td headers="colF,eth2F,row1">6</td>
+        <td headers="colF,eth3F,row1">1</td>
+        <td headers="colF,eth4F,row1">0</td>
+        <td headers="colF,eth5F,row1">4</td>
+        <td headers="colM,eth1M,row1">5</td>
+        <td headers="colM,eth2M,row1">2</td>
+        <td headers="colM,eth3M,row1">2</td>
+        <td headers="colM,eth4M,row1">0</td>
+        <td headers="colM,eth5M,row1">1</td>
+        <td headers="colT,row1">24</td>
+    </tr>
+    <tr>
+        <th id="row2" scope="row">Other</th>
+        <td headers="colF,eth1F,row2">28</td>
+        <td headers="colF,eth2F,row2">16</td>
+        <td headers="colF,eth3F,row2">10</td>
+        <td headers="colF,eth4F,row2">1</td>
+        <td headers="colF,eth5F,row2">12</td>
+        <td headers="colM,eth1M,row2">16</td>
+        <td headers="colM,eth2M,row2">7</td>
+        <td headers="colM,eth3M,row2">19</td>
+        <td headers="colM,eth4M,row2">2</td>
+        <td headers="colM,eth5M,row2">8</td>
+        <td headers="colT,row2">119</td>
+    </tr>
+    <tr>
+        <th id="row3" scope="row">Total</th>
+        <td headers="colF,eth1F,row3">31</td>
+        <td headers="colF,eth2F,row3">22</td>
+        <td headers="colF,eth3F,row3">11</td>
+        <td headers="colF,eth4F,row3">1</td>
+        <td headers="colF,eth5F,row3">16</td>
+        <td headers="colM,eth1M,row3">21</td>
+        <td headers="colM,eth2M,row3">9</td>
+        <td headers="colM,eth3M,row3">21</td>
+        <td headers="colM,eth4M,row3">2</td>
+        <td headers="colM,eth5M,row3">9</td>
+        <td headers="colT,row3">143</td>
+    </tr>
+</table>
+</center>
+</div>
+
+<p>
+    <a id="ethnicity_list"></a>*Ethnicity: 1, White; 2, Black; 3,
+    Hispanic; 4, Native American/Alaskan; 5, Asian and Pacific Islander.
+</p>
+
+<p class="math">&nbsp;</p>
+
+<h3>
+    Analysis
+</h3>
+
+<p>
+    How might we assess whether Service, Inc., discriminated in firing on the basis of age,
+    gender, and/or ethnicity?
+    One way is to ask whether the age, gender, and ethnicity breakdown of the 24 involuntarily
+    terminated employees  is surprisingly different from the breakdown that would be expected
+    had 24 of the 143 employees been selected at random.
+    This is not to suggest that people really are fired at random, nor
+    that competence, reliability, and adequate job performance are <em>necessarily</em> equal
+    (even on the average) for different demographic groups.
+    Rather, the question is whether
+    the assumption that involuntary terminations were blind to age, gender, and ethnicity is
+    compatible with the data. We shall take the total number of people terminated
+    involuntarily as a given, 24 (we shall
+    <a class="glossRef" href="gloss.htm#conditional_probability">condition</a>
+    on the number of people terminated involuntarily).
+</p>
+
+<p>
+    For example, consider the table of <a href="#table_by_gender">termination by gender</a>.
+    Of the 143 employees, 81 were female (81/143 = 56.64%); of the 24 employees who were
+    fired, 14 were female (14/24 = 58.33%). Suppose that 24 employees were selected at random
+    without replacement from the 143 employees in the period in question.
+    Would it be surprising if 14 or more of those 24 employees were women?
+</p>
+
+<p>
+    There is a Federal case, <em>Equal Employment Opportunity Commission v. Federal Reserve
+    Bank of Richmond</em>, 673 F.2d 798 (1983), that says one should look at whether the firing
+    rates are surprisingly large <em>or</em> surprisingly small in making this assessment (in
+    statistical parlance, one should use <a class="glossRef" href="gloss.htm#two-sided_test">two-sided</a>
+    rather than <a class="glossRef" href="gloss.htm#one-sided_test">one-sided</a> hypothesis tests).
+    That is, we should look at the mean number of women in all possible
+    <a class="glossRef" href="gloss.htm#simple_random_sample">simple random samples</a> of 24 employees from the
+    143, and look at the <em>difference</em> between that average and the number of women
+    actually fired.
+    If that difference is surprisingly large (if the number fired is much
+    larger or much smaller than the average), there is <em>prima facie</em> evidence of
+    discrimination&mdash;possibly reverse discrimination.
+    If differences that large or larger are
+    relatively likely to occur in a <a class="glossRef" href="gloss.htm#simple_random_sample">simple random
+    sample</a> of 24 employees from the 143, there is no <em>prima facie</em> evidence of
+    discrimination: the &quot;luck of the draw&quot; is sufficient to explain the observed
+    difference.
+</p>
+
+<p>
+    The number of women in a <a class="glossRef" href="gloss.htm#simple_random_sample">simple
+    random sample</a> from the employees is like the number of tickets
+    labeled &quot;1&quot; in <span class="math">n</span> draws without replacement
+    from a box of <span class="math">N</span> tickets of which <span class="math">G</span> are 
+    labeled &quot;1&quot; and the
+    rest are labeled &quot;0&quot; is <span class="math">n&times;G/N</span>.
+    That number has an
+    <a class="glossRef" href="gloss.htm#hypergeometric">hypergeometric</a> distribution
+    with parameters <span class="math">N</span>, <span class="math">G</span> and <span class="math">n</span>.
+    We saw previously that the <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the number of tickets labeled &quot;1&quot; is <span class="math">n&times;G/N</span>.
+    The <a class="glossRef" href="gloss.htm#expectation">expected
+    value</a> of the number of women in a simple random sample of 24 employees is thus
+</p>
+
+<p class="math">
+    24 &times; (81/143) = 13.594 women.
+</p>
+
+<p>
+    One would not <em>expect</em> to see a fractional number of
+    women in the sample; nonetheless, this is how the
+    <a class="glossRef" href="gloss.htm#expectation">expected value</a> is defined
+    (it is the long-run average number of women in repeated simple random samples of size 24,
+    or the probability-weighted average of the possible number of women in the sample).
+    Because of the luck of the draw, the number of women in the sample will vary from draw to
+    draw, but  it is likely to be in a range around 14.
+    The chance of each possible number of women in the sample (from 0 to 24) is given
+    by the <a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric distribution</a>.
+</p>
+
+<p>
+    Similarly, the chance of each possible number of people under the age of
+    40 in the sample, and of the number of people of each ethnicity in the sample, all have
+    hypergeometric distributions with <span class="math">N&nbsp;=&nbsp;143</span> and 
+    <span class="math">n&nbsp;=&nbsp;24</span>,
+    but with difference values of <span class="math">G</span>.
+</p>
+
+<p>
+    What happens when we want to look at more than two groups at a time, for
+    example, the breakdown by age <em>and</em> gender? For example, what is the chance that a
+    random sample of 24 of the employees has 7 women under 40, 7 women 40 or older, 7 men
+    under 40, and 3 men 40 or over?
+</p>
+
+<p>
+    If we were to make a box model for the draws, the tickets in the box would
+    have more than two labels (male under 40, male 40+, female under 40, female 40+), so this
+    is <em>not</em> like the number of tickets labeled &quot;1&quot; in draws from a box that has
+    tickets labeled &quot;0&quot; and &quot;1.&quot;
+    However, we can use the same kind of reasoning we have used in the last few chapters to
+    figure out the chance.
+    It is just like the chance of a card hand, dealing a 24-card hand from a deck of
+    143 cards that has only one suit, and four kinds of cards, with different numbers
+    of each kind of cards.
+    One kind of card corresponds to males under 40, one kind to males 40 and over, <em>etc.</em>
+</p>
+
+<p>
+    The total number of ways to draw 24 employees without replacement from the
+    143 is  <span class="math"><sub>143</sub>C<sub>24</sub></span>.
+    These are equally likely in
+    <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sampling</a>&mdash;indeed, that is the
+    definition of a simple random sample.
+    How many of those ways result in 7 women under age
+    40, 7 women age 40 or older, 7 men under age 40, and 3 men age 40 or over?
+    We can use the
+    <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">fundamental rule of counting</a>.
+    There are 32 female employees under age 40, so there are  <span class="math"><sub>32</sub>C<sub>7</sub></span>
+    ways to select 7 of them. There are 49 female employees age 40 and over, so there are
+     <span class="math"><sub>49</sub>C<sub>7</sub></span> ways to select 7 of them.
+    There are 43 male employees under age 40, so there are  
+    <span class="math"><sub>43</sub>C<sub>7</sub></span>
+    ways to select 7 of them.
+    There are 19 male employees age 40 and over, so there are  <span class="math"><sub>19</sub>C<sub>3</sub></span>
+    ways to select 3 of them.
+    By the <span class="termOfArt">fundamental rule of counting</span>, there are
+</p>
+
+<p class="math">
+    <sub>32</sub>C<sub>7</sub>&times;<sub>49</sub>C<sub>7</sub>&times;<sub>43</sub>C<sub>7</sub>
+    &times;<sub>19</sub>C<sub>3</sub>
+</p>
+
+<p>
+    ways to make all these choices. The chance that a simple random sample of 24 employees
+    has 7 women under age 40, 7 women age 40 or older, 7 men under age 40, and 3 men age 40 or
+    over is thus
+</p>
+
+<div align="center">
+<center>
+    <table border="0" cellspacing="1">
+    <tr>
+        <td valign="middle" align="center"> 
+         <span class="math"><sub>32</sub>C<sub>7</sub>&times;<sub>49</sub>C<sub>7</sub>&times;<sub>43</sub>C<sub>7</sub>&times;<sub>19</sub>C<sub>3</sub></span></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center">---------------------------</td>
+        <td valign="middle" align="center">=</td>
+        <td valign="middle" align="center">0.81%.</td>
+    </tr>
+    <tr>
+        <td valign="middle" align="center"> <span class="math"><sub>143</sub>C<sub>24</sub></span></td>
+        <td valign="middle" align="center"></td>
+        <td valign="middle" align="center"></td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    To assess whether the data evidence discrimination, I calculated the
+    chance that the ethnicity, gender, and age proportions of a group of 24 employees chosen
+    at random from the population of 143 would differ from the corresponding proportions among
+    the 143 by as much or more than observed.
+    These are the <em>P</em>-values the null hypotheses of no discrimination on the basis of
+</p>
+
+<ul>
+    <li>Gender</li>
+    <li>Age</li>
+    <li>Gender or age</li>
+    <li>White vs. non-white</li>
+    <li>Ethnicity</li>
+    <li>Gender or ethnicity</li>
+</ul>
+
+<p>
+    A large probability indicates that the departure
+    from proportional representation can be accounted for reasonably by
+    <a class="glossRef" href="gloss.htm#chance_variation">chance
+    variation</a>&mdash;the luck of the draw.
+    A small probability is <a class="glossRef" href="gloss.htm#prima_facie"><em>prima
+    facie</em></a> evidence of discrimination (assuming that the terminations were not for
+    cause).
+    It is my understanding that in discrimination cases, the threshold probability for
+    inferring that discrimination has taken place is at most 5%.
+    The results are as shown in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeTable();
+// -->
+</script>.
+    None of the divisions shows a surprising departure from its expected value in a
+    simple random sample of 24 employees.
+</p>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<span class="math">P</span-values for Null Hypotheses of No ' +
+               'Discrimination&mdash;that Terminations Were Random.';
+    writeTableCaption(qStr);
+// -->
+</script>
+
+<div align="center">
+<center>
+    <table class="dataTable">
+    <caption><em>P</em>-values for the null hypotheses of &quot;no discrimination&quot;</caption>
+    <tr>
+    <th id="col0">Subgroup(s)</th>
+    <th id="col1">Probability</th>
+    </tr>
+    <tr>
+    <th id="row1" scope="row">Gender</th>
+    <td headers="col1,row1">82.4%</td>
+    </tr>
+    <tr>
+    <th id="row2" scope="row">Age</th>
+    <td headers="col1,row2">82.6%</td>
+    </tr>
+    <tr>
+    <th id="row3" scope="row">Gender and age</th>
+    <td headers="col1,row3">8.9%</td>
+    </tr>
+    <tr>
+    <th id="row4" scope="row">White v. other</th>
+    <td headers="col1,row4">81.9%</td>
+    </tr>
+    <tr>
+    <th id="row5" scope="row">All ethnicities</th>
+    <td headers="col1,row5">99.4%</td>
+    </tr>
+    <tr>
+    <th id="row6" scope="row">All ethnicities and gender</th>
+    <td headers="col1,row6">99.9%</td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<h3>
+    Conclusions
+</h3>
+
+<p>
+    If 24 of the 143 employees were terminated completely at random, there would be more
+    than an 80% chance that the proportions of protected minorities terminated involuntarily
+    would differ from their corresponding proportions in the employee pool by at least as much
+    as these data show.
+    The data are quite consistent with the hypothesis that there was
+    no discrimination by age, ethnicity, or gender.
+    Empirically, employees age 40 and over were less likely to be fired than employees
+    under age 40, with women age 40 and over less likely to be fired than men age 40 and over.
+</p>
+
+<p>
+    The following exercise asks you to test the null hypothesis that two probabilities are equal.
+    As is the case in the previous example of no discrimination, the null hypothesis&mdash;that a
+    decision is made randomly&mdash;is contrived.
+    Nonetheless, the large <em>P</em>-value is suggestive.
+</p>
+
+<!-- ================================= START PROBLEM =================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var gore = 2912253;
+    var bush = 2912790;
+    var totVot = gore+bush;
+    var pNull = 0.5;
+    var disc = bush - totVot*pNull;
+    var seNull = Math.sqrt(pNull*(1.0-pNull)*totVot);
+    var zScore = disc/seNull;
+    var pVal = 1-2*normCdf(-zScore);
+    var qStr = 'In the 2000 U.S. Presidential election, the outcome rode on the voting ' +
+           'in the state of Florida.  On 26 November 2000, Florida Secretary of State ' +
+           'Katherine Harris certified that in Florida, 2,912,790 people voted for ' +
+           'George W. Bush, and 2,912,253 people voted for Al Gore.</p><p>' +
+           'If we neglect voters who voted for any presidential candidate other ' +
+           'than Bush or Gore, the total number of Florida voters is 5,825,043, ' +
+           'with Bush receiving 537 votes more than Gore.</p><p>' +
+           'Suppose each of those Florida voters decided for whom to vote by tossing ' +
+           'a fair coin: if the coin lands heads, the voter votes for Bush; if tails, ' +
+           'he or she votes for Gore.  Suppose all the coin tosses are independent. ' +
+           '<span class="qSpan">What, approximately, is the chance that ' +
+           'the vote would come out this close or closer?</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pVal));
+    document.writeln('</p>');
+    var ansStr = 'Under this hypothesis, the number of voters for Bush would have a binomial ' +
+        'distribution with parameters <span class="math">n&nbsp;=&nbsp;5,825,043</span> and <span class="math">p' +
+        '&nbsp;=&nbsp;50%</span>.  The expected number of voters for Bush thus would be ' +
+        '<span class="math">0.5&nbsp;&times;&nbsp;5,825,043 = ' + roundToDig(pNull*totVot,1).toString() +
+        '</span>, and the standard error of the number of voters for Bush would be ' +
+        '</p><p class="math">SE = <big>(</big> 5,825,043 &times; 50% &times; 50% ' +
+        ' <big>)</big><sup>&frac12;</sup> = ' + roundToDig(seNull, 3).toString() +
+        '.</p><p>The probability histogram of a binomial distribution with <span class="math">p' +
+        '&nbsp;=&nbsp;50%</span> and <span class="math">n</span> so large is approximated very closely by ' +
+        'a normal curve, if we convert to standard units.  The vote in standard units ' +
+        'is </p><p class="math">Z = ( 2,912,790 &minus; ' +
+        roundToDig(pNull*totVot,1).toString() + ' )/' + roundToDig(seNull,3).toString() +
+        '.</p><p>The chance that the vote would be this close or closer is the ' +
+        'area under the normal curve between &plusmn;' + roundToDig(zScore,3).toString() +
+        ', which is ' + roundToDig(100*pVal,2).toString() + '%:</p><p class="figure">' +
+        '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
+        'width="600" archive="PbsGui.zip" height="320">' +
+        '<param name="hiLiteLo" value="' + (-zScore).toString() + '">' +
+        '<param name="hiLiteHi" value="' + (zScore).toString() +
+        '">You need Java to see this</applet></p>';
+    writeSolution(pCtr-1, ansStr);
+// -->
+</script>
+</div>
+
+<h2><a id="caveats"></a>
+    Caveats
+</h2>
+
+<p>
+    Hypothesis tests need to be interpreted with care.
+    Rejecting the null hypothesis does not mean that the null hypothesis is false,
+    nor does failing to reject the null mean that the null hypothesis is true.
+    Practical importance and statistical significance have little to do with each other.
+    <em>P</em>-values often are misinterpreted.
+    The number of tests performed matters.
+    The fraction of rejected null hypotheses that are rejected in error depends
+    on more than just the significance level.
+</p>
+
+<h3><a id="meaning"></a>
+    The Meaning of Rejection
+</h3>
+
+<p>
+    In testing hypotheses, we speak of <em>rejecting</em> the
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> or <em>not rejecting</em>
+    the null hypothesis.
+    We do not speak of <em>accepting</em> the null hypothesis or the
+    <a class="glossRef" href="gloss.htm#alternative_hypothesis">alternative hypothesis</a>.
+    Statisticians use data to show that some possibilities are implausible,
+    but there are always many possible explanations for the data we observe.
+    Moreover, if the data are poor or few in number, typically they cannot
+    provide strong evidence against the null hypothesis, even if
+    the null hypothesis be false.
+    We should not interpret poor or inconclusive data as supporting the null hypothesis.
+    Sometimes we can rule out an hypothesis as being inconsistent
+    with the data (if the data are extremely unlikely on the
+    assumption that the hypothesis are true), but the set of hypotheses that are
+    consistent with the data usually contains more than just
+    the null and alternative hypotheses.
+    The precise statistical statement when we reject a null hypothesis is that either the
+    null hypothesis is false, or an event has occurred that has probability no larger than
+    the significance level.
+</p>
+
+<div class="callout">
+        <p>
+           <span class="calloutCaption">Rejecting the null hypothesis</span>
+        </p>
+        <p>
+            Not rejecting the null hypothesis does not mean that the null hypothesis
+            is true, nor that the data support the null hypothesis.
+        </p>
+        <p>
+            In particular, if the data are few or poor, it is hard for a
+            test to have much power&mdash;it is hard for a test to reject a false
+            null hypothesis.
+        </p>
+        <p>
+            Rejecting the null hypothesis does not mean that the alternative
+            hypothesis is true.
+        </p>
+        <p>
+            It means that either the null hypothesis
+            is false, or an event has occurred that has probability no larger
+            than the significance level.
+        </p>
+        <p>
+            It is not hard to a construct &quot;straw man&quot;
+            null hypothesis that will succumb to the slightest contact with data.
+        </p>
+</div>
+
+<h3><a id="significance_importance"></a>
+    Statistical Significance and Practical Importance
+</h3>
+
+<p>
+    If the null hypothesis is rejected, one says that the effect or test is &quot;statistically significant
+    at level___,&quot; where the significance level or the <em>P</em>-value goes in the blank.
+    &quot;At level___&quot; often is omitted, which makes it impossible to know what the chance of
+    a false alarm might be.
+    All too often, the word &quot;statistically&quot; is dropped too, leading one to think that the
+    effect is important, not merely detectable.
+    The difference between importance and detectability is considerable.
+    A small, unimportant effect can be detected if there are sufficiently many data of
+    sufficiently high quality.
+    Conversely, an effect can be both large and important, but not statistically significant
+    if the data are few or of low quality.
+    That can lead to peculiar locutions, such as &quot;no other leading brand has been shown to surpass ZZZ.&quot;
+    Aside from the ambiguity in the word &quot;leading,&quot;
+    one might not reject the null hypothesis that no brand is better than ZZZ because ZZZ
+    really is at least as good as all other brands, or because the data are too few or of
+    too low quality to allow one to detect that another brand actually is better than ZZZ.
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Statistical Significance and Practical Importance</span>
+    </p>
+
+    <p>
+        Practical significance (importance) and statistical significance (detectability) have
+        little to do with each other.
+    </p>
+
+    <p>
+        An effect can be important, but undetectable (statistically insignificant) because the
+        data are few, irrelevant, or of poor quality.
+    </p>
+
+    <p>
+        An effect can be statistically significant (detectable) even if it is small and unimportant,
+        if the data are many and of high quality.
+    </p>
+</div>
+
+<h3>
+    <a id="interpreting_p_values"></a>
+    Interpreting <em>P</em>-values
+</h3>
+
+<p>
+    A common mistake in hypothesis testing is to misinterpret
+    the <a class="glossRef" href="gloss.htm#p-value"><em>P</em>-value</a> or significance level; in particular, to
+    consider the <em>P</em>-value or significance level to be the
+    probability that the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a> is true.
+    The data have a random component, but the truth of
+    the <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+    is not random&mdash;the null hypothesis is either true or false, regardless of what
+    data we observe.
+    The <em>P</em>-value is a probability
+    computed on the assumption that the null hypothesis <em>is</em> true.
+    As is the case for <a class="glossRef" href="gloss.htm#confidence_interval">confidence intervals</a>,
+    chance is meaningful only before the data are collected.
+    The null hypothesis is either true, or not.
+    Once the data have been collected, there is no chance left:
+    the hypothesis testing procedure either
+    rejects the null hypothesis, or not.
+    Depending on whether the null hypothesis is true, an error occurs, or not.
+</p>
+
+
+<h3>
+    <a id="multiplicity"></a> <a id="data_mining"></a>
+    Multiplicity and Data Mining
+</h3>
+
+<p>
+    The significance levels we have been computing are for testing a single
+    hypothesis with a single test.
+    Suppose we were interested in whether any of the &quot;brain
+    cocktails&quot; sometimes served at parties is effective in increasing
+    mental acuity.
+</p>
+
+<p>
+    We test the effectiveness of 10 different types of cocktails using the
+    methodology described in this chapter, using a 5% significance level for each test.
+    We use different individuals to test each kind of cocktail; we assume that the
+    outcomes of the tests are independent.
+    This is an example of <em>multiplicity</em>: testing more than one
+    hypothesis simultaneously.
+</p>
+
+<p>
+    Suppose we go through the protocol, and cocktail X shows up as having a
+    significant effect; that is, we reject the hypothesis that cocktail X has no
+    effect, at significance level 5%.
+    On the face of it, it appears that cocktail X improves mental
+    acuity (the cocktail increases acuity, however we measure it, or
+    an event has occurred that has chance no larger than 5%).
+    It would seem, therefore, that we could reject the null
+    hypothesis that none of the brain cocktails is effective, at
+    significance level 5%&mdash;but that is not the correct significance level.
+    The question we need to ask is,
+    &quot;if none of the cocktails really had an effect, what would be the chance of
+    getting at least one positive result?&quot;
+</p>
+
+<p>
+    The <em>grand null hypothesis</em> is that none of the cocktails makes
+    a difference.
+    The alternative hypothesis is that at least one of them improves mental acuity.
+    If the grand null hypothesis is true, what is the chance that at
+    least one of the tests gives a false positive result?
+</p>
+
+<p>
+    If the grand null hypothesis is true, the number of false positives would
+    have the same distribution as the number of 1's in 10 draws with replacement
+    from a 0-1 box that has 5 tickets labeled
+    &quot;1&quot; and 95 tickets labeled &quot;0,&quot; and adding the draws.
+</p>
+
+<p>
+    That distribution is binomial, with parameters <span class="math">n&nbsp;=&nbsp;10</span> and
+    <<span class="math">p&nbsp;=&nbsp;5%</span>.
+    The chance that we get at least one ticket labeled  &quot;1&quot; is 100% minus
+    the chance that we get no ticket labeled &quot;1&quot;:
+</p>
+
+<p class="math">
+    chance of at least one false positive = 100% &minus; (chance of no false positive)
+</p>
+
+<p class="math">
+    = 100% &minus; (95%)<sup>10</sup>
+</p>
+
+<p class="math">
+    = 100% &minus; 60%
+</p>
+
+<p class="math">
+    = 40%.
+</p>
+
+<p>
+    Even though we test the individual hypotheses that each cocktail has no
+    effect at significance level 5%, the resulting significance level for testing the
+    &quot;grand&quot; null hypothesis is 40%.
+</p>
+
+<p>
+    This is typical of the effect of multiplicity on the significance level:
+    The more tests performed, the greater the chance of a false positive.
+    If you test many hypotheses at, say, 5% significance level, using independent data,
+    you should expect that in the long run you would erroneously reject about 5%
+    of the null hypotheses that are in fact true.
+</p>
+
+<p>
+    Beware studies that apply many different tests
+    or test many different hypotheses from the same data, and claim a significant result.
+    Often, such studies neglect the effect of multiplicity, and the chance of a
+    false positive is much higher than the authors recognize.
+    Applying many hypothesis tests to the same data in search of a significant result
+    is known in Statistics as &quot;data mining&quot; or &quot;data snooping.&quot;
+</p>
+
+
+<h3>
+    <a id="gigo"></a>
+    Garbage in, garbage out
+</h3>
+
+<p>
+    Often in science it is the hypothesis rejections that are interesting.
+    Typically, rejecting a
+    <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>
+    means deciding that some effect is present or
+    important; this is called a &quot;discovery.&quot;
+    At one extreme, every discovery is true&mdash;every rejected null hypothesis is
+    in fact false.
+    At the other extreme, every discovery is false&mdash;every rejected null hypothesis
+    is in fact true.
+    Typically, only the &quot;discoveries&quot; are brought to our attention.
+    Few scientists seek to publish negative results.
+    Consequently, we see primarily the rejections in tests of a population
+    of hypotheses of which an unknown fraction really are false.
+    Testing hypotheses at significance level 5% does not mean that 5% of the
+    rejections are erroneous.
+    The fraction of erroneous rejections depends on the fraction of true null
+    hypotheses, and can be anywhere between 0% and 100%, regardless of the
+    significance level of the tests.
+</p>
+
+<p>
+    Suppose one tests a large collection of hypotheses.
+    Among those that are not rejected, what fraction are true?
+    Among those that are rejected, what fraction are false?
+    This question cannot be answered unless one knows what proportion of null
+    hypotheses tested are false, as simple reasoning shows:
+</p>
+
+<p>
+    Suppose a fraction <span class="math">t</span> of the null hypotheses tested are in fact true,
+    so the fraction of null hypotheses that are false is <span class="math">(1&minus;t)</span>.
+    If <span class="math">t = 100%</span>, every hypothesis that is rejected is rejected
+    erroneously, and every hypothesis that is not rejected is really
+    true&mdash;every error we make is a Type I error.
+    At the other extreme, if <span class="math">t = 0</span>, every hypothesis that is
+    rejected is rejected correctly, and every hypothesis that is not rejected is in fact
+    false&mdash;every error we make is a Type II error.
+    No matter how good the test is, it cannot make a true hypothesis false,
+    nor a false hypothesis true.
+    Unless the test always rejects, if fed a steady diet of false
+    hypotheses, it will fail to reject some of them.
+    Unless the test never rejects, if fed a steady diet of true hypotheses, it will
+    erroneously reject some of them.
+    These remarks can be summarized as &quot;garbage in, garbage out.&quot;
+</p>
+
+<p>
+    Suppose that every test performed has the same power.
+    The chance that a false null hypothesis is rejected is the power,
+    and the chance that a true null hypothesis is rejected is the significance level,
+    so the long-run fraction of rejected hypotheses that are in fact false is
+</p>
+
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="center">
+        <span class="math">(1&minus;t)&times;power</span>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        ----------------------------------------
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <span class="math">t&times;(significance level) + (1&minus;t)&times;power</span>
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    (the numerator is the expected fraction of false hypotheses that are rejected;
+    the denominator is the sum of the expected fraction of false hypotheses that
+    are rejected and the expected fraction of true hypotheses that are rejected).
+    The long-run fraction of hypotheses that are not rejected and that are in
+    fact true is
+</p>
+<div align="center">
+<center>
+    <table border="0">
+    <tr>
+        <td align="center">
+        <span class="math">t &times; (100% &minus; significance level)</span>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        ------------------------------------------------------------
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+        <span class="math">t &times; (100% &minus; significance level) +
+        (1&minus;t) &times; (100% &minus; power)</span>
+        </td>
+    </tr>
+    </table>
+</center>
+</div>
+
+<p>
+    (the numerator is the expected fraction of true hypotheses that are not rejected;
+    the denominator is the sum of the expected fraction of true hypotheses that are
+    not rejected and the expected fraction of false hypotheses that are not rejected).
+</p>
+
+<a id="fdr"></a>
+<p>
+    Relatively recently, statisticians have developed hypothesis testing methods that
+    keep the rate of false discoveries under control (see the work of
+    Benjamini, Hochberg, and others).
+    That is, the methods guarantee that the fraction of &quot;discoveries&quot;
+    that are erroneous rejections of true null hypotheses
+    does not exceed a specified limit (such as 5%).
+    These methods control what is called &quot;the false discovery rate.&quot;
+    Perhaps those methods will be used commonly in the future.
+    Until then, it is prudent to keep in mind that the proportion of real discoveries among
+    the claims of &quot;discoveries&quot; is unknown.
+    Scientists are much more likely to report positive results than negative
+    ones, and scientific journals are much more likely to publish positive
+    reports than negative ones, so the majority of hypothesis tests that are reported
+    are the &quot;discoveries.&quot;
+    The failures to reject null hypotheses are rarely reported.
+    Thus it is plausible that many published &quot;discoveries&quot; are in fact
+    erroneous rejections of null hypotheses.
+</p>
+
+
+<h2><a id="summary"></a>
+    Summary
+</h2>
+
+<p>
+    Many scientific and practical questions can be posed as decisions between competing hypotheses
+    or theories about the world: a <em>null hypothesis</em> and an <em>alternative hypothesis</em>.
+    Two kinds of error are possible: rejecting a true null hypothesis (a <em>Type I error</em>),
+    and failing to reject a false null hypothesis (a <em>Type II error</em>).
+    If the data on which the decision is based have a random component,
+    the rule is called a <em>statistical hypothesis test</em> or a <em>test of significance</em>.
+    The chance an hypothesis test commits a Type I error is the significance level of the test&mdash;the
+    chance of a false alarm.
+    The chance that the test correctly rejects the null hypothesis when a particular
+    alternative hypothesis is true is the <em>power</em> of the test against that alternative.
+    The chance of a Type II error when a particular alternative is true is 100% minus the power
+    against that alternative.
+    When an hypothesis test rejects the null hypothesis, either the null hypothesis is false,
+    or an event occurred that has probability no larger than the significance level of the test.
+    It does not mean that the alternative hypothesis is true.
+    When the null hypothesis is not rejected, it does not mean that the null hypothesis is true.
+    In particular, if the data are few, irrelevant, or poor, any test will have trouble rejecting
+    a false null hypothesis. 
+    Given a family of hypothesis tests that allow a null hypothesis
+    to be tested at any significance level between 0 and 100%, the
+    <em><em>P</em>-value of the null hypothesis for the observed data</em> is the smallest
+    significance level for which any of the tests would reject the null hypothesis.
+</p>
+
+<p>
+    Statistical significance should not be confused with practical importance.
+    Statistical significance has to do with detectability, which depends on the number and
+    quality of data, among other things.
+    The significance level or <em>P</em>-value is <em>not</em> the probabiity that the null
+    hypothesis is true.
+    In fact, the <em>P</em>-value and significance level are both computed using the assumption
+    that the null hypothesis is true.
+    The power is computed using the assumption that the alternative hypothesis is true.
+</p>
+
+<p>
+    Hypothesis tests usually are based on a <em>test statistic</em>: a random variable computed from the data.
+    If the test statistic is in the <em>rejection region</em>, the null hypothesis is rejected.
+    The rejection region is chosen subject to the constraint that if the null hypothesis is true,
+    the chance that the test statistic will be in the rejection region is at most the significance
+    level, so that the test has the desired significance level.
+    The rejection region also should also be chosen so that the test will have good power
+    against the alternatives that are contemplated:
+    The chance that the test statistic is in the rejection region should be higher when the
+    alternative hypothesis is true than when the null hypothesis is true.
+    For significance levels to be meaningful, the null hypothesis, test statistic,
+    significance level, and rejection region all must be chosen before the data are collected.
+</p>
+
+<p>
+    Many hypotheses can be written in terms of the value of a parameter 
+    <span class="math">&mu;</span>, the null hypothesis  being that 
+    <span class="math">&mu; = &mu;<sub>0</sub></span>, the <em>null value</em>; and the alternative hypothesis
+    being that <span class="math">&mu;&ne;&mu;<sub>0</sub></span> (a two-sided alternative hypothesis),
+    that <span class="math">&mu;&gt;&mu;<sub>0</sub></span>  (a one-sided alternative hypothesis), or that
+    <span class="math">&mu;&lt;&mu;<sub>0</sub></span> (a one-sided alternative hypothesis).
+    Hypothesis tests designed to have good power against two-sided alternatives are
+    called two-sided tests; tests designed to have good power only against one-sided
+    alternatives are called one-sided tests.
+</p>
+
+<p>
+    The significance level of a test controls the long-run fraction of true null
+    hypotheses that are rejected erroneously, but not the fraction of rejected null
+    hypotheses that are rejected erroneously: That fraction depends on the significance level,
+    the power, and on the fraction of null hypotheses that are true.
+    If every tested null null hypothesies tested is false, every rejection is a correct rejection;
+    if no tested null hypothesis tested is false, every rejection is an erroneous rejection, no
+    matter how good the test.
+    When many hypotheses are tested, the there is a the chance of that at least one Type I error
+    will occur is much larger than the chance of a Type I error in each test; this is the
+    issue of <em>multiplicity</em>.
+    Because only rejections of null hypotheses tend to be reported in scientific literature
+    (as &quot;discoveries&quot;), it is likely that a noticeable fraction of scientific results
+    are Type I errors&mdash;false discoveries.
+</p>
+
+<h2>
+    <a id="key_terms">Key Terms</a>
+</h2>
+
+<ul>
+    <li>0-1 box                        </li>
+    <li>alternative hypothesis         </li>
+    <li>binomial distribution          </li>
+    <li>box model                      </li>
+    <li>chance variability             </li>
+    <li>confidence interval            </li>
+    <li>disjoint                       </li>
+    <li>event                          </li>
+    <li>expected value                 </li>
+    <li>false discovery rate           </li>
+    <li>Fundamental Rule of counting   </li>
+    <li>hypergeometric distribution    </li>
+    <li>hypothesis test                </li>
+    <li>independent                    </li>
+    <li>mean average                   </li>
+    <li>null hypothesis                </li>
+    <li>one-sided                      </li>
+    <li>parameter                      </li>
+    <li>permutation                    </li>
+    <li>power                          </li>
+    <li>prima facie                    </li>
+    <li>probability                    </li>
+    <li>probability distribution       </li>
+    <li>P-value                        </li>
+    <li>random sample                  </li>
+    <li>random variable                </li>
+    <li>rejection region               </li>
+    <li>significance level             </li>
+    <li>simple random sample           </li>
+    <li>test statistic                 </li>
+    <li>treatment                      </li>
+    <li>two-sided                      </li>
+    <li>Type I error                   </li>
+    <li>Type II error                  </li>
+</ul>
+
+</form>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>
+

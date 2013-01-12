@@ -1,0 +1,849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "28 June 2011 20:24 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "regressionDiagnostics";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<form method="POST">
+
+<h1>
+   Regression Diagnostics
+</h1>
+
+<p>
+    This chapter studies whether <span class="termOfArt">regression</span> 
+    is an appropriate summary of a given set bivariate data, and whether the regression line was computed correctly.
+    Problems with regression are generally easier to see by plotting the <span class="termOfArt">residuals</span>
+    rather than the original data.
+    The vertical amount by which the line misses a datum is called a
+    <span class="termOfArt">residual</span>&mdash;it is the error in estimating the value of
+    Y for that datum from its value of X using the regression line.
+    Plotting the residuals against X is called a <span class="termOfArt">residual plot</span>.
+</p>
+
+<p>
+    If the data are heteroscedastic, nonlinearly associated, or have outliers,
+    the regression line is not a good summary of the data, and it is not appropriate to
+        use regression to summarize the data.
+        Heteroscedasticity, nonlinearity and outliers are easier to see in a residual
+        plot than in a scatterplot of the raw data.
+        There can be errors of arithmetic in calculating the regression line, so that the slope
+        or intercept is wrong.
+        It is easy to catch such errors by looking at residual plots, where they show up
+        as a nonzero mean or a trend.
+</p>
+
+<h2>
+  Residual plots
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=3652&end=3958" frameborder="0" allowfullscreen></iframe>
+</p>     
+
+<p>
+    <a id="residual_plot"></a>A <a class="glossRef" href="gloss.htm#residual">residual</a> is the
+    vertical difference between the Y value of
+    an individual and the regression line at the value of X corresponding to that individual,
+    for regressing Y on X.
+    That is, suppose there are <span class="math">n</span> pairs of measurements of X and Y:
+</p>
+
+<p class="math">
+    (x<sub>1</sub>, y<sub>1</sub>),
+    (x<sub>2</sub>, y<sub>2</sub>),&nbsp;&hellip; ,
+    (x<sub>n</sub>, y<sub>n</sub>),
+</p>
+
+<p>
+    and that the equation of the regression line (see 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('regression','equation_of_regression_line') + ') ');
+// -->
+</script>
+    is
+</p>
+
+<p class="math">
+    y = ax + b.
+</p>
+
+<p>
+    The vertical residual <span class="math">e<sub>1</sub></span> for the first datum is
+</p>
+
+<p class="math">
+    e<sub>1</sub> =  y<sub>1</sub> &minus; (ax<sub>1</sub> + b).
+</p>
+
+<p>
+    The vertical residual for the second datum is
+</p>
+
+<p class="math">
+    e<sub>2</sub> =  y<sub>2</sub> &minus; (ax<sub>2</sub> + b),
+</p>
+
+<p>
+    and so on.
+    The <span class="math">i</span><sup>th</sup> vertical residual is the amount by which the regression line at the
+    <span class="math"> i</span><sup>th</sup> value of 
+    X misses the <span class="math">i</span><sup>th</sup> value of Y&mdash;the error in
+    using the regression line to estimate the <span class="math">i</span><sup>th</sup> datum.
+    (For regressing X on Y, a residual is the horizontal difference
+    between the X value of the individual and the regression line at the value of Y
+    corresponding to that individual.)
+</p>
+
+<p>
+    Plotting the residuals as a function of the
+    &quot;independent&quot; variable (the one that is being regressed upon) can tell a great
+    deal about the regression, including whether it was appropriate to use linear regression
+    in the first place, and whether the regression was computed correctly.
+    A plot of the
+    residuals against the corresponding values of the independent variable is called a
+    <a class="glossRef" href="gloss.htm#residual_plot">residual plot</a>.
+    It is a scatterplot of the <span class="math">n</span> points
+</p>
+
+<p class="math">
+    (x<sub>1</sub>, e<sub>1</sub>),  (x<sub>2</sub>, e<sub>2</sub>),
+    &hellip; , (x<sub>n</sub>, e<sub>n</sub>).
+</p>
+
+<p>
+    A residual plot is like a scatterplot of the original data, but with
+    <span class="math">(ax<sub>i</sub> + b)</span> subtracted from the value of
+    <span class="math">y<sub>i</sub></span> for each point
+    <span class="math">(x<sub>i</sub>, y<sub>i</sub>), i = 1, 2, &hellip; , n</span>.
+    Subtracting the regression line from the data removes from Y any overall average
+    and any trend with X.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows the GMAT data again, this time with the residual plots displayed
+    instead of the original data. (If the figure does not show Quantitative GMAT
+    versus Verbal GMAT, select those variables from the drop-down menus.)
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Residual Plot of the GMAT Data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Bivariate.class" codebase="../../Java/" align="baseline"
+            width="640" height="380" archive="PbsGui.zip">
+        <param name="addPoints" value="false">
+        <param name="files" value="./Data/gmat.dat">
+        <param name="graphAveButton" value="true">
+        <param name="nFiles" value="1">
+        <param name="regressButtons" value="true">
+        <param name="showResiduals" value="true">
+        <param name="sdButton" value="true">
+        <param name="sdLineButton" value="true">
+        <param name="showSdLine" value="true">
+        <param name="Xinit" value="Verbal GMAT">
+        <param name="Yinit" value="Quant. GMAT">
+        You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    Clicking <span class="appCtrlName">Plot Data</span> will toggle the display back
+    to a scatterplot of the data; that button will then say &quot;Plot Residuals.&quot;
+    Clicking <span class="appCtrlName">Plot Residuals</span> will change the display 
+    back to the residual plot.
+    Notice that
+    for the residual plot for quantitative GMAT versus verbal GMAT, there is (slight)
+    heteroscedasticity: the scatter in the residuals for small values of verbal GMAT (the
+    range 12&ndash;22) is a bit larger than the scatter of the residuals for larger values of verbal
+    GMAT.
+</p>
+
+<h2><a id="reading_residual_plots"></a>
+    Reading Residual Plots
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=3958&end=4204" frameborder="0" allowfullscreen></iframe>
+</p>   
+
+<p>
+    Regression is a poor summary of data that have heteroscedasticity, nonlinear association, or outliers.
+    These are easier to see in a residual plot than in a scatterplot of the original data.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is the residual plot for more severely heteroscedastic data:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Residual Plot of Heteroscedastic Data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+    width="600" height="320" name="q1applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="0,3,4">
+    <param name="regressButtons" value="true">
+    <param name="showResiduals" value="true">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="true">
+    <param name="title" value="Heteroscedastic Residual Plot">
+    You need Java to see this
+</applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var examplePoints = 100;
+    var parms = [["polynomial", .5, rand.next()], 8, 5];
+    var data1 = fakeBivariateData(examplePoints,parms[0],
+          parms[1],parms[2]);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(data1[0].join(),data1[1].join() );\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The heteroscedasticity is clearly evident&mdash;the vertical scatter is quite different 
+    in different vertical strips, large in some slices and small in others.
+    Click <span class="appCtrlName">Plot Data</span> in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    to display a scatterplot of the raw data.
+    You will see that the heteroscedasticity, while still visible, is less pronounced than
+    in the residual plot.
+    (Click <span class="appCtrlName">Plot Residuals</span> to show the residual plot again.)
+</p>
+
+<p>
+    Note that for both
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+    document.writeln(' and ');
+    citeFig(figCtr-1);
+    document.writeln(', ');
+// -->
+</script>
+    there is no trend in the residuals: the horizontal (X) axis divides the residuals into two
+    roughly symmetrical parts.
+    This is because the data are linearly associated.
+    In contrast,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is a residual plot for data with
+    nonlinear association:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Residual Plot of Data with Nonlinear Association.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+    width="600" height="380" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="regressButtons" value="true">
+    <param name="sdLineButton" value="false">
+    <param name="showResiduals" value="true">
+    <param name="title" value="Nonlinearly associated data">
+    <param name="x" value="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,
+               26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,
+               48,49,50">
+    <param name="y" value="1.3648462,2.4493555,2.4686836,3.1937691,4.5300116,4.1035171,
+              4.7296546,4.1827321,4.7415191,4.5860516,4.6978422,5.0302679,
+              4.8101506,4.6254892,3.9367077,3.7839850,2.8874823,2.8867729,
+              3.3807606,3.0995626,2.8559447,2.2024342,2.9366545,3.1528946,
+              3.1058939,3.7296558,5.0469460,4.2949031,4.3250106,4.4094161,
+              5.6797091,6.2004392,6.4514583,8.1304136,8.0355230,8.1702298,
+              8.2398647,7.0043573,8.8214607,8.0677759,7.5286017,6.8350082,
+              7.4065463,7.8839126,6.8542513,6.7049488,5.9683663,6.1649185,
+              4.9026613,5.7249926">
+    You need Java to see this.
+</applet>
+</p>
+</div>
+
+<p>
+    Recall that two variables have <a class="glossRef" href="gloss.htm#nonlinear">nonlinear association</a> if their
+    scatterplot shows a curved pattern.
+    The residuals have a nonlinear association with X if and only if the
+    original observations of Y have a nonlinear association with X,
+    but it is easier to see the nonlinear association in the
+    residual plot than in the scatterplot,
+    just as it is easier to see heteroscedasticity in the residual plot.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    is the residual plot for data that are both nonlinearly associated
+    and heteroscedastic:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Residual Plot for Heteroscedastic, Nonlinearly Associated Data.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+    width="600" height="320" name="q2applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="0,3,4">
+    <param name="regressButtons" value="true">
+    <param name="showResiduals" value="true">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="true">
+    <param name="title" value="Nonlinear, Heteroscedastic Data">
+    You need Java to see this
+</applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var parms = [["polynomial", .5, rand.next(),-.5,.25], 8, 5];
+    var data2 = fakeBivariateData(examplePoints,parms[0], parms[1],parms[2]);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(data2[0].join(),data2[1].join() );\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+    document.writeln(' and ');
+    citeFig(figCtr-1);
+// -->
+</script>
+    the residuals are
+    scattered asymmetrically around the <span class="math">x</span> axis:
+    They show a systematic sinuous pattern characteristic of nonlinear association.
+    In some ranges of X, all the residuals are below the <span class="math">x</span> axis (negative),
+    while in other ranges, all the residuals are above the <span class="math">x</span> axis (positive).
+    Nonlinear association between the variables shows up in a residual plot as
+    a systematic pattern.
+    Toggle back and forth between plotting the data and plotting the residuals in 
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-2);
+    document.writeln(' and ');
+    citeFig(figCtr-1);
+    document.writeln('. ');
+// -->
+</script>
+    Note that the nonlinearity and heteroscedasticity are easier to see in the residual plots.
+</p>
+
+<p>
+    Similarly, a residual plot shows outliers if and only if the original data contain outliers,
+    but&mdash;as with heteroscedasticity and nonlinearity&mdash;it is easier to see
+    outliers in the residual plot than in a scatterplot of the original data.
+    In summary:
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Residual plots make some aspects of the data easier to see</span>
+    </p>
+    <p>
+        Residuals have heteroscedasticity, nonlinearity, or outliers only if
+        the original data do too.
+    </p>
+    <p>
+        It is easier to see heteroscedasticity, nonlinearity, and outliers in a
+        residual plot than in a scatterplot of the original data.
+    </p>
+    <p>
+        Heteroscedasticity shows up in a residual plot as a difference in the
+        scatter of the residuals for different ranges of values of the
+        independent variable.
+    </p>
+    <p>
+        Nonlinearity shows up in a residual plot as a tendency for the residuals
+        to be predominantly positive for some ranges of values of the
+        independent variable and predominantly negative for other ranges.
+    </p>
+    <p>
+        Outliers show up in a residual plot as unusually large positive or negative values.
+    </p>
+</div>
+
+<p>
+    We have seen that residual plots can help identify heteroscedasticity, nonlinearity and
+    outliers.
+    They can also help identify computational errors in calculating the regression line.
+    At issue above was whether regression is a good summary of the data: whether regression is
+    <em>appropriate</em>.
+    At issue here, in contrast, is whether the slope and intercept of the regression line 
+    were <em>computed correctly</em>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    If the regression line is computed correctly, the vertical residuals
+    from regression line average to zero and the correlation between the 
+    vertical residuals and X
+    is zero.<script language="JavaScript1.4" type="text/javascript"><!--
+       var fStr = 'This is directly analogous to the fact that the deviations from the mean average to zero.';
+       writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+    If the average of the residuals is not zero or the correlation between the 
+    residuals and X is not zero (i.e., if the residual plot shows a trend), 
+    there was a computational error.
+    For example,
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+    document.writeln(' and ');
+    citeFig(figCtr+1);
+// -->
+</script>
+    could not be residual plots for correctly computed regression lines.
+</p>
+</div>
+
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'An Impossible Residual Plot: The Mean of the Residuals is not Zero.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="Correlation.class" codebase="../../Java/" align="baseline"
+         width="600" height="320" name="q4applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="0,3,4">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Impossible residual plot: something's wrong">
+    You need Java to see this
+    </applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var randSign = rand.next();
+    if (randSign > 0.5) {
+        randSign = 1;
+        } else {
+        randSign = -1;
+    }
+    var parms = [["polynomial", 5*randSign], 1, 5];
+    var data4 = fakeBivariateData(examplePoints,parms[0],
+        parms[1],parms[2]);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(data4[0].join(),data4[1].join() );\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>&nbsp;</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'An Impossible Residual Plot: The Mean of the Residuals is not Zero, and the ' +
+               'Residuals have a Trend.';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+<applet code="Correlation.class" codebase="../../Java/" align="baseline"
+     width="600" height="320" name="q3applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="0,3,4">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Impossible residual plot: something's wrong">
+    You need Java to see this
+</applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var parms = [["polynomial", 10*(1+rand.next()), 5*rand.next()], 1, 5];
+    var data3 = fakeBivariateData(examplePoints,parms[0], parms[1],parms[2]);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(data3[0].join(),data3[1].join() );\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</p>
+</div>
+
+
+<p>
+    If the residuals have a trend, the slope of the regression line was computed incorrectly.
+    If the residuals do not have a trend but their average is not zero,
+    the intercept of the regression line was computed incorrectly.
+    If the residuals have a trend and their average is not zero,
+    then the slope of the regression line was computed incorrectly, and the
+    intercept of the regression line might also have been computed incorrectly.
+</p>
+
+<div class="indent">
+<p class="inline">
+    If the regression line is computed correctly, then if we treat the residuals themselves as
+    data and compute another regression line for <em>them</em>&mdash;that is, if we 
+    regress the <em>residuals</em> against X&mdash;<em>that</em> regression line
+    will coincide with the <span class="math">x</span> axis 
+    (a horizontal line at height 
+    <span class="math">y = 0</span>).<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'If the regression line is computed correctly, the mean ' +
+        'of the residuals is zero, and the correlation between the residuals ' +
+        'and X is zero.</p><p>' +
+        'Let the <span class="math">n</span> data be ' +
+        '<span class="math">(x<sub>1</sub>, y<sub>1</sub>), (x<sub>2</sub>, ' +
+        'y<sub>2</sub>), &hellip; , (x<sub>n</sub>, y<sub>n</sub>)</span>. ' +
+        'The equation of the regression line is </p><p class="math">' +
+        'y = ax + b, </p><p>' +
+        'where </p><p class="math">' +
+        'a = r<sub>XY</sub> &times; SD<sub>Y</sub>/SD<sub>X</sub> </p>' +
+        '<p> and <span class="math">b = mean(Y) &minus; a &times; mean(X)</span>. ' +
+        'The vertical residuals are </p><p class="math">' +
+        'e<sub>i</sub> =  y<sub>i</sub> &minus; ' +
+        '(ax<sub>i</sub> + b), </p><p>' +
+        'for <span class="math">i = 1, 2, &hellip; , n</span>. ' +
+        'The mean of the residuals is </p><p class="math"> ' +
+        '(1/n) &times; (e<sub>1</sub> + e<sub>2</sub> + ' +
+        '&hellip; + e<sub>n</sub>) ' +
+        '= (1/n) &times; ( y<sub>1</sub> &minus; ' +
+        '(ax<sub>1</sub> + b) + ' +
+        'y<sub>2</sub> &minus; (ax<sub>2</sub> + b) + ' +
+        '&hellip; + y<sub>n</sub> &minus; ' +
+        '(ax<sub>n</sub> + b) ) </p><p class="math">' +
+        '= (1/n) &times; ( y<sub>1</sub> + y<sub>2</sub> + ' +
+        '&hellip; y<sub>n</sub> &minus; a(x<sub>1</sub> + x<sub>2</sub> + &hellip; + ' +
+        'x<sub>n</sub>) &minus; nb) </p><p class="math">' +
+        '= mean(Y) &minus; a&times;mean(X) &minus; b. </p><p>' +
+        'For the regression line, <span class="math">b = mean(Y) &minus; a&times;mean(X)</span>, so the mean ' +
+        'of the residuals is zero: ' +
+        'The point of averages of the residual plot is on the <span class="math">x</span> axis if ' +
+        '<span class="math">a</span> and <span class="math">b</span> are computed correctly. ' +
+        'Let SD<sub>e</sub> denote the standard deviation of the residuals, ' +
+        'and let <span class="math">c = 1/(SD<sub>X</sub>&times;SD<sub>e</sub>)</span>. ' +
+        '(Later in this chapter, we shall see that </p><p class="math">' +
+        'SD<sub>e</sub> = ' +
+        '(1 &minus; r<sub>XY</sub><sup>2</sup>)<sup>&frac12;</sup>&times;SD<sub>Y</sub>.)' +
+        '</p><p>Because the mean of the residuals is zero, the correlation coefficient ' +
+        'for the residuals and X is </p><p class="math">' +
+        'r<sub>XE</sub> =  c &times; [ (x<sub>1</sub> &minus; ' +
+        'mean(X)) e<sub>1</sub>+ (x<sub>2</sub> &minus; mean(X)) &times; ' +
+        'e<sub>2</sub> + &hellip; + (x<sub>n</sub> ' +
+        '&minus; mean(X))&times; e<sub>n</sub> )] </p><p class="math">' +
+        '= <em>c</em> &times; [ (x<sub>1</sub> &minus; ' +
+        'mean(X))&times;(y<sub>1</sub> - <em>a</em>x<sub>1</sub> - <em>b</em>) + ' +
+        '(x<sub>2</sub> &minus; mean(X))&times;(y<sub>2</sub> &minus; ' +
+        '<em>a</em>x<sub>2</sub> &minus; <em>b</em>) + &hellip; + ' +
+        '(x<sub>n</sub> &minus; mean(X)) &times; ' +
+        '(y<sub>n</sub> &minus; <em>a</em>x<sub>n</sub> &minus; <em>b</em>) ]</p>' +
+        '<p class="math">' +
+        '= <em>c</em> &times; [ (x<sub>1</sub> &minus; mean(X))&times;(y<sub>1</sub> ' +
+        '&minus; <em>a</em>x<sub>1</sub> &minus; mean(Y) + <em>a</em>&times;mean(X) ) + ' +
+        '(x<sub>2</sub> &minus; mean(X))&times;(y<sub>2</sub> &minus; ' +
+        '<em>a</em>x<sub>2</sub> &minus; mean(Y) + <em>a</em>&times;mean(X) ) + &hellip; ' +
+        '+ (x<sub>n</sub> &minus; ' +
+        'mean(X))&times;(y<sub>n</sub> &minus; ' +
+        '<em>a</em>x<sub>n</sub> &minus; mean(Y) + <em>a</em>&times;mean(X) ) ] ' +
+        '</p><p class="math">' +
+        '= <em>c</em> &times; [ (x<sub>1</sub> &minus; mean(X))&times;( ' +
+        '(y<sub>1</sub> &minus; mean(Y)  &minus;  <em>a</em>&times;(x<sub>1</sub> &minus; mean(X)) ) ' +
+        '+ (x<sub>2</sub> &minus; mean(X))&times;( (y<sub>2</sub> &minus; mean(Y) ' +
+        '&minus;  <em>a</em>&times;(x<sub>2</sub> &minus; mean(X)) ) + &hellip; + ' +
+        '(x<sub>n</sub> &minus; ' +
+        'mean(X))&times;((y<sub>n</sub> &minus; mean(Y)  &minus;  ' +
+        '<em>a</em>&times;(x<sub>n</sub> &minus; mean(X)) ) ] ' +
+        '</p><p class="math">' +
+        '= <em>c</em> &times; [ (x<sub>1</sub> &minus; ' +
+        'mean(X))&times;(y<sub>1</sub>' +
+        ' &minus; mean(Y) ) + (x<sub>2</sub> &minus; mean(X))&times;(y<sub>2</sub> ' +
+        '&minus; mean(Y) ) + &hellip; + (x<sub>n</sub> &minus; ' +
+        'mean(X))&times;(y<sub>n</sub> &minus; mean(Y)) ]' +
+        '&minus;  <em>c</em> &times; <em>a</em> [ (x<sub>1</sub> &minus; mean(X) ))&times; ' +
+        '(x<sub>1</sub> &minus; mean(X)) + (x<sub>2</sub> &minus; ' +
+        'mean(X))&times;(x<sub>2</sub> &minus; mean(X) ) + &hellip; ' +
+        '+ (x<sub>n</sub> &minus; mean(X)) &times; ' +
+        '(x<sub>n</sub> &minus; mean(X)) ].</p><p>' +
+        'The sum in the first set of square brackets is </p><p class="math">' +
+        'r<sub>XY</sub>&times;SD<sub>X</sub>&times;SD<sub>Y</sub>, </p><p>' +
+        'and the sum in the second set of square brackets is ' +
+        '(SD<sub>X</sub>)<sup>2</sup>, so ' +
+        '</p><p class="math">' +
+        'r<sub>XE</sub> = <em>c</em>&times; ' +
+        'r<sub>XY</sub>&times;SD<sub>X</sub>&times;SD<sub>Y</sub> &minus; ' +
+        '<em>c</em>&times;<em>a</em>&times;(SD<sub>X</sub>)<sup>2</sup> </p><p class="math">' +
+        '= <em>c</em>&times; (SD<sub>X</sub>)<sup>2</sup> &times; ' +
+        '[r<sub>XY</sub>&times;SD<sub>Y</sub>/SD<sub>X</sub> &minus; <em>a</em>].</p><p>' +
+        'However, for the regression line, </p><p class="math">' +
+        '<em>a</em> = r<sub>XY</sub>&times;SD<sub>Y</sub>/SD<sub>X</sub>, </p><p>' +
+        'so the term in square brackets is zero.  ' +
+        'This proves that the correlation between the vertical residuals from the ' +
+        'regression line and the independent variable is zero, that is, that the ' +
+        'residual plot does not have a trend if the regression line slope <em>a</em> is ' +
+        'computed correctly.';
+    writeFootnote(fCtr++, fCtr, fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+      In summary:
+</p>
+
+<div class="callout">
+    <p>
+        <span class="calloutCaption">Residual plots can reveal computational errors</span>
+    </p>
+    <p>
+        A residual plot shows at a glance whether the regression line was
+        computed correctly.
+    </p>
+    <p>
+        If the regression line was computed correctly, the point of
+        averages of the residual plot will be on the <span class="math">x</span> axis,
+        and the residuals will not have a trend: the correlation
+        coefficient for the residuals and X will be zero.
+    </p>
+    <p>
+        If the residuals have a trend, the slope of the regression line was
+        miscalculated.
+    </p>
+    <p>
+        If the residuals do not have a trend, but the average of the
+        residuals is not zero, the intercept of the regression line
+        was miscalculated.
+    </p>
+    <p>
+        If the residuals have a trend and the average of the residuals is
+        not zero, the slope of the regression line was miscalculated,
+        and the intercept of the regression might also have been miscalculated.
+    </p>
+</div>
+
+<p>
+    The following exercise  tests your ability to read residual plots for evidence of
+    heteroscedasticity, nonlinearity, or outliers, and to determine whether the 
+    regression line was computed correctly and appropriately.
+</p>
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var randSign = rand.next();
+    if (randSign > 0.5) {
+        randSign = 1;
+    } else {
+        randSign = -1;
+    }
+    var parms = new Array(1);
+    var examplePoints = 100;
+    var pVals = listOfRandInts(4,-1,1);
+    if (twoNorm(pVals) == 0) {
+        pVals = [0, 1, 0, 0];
+    }
+    loRnd = listOfRandInts(1, 0, 1)[0];
+    parms[0] = [["polynomial", 10*pVals[0], 5*pVals[1],
+            2*pVals[2], .3*pVals[3]], 1 + 5*loRnd,
+            1 + 4*Math.floor(rand.next()+0.5)];
+    var data5 = fakeBivariateData(examplePoints,parms[0][0],parms[0][1],parms[0][2]);
+    var yMean = mean(data5[1]);
+    yMnMx = vMinMaxAbs(data5[1]);
+    if (Math.abs(yMean) < 0.07*yMnMx[1] || pVals[0] == 0){
+        for (i=0; i < data5[1].length; i++){
+            data5[1][i] -= yMean;
+        }
+        yMean = 0.0;
+    }
+    var xyCorr = corr(data5[0],data5[1]);
+    var opt = ["residuals have nonzero mean",      // a
+               "residuals have trend",             // b
+               "data have nonlinear association",  // c
+               "data are heteroscedastic",         // d
+               "regression looks fine",            // e
+               "regression is a poor summary of the data", // f
+               "regression went wrong"];           // g
+    var aVal = '';
+    if (Math.abs(yMean) > 0.01) aVal +='a&';
+    if (Math.abs(xyCorr) > 0.05) aVal +='b&';
+    if (pVals[2] != 0 || pVals[3] != 0) aVal +='c&';
+    if (parms[0][1] > 1) aVal +='d&';
+    if (aVal.indexOf('c') >= 0 || aVal.indexOf('d') >= 0) {
+       aVal +='f&';
+    }
+    if (aVal.indexOf('a') >= 0 || aVal.indexOf('b') >= 0 )  {
+       aVal += 'g';
+    }
+    if (Math.max(aVal.indexOf('f'),aVal.indexOf('g')) < 0) aVal +='e';
+    if (aVal.lastIndexOf('&') == aVal.length - 1) aVal = aVal.substring(0,aVal.length - 1);
+    var qStr = '<span class="qSpan">Select those attributes that can be inferred from the ' +
+           'following residual plot (select all that apply).</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    var qStr = '</p><p class="figure"><applet code="Correlation.class" ' +
+           'codebase="../../Java/" align="baseline" width="600" height="320" ' +
+           'name="q5applet" archive="PbsGui.zip"><param name="addPoints" value="false">' +
+           '<param name="graphAveButton" value="false"><param name="x" value="1,2,3">' +
+           '<param name="y" value="0,3,4"><param name="regressButtons" value="false">' +
+           '<param name="sdButton" value="false"><param name="sdLineButton" value="false">' +
+           '<param name="showR" value="false">' +
+           '<param name="title" value="Exercise: reading residual plots">' +
+           'You need Java to see this</applet></p>';
+    document.writeln(qStr);
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'document.applets[' + appNum + '].' +
+              'setVariables(data5[0].join(),data5[1].join() );\n' +
+              'document.applets[' + appNum + '].showPlot();\n';
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="summary"></a>Summary
+</h2>
+
+<p>
+    The residuals from a regression line are the values of
+    the dependent variable Y minus the estimates of their values using the
+    regression line and the independent variable X.
+    If the <span class="math">i</span><sup>th</sup> datum is
+    <span class="math">(x<sub>i</sub>, y<sub>i</sub>)</span> and the equation of the regression
+    line is <span class="math">y = ax+b</span>, then the <span class="math">i</span><sup>th</sup> residual is
+</p>
+
+<p class="math">
+    e<sub>i</sub> = y<sub>i</sub>&nbsp;&minus;&nbsp;( ax<sub>i</sub>+b).
+</p>
+
+<p>
+    A residual plot is a scatterplot of the residuals versus their corresponding
+    values of X, that is, a plot of the n points
+</p>
+
+<p class="math">
+    (x<sub>i</sub>, e<sub>i</sub>),
+     i = 1, &hellip; , n.
+</p>
+
+<p>
+    A residual plot shows heteroscedasticity, nonlinear association,
+    or outliers if and only if the original scatterplot does, but it is
+    easier to see these qualitative features of bivariate data in the
+    residual plot than in the scatterplot of the original data.
+</p>
+
+<p>
+    If the regression line is computed correctly, the correlation
+    coefficient between the residuals and the independent variable is zero&mdash;the
+    residuals do not have a trend with X&mdash;and the average of the
+    residuals is zero.
+    If the residuals have a trend, the slope of the regression line was
+    computed incorrectly.
+    If the residuals do not have a trend but the mean of the residuals
+    is not zero, the intercept of the regression line was computed incorrectly.
+    If the residuals have a trend and the mean of the residuals is not zero,
+    the slope of the regression line was computed incorrectly, and the intercept
+    of the regression line might or might not have been computed correctly.
+</p>
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>correlation coefficient</li>
+    <li>dependent variable</li>
+    <li>football-shaped</li>
+    <li>graph of averages</li>
+    <li>heteroscedasticity</li>
+    <li>histogram</li>
+    <li>homoscedastic</li>
+    <li>independent variable</li>
+    <li>mean</li>
+    <li>nonlinear</li>
+    <li>nonlinearity</li>
+    <li>outlier</li>
+    <li>percentile</li>
+    <li>regression line</li>
+    <li>residual</li>
+    <li>residual plot</li>
+    <li>rms</li>
+    <li>scatterplot</li>
+    <li>SD</li>
+    <li>slice</li>
+    <li>variable</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+</body>
+</html>

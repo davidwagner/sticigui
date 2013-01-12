@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "correlation";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+
+<h2>Correlation</h2>
+
+<div class="indent">
+<h3>
+   Part I
+</h3>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The scatterplot just below contains 100 points. <span class="qSpan">The ' +
+               'correlation coefficient is </span>';
+    document.writeln(qStr);
+    r1 = roundToDig(2*rand.next()-1,1);
+    var aVal =  doubleToStr(Math.max(r1-.15,-1),1) +
+              ':' + doubleToStr(Math.min(r1 +.15,1),1);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+
+<div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/"
+       align="baseline" width="600" height="320" name="q1applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="n" value="100">
+    <param name="r" value="1">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Guess r">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  var appNum = document.applets.length - 1;
+  sectionContext += 'document.applets[' + appNum.toString() + '].setR(' +
+                     r1.toString() + ');\n';
+  // -->
+</script>
+</p>
+</center>
+</div>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = 'The scatterplot below contains 50 points. <span class="qSpan">The correlation ' +
+               'coefficient is </span>';
+    document.writeln(qStr);
+    r2 = roundToDig(2*rand.next()-1,1);
+    var aVal =  doubleToStr(Math.max(r2-.15,-1),1) +
+        ':' + doubleToStr(Math.min(r2 +.15,1),1);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline"
+  width="600" height="320" name="q2applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="n" value="50">
+    <param name="r" value="1">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="false">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="false">
+    <param name="title" value="Guess r">You need Java to see this
+  </applet>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  var appNum = document.applets.length - 1;
+  sectionContext += 'document.applets[' + appNum.toString() + '].setR(' +
+                     r2.toString() + ');\n';
+  // -->
+</script>
+</p>
+</center>
+</div>
+</div>
+
+
+
+<div class="indent">
+<h3>
+    Part II
+</h3>
+</div>
+
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">There is a positive association between years of ' +
+               'education and salary. Obviously, the association is not perfect, because ' +
+               'some people with a great deal of education have low or moderate salaries ' +
+               '(<em>e.g.</em>, teachers and university professors), and some people with ' +
+               'little education have very large incomes (<em>e.g.</em>, some entrepeneurs). ' +
+               'However, the association ensures that increasing one\'s education will ' +
+               'increase one\'s salary, all other things being equal.</span>';
+    document.writeln(qStr);
+    var opt = ["true","false"];
+    writeSelectExercise(false,qCtr++,opt,'b');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var theInts = listOfRandInts(2,2,5);
+    var sn = Math.pow(-1,theInts[1]);
+    var slope = roundToDig(sn/theInts[0],3);
+    var qStr = '<span class="qSpan">The points in a scatterplot of two variables ' +
+               'lie on a straight line with slope ' + slope.toString() + 
+               '. The correlation coefficient of the two variables is</span>';
+    document.writeln(qStr);
+    var opt = [(-theInts[0]).toString(),
+                "-1",
+                (-Math.abs(slope)).toString(),
+                "0",
+                (Math.abs(slope)).toString(),
+                "1",
+                (theInts[0]).toString()];
+    var k;
+    if ((theInts[1] % 2)==0) {
+        k="f";
+      } else {
+          k="b";
+    }
+    writeSelectExercise(false,qCtr++,opt,k);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan">If two variables ';
+  if (rand.next() > 0.5) {
+     qStr += 'have a causal connection, they will have a large correlation coefficient,';
+  } else {
+     qStr += 'are perfectly correlated, there is a causal connection between them.';
+  }
+  qStr += '</span>';
+  document.writeln(qStr);
+  var opt = ["true","false"];
+  writeSelectExercise(false,qCtr++,opt,'b');
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan">Per capita dietary sugar ' +
+             'intake and per capita dietary fat intake are highly correlated across ' +
+             'countries. Therefore, you can predict an individual\'s dietary sugar ' +
+             'intake relatively well from his or her dietary fat intake.</span> ';
+  document.writeln(qStr);
+  var opt = ["true","false"];
+  writeSelectExercise(false,qCtr++,opt,'b');
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  // set up data for the next three problems
+  var examplePoints = 100;
+  var data = new Array(3);
+  data[0] = cNormPoints(examplePoints-1, rand.next());
+  var mnmx = vMinMax(data[0][0]);
+  data[0][0][examplePoints] = mnmx[1];
+  var sdy = sd(data[0][1]);
+  var meany = mean(data[0][1]);
+  data[0][1][examplePoints] = meany + (2*Math.floor(rand.next()+.5) - 1)*7*sdy;
+            // data[0] now has an outlier
+  var parms = new Array(3);
+  parms[0] = [["polynomial", rand.next() - .5, 1], 1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5) ];  // linear, possibly heteroscedastic
+  parms[1] = [["polynomial", .5, rand.next(), rand.next(), 1],
+    1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5)]; // nonlinear, possibly heteroscedastic
+  parms[2] = [["polynomial", rand.next() - .5, 10*(rand.next()-.5), 1+2*rand.next()],
+    1 + 7*Math.floor(rand.next()+0.5),
+    1 + 4*Math.floor(rand.next()+0.5)]; // nonlinear, possibly heteroscedastic
+  var thePermutation = randPermutation([0,1,2]);
+  data[1] = fakeBivariateData(examplePoints,parms[thePermutation[0]][0],
+    parms[thePermutation[0]][1],parms[thePermutation[0]][2]);
+  data[2] = fakeBivariateData(examplePoints,parms[thePermutation[1]][0],
+    parms[thePermutation[1]][1],parms[thePermutation[1]][2]);
+  var opt = ["yes","no, because of nonlinearity","no, because of heteroscedasticity",
+        "no, because of outliers", "no, because the association is weak"];
+  var k = new Array(3);
+  k[0] = "d";
+  if (typeof(parms[thePermutation[0]][0][3]) == "undefined" ||
+                       parms[thePermutation[0]][0][3] == null) {
+    if (parms[thePermutation[0]][1] > 1.0) {
+        k[1] = "c";
+    } else {
+        k[1] = "a";
+    }
+  } else {
+    k[1] = "b";
+    if (parms[thePermutation[0]][1] > 1.0) k[1] += "&c";
+  }
+  if (typeof(parms[thePermutation[1]][0][3]) == "undefined" ||
+                       parms[thePermutation[1]][0][3] == null) {
+    if (parms[thePermutation[1]][1] > 1.0) {
+        k[2] = "c";
+    } else {
+        k[2] = "a";
+    }
+  } else {
+    k[2] = "b";
+    if (parms[thePermutation[1]][1] > 1.0) k[2] += "&c";
+  }
+  var newPerm = randPermutation([0,1,2]);
+  var data1 = data[newPerm[0]];
+  var data2 = data[newPerm[1]];
+  var data3 = data[newPerm[2]];
+  var qStr = '<span class="qSpan">Are the point of averages, the SDs of X and Y ' +
+             'and the correlation coefficient a reasonable summary of the following ' +
+             'scatterplot? (select all that apply)</span>';
+  document.writeln(qStr);
+  writeSelectExercise(true,qCtr++,opt,k[newPerm[0]]);
+  document.writeln('</p>');
+// -->
+</script>
+
+<div align="center"><center><p>
+<applet code="Correlation.class" codebase="../../Java/" align="baseline" width="600"
+             height="320" name="q3applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="true">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="true">
+    <param name="title" value="Faux Dataset 1">You need Java to see this
+  </applet> </p>
+</center>
+</div>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables(data1[0].join(),data1[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan">Are the point of averages, the SDs of X and Y, ' +
+             'and the correlation coefficient a reasonable summary of the following ' +
+             'scatterplot? (select all that apply)</span>';
+  document.writeln(qStr);
+  writeSelectExercise(true,qCtr++,opt,k[newPerm[1]]);
+  document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline"
+               width="600" height="320" name="q4applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="true">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="true">
+    <param name="title" value="Faux Dataset 2">You need Java to see this
+  </applet>
+</p>
+</center>
+</div>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables(data2[0].join(),data2[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan">Are the point of averages, the SDs of X and Y ' +
+             'and the correlation coefficient a reasonable summary of the ' +
+             'following scatterplot? (select all that apply)</span>';
+  document.writeln(qStr);
+  writeSelectExercise(true,qCtr++,opt,k[newPerm[2]]);
+  document.writeln('</p>');
+// -->
+</script>
+
+  <div align="center"><center><p>
+  <applet code="Correlation.class" codebase="../../Java/" align="baseline"
+               width="600" height="320" name="q5applet" archive="PbsGui.zip">
+    <param name="addPoints" value="false">
+    <param name="graphAveButton" value="false">
+    <param name="x" value="1,2,3">
+    <param name="y" value="1,2,3">
+    <param name="regressButtons" value="false">
+    <param name="sdButton" value="true">
+    <param name="sdLineButton" value="false">
+    <param name="showR" value="true">
+    <param name="title" value="Faux Dataset 3">You need Java to see this
+  </applet>
+</p>
+</center>
+</div>
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    var appNum = document.applets.length - 1;
+    sectionContext += 'document.applets[' + appNum.toString() +
+                      '].setVariables(data3[0].join(),data3[1].join() );\n' +
+                      'document.applets[' + appNum.toString() + '].showPlot();\n';
+  // -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part III
+</h3>
+
+<p class="inline">
+Here is a table of (fake) bivariate data:
+the average annual average temperature in &deg;F (Temp.) and the average annual rainfall
+in inches (Rain)
+in 10 fictitious places.
+</p>
+</div>
+<script language="JavaScript1.4" type="text/javascript" ><!---
+    var r3 = roundToDig(1.85*(rand.next()-.5),1);
+    var n = 10;
+    var fac1 = Math.round(7*rand.next()-3.5);
+    var tempSd0 = 15;
+    var rainSd0 = 20;
+    var tempSd0 = Math.max(1,tempSd0 + 6*(rand.next()-1));
+    var rainSd0 = Math.max(1,rainSd0 + 6*(rand.next()-1));
+    var tempMean0 = 60;
+    var rainMean0 = 100;
+    var tempMean0 = Math.max(20,tempMean0 + tempSd0*rNorm());
+    var rainMean0 = Math.max(30,rainMean0 + rainSd0*rNorm());
+    var lists = cNormPoints(n,r3);
+    var temp = lists[0];
+    var rain = lists[1];
+    var m1 = mean(temp);
+    var m2 = mean(rain);
+    var s1 = sd(temp);
+    var s2 = sd(rain);
+    for (i=0; i < temp.length; i++) {
+        temp[i] = Math.floor(tempMean0 + tempSd0*(temp[i]-m1)/s1);
+        rain[i] = Math.max(1,Math.floor(rainMean0 + rainSd0*(rain[i]-m2)/s2));
+    }
+    lists[0] = temp;
+    lists[1] = rain;
+    var cc = roundToDig(corr(temp,rain),2);
+    var aveRain = roundToDig(mean(rain),2);
+    var aveTemp = roundToDig(mean(temp),2);
+    var sdRain =  roundToDig(sd(rain),2);
+    var sdTemp =  roundToDig(sd(temp),2);
+    var header = new Array("Temp. (&deg;F)","Rain (in.)");
+    listToTable(header,lists,"standard","center");
+// -->
+</script> 
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+   var qStr = '<span class="qSpan"> Consider the scatterplot of Rain vs. Temp. ' +
+              'Computed from the data, the point of averages is (';
+  document.writeln(qStr);
+  writeTextExercise(5,qCtr++,numToRange(aveTemp,.05));
+  document.write(" &deg;F,");
+  writeTextExercise(5,qCtr++,numToRange(aveRain,.05));
+  qStr = '\"). The SD of average annual average temperature is ';
+  document.writeln(qStr);
+  writeTextExercise(5,qCtr++,numToRange(sdTemp,.05));
+  qStr = '&deg;F, and the SD of average annual rainfall is ';
+  document.writeln(qStr);
+  writeTextExercise(5,qCtr++,numToRange(sdRain,.05));
+  document.write('\".</span></p>');
+  // -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var qStr = '<span class="qSpan"> Let &quot;SU&quot; stand for &quot;standard units.&quot; ' +
+             'Complete the following table for the Rain and Temp. data given above:</span></p>' +
+             '<div align="center"><center><table class="dataTable">' +
+             '<caption>Table for computing correlation</caption>' +
+             '<tr><th id="col0">Temp. (&deg;F)</th><th id="col1">Temp. in SU</th>' +
+             '<th id="col2">Rain (in.)</th><th id="col3">Rain in SU</th>' +
+             '<th id="col4">(Temp. in SU)&times;(Rain in SU)</th></tr>';
+  document.writeln(qStr);
+  for (i = 0; i < temp.length; i++) {
+    var tempStd =  (temp[i] - aveTemp)/sdTemp;
+    var rainStd = (rain[i] - aveRain)/sdRain;
+    document.writeln('<tr><td headers="col0" align="right">' + temp[i] + '</td>');
+    if (i < 5) {
+        document.writeln('<td headers="col1" align="right">' +
+                         roundToDig(tempStd,3) +'</td>');
+    }
+    else {
+        document.writeln('<td headers="col1" align="right">');
+        writeTextExercise(6,qCtr++,numToRange(tempStd,.05));
+        document.writeln('</td>');
+    }
+    document.writeln('<td headers="col2" align="right">' + rain[i]  +'</td>');
+    if (i < 5) {
+        document.writeln('<td headers="col3" align="right">' +
+                          roundToDig(rainStd,3)  +'</td>');
+    }
+    else {
+        document.writeln('<td headers="col3" align="right">');
+        writeTextExercise(6,qCtr++,numToRange(rainStd,.05));
+        document.writeln('</td>');
+    }
+    document.writeln('<td headers="col4" align="right">' +
+                     roundToDig(tempStd*rainStd,6) + '</td>');
+    document.writeln('</tr>');
+  }
+  qStr = '</table></center></div>';
+  document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">The correlation coefficient of annual average ' +
+             'temperature and rainfall is </span>';
+    document.writeln(qStr);
+    var aVal = doubleToStr(Math.max(cc-0.05,-1),2)+  ":" + doubleToStr(Math.min(cc+0.05,1),2);
+    writeTextExercise(6,qCtr++,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var theTempInSU = roundToDig(4*2*(rand.next()-1),2);
+  var qStr = '<span class="qSpan"> The temperature in &deg;F corresponding ' +
+             'to a temperature of ' + theTempInSU.toString() +
+             ' in standard units is</span> ';
+  document.writeln(qStr)
+  writeTextExercise(6,qCtr++,numToRange(theTempInSU*sdTemp + aveTemp,1));
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>

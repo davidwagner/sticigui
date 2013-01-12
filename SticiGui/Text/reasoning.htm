@@ -1,0 +1,2500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "30 December 2011 13:58 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "reasoning";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+<!-- logic problems script -->
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/logic.js"></script>
+
+<form method="POST">
+
+<h1><a id="fallacy"></a>
+    Reasoning and Fallacies
+</h1>
+
+<p>
+    This chapter reviews logical rules that produce valid arguments and common rule violations
+    that lead to fallacies.
+    Understanding fallacies helps us to avoid committing them and to recognize fallacious
+    arguments made by others.
+</p>
+
+<p>
+   Reasoning can be <em>inductive</em> or <em>deductive</em>.
+   Deductive reasoning is what we call &quot;logic&quot; informally.
+   It is a way of thinking mathematically about all kinds of things:
+   Given a set of assumptions (premises), what must then be true?
+   In contrast, inductive reasoning attempts to generalize from experience (data) to new situations:
+   How strong is the evidence that something is true or false about the world?
+   Inductive reasoning is inherently uncertain.
+   Deductive reasoning&mdash;if logical&mdash;is as certain as
+   mathematics can be.
+   Much of the meat of Statistics, covered in other chapters, concerns inductive reasoning.
+   Exceptional care is needed to draw reliable conclusions by inductive reasoning.
+   And good inductive reasoning requires correct deductive reasoning, the subject of this chapter.
+</p>
+
+<p>
+    Deductive reasoning that is mathematically correct (logical) is <span class="termOfArt">valid</span>.
+    Deductive reasoning that is incorrect (logically faulty, illogical) is
+    <span class="termOfArt">fallacious</span>.
+    Reasoning can be valid even if the assumptions on which it is based are false.
+    If reasoning is valid <em>and</em> based on true premises, it is
+    <span class="termOfArt">sound</span>.
+</p>
+
+<p>
+    Many deductive and inductive arguments rely on statistical evidence.
+    Even the best statistical evidence can lead to wrong conclusions if it is used in
+    a fallacious argument.
+    The difficulty many people have understanding statistics makes statistics
+    especially effective &quot;red herrings&quot; to distract the listener.
+    Moreover, statistics can give fallacious arguments an undeserved air of scientific precision.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Fallacies have been studied at least since classical times.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'The ancient Greek philosopher Aristotle is generally credited with the first catalog ' +
+               'of fallacies: He lists thirteen in <em>Sophistici Elenchi</em> ' +
+               '(sophistical refutations), written in the fourth century BCE.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    This chapter gives a loose taxonomy of fallacies.
+    <span class="termOfArt">Validity</span>, <span class="termOfArt">soundness</span> and
+    <span class="termOfArt">formal fallacies</span> (which result
+    from not following valid rules of logic or misapplying valid rules)
+    are covered in more detail in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('logic') + '. ' + citeLinkChapter('categoricalLogic') + ', ');
+// -->
+</script>
+    covers reasoning about <em>categories</em> of things.
+    The <a class="glossRef" href="gloss.htm#post_hoc">post hoc ergo propter hoc</a> fallacy
+    is addressed in more detail in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("scatterplots") + '. ');
+// -->
+</script>
+    The <a class="glossRef" href="gloss.htm#regression_fallacy">regression fallacy</a>
+    gets special attention in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("regressionErrors") + '. ');
+// -->
+</script>
+    The <a class="glossRef" href="gloss.htm#principle_of_insufficient_reason">principle of insufficient
+    reason</a>, mentioned in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("probabilityPhilosophy") + ', ');
+// -->
+</script>
+    is related to the
+    <a class="glossRef" href="gloss.htm#appeal_to_ignorance">appeal to ignorance</a> fallacy.
+    The <a class="glossRef" href="gloss.htm#base_rate_fallacy">base rate fallacy</a> and
+    the <a class="glossRef" href="gloss.htm#base_rate_fallacy">Prosecutor's fallacy</a>
+    are mentioned in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("probabilityAxioms") + '. ');
+// -->
+</script>
+    <a class="glossRef" href="gloss.htm#nonresponse_bias">Nonresponse bias</a>
+    and sampling design, studied in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("sampling") + ', ');
+// -->
+</script>
+    is related to the <span class="termOfArt">hasty generalization</span> fallacy.
+    <a class="glossRef" href="gloss.htm#simpson">Simpson's paradox</a>, a version of the
+    <span class="termOfArt">composition fallacy</span>, is covered in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("experiments") + '. ');
+// -->
+</script>
+</p>
+</div>
+
+<h2><a id="rules_of_reasoning"></a>Valid rules of reasoning
+</h2>
+
+<h3><a id="arguments"></a>Arguments
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/mnbbRtFxWHA?start=3010&end=3235" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    An <span class="termOfArt">argument</span> is a sequence of statements, one of
+    which is called the <span class="termOfArt">conclusion</span>.
+    The other statements are <span class="termOfArt">premises</span> (assumptions).
+    The argument presents the premises&mdash;collectively&mdash; as evidence that the
+    conclusion is true.
+    For instance, the following is an argument:
+</p>
+
+<p class="example">
+    <span class="math">If A is true then B is true.</span>
+    <span class="math">A is true.</span>
+    <span class="math">Therefore, B is true.</span>
+</p>
+
+<div class="indent">
+<p class="inline">
+    The <span class="termOfArt">conclusion</span> is that <span class="math">B is true</span>.
+    The <span class="termOfArt">premises</span> are <span class="math">If A is true then B is true</span>
+    and <span class="math">A is true.</span>
+    The premises support the conclusion that <span class="math">B is true</span>.
+    The word &quot;therefore&quot; is not part of the conclusion: It is a signal that the statement after it
+    is the conclusion.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'A special symbol is often used to flag the conclusion of an argument.  One symbol ' +
+               'often used to signal that the statement after it is the conclusion is three dots ' +
+               'forming the vertices of an equilateral triangle: &there4;, pronounced &quot;therefore.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    The words <em>thus</em>, <em>hence</em>, <em>so</em>, and the phrases <em>it follows that</em>,
+    <em>we see that</em>, and so on, also flag conclusions.
+    The words <em>suppose</em>, <em>let</em>, <em>given</em>, <em>assume</em>, and so on, flag premises.
+</p>
+</div>
+
+<p>
+    A concrete argument of the form just given might be:
+</p>
+
+<p class="example">
+    If it is sunny, I will wear sandals. It is sunny.  Therefore, I will wear sandals.
+</p>
+
+<p>
+    Here, <span class="math">A</span> is &quot;it is sunny&quot; and
+    <span class="math">B</span> is &quot;I will wear sandals.&quot;
+</p>
+
+<p>
+    We usually omit the words &quot;is true.&quot;
+    So, for example, the previous argument would be written
+</p>
+
+<p class="math">If A then B.</span> <span class="math">A.</span>
+    <span class="math">Therefore, B.</span>
+</p>
+
+<div class="indent">
+<p class="inline">
+    The statement <span class="math">not A</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="math">Not A</span> is sometimes written <span class="math">&not;A</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+     means <span class="math">A</span> is false.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("logic") + ', and ' + citeLinkChapter("categoricalLogic") + ', ');
+// -->
+</script>
+    give a more mathematical treatment of logic.
+    This chapter gives only a few valid rules of reasoning (and some fallacies to avoid).
+</p>
+</div>
+
+<h3><a id="valid_sound"></a>Validity and Soundness
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/mnbbRtFxWHA?start=3235&end=3440" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    <span class="defSpan">An argument is <span class="termOfArt">valid</span>
+    if the conclusion must be true whenever the premises are true.</span>
+    In other words, an argument is valid if the truth of
+    its premises guarantees the truth of its conclusion.
+    Stating the conclusion explicitly is in some sense redundant, because the conclusion follows from
+    the premises:
+    it serves to draw our attention to the fact that that <em>particular</em> statement
+    is one (of many) that must be true if the premises are true.
+    <span class="defSpan">An argument that is not valid is <span class="termOfArt">invalid</span>
+    or <span class="termOfArt">fallacious</span>.</span>
+</p>
+
+<p>
+    If an argument is valid <em>and</em> its premises are true, the argument is
+    <span class="termOfArt">sound</span>.
+    If an argument is not sound it is <span class="termOfArt">unsound</span>.
+    An argument can be valid even if its premises are false&mdash;but
+    such an argument is unsound.
+    For instance, the following argument is valid but unsound:
+</p>
+
+<p class="example">
+    Cheese more than a billion years old is stale.
+    The Moon is made of cheese.
+    The Moon is more than a billion years old.
+    Therefore, the Moon is stale cheese.
+</p>
+
+<div class="indent">
+<p class="inline">
+    If all three premises were true, the conclusion would have to be true.
+    The argument is valid despite the fact that the Moon is not made of cheese,
+    but the argument is unsound&mdash;because the Moon is not made of cheese.
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(citeLinkChapter('logic') + ', ');
+// -->
+</script>
+    discusses validity and soundness in more detail.
+</p>
+</div>
+
+<p>
+   The logical form of the argument just above is (roughly):
+</p>
+
+<div class="indent">
+<p class="example" class="inline">
+   <span class="math">For any x, if x is A and x is B then x is C. y is A. y is B.
+   Therefore, y is C.</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'There are hard, picky details hidden here. For instance, when can you substitute ' +
+               '<span class="math">y</span> for <span class="math">x</span>?  Such issues are ' +
+               'studied in formal logic; we will not delve that deep here. However, see ' +
+               citeLinkChapter('categoricalLogic') + '. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+   Here, <span class="math">A</span> is &quot;made of cheese,&quot; <span class="math">B</span> is
+   &quot;more than a billion years old.&quot; and <span class="math">C</span> is
+   &quot;stale.&quot;
+   The symbol <span class="math">x</span> is a free variable that can stand for anything;
+   the symbol <span class="math">y</span> stands for the Moon.
+   Note that this example uses <span class="math">A, B,</span> and <span class="math">C</span>
+   to represent properties of objects (categories, see
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('categoricalLogic') + '), ');
+// -->
+</script>
+   rather than to represent statements (whole sentences), as above.
+</p>
+</div>
+
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption"><a id="inference_rules"></a>
+                Some Valid Rules of Reasoning</span>
+        </p>
+<ul>
+   <li>
+        <span class="math">A or not A.</span>
+        (<span class="termOfArt">Law of the excluded middle</span>)
+   </li>
+   <li>
+        <span class="math">Not (A and not A).</span>
+   </li>
+   <li>
+        <span class="math">A.</span>
+        <span class="math">Therefore, A or B.</span>
+   </li>
+   <li>
+        <span class="math">A.</span>  <span class="math">B.</span>
+        <span class="math">Therefore, A and B.</span>
+   </li>
+   <li>
+        <span class="math">A and B.</span> <span class="math">Therefore, A.</span>
+   </li>
+   <li>
+         <span class="math">Not A.</span>
+         <span class="math">Therefore, not (A and B).</span>
+   </li>
+   <li>
+         <span class="math">A or B.</span>  <span class="math">Not A.</span>
+         <span class="math">Therefore, B.</span>
+         (<span class="termOfArt">denying the disjunct</span>)
+   </li>
+   <li> <span class="math">Not (A and B).
+        Therefore, (not A) or (not B).</span>
+         (<span class="termOfArt">de Morgan</span>)
+   </li>
+   <li> <span class="math">Not (A or B).
+        Therefore, (not A) and (not B).</span>
+         (<span class="termOfArt">de Morgan</span>)
+   </li>
+   <li>
+         <span class="math">If A then B.</span>  <span class="math">A.</span>
+         <span class="math">Therefore, B.</span>
+         (<span class="termOfArt">affirming the precedent</span>,
+          <span class="termOfArt">modus ponendo ponens</span>,
+          &quot;affirming by affirming&quot;)
+   </li>
+   <li>
+         <span class="math">If A then B.</span>  <span class="math">Not B.</span>
+         <span class="math">Therefore, not A.</span>
+         (<span class="termOfArt">denying the consequent</span>,
+          <span class="termOfArt">modus tollendo tollens</span>,
+          &quot;denying by denying&quot;)
+   </li>
+</ul>
+</div>
+
+<h3><a id="formal_fallacies"></a>Formal Fallacies
+</h3>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/GEFVaWkhwNE?start=205&end=720" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    <span class="defSpan"><span class="termOfArt">Formal fallacies</span>
+    are errors that result from misapplying or not following these rules.</span>
+    For instance, consider the argument:
+</p>
+
+<p class="example">
+      <span class="math">If A then B.</span>  <span class="math">B.</span>
+         <span class="math">Therefore, A.</span>
+</p>
+
+<p>
+   A concrete example of this might be:
+</p>
+
+<p class="example">
+   If it is sunny, I will wear sandals. I will wear sandals.  Therefore, it is sunny.
+</p>
+
+<p>
+    (I encourage you to &quot;plug in&quot; values in abstract expressions to get plain-language
+    examples&mdash;not only in this chapter, but anytime you encounter a mathematical expression.
+    That can really clarify the math.)
+    This is a fallacy known as <span class="termOfArt">affirming the consequent</span>.
+    (In the <a class="glossRef" href="gloss.htm#conditional">conditional</a>
+    <span class="math">If A then B</span>, <span class="math">A</span> is
+    called the <span class="termOfArt">antecedent</span> and <span class="math">B</span> is
+    called the <span class="termOfArt">consequent</span>.
+    To <em>affirm</em> something is to assert that it is true; to <em>deny</em> something is to
+    assert that it is false.)
+    The premises say that if <span class="math">A</span> is true, <span class="math">B</span>
+    must also be true.
+    It does not follow that if <span class="math">B</span> is true,
+    <span class="math">A</span> must also be true.
+    To draw the conclusion that <span class="math">A</span> is true,
+    we need an additional premise: <span class="math">If B then A</span>.
+    That premise, together with the other two premises,
+    would allow us to conclude that <span class="math">A</span>  is true.
+</p>
+
+<p>
+   More generally, consider proving something from the premise
+   <span class="math">If A then B</span> and an additional premise:
+   that <span class="math">A</span> is true, that
+   <span class="math">A</span> is false, that <span class="math">B</span> is true,
+   or that <span class="math">B</span> is false.
+</p>
+
+<p>
+   If the additional premise is that the antecedent <span class="math">A</span> is true,
+   we are <a class="glossRef" href="gloss.htm#affirming_the_antecedent">affirming the antecedent</a>,
+   which allows us to reach the logically valid conclusion that <span class="math">B</span>
+   is also true.
+   If the additional premise is that the antecedent <span class="math">A</span> is false,
+   we are <a class="glossRef" href="gloss.htm#denying_the_antecedent">denying the antecedent</a>,
+   which does <em>not</em> allow us to conclude anything about <span class="math">B</span>.
+</p>
+
+<p>
+   If the additional premise is that the consequent <span class="math">B</span> is true, we are
+   <a class="glossRef" href="gloss.htm#affirming_the_consequent">affirming the consequent</a>,
+   which does <em>not</em> allow us to conclude anything about <span class="math">A</span>.
+   If the additional premise is that the consequent <span class="math">B</span> is false, we are
+   <a class="glossRef" href="gloss.htm#denying_the_consequent">denying the consequent</a>,
+   which allows us to reach the logically valid conclusion that <span class="math">A</span> is also
+   false.
+</p>
+
+<p>
+    There are countless fallacies, some, such as
+    <a class="glossRef" href="gloss.htm#affirming_the_consequent">affirming the consequent</a>
+    and <a class="glossRef" href="gloss.htm#denying_the_antecedent">denying the antecedent</a>
+    are so common they have names.
+    Some do not.
+</p>
+
+<p>
+    <em>Non sequitur</em> is the name of another common type of formal fallacy.
+    For instance, consider the argument:
+</p>
+
+<p class="example">
+      <span class="math">If A then B.</span>  <span class="math">A.</span>
+         <span class="math">Therefore, C.</span>
+</p>
+
+<p>
+    This is a fallacy known as <span class="termOfArt">non sequitur</span>, which is
+    Latin for &quot;does not follow.&quot;
+    The conclusion does not follow from the two premises.
+    The premises guarantee that <span class="math">B</span> is true.
+    They say nothing about <span class="math">C</span>.
+    The conclusion <span class="math">B</span> follows from the premises but the conclusion
+    <span class="math">C</span> does not.
+    There is a missing premise: <span class="math">If B then C</span>.
+    We will distinguish between two kinds of <span class="termOfArt">non sequitur</span>;
+    see the box below.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption"><a id="common_formal_fallacies"></a>
+                Common Formal Fallacies</span>
+        </p>
+<ul>
+   <li>
+        <span class="math">A or B.</span>
+        <span class="math">Therefore, A.</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'If  <span class="math">B</span> is true, <span class="math">A or B</span> is true even if ' +
+               '<span class="math">A</span> is false.  Hence, we cannot conclude from ' +
+               '<span class="math">A or B</span> that <span class="math">A</span> is true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">A or B.</span>  <span class="math">A.</span>
+        <span class="math">Therefore, not B.</span>
+        (<span class="termOfArt">affirming the disjunct)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Both <span class="math">A</span> and <span class="math">B</span> could be true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">Not both A and B are true.</span> <span class="math">Not A.</span>
+        <span class="math">Therefore, B.</span>
+        (<span class="termOfArt">denying the conjunct</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Both <span class="math">A</span> and <span class="math">B</span> could be false.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">B.</span>
+        <span class="math">Therefore, A.</span>
+        (<span class="termOfArt">affirming the consequent</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="math">If A then B</span> says that if <span class="math">B</span> is false, ' +
+               '<span class="math">A</span> must be too.  But it is mute when ' +
+               '<span class="math">B</span> is true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">Not A.</span>
+        <span class="math">Therefore, not B.</span>
+        (<span class="termOfArt">denying the antecedent</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="math">If A then B</span> says that if <span class="math">A</span> is true, ' +
+               '<span class="math">B</span> must be too.  But it is mute when ' +
+               '<span class="math">A</span> is false.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">C.</span>
+        <span class="math">Therefore, B.</span>
+        (<span class="termOfArt">non sequitur of evidence</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="termOfArt">non sequitur</span> means &quot;does not follow.&quot; ' +
+               'The first premise says what happens if <span class="math">A</span> is true.  It says nothing ' +
+               'about what happens when <span class="math">C</span> is true: The conclusion does not follow. ' +
+               'This is a non sequitur <em>of evidence</em> because the evidence (the second premise ' +
+               '<span class="math">C</span>) cannot be combined with the first premise to reach any ' +
+               'conclusion.  There is a missing premise:  If <span class="math">C</span> is true, ' +
+               '<span class="math">A</span> must also be true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">Not C.</span>
+        <span class="math">Therefore, not A.</span>
+        (<span class="termOfArt">non sequitur of evidence</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="termOfArt">non sequitur</span> means &quot;does not follow.&quot; ' +
+               'The first premise says that if <span class="math">B</span> false, ' +
+               '<span class="math">A</span> must also be false. It says nothing about what happens when ' +
+               '<span class="math">C</span> is false: The conclusion does not follow. ' +
+               'This is a non sequitur <em>of evidence</em> because the evidence (the second premise ' +
+               '<span class="math">not C</span>) cannot be combined with the first premise to reach any ' +
+               'conclusion.  There is a missing premise: If <span class="math">C</span> is false, ' +
+               '<span class="math">B</span> must also be false.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">A</span>.
+        <span class="math">Therefore, C.</span>
+        (<span class="termOfArt">non sequitur of relevance</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="termOfArt">non sequitur</span> means &quot;does not follow.&quot;' +
+               'The premises guarantee that <span class="math">B</span> is true.  They say nothing ' +
+               'about <span class="math">C</span>. The conclusion <span class="math">B</span> follows ' +
+               'but the conclusion <span class="math">C</span> does not. ' +
+               'This is a non sequitur <em>of relevance</em> because the conclusion that can be derived from ' +
+               'the premises (<span class="math">B</span>) has nothing to do with the stated conclusion ' +
+               '(<span class="math">C</span>).  There is a missing premise: If <span class="math">B</span> ' +
+               'is true, <span class="math">C</span> must also be true.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+   <li>
+        <span class="math">If A then B.</span>  <span class="math">Not B.</span>
+        <span class="math">Therefore, not C.</span>
+        (<span class="termOfArt">non sequitur of relevance</span>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+   var fStr =  '<span class="termOfArt">non sequitur</span> means &quot;does not follow.&quot; ' +
+               'The first premise says that if <span class="math">B</span> is false, ' +
+               '<span class="math">A</span> must be false.  Together with the second premise, ' +
+               'it lets us conclude that <span class="math">A</span> is false. The conclusion ' +
+               'that <span class="math">C</span> is false does not follow. ' +
+               'This is a non sequitur <em>of relevance</em> because the conclusion that can be derived ' +
+               'from the premises (<span class="math">not A</span>) has nothing to do with the ' +
+               'stated conclusion (<span class="math">not C</span>).  There is a missing premise: ' +
+               'If <span class="math">A</span> is false, <span class="math">C</span> must also be false.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   </li>
+</ul>
+</div>
+
+<p>&nbsp;</p>
+
+<p>
+   The following exercises check your understanding of the correct application of rules of reasoning,
+   valid and sound arguments, and formal and informal fallacies.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = 'Identify whether the following sequence of statements is valid reasoning or a formal fallacy ' +
+                '(reload the page to get another example): ' +
+                '</p><p class="math"><span class="qSpan"><span class="math">';
+    var opt = ['valid','fallacious'];
+    var aVal = 'a';
+    var vstatements = [
+                        ['A. Therefore, not (not A).',
+                           'This is the definition of &quot;not.&quot;'],
+                       ['A. B. Therefore, A and B.',
+                           'This is the definition of &quot;and.&quot;'],
+                       ['B. Therefore, A or B.',
+                           '<span class="math">A or B</span> is true if <span class="math">A</span> is true, ' +
+                           'if <span class="math">B</span> is true and if both <span class="math">A</span> ' +
+                           ' and <span class="math">B</span> are true.'],
+                       ['A or B. Not B. Therefore, A.',
+                           'If either <span class="math">A</span> or <span class="math">B</span> is true, and ' +
+                           '<span class="math">B</span> is not true, <span class="math">A</span> must ' +
+                           'be true.'],
+                       ['If A then B. A. Therefore, B.',
+                           'This is <a class="glossRef" href="gloss.htm#affirming_the_antecedent">affirming ' +
+                           'the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, not A.',,
+                           'This is <a class="glossRef" href="gloss.htm#denying_the_consequent">denying ' +
+                           'the consequent</a>.'],
+                       ['not (A or B).  Therefore, (not A) and (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'],
+                       ['not (A or B).  Therefore, (not A) or (not B)',
+                           'By one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>, if ' +
+                           '<span class="math">not (A or B)</span>, ' +
+                           'then <span class="math">A</span> is false and <span class="math">B</span> ' +
+                           'is false. But if both <span class="math">A</span> and ' +
+                           '<span class="math">B</span> are false, then either <span class="math">A</span> ' +
+                           'is false or <span class="math">B</span> is false.'],
+                       ['not (A and B).  Therefore, (not A) or (not B)',
+                           'This is an application of one of ' +
+                           '<a class="glossRef" href="gloss.htm#de_morgan">de Morgan\'s laws</a>.'],
+                       ['A or not B.  B. Therefore, A.',
+                           'This is the definition of &quot;or&quot; applied to <span class="math">A</span> ' +
+                           'and <span class="math">not B</span>.  If either <span class="math">A</span> is ' +
+                           'true or <span class="math">B</span> is false, and <span class="math">B</span> ' +
+                           'is true, then <span class="math">A</span> must be false.']
+                      ];
+    var fstatements = [
+                       ['A or B.  A.  Therefore, not B.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['A or B.  B.  Therefore, not A.',
+                           '<span class="math">A or B</span> is true with either <span class="math">A</span>, ' +
+                           '<span class="math">B</span> or both are true.  So, both <span class="math">A</span> ' +
+                           'and <span class="math">B</span> could be true, and it does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['not (A and B). Therefore, not B.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">B</span> ' +
+                           'might be true and <span class="math">A</span> might be false. It does not follow that ' +
+                           '<span class="math">B</span> is false.'],
+                       ['not (A and B). Therefore, not A.',
+                           '<span class="math">A and B</span> is false when either <span class="math">A</span>, ' +
+                           '<span class="math">B</span>, or both are false.  So, <span class="math">A</span> ' +
+                           'might be true and <span class="math">B</span> might be false. It does not follow that ' +
+                           '<span class="math">A</span> is false.'],
+                       ['If A then B. Not A. Therefore, not B.',
+                           'This is an example of <a class="glossRef" href="gloss.htm#denying_the_antecedent">' +
+                           'denying the antecedent</a>.'],
+                       ['If A then B. Not B. Therefore, A.',
+                           'By <a class="glossRef" href="gloss.htm#denying_the_consequent">denying the ' +
+                           'consequent</a>, we can conclude that <span class="math">A</span> is false, not that ' +
+                           '<span class="math">A</span> is true.'],
+                       ['If A then B. B. Therefore, A.',
+                           'This is an example of <a class="glossRef" href="gloss.htm#affirming_the_consequent">' +
+                           'affirming the consequent</a>.'],
+                       ['not (A and B). Therefore, (not A) and (not B)',
+                           'It follows that either <span class="math">A</span> is false or ' +
+                           '<span class="math">B</span> is false, but not necessarily that both are false.'],
+                       ['If A then B. C. Therefore, A.',
+                           'This is a <a class="glossRef" href="non_sequitur_of_evidence">non sequitur of ' +
+                           'evidence</a>.'],
+                       ['If A then B. A. Therefore, C.',
+                           'This is a <a class="glossRef" href="non_sequitur_of_relevance">non sequitur of ' +
+                           'relevance</a>.']
+                      ];
+    var vOrF = randBoolean();
+    var which;
+    var ansStr;
+    if (vOrF) {
+         which = listOfRandInts(1, 0, vstatements.length-1)[0];
+         qStr += vstatements[which][0];
+         ansStr = vstatements[which][1];
+    } else {
+         aVal = 'b';
+         which = listOfRandInts(1, 0, fstatements.length-1)[0];
+         qStr += fstatements[which][0];
+         ansStr = fstatements[which][1];
+    }
+    qStr +=  '</span></span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = 'Identify whether the following sequence of statements is valid reasoning or a formal fallacy ' +
+                '(reload the page to get another example): ' +
+                '</p><p class="math"><span class="qSpan">';
+    var opt = ['valid','fallacious'];
+    var aVal = 'a';
+    var vstatements = [
+                       ['<span class="math">It is warm. Therefore, it is not cold.</span>',
+                            'This is the law of the excluded middle: it cannot be both warm and cold.  The structure of the ' +
+                            'argument is <span class="math">A.  Therefore, not (not A).</span>'],
+                       ['<span class="math">It is sunny. It is warm. Therefore, it is sunny and warm.</span>',
+                            'This is the definition of <span class="termOfArt">and</span>.'],
+                       ['<span class="math">It is warm. Therefore, it is sunny or it is warm.</span>',
+                            'A or B is true if either A is true or B is true (or both).'],
+                       ['<span class="math">It is sunny or it is warm.  It is cold. Therefore, it is sunny.</span>',
+                            'This is of the form <span class="math">A or B. Not B. Therefore, A</span>.  It is ' +
+                            'an example of <a span="termOfArt">denying the disjunct</span>.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is sunny. ' +
+                              'Therefore, it is warm.</span>',
+                            'This is an example of <span class="termOfArt">affirming the precedent</span>, ' +
+                            '<span class="termOfArt">modus ponendo ponens</span>.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is not warm. ' +
+                              'Therefore, it is not sunny.</span>',
+                            'This is an example of <span class="termOfArt">denying the consequent</span>, ' +
+                            '<span class="termOfArt">modus tollendo tollens</span>.'],
+                       ['<span class="math">It is not sunny or warm. ' +
+                              'Therefore, it is not sunny and it is not warm.</span>',
+                            'This is one of de Morgan\'s Laws.'],
+                       ['<span class="math">It is not sunny and warm.  ' +
+                              'Therefore, it is not sunny or it is not warm.</span>',
+                            'This is one of de Morgan\'s Laws.'],
+                       ['<span class="math">It is sunny or not warm. It is warm. ' +
+                              'Therefore, it is sunny.</span>',
+                            'This is of the form <span class="math">A or B. Not B. Therefore, A</span>, ' +
+                            'where <span class="math">B</span> is &quot;not warm&quot;. The argument is ' +
+                            'an example of <a span="termOfArt">denying the disjunct</span>.'],
+                       ['<span class="math">It is not sunny or warm. ' +
+                              'Therefore, it is not warm.</span>',
+                            'This is one of de Morgan\'s Laws.']
+                      ];
+    var fstatements = [
+                       ['<span class="math">It is sunny or warm.  It is sunny.  Therefore, it is not warm.</span>',
+                            'This is an example of <span class="termOfArt">affirming the disjunct</span>.'],
+                       ['<span class="math">It is not sunny and warm.  Therefore, it is not warm.</span>',
+                            'This is an example of <span class="termOfArt">denying the conjunct</span>.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is not sunny. ' +
+                              'Therefore, it is not warm</span>',
+                            'This is an example of <span class="termOfArt">denying the antecedent</span>.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is warm. ' +
+                              'Therefore, it is sunny.</span>',
+                            'This is an example of <span class="termOfArt">affirming the consequent</span>.'],
+                       ['<span class="math">It is not sunny and warm.  ' +
+                              'Therefore, it is not sunny and it is not warm.</span>',
+                            'This is related to <span class="termOfArt">denying the conjunct</span>. We know that ' +
+                              'not both <span class="math">A</span> and <span class="math">B</span> are true. ' +
+                              'Both could be false, but it is also possible that exactly one of them is true.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is dry. ' +
+                              'Therefore, it is sunny.</span>',
+                           'This is a <span class="termOfArt">non sequitur of evidence</span>.'],
+                       ['<span class="math">If it is sunny then it is warm.  It is sunny. ' +
+                              'Therefore, it is dry.</span>',
+                           'This is a <span class="termOfArt">non sequitur of relevance</span>.']
+                      ];
+    var vOrF = randBoolean();
+    var which;
+    var ansStr;
+    if (vOrF) {
+         which = listOfRandInts(1, 0, vstatements.length-1)[0]
+         qStr += vstatements[which][0];
+         ansStr = vstatements[which][1];
+    } else {
+         aVal = 'b';
+         which = listOfRandInts(1, 0, fstatements.length-1)[0]
+         qStr += fstatements[which][0];
+         ansStr = fstatements[which][1];
+    }
+    qStr +=  '</span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="informal_fallacies"></a>Informal Fallacies
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/GEFVaWkhwNE?start=720&end=773" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    <span class="defSpan">A <span class="termOfArt">fallacy</span>
+    is an argument in which the premises do not justify
+    the conclusion as a matter of logic.</span>
+    An argument can be fallacious for many reasons.
+    The argument might mis-apply a legitimate rule of logic.
+    Or it might omit a crucial premise or misconstrue a premise.
+    Or it might misconstrue the conclusion.
+</p>
+
+<p>
+    For instance, consider the argument: <span class="example">Mary says X is true.  Mary does Y.
+    Anybody who does Y is a bad person.
+    Therefore, X is false.</span>
+</p>
+
+<div class="indent">
+<p class="inline">
+    That argument is fallacious: It is a <span class="termOfArt">non sequitur of relevance</span>
+    because the conclusion that X is false does not follow from the two premises
+    (&quot;Mary does Y&quot; and &quot;Anybody who does Y is a bad person&quot;).
+    The form of the argument is: <span class="math">If A then B. A.  Therefore C.</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="math">A</span> is the proposition that Mary does Y. ' +
+               '<span class="math">B</span> is the proposition that Mary is a bad person.' +
+               '<span class="math">C</span> is the proposition that anything Mary says is incorrect.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    To get to the conclusion that X is false, we would need an additional premise, namely,
+    that everything a bad person says is false, that is, the
+    premise <span class="math">if B then C</span>.
+    If we added that premise, the argument would be
+    <a class="glossRef" href="gloss.htm#valid">valid</a>&mdash;but not
+    <a class="glossRef" href="gloss.htm#sound">sound</a>, because it is not true
+    that everything bad people say is false.
+</p>
+</div>
+
+<p>
+    Because this fallacy has, at its heart, a
+    <span class="termOfArt">non sequitur of relevance</span>, we call it a
+    <span class="termOfArt">fallacy of relevance</span>.
+    Instead of establishing the conclusion it claims (that X is false),
+    it establishes a different conclusion (that Mary is bad) and
+    ignores the difference.
+    This variant of a fallacy of relevance is very common.
+    It has a name, <span class="termOfArt">ad hominem</span>, which means &quot;at the person&quot; in
+    Latin.
+    Instead of addressing Mary's argument that X is true, it attacks Mary herself.
+    <span class="termOfArt">Ad hominem</span> arguments are discussed below.
+</p>
+</div>
+
+<p>
+    The tacit premise that everything that comes of something bad is bad&mdash;and its
+    opposite, that only good comes of good&mdash;are <span class="termOfArt">genetic fallacies</span>.
+    <span class="termOfArt">Inappropriate appeal to authority</span>, discussed below, is another
+    genetic fallacy.
+</p>
+
+<p>
+    Consider the argument: <span class="example">All Ys are Zs. Mary says X is a Y. Therefore, X is a Z.</span>
+</p>
+
+<div class="indent">
+<p class="inline">
+    That argument is fallacious: It is a <span class="termOfArt">non sequitur of evidence</span>
+    because the conclusion that X is a Z does not follow from the two premises
+    (&quot;All Ys are Zs&quot; and &quot;Mary says X is a Y&quot;).
+    The form of the argument is: <span class="math">If A then B. C.  Therefore B.</span>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = '<span class="math">A</span> is the proposition that X is a Y. ' +
+               '<span class="math">B</span> is the proposition that X is a Z.' +
+               '<span class="math">C</span> is the proposition that Mary says X is a Y.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    To get to the conclusion that X is a Z, we would need an additional premise, namely,
+    that if Mary says X is a Y, X is in fact a Y: the
+    premise <span class="math">if C then A</span>.
+    In words, that extra premise is &quot;if Mary says X is a Y, then X is a Y.&quot;
+    If we added that premise, the argument would be
+    <a class="glossRef" href="gloss.htm#valid">valid</a>.
+    But it would not be <a class="glossRef" href="gloss.htm#sound">sound</a>
+    unless it is impossible for Mary to be mistaken that X is a Y.
+    Because this fallacy has, at its heart, a <span class="termOfArt">non sequitur of evidence</span>,
+    we call it a <span class="termOfArt">fallacy of evidence</span>.
+    The fallacy consists in treating one of the stated premises (Mary says X is a Y) as if it were a
+    different premise (X is a Y).
+    This particular kind of fallacy of evidence is common: It is an
+    <span class="termOfArt">(inappropriate) appeal to authority</span>.
+    There are more examples and discussion of fallacies of evidence and fallacies of relevance below.
+</p>
+</div>
+
+<p>
+    To sum up, many (if not all) informal fallacies are of this form: The argument is a
+    <span class="termOfArt">non sequitur of relevance</span> or a
+    <span class="termOfArt">non sequitur of evidence</span>.
+    <span class="termOfArt">Non sequiturs of relevance</span> can
+    be made valid by adding a premise that says the real conclusion implies the desired conclusion.
+    <span class="termOfArt">Non sequiturs of evidence</span> can be made valid by adding a premise
+    that says one of the given premises implies a necessary but missing premise.
+    In both cases, the missing premise is false, so the patched argument would be
+    valid but not sound.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption"><a id="fallacies_of_relevance_and_evidence"></a>
+                Fallacies of Relevance and Fallacies of Evidence</span>
+        </p>
+
+<p>
+    A <span class="termOfArt">fallacy of relevance</span> commits a
+    <span class="termOfArt">non sequitur of relevance</span>: It establishes a conclusion, but not
+    the desired conclusion.
+    An extra (and false) premise is needed for the actual conclusion to
+    imply the desired conclusion.
+    A canonical form of a fallacy of relevance is:
+</p>
+
+<p class="example">
+    <span class="math">If A then B.  A.  Therefore, C.</span>&mdash;together with the real-world fact
+    that <span class="math">B</span> does not imply <span class="math">C</span>.
+</p>
+
+<p>
+    Alternatively, a fallacy of relevance is:
+</p>
+
+<p class="example">
+    <span class="math">If A then B.  Not B.  Therefore, not C.</span>&mdash;together with the real-world fact
+    that <span class="math">not A</span> does not imply <span class="math">not C</span>.
+</p>
+
+<p>
+    Conversely, a <span class="termOfArt">fallacy of evidence</span> commits a
+    <span class="termOfArt">non sequitur of evidence</span>: It does not establish any
+    conclusion.
+    An extra (and false) premise is needed for one of the stated premises to imply a
+    premise that can be used to reach the desired conclusion.
+    A canonical form for a fallacy of evidence is:
+</p>
+
+<p class="example">
+    <span class="math">If A then B. C.
+    Therefore B.</span>&mdash;together with the real-world fact that <span class="math">C</span>
+    does not imply <span class="math">A</span>.
+</p>
+
+<p>
+    Alternatively, a fallacy of evidence is:
+</p>
+
+<p class="example">
+    <span class="math">If A then B.  Not C.  Therefore, not A.</span>&mdash;together with the real-world fact
+    that <span class="math">not C</span> does not imply <span class="math">not B</span>.
+</p>
+</div>
+
+
+<h3><a id="relevance"></a>Fallacies of Relevance
+</h3>
+
+<p>
+    Logicians often distinguish among kinds of relevance.
+    <span class="defSpan">A piece of evidence is <em>positively relevant</em> to
+    some assertion if it adds weight to the assertion.
+    It is <em>negatively relevant</em> if it takes weight away from the assertion.
+    Some evidence is <em>irrelevant</em> to a given assertion.</span>
+</p>
+
+<p>
+    For instance, consider the assertion &quot;it's hot outside.&quot;
+    The observation that passers-by are sweating would be positively relevant to the assertion:
+    it supports the assertion that the weather is hot.
+    The observation that passers-by are wearing parkas would be negatively relevant:
+    it is evidence that the weather is not hot.
+    The observation that passers-by are listening to mp3 players would be irrelevant.
+</p>
+
+<p>
+    Many superficially persuasive arguments in fact ride on irrelevant observations.
+    Here are some examples.
+</p>
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Ad hominem</em> (personal attack)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Nancy claims the death penalty is a good thing.
+    But Nancy once set fire to a vacant warehouse.
+    Nancy is evil.
+    Therefore, the death penalty is a bad thing.
+</p>
+
+<p>
+    This argument does not address Nancy's argument, it just says she must be wrong (about everything)
+    because she is evil.
+    Whether Nancy is good or evil is irrelevant: It has no bearing on whether her argument is sound.
+</p>
+
+<p>
+    This is a fallacy of relevance:  It establishes that Nancy is bad, then equates being bad and
+    never being right.
+    In symbols, the argument is <span class="math">If A then B. A.  Therefore C.</span>
+    (If somebody sets fire to a vacant warehouse, that person is evil.  Nancy set fire to a vacant
+     warehouse.  Therefore, Nancy's opinion about the death penalty is wrong.)
+</p>
+
+<div class="indent">
+<p class="inline">
+    <em>Ad hominem</em> is Latin for &quot;towards the person.&quot;  An <em>ad hominem</em> argument
+    attacks the person making the claim, rather than the person's reasoning.
+    A variant of the <em>ad hominem</em> argument is &quot;guilt by association.&quot;
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'A vanilla <em>ad hominem</em> argument attacks the person directly.  A guilt-by-association ' +
+               'argument attacks the person indirectly, through his or her friends or associates: Nancy ' +
+               'sends cookies to violent criminals. Therefore, Nancy is not to be trusted.  ' +
+               'Guilt-by-association arguments are quite common in political discourse; John McCain\'s ' +
+               'attacks on Barack Obama for his association with Bill Ayers.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Bad motive';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Bob claims the death penalty is a good thing.
+    But Bob's family business manufactures caskets.
+    Bob benefits when people die, so his motives are suspect.
+    Therefore, the death penalty is a bad thing.
+</p>
+
+<p>
+    This argument does not address Bob's argument, it addresses Bob's motives.
+    His motives are irrelevant: They have nothing to do with whether his argument for the death penalty
+    is sound.
+</p>
+
+<p>
+    This is related to an <em>ad hominem</em> argument.
+    It, too, addresses the person, not the person's argument.
+    However, rather than condemning Bob as evil,
+    it impugns his motives in arguing for this particular conclusion.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Tu quoque</em> (look who\'s talking)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Amy says people shouldn't smoke cigarettes in public because cigarette smoke has a strong odor.
+    But Amy wears strong perfume all the time.
+    Amy is clearly a hypocrite.
+    Therefore, smoking in public is fine.
+</p>
+
+<p>
+    This argument does not engage Amy's argument: It attacks her for the (in)consistency
+    of her opinions in this matter and in some other matter.
+    Whether Amy wears strong fragrances has nothing to do with
+    whether her argument against smoking is sound.
+</p>
+
+<p>
+    The abstract form of this argument is also a <em>non sequitur</em>: <span class="math">If A then B. A.
+    Therefore C.</span>
+    (In words: If you complain about strong smells and wear strong fragrances, you are a hypocrite.
+     Amy complains about strong smells and wears strong perfume; therefore, her opinion about smoking
+     is incorrect.)
+</p>
+
+<p>
+    <em>Tu quoque</em> is Latin for &quot;you also.&quot;
+    It related to <em>ad hominem</em> arguments:
+    it addresses the person rather than the person's argument.
+    But instead of <em>generally</em> condemning the other party, it says that his or her claim in the
+    matter at issue is hypocritical because
+    it is inconsistent with something else the person has done or said.
+    We are supposed to conclude that he or she must therefore be wrong on this particular point.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Two wrongs make a right';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Yes, I hit Billy.
+    But Sally hit him first.
+</p>
+
+<p>
+    This argument claims it is fine to do something wrong because somebody else did something wrong.
+    The argument is of the form: <span class="math">If A then B. A.
+    Therefore C.</span>
+    (In words: If Sally hit Billy, it's OK for Billy to hit Sally.  Sally hit Billy.  Therefore, it's OK
+     for me to hit Billy.)
+</p>
+
+<p>
+    Generally, the two-wrongs-make-a-right argument says that the justified wrong happened after the
+    exculpatory wrong, or was less severe.
+    For instance, Sally hit Billy first, or Sally hit Billy harder than I did, or
+    Sally pulled a knife on Billy.
+</p>
+
+<p>
+    On the other hand, it might be quite reasonable to argue, &quot;yes, I hit Billy.
+    But he was beating me with a baseball bat&mdash;I acted in self defense. &quot;
+    In that case, the first &quot;wrong&quot; might justify hitting Billy, which otherwise would
+    be wrong.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Ad baculum</em> (appeal to force)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    If you don't give me your lunch money, my big brother will beat you up.
+    You don't want to be beaten up, do you?
+    Therefore, you should give me your lunch money.
+</p>
+
+<div class="indent">
+<p class="inline">
+    This argument appeals to force: Accept my conclusion&mdash;or else.
+    It is not a logical argument.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'But it can be quite persuasive nonetheless.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    It is an argument that if you do not accept the conclusion (and give me
+    your lunch money), something bad will happen (you will get beaten)&mdash;not an argument
+    that the conclusion is correct.
+    The form of the argument is <span class="math">If A then B.  B is bad. Therefore, not A</span>.
+    Here, <span class="math">A</span> is &quot;you don't give me your lunch money,&quot;
+    <span class="math">B</span> is &quot;you will be beaten up.&quot;
+    The argument conflates &quot;it is bad to be beaten up&quot; with &quot;it is false that you
+    will be beaten up.&quot;
+    The argument establishes the conclusion that if you don't give me your lunch money, something bad
+    will happen.
+    It does not establish the conclusion that you should give me your lunch money.
+    There is a missing premise that relates the implicit conclusion that could be
+    justified on the evidence (the if you don't give me your lunch money, something bad will happen)
+    to the stated conclusion (you should give me your lunch money).
+    <em>Ad baculum</em> is a fallacy of relevance, because it relies on a
+    <span class="termOfArt">non sequitur of relevance</span>.
+</p>
+</div>
+
+<p>
+    <em>Ad baculum</em> is Latin for &quot;to the stick.&quot;
+    It is essentially the argument &quot;might makes right.&quot;
+</p>
+
+<p>
+    Not all arguments of the form
+    <span class="math">If you do A then B will happen.  B is bad.  Therefore, don't do A</span>
+    are <span class="termOfArt">ad baculum</span> arguments.
+    It depends in part on whether B is a real or imposed consequence of A.
+    For instance, <span class="math">If you cheat on your exam, you will feel guilty
+    about it for the rest of your life; therefore, you should not cheat</span>
+    is not an <span class="termOfArt">ad baculum</span> argument.
+    But <span class="math">If you cheat on your exam, I will turn you in to the Student
+    Conduct Office and have you expelled;
+    therefore, you should not cheat</span> is an <span class="termOfArt">ad baculum</span> argument.
+    (Either way, don't cheat on your exam!)
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Ad misericordium</em> (appeal to pity)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Yes, I downloaded music illegally&mdash;but my girlfriend left me and I lost my job
+    so I was broke and I couldn't afford to
+    buy music and I was so sad that I was broke and that my girlfriend was gone that I really <em>had</em>
+    to listen to 100 variations of <em>She caught the Katy</em>.
+</p>
+
+<p>
+    This argument justifies an action not by claiming that it is correct, but
+    by an appeal to pity: extenuating circumstances of a sort.
+</p>
+
+<p>
+    <em>Ad misericordium</em> is Latin for &quot;to pity.&quot;
+    It is an appeal to compassion rather than to reason.
+    Another example:
+</p>
+
+<p class="example">
+    Yes, I failed the final.  But I <em>need</em> to get an A in the class or I
+   [won't get into Business school] /
+   [will lose my scholarship] /
+   [will violate my academic probation] /
+   [will lose my 4.0 GPA].
+    You have to give me an A!
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Ad populum</em> (bandwagon)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Millions of people share copyrighted mp3 files and videos online.
+    Therefore, sharing copyrighted music and videos is fine.
+</p>
+
+<p>
+    This &quot;bandwagon&quot; argument claims that something is moral because it is common.
+    Common and correct are not the same.
+    Whether a practice is widespread has little bearing on whether it is legal or moral.
+    That many people believe something is true does not make it true.
+</p>
+
+<p>
+    <span class="termOfArt">Ad populum</span> is Latin for &quot;to the people.&quot;
+    It equates the popularity of an idea with the truth of the idea: Everybody can't be wrong.
+    Few teenagers have not made <span class="termOfArt">ad populum</span> arguments:
+    &quot;But Mom, <em>everybody</em> is doing it!&quot;
+</p>
+</div>
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Straw man';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Bob: Sleeping a full 12 hours once in a while is a healthy pleasure.
+</p>
+
+<p class="example">
+    Samantha: If everybody slept 12 hours all the time, nothing would ever get done; the reduction in
+    productivity would drive the country into bankruptcy.
+    Therefore, nobody should sleep for 12 hours.
+</p>
+
+<p>
+    Samantha attacked a different claim from the one Bob made:
+    She attacked the assertion that it is good <em>for everybody to sleep 12 hours every day</em>.
+    Bob only claimed that is was good <em>once in a while</em>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    This argument is also a <span class="termOfArt">non sequitur of relevance</span>:
+    <span class="math">If A then B. A.
+    Therefore C.</span>
+    (In words: If an action would have bad consequences if everyone did it all the time, then
+     that action should not be performed by everyone all the time.
+     Sleeping 12 hours would have bad consequences if everyone did it all the time.
+     Therefore, nobody should ever do it.)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Some moral systems decide whether actions are right by asking &quot;what if everybody ' +
+               'did this?&quot;  If the consequences are bad, the action is deemed to be wrong. ' +
+               'Clearly, this is a matter of definition, not purely one of logic.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    A straw man argument replaces the original claim with one that is more vulnerable,
+    attacks that more vulnerable claim, then pretends to have refuted the original.
+</p>
+
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Red herring';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Art: Teacher salaries should be increased to attract better teachers.
+</p>
+
+<p class="example">
+    Bette: Lengthening the school day would also improve student learning outcomes.
+    Therefore, teacher salaries should remain the same.
+</p>
+
+<p>
+    Art argues that increasing teacher salaries would attract better teachers.
+    Bette does not address his argument: She simply argues that there are other ways of
+    improving student learning outcomes.
+    Art did not even use student learning outcomes as a reason for increasing teacher salaries.
+    Even if Bette is correct that lengthening the school day would improve learning outcomes, her
+    argument is sideways to Art's: It is a distraction, not a refutation.
+</p>
+
+<div class="indent">
+<p class="inline">
+    A red herring argument distracts the listener from
+    the real topic.<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'I\'m told that to train English hunting dogs not to be distracted by strong scents, ' +
+               'herring were sometimes dragged across the scent trail of the true game. ' +
+               'The scent of the herring is the distraction from the dog\'s true task: to follow ' +
+               'the fox.  A well trained dog will ignore the smell of the herring.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Red herring arguments are very common in political discourse.
+</p>
+</div>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Equivocation';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    All men should have the right to vote.
+    Sally is not a man.
+    Therefore, Sally should not necessarily have the right to vote.
+</p>
+
+<div class="indent">
+<p class="inline">
+    This is an example of <span class="termOfArt">equivocation</span>, a fallacy facilitated by
+    the fact that a word can have more than one meaning.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Puns and equivocation are related.  Puns exploit the fact that words can have more than one ' +
+               'meaning; they are intended to be funny; and they sometimes succeed. ' +
+               'Equivocation exploits the fact that words can have more than one meaning; they are intended to ' +
+               'mislead; and they sometimes succeed.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    This argument uses the word <em>man</em> in two different ways.
+    In the first premise, the word means <em>human</em> while in the second, it means
+    <em>male</em>.
+    Generally, equivocation is considered a <span class="termOfArt">fallacy of relevance</span>,
+    but this example fits our definition of a <span class="termOfArt">fallacy of evidence</span>.
+</p>
+</div>
+
+<p>
+    The logical form of this argument is <span class="math">If A then B.  Not C.  Therefore,
+    B is not necessarily true.</span>
+    That argument is a formal fallacy.
+    There is a missing premise that equates one of the premises given
+    (Sally is not male) with a different premise not given (Sally is not human).
+    That is, <span class="math">if not C then not A</span>.
+    That (false) premise relates evidence given to evidence not given, so this is a
+    <span class="termOfArt">fallacy of evidence</span> according to our definition.
+    The fact that the same word can mean &quot;human&quot; and &quot;male&quot; hides the
+    formal fallacy.
+</p>
+
+<p>
+    Another common structure for fallacies that involve equivocation is:
+    <span class="math">All <em>P</em><sub>1</sub>s are <em>Q</em>s.
+    <em>X</em> is a <em>P</em><sub>2</sub>.  Therefore, <em>X</em> is a <em>Q</em>.</span>
+    The equivocation is that the same word is used to refer to <em>P</em><sub>1</sub>
+    and <em>P</em><sub>2</sub>, which hides the fact that <em>P</em><sub>1</sub> and <em>P</em><sub>2</sub>
+    are not the same.
+</p>
+
+<p>
+    Here is an example of equivocation hiding a fallacy of relevance:
+</p>
+
+<p class="example">
+    If you are a Swiss citizen living in the U.S., you are an alien (foreigner).
+    Birgitte is a Swiss citizen living in California.
+    Therefore, Birgitte is an Alien (from another planet).
+</p>
+
+<p>
+    The structure of this example is <span class="math">For any x, if x is A then x is B.  y is A.
+    Therefore, y is C.</span>
+    The missing (and false) premise is that all aliens are Aliens
+    (<span class="math">For any x, if x is B then x is C</span>),
+    which would relate the valid conclusion (Birgitte is an alien) to the desired conclusion (Birgitte is
+    an Alien).
+    Thus this equivocation fallacy is a <span class="termOfArt">fallacy of relevance</a>.
+</p>
+</div>
+
+<p>
+    The straw man, red herring and equivocation fallacies all change the subject:
+    they argue for (or against) something that is sideways to the original claim but easy to confuse
+    with the original claim.
+    <em>Ad hominem</em> arguments also change the subject&mdash;from whether the speaker is right
+    to whether the speaker is &quot;good.&quot;
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = '<em>Petitio principii</em> (begging the question)';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    There is no circumstance that justifies killing another person.
+    The death penalty involves killing another person.
+    Therefore, even if someone commits a brutal murder, he should not be put to death.
+</p>
+
+<p>
+    This argument begs the question.
+    It assumes what it purports to prove, namely, that there is no circumstance
+    that justifies killing.
+    &quot;No circumstance&quot; already precludes &quot;commits brutal murder.&quot;
+</p>
+
+<p>
+    The form of the argument is <span class="math">A.  Therefore, A.</span>
+    That is indeed logically valid&mdash;it just isn't much of an argument.
+    Where this &quot;fallacy&quot; gets legs is when the premise and the conclusion use
+    different words to say the same thing, creating the illusion that the conclusion is
+    different from the assumption.
+    Here is another example:
+</p>
+
+<p class="example">
+    Jack is overweight.  Therefore, Jack is fat.
+</p>
+
+<p>
+    <em>Petitio principii</em> is Latin for &quot;attack the beginning.&quot;
+    The premise assumes the truth of the conclusion.
+    A circular argument is a variant of begging the question.
+</p>
+</div>
+
+
+<p></p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption"><a id="fallacies_of_relevance"></a>
+                Common Fallacies of Relevance</span>
+        </p>
+<ul>
+   <li> Personal attack (<em>ad hominem</em>)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Advice to lawyers: When the facts are with you, argue the facts.  When the facts are against ' +
+           'you, argue the law.  When the facts and the law are against you, call the other lawyer names.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script></li>
+   <li> Attacking the motive  </li>
+   <li> Look who's talking (<em>tu quoque</em>)  </li>
+   <li> Two wrongs make a right  </li>
+   <li> Appeal to force (<em>ad baculum</em>)  </li>
+   <li> Appeal to pity (<em>ad misericordium</em>)  </li>
+   <li> Bandwagon argument (<em>ad populum</em>)  </li>
+   <li> Straw man  </li>
+   <li> Red herring  </li>
+   <li> Equivocation (semantic fallacy)
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'As noted above, equivocation can hide a fallacy of relevance or a fallacy of evidence.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script></li>
+   <li> Begging the question (<em>petitio principii</em>) </li>
+</ul>
+</div>
+
+<h3><a id="evidence"></a>Fallacies of Evidence
+</h3>
+
+<p>
+    This section gives examples of fallacies of evidence.
+    Recall that such fallacies are of the form:
+    <span class="math">If A then B.  C.  Therefore B.</span>
+    There is a missing premise, namely, <span class="math">If C then A</span>.
+    Without that premise, the argument is not much of an argument at all: The premises cannot be combined to
+    support a conclusion other than the premises themselves (which would be a circular argument:
+    <span class="math">C.  Therefore, C.</span>).
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr);
+// -->
+</script>
+    is of this form.
+</p>
+
+<p>
+    Another form for a fallacy of evidence is:  <span class="math">If A then B.  Not C.  Therefore Not A.</span>
+    Again, there is a missing premise, namely, <span class="math">If not C then not B</span>.
+    And without that premise, the argument is no argument at all.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample(xCtr+3);
+// -->
+</script>
+    is of this form.
+</p>
+
+<p>
+    Yet another fallacy is of the form: <span class="math">A.  Therefore, B.</span>
+    For instance:
+</p>
+
+<div class="indent">
+<p class="example" class="inline">Eat your brussels sprouts.  There are children starving in Africa.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'To which the standard response is, &quot;Send them my brussels sprouts.  I\'m not gonna ' +
+               'eat them.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+   (In this argument, the premise <span class="math">A</span> is &quot;there are children starving in Africa,&quot;
+    and the conclusion <span class="math">B</span> is &quot;you should eat your brussels sprouts.&quot;)
+   This could be classified as a fallacy of evidence: There's a missing premise,
+   <span class="math">If A then B</span>: &quot;If children are starving in
+   Africa, then I should eat my brussels sprouts.&quot;
+   Without that premise, the statements are not much of an argument.
+</p>
+
+<p>
+    The examples of fallacies of evidence given below differ in how <span class="math">C</span>
+    is related to <span class="math">A</span> and <span class="math">B</span>.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Inappropriate appeal to authority';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    All animals with rabies go crazy.
+    Jessie says my cat has rabies.
+    Therefore, my cat will go crazy.
+</p>
+
+<p>
+    This argument is fallacious.
+    The form of the argument is <span class="math">If A then B.  C.  Therefore, B.</span>
+    There is a missing premise, namely, that if Jessie says my cat has
+    rabies, then my cat has rabies (<span class="math">If C then A.</span>).
+    That premise relates a stated premise (Jessie says my cat has rabies&mdash;the evidence given)
+    to an unstated premise (my cat has rabies&mdash;the evidence required to be able to use the premise
+    that animals with rabies go crazy).
+    Thus, this is a fallacy of evidence.
+</p>
+
+<p>
+    If we add that missing premise, the argument might or might not be sound, depending on
+    whether Jessie could be mistaken.
+    The argument is clearly stronger if Jessie is a veterinarian who tested my cat for rabies
+    than if Jessie is a 5-year-old child who lives next door.
+    Any time we take somebody's say-so as evidence, we are making an appeal to authority.
+    That person might or might not be &quot;an authority.&quot;
+</p>
+
+<p>
+    Our legal system has elaborate rules governing evidence.
+    A witness can testify about what he or she saw or heard or has personal knowledge of.
+    If I say &quot;Jane told me she saw Frank hotwire the car,&quot;
+    all other things being equal, that could be used in court as evidence that Jane told me
+    something, but not as evidence that Frank hotwired the car&mdash;it is <em>hearsay</em> because
+    I am reporting something I heard about, not something I witnessed directly.
+    I could not appeal to Jane's authority for evidence about Frank's actions.
+    There is a big difference between &quot;I heard it&quot; and &quot;I heard of it.&quot;
+</p>
+
+<p>
+    The fallacy of appealing to authority is called
+    <span class="termOfArt">argumentum ad verecundiam</span>,
+    argument to veneration (respect).
+    A more blatant example is:
+</p>
+
+<p class="example">
+   Professor Stark says <span class="math">1+1=3</span>.
+   Professor Stark has a Ph.D.
+   He is a learned professor of statistics at one of the world's best universities.
+   He has published many scholarly articles in refereed journals, lectured in many countries,
+   and written a textbook about Statistics.
+   His former students hold positions at top universities, in government research agencies, and
+   in the private sector.
+   He has consulted for many top law firms and Fortune 100 companies.
+   He has been qualified as an expert in Federal court and has testified to Congress.
+   Therefore, <span class="math">1+1=3</span>.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Appeal to Ignorance';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    To study user satisfaction with our software product, we sent out 5,000 questionnaires to
+    registered users.
+    Only 100 users filled out and mailed back their questionnaires.
+    Since more than 4,900 of the 5,000 users surveyed did not complain, the vast majority of
+    users are satisfied with the software.
+</p>
+
+<div class="indent">
+<p class="inline">
+    This argument is fallacious: It treats &quot;no evidence of dissatisfaction&quot; as if it were
+    &quot;evidence of satisfaction.&quot;
+    Lack of evidence that a statement is false is not evidence that the statement is true.
+    Nor is lack of evidence that a statement is true evidence that the statement is false.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Arguments for the existence of extraterrestrials and the Easter Bunny often ' +
+               'involve appeals to ignorance.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    This is an example of <a class="glossRef" href="nonresponse">nonresponse</a> in a survey.
+    Nonresponse generally leads to <a class="glossRef" href="nonresponse_bias">nonresponse bias</a>:
+    people who return the survey are generally different from those who do not.
+    Moreover, even if everyone surveyed responds, the opinions expressed in a survey do not tend
+    to be representative of the opinions of the population surveyed (all users, in this case)
+    unless the group that is administered the survey (the 5,000 users who were sent questionnaires)
+    is selected at random.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter("sampling") + ', ');
+// -->
+</script>
+    discusses sample surveys, survey design, nonresponse, and nonresponse bias.
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'False dichotomy';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Either you support the war in Iraq, or you don't support our soldiers who risk their
+    lives for our country.
+    You do support our soldiers.
+    Therefore, you support the war.
+</p>
+
+<p>
+    This argument is valid but not sound: It starts with a premise that is an artificial
+    &quot;either-or,&quot;&mdash;a false dichotomy.
+    It is possible to support our soldiers and still to oppose the war in Iraq,
+    so the first premise is false.
+</p>
+
+<p>
+    The same false dichotomy could have been disguised in slightly different language: The first
+    premise could have been written &quot;if you don't support the war in Iraq, you don't
+    support our soldiers who risk their lives for our country.&quot;
+    That is because the premise <span class="math">if A then B</span> is
+    <a class="glossRef" href="logically_equivalent">logically equivalent</a> to the premise
+    <span class="math">not A or B</span>.
+</p>
+
+<p>
+    False dichotomies show up in question form as well:
+    &quot;So, if you didn't get that money by embezzling it, did you rob someone at gunpoint?&quot;
+    If a lawyer asked a witness that question in court, you would expect the opposing attorney to say,
+    &quot;Objection: compound.&quot;
+</p>
+
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Loaded question';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Did you know that the Sun goes around the Earth?
+</p>
+
+<p>
+    This statement presupposes that the Sun goes around the Earth&mdash; it is a loaded question.
+    Classical examples of loaded qustions include,
+    &quot;Have you stopped beating your wife?&quot;
+    and &quot;Does your mother know you are an alcoholic?&quot;
+    The word &quot;stop&quot; presupposes that something has already started; the word &quot;know&quot;
+    presupposes that something is true.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Questionable cause';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    After nearly eight years of the Bush administration, the stock market had the largest drop
+    since the Great Depression.
+    The Republican government ruined the economy.
+</p>
+
+<p>
+    It might be true that Bush administration policies led to the stock market crash.
+    And it might be true that there would have been a comparable &quot;market correction&quot;
+    under a Democratic administration.
+    The fact that the crash occurred late in the Bush administration is not in itself proof that it
+    was caused by Republican government.
+    The crash also occurred shortly after the introduction of the iPhone.
+    Does it follow that the iPhone caused the stock market crash?
+</p>
+
+<p>
+    This argument is an example of <span class="termOfArt">questionable cause</span>.
+    In particular, it is an example of the
+    <a class="glossRef" href="gloss.htm#post_hoc">post hoc ergo propter hoc</a>
+    (after this, therefore because of this) fallacy.
+</p>
+
+<p>
+    Moreover, even if actions of the Bush government contributed to the stock market crash,
+    it would be an oversimplification to pin everything on the government:
+    an example of the <span class="termOfArt">oversimplified cause</span> fallacy.
+    For instance, mortgage banks that gave &quot;sub-prime&quot; loans to
+    borrowers who were not creditworthy might also have played a role.
+</p>
+
+<p>
+    In addition to <a class="glossRef" href="gloss.htm#post_hoc">post hoc ergo propter hoc</a>,
+    the <a class="glossRef" href="gloss.htm#cum_hoc">cum hoc ergo propter hoc</a>
+    (with this, therefore because of this) fallacy is common in misapplications of statistics:
+    data show that two phenomena are associated&mdash;tend to occur together
+    or to rise and fall together&mdash;and the arguer mistakenly concludes that
+    one of them must therefore cause the other.
+    These fallacies are discussed in more depth in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('correlation') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    Giving coincidences special causal import is another example of the
+    questionable cause fallacy.
+    For instance:
+</p>
+
+<p class="example">
+    Dogs bark before earthquakes.
+    Therefore, dogs can sense that an earthquake is coming.
+</p>
+
+<p>
+    Dogs do bark before earthquakes.  And during earthquakes.  And after earthquakes.
+    And between earthquakes.
+</p>
+
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Slippery slope';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Marijuana must remain illegal.
+    If it were legalized, cocaine would soon follow.
+    And if cocaine were legalized, then opium would be, and eventually heroin, too.
+    Before you know it, everybody would be on drugs, from nursing infants to
+    great-great-grandparents.
+    The only babies born would be crack babies.
+    People would be dying by the tens of millions from AIDS transmitted by sharing hypodermic
+    needles.
+    There would be rampant prostitution so drug-crazed women and men could pay for their habits.
+    Construction workers would fall off buildings, right and left.
+    Nobody would be able to drive safely&mdash;highway fatalities would claim millions of
+    lives a year.
+    The police and military would all become addicted, so there would be no law enforcement or
+    national security.
+    Doctors would be so whacked-out that they couldn't treat patients.
+    The economy would collapse.
+    Within five years, the U.S. would be a third-world country.
+    Eventually, nobody would live past age 20&mdash;if they managed to survive infancy.
+</p>
+
+<p>
+    This argument is of the form:
+</p>
+
+<p class="example">
+    If A then B.  If B then C.  If C then D, etc.
+    Eventually, Z.
+    You don't want Z, do you?  So, you must prevent A.
+</p>
+
+<p>
+   While each step in this progression is possible, it is by no means inevitable: The
+   <span class="termOfArt">conditional</span>
+   statements are really &quot;if A then <em>possibly</em> B&quot;, etc., but they are asserted
+   as &quot;if A then <em>necessarily</em> B,&quot; and so on.
+   The implicit argument is that since there is no &quot;bright line&quot;
+   demarcating where to stop the progression, the progression will not stop.
+   That is fallacious.
+   It is also a resort to scare tactics&mdash;an appeal to emotion rather than to reason.
+   There is no law of Nature that says government could not draw the line at any point in the progression.
+   Currently, the line is drawn at alcohol, although during the Prohibition, the line was drawn
+   on the other side of alcohol.
+   The line on tobacco is being re-drawn to impose more restrictions: no smoking on airplanes,
+   in restaurants, etc.
+   Lines can be drawn anywhere.
+</p>
+
+<div class="indent">
+<p class="inline">
+   The adage &quot;give them an inch and they'll take a mile&quot; is in this family.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'So is the expression &quot;the camel\'s nose under the edge of the tent.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+   Surely, &quot;they&quot; want a mile&mdash;or a hundred&mdash;in the first place.
+   It's up to us to draw the line where we see fit: at zero, at a millimeter, at an inch,
+   or at a megaparsec.
+</p>
+</div>
+
+<p>
+   Not every argument of the form &quot;If A then B.  If B then C.  If C then D, etc.
+   Eventually, Z&quot; is a slippery-slope fallacy.
+   If each of the
+   <a href="gloss.htm#conditional" class="glossRef">conditionals</a> (the if-then statements)
+   is valid, this is a perfectly valid argument.
+   For instance, this argument has no fallacy (assuming the bomb is big):
+   <span class="math">If I push the detonator, the bomb will go off.
+   If the bomb goes off, the building will collapse.
+   If the building collapses, people will be injured and killed.
+   I don't want that to happen, so I shouldn't push the detonator.</span>
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Hasty generalization';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+       I interviewed 20 students in the lunch line at noon today.
+       Nineteen were hungry.
+       Therefore, most students are hungry.
+</p>
+
+<p>
+<div class="indent">
+<p class="inline">
+    This argument is of the form: <span class="math">Some x are (sometimes) A.
+    Therefore, most x are (always) A.</span>
+    The data do not support such a generalization: They were taken at a particular
+    time and place of my choosing.
+    To draw reliable generalizations from the sample to other times, places, and students
+    requires a sample that is drawn using proper sampling techniques, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sampling') + '. ');
+// -->
+</script>
+    This sample has <span class="termOfArt">built-in bias</span> by virtue of where and when it was taken.
+    It is called a <a class="glossRef" href="gloss.htm#convenience_sample">convenience sample</a> because
+    it simply selected students who were readily available.
+    At another time, the same students might not be hungry.
+    At noon, students not in the lunch line might not be hungry.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'A physicist, a statistician and a mathematician are traveling together ' +
+               'by train to a conference in northern Scotland.  They pass a black sheep.  The physicist says, ' +
+               '&quot;Look! Scottish sheep are black!&quot;  The statistician counters, &quot;Don\'t be ' +
+               'hasty: From this observation all you can infer is that at least <em>one</em> Scottish sheep is ' +
+               'black.&quot;  The mathematician: &quot;At least one Scottish ' +
+               'sheep is black on at least one side.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Hasty generalizations occur in Statistics when the sample from which we generalize is not
+    representative of the larger group (&quot;population&quot;)
+    to which we would like to generalize.
+    This tends to happen when the method used to draw the sample is not a good one&mdash;leading to large
+    <a class="glossRef" href="gloss.htm#bias">bias</a>&mdash;or because the
+    sample is small, so that the luck of the draw has a big effect on the accuracy.
+    To ensure that a sample is representative generally requires using some method of random selection.
+    These issues are discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sampling') + ', and ' + citeLinkChapter('estimation') + '. ');
+// -->
+</script>
+    Another example:
+</p>
+
+<p class="example">
+    I want to estimate the fraction of free &quot;adult&quot (commercial pornography) websites
+    that are hosted in the United States.
+    I run a search on a popular search engine for &quot;free porn&quot; and find a link to a
+    list of 25,000 free porn websites, with user ratings.
+    I look up whether each of those websites is hosted in the U.S. or elsewhere.
+    Seventy percent are hosted in the U.S.
+    Therefore, the majority of free porn websites are hosted in the U.S.
+</p>
+
+<p>
+    This is a hasty generalization.
+    Even though the list is large, there is no reason it should be representative of the
+    population of all free porn websites,
+    with respect to the country they are hosted in or any other variable.
+    The list is a sample of convenience.
+    It was found by running a query in English on a U.S. search engine.
+    It is just a list somebody made and that I happened to find.
+</p>
+
+<p class="example">
+    To try to get a better sample, I think of more search terms.
+    I run searches on a popular search engine for &quot;free porn,&quot; &quot;free sex videos,&quot;
+    &quot;naked girls,&quot; &quot;hot sex,&quot; &quot;free intercourse videos,&quot; and
+    15 other terms.
+    For each search, I record the first 100 links to free porn websites that the search engine returns,
+    producing a list of 2,000 websites.
+    I look up whether each of those websites is hosted in the U.S.
+    Seventy percent are; therefore, the majority of free porn websites are hosted in the U.S.
+</p>
+
+<p>
+    This is still a hasty generalization from a sample of convenience.
+    There is no reason the first 100 websites returned by a search engine in response to each of 20 queries I
+    make up should be representative of free porn websites, with respect to host country or any other
+    characteristic&mdash;and there are many reasons for it to be unrepresentative:
+    More popular websites tend to be returned closer to the top of the list of results for each search.
+    Queries in English tend to return links in the U.S.
+    U.S. search engines tend to return links in the U.S.
+    The search engine databases are not an exhaustive list of all websites.
+    Other queries intended to retrieve porn websites would get different results.
+    There are countless more reasons.
+</p>
+
+</div>
+
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Weak analogy';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    Countries are like families.
+    Government is like the parents, and citizens are like the children.
+    &quot;Spare the rod, spoil the child.&quot;
+    Therefore, our legal system must impose harsh penalties for legal infractions: &quot;tough love.&quot;
+</p>
+
+<p>
+    This argument is of the form: <span class="math">x</span> is similar to <span class="math">y</span>
+    in some regards.
+    Therefore, everything that is true for <span class="math">x</span> is true for <span class="math">y</span>.
+    Another example:
+</p>
+
+<p class="example">
+    Physicists are like physicians.
+    Both study calculus as undergraduates;
+    both have many years of education,
+    culminating in advanced degrees;
+    both know lots of science;
+    both tend to have above average intelligence;
+    both tend to be arrogant;
+    both even start with the same seven letters, &quot;physici.&quot;
+    Physicians treat illness.
+    Therefore, physicists treat illness.
+</p>
+
+<p>
+    Weak analogies often arise in some forms of sampling, such as
+    <a class="glossRef" href="gloss.htm#quota_sample">quota sampling</a> and
+    <a class="glossRef" href="gloss.htm#convenience_sample">convenience sampling</a>.
+    A sample can resemble the population from which it is drawn in many ways, and yet be
+    unrepresentative of the population with respect to the property we care about.
+    The Hite report example in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('sampling') + ', ');
+// -->
+</script>
+    shows that a sample can match the demographics of the population from which it is drawn quite accurately,
+    but still be unlike the population with respect to opinions and experiences.
+    One of the chief merits of <a class="glossRef" href="gloss.htm#random_sample">random sampling</a>
+    is that the resulting samples tend to be representative of the population with respect
+    to all properties; moreover, we can quantify the extent to which a random sample is likely to be
+    unrepresentative, and those differences tend to be smaller the larger the
+    <a class="glossRef" href="gloss.htm#sample_size">sample size</a>.
+    For other ways of drawing samples, the samples are generally unrepresentative even
+    when they are large.
+</p>
+</div>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Inconsistency';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p class="example">
+    &quot;Nobody goes there anymore.  That place is too crowded.&quot;&mdash;Yogi Berra.
+</p>
+
+<div class="indent">
+<p class="inline">
+    This isn't an argument because there is no conclusion, only premises, but that's not the point.
+    These two premises amount to: <span class="math">A. Not A.</span>
+    They contradict each other.
+    If one of the premises is true, the other must be false:
+    It is logically impossible for both to be true.
+    Hence, any argument that stems from them cannot be sound&mdash;since, even if it is valid,
+    it will have a false premise.
+    Generally, the fallacy of inconsistency occurs whenever the premises cannot all be true&mdash;as a matter
+    of logic.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Two neighbors are in a dispute over a lawnmower.  One claims that the other borrowed ' +
+               'his lawnmower and broke it.  The defense:  (1) The lawnmower was broken when you loaned it ' +
+               'to me.  (2) I returned the lawnmower to you in perfect working order.  (3) I never borrowed ' +
+               'your lawnmower.  (4) The lawnmower in question is mine.  (5) There is no lawnmower.</p>' +
+               '<p>Some years ago I told this joke to a brilliant attorney, a director at a top-notch ' +
+               'San Francisco law firm. His response: &quot;Well argued!&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Yogi Berra was a master of inconsistency.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'He was also a master of the circular argument: ' +
+               '&quot;You wouldn\'t have won if we\'d beaten you.&quot; ' +
+               '&quot;I always thought that record would stand until it was broken.&quot; ' +
+               '&quot;The future ain\'t what it used to be.&quot;';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    I don't know how many of the following he actually said, but I've seen these quotes attributed to him:
+</p>
+</div>
+
+<p class="example">
+     &quot;Baseball is 90% physical.  The other half is mental.&quot;
+     &quot;Half the lies they tell about me aren't true.&quot;
+     &quot;I never said most of the things I said.&quot;
+     &quot;If the world was perfect, it wouldn't be.&quot;
+     &quot;It was impossible to get a conversation going, everybody was talking too much.&quot;
+     &quot;It gets late early out there.&quot;
+     &quot;I wish I had an answer to that because I'm tired of answering that question.&quot;
+</p>
+
+</div>
+
+<p>&nbsp;</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption"><a id="fallacies_of_evidence"></a>
+               Common Fallacies of Evidence</span>
+        </p>
+<ul>
+   <li>	Inappropriate appeal to authority </li>
+   <li>	Appeal to ignorance  </li>
+   <li>	False dichotomy  </li>
+   <li>	Loaded question  </li>
+   <li>	Questionable cause  </li>
+   <li>	Slippery slope  </li>
+   <li>	Hasty generalization  </li>
+   <li>	Weak analogy  </li>
+   <li>	Inconsistency  </li>
+</ul>
+</div>
+
+
+<p>
+    The following exercises check your ability to recognize informal fallacies.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var  qStr = '<span class="qSpan">Does the following argument commit any informal fallacies?</span> ' +
+                '<span class="example">';
+    var vstatements = [
+                        'Leeks are like scallions.  Both are in the onion family.  Both have a pungent taste. ' +
+                           'Both grow in the ground and photosynthesize using chlorophyll. Therefore, ' +
+                            'both are plants.',
+                        'The police and courts are designed to prosecute and punish those who break ' +
+                           'the law. It is a law that you must stop at red lights. Therefore, if ' +
+                           'you run a red light, the police and courts might prosecute and punish you.',
+                        'Something is representative if it is typical of the group from which it is drawn. ' +
+                           'Elements of random samples tend to be representative of the population from ' +
+                           'which they are drawn.  Therefore, elements of random samples tend to be ' +
+                           'typical of the population from which they are drawn.',
+                        'Adolph Hitler\'s Nazi dictatorship killed more than 12 million people. ' +
+                           'That is more than almost any other regime.  Therefore, the Nazi government ' +
+                           'was unusually effective at killing.',
+                        'In a state of starvation, the body metabolizes itself. Even heart muscle can ' +
+                           'is metabolized, which can lead to heart damage.  Therefore, while they can ' +
+                           'be effective for weight loss, starvation diets also pose the risk of heart ' +
+                           'damage.',
+                        'I saw a dog running away from a cat. Therefore, dogs can run.',
+                        'Four out of five dentists surveyed recommend sugarless gum for their ' +
+                           'patients who chew gum.  Therefore, there are at least four dentists who ' +
+                           'recommend sugarless gum for their patients who chew gum.',
+                        'Software companies have sold millions of copies of filtering software designed ' +
+                           'to prevent children from encountering pornography on the Internet.  Software ' +
+                           'companies do not continue to sell products that are not profitable. Therefore, ' +
+                           'filtering software is profitable.',
+                        'Surveys of parents who install &quot;parental control&quot; software to prevent their ' +
+                           'children from encountering pornography on the Internet generally find that most ' +
+                           'respondents are satisfied with the software.  Therefore, ' +
+                           'some respondents report that they are satisfied with &quot;parental ' +
+                           'control&quot; software.',
+                        'Paleoclimate data suggests that there have been large changes in Earth\'s climate ' +
+                           'many times in the past, including ice ages and warming spells long before ' +
+                           'human civilization. Changes in climate since the industrial revolution are ' +
+                           'small compared with ice ages.  Therefore, the magnitude of global warming ' +
+                           'does not by itself provide evidence that industrialization and ' +
+                           'the burning of fossil fuels are causing the polar ice caps to melt.',
+                        'Lung cancer rates for people who live near power lines are indistinguishable from ' +
+                           'lung cancer rates for people who live far from power lines.  Therefore, if ' +
+                           'living near power lines increases the risk of lung cancer, it does not ' +
+                           'increase the risk by much.',
+                        'I have $2 in my pocket.  If I spend it on coffee, I won\'t have money left for food. ' +
+                           'I won\'t have money left for bus fare.  I won\'t have money left for a newspaper. ' +
+                           'I won\'t have money left for candy.',
+                        'If you don\'t brush your teeth, you will get cavities.  Therefore, if you don\'t want ' +
+                           'cavities, you should brush your teeth.'
+                      ];
+    var fstatements = [
+                        ['Life is like an onion.  Both have many layers.  Both can make you cry. ' +
+                           'Onions are good on hamburgers.  Therefore, life is good on hamburgers. ' +
+                           'Ants live on hamburgers.  Therefore, ants have a good life.',
+                         'weak analogy and equivocation.',[20,6]],
+                        ['The police and courts are designed to prosecute and punish those who break ' +
+                           'the law. Gravity is a law. Therefore, if you break the law of gravity, ' +
+                           'the police and courts might prosecute and punish you.',
+                         'equivocation.',[6]],
+                        ['Something is representative if it is typical of the group from which it is drawn. ' +
+                           'Members of congress are representatives of their states.  Therefore, members ' +
+                           'of congress from California are typical Californians.',
+                         'equivocation.',[6]],
+                        ['Adolph Hitler\'s Nazi dictatorship killed more than 12 million people. ' +
+                           'The Nazi government advocated eugenics.  Therefore, eugenics ' +
+                           'programs should not be pursued.',
+                         'personal attack, guilt by association.',[8,14]],
+                        ['The only effective diet is a starvation diet.  If you eat anything at all, ' +
+                           'you will be tempted to eat more.  Then more.  Then even more.  Eventually, ' +
+                           'you will eat so much that you gain back any weight you lost.  Therefore, ' +
+                           'starvation diets are the best way to control your weight.',
+                         'slippery slope.',[17]],
+                        ['I saw a dog running away from a cat. Therefore, dogs are afraid of cats.',
+                         'hasty generalization, non sequitur of evidence, questionable cause',
+                           [9,15]],
+                        ['Four out of five dentists surveyed recommend sugarless gum for their ' +
+                           'patients who chew gum.  Therefore, sugarless gum is better for your teeth than ' +
+                           'regular gum.',
+                         'non sequitur of relevance, non sequitur of evidence, inappropriate appeal to authority.',
+                            [10]],
+                        ['Software companies have sold millions of copies of filtering software designed ' +
+                           'to prevent children from encountering pornography on the Internet.  Therefore, ' +
+                           'filtering software is effective at preventing children from encountering ' +
+                           'pornography on the Internet.',
+                         'non sequitur of relevance, bandwagon; less clear-cut: inappropriate appeal to ' +
+                           'authority, hasty generalization.',[4,9,10]],
+                        ['Surveys of parents who install &quot;parental control&quot; software to prevent their ' +
+                           'children from encountering pornography on the Internet generally find that most ' +
+                           'respondents are satisfied with the software.  Therefore, ' +
+                           '&quot;parental control&quot; software is effective.',
+                         'non sequitur of evidence, non sequitur of relevance, bandwagon, hasty generalization, ' +
+                           'inappropriate appeal to authority, red herring.',[4,9,10,16]],
+                        ['Google is by far the most popular search engine.  Therefore, it is the best ' +
+                           'search engine.',
+                         'non sequitur of relevance, bandwagon.',[4]],
+                        ['More people use google than any other search engine.  Therefore, it is ' +
+                           'the most popular search engine.',
+                         'begs the question.', [5]],
+                        ['Some NASA scientists are concerned about global warming.  But other NASA scientists ' +
+                           'helped leave junk in space, and rocket exhaust could damage the ozone layer. ' +
+                           'Therefore, global warming is not a legitimate concern.',
+                         'look who\'s talking, guilt by association', [13,8]],
+                        ['The evidence linking global warming to human activity&mdash;such as burning ' +
+                           'fossil fuels&mdash;is weak.  Therefore, human activity does not cause global ' +
+                           'warming.',
+                         'appeal to ignorance.',[1]],
+                        ['Either global warming is caused by burning fossil fuel or it is caused by a rapid, ' +
+                           'drastic change in Earth\'s orbit or in solar radiation.  Careful astronomical ' +
+                           'and geophysical observations show that changes in Earth\'s orbit and in solar ' +
+                           'radiation have been small and gradual for hundreds of millions of years. ' +
+                           'Therefore, global warming is caused by burning fossil fuel.',
+                         'false dichotomy.', [7]],
+                        ['Global average temperature has been increasing as the burning of fossil fuels has ' +
+                           'increased.  Therefore, burning fossil fuels causes global warming.',
+                         'cum hoc ergo propter hoc, questionable cause.', [15]],
+                        ['Power lines produce magnetic fields.  There is no scientific evidence that the ' +
+                           'magnetic fields of power lines cannot cause cancer. Therefore, power lines ' +
+                           'pose a health hazard.',
+                         'appeal to ignorance.', [1]],
+                        ['If you don\'t brush your teeth, I will kick your teeth in.  Therefore, you should ' +
+                           'brush your teeth.',
+                         'appeal to force (<span class="termOfArt"><em>ad baculum</em></span>).', [0]],
+                        ['Everybody brushes his or her teeth.  Therefore, you should ' +
+                           'brush your teeth.',
+                         'bandwagon argument.', [4]],
+                        ['I have $2 in my pocket.  If I spend it on coffee, I won\'t have money left for bus ' +
+                           'fare.  If I don\'t have money for bus fare, I will get stuck downtown. ' +
+                           'If I get stuck downtown late at night, I will get mugged. ' +
+                           'If I get mugged, I will get beaten up. If I get beaten up, I will be permanently ' +
+                           'injured or possibly killed.  Therefore, I should not spend my money on coffee.',
+                          'slippery slope.', [17]]
+                      ];
+    var vOrF = randBoolean();
+    var aVal = 'a';
+    var ansStr = '';
+    var which;
+    if (vOrF) {
+         which = listOfRandInts(1, 0, vstatements.length-1)[0];
+         qStr += vstatements[which];
+         ansStr = 'This is a valid argument.';
+    } else {
+         aVal = 'b';
+         which = listOfRandInts(1, 0, fstatements.length-1)[0];
+         qStr += fstatements[which][0];
+         ansStr = 'This argument commits (at least) the following informal fallacies: ' +
+                  fstatements[which][1];
+    }
+    qStr +=  '</span>';
+    var opt = ['no informal fallacy','one or more informal fallacies'];
+/*    var lOpt = [
+                'affirming the antecedent',
+                'affirming the conjunct',
+                'affirming the consequent',
+                'affirming the disjunct',
+                'denying the antecedent',
+                'denying the conjunct',
+                'denying the consequent',
+                'denying the disjunct',
+                'non sequitur of relevance',
+                'non sequitur of evidence'
+               ];
+*/
+    var iOpt = [
+                'appeal to force',        // 1
+                'appeal to ignorance',
+                'appeal to pity',
+                'attacking the motive',
+                'bandwagon argument',     // 5
+                'begs the question',
+                'equivocation',
+                'false dichotomy',
+                'guilt by association',
+                'hasty generalization',     // 10
+                'inappropriate appeal to authority',
+                'inconsistency',
+                'loaded question',
+                'look who\'s talking',
+                'personal attack',      // 15
+                'questionable cause',
+                'red herring',
+                'slippery slope',
+                'straw man',
+                'two wrongs make a right',   // 20
+                'weak analogy'
+               ];
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = '<span class="qSpan">Which of the following informal fallacies does the argument commit?</span>';
+    document.writeln(qStr);
+    var rawOpt = iOpt;
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = 'none of the above';
+    aVal = '';
+    if (vOrF) {
+       aVal = alphabet[opt.length-1];
+    } else {
+       for (var i = 0; i < fstatements[which][2].length; i++) {
+          aVal += alphabet[optPerm[1][fstatements[which][2][i]]] + '|';
+       }
+       aVal = aVal.substr(0, aVal.length-1);
+    }
+    writeSelectExercise(true, qCtr++, opt, aVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+
+<h2><a id="summary"></a>Summary</h2>
+
+<p>
+    An argument consists of a sequence of statements.
+    One is the <span class="termOfArt">conclusion</span>; the rest are
+    <span class="termOfArt">premises</span>.
+    The premises are given as evidence that the conclusion is true.
+    If the conclusion must be true if the premises were true, the argument is
+    <span class="termOfArt">valid</span>.
+    A valid argument is <span class="termOfArt">sound</span> if its premises are true.
+    Valid arguments result from applying correct rules of reasoning.
+    Examples of correct rules of reasoning include:
+</p>
+
+<ul>
+   <li> <span class="math">A or not A.</span></li>
+   <li> <span class="math">Not (A and not A).</span></li>
+   <li> <span class="math">A. B. Therefore, A and B.</span></li>
+   <li> <span class="math">A. Therefore, A or B.</span></li>
+   <li> <span class="math">A and B. Therefore, A.</span></li>
+   <li> <span class="math">A or B. Not A. Therefore, B.</span></li>
+   <li> <span class="math">Not A. Therefore, not (A and B).</span></li>
+   <li> <span class="math">Not (A and B). Therefore, (not A) or (not B).</span></li>
+   <li> <span class="math">Not (A or B). Therefore, (not A) and (not B).</span></li>
+   <li> <span class="math">If A then B. A. Therefore, B.</span></li>
+   <li> <span class="math">If A then B. Not B. Therefore, not A.</span></li>
+</ul>
+
+<p>
+    Using incorrect rules of reasoning or misapplying correct rules results in a
+    <span class="termOfArt">formal fallacy</span>.
+    There are many common formal fallacies.
+    One is the <span class="termOfArt">non sequitur</span>.
+    In a <span class="termOfArt">non sequitur</span>, a necessary premise is missing.
+    If the missing premise relates one of the stated premises to a different premise (i.e., ties evidence given to
+    evidence not given), the fallacy is a <span class="termOfArt">non sequitur of evidence</span>.
+    If the missing premise relates a valid conclusion but unstated conclusion to the stated
+    conclusion (i.e., ties the conclusion given to
+    a conclusion not given), the fallacy is a <span class="termOfArt">non sequitur of relevance</span>.
+    There are other formal fallacies as well.
+    Examples of formal fallacies include:
+</p>
+
+<ul>
+   <li> <span class="math">A or B. A.  Therefore, not B.</span></li>
+   <li> <span class="math">Not (A and B). Not A. Therefore, B.</span></li>
+   <li> <span class="math">If A then B. B.  Therefore, A.</span></li>
+   <li> <span class="math">If A then B. not A.  Therefore, not B.</span></li>
+   <li> <span class="math">If A then B. C.  Therefore, B.</span></li>
+   <li> <span class="math">If A then B. A.  Therefore, C.</span></li>
+</ul>
+
+<p>
+    In addition to formal fallacies, there are <span class="termOfArt">informal fallacies</span>.
+    Although the categorization is not strict, informal fallacies generally fall into two groups:
+    <span class="termOfArt">fallacies of relevance</span> and <span class="termOfArt">fallacies of evidence</span>.
+    Fallacies of relevance have <span class="termOfArt">non sequiturs of relevance</span> at their core;
+    fallacies of evidence have <span class="termOfArt">non sequiturs of evidence</span>.
+    Examples of the former include <span class="termOfArt">ad hominem</span> and other genetic fallacies,
+    appeals to emotion (fear, pity), the straw man, the red herring, and arguments that beg the question.
+    Examples of the latter include appeals to authority, slippery slope, hasty generalizations,
+    weak analogies, <span class="termOfArt">post hoc ergo propter hoc</span>, and
+    <span class="termOfArt">cum hoc ergo propter hoc</span>.
+    Equivocation can hide a fallacy of relevance or a fallacy of evidence.
+    Inconsistency can produce a valid argument, but never a sound argument.
+</p>
+
+<p>
+    Statistics can be (and often is) misused to produce both kinds of informal fallacy.
+    Be alert to the structure of arguments to avoid being deceived and to avoid deception.
+</p>
+
+
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li><em>ad hominem</em> argument</li>
+    <li>affirming the consequent</li>
+    <li>anecdotal fallacy</li>
+    <li>antecedent</li>
+    <li>appeal to authority</li>
+    <li>bad reasons fallacy</li>
+    <li>compound question</li>
+    <li>consequent</li>
+    <li><em>cum hoc ergo propter hoc</em></li>
+    <li>equivocation</li>
+    <li>evidential fallacy</li>
+    <li>false dichotomy</li>
+    <li>formal fallacy</li>
+    <li>genetic fallacy</li>
+    <li>hasty generalization</li>
+    <li>informal fallacy</li>
+    <li><em>modus ponendo ponens</em></li>
+    <li><em>modus tollendo tollens</em></li>
+    <li><em>non sequitur</em> of evidence</li>
+    <li><em>non sequitur</em> of relevance</li>
+    <li><em>post hoc ergo propter hoc</em></li>
+    <li>premise</li>
+    <li>presupposition</li>
+    <li>quantificational fallacy</li>
+    <li>red herring</li>
+    <li>semantic fallacy</li>
+    <li>slippery slope</li>
+    <li>sound</li>
+    <li>straw man</li>
+    <li>syllogism</li>
+    <li>tautology</li>
+    <li>valid</li>
+    <li>weak analogy</li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

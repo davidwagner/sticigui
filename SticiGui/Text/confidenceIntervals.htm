@@ -1,0 +1,2323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "9 August 2012 14:45 PDT";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "confidenceIntervals";
+    writeChapterHead('SeEd',cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('..');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<form method="POST">
+
+<!-- ====================================================================================== -->
+
+<h1>
+   Confidence Intervals
+</h1>
+
+<p>
+    This chapter continues our study of estimating population
+    <a class="glossRef" href="gloss.htm#parameter">parameters</a> from
+    <a class="glossRef" href="gloss.htm#random_sample">random samples</a>.
+    In
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('estimation') + ', ');
+// -->
+</script>
+    we studied <a class="glossRef" href="gloss.htm#estimator">estimators</a> that assign a number to each
+    possible random sample, and the
+    uncertainty of such estimators, measured by their <a class="glossRef" href="gloss.htm#rmse">RMSE</a>.
+    (The RMSE is the square-root of the expected value of the squared difference between the
+    estimator and the parameter&mdash;a measure of the typical size of the error.)
+    Instead of assigning a single number to each sample and reporting the size of a
+    typical error, the methods in this chapter assign an interval to each sample and
+    report the <a class="glossRef" href="gloss.htm#confidence_level">confidence level</a>
+    that the interval contains the parameter.
+    <em>Confidence</em> is a technical term related to probability.
+    Just as the RMSE of an estimator measures the long-run average size of the error in
+    repeated sampling, but the error for any particular sample could be smaller or
+    larger than the RMSE, the confidence level is the long-run fraction of intervals
+    that contain the parameter in repeated sampling, but the interval for any particular
+    sample might or might not contain the parameter.
+</p>
+
+<p>
+    The statement <em>&quot;the interval [92%, 94%] contains the population percentage at
+    confidence level 90%&quot;</em> does <em>not</em> mean that the probability that the population
+    percentage is between 92% and 94% is 90%.
+    (The event that the interval [92%, 94%] contains the population percentage is not
+    random: Either the population percentage is between 92% and 94%, or it is not.)
+    Rather, the statement means that if we were to take samples of size <span class="math">n</span> repeatedly
+    and compute a 90% confidence level confidence interval for the population percentage
+    from each sample of size <span class="math">n</span>, the long-run fraction of intervals that contain
+    the population percentage would converge to 90%.
+</p>
+
+<p>
+    The length of the confidence interval and the confidence level measure how
+    accurately we are able to estimate the parameter from a sample.
+    If a short interval has high confidence, the data allow us to estimate the parameter
+    accurately.
+    Higher confidence generally requires a longer interval, <em>ceteris paribus</em>,
+    and, shorter intervals generally have lower confidence levels.
+    Conventional values for the confidence level of confidence intervals include
+    68%, 90%, 95%, and 99%, but sometimes other values are used.
+    It is crucial to know the confidence level associated with a confidence interval:
+    The interval by itself is meaningless.
+</p>
+
+<h2>
+    <a id="conservative_ci"></a>
+    Conservative confidence intervals for percentages
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/jkWOMalw4zI?start=3990&end=4721" frameborder="0" allowfullscreen></iframe> &nbsp;
+	<iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=108&end=778" frameborder="0" allowfullscreen></iframe>
+</p>
+
+<p>
+    In this section, we develop conservative confidence intervals for the
+    population <a class="glossRef" href="gloss.htm#population_percentage">percentage</a> based on the
+    <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage</a>,
+    using <a class="glossRef" href="gloss.htm#chebychev">Chebychev’s Inequality</a>
+    and an upper bound on the <a class="glossRef" href="gloss.htm#sd">SD</a> of lists that contain
+    only the numbers 0 and 1.
+    <em>Conservative</em> means that the chance that the procedure produces an
+    interval that contains the population percentage is at least large as claimed.
+    (Later in this chapter we will consider <em>approximate</em> confidence intervals.)
+</p>
+
+<p>
+    Consider a <a class="glossRef" href="gloss.htm#0_1_box">0-1 box</a> of <span class="math">N</span> tickets.
+    The population percentage <span class="math">p</span> is the fraction of tickets labeled &quot;1:&quot;
+</p>
+
+<p class="math">
+    p = 100% &times;
+    (# tickets in the population labeled &quot;1&quot;)/N,
+</p>
+
+<p>
+    The population percentage is also the <a class="glossRef" href="gloss.htm#population_mean">population mean</a>
+    of the numbers on all the tickets in the box, ave(box).
+    The sample percentage <span class="math">&phi;</span> of a
+    <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>
+    (random sample without replacement) of size <span class="math">n</span> from the population
+    of <span class="math">N</span> tickets is
+</p>
+
+<p class="math">
+    &phi; = 100% &times; (# tickets in the sample labeled "1")/n.
+</p>
+
+<div class="indent">
+<p class="inline">
+    The sample percentage is the sample mean of the labels on the tickets in the sample.
+    The <a class="glossRef" href="gloss.htm#expectation">expected value</a>
+    of the sample percentage <span class="math">&phi;</span> is the population
+    percentage <span class="math">p</span>,
+    and the <a class="glossRef" href="gloss.htm#se">SE</a> of the sample percentage
+    <span class="math">&phi;</span> is
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = citeLinkChapter('expectation') +
+               ', shows that the expected value of the sample percentage is <span class="math">E(&phi;) = p</span>. ' +
+               citeLinkChapter('standardError') + ' shows that shows that ' +
+               '<span class="math">SE(&phi;) = f &times; ' +
+               '(p&times;(1&minus;p) )<sup>&frac12;</sup>/n<sup>&frac12;</sup></span>. ' +
+               citeLinkChapter('estimation') + ', shows that the standard error of the sample ' +
+               'percentage is largest when <span class="math">p=50%</span>. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p class="math">
+    SE(&phi;) = f  &times;
+    ( p&times;(1&minus;p) )<sup>&frac12;</sup>/n<sup>&frac12;</sup>
+</p>
+
+<p class="math">
+    &le; f &times;50%/n<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">f</span> is the finite population correction
+</p>
+
+<p class="math">
+    f = (N &minus;n)<sup>&frac12;</sup>/(N &minus; 1)<sup>&frac12;</sup>.
+</p>
+
+<p>
+    Thus <span class="math">f &times;50%/n<sup>&frac12;</sup></span> is an upper bound on the SE of
+    the sample percentage.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    shows what happens if we center an interval at the sample percentage, and extend the interval
+    down and up from the sample percentage by twice the upper bound on the SE of the
+    sample percentage.
+    When the interval includes the population percentage, we say the
+    interval <a class="glossRef" href="gloss.htm#cover">covers</a> the truth.
+    The interval is random, because it is centered at the sample percentage, which is
+    random.
+    The chance that the random interval will contain the true population
+    percentage is called the
+    <a class="glossRef" href="gloss.htm#coverage_probability">coverage probability</a> of the interval.
+    Take a few samples by clicking <span class="appCtrlName">Take Sample</span>
+    to get the feel of the tool; then increase <span class="appCtrlName">Samples to Take</span>
+    to 1000
+    and click <span class="appCtrlName">Take Sample</span> again.
+    The actual percentage of intervals that cover will vary, but almost always it will
+    be larger than 75%, sometimes nearly 100%.
+    The empirical percentage of intervals that cover is an estimate of the coverage probability
+    of the procedure.
+    Vary the sample size and put a few different lists of zeros and ones into the
+    <span class="appCtrlName">Population</span> box at
+    the right of the figure, and try a few different sample sizes for each population.
+    You should find that the fraction of intervals that cover the true population percentage
+    stays above 75% (almost without fail), no matter what the population of zeros and ones is.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Conservative Confidence Interval for the Population Percentage';
+    writeFigureCaption(qStr);
+// -->
+</script>
+<p class="figure">
+    <applet code="Ci.class" codebase="../../Java/" align="baseline"
+        width="800" archive="PbsGui.zip" height="400">
+    <param name="factor" value="2">
+    <param name="sampleSize" value="3">
+    <param name="showTruth" value="true">
+    <param name="sources" value="0-1 box">
+    <param name="replace" value="false">
+    <param name="seChoices" value="Bound on SE (0-1 Box only)">
+    <param name="boxContents" value="0,0,0,1,1,1">
+    You need Java to see this.
+    </applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'var newPop = listOfRandInts(6,0,1);\n' +
+              'if (vSum(newPop) == 0) {\n' +
+              '     newPop[0] = 1;\n' +
+              ' } else if (vSum(newPop) == newPop.length) {\n' +
+              '     newPop[0] = 0;\n' +
+              ' }\n' +
+              ' newPop = newPop.join();\n' +
+              ' document.applets[' + appNum + '].setBox(newPop,true);\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Why do these random intervals cover the true population percentage so often?
+    We can show that they should using Chebychev's inequality.
+    Because
+</p>
+
+<p class="math">
+    SE(&phi;) &le; f &times; 50%/n<sup>&frac12;</sup>,
+</p>
+
+<p>
+    the event
+</p>
+
+<p class="math">
+    | &phi; &minus; p | &le; k &times; SE(&phi;)
+</p>
+
+<p>
+    is a subset of the event
+</p>
+
+<p class="math">
+    | &phi; &minus; p | &le; k &times; f
+    &times; 50%/n<sup>&frac12;</sup>.
+</p>
+
+<p>
+    It follows that
+</p>
+
+<p class="math">
+    P<big>(</big> | &phi; &minus; p | &le; k &times;
+    SE(&phi;) <big>)</big> &le;
+    P<big>(</big> | &phi; &minus; p | &le; k &times;
+    f
+    &times; 50%/n<sup>&frac12;</sup> <big>)</big>.
+</p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a>
+    guarantees that the chance the sample percentage <span class="math">&phi;</span>
+    differs from its expected value <span class="math">p</span> by more than
+    <span class="math">k</span> times its <a class="glossRef" href="gloss.htm#se">standard error</a> is at most
+    <span class="math">1/k<sup>2</sup></span>, so
+</p>
+
+<p class="math">
+     1 &minus; 1/k<sup>2</sup> &le;
+     P <big>(</big> |&phi; &minus; p| &le;
+     k&times;SE(&phi;) <big>)</big>
+</p>
+
+<p class="math">
+    &le; P<big>(</big> |&phi; &minus; p| &le;
+     k &times; f &times; 50%/n<sup>&frac12;</sup> <big>)</big>.
+</p>
+
+<p>
+    That is,
+</p>
+
+<p class="math">
+    P<big>(</big> |&phi; &minus; p| &le; k &times;
+    f &times; 50%/n<sup>&frac12;</sup> <big>)</big>
+    &ge; 1 &minus; 1/k<sup>2</sup>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Therefore, in the long run in repeated sampling, the fraction of trials in which
+    the sample percentage
+    <span class="math">&phi;</span> is within
+    <span class="math">&plusmn;2&times;f&times;50%/n<sup>&frac12;</sup></span> of the
+    population percentage <span class="math">p</span>
+    converges to a number that is 75% or larger.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'More precisely, there is a number <span class="math">q</span> that is 75% or larger, ' +
+           'such that for any number <span class="math">e</span> &gt; 0, the chance that the fraction ' +
+           'of intervals that contain the population percentage is within ' +
+           '<span class="math">&plusmn;e</span> of <span class="math">q</span> ' +
+           'approaches 100% as the number of repetitions increases.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+    Whenever <span class="math">&phi;</span> is within
+    <span class="math">&plusmn;2&times;f&times;50%/n<sup>&frac12;</sup></span> of the
+    population percentage <span class="math">p</span>, an interval centered at <span class="math">&phi;</span>
+    extending down and up by
+    <span class="math">&plusmn;2&times;f&times;50%/n<sup>&frac12;</sup></span> will contain
+    <span class="math">p</span>.
+    That is, the interval
+<p class="math">
+    &phi;
+    &plusmn; 2&times; f &times; 50%/n<sup>&frac12;</sup>,
+</p>
+</div>
+
+<p>
+    which is shorthand for
+</p>
+
+<p class="math">
+    <big>[</big> &phi; &minus;
+    2 &times; f &times; 50%/n<sup>&frac12;</sup>,
+    &phi; +
+    2 &times; f &times; 50%/n<sup>&frac12;</sup>
+    <big>]</big>,
+</p>
+
+<p>
+    contains <span class="math">p</span> at least 75% of the time, in the long run.
+    Similarly,
+    the fraction of trials in which <span class="math">&phi;</span> is within
+    <span class="math">&plusmn;3&times;f&times;50%/n<sup>&frac12;</sup></span> of
+    <span class="math">p</span>
+    converges to a number that is 88.89% or larger, so the long-run fraction of intervals
+    <span class="math">&phi;&plusmn;3&times;f&times;50%/n<sup>&frac12;</sup></span>
+    that contain <span class="math">p</span> will be 88.89% or larger.
+    The fraction of trials in which <span class="math">&phi;</span> is within
+    <span class="math">&plusmn;4&times;f&times;50%/n<sup>&frac12;</sup></span> of
+    <span class="math">p</span>
+    converges to a number that is 93.75% or larger, so the long-run fraction of intervals
+    <span class="math">&phi;&plusmn;4&times;f&times;50%/n<sup>&frac12;</sup></span>
+    that contain <span class="math">p</span> will be 93.75% or larger, <em>etc</em>.
+</p>
+
+<p>
+    In general, if we go down and up from the sample percentage by
+    <span class="math">k&times;f&times;50%/n<sup>&frac12;</sup></span>,
+    then in the long run in repeated trials, the resulting intervals will include the
+    true population percentage at least <span class="math">1 - 1/k<sup>2</sup></span>
+    of the time.
+</p>
+
+<p>
+    Change the <span class="appCtrlName">Intervals: &plusmn;</span> value in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig(figCtr-1);
+// -->
+</script>
+    to 3 and to 4 to confirm empirically that this is true.
+</p>
+
+<p>
+    The interval
+    <span class="math">&phi;&plusmn;k&times;f&times;(50%/n<sup>&frac12;</sup>)</span>
+    is <em>random</em>: Its center depends
+    on <span class="math">&phi;</span>, which in turn depends on
+    which <a class="glossRef" href="gloss.htm#unit">units</a> (here, tickets) happen to be in the random sample.
+    The probability is in the random sampling procedure, <em>not</em> in the parameter.
+    The <a class="glossRef" href="gloss.htm#parameter">parameter</a> is the same, no matter
+    what sample we happen to get&mdash;the parameter is a property of the population, not the
+    sample.
+    It is the interval that varies with the random sample.
+    Before the data are collected, the coverage probability is the
+    chance that sampling will result in an interval that contains the parameter.
+</p>
+
+<p>
+    Taking the sample determines the interval, leaving nothing to chance:
+    The interval the procedure produced
+    either does or does not contain the population percentage.
+    (One could say that after collecting the data, the chance that the interval covers
+    the parameter is either 0 or 100%.)
+    Typically, we never learn whether the interval covers the parameter,
+    but our ignorance is not a probability (at least, not according to the
+    <a class="glossRef" href="gloss.htm#frequency_theory">frequency theory of probability</a> used
+    in this book).
+</p>
+
+<p>
+    The interval the procedure gives for any particular set of data is called a
+    <a class="glossRef" href="gloss.htm#confidence_interval">confidence interval</a>.
+    The <a class="glossRef" href="gloss.htm#confidence_level">confidence level</a> of a
+    <a class="glossRef" href="gloss.htm#confidence_interval">confidence interval</a> is equal to the
+    <a class="glossRef" href="gloss.htm#coverage_probability">coverage probability</a> of the procedure
+    before the data are collected.
+</p>
+
+<p>
+    <a class="glossRef" href="gloss.htm#confidence_level">Confidence</a> is a word
+    statisticians reserve for this idea.
+    If, before collecting the data, the procedure
+    we are using has a <span class="math">P%</span> chance of producing an interval that
+    <a class="glossRef" href="gloss.htm#cover">covers</a> the true
+    <a class="glossRef" href="gloss.htm#population_percentage">population percentage</a>, then, after
+    collecting the data, the interval the procedure
+    produced is called a <span class="math">P%</span>
+    <a class="glossRef" href="gloss.htm#confidence_interval">confidence interval</a>.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Coverage Probability and Confidence Level</span>
+        </p>
+        <p>
+            Consider a population parameter, and a
+            procedure that produces random intervals.
+            Suppose that the probability that the procedure produces an
+            interval that contains the parameter is <span class="math">P%</span>.
+        </p>
+        <ol>
+            <li>
+            The procedure is said to have
+            <em>coverage probability</em> <span class="math">P%</span>.
+            </li>
+            <li>
+            The interval the procedure produces for any particular sample
+            is called a <span class="math">P%</span> confidence interval for the
+            parameter, or a
+            confidence interval for the parameter
+            with confidence level <span class="math">P%</span>.
+            </li>
+        </ol>
+</div>
+
+<p>
+    In repeated sampling, about <span class="math">P%</span> of confidence
+    intervals with confidence level <span class="math">P%</span> will contain
+   (<a class="glossRef" href="gloss.htm#cover">cover</a>) the
+    <a class="glossRef" href="gloss.htm#parameter">parameter</a>.
+    About <span class="math">(100&minus;P)%</span> of the intervals will not cover the parameter.
+    For any particular sample, unless the population parameter is known,
+    we will not know whether the confidence interval
+    covers the <a class="glossRef" href="gloss.htm#parameter">parameter</a>.
+</p>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('estimation') + ', ');
+// -->
+</script>
+    summarized the uncertainty of an estimate of a parameter
+    by the <a class="glossRef" href="gloss.htm#mse">mean squared error</a> or
+    <a class="glossRef" href="gloss.htm#rmse">root mean squared error</a>of the estimator,
+    which are measures of the average error of the estimator in repeated sampling.
+    A confidence interval is a different way of expressing the uncertainty in an
+    estimate: a range of values that contains the parameter with specified confidence
+    level.
+</p>
+
+<div class="indent">
+<p class="inline">
+    The interpretation of confidence level for a particular interval is analogous
+    to the interpretation of RMSE for a particular value of the estimate:
+    The RMSE is the square-root of the long-run average squared error of the
+    estimator in repeated sampling, but for any particular sample, the error
+    could be larger or smaller than the RMSE&mdash;and we will not know which
+    unless we know the true value of the parameter.
+    The confidence level measures the long-run fraction of intervals that contain
+    the parameter in repeated sampling, but for any particular sample, the
+    confidence interval either will or will not contain the parameter&mdash;and
+    we will not know which unless we know the true value of the parameter.
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Let <span class="math">X</span> denote the square of the difference between the estimator ' +
+           'and the parameter. The MSE is the expected value of <span class="math">X</span>, the ' +
+           'long-run average value of <span class="math">X</span> in repeated sampling. ' +
+           'The actual value of <span class="math">X</span> for any particular sample, the squared ' +
+           'error of the estimate for that sample, could be larger than or smaller ' +
+           'than the expected value of <span class="math">X</span>, and unless we know the true value ' +
+           'of the parameter, we cannot know the actual value of <span class="math">X</span>.</p><p>' +
+           'Similarly, let <span class="math">Y</span> be the indicator random variable for the event ' +
+           'that the confidence interval contains the parameter, so ' +
+           '<span class="math">Y&nbsp;=&nbsp;1</span> if the interval contains the parameter; ' +
+           '<span class="math">Y&nbsp;=&nbsp;0</span> if not.  The expected value of <span class="math">Y</span> ' +
+           'is the probability that <span class="math">Y&nbsp;=&nbsp;1</span>:</p><p class="math">' +
+           '<a class="glossRef" href="gloss.htm#expectation">E</a>Y = 0 &times; ' +
+           '<a class="glossRef" href="gloss.htm#probability">P</a>(Y = 0) + 1 &times; ' +
+           '<a class="glossRef" href="gloss.htm#probability">P</a>(Y = 1)</p>' +
+           '<p class="math"> = <a class="glossRef" href="gloss.htm#probability">P</a>(Y = 1) ' +
+           '</p><p>The probability that <span class="math">Y&nbsp;=&nbsp;1</span> is the probability ' +
+           'that the interval contains the parameter, which is the confidence level. ' +
+           'For any particular sample, either <span class="math">Y&nbsp;=&nbsp;0</span> or ' +
+           '<span class="math">Y&nbsp;=&nbsp;1</span>: the value of <span class="math">Y</span> can be less than or ' +
+           'greater than the expected value of <span class="math">Y</span>.  Unless we know the true ' +
+           'value of the parameter, we cannot know the actual value <span class="math">Y</span> takes ' +
+           'for any particular sample.  This is directly analogous to the statement ' +
+           'about the expected value of <span class="math">X</span> and the value that ' +
+           '<span class="math">X</span> takes for any particular sample.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<div class="indent">
+<p class="inline">
+    We can use the approach developed in this section to construct confidence intervals
+    for the <a class="glossRef" href="gloss.htm#population_percentage">population percentage
+    <span class="math">p</span></a>
+    with other nominal confidence levels, by extending the interval up and down from
+    the <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage <span class="math">&phi;</span></a>
+    by larger or smaller amounts.
+    The longer the intervals, the larger the nominal confidence level&mdash;the larger the
+    chance that an interval will contain <span class="math">p</span>.
+    The shorter the intervals, the smaller the chance that an interval will contain <span class="math">p</span>.
+    In particular, if we choose <span class="math">k</span> so
+    that<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'We can solve for the appropriate value of <span class="math">k</span>: ' +
+           '</p><p class="math">1&nbsp;&minus;&nbsp;1/k<sup>2</sup> = ' +
+           'P% </p><p class="math">1/k<sup>2</sup>  = ' +
+           '1&minus;P%</p><p class="math">k = <big>(</big> ' +
+           '1/(1&minus;P%) <big>)</big><sup>&frac12;</sup> = ' +
+           '<big>(</big> 1&minus;P% <big>)</big><sup>&minus;&frac12;</sup></p>';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script>
+</p>
+</div>
+
+<p class="math">
+    1&nbsp;&minus;&nbsp;1/k<sup>2</sup> = P%,
+</p>
+
+<p>
+    then the interval
+</p>
+
+<p class="math">
+    <big>[</big> &phi; &minus;
+    k &times; f&times; 50%/n<sup>&frac12;</sup>,
+    &phi; + k &times; f&times; 50%/n<sup>&frac12;</sup>
+    <big>]</big>
+</p>
+
+<p>
+    is a (nominal) <span class="math">P%</span> confidence interval for the population percentage
+    <span class="math">p</span>.
+</p>
+
+<p>
+    Conversely, to get a nominal <span class="math">P%</span> conservative confidence interval
+    for the population percentage using a simple random sample, we should take an interval that
+    extends down and up from the sample percentage by
+    <span class="math">k &times; f &times; 50%/n<sup>&frac12;</sup></span>, with
+</p>
+
+<p class="math">
+    k = (1 &minus; P/100)<sup>-&frac12;</sup>.
+</p>
+
+<p>
+    The actual <a class="glossRef" href="gloss.htm#coverage_probability">coverage probability</a>
+    of the interval
+</p>
+
+<p class="math">
+    <big>[</big> &phi; &minus;
+    k &times; f &times; 50%/n<sup>&frac12;</sup>,
+    &phi; + k &times; f &times; 50%/n<sup>&frac12;</sup>
+    <big>]</big>
+</p>
+
+<p>
+    is greater than <span class="math">(1&nbsp;&minus;&nbsp;1/k<sup>2</sup>)</span>, for two reasons.
+    First, the <a class="glossRef" href="gloss.htm#se">standard error</a> of the sample percentage
+    <span class="math">&phi;</span> is less than
+    <span class="math">f&times;(50%/n<sup>&frac12;</sup>)</span> unless the population
+    percentage <span class="math">p</span> is 50%.
+    Second, the distribution of the sample percentage is that of an hypergeometric
+    random variable divided by the sample size, <span class="math">n</span>, and such a distribution
+    cannot attain the bound in <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a>:
+    Even for the true SE of the sample percentage,
+</p>
+
+<p class="math">
+    SE(&phi;) =
+    f &times;
+    <big>(</big> p &times; (1&minus;p)
+    <big>)</big><sup>&frac12;</sup>/n<sup>&frac12;</sup>,
+</p>
+
+<p>
+   the chance that the sample percentage is within <span class="math">kSE(&phi;)</span> of
+   the population percentage <span class="math">p</span>
+   is greater than <span class="math">1&minus;1/k<sup>2</sup></span>:
+</p>
+
+<p class="math">
+    P<big>(</big> | &phi; &minus; p | &lt;
+    k &times; SE(&phi;) <big>)</big>
+    &gt; 1 &minus; 1/k<sup>2</sup>.
+</p>
+
+<p>
+    As a result, confidence intervals for the population percentage based on Chebychev's
+    inequality and the upper bound of 50% for the SD of a list of zeros and ones
+    are <em>conservative</em>:
+    the <em>actual</em> <a class="glossRef" href="gloss.htm#confidence_level">confidence level</a>
+    is greater than the <em>nominal</em> confidence level,
+    <span class="math">(1&nbsp;&minus;&nbsp;1/k<sup>2</sup>)</span>.
+    The next section develops a procedure that is not conservative, but that is
+    approximate:
+    The confidence level could be larger or smaller than the nominal level.
+    (The nominal confidence level is close to the actual confidence level
+    when the sample size <span class="math">n</span> is large.)
+</p>
+
+<p>
+    A population percentage cannot be less than 0%.
+    If the lower endpoint of a confidence interval for a population percentage is negative,
+    it is completely legitimate to replace the lower endpoint by zero: It does not decrease the
+    confidence level.
+    Similarly, a population percentage cannot be greater than 100%.
+    If the upper endpoint of a confidence interval for a population percentage is greater than
+    100%, it is legitimate to replace the upper endpoint by 100%.
+    The confidence level remains the same.
+    Similarly, if we are constructing a confidence interval for a quantity that cannot be negative
+    (height, weight, or age, for instance), removing negative values from a confidence interval
+    cannot reduce the coverage probability or confidence level.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Confidence Intervals for Restricted Parameters</span>
+        </p>
+        <p>
+            If some values of a parameter are known to be impossible, excluding those values from
+            a confidence interval does not reduce the confidence level of the confidence interval.
+        </p>
+
+        <p>
+            Conversely, including impossible values of a parameter in a confidence interval
+            does not increase the confidence level.
+        </p>
+
+        <p>
+            For example, if a confidence interval for a parameter that must be positive
+            has a lower endpoint that is negative, the lower endpoint can be replaced with zero.
+            The confidence level remains the same.
+        </p>
+
+        <p>
+            In particular, if the lower endpoint of a confidence interval for a population percentage is
+            negative, the lower endpoint can be replaced with zero.
+            If the upper endpoint of a confidence interval for a population percentage is
+            greater than 100%, the upper endpoint can be replaced with 100%.
+        </p>
+</div>
+
+
+<p>
+    Whenever you use a confidence interval, it crucial to report the confidence level.
+    Otherwise, it is impossible to interpret the result.
+    The choice of the confidence level is essentially arbitrary, but the choice
+    should be made before collecting the data.
+    Common values of the confidence level are 68%, 90%, 95%, and 99%.
+    There is a tradeoff between precision (the length of the confidence
+    interval), and confidence level: <em>Ceteris paribus</em>, higher confidence levels require
+    longer confidence intervals.
+</p>
+
+<p>
+    The following exercise checks your ability to compute a
+    conservative confidence interval for the population percentage.
+</p>
+
+<!-- ==============================     START PROBLEM    ================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var samSize = 5*(listOfRandInts(1,3,20)[0]);
+    var popSize = 5*(listOfRandInts(1,3,10)[0])*samSize;
+    var fpc = Math.sqrt((popSize-samSize)/(popSize-1));
+    var cl = 70 + 5*(listOfRandInts(1,0,5)[0]);
+    var chebFac = Math.sqrt(1.0/(1.0 - cl/100.0));  // 1/k^2 = 1-cl/100; k = sqrt(1/(1- cl/100))
+    var pHat = listOfRandInts(1,5,95)[0];
+    var sqtn = Math.sqrt(samSize);
+    var seBnd = fpc*.5/sqtn;
+    var width = chebFac*seBnd;
+    var ansStr = 'By Chebychev\'s inequality, the chance that the sample percentage ' +
+         '<span class="math">&phi;</span> is within ' +
+         '<span class="math">&plusmn; ' + roundToDig(chebFac,2).toString() +
+         ' &times; SE(&phi;)</span> of the population percentage <span class="math">p</span> ' +
+         'is at least ' + cl.toString() + '%.  The standard error of the sample ' +
+         'percentage is at most </p><p class="math"> ' +
+         'f &times; 50%/n<sup>&frac12;</sup> = ' +
+         roundToDig(fpc,3).toString() + ' &times; 50% /' + roundToDig(sqtn,3) +
+         ' = ' + roundToDig(100*seBnd,2) + '%.</p><p>Thus a conservative confidence ' +
+         'interval would be centered at the sample percentage, and extend up and ' +
+         'down by </p><p class="math">' + roundToDig(chebFac,2).toString() +
+         ' &times; ' + roundToDig(100*seBnd,2) + '% = ' +
+         roundToDig(100*width,2).toString() + '%.</p><p>For <span class="math">&phi; = ' +
+         pHat.toString() + '%</span>, the conservative ' + cl.toString() + '% confidence interval is ' +
+         '</p><p class="math"><big>[</big> ' +
+         roundToDig(pHat - 100*width,2).toString() + '% , ' +
+         roundToDig(pHat + 100*width,2).toString() + '% <big>]</big>.</p>';
+     if (pHat - 100*width < 0) {
+         ansStr += '<p>The lower endpoint of this interval is less than zero, but the population ' +
+                   'percentage cannot be negative, so the lower endpoint of the interval could be ' +
+                   'replaced by 0 without reducing the confidence level.  That is, the interval</p>' +
+                   '<p class="math"><big>[</big> 0%, ' +
+                    roundToDig(pHat + 100*width,2).toString() + '% <big>]</big></p>' +
+                   '<p>is also a conservative ' + cl.toString() + '% confidence interval.</p>';
+     }
+     if (pHat + 100*width > 100) {
+         ansStr += '<p>The upper endpoint of this interval is greater than 100%, but the population ' +
+                   'percentage cannot be greater than 100%, so the upper endpoint of the interval could be ' +
+                   'replaced by 100% without reducing the confidence level.  That is, the interval</p>' +
+                   '<p class="math"><big>[</big> ' + roundToDig(pHat - 100*width,2).toString() +
+                   '% , 100% <big>]</big></p>' +
+                   '<p>is also a conservative ' + cl.toString() + '% confidence interval.</p>';
+     }
+     ansStr +=  '<p> ' +
+         'The true confidence level of this interval is at least ' + cl.toString() + '%, but ' +
+         'the probability that the interval contains the population percentage ' +
+         'is either zero or one&mdash;there is nothing random left after the sample ' +
+         'is taken.';
+     var qStr = 'The entering class at North Southcentral University contains ' +
+        popSize.toString() +
+        ' students.  The dean\'s office seeks to determine the percentage of ' +
+        'entering students who have credit cards.  The dean\'s office ' +
+        'will take a simple random sample of ' + samSize.toString() +
+        ' entering students, interview them, and compute the sample percentage. ' +
+        'The office would like to construct a conservative ' + cl.toString() +
+        '% confidence interval for the percentage of entering students who have ' +
+        'credit cards.  The center of the interval will be the sample percentage ' +
+        '<span class="math">&phi;</span>.</p>' +
+        '<p><span class="qSpan">The interval should extend up and down from the ' +
+        'sample percentage by </span>';
+     document.writeln(qStr);
+     writeTextExercise(8, qCtr++, numToRange(width));
+     document.writeln('</p><p>The sample is taken, and the sample percentage is ' +
+              'observed to be ' + pHat.toString() + '%. </p>' +
+              '<p><span class="qSpan"> The lower endpoint of the confidence interval ' +
+              'should be </span>');
+     writeTextExercise(8, qCtr++, numToRange(pHat/100 - width));
+     document.writeln(' <span class="qSpan">and the upper endpoint should be </span>');
+     writeTextExercise(8, qCtr++, numToRange(pHat/100 + width));
+     document.writeln('</p><p><span class="qSpan">The probability that this ' +
+              'interval contains the percentage of students in the entering class ' +
+              'who have credit cards </span>');
+     var opt = [
+         'is at most ' + cl.toString() + '%',
+         'is at least ' + cl.toString() + '%',
+         'equals ' + cl.toString() + '%',
+         'cannot be determined'
+           ];
+     writeSelectExercise(false,qCtr++,opt,'d');
+     document.writeln('</p><p><span class="qSpan">The confidence level of this ' +
+               'interval </span>');
+     writeSelectExercise(false,qCtr++,opt,'b');
+     document.writeln('</p>');
+     writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ====================================================================================== -->
+
+<h2>
+    <a id="conservative_ci_box"></a>
+    Conservative confidence intervals for population means of bounded boxes
+</h2>
+
+<p>
+    Recall that percentages are just means of special lists of numbers, lists
+    that contains only zeros and ones.
+    We can find confidence intervals for the means of more general lists of numbers, too.
+</p>
+
+<p>
+    In the previous section we exploited the fact that the <span class="math">SD</span>
+    of a 0-1 box is at most <span class="math">1/2</span> to construct conservative confidence
+    interval for the population mean of a 0-1 box&mdash;that is, the population percentage.
+    The approach can be used not only for 0-1 boxes, but whenever we can find a bound on the
+    <span class="math">SD</span> of the box, so that we can apply Chebychev's inequality.
+    For any box of numbered tickets whatsoever, the sample mean of a simple random sample or
+    random sample with replacement
+    is an unbiased estimator of the population mean of the numbers on the tickets, and the
+   <span class="math">SE</span> of the
+    sample mean is proportional to the <span class="math">SD</span> of the box.
+</p>
+
+<div class="indent">
+<p class="inline">
+    For instance, suppose we know that the numbers on the tickets in the box are all between
+    <span class="math">a</span> and <span class="math">b</span>, with <span class="math">a &le; b</span>.
+    Then <span class="math">SD(box)</span> is at most <span class="math">(b &minus; a)/2</span>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'Proving this requires calculus; it is beyond the scope of this class.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+    // -->
+</script>
+    In the special case that <span class="math">a = 0</span> and <span class="math">b = 1</span>, this
+    implies that the <span class="math">SD</span> of a 0-1 box is at most <span class="math">50%</span>,
+    as we have seen already.
+</p>
+</div>
+
+<p>
+    That in turn implies that the means that if all the numbers in a box are between
+    <span class="math">a</span> and <span class="math">b</span>, the <span class="math">SE</span> of
+    the sample mean of a simple random sample of <span class="math">n</span> draws from the box
+    is at most <span class="math">f(b &minus; a)/(2n<sup>&frac12;</sup>)</span>, where <span class="math">f</span>
+    is the <a class="glossRef" href="gloss.htm#fpc">finite population correction</a>.
+    And the <span class="math">SE</span> of
+    the sample mean of <span class="math">n</span> draws with replacement from the box is at most
+    <span class="math">(b &minus; a)/(2n<sup>&frac12;</sup>)</span>.
+</p>
+
+<div class="callout">
+        <p>
+            <span class="calloutCaption">Sampling from a Bounded Box</span>
+        </p>
+        <p>Suppose all the numbers in a box are between
+          <span class="math">a</span> and <span class="math">b</span>, with
+          <span class="math">a &le; b</span>.
+          Then:
+        </p>
+
+        <ul>
+            <li>
+                <span class="math">SD(box)</span> is at most <span class="math">(b &minus; a)/2</span>
+            </li>
+            <li>
+                The <span class="math">SE</span> of the sample mean of <span class="math">n</span>
+                draws with replacement from the box is at most
+               <span class="math">(b &minus; a)/(2n<sup>&frac12;</sup>)</span>.
+            </li>
+            <li>
+                The <span class="math">SE</span> of the sample mean of a simple random sample of size
+               <span class="math">n</span> from the box is at most
+               <span class="math">f(b &minus; a)/(2n<sup>&frac12;</sup>)</span>, where <span class="math">f</span>
+               is the <a class="glossRef" href="gloss.htm#fpc">finite population correction</a>.
+            </li>
+</div>
+
+<p>
+    With a bound on the <span class="math">SE</span>, we can use Chebychev's inequality the same way we
+    did for the population percentage to get a confidence interval for the population mean of the numbers
+    on the tickets in a box:
+</p>
+
+<div class="callout">
+     <p class="calloutCaption">Conservative Confidence Intervals for the Population Mean of a Bounded List</p>
+
+     <p>
+         Suppose all the numbers in a box are between <span class="math">a</span> and <span class="math">b</span>,
+         where <span class="math">a &le; b</span>.
+     </p>
+<p>
+    For a simple random sample of size <span class="math">n</span>,
+    the chance that the random interval
+</p>
+
+<p class="math">
+    [(sample mean)&minus;k&times;f(b &minus; a)/(2n<sup>&frac12;</sup>),
+    (sample mean) + k&times;f(b &minus; a)/(2n<sup>&frac12;</sup>)]
+</p>
+<p>
+    includes the mean of the numbers in the box is at least
+    <span class="math">1&minus;1/k<sup>2</sup></span>,
+    where  <span class="math">f</span>
+    is the finite population correction
+    <span class="math">(N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup></span>,
+    <span class="math">N</span> is the population size, and <span class="math">n</span> is the sample size.
+
+<p>
+    For random sampling with replacement, the chance that the random interval
+</p>
+
+<p class="math">[(sample mean)&minus;k&times;(b &minus; a)/(2n<sup>&frac12;</sup>),
+                 (sample mean)+k&times;(b &minus; a)/(2n<sup>&frac12;</sup>)]
+</p>
+
+<p>
+    includes the mean of the numbers in the box is at least
+    <span class="math">1&minus;1/k<sup>2</sup></span>.
+</p>
+
+<p>
+    In both cases, if the lower endpoint of the interval is less than <span class="math">a</span>,
+    it can be replaced by <span class="math">a</span>, and if the upper endpoint of the
+    interval is greater than <span class="math">b</span>, it can be replaced by <span class="math">b</span>.
+</p>
+
+<p>
+    These are <em>conservative</em> procedures for constructing confidence intervals:
+    the probability that the intervals they produce cover the true population mean
+    is greater than the
+    probability they claim, <span class="math">1&minus;1/k<sup>2</sup></span>
+    (the <em>nominal</em> coverage probability).
+</p>
+
+</div>
+
+
+
+
+<!-- ====================================================================================== -->
+
+<h2>
+    <a id="approximate_ci_pct"></a>
+    Approximate confidence intervals for percentages
+</h2>
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=778&end=2067" frameborder="0" allowfullscreen></iframe>
+  </p>
+<p>Confidence intervals for the population percentage
+    based on Chebychev's inequality and the upper bound of 50% for the SD of lists
+    of zeros and ones are <em>conservative</em>: Their true confidence level
+    is greater than their nominal confidence level,
+    <span class="math">(1&nbsp;&minus;&nbsp;1/k<sup>2</sup>)</span>.
+    We could use shorter intervals and still have confidence level
+    <span class="math">(1&nbsp;&minus;&nbsp;1/k<sup>2</sup>)</span>, or we could claim a confidence level
+    higher than <span class="math">(1&nbsp;&minus;&nbsp;1/k<sup>2</sup>)</span>.
+</p>
+
+<div class="indent">
+<p class="inline">
+    How much shorter could the interval be, or how large a confidence level could we claim?
+    It is possible to figure these things out precisely,
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'For example, one can invert a family of <em>most powerful hypothesis tests</em> ' +
+               'to construct much shorter confidence intervals; they are not of the form ' +
+               '<span class="math">&phi;&nbsp;&plusmn;&nbsp;e</span> unless <span class="math">&phi;=50%</span>.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+    // -->
+</script>
+    but we shall follow a standard approximate approach instead, one that we can extend to
+    other situations.
+    We shall use the <a class="glossRef" href="gloss.htm#clt">central limit theorem</a> to develop a
+    procedure that produces shorter confidence intervals for a given nominal
+    confidence level.
+    The new procedure will be <em>approximate</em> instead of <em>conservative</em>:
+    the coverage probability will be close to the nominal coverage probability
+    when the sample size is large, but could be smaller or larger
+    depending on the population percentage, and could be quite
+    different from the nominal coverage probability
+    for small samples from pathological populations.
+</p>
+</div>
+
+<p>
+    We shall assume throughout the rest of this chapter that either
+</p>
+
+<ul>
+    <li>
+        the sample is drawn with replacement, or
+    </li>
+    <li>
+        the sample size <span class="math">n</span> is much, much smaller than the population size
+        <span class="math">N</span>.
+    </li>
+</ul>
+
+<p>
+    With this assumption, we can neglect the
+    <a class="glossRef" href="gloss.htm#finite_population_correction">finite population correction</a>
+    and act as if the tickets in the sample were drawn independently.
+    (See
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('standardError') + '.) ');
+// -->
+</script>
+    When the tickets are drawn independently, the <a class="glossRef" href="gloss.htm#clt">central limit
+    theorem</a> tells us that as the sample size grows, the
+    <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> is a better and better
+    approximation to the
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability histogram</a>
+    of the <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage</a> (and to the
+    probability histogram of the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>).
+    The <a class="glossRef" href="gloss.htm#normal_approx">normal approximation</a>
+    to the probability that the sample percentage is in the interval
+</p>
+
+<p class="math">
+    [p
+    &minus; 1.15&times;(p&times;(1&minus;p))<sup>&frac12;</sup>/n<sup>&frac12;</sup>,
+    p +
+    1.15&times;(p&times;(1&minus;p))<sup>&frac12;</sup>/n<sup>&frac12;</sup>]
+</p>
+
+<p>
+    is equal to the area under the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> for the
+    corresponding range of values in <a class="glossRef" href="gloss.htm#su">standard units</a>,
+    [&minus;1.15, 1.15].
+    The area under the normal curve between &minus;1.15 and 1.15 is about 75%:
+</p>
+
+<div class="figure">
+<p class="figure">
+    <applet code="NormHiLite.class" codebase="../../Java/"
+        align="baseline" width="600" height="280" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="1.15">
+    <param name="hiLiteLo" value="-1.15">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    This is much larger than the bound of (1&nbsp;&minus;&nbsp;1/(1.15)<sup>2</sup>) = 24.4%
+    that <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> gives.
+    When the sample percentage <span class="math">&phi;</span> is within
+</p>
+
+<p class="math">
+    &plusmn;1.15&times; <big>(</big> p&times;(1&minus;p)
+    <big>)</big><sup>&frac12;</sup>/n<sup>&frac12;</sup>
+</p>
+
+<p>
+    of <span class="math">p</span>, <span class="math">p</span> is within
+</p>
+
+<p class="math">
+    &plusmn;1.15&times; <big>(</big> p&times;(1&minus;p)
+    <big>)</big><sup>&frac12;</sup>/n<sup>&frac12;</sup>
+</p>
+
+<p>
+    of the sample percentage <span class="math">&phi;</span>, so the probability that the interval
+</p>
+
+<p class="math">
+    I =
+    <big>[</big> &phi; &minus;
+    1.15 &times; <big>(</big> p&times;(1&minus;p)
+    <big>)</big><sup>&frac12;</sup>/n<sup>&frac12;</sup>,
+    &phi;  +
+    1.15 &times; <big>(</big> p&times;(1&minus;p)
+    <big>)</big><sup>&frac12;</sup>/n<sup>&frac12;</sup> <big>]</big>
+</p>
+
+<p>
+    contains the population percentage <span class="math">p</span> is about 75%: The
+    coverage probability of <span class="math">I</span>
+    is approximately 75%.
+</p>
+
+<div class="indent">
+<p class="inline">
+    Unfortunately, we cannot construct <span class="math">I</span> from the sample alone:
+    the sample determines the center of <span class="math">I</span>, but to find the
+    length of <span class="math">I</span> we need to know <span class="math">p&times;(1&minus;p)</span>,
+    which is tantamount to knowing <span class="math">p</span>.
+<script language="JavaScript1.4" type="text/javascript"> <!--
+    var fStr = 'For a <span class="termOfArt">0-1 box</span>, if SD(box) is known, ' +
+               'there are only two possible values of <span class="math">p</span>.  ' +
+               'For a 0-1 box, </p><p class="math">SD(box) = ' +
+               '(p&times;(1&minus;p))<sup>&frac12;</sup>.</p><p>Thus </p>' +
+               '<p class="math">SD<sup>2</sup>(box) = p&times;(1&minus;p) ' +
+               '= p&minus;p<sup>2</sup></p><p>. Equivalently, <span class="math">p</span> solves the ' +
+               'quadratic equation </p><p class="math"> ' +
+               '&minus;p<sup>2</sup> + p &minus; SD<sup>2</sup>(box) = 0.</p><p>' +
+               'By the quadratic formula, </p><p class="math">p= ' +
+               '&frac12; &plusmn; &frac12;(1&minus;4SD<sup>2</sup>(box))<sup>&frac12;</sup>.</p>' +
+               '<p>For example, if SD(box)=0.3, either </p><p class="math">' +
+               'p= &frac12; + &frac12;(1&minus;4&times;0.09)<sup>&frac12;</sup> = 0.9 ' +
+               'or p =&frac12; &minus; &frac12;(1&minus;4&times;0.09)&frac12; = 0.1.';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+    // -->
+</script>
+    If we knew <span class="math">p</span>, we would not be estimating it.
+</p>
+</div>
+
+<p>
+    If the sample size <span class="math">n</span> is large, the
+    <a class="glossRef" href="gloss.htm#sample_sd">sample standard deviation <span class="math">s</span></a>
+</p>
+
+<p class="math">
+    s =
+    <big>(</big> (n/(n&minus;1)) &times;
+    &phi; &times; (1 &minus; &phi;)
+    <big>)</big><sup>&frac12;</sup>,
+</p>
+
+<p>
+    is likely to be close to the SD of the population; when that happens,
+</p>
+
+<p class="math">
+    s/n<sup>&frac12;</sup>
+</p>
+
+<p>
+    is close to <span class="math">SE(&phi;)</span>, the standard error of the sample percentage.
+    Therefore, if the sample size is large, but either the sample is small compared to
+    the population or the sample is taken with replacement, the probability that the
+    random interval
+</p>
+
+<p class="math">
+    <big>[</big> &phi;  &minus; 1.15 &times; s/n<sup>&frac12;</sup>,
+    &phi;  + 1.15 &times; s/n<sup>&frac12;</sup>
+    <big>]</big>
+</p>
+
+<p>
+    contains the population percentage <span class="math">p</span> is about 75%.
+    This interval has not only a random center (the sample percentage <span class="math">&phi;</span>),
+    but also a random length (the length depends on the observed value of <span class="math">s</span>,
+    and <span class="math">s</span> is random, because it depends on the random sample).
+</p>
+
+<p>
+    Figure
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>
+    lets you try the procedure yourself.
+    Each time you click the <span class="appCtrlName">Take Sample</span> button,
+    a sample is drawn with replacement from the numbers in the box on the right
+    (initially set to a random list of zeros and ones).
+    The sample size initially is set to 30.
+    The controls at the bottom of the figure allow you to change the size of each
+    sample, the number of samples that are taken each time you click the button,
+    and the width of the interval, as a multiple of the estimated SE or
+    the conservative bound on the SE.
+    (The estimated SE is
+    <a class="glossRef" href="gloss.htm#sample_sd"><span class="math">s</a>/n<sup>&frac12;</sup></span> because
+    we are sampling with replacement; the bound is
+    <span class="math">0.5/n<sup>&frac12;</sup></span>.)
+    A label in the bottom right corner reports the fraction of intervals that
+    <a class="glossRef" href="gloss.htm#cover">cover</a> the population percentage.
+    Intervals that cover are green; those that do not cover are red.
+    A small black dot marks the middle of each interval (the sample percentage).
+    A blue vertical line marks the true population percentage <span class="math">p</span>.
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Approximate confidence intervals for the population mean and percentage';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+
+
+<p class="figure">
+    <applet code="Ci.class" codebase="../../Java/" align="baseline"
+        width="800" archive="PbsGui.zip" height="400">
+    <param name="factor" value="1.15">
+    <param name="sampleSize" value="30">
+    <param name="showTruth" value="true">
+    <param name="seChoices" value="Estimated SE,Bound on SE (0-1 Box only)">
+    <param name="boxContents" value="0,0,0,1,1">
+    You need Java to see this.
+    </applet>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var appNum = (document.applets.length - 1).toString();
+    sectionContext += 'var newPop = listOfRandInts(5,0,1);\n' +
+              'if (vSum(newPop) == 0) {\n' +
+              '     newPop[0] = 1;\n' +
+              ' } else if (vSum(newPop) == newPop.length) {\n' +
+              '     newPop[0] = 0;\n' +
+              ' }\n' +
+              ' newPop = newPop.join();\n' +
+              ' document.applets[' + appNum + '].setBox(newPop,true);\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    Take a few samples to get the feel of the tool; then increase the
+    <span class="appCtrlName">Samples to take</span> to 1000,
+    and click the <span class="appCtrlName">Take Sample</span> button again.
+    The actual percentage of intervals that cover will vary, but should be reasonably
+    close to 75%. Increase <span class="appCtrlName">Sample size</span>
+    to 200 and try again; the percentage of intervals
+    that cover should be closer to 75%.
+    Try putting a few different lists of zeros and ones into the
+    <span class="appCtrlName">Population box</span> at
+    the right of the figure, and try a few different sample sizes for each population.
+    When the sample size is large, the fraction of intervals that cover the true
+    population percentage will be very close to 75%.
+</p>
+
+<p>
+    The following exercises check your ability to compute conservative and
+    approximate confidence intervals for the population percentage,
+    and your ability to determine which method is more appropriate.
+</p>
+
+<h3>Videos of Exercises</h3>
+<p>(Reminder: Examples and exercises may vary when the page is reloaded; the video shows only one version.)</p>
+<ul class="videogroup">
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=2067&end=2220" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=2220&end=3276" frameborder="0" allowfullscreen></iframe></li>
+ <li><iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=3276&end=3935" frameborder="0" allowfullscreen></iframe></li>
+</ul>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var ansStr = 'This is not a simple random sample. The sample is one of convenience, ' +
+        'and probably is biased by how it was selected; for example, students ' +
+        'who do not have campus email accounts have no chance of being in the ' +
+        'sample. It is not possible to calculate an approximate 95% confidence ' +
+        'interval from these data, but since the parameter of interest is a population percentage, ' +
+        'it must be between 0% and 100%.  The data do not narrow that down much: All we know is that ' +
+        'the population percentage is at least <span class="math">3/(# undergrads)</span> ' +
+        'and at most <span class="math">(# undergrads - 97)/(# undergrads)</span>.';
+    var qStr = 'I would like to know the fraction of UC Berkeley undergraduates who ' +
+           'commute to school from their parents\' homes. I send email to students ' +
+           'with campus computer accounts until 100 have responded; 3 of the ' +
+           'responders were commuters.</p><p><span class="qSpan">' +
+           'An approximate 95% confidence interval for the fraction of UC Berkeley ' +
+           'undergraduates who commute to school is from </span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, "0");
+    var qStr = '<span class="qSpan">to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, "1");
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var pct = listOfRandInts(1,6,10)[0];
+   var cl = 80 + 2*listOfRandInts(1,0,9)[0];
+   var alpha = (100-cl)/100;
+   var samSize = 100*listOfRandInts(1,4,12)[0];
+   var p = pct/100;
+   var sePct = Math.sqrt(p*(1-p)/samSize);
+   var seStr = roundToDig(100*sePct,2).toString() + '%';
+   var mult = normInv(1.0- alpha/2.0);
+   var multStr = roundToDig(mult,3).toString();
+   var loEnd = p - mult*sePct;
+   var hiEnd = p + mult*sePct;
+   var aVal1 = numToRange(loEnd);
+   if (loEnd < 0) {
+        aVal1 = numToRange( loEnd/2, -loEnd*(0.5 + 3*fudgeFactor) );
+    }
+   var aVal2 = numToRange(hiEnd);
+   if (hiEnd > 1) {
+        aVal2 = numToRange( 1 + (hiEnd-1)/2, (hiEnd-1)*(0.5 + 3*fudgeFactor) );
+   }
+   var ansStr = 'The sample size is sufficiently large in absolute terms, and ' +
+        'sufficiently small compared with the population size, that ' +
+        'the normal approximation to the ' +
+        'distribution of the sample percentage should be reasonably accurate, ' +
+        'the bootstrap estimate of the SD of the population should be accurate, ' +
+        'and the SE of the sample percentage for sampling without replacement ' +
+        'should be a good approximation the SE of the sample percentage ' +
+        '<span class="math">&phi;</span> for simple random sampling. </p><p>' +
+        'The bootstrap estimate of the SD of the population is ' +
+        '<p class="math">(' + roundToDig(pct,0).toString() +
+        '%&times;' + roundToDig(100-pct,0).toString() + '%)<sup>&frac12;</sup>' +
+        '</p><p> and the corresponding estimate of the SE of the sample ' +
+        'percentage is</p>' +
+        '<p class="math"><big>(</big>(' + roundToDig(pct,0).toString() +
+        '%&times;' + roundToDig(100-pct,0).toString() + '%)/' +
+        samSize.toString() + '<big>)</big><sup>&frac12;</sup> = ' +
+        seStr + '.</p><p>The area under the normal curve between &plusmn;' +
+        multStr +
+        ' is about ' + cl.toString() + '%, so an approximate ' + cl.toString() +
+        '% confidence interval would be</p><p class="math">' +
+        pct.toString() + '% &plusmn; ' + multStr + '&times;' +  seStr + ' = [' +
+        roundToDig(100*loEnd,2).toString() + '%, ' +
+        roundToDig(100*hiEnd,2).toString() + '%]. </p>';
+    if (loEnd < 0) {
+         ansStr += '<p>The lower endpoint of this interval is less than zero, but the population ' +
+                   'percentage cannot be negative, so the lower endpoint of the interval could be ' +
+                   'replaced by 0 without reducing the confidence level.  That is, the interval</p>' +
+                   '<p class="math"><big>[</big> 0%, ' + roundToDig(100*hiEnd,2).toString() +
+                   '%]. </p><p>is also an approximate ' + cl.toString() + '% confidence interval.</p>';
+     }
+     if (hiEnd > 100) {
+         ansStr += '<p>The upper endpoint of this interval is greater than 100%, but the population ' +
+                   'percentage cannot be greater than 100%, so the upper endpoint of the interval could be ' +
+                   'replaced by 100% without reducing the confidence level.  That is, the interval</p>' +
+                   '<p class="math"><big>[</big> ' + roundToDig(100*loEnd,2).toString() + '%, ' +
+                   '100%]. </p><p>is also an approximate ' + cl.toString() + '% confidence interval.</p>';
+     }
+     ansStr += '<p>Because the sample size is large, it does not make much difference whether we ' +
+               'use the bootstrap or the sample standard deviation <span class="math">s</span> to ' +
+               'estimate of the SD of the population.</p>';
+    var qStr = 'I would like to know the fraction of homes in Alameda County, California, ' +
+           'that have assessed values of $700,000 or more. I take a simple random ' +
+           'sample of size ' + samSize.toString() + ' from the Alameda County property ' +
+           'tax records (somehow). The sample percentage of homes assessed at ' +
+           '$700,000 or more is ' + pct.toString()   + '%. </p><p><span class="qSpan">' +
+           'An approximate ' + cl.toString()   + '% confidence interval for the ' +
+           'percentage of homes assessed at $700,000 or more is from</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal1);
+    var qStr = '<span class="qSpan">to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, aVal2);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var samSize = 5*listOfRandInts(1,2,5)[0];
+   var nOk = listOfRandInts(1,1,Math.floor(samSize/2))[0];
+   var cl = listOfRandInts(1,70,99)[0];
+   var seBnd = 100*.5/Math.sqrt(samSize);
+   var seBndStr = roundToDig(seBnd,2).toString() + '%';
+   var fac = Math.sqrt(100/(100-cl));
+   var facStr = roundToDig(fac,3).toString();
+   var pHat = 100*nOk/samSize;
+   var pHatStr = roundToDig(pHat,2).toString() + '%';
+   var width = fac*seBnd;
+   var lo = pHat - width;
+   var hi = pHat + width;
+   var ansStr = 'The sample percentage is </p><p class="math">' +
+        '(#tickets labeled &quot;1&quot;)/(#tickets in sample) = ' + nOk.toString() +
+        '/' + samSize.toString() + ' = ' + pHatStr + '.</p><p> ' +
+        'The sample size is so small that the bootstrap estimate of the SD of ' +
+        'the box is unreliable, and the normal approximation to the distribution ' +
+        'of the sample percentage will not be very accurate.  However, we can construct ' +
+        'a conservative confidence interval ' +
+        'for the population percentage using Chebychev\'s ' +
+        'inequality and the upper bound on the SD of the box, 50%. ' +
+        'The sample percentage is ' + nOk.toString() + '/' +
+        samSize.toString() + ' = ' + pHatStr + '. The expected value of the ' +
+        'sample percentage is the population percentage, and the SE of the ' +
+        'sample percentage is at most 50%/(' + samSize.toString() +
+        ')<sup>&frac12;</sup> = ' + seBndStr + '.  We need to find the value of ' +
+        '<span class="math">k</span> for which ' +
+        '<a class="glossRef" href="gloss.htm#chebychev">Chebychev\'s inequality</a> ' +
+        'guarantees that the chance the sample percentage differs from its ' +
+        'expected value by at most <span class="math">k&times;SE</span> is at least ' +
+        cl.toString() + '%.  According to Chebychev\'s inequality, </p>' +
+        '<p class="math"> P<big>(</big>|sample percentage &minus; population percentage| ' +
+        '&le; k&times;SE <big>)</big> &ge; 1 &minus; 1/k<sup>2</sup>.</p>' +
+        '<p>Thus we need to find the value of <span class="math">k</span> such that </p>' +
+        '<p class="math">1 &minus; 1/k<sup>2</sup> = ' + cl.toString() + '%</p>' +
+        '<p>We solve for <span class="math">k</span> as follows:</p>' +
+        '<p class="math">100% &minus; ' + cl.toString() + '% = 1/k<sup>2</sup>' +
+        '</p><p class="math">k<sup>2</sup> = 1/(100% &minus; ' +
+        cl.toString() + '%)</p><p class="math">k = <big>(</big> 1/(100% &minus; ' +
+        cl.toString() + '%)<big>)</big><sup>&frac12;</sup> = ' + facStr + '.</p>' +
+        '<p>Thus Chebychev\'s inequality implies that ' +
+        'the chance that a random variable is within &plusmn;' +
+        facStr + ' standard errors of its expected value is at least ' +
+        '</p><p class="math">' +
+        '1 &minus; 1/(' + facStr + ')<sup>2</sup> = ' + cl.toString() +
+        '%.</p><p>  Because the SE of the sample ' +
+        'percentage is at most ' + seBndStr + ', the interval</p>' +
+        '<p class="math">[' + pHatStr + ' &minus; ' + facStr + '&times;' +
+        seBndStr + ', ' + pHatStr + ' + ' + facStr + '&times;' +
+        seBndStr + ']</p><p class="math"> = [ ' +
+        roundToDig(pHat-width,2).toString() + '%, ' +
+        roundToDig(pHat+width,2).toString() + '%]</p><p>' +
+        'is a conservative ' + cl.toString() + '% confidence interval.</p>';
+    if (lo < 0) {
+        ansStr += '<p>Since the lower endpoint is less than zero but the population percentage cannot ' +
+                  'be negative, we can replace the lower endpoint by zero and the confidence level remains ' +
+                  'the same.  The resulting interval is <span class="math">[ 0%, ' +
+                   roundToDig(pHat+width,2).toString() + '%]</span></p>';
+    }
+    if (hi > 100) {
+        ansStr += '<p>Since the upper endpoint is greater than 100% but the population percentage cannot ' +
+                  'be, we can replace the upper endpoint by 100% and the confidence level remains ' +
+                  'the same.  The resulting interval is <span class="math">[ ' +
+                  roundToDig(pHat-width,2).toString() + '%, 100%]</span></p>';
+    }
+    if (nOk == 1) {
+       isWord = " is ";
+    } else {
+       isWord = " are ";
+    }
+    var qStr = 'A random sample with replacement of size ' + samSize.toString() +
+           ' was taken from a box of tickets.  Each ticket in the box is numbered ' +
+           'either zero or one. ' + Cardinals[nOk]  + ' of the tickets in the sample ' +
+           isWord  + ' labeled &quot;1;&quot; the rest are labeled &quot;0.&quot;</p><p>' +
+           '<span class="qSpan">The sample percentage is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(pHat/100));
+    var qStr = '</p><p><span class="qSpan">The sample size</span>';
+    document.writeln(qStr);
+    var opt = ['is','is not'];
+    writeSelectExercise(false, qCtr++, opt, 'b');
+    var qStr = '<span class="qSpan">large enough to justify assuming that <span class="math">s</span> ' +
+           'is close to SD(box) and using a confidence interval based on the normal ' +
+           'distribution.</span></p><p><span class="qSpan">The SE of the sample ' +
+           'percentage is</span>';
+    document.writeln(qStr);
+    var opt = ["at least",
+           "equal to",
+           "at most"
+          ];
+    writeSelectExercise(false,qCtr++,opt,"c");
+    document.write(" ");
+    writeTextExercise(8, qCtr++, numToRange(seBnd/100));
+    var qStr = '</p><p><span class="qSpan">A conservative ' + cl.toString() +
+           '% confidence interval for the population percentage is from</span>';
+    document.writeln(qStr);
+    var loVal = numToRange(lo/100);
+    if (lo < 0) {
+        loVal = numToRange( (lo/100)/2, -(lo/100)*(0.5 + 3*fudgeFactor) );
+    }
+    var hiVal = numToRange(hi/100);
+    if (hi > 100) {
+        hiVal = numToRange( 1 + (hi/100-1)/2, (hi/100-1)*(0.5 + 3*fudgeFactor) );
+    }
+    writeTextExercise(8, qCtr++, loVal);
+    var qStr = '<span class="qSpan">to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, hiVal);
+    document.writeln('</p>');
+    writeSolution(pCtr-1,ansStr);
+// -->
+</script>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var popSize = 100*listOfRandInts(1,5,10)[0];
+   var samSize = 20*listOfRandInts(1,5,10)[0];
+   var cl = 80+2*listOfRandInts(1,0,9)[0];
+   var p = 1-((1-cl/100)/2);
+   var nOk = listOfRandInts(1,Math.floor(samSize/6),Math.floor(5*samSize/6))[0];
+   var pct = nOk/samSize;
+   var pctStr = roundToDig(100*pct,2).toString() + '%';
+   var qctStr = roundToDig(100*(samSize-nOk)/samSize,2).toString() + '%';
+   var s = Math.sqrt(pct*(1.0-pct));
+   var sStr = roundToDig(100*s,2).toString() + '%';
+   var hit = normInv(p);
+   var hitStr = roundToDig(hit,3).toString();
+   var width = s*hit/Math.sqrt(samSize);
+   var ansStr = 'The sample percentage is the number who respond positively, ' +
+        'divided by the sample size: ' + nOk.toString() + '/' +
+        samSize.toString() + ' = ' + pctStr + '. The standard deviation of the sample ' +
+        '(the bootstrap estimate of the SD of the population) is </p><p class="math">' +
+        's = <big>(</big>' + pctStr + '&times;' + qctStr +
+        ' <big>)</big><sup>&frac12;</sup> = ' + sStr + '.</p>' +
+        '<p>The sample is large enough that the normal approximation to the ' +
+        'sample percentage should be reasonably accurate, and that the bootstrap ' +
+        'estimate of the SD of the population should be accurate. ' +
+        'Thus we can base our confidence interval ' +
+        'on the normal curve. The area under the normal curve between &plusmn;' +
+        hitStr + ' is ' + cl.toString() + '%:</p><p class="figure">' +
+        '<applet code="NormHiLite.class" codebase="../../Java/" ' +
+        'align="baseline" width="620" height="300" archive="PbsGui.zip">' +
+        '<param name="hiLiteHi" value="' + hitStr + '">' +
+        '<param name="hiLiteLo" value="-' + hitStr + '"></applet>' +
+        '</p><p>The confidence interval is thus </p><p class="math">' +
+        '[' + pctStr + ' &minus; ' + hitStr + '&times;' + sStr + '/(' +
+        samSize.toString() + ')<sup>&frac12;</sup>, ' +
+        pctStr + ' + ' + hitStr + '&times;' + sStr + '/(' +
+        samSize.toString() + ')<sup>&frac12;</sup>] = ' +
+        '[ ' + roundToDig(100*(nOk/samSize - width),2).toString() + '%, ' +
+        roundToDig(100*(nOk/samSize + width),2).toString() + '%].';
+    var qStr = 'A restauranteur plans to change the menu in her restaurant, ' +
+           'which specializes in game meats. She is trying to decide whether or not ' +
+           'to offer venison goulash on the new menu. ' +
+           'Each day for a month, she picks people at random as they come into ' +
+           'the restaurant, and asks them whether they would order venison goulash ' +
+           'if it were offered. On busy days, she picks more people; on quiet days, ' +
+           'she picks fewer people. Suppose that in effect she has a simple ' +
+           'random sample of ' + commify(samSize) +
+           ' people who eat at her restaurant. Suppose further that the number of ' +
+           'diners is much much larger than the sample. In the sample, ' +
+           commify(nOk)  + ' say they would order venison goulash if it were offered. ' +
+           '</p><p><span class="qSpan">The sample percentage of diners who say they ' +
+           'would order venison goulash is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(nOk/samSize));
+    var qStr = '</p><p><span class="qSpan">The bootstrap estimate of the population ' +
+           'standard deviation is</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(s));
+    var qStr = '</p><p><span class="qSpan">A ' + cl.toString()  +
+           '% confidence interval for the percentage of diners who would say they would ' +
+           'order venison goulash among the population of people who eat at that ' +
+           'restaurant would go from</span>';
+    document.writeln(qStr);
+    var lo = (pct - width);
+    var hi = (pct + width);
+    var loVal = numToRange(lo);
+    if (lo < 0) {
+        loVal = numToRange( lo/2, -lo*(0.5 + 3*fudgeFactor) );
+    }
+    var hiVal = numToRange(hi);
+    if (hi > 1) {
+        hiVal = numToRange( 1 + (hi-1)/2, (hi-1)*(0.5 + 3*fudgeFactor) );
+    }
+    writeTextExercise(8, qCtr++, loVal);
+    var qStr = '<span class="qSpan">to</span>';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, hiVal);
+    document.writeln('</p>');
+    var ex2df = samSize-1;
+    var ex2Lim = hit;
+    var thisApplet1 = document.applets.length;
+    var setThisApplet = function(thisApplet1) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet1,
+                                            function(){document.applets[thisApplet1].setLimits((-ex2Lim).toString(),ex2Lim.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+
+<h2>
+    <a id="ci_for_pop_mean"></a>
+    Approximate Confidence Intervals for the Population Mean
+</h2>
+
+
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=3935&end=4260" frameborder="0" allowfullscreen></iframe>
+  </p>
+<p>Suppose that we seek a confidence interval for the
+    mean of a population (box) of numbers, based on a random sample from the population.
+    The <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> is an
+    <a class="glossRef" href="gloss.htm#unbiased">unbiased</a> estimator of the population mean
+    (<a class="glossRef" href="gloss.htm#expectation">E</a>(<a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>) =
+    <a class="glossRef" href="gloss.htm#mean">ave</a>(box)),
+    so it is reasonable to center a confidence interval at the sample mean.
+    How wide should we make an interval centered at the sample mean, for the interval
+    to have a specified probability of <a class="glossRef" href="gloss.htm#cover">covering</a>
+    the <a class="glossRef" href="#population_mean">population mean</a>?
+</p>
+
+<p>
+    If we knew the SD of the population or had an upper bound on the SD of the population, we could use
+    <a class="glossRef" href="gloss.htm#chebychev">Chebychev's inequality</a> to construct
+    a conservative confidence interval for the population mean, as we did earlier in
+    the chapter: the standard error of the sample mean is
+</p>
+
+<p class="math">
+    <a class="glossRef" href="gloss.htm#se">SE</a>(<a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>)
+    = <a class="glossRef" href="gloss.htm#sd">SD</a>(box)/n<sup>&frac12;</sup>,
+</p>
+
+<p>
+    where <span class="math">n</span> is the sample size.
+    So, for example, the <a class="glossRef" href="gloss.htm#coverage_probability">coverage probability</a>
+    of the random interval
+</p>
+
+<p class="math">
+    [(sample mean) &minus; 2&times;SD(box)/n<sup>&frac12;</sup>,
+    (sample mean) + 2&times;SD(box)/n<sup>&frac12;</sup>]
+</p>
+
+<p>
+    is at least 75%.
+</p>
+
+<p>
+    Typically, however, the SD of the population is not known, so we cannot construct
+    this interval.
+    Moreover, typically we cannot use the conservative approach based on Chebychev's Inequality,
+    because
+    there is no upper bound on the SD of a <em>general</em> list of numbers analogous to
+    the upper bound of 50% for the SD of lists that contain only zeros and ones.
+    (As we have seen, if all the numbers are bounded between <span class="math">a</span>
+    and <span class="math">b</span>, with <span class="math">a&le;b</span>,
+    then <span class="math">SD(box)&le;(b &minus; a)/2</span>&mdash;but typically we do not know such
+    lower and upper bounds <span class="math">a</span> and <span class="math">b</span>.)
+</p>
+
+<p>
+    However, the approximate approach to constructing confidence intervals, based on the
+    normal curve, works if the sample size is sufficiently large.
+    The <a class="glossRef" href="gloss.htm#clt">central limit theorem</a> tells us that the
+    <a class="glossRef" href="gloss.htm#probability_histogram">probability
+    histogram</a> of the <a class="glossRef" href="gloss.htm#mean">average</a> of <span class="math">n</span>
+    draws with replacement from a box
+    follows the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a> increasingly
+    well as the number of draws <span class="math">n</span> increases.
+    We also know that the sample standard deviation <span class="math">s</span> is increasingly
+    likely to be an accurate estimate of the <a class="glossRef" href="gloss.htm#sd">SD</a> of the
+    population as <span class="math">n</span> increases.
+    As a result, the probability that the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
+    is within <span class="math">&plusmn;z&times;s/n<sup>&frac12;</sup></span> is approximately
+    the same as the area under the normal curve between <span class="math">&minus;z</span> and
+    <span class="math">z</span>.
+    For any fixed population (box), the approximation improves as the sample size
+    <span class="math">n</span> increases, for random sampling with replacement.
+    Example
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeExample();
+// -->
+</script>
+    illustrates calculating an approximate confidence interval for the population mean.
+    The example is dynamic: It will tend to change when you reload the page.
+</p>
+
+<div class="example">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Approximate Confidence Interval for the Population Mean';
+    writeExampleCaption(qStr);
+// -->
+</script>
+
+<p>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cl = 80+ 2*listOfRandInts(1,0,9)[0];
+    var popSize = listOfRandInts(1,10,20)[0];
+    var samSize = 10*listOfRandInts(1,10,popSize)[0];
+    var popSize = 2000*popSize;
+    var popSd = 20;
+    var popMn = 100;
+    var samMean = roundToDig(popMn + popSd*rNorm(),2);
+    var samSd = roundToDig( Math.max(popSd/5.0, popSd + popSd*rNorm()/3.0), 2);
+    var ex3Lim = roundToDig(normInv(1.0- (1.0-cl/100.0)/2.0),3);
+    var width = samSd*ex3Lim/Math.sqrt(samSize);
+    var qStr = 'To assess scholastic performance, a state administers an achievement test to ' +
+           'a simple random sample of ' +  samSize.toString() + ' high school seniors. ' +
+           'There are ' + popSize.toString() + ' high school seniors in the state. ' +
+           'The mean score of the students who took the exam is ' + samMean.toString() +
+           ' points, and the sample standard deviation of their scores is ' +
+           samSd.toString() + ' points. Find an approximate ' + cl.toString() +
+           '% confidence interval for the average of the population scores that would ' +
+           'have been obtained had every high school senior in the state been ' +
+           'administered the achievement test.</p>' +
+           '<p><strong>Solution</strong>. The sample size (' + samSize.toString() +
+           ') is a sufficiently small fraction of the population size (' +
+           commify(popSize) + ') that treating the sample as if it were drawn with ' +
+           'replacement is reasonable.  The sample size is sufficiently large that ' +
+           'the normal approximation to the distribution of the sample mean should be ' +
+           'reasonably accurate, and that the sample standard deviation should be close to ' +
+           'the standard deviation of the population.  The area under the normal curve ' +
+           'between &plusmn;' + ex3Lim.toString() + ' is ' + cl.toString() + '%:</p>' +
+           '<p class="figure"><applet code="NormHiLite.class" codebase="../../Java/" ' +
+           'align="baseline" width="600" height="280" archive="PbsGui.zip">' +
+           '<param name="hiLiteHi" value="' + ex3Lim.toString() + '">' +
+           '<param name="hiLiteLo" value="-' + ex3Lim.toString() + '">' +
+           'You need Java to see this.</applet></p>' +
+           '<p>Thus, an approximate ' + cl.toString() +
+           '% confidence interval would be centered at the sample mean, and extend ' +
+           'down and up by from the sample mean by ' + ex3Lim.toString() +
+           ' standard units.  The estimated standard error of the sample mean is </p>' +
+           '<p class="math">' +
+           samSd.toString() + '/' + samSize.toString() + '<sup>&frac12;</sup> = ' +
+           roundToDig(samSd/Math.sqrt(samSize),3) + ' points.</p><p>The confidence ' +
+           'interval thus should extend down and up from the sample mean by</p>' +
+           '<p class="math">' + ex3Lim.toString() + '&nbsp;&times;&nbsp;' +
+           roundToDig(samSd/Math.sqrt(samSize),3) + ' points, </p><p>so the confidence ' +
+           'interval is </p><p class="math">[ ' +
+           roundToDig(samMean - width,3).toString() + ' points, ' +
+           roundToDig(samMean + width,3).toString() + ' points ]</p> ';
+    document.writeln(qStr);
+    ex3AppletNum = document.applets.length - 1;
+    sectionContext += 'document.applets[ex3AppletNum].' +
+              'setLimits((-ex3Lim).toString(),ex3Lim.toString());\n';
+// -->
+</script>
+</p>
+</div>
+
+<p>
+    The following exercise checks your ability to calculate approximate confidence intervals
+    for the population mean.
+    The exercise is dynamic:
+    The question will tend to change when you reload the page.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(startProblem(pCtr++));
+    var cl = 80+ 2*listOfRandInts(1,0,9)[0];
+    var popSize = listOfRandInts(1,10,20)[0];
+    var samSize = 10*listOfRandInts(1,10,popSize)[0];
+    var popSize = 2000*popSize;
+    var popSd = 10;
+    var popMn = 90;
+    var samMean = roundToDig(popMn + popSd*rNorm(),2);
+    var samSd = roundToDig( Math.max(popSd/5.0, popSd + popSd*rNorm()/3.0), 2);
+    var ex4Lim = roundToDig(normInv(1.0- (1.0-cl/100.0)/2.0),3);
+    var width = samSd*ex4Lim/Math.sqrt(samSize);
+    var qStr = 'To determine the average lifetime of their light-emitting diode (LED) ' +
+           'light bulbs, a manufacturer takes a simple random sample of ' +
+           samSize.toString() + ' bulbs from a manufacturing lot of ' +
+           commify(popSize) + ' bulbs. ' +
+           'The mean lifetime of the bulbs in the sample is ' + samMean.toString() +
+           ' thousand hours, and the sample standard deviation of their lifetimes is ' +
+           samSd.toString() + ' thousand hours. </p><p><span class="qSpan">An approximate ' +
+           cl.toString() + '% confidence interval for the average lifetime of the ' +
+           'bulbs in the manufacturing lot would extend from</span></p><p class="center">';
+    document.writeln(qStr);
+    writeTextExercise(8, qCtr++, numToRange(samMean - width));
+    document.writeln(' <span class="qSpan">thousand hours (low) to</span> ');
+    writeTextExercise(8, qCtr++, numToRange(samMean + width));
+    document.writeln(' <span class="qSpan">thousand hours (high)</span></p>.');
+    var ansStr = 'The sample size (' + samSize.toString() +
+           ') is a sufficiently small fraction of the population size (' +
+           commify(popSize) + ') that treating the sample as if it were drawn with ' +
+           'replacement is reasonable.  The sample size is sufficiently large that ' +
+           'the normal approximation to the distribution of the sample mean should be ' +
+           'reasonably accurate, and the sample standard deviation should be close to ' +
+           'the standard deviation of the population.  The area under the normal curve ' +
+           'between &plusmn;' + ex4Lim.toString() + ' is ' + cl.toString() + '%:</p>' +
+           '<p class="figure"><applet code="NormHiLite.class" codebase="../../Java/" ' +
+           'align="baseline" width="600" height="280" archive="PbsGui.zip">' +
+           '<param name="hiLiteHi" value="' + ex4Lim.toString() + '">' +
+           '<param name="hiLiteLo" value="-' + ex4Lim.toString() + '">' +
+           'You need Java to see this.</applet></p><p>An approximate ' + cl.toString() +
+           '% confidence interval would thus be centered at the sample mean, and extend ' +
+           'down and up by ' + ex4Lim.toString() + ' standard units.  The estimated ' +
+           'standard error of the sample mean is </p><p class="math">' +
+           samSd.toString() + '/' + samSize.toString() + '<sup>&frac12;</sup> = ' +
+           roundToDig(samSd/Math.sqrt(samSize),3) + ' thousand hours.</p>' +
+           '<p>The confidence interval thus should extend up and down from the ' +
+           'sample mean by</p>' +
+           '<p class="math">' + ex4Lim.toString() + '&nbsp;&times;&nbsp;' +
+           roundToDig(samSd/Math.sqrt(samSize),3) + ' thousand hours, </p>' +
+           '<p>so the confidence ' +
+           'interval is </p><p class="math">[ ' +
+           roundToDig(samMean - width,3).toString() + ' thousand hours, ' +
+           roundToDig(samMean + width,3).toString() + ' thousand hours  ].</p> ';
+    var thisApplet2 = document.applets.length;
+    var setThisApplet = function(thisApplet2) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet2,
+                                            function(){document.applets[thisApplet2].setLimits((-ex4Lim).toString(),ex4Lim.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+
+<!-- ====================================================================================== -->
+
+
+<h2>
+    <a id="exact_ci_for_pct"></a>
+    Exact Confidence Intervals for Percentages
+</h2>
+
+<p>
+     We have seen two methods for constructing confidence intervals for a population percentage:
+     a conservative method based on Chebychev's Inequality and a bound on
+     <span class="math">SD(box)</span>,
+     and an approximate method based on the normal approximation.
+     <em>Conservative</em> means that the coverage probability is at least as high as claimed&mdash;but could
+     be substantially higher for some populations.
+     <em>Approximate</em> means that the coverage probability is roughly as high as claimed&mdash;but could
+     be substantially lower (or substantially higher) for some populations.
+     This section develops a third method, which is <em>exact</em>.
+     <em>Exact</em> means that the probability that the random interval covers the true population percentage is
+     just what it is claimed to be (depending on the value of <span class="math">&alpha;</span> it can
+     be a bit higher, simply because the binomial distribution is a discrete distribution).
+</p>
+
+<p>
+     These intervals are rather different from the confidence intervals presented
+     earlier in this chapter, which were of the form (estimate &plusmn; uncertainty).
+     Instead, each of the endpoints is computed from the data, separately.
+     The resulting interval usually is not symmetric around the sample percentage
+     <span class="math">&phi;</span>.
+</p>
+
+<p>
+    We assume that a sample of size <span class="math">n</span> is drawn at random with replacement from
+    a 0-1 box.
+    We want to find a confidence interval for <span class="math">p</span>, the percentage of tickets labeled
+    &quot;1&quot; in the box.
+    Let <span class="math">X</span> be the number of tickets in the sample that are labeled &quot;1.&quot;
+    If the true percentage of tickets labeled &quot;1&quot; in the 0-1 box is
+    <span class="math">p</span>, then <span class="math">X</span>
+    has a <a class="glossRef" href="gloss.htm#binomial">Binomial probability distribution</a>
+    with parameters <span class="math">n</span> and <span class="math">p</span>.
+    We will construct a confidence interval for <span class="math">p</span> by looking at the values
+    of <span class="math">p</span> that are plausible, given the observed value of <span class="math">X</span>.
+    The approach is similar to the approach we took in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHallTest') + ', ');
+// -->
+</script>
+    and very closely related to hypothesis testing, discussed in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('testing') + '. ');
+// -->
+</script>
+</p>
+
+<p>
+    Suppose the observed value of <span class="math">X</span> is <span class="math">x</span>.
+    If <span class="math">p</span> were very very small (close to zero),
+    it would be unlikely to see <span class="math">x</span>
+    or more ones in the sample&mdash;unless <span class="math">x = 0</span>.
+    So seeing <span class="math">x</span> ones in the sample is evidence that <span class="math">p</span>
+    is not too small.
+    Conversely, if <span class="math">p</span> were very very large (close to one), it
+    would be unlikely to see <span class="math">x</span> or fewer ones in the
+    sample&mdash;unless <span class="math">x = n</span>.
+    So observing that <span class="math">X = x</span> limits the plausible range of values of
+    <span class="math">p</span>.
+</p>
+
+<p>
+    Suppose we want a confidence interval for <span class="math">p</span> with confidence level
+    <span class="math">1&minus;&alpha;</span>.
+    Let <span class="math">p<sup>-</sup></span> be the smallest value of <span class="math">q</span>
+    for which
+</p>
+
+<p class="math">
+   &alpha;/2 &le; P(X &ge; x if p = q) = <sub>n</sub>C<sub>x</sub>q<sup>x</sup>(1&minus;q)<sup>n&minus;x</sup>
+                            + <sub>n</sub>C<sub>x+1</sub>q<sup>x+1</sup>(1&minus;q)<sup>n&minus;x&minus;1</sup>
+                            + &hellip;
+                            + <sub>n</sub>C<sub>n</sub>q<sup>n</sup>(1&minus;q)<sup>0</sup>.
+</p>
+
+<p>
+    Similarly, let <span class="math">p<sup>+</sup></span> be the largest value of <span class="math">q</span>
+    for which
+</p>
+
+<p class="math">
+   &alpha;/2 &le; P(X &le; x if p = q) = <sub>n</sub>C<sub>x</sub>q<sup>x</sup>(1&minus;q)<sup>n&minus;x</sup>
+                            + <sub>n</sub>C<sub>x&minus;1</sub>q<sup>x+1</sup>(1&minus;q)<sup>n&minus;x+1</sup>
+                            + &hellip;
+                            + <sub>n</sub>C<sub>0</sub>q<sup>0</sup>(1&minus;q)<sup>n</sup>.
+</p>
+
+<p>
+   Then the interval <span class="math">[p<sup>-</sup>, p<sup>+</sup>]</span> is a
+   <span class="math">1&minus;&alpha;</span> confidence interval for <span class="math">p</span>.
+   Intervals constructed this way can be much shorter than the conservative intervals based on
+   Chebychev's Inequality and the upper bound on <span class="math">SD(box)</span>, but they
+   are still guaranteed to attain at least their nominal confidence level.
+   Confidence intervals based on the normal approximation are generally not much shorter, but their
+   actual confidence level can be substantially lower than their nominal confidence level.
+</p>
+
+
+
+
+
+
+
+<!-- ====================================================================================== -->
+
+
+<h2>
+    <a id="ci_for_percentiles"></a>
+    Confidence Intervals for Population Percentiles
+</h2>
+<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/t5qF7r7OqXM?start=4260&end=4357" frameborder="0" allowfullscreen></iframe></p>
+<div class="indent">
+<p class="inline">
+    We can also use a random sample with replacement to find a confidence interval for
+    a <a class="glossRef" href="gloss.htm#percentile">percentile</a> of a population.
+    We shall work out the details for the <a class="glossRef" href="gloss.htm#median">median</a>;
+    other percentiles can be treated similarly.
+    Unlike the conservative and approximate
+    confidence intervals&mdash;and like exact confidence intervals for the population percentage
+    we just saw&mdash;and these intervals are not of the form (estimate &plusmn; uncertainty).
+    Instead, the endpoints of the intervals are two of the data.
+    And this approach also leads to
+    <em>exact</em> confidence intervals:
+    The nominal coverage probability is equal
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var fStr = 'Essentially.  Some values of the confidence level cannot be attained exactly using ' +
+               'this approach, because the binomial distribution is discrete. ';
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+// -->
+</script> to the
+    actual coverage probability.
+</p>
+</div>
+
+<p>
+    To begin, suppose we have a random sample of size 10
+</p>
+
+<p class="math">
+    {X<sub>1</sub>, X<sub>2</sub>,
+    &hellip; , X<sub>10</sub>}
+</p>
+
+<p>
+    taken with replacement from a population with median <span class="math">m</span>.
+    Sort the data into increasing order:
+    let <span class="math">X<sub>(1)</sub></span> be the smallest datum,
+    <span class="math">X<sub>(2)</sub></span>
+    be the second-smallest, <em>etc</em>., and let <span class="math">X<sub>(10)</sub></span>
+    be the largest datum.
+    (The sorted data are called the <em>order statistics</em>.)
+    Let <span class="math">A<sub>1</sub></span> be the event that the fourth-smallest datum,
+    <span class="math">X<sub>(4)</sub></span>, is less than or equal to the median, and
+    let <span class="math">A<sub>2</sub></span> be the event that the
+    seventh-smallest datum, <span class="math">X</em><sub>(7)</sub></span>,
+    is greater than or equal to the median.
+    The event <span class="math">A<sub>1</sub></span> occurs unless 7 or more data are greater than the population
+    median, so <span class="math">A<sub>1</sub><sup>c</sup></span> is the event that 7 or
+    more data are greater than the population median.
+    Similarly, the event <span class="math">A<sub>2</sub></span> occurs unless 7 or more data
+    are less than the population median, so <span class="math">A<sub>2</sub><sup>c</sup></span>
+    is the event that 7 or more data are less than the population median.
+    Let <span class="math">A=A<sub>1</sub>A<sub>2</sub></span> be the event that the fourth and
+    seventh order statistics bracket the median.
+    We shall find a lower bound on the probability of <span class="math">A</span>.
+</p>
+<p>
+    Note that if seven or more data are less than the median,
+    then it is not the case that seven or more data are greater than the median,
+    so <span class="math">A<sub>1</sub><sup>c</sup></span> and
+    <span class="math">A<sub>2</sub><sup>c</sup></span> are disjoint.
+    Hence,
+</p>
+<p class="math">
+    P(A<sup>c</sup>) = P((A<sub>1</sub>A<sub>2</sub>)<sup>c</sup>)
+</p>
+<p class="math">
+    = P(A<sub>1</sub><sup>c</sup> &cup;A<sub>2</sub><sup>c</sup>)
+</p>
+<p class="math">
+    =
+    P(A<sub>1</sub><sup>c</sup>) + P(A<sub>2</sub><sup>c</sup>),
+</p>
+<p>
+    and thus
+</p>
+<p class="math">
+    P(A) = 1&minus;P(A<sup>c</sup>) = 1 &minus; P(A<sub>1</sub><sup>c</sup>) &minus;
+    P(A<sub>2</sub><sup>c</sup>).
+</p>
+<p>
+    We are done if we can find upper bounds for <span class="math">P(A<sub>1</sub><sup>c</sup>)</span>
+    and <span class="math">P(A<sub>2</sub><sup>c</sup>)</span>.
+</p>
+
+<p>
+    Recall that the median is the smallest number that at least 50% of
+    the population are less than or equal to.
+    It follows that the probability that a
+    number drawn at random from the population is strictly less than the median
+    is at most 50% (and possibly less), and that the probability that a number
+    drawn at random from the population is strictly greater than the median is at most 50%
+    (and possibly less).
+    The data are drawn from the population independently, so the number of data that
+    are less than the population median has a
+    <a class="glossRef" href="gloss.htm#binomial">Binomial probability
+    distribution</a> with <span class="math">n</span> trials and
+    <span class="math">p &le; 50%</span>, as does the number of
+    data that are greater than the population median.
+</p>
+
+<p>
+    Let Y be a random variable with a Binomial distribution with parameters
+    <span class="math">n=10</span> and <span class="math">p = 50%</span>.
+    Thus <span class="math">P(A<sub>1</sub><sup>c</sup>) &le; P(Y &ge; 7)</span>, and
+    <span class="math">P(A<sub>2</sub><sup>c</sup>) &le; P(Y &ge; 7)</span>.
+    However, <span class="math">P(Y&nbsp;&ge;&nbsp;7)&nbsp;=&nbsp;P(Y&nbsp;&le;&nbsp;3)</span>, so
+</p>
+<p class="math">
+     P(A) &ge; 1 &minus; P(Y&le; 3 or Y &ge; 7) = P(4 &le; Y &le; 6).
+</p>
+
+<p>
+     Thus the probability that the interval
+     <span class="math">[<em>X</em><sub>(4)</sub>, <em>X</em><sub>(7)</sub>]</span> contains the
+     population median is at least as large as the probability of observing
+     4, 5, or 6 successes in 10 independent trials with probability 50% of succeess
+     in each trial&mdash;the highlighted area in
+<script language="JavaScript1.4" type="text/javascript"><!--
+    citeFig();
+// -->
+</script>:
+</p>
+
+<div class="figure">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var qStr = 'Binomial probability histogram';
+    writeFigureCaption(qStr);
+// -->
+</script>
+
+<p class="figure">
+    <applet code="HistHiLite.class" codebase="../../Java/"
+        align="baseline" width="600" height="320" archive="PbsGui.zip">
+    <param name="hiLiteHi" value="6.5">
+    <param name="hiLiteLo" value="3.5">
+    <param name="n" value="10">
+    <param name="normalControls" value="false">
+    <param name="p" value=".5">
+    You need Java to see this.
+    </applet>
+</p>
+</div>
+
+<p>
+    The interval from the fourth-smallest datum to the seventh-smallest datum is
+    therefore a
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cl = roundToDig(100*(binomialCdf(10,.5,6) - binomialCdf(10,.5,3)),1).toString();
+    document.writeln( cl + '% ');
+// -->
+</script>
+    confidence interval for the population median.
+</p>
+
+<p>
+    The same idea can be used to find confidence intervals for other percentiles:
+    The probability distribution of the number of data that are less than the
+    100&times;<span class="math">q</span>th percentile is Binomial with number of trials equal to the
+    number of data, <span class="math">n</span>, and probability of success at most
+    <span class="math">q</span>, and
+    the probability distribution of the number of data that are greater than the
+    <span class="math">100&times;q</span>th percentile is Binomial with number of trials equal to the
+    number of data, <span class="math">n</span>, and probability of success at most
+    <span class="math">1&minus;q</span>.
+</p>
+
+<p>
+    The following exercise checks whether you can find a confidence interval for
+    a population median.
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript"><!--
+   document.writeln(startProblem(pCtr++));
+   var nVal1 = listOfRandInts(1,11,20)[0];
+   var tailProb = 0;
+   var j = 0;
+   while (tailProb < .1) {
+       j++;
+       oldTail = tailProb;
+       tailProb = 2*binomialCdf(nVal1,.5,j);
+   }
+   var cl = 1-oldTail;
+   var limLo = (j-0.5);
+   var limHi = (nVal1-j+0.5);
+   var ansStr = 'The probability that at least ' + (j-1).toString() + ' of the ' +
+        nVal1.toString() + ' data are less than the median and that at least ' +
+        (j-1).toString() + ' data are above the median is at least ' +
+        'the probability that a variable with the binomial distribution with ' +
+        'parameters <span class="math">n = ' + nVal1.toString() + '</span> and <span class="math">p = ' +
+        '50%</span> is between ' + j.toString() + ' and ' + (nVal1-j).toString() +
+        ', inclusive, which is ' + roundToDig(100*cl,1).toString() +
+        '%:</p><p class="figure"><applet code="HistHiLite.class" ' +
+        'codebase="../../Java/" align="baseline" width="600" height="320" ' +
+        'archive="PbsGui.zip"><param name="hiLiteHi" value="' +
+        limHi.toString() + '"><param name="hiLiteLo" value="' +
+        limLo.toString() + '"><param name="n" value="' + nVal1.toString() +
+        '"><param name="normalControls" value="false">' +
+        '<param name="p" value=".5">You need Java to see this.</applet></p>' +
+        '<p>Thus the interval from the ' + ordinals[j] + ' smallest datum to the ' +
+        ordinals[nVal1-j] + ' smallest datum is a ' +
+        roundToDig(100*cl,1).toString() + '% confidence interval for the ' +
+        'population median.';
+    var qStr = 'Consider finding a ' + roundToDig(100*cl,1) +
+           '% confidence interval for the median of a population from a random ' +
+           'sample with replacement of size ' + nVal1.toString() + '.</p><p>' +
+           '<span class="qSpan">The confidence interval should go from the</span>';
+    document.writeln(qStr);
+    var opt = new Array();
+    opt[0] = "smallest";
+    for (var i=1; i < nVal1; i++) {
+       opt[i] = ordinals[i] + " smallest ";
+    }
+    var aVal = alphabet[j];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '<span class="qSpan">datum to the</span>';
+    document.writeln(qStr);
+    var opt = new Array();
+    opt[0] = "smallest";
+    for (var i=1; i < nVal1; i++) {
+       opt[i] = ordinals[i] + " largest ";
+    }
+    var aVal = alphabet[nVal1 - j ];
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var qStr = '<span class="qSpan">datum.</span></p>';
+    var thisApplet3 = document.applets.length;
+    var setThisApplet = function(thisApplet3) {
+                           return function() {
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet3,
+                                            function(){document.applets[thisApplet3].setNP(nVal1, 0.5)}
+                                           );
+                              waitForAppletIterationCount = 0;
+                              waitForApplet(thisApplet3,
+                                            function(){document.applets[thisApplet3].setLimits(limLo.toString(),limHi.toString())}
+                                           );
+                           }
+                        }
+    writeSolution(pCtr-1, ansStr, setThisApplet());
+// -->
+</script>
+</div>
+
+<h2>
+    <a id="summary"></a>
+    Summary
+</h2>
+
+<p>
+    Suppose we have a procedure for calculating an interval from every possible sample of
+    size <span class="math">n</span> from a population of size <span class="math">N</span>
+    (a box of <em>N</em> numbered tickets).
+    Let <span class="math">t</span> be a parameter of the population.
+    Suppose that if the procedure is applied to a random sample of size <span class="math">n</span>,
+    the chance that the resulting interval will contain <span class="math">t</span> is
+    <span class="math">P%</span>.
+    Then the interval that results from applying the procedure to any particular
+    random sample of size <span class="math">n</span> is a
+    <span class="termOfArt"><span class="math">P%</span> confidence interval for</span> <span class="math">t</span>.
+    Once the random sample has been drawn, the resulting interval either covers
+    (contains) or does not cover <span class="math">t</span>&mdash;the probability
+    that the interval covers <span class="math">t</span> is either 0 or 100%.
+    The probability that the interval will cover <span class="math">t</span> before the sample is drawn is
+    called the <span class="termOfArt">confidence level</span> of the interval after the sample is drawn.
+    Confidence intervals provide an alternative to reporting a single &quot;best estimate&quot;
+    of a parameter and a summary measure of the uncertainty of the estimate.
+    It is possible to construct conservative confidence intervals for the population
+    percentage from simple random samples or random samples with replacement from
+    <span class="termOfArt">0-1 boxes</span>:
+    For a simple random sample of size <span class="math">n</span>,
+    the chance that the random interval
+</p>
+
+<p class="math">
+    [&phi;&minus;k&times;f/(2n<sup>&frac12;</sup>),
+    &phi;&minus;k&times;f/(2n<sup>&frac12;</sup>)]
+</p>
+
+<p>
+    covers the population percentage <span class="math">p</span> is at least
+    <span class="math">1&minus;1/k<sup>2</sup></span>,
+    where <span class="math">&phi;</span> is the sample percentage, <span class="math">f</span>
+    is the finite population correction
+    <span class="math">(N&minus;n)<sup>&frac12;</sup>/(N&minus;1)<sup>&frac12;</sup></span>,
+    <span class="math">N</span> is the population size, and <span class="math">n</span> is the sample size.
+    For random sampling with replacement, the chance that the random interval
+</p>
+
+<p class="math">[&phi;&minus;k/(2n<sup>&frac12;</sup>),
+    &phi;&minus;k/(2n<sup>&frac12;</sup>)]
+</p>
+
+<p>
+    includes the population percentage <span class="math">p</span> is at least
+    <span class="math">1&minus;1/k<sup>2</sup></span>.
+    These are <em>conservative</em> procedures for constructing confidence intervals,
+    because the probability that the intervals they produce cover the true population
+    percentage <span class="math">p</span> (the actual coverage probability) is greater than the
+    probability they claim, <span class="math">1&minus;1/k<sup>2</sup></span>
+    (the <em>nominal</em> coverage probability).
+    These procedures can be extremely pessimistic,
+    especially when the sample size <span class="math">n</span> is large and when the true population percentage
+    <span class="math">p</span> is far from 50%&mdash;the intervals then are much wider than they need to be
+    for the actual coverage probability to be <span class="math">1&minus;1/k<sup>2</sup></span>.
+</p>
+
+<p>
+    Suppose that the random sample is drawn with replacement.
+    When the sample size <span class="math">n</span> is large, the central limit theorem ensures that
+    the probability histogram of the sample percentage can be approximated accurately
+    by the normal curve.
+    The expected value of the sample percentage <span class="math">&phi;</span> is
+    <span class="math">p</span> and the SE
+    of the sample percentage is <span class="math">SD(box)/n<sup>&frac12;</sup></span>,
+    where SD(box) is
+    the population SD, <span class="math">(p&times;(1&minus;p))<sup>&frac12;</sup></span>,
+    the SD of the list of numbers on the tickets in the box.
+    When <span class="math">n</span> is large, the SD of the sample,
+   <span class="math">s<sup>*</sup></span>, tends to be an
+    accurate estimate of SD(box), and the chance that the random interval
+</p>
+
+<p class="math">
+    [&phi;&minus;z&times;s<sup>*</sup>/n<sup>&frac12;</sup>,
+    &phi;+z&times;s<sup>*</sup>/n<sup>&frac12;</sup>]
+</p>
+
+<p>
+    contains <span class="math">p</span> is approximately equal to the area under the normal curve between
+    <span class="math:>&minus;z</span> and <span class="math">z</span>.
+    Taking <span class="math">z=1.96</span>, for example, gives approximate 95% confidence intervals.
+    The coverage probability of this procedure typically is not exactly the area under the
+    normal curve between <span class="math">&plusmn;z</span>, but as the sample size
+    grows, the coverage probability approaches that area.
+</p>
+
+<p>
+    Approximate confidence intervals for the population mean can be constructed similarly,
+    but then it is more common to use
+</p>
+
+<p class="math">
+    s=s<sup>*</sup>&times;n<sup>&frac12;</sup>/(n&minus;1)<sup>&frac12;</sup>
+</p>
+
+<p>
+    to estimate SD(box) than to use <span class="math">s<sup>*</sup></span>.
+    Let <span class="math">M</span> denote the sample mean.
+    For random sampling with replacement, if the sample size <span class="math">n</span> is large,
+    the chance that the random interval
+</p>
+
+<p class="math">
+    [M&minus;z&times;s/n<sup>&frac12;</sup>,
+    M+z&times;s/n<sup>&frac12;</sup>]
+</p>
+
+<p>
+    covers the population mean is approximately equal to the area under the normal
+    curve between <span class="math">&plusmn;z</span>.
+    Again, the coverage probability is not exactly the area under the normal
+    curve between <span class="math">&plusmn;z</span>,
+    but it approaches that area as the sample size grows.
+</p>
+
+<p>
+    Confidence intervals can be constructed for population parameters other than
+    percentages and means.
+    For example, one can construct confidence intervals for percentiles of a population
+    using the fact that for random sampling with replacement, the number of data
+    that are less than the <span class="math">100&times;q</span>th percentile has a binomial distribution
+    with parameters <span class="math">n</span> and
+    <span class="math">p = q</span>, and the number of data that
+    are greater than the <span class="math">100&times;q</span>th percentile has a binomial distribution
+    with parameters <span class="math">n</span> and <span class="math">p=1&minus;q</span>.
+</p>
+
+<h2><a id="keyTerms"></a>Key Terms</h2>
+
+<ul>
+    <li>approximate confidence interval</li>
+    <li>bootstrap estimate of the standard deviation</li>
+    <li>Chebychev's inequality</li>
+    <li>confidence interval</li>
+    <li>confidence level</li>
+    <li>conservative confidence interval</li>
+    <li>coverage probability</li>
+    <li>expected value</span>
+    <li>finite population correction <span class="math">f</span></li>
+    <li>normal approximation</li>
+    <li>normal curve</li>
+    <li>parameter</li>
+    <li>population mean</li>
+    <li>population percentage </li>
+    <li>population SD</li>
+    <li>probability</li>
+    <li>sample mean</li>
+    <li>sample percentage <span class="math">&phi;</span></li>
+    <li>sample standard deviation <span class="math">s</span></li>
+    <li>standard deviation (SD)</li>
+    <li>standard deviation of the sample <span class="math">s<sup>*</sup></span></li>
+</ul>
+
+</form>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterFooter();
+// -->
+</script>
+
+</body>
+</html>

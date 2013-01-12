@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "13 June 2011 15:24 PST";
+	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+</script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    var cNum = "probabilityAxioms";
+    labSetUp("SeEd",cNum);
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeProblemSetBody();
+// -->
+</script>
+
+<h2>Axioms of Probability, Probability and Set Relations</h2>
+
+<div class="indent">
+<h3>
+     Part I: Axioms of Probability
+</h3>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+  document.writeln(startProblem(pCtr++));
+  var rawOpt = [
+                "for any event A, P(A)&ge;0",
+                "P(S)=100%",
+                "if AB={}, P(A&cup;B) = P(A)+P(B)",
+                "P(not A)=100%-P(A)",
+                "P(A&cup;B)=P(A)+P(B)-P(AB)",
+                "P(A&cup;B)&le;P(A)+P(B)",
+                "P(AB)&le;P(A)",
+                "If A is a subset of B, P(AB)=P(A)",
+                "If A is a subset of B, P(A&cup;B)=P(B)",
+                "If A is a subset of B, P(A&cup;B)=P(A)",
+                "If A is a subset of B, P(AB)=P(B)",
+                "P(A&cup;B)=P(A)+P(B)",
+                "P(AB)=P(A)P(B)"
+               ];
+  var optPerm = randPermutation(rawOpt,"inverse");
+  var opt = optPerm[0];
+  var aVal = "";
+  for (i=0; i < 3; i++) {
+    aVal += alphabet[optPerm[1][i]] + "&";
+  }
+  aVal = aVal.substring(0,aVal.length-1); // trim final '&'
+  var qStr = '<span class="qSpan">Which of the following are the axioms of probability?</span>';
+  document.writeln(qStr);
+  writeSelectExercise(true,qCtr++,opt,aVal);
+  document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var optPerm = randPermutation(rawOpt,"inverse");
+    var opt = optPerm[0];
+    var aVal = "";
+    for (i=0; i < 9; i++) {
+        aVal += alphabet[optPerm[1][i]] + "&";
+    }
+    aVal = aVal.substring(0,aVal.length-1); // trim final '&'
+    var qStr = '<span class="qSpan">Which of the following are always true?</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+    Part II: Set Relations and Probability
+</h3>
+
+<p class="inline">
+    The Venn Diagram tool in the frame below is designed to help you visualize the relations
+    between sets, but it will only plot rectangular sets. Unless a
+    question specifically refers to the tool, you should consider what
+    would happen with other shaped sets as well in answering the questions.
+</p>
+</div>
+
+<p>
+    Click the radio button to highlight the event &quot;A or B.&quot;
+    Drag the events A and B around with the
+    mouse. Notice how the probability of &quot;A or B&quot; varies as you do.
+    <strong>Do not change the probability of A or of B until instructed
+    to do so!</strong>
+    Make sure that you have not changed the probability of A or of B; you should have 
+    P(A) = 30% and P(B) = 20%. 
+</p>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var pA = 0.3;
+    var pB = 0.2;
+    var rawOpt = ["A and B are mutually exclusive",
+                  "A and B are independent",
+                  "A is a subset of B",
+                  "B is a subset of A"
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    aVal = alphabet[optPerm[1][0]];
+    var qStr = '<span class="qSpan">The probability of &quot;A or B&quot; is largest when </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = 'In that case, P(A&cup;B) = </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pA+pB,0.00001));
+    document.writeln('</p>');
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var pA = 0.3;
+    var pB = 0.2;
+    var rawOpt = [  "A and B are mutually exclusive",
+                    "A and B are independent",
+                    "A is a subset of B",
+                    "B is a subset of A"
+                  ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][3]];
+    var qStr = 'Make sure that you have not changed the probability of A or of B; you should have ' +
+               'P(A) = 30% and P(B) = 20%. <span class="qSpan">P(AB) is largest when ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = 'In that case, P(AB) = </span>';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(pB,.00001));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = [  "A and B are mutually exclusive",
+                    "A and B are independent",
+                    "A is a subset of B",
+                    "B is a subset of A"
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    aVal = alphabet[optPerm[1][0]];
+    pAB = 0;
+    qStr = '<span class="qSpan">P(AB) is smallest when ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' In that case, P(AB) =</span> ';
+    document.writeln(qStr);
+    writeTextExercise(8,qCtr++,numToRange(1.0e-8,1.0e-8));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = ["false","true"];
+    var aVal = "a";
+    var qStr = 'Drag A and B around to make the probability of AB equal to 6%, which is ' +
+               'the product P(A)&times;P(B); then A and B are independent. Notice that ' +
+               'that is not so easy to do. <span class="qSpan"> There is only one way to ' +
+               'position A and B that makes them independent. </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<p>
+    Now experiment with changing the probabilities of A and B and
+    dragging A and B around;
+    try to make P(AB) as large as possible and as small as possible.
+    Think about what could happen in general, not necessarily for
+    rectangular events; that is, suppose we specify P(A) and P(B), but
+    neither the shapes nor the positions of A and B.
+</p>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = ["false","true"];
+    var aVal = 'b';
+    var qStr = '<span class="qSpan">For some values of P(A) and P(B), there is no possible ' +
+               'combination of shapes and positions of A and B so that A and B could be ' +
+               'mutually exclusive.</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+     document.writeln(startProblem(pCtr++));
+     var opt = ["false","true"];
+     var aVal = alphabet[0];
+     var qStr = '<span class="qSpan">For some values of P(A) and P(B), there is no ' +
+                'combination of shapes and positions of A and B so that A and B could ' +
+                'be independent.</span> ';
+     document.writeln(qStr);
+     writeSelectExercise(false,qCtr++,opt,aVal);
+     document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var opt = [
+                "A and B are mutually exclusive", // a
+                "A and B are independent", // b
+                "A and B are dependent", // c
+                "A is a subset of B", // d
+                "B is a subset of A", // e
+                "not A is a subset of B", // f
+                "not B is a subset of A", // g
+                "A is a subset of not B", // h
+                "B is a subset of not A", // i
+                "not B is a subset of not A", // j
+                "not A is a subset of not B", // k
+                "none of the above" // l
+                ];
+    var qPossible = [" A implies B "," B implies A "," A implies not B "," B implies not A "];
+    var which = (listOfRandInts(1,0,qPossible.length - 1))[0];
+    var aVal = "";
+    if (which == 0) {
+         aVal = "c&d&j";
+    } else if (which == 1) {
+         aVal = "c&e&k";
+    } else if (which == 2) {
+         aVal = "a&c&h&i";
+    } else if (which == 3) {
+         aVal = "a&c&h&i";
+    }
+    var qStr = '<span class="qSpan">Suppose 0&lt;P(A)&lt;1 and 0&lt;P(B)&lt;1. If ' + qPossible[which] + 
+               ' then (select all that apply)</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var probs = listOfDistinctRandInts(2,50,90);
+    probs.sort(numberLessThan);
+    var pA = probs[1];
+    var pB = probs[0];
+    var rawOpt = [
+                "P(AB)&le;" + pB.toString() + "%",
+                "P(AB)&le;" + pA.toString() + "%",
+                "P(AB)&ge;" + (pA + pB - 100).toString() + "%",
+                "P(A&cup;B)&ge;" + pA.toString() + "%",
+                "A and B cannot be mutually exclusive",
+                "A cannot imply B",
+                "B cannot imply A",
+                "P(A&cup;B)=100%",
+                "A and B cannot be independent",
+                "P(A&cup;B)&ge;" + (pA+5).toString() + "%"
+              ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal="";
+    for (i=0; i < 6; i++) {
+        aVal += alphabet[optPerm[1][i]]+ "&";
+    }
+    aVal = aVal.substring(0,aVal.length-1);
+    var qStr = 'Suppose there are two events, A and B, with P(A) = ' + pA.toString() + 
+               '% and P(B) = ' + pB.toString() + '%. <span class="qSpan">Select all that ' +
+               '<strong>must</strong> apply.</span>';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+   document.writeln(startProblem(pCtr++));
+   var probs = listOfDistinctRandInts(2,2,8);
+   probs.sort(numberLessThan);
+   var pC = 10;
+   var pB = roundToDig(10*probs[0],0);
+   var pA = roundToDig(10*probs[1],0);
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal="";
+    for (i=0; i < 5; i++) {
+        aVal += alphabet[optPerm[1][i]]+ "&";
+    }
+    aVal = aVal.substring(0,aVal.length-1);
+    var rawOpt = [
+                    "If B implies A, P(A&cup;B&cup;C)&le;" + (Math.min(100,pA+pC)).toString() + "%",
+                    "A cannot imply B",
+                    "C cannot imply B",
+                    "If C implies B, P(ABC)&ge;" + pC.toString() + "%",
+                    "If C implies A, P(A&cup;B&cup;C)>" + (Math.min(pA + pB,100)).toString() + "%"
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    opt = optPerm[0];
+    var aVal = "";
+    for (i=0; i < 2; i++) {
+        aVal += alphabet[optPerm[1][i]] + "&";
+    }
+    aVal = aVal.substring(0, aVal.length-1);
+    var qStr = 'Suppose there are three events, A, B, and C, with P(A)=' + pA.toString() + 
+               '%, P(B)=' + pB.toString() + '%, and P(C)=' + pC.toString() + 
+               '%. <span class="qSpan">Select all that <strong>must</strong> apply.</span> ';
+    document.writeln(qStr);
+    writeSelectExercise(true,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<div class="indent">
+<h3>
+   Part III: Applications
+</h3>
+
+<p class="inline">
+  I will be dealt 5 cards from a well shuffled standard deck of 52
+  playing cards.
+</p>
+</div>
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ["mutually exclusive",
+                "independent",
+                "a subset"
+                ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][0]];
+    var qStr = '<span class="qSpan">The event that I get exactly one ace is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var rawOpt = ["equal to",
+                  "less than",
+                  "greater than"
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][0]];
+    qStr = ' of the event that I get exactly two aces, so the chance that I get one or two aces is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    qStr = ' the sum of the chance that I get exactly one ace and the chance ' +
+           ' that I get exactly two aces. </span></p>';
+    document.writeln(qStr);
+// -->
+</script>
+</div>
+
+
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var rawOpt = ["equal to",
+                    "less than",
+                    "greater than"
+                    ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][1]];
+    var qStr = '<span class="qSpan">The probability of the event that I get an Ace or a King is ';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    var rawOpt = [
+                  "the events are mutually exclusive",
+                  "the events are independent",
+                  "the intersection of the events is not empty",
+                  "one event is a subset of the other",
+                  "the events are dependent"
+                 ];
+    var optPerm = randPermutation(rawOpt,'inverse');
+    var opt = optPerm[0];
+    opt[opt.length] = "none of the above";
+    var aVal = alphabet[optPerm[1][2]];
+    qStr = ' the sum of the chance that I get an Ace and the chance that I get a King, because </span>';
+    document.writeln(qStr);
+    writeSelectExercise(false,qCtr++,opt,aVal);
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+    writeProblemSetFooter();
+// -->
+</script>
+</body>
+</html>
