@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Normal Approximation to Data',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+<h1 align="center">The <a
+
+href="../../SticiGui/Text/gloss.htm#normal_approximation">Normal
+
+Approximation</a> to Data </h1>
+
+
+
+<p>
+
+Many (but probably not most) <a
+
+href="../../SticiGui/Text/gloss.htm#histogram">histograms</a> of data can
+
+be approximated by a <a
+
+href="../../SticiGui/Text/gloss.htm#normal_curve">Normal Curve</a>
+
+if the data values are converted to <a
+
+href="../../SticiGui/Text/gloss.htm#standard_units">Standard Units</a>,
+
+in the sense that the area under the histogram over various
+
+regions is about the same as the area of the normal curve over
+
+the same regions. The following applet shows the histogram of <a
+
+href="#table">100 measurements of the acceleration of gravity at
+
+Piñon Flat Observatory</a>.
+
+</p>
+
+
+
+<p align="left">&nbsp;</p>
+
+
+
+<p align="center">
+
+<applet archive="PbsGui.zip" codebase=".."  code="HistHiLite.class" align="middle"
+
+    width="600" height="320">
+
+    <param name="bins" value="10">
+
+    <param name="counts" value="6,14,21,17,21,16,3,1,0,1">
+
+    <param name="ends" value="-2.04,-1.45,-.87,-0.29,0.3,0.82,1.46,2.05,2.63,3.21,3.8">
+
+    <param name="hiLiteHi" value="2">
+
+    <param name="hiLiteLo" value="-2"><param name="mean" value="0"><param name="SD" value="1">
+
+    <param name="title" value="Pinon Flat g data in Standard Units">
+
+    You need Java to see this.
+
+</applet>
+
+</p>
+
+
+
+<p>The scroll bars let you select different regions of the
+
+histogram; the area under the histogram and under the
+
+corresponding part of the normal curve are shown at the bottom of
+
+the applet. <a name="table"></a> </p>
+
+
+
+<p>The following is a table of 100 observations of <em>g</em>,
+
+the acceleration due to gravity, made at Piñon Flat Observatory
+
+in 1989 (day 229, between 5:29:52pm and 5:48:08pm). The base <em>g</em>
+
+value is 9.792838 meters/s**2. The table lists the deviations of
+
+the measurements from that reference value. The experimental
+
+apparatus is pretty slick: it uses a laser and an accurate time
+
+reference to determine the distance a mirrored corner of a cube
+
+falls in a vacuum chamber as a function of time. These
+
+measurements were made by Glen Sasagawa and Mark Zumberge. </p>
+
+
+
+<pre>
+
+-.00000001 .00000002 -.00000074 -.00000044 -.00000019
+
+-.00000060 -.00000106 -.00000083 -.00000086 -.00000079
+
+-.00000024 -.00000012 .00000014 -.00000074 -.00000050
+
+.00000041 .00000014 .00000072 -.00000015 -.00000107
+
+-.00000071 -.00000128 -.00000035 -.00000120 .00000018
+
+-.00000101 -.00000019 -.00000067 .00000024 -.00000027
+
+-.00000106 -.00000000 -.00000150 .00000000 .00000014
+
+-.00000132 -.00000014 .00000018 -.00000014 .00000051
+
+-.00000037 -.00000034 -.00000059 -.00000113 .00000029
+
+-.00000083 -.00000038 -.00000108 -.00000061 -.00000016
+
+.00000045 -.00000069 -.00000034 -.00000004 -.00000071
+
+-.00000132 -.00000089 -.00000055 -.00000024 .00000019
+
+-.00000099 .00000155 .00000001 -.00000012 -.00000067
+
+.00000014 -.00000112 -.00000012 -.00000016 -.00000060
+
+-.00000043 -.00000062 -.00000019 -.00000080 -.00000019
+
+-.00000122 -.00000049 .00000029 -.00000101 -.00000074
+
+.00000007 -.00000018 -.00000105 -.00000121 -.00000027
+
+-.00000016 -.00000048 -.00000029 -.00000065 -.00000048
+
+-.00000080 -.00000152 -.00000052 -.00000026 -.00000087
+
+-.00000107 -.00000054 -.00000054 -.00000047 -.00000106
+
+</pre>
+
+
+
+<p>Why take so many measurements?</p>
+
+
+
+<ul>
+
+    <li>Fluctuations tend to average out to some extent, so you
+
+    can get more accurate results by averaging the
+
+    measurements</li>
+
+    <li>Quality control: if the fluctuations get larger, or a
+
+    measurement is &quot;unusual,&quot; something might be
+
+    going wrong with the instrument or its set-up.</li>
+
+    <li>The variability of the repeated measurements gives you an
+
+    estimate of the uncertainty of a single measurement, or
+
+    of the average of the measurements, via the SD.</li>
+
+</ul>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+</body>
+
+</html>
+

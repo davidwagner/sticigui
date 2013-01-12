@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 8 January 2013 15:36:59 PST";
+	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Scatterplots',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+
+<p align="center">
+
+<applet code="Bivariate.class" align="baseline" width="800"
+
+   height="600" archive="PbsGui.zip" codebase=".." >
+
+   <param name="addPoints" value="true">
+
+   <param name="files" value="./Data/cities.dat,./Data/cities47.dat,./Data/gmat.dat,./Data/ccv.dat">
+
+   <param name="urlBox" value="true">
+
+   <param name="sdButtons" value="true">
+
+   You need Java to see this.
+
+</applet>
+
+</p>
+
+
+
+<p>
+
+This applet lets you study the relationship between pairs of
+
+variables using <a href="../../SticiGui/Text/gloss.htm#scatterplot">scatterplots</a>,
+
+the <a href="../../SticiGui/Text/gloss.htm#correlation_coef">correlation
+
+coefficient</a>, the <a href="../../SticiGui/Text/gloss.htm#graph_of_averages">graph
+
+of averages</a>, <a href="../../SticiGui/Text/gloss.htm#regression">linear
+
+regression</a>, and <a href="../../SticiGui/Text/gloss.htm#residual_plot">residual
+
+plots</a>.
+
+</p>
+
+
+
+<p>You can select one of four data sets using the drop-down menu,
+
+or <a href="#urlExpl">type in the URL of a different dataset</a>.
+
+The four data sets are
+
+</p>
+
+
+
+<ul>
+
+    <li><a href="#cities_data">data about the number of homeless
+
+    in 50 cities in the USA</a> </li>
+
+    <li><a href="#cities47_data">data about the 47 smallest of
+
+    those 50 cities</a> </li>
+
+    <li><a href="#ccv_data">pollutant emissions from EPA test
+
+    vehicles in 96 tests</a> </li>
+
+    <li><a href="#gmat_data">data about the GPAs and GMAT scores
+
+    of 913 first year MBA students</a></li>
+
+</ul>
+
+
+
+<p>The next two choice boxes let you select which variable in the
+
+selected data set to plot on the X axis, and which to plot on the
+
+Y axis. <font color="#FF0000">Again, on monochrome monitors on
+
+unix systems, the box itself might not be visible: click on the
+
+name of the variable to see the other choices.</font> </p>
+
+
+
+<p>The buttons should be self-explanatory. They let you plot ±1
+
+SD from the <a href="../../SticiGui/Text/gloss.htm#point_of_averages">point
+
+of averages</a>, which is plotted in red; plot the
+
+<a href="../../SticiGui/Text/gloss.htm#sd_line">SD Line</a>, the
+
+<a href="../../SticiGui/Text/gloss.htm#graph_of_averages">graph
+
+of averages</a> (yellow squares), and the
+
+<a href="../../SticiGui/Text/gloss.htm#regression">regression
+
+line</a>, pop up a window containing the currently plotted
+
+dataset, pop up a window containing summary statistics for each
+
+variable, and toggle from a
+
+<a href="../../SticiGui/Text/gloss.htm#scatterplot">scatterplot</a>
+
+of the data to a <a href="../../SticiGui/Text/gloss.htm#residual">residual plot</a>,
+
+use or ignore points you have added by clicking on the graph, and
+
+clear points you added previously by clicking on the graph. (The
+
+univariate summary statistics are always for the original data;
+
+they do not include any points you have added.) You can find the
+
+X and Y values for any point by positioning the mouse cursor over
+
+it: the coordinates of the cursor are given in the lower right
+
+corner of the applet. If you select some rows of data in the
+
+dataset window and strike &quot;return,&quot; the corresponding
+
+points in the scatterplot will be plotted in yellow, rather than
+
+blue.</p>
+
+
+
+<hr size="3" width="70%">
+
+
+
+<h2 align="center">Description of the Data Sets</h2>
+
+
+
+<p><a name="cities_data"><strong>Cities data</strong></a>. These
+
+data come from a September 25, 1987, article by W. Tucker in the
+
+National Review. Mr. Tucker presented the results of analyses by
+
+Prof. Jeffrey Simonoff of the Department of Statistics and
+
+Operations Research, Stern School of Business, New York
+
+University. The &quot;conceivably relevant factors&quot; Prof.
+
+Simonoff considered in studying the the homeless rate per
+
+thousand population were the population size, vacancy rate, and
+
+unemployment rate, in 50 cities in the USA. The homeless figures
+
+for 35 of the cities came from the 1984 Report to the Secretary
+
+of Housing and Urban Development on Emergency Shelters and
+
+Homeless Populations. The homeless data for the other 15 cities
+
+(St. Louis, Santa Monica, Newark, Yonkers, Dallas-Fort Worth,
+
+Denver, Charleston WV, Atlanta, San Diego, New Orleans,
+
+Albuquerque, Tucson, Burlington, Milwaukee, Providence, and
+
+Lincoln NE) were from local sources, and were chosen because 1987
+
+or 1988 homeless estimates for those cities happened to be
+
+available. The other data for those cities came from various
+
+federal agencies, such as the Census Bureau, HUD, and the NOAA
+
+(Prof. J. Simonoff, personal communication, 1998.).
+
+The <a name="cities47_data">cities47 data set excludes the largest three
+
+of the 50 cities. </a></p>
+
+
+
+<p><a name="ccv_data"></a><strong>CCV data</strong>. The
+
+Correlation Check Vehicle (CCV) data were made available by Leo
+
+Breiman, Department of Statistics, UCB. The data were collected
+
+by the Environmental Protection Agency. The test vehicles are
+
+1977 Chevrolet Novas, modified in various ways, including the
+
+removal of their catalytic converters and other emissions-control
+
+systems. These data were collected in 1979 at a single
+
+laboratory, and used constant engine load and fuel temperature.
+
+The measured variables are the emissions of hydrocarbons (HC),
+
+nitrogen oxides (NOx), and carbon monoxide (CO), measured in
+
+milligrams per mile. Three outliers whose cause was known were
+
+removed from the data set; 96 measurements of each of the three
+
+variables remain. &quot;Test&quot; is just a number that
+
+identifies the case, not a measurement. </p>
+
+
+
+<p><a name="gmat_data"></a><strong>GMAT data</strong>. These data
+
+were made available by Howard Wainer, Educational Testing
+
+Service. The data are the undergraduate GPA's, verbal and
+
+quantitative GMAT scores, and first-year MBA GPA's of 913
+
+students from five major universities. I do not know how the
+
+students were selected, nor do I know the year of the study. </p>
+
+
+
+<h2 align="center">Univariate Statistics of the Data Sets</h2>
+
+
+
+<p align="center">
+
+    <applet code="HistHiLite.class" align="center" width="640"
+
+            height="400" archive="PbsGui.zip" codebase=".." >
+
+        <param name="nFiles" value="3">
+
+        <param name="files" value="./Data/cities.dat,./Data/cities47.dat,./Data/gmat.dat">
+
+        <param name="urlBox" value="true">
+
+        <param name="univariateStats" value="true">
+
+    </applet>
+
+</p>
+
+
+
+<p>
+
+<a name="urlExpl"></a>Give the URL of a file on the web. The file
+
+should be in the following format:
+
+</p>
+
+
+
+<ol>
+
+    <li>The first line has the variable names, separated by tabs or spaces.
+
+    Complicated names that contain spaces can be surrounded with quotation
+
+    marks. If a line contains two slashes (//), everything from the
+
+    slashes to the end of the line is ignored---it is a comment.</li>
+
+    <li> the remaining lines contain the data, separated by spaces or tabs.
+
+    The order of the data should be every variable for the first case,
+
+    then every variable for the second case, etc., up to the last case.
+
+    Again, everything in a line after two slashes is ignored.
+
+    </li>
+
+</ol>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+</body>
+
+</html>
+

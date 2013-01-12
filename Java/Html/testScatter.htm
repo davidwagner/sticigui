@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+<title>SticiGui: Scatterplots and Association</title>
+</head>
+
+<body>
+<h1 align="center">Scatterplot of SAT data by State</h1>
+<form>
+<p align="center">
+<applet code="Correlation.class" align="baseline" width="640"
+   height="400" archive="PbsGui.zip" codebase="..">
+   <param name="title" value="Manfred Kuechler's data">
+   <param name="x" value="514,476,497,511,484,513,471,470,466,443
+                          481,502,528,459,577,548,521,517,463,478
+                          473,514,542,519,522,523,546,487,486,473
+                          527,470,440,564,499,523,484,463,461,437
+                          555,525,461,539,466,470,486,490,543,519">
+   <param name="y" value="8,42,25,6,45,28,74,58,44,57
+                      52,17,16,54,5,10,10,9,60,59
+                      72,12,14,4,12,20,10,24,67,69
+                      12,70,55,6,22,9,49,64,62,54
+                      5,12,42,5,62,58,44,15,11,13">
+You need Java to see this.
+</applet>
+</p>
+<textarea rows="3" cols="70" name="xVals">type new values of x here</textarea>
+<textarea rows="3" cols="70" name="yVals">type new values of y here</textarea>
+<input type="button" name="setVals" value="update plot"
+onClick="document.applets[0].setVariables(document.forms[0].xVals.value,document.forms[0].yVals.value)">
+
+</form>
+
+</body>
+</html>

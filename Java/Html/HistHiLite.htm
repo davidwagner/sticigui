@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Histograms',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script><p align="center">
+
+    <applet code="HistHiLite.class" align="middle"
+
+        width="600" height="400" name="hist" archive="PbsGui.zip" codebase=".." >
+
+      <param name="files" value="./Data/gmat.dat,./Data/cities.dat,./Data/baseball98.dat">
+
+      <param name="urlBox" value="true">
+
+      <param name="univariateStats" value="true">
+
+        Your browser must be running Java to view this histogram.
+
+    </applet>
+
+</p>
+
+
+
+<p>
+
+You can use the scrollbars to highlight different parts of the
+
+histogram; the area highlighted is given in the lower left
+
+corner. Try to guess the percentiles, and test yourself!
+
+</p>
+
+
+
+<p>
+
+You can also load your own data from any URL. The file should
+
+have the following format:
+
+</p>
+
+
+
+<ol>
+
+    <li>Variable names, separated by spaces or tabs. Compound
+
+        names can be in quotation marks.</li>
+
+    <li>Comments can be preceeded by //</li>
+
+    <li>values of the variables: rows are cases, columns are
+
+        variables.</li>
+
+</ol>
+
+
+
+<p>Example: here is the data set aveGmat.dat, which has 5
+
+variables recorded for each of 5 cases.</p>
+
+
+
+<p align="left">School &quot;1st year MBA GPA&quot; &quot;Verbal
+
+GMAT&quot; &quot;Quant. GMAT&quot; &quot;Undergrad. GPA&quot; //
+
+variable names<br>
+
+1.0000 3.1066 35.7536 36.9427 3.2537 // school 1<br>
+
+2.0000 2.7854 34.7463 32.4279 3.1701 // etc.<br>
+
+3.0000 3.3993 38.0688 38.6500 3.4351<br>
+
+4.0000 3.3556 29.5795 28.2614 2.8784<br>
+
+5.0000 3.0876 33.7391 33.6870 3.2137</p>
+
+
+
+<p align="left">If you type Data/aveGmat.dat into the &quot;Load
+
+URL:&quot; window and hit &quot;return&quot; or
+
+&quot;enter,&quot; the data set will show up as a choice in the
+
+&quot;Data Set&quot; choice menu.</p>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+</body>
+
+</html>
+

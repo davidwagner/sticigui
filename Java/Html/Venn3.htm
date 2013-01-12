@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Venn Diagrams and Probability: 3 Sets',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+
+
+<p align="center">
+
+<APPLET CODE="Venn3.class" WIDTH=900 HEIGHT=400 archive="PbsGui.zip" codebase="..">
+
+   You need Java to see this.
+
+</APPLET>
+
+</p>
+
+
+
+<p>
+
+Venn diagrams are a way of visualizing sets.
+
+This applet lets you highlight the set A, the set B, the set C, the universal set S,
+
+the empty set {}, the complement of A (Ac), the complement of B (Bc),
+
+the complement of C (Cc),
+
+the intersection of A and B (AB), the union of A and B (A or B),
+
+the intersection of the complement of A with B (AcB),
+
+the intersection of A with the
+
+complement of B (ABc),
+
+the intersection of A, B, and C (ABC), the union of A, B, and C (A or B or C),
+
+the intersection of Ac and B and C (AcBC), and the union of the complement of A and the
+
+intersection of B and C (Ac or BC).
+
+One can think of the relative area of a set to the area of S as a
+
+probability.
+
+The picture uses that analogy: the numbers P(A), P(B), and P(C) are proportional to
+
+the area of A, the area of B, and the area of C, respectively; P(AB) is the area of the
+
+intersection of A and B, and P(A or B) is the area of the union of A and B, etc.
+
+</p>
+
+<p>
+
+You can drag the <a href="../SticiGui/Text/gloss.htm#event">events</a>
+
+A, B, and C around, which changes the probability of their intersection
+
+and of their union.
+
+When A and B do not overlap, they are said to be
+
+<a href="../SticiGui/Text/gloss.htm#disjoint">disjoint or mutually exclusive</a>.
+
+When the probability of the intersection of A and B
+
+equals the product
+
+of the probability of A and the probability of B (when P(AB) = P(A)&times;P(B)),
+
+A and B are
+
+<a href="../SticiGui/Text/gloss.htm#independent">independent</a>.
+
+Try to drag A or B to make P(AB) = P(A)&times;P(B);
+
+notice how hard it is to make the overlap just
+
+right: independence is a very special relationship between events.
+
+For the collection of all three events, {A, B, C}, to be independent, one needs
+
+P(AB) = P(A)&times;P(B), P(AC)=P(A)&times;P(C), P(BC) = P(B)&times;P(C),
+
+and P(ABC)=P(A)&times;P(B)&times;P(C).
+
+This is quite hard to arrange.
+
+The scrollbars let you adjust the probability of A, the probability of
+
+B, and the probability of C.
+
+</p>
+
+<p>
+
+    The conditional probability of A given B, P(A|B), is defined to be
+
+    P(AB)/P(B), provided P(B) is not zero.
+
+    This applet displays six conditional probabilities: P(A|B), P(Ac|B), P(B|A),
+
+    P(A|BC), P(Ac|BC), and P(A|(B or C)).
+
+    When the corresponding checkbox is ticked, the events whose probabilities
+
+    are involved in computing the conditional probability are highlighted in
+
+    contrasting colors.
+
+</p>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../SticiGui');
+
+// -->
+
+</script>
+
+</BODY>
+
+
+
+</HTML>
+

@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Sampling Distribution of the Chi-Square Statistic',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+<h1 align="center">
+
+  Distribution of the Sample Chi-Square Statistic
+
+</h1>
+
+
+
+<p align="center">
+
+    <applet archive="PbsGui.zip" codebase=".."  code="SampleDist.class" WIDTH="640" HEIGHT="330">
+
+        <param name="variables" value="chi-squared">
+
+        <param name="showPopHist" value="false">
+
+        <param name="binControls" value="true">
+
+        <param name="curveControls" value="true">
+
+        <param name="showCurve" value="true">
+
+        <param name="boxHistControl" value="false">
+
+        <param name="boxEditable" value="true">
+
+        <param name="toggleVar" value="false">
+
+        <param name="bins" value="50">
+
+        <param name="boxContents" value="1,2,3,4">
+
+        <param name="sources" value="box">
+
+        You need Java to see this.
+
+    </applet>
+
+</p>
+
+<p>
+
+    When the tool starts, the &quot;box&quot; on the right will contain four probabilities; these
+
+    are the probabilities of four distinct outcome categories.
+
+    You might think of them as four colors.
+
+    Each time you press the &quot;Take Sample&quot; button, the computer draws a pseudo-random
+
+    sample of categories, according to the probabilities.
+
+    It then computes the observed value of the
+
+    <a href="../../SticiGui/Text/gloss.htm#chi-square_statistic"
+
+    target="glossWin"><em>chi-squared</em> statistic</a>,
+
+    and appends the value to the list of data displayed in the
+
+    <a href="../../SticiGui/Text/gloss.htm#histogram" target="glossWin">histogram</a>.
+
+    The curve displayed is the
+
+    <a href="../../SticiGui/Text/gloss.htm#chi-square" target="glossWin">Chi-Squared curve</a>
+
+    with 4 degrees of freedom.
+
+    Press the &quot;Take Sample&quot; button a few times to see what happens.
+
+    Then type 1000 into the &quot;Take ____ samples&quot; box and hit the return key.
+
+    Now each time you press the &quot;Take Sample&quot; button, the computer will take
+
+    1000 samples of size 5, and add the 1000 resulting values of the
+
+    <em>chi-squared</em> statistic to the data displayed in the histogram.
+
+    Press the &quot;Take Sample&quot; button until you have taken a total of 10,000
+
+    samples of size 5.
+
+    Note that the chi-square curve generally follows the histogram of values of
+
+    the Chi-square statistic, but does not match it exactly.
+
+    In particular, the histogram has gaps that the curve does not share, as well as
+
+    &quot;spikes&quot; at frequent values.
+
+    Change the sample size to 200 and repeat the experiment, taking 10,000 samples.
+
+    Now the chi-squared curve will be an excellent approximation to the histogram.
+
+    In general, if the expected number of outcomes
+
+    in every category is 10 or larger, the
+
+    <a href="../../SticiGui/Text/gloss.htm#chi-square" target="glossWin">chi-squared curve</a>
+
+    with <em>k</em>&nbsp;-&nbsp;1
+
+    degrees of freedom is an accurate approximation to the
+
+    <a href="../../SticiGui/Text/gloss.htm#probability_histogram" target="glossWin">probability
+
+    histogram</a> of the
+
+    <a href="../../SticiGui/Text/gloss.htm#chi-square_statistic" target="glossWin"><em>chi-squared
+
+    statistic</em></a>
+
+    for <em>k</em> categories.
+
+</p>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+
+
+</body>
+
+</html>
+

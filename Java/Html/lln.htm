@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Law of Large Numbers Demonstration',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+<p align=center>
+
+<APPLET archive="PbsGui.zip" codebase=".."  code="Lln.class" WIDTH=600 HEIGHT=350>You need
+
+Java to see this.
+
+</APPLET>
+
+</p>
+
+
+
+<p>
+
+The <a href="../../SticiGui/Text/gloss.htm#law_of_large_numbers">Law
+
+of Large Numbers</a> says that in repeated, independent trials with
+
+the same probability <em>p</em> of success in each trial, the chance that
+
+the percentage of successes differs from the probability <em>p</em> by
+
+more than a fixed positive amount, <em>e</em> > 0, converges to zero
+
+as the number
+
+of trials <em>n</em> goes to infinity, for every positive <em>e</em>.
+
+Note two things:
+
+</P>
+
+<p>
+
+<ol>
+
+<li> The difference between the number of successes and the number of
+
+trials times the chance of success in each trial (the expected number
+
+of successes) tends to <strong>grow</strong> as the number of trials
+
+increases. (In fact, this difference tends to grow like the square-root
+
+of the number of trials.)
+
+</li>
+
+<li>
+
+Although the chance of a large difference between the percentage of successes
+
+and the chance of success gets smaller and smaller as <em>n</em>
+
+grows, nothing prevents the difference from being large in some sequences
+
+of trials.
+
+The assumption that this difference always tends to zero, as opposed to
+
+this difference having a large probability of being arbitrarily close to
+
+zero, is the difference between the
+
+<a href="../../SticiGui/Text/gloss.htm#law_of_large_numbers">Law
+
+of Large Numbers</a>, which is a mathematical theorem, and the
+
+<a href="../../SticiGui/Text/gloss.htm#empirical_law_of_averages">Empirical
+
+Law
+
+of Averages</a>, which is an assumption about how the world works that
+
+lies at the base of the
+
+<a href="../../SticiGui/Text/gloss.htm#frequency_theory">Frequency
+
+Theory</a> of probability.
+
+</li>
+
+</ol>
+
+</p>
+
+<p>
+
+The distribution of the number of successes in <em>n</em> independent
+
+trials with probability <em>p</em> of success in each trial is
+
+<a href="../../SticiGui/Text/gloss.htm#binomial">Binomial</a>,
+
+with parameters <em>n</em> and <em>p</em>.
+
+<p>
+
+The controls on this applet let you change the number of trials, the
+
+probability of success in each trial, and toggle between viewing either
+
+the
+
+difference between the number of successes and the expected number
+
+of successes, or the difference between the percentage of successes
+
+and the probability of success in each trial.
+
+</p>
+
+
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+</BODY>
+
+
+
+</HTML>
+

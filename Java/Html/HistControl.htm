@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Histograms and Controlling for Variables',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+
+
+<p align="center">
+
+    <applet code="HistHiLite.class" align="baseline" width="640"
+
+        height="440" archive="PbsGui.zip" codebase=".." >
+
+        <param name="files" value="./Data/ccv.dat,./Data/cities.dat,./Data/gmat.dat">
+
+        <param name="nFiles" value="3">
+
+        <param name="restrict" value="true">
+
+        <param name="normalControls" value="true">
+
+        <param name="univariateStats" value="true">
+
+        You need Java to see this.
+
+    </applet>
+
+</p>
+
+
+
+<p>
+
+    This applet lets you take &quot;slices&quot; through a
+
+    multivariate data set to compare the distribution of a variable
+
+    without regard for the values of the other variables with the
+
+    distribution of that variable when the value of one or more of
+
+    the other variables is restricted to some range; that is, the
+
+    distribution for just those individuals in the data set for which
+
+    the other variables are all in the specified ranges.
+
+</p>
+
+
+
+<p>
+
+    The blue histogram (yellow when highlighted) shows the
+
+    distribution of the selected variable for the entire data set.
+
+    The green histogram (magenta when highlighted) shows the
+
+    distribution of the selected variable for only those members of
+
+    the population whose measurement on other variables are in the
+
+    ranges specified near the bottom of the applet. The means and SDs
+
+    of the overall and restricted values, as well as the overall
+
+    number of individuals and the number in the restricted group, are
+
+    given at the bottom. Using the scrollbars or text entry areas,
+
+    you can select a range of values and see how the area of the
+
+    histograms the selected range differs between the restricted and
+
+    unrestricted groups; you can also see the normal curves (blue for
+
+    the blue histogram; green for the green histogram) and the area
+
+    under the normal curve corresponding to the selected region of
+
+    the histograms.
+
+</p>
+
+
+
+<p>
+
+The bins are plotted in such a way that if both the
+
+unrestricted and restricted histograms have a positive height in
+
+a given class interval, the shorter one is &quot;in front,&quot;
+
+so that you see the taller one sticking up beyond it. If the two
+
+have exactly the same height in a given bin, the restricted one
+
+(green or magenta, depending on whether or not it is highlighted)
+
+plots in front, so only it is visible.
+
+</p>
+
+
+
+<p>You can select one of three data sets, <a
+
+href="ScatterPlot.htm#ccv_data">CCV (emissions of EPA test
+
+vehicles in 96 tests)</a>, <a href="ScatterPlot.htm#cities_data">Cities
+
+(homeless rates and several other variables possibly related to
+
+homelessness for 50 cities)</a>, and <a
+
+href="ScatterPlot.htm#gmat_data">GMAT (GMAT scores, undergraduate
+
+GPAs and first-year MBA GPAs for 913 students)</a>. From each
+
+data set you can choose a histogram of one of several variables,
+
+and you can superpose the histogram of that variable for just
+
+those cases where it and other variables are in specified ranges.
+
+It is interesting to compare such slices with
+
+scatterplots of these variables.</p>
+
+
+
+<h2 align="center">Explanation of the Applet Controls</h2>
+
+
+
+<p align="left">The choice boxes
+
+above the histogram allow you to choose
+
+which data set to look at, and which variable in that data set to
+
+plot a histogram of. The check boxes above the histogram
+
+control whether the histogram
+
+of the original, unrestricted data is plotted (blue in the
+
+unhighlighted regions and yellow where highlighted), and/or the
+
+histogram of the data that remain after the restrictions are
+
+applied (green in the unhighlighted regions and magenta where
+
+highlighted).</p>
+
+
+
+<p align="left">The three text boxes and scroll bars just under
+
+the histogram control the lower endpoint of the range to
+
+highlight, the upper endpoint of the range to highlight, and the
+
+number of bins in the histogram, respectively. You can either use
+
+the scrollbars to change the values, or type a new value into the
+
+box, followed by the &quot;return&quot; or &quot;enter&quot; key.</p>
+
+
+
+<p align="left">
+
+In the next row of controls, the button controls
+
+whether or not normal curves are superposed on the histograms; if
+
+so, the areas under the normal curves for the highlighted parts
+
+of the histograms are displayed. The highlighted areas of the
+
+histograms themselves are always displayed.
+
+</p>
+
+
+
+
+
+<p>
+
+    The next row of controls allows you to select
+
+    other variables in the current dataset to apply restrictions to,
+
+    and show the histogram of the value of the variable selected on
+
+    the previous line, but for only those individuals whose
+
+    measurements of the variables restricted on this line fall in the
+
+    specified ranges. The first check box specifies
+
+    whether or not you want to restrict the variable selected on this
+
+    line to be larger than some threshold; the threshold is displayed
+
+    in the text area just to the right of &quot;&gt;=&quot;. You can
+
+    change the threshold by typing in a new value, then striking the
+
+    &quot;enter&quot; or &quot;return&quot; key. The next check box
+
+    specifies whether or not you want to constrain the variable
+
+    selected on this line to be less than the threshold value
+
+    displayed in the text area just to the right of
+
+    &quot;&lt;=.&quot; Again, you can change the threshold value by
+
+    typing over it and striking &quot;return&quot; or
+
+    &quot;enter.&quot; The histogram of the remaining values of the
+
+    variable selected on the previous line, after the restrictions
+
+    are applies, is shown in green (magenta where highlighted). Note
+
+    that any restrictions you apply persist when you select a
+
+    different variable on this line; you have to clear them
+
+    individually, or all at once using the &quot;clear
+
+    restrictions&quot; button, which unchecks all the check boxes for
+
+    all the variables, and resets the threshold values to the minimum
+
+    and maximum values of each variable.
+
+</p>
+
+
+
+<p>
+
+    The button on the bottom line pops up a
+
+    new window that lists the current dataset.
+
+    The rest of the bottom line shows the number of
+
+    original observations of the variable plotted, the mean and sd of
+
+    those values, the number of observations that remain after the
+
+    restrictions are applied, and the mean and sd of those
+
+    observations.
+
+</p>
+
+
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+</body>
+
+</html>
+

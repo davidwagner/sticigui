@@ -1,0 +1,909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Tuesday 9 September 2008 10:06:59 PDT";
+	// copyright 1997-2008 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterHead('SeEd','','Distribution of the Sample Sum, Sample Mean, Sample t, ' +
+                               'Sample S<sup>2</sup>, and Sample Chi-Squared',true,'../../SticiGui');
+// -->
+</script>
+</head>
+
+<body onload="setApplets()" onunload="killApplets()">
+<script language="JavaScript1.4" type="text/javascript"><!--
+    writeChapterNav('../../SticiGui');
+    writeChapterTitle();
+// -->
+</script>
+
+
+
+
+<h3>
+
+    <a href="#controls">Explanation of Controls</a>
+
+</h3>
+
+
+
+<p align="center">
+
+    <applet code="SampleDist.class"
+
+            align="baseline" width="800" height="600" archive="PbsGui.zip" codebase=".." >
+
+      <param name="variables" value="all">
+
+      <param name="startWith" value="sum">
+
+      <param name="boxContents" value="0,1,2,3,4">
+
+      <param name="sources" value="all">
+
+      <param name="boxHistControl" value="true">
+
+      <param name="replaceControl" value="true">
+
+      You need Java to see this.
+
+    </applet>
+
+</p>
+
+
+
+
+
+<p>
+
+    This applet illustrates the concept of the
+
+    <a href="../../SticiGui/Text/gloss.htm#sampling_distribution">sampling distribution</a>
+
+    of a <a href="../../SticiGui/Text/gloss.htm#statistic">statistic</a>
+
+    by simulating the sampling distribution of four common statistics:
+
+    the <a href="../../SticiGui/Text/gloss.htm#sample_sum">sample sum</a>,
+
+    the <a href="../../SticiGui/Text/gloss.htm#sample_mean">sample mean</a>,
+
+    <a href="../../SticiGui/Text/gloss.htm#s-squared">S<sup>2</sup>, the sample variance</a>,
+
+    and the <a href="../../SticiGui/Text/gloss.htm#chi-squared_statistic">Chi-Squared
+
+    statistic</a>.
+
+</p>
+
+
+
+<p>
+
+    Each time you press the "take sample" button, a (pseudo-) random sample is drawn from a
+
+    population of numbers, and the statistic is computed from the sample.
+
+    A <a href="../../SticiGui/Text/gloss.htm#histogram">histogram</a>
+
+    displays the history of values of the statistic as you take more and more samples;
+
+    also, the display shows the <a href="../../SticiGui/Text/gloss.htm#mean">mean</a> and
+
+    <a href="../../SticiGui/Text/gloss.htm#sd">SD</a> of the sample values of the statistic.
+
+    With the sample mean, sample sum, and sample S<sup>2</sup>, there are three
+
+    choices for the population of numbers from which to draw
+
+    each sample: from the list of numbers in the box on the right, from a uniform distribution,
+
+    and from a normal distribution.
+
+    With the sample chi-square statistic, the box contains the category probabilities
+
+    for the population: each number in the box stands for a category of outcome;
+
+    the value of the number is interpreted to be the probability of that outcome.
+
+    (The numbers are automatically renormalized to sum to unity when the chi-square
+
+    statistic is selected.)
+
+</p>
+
+
+
+<p>
+
+    The <a href="../../SticiGui/Text/gloss.htm#sample_sum">sample
+
+    sum</a> is the sum of a <a
+
+    href="../../SticiGui/Text/gloss.htm#random_sample">random
+
+    sample</a> from a population. The <a
+
+    href="../../SticiGui/Text/gloss.htm#sample_mean">sample
+
+    mean</a> is the usual average of a <a
+
+    href="../../SticiGui/Text/gloss.htm#random_sample">random
+
+    sample</a> from a population: it is the sample sum, divided by
+
+    the number of numbers in the sample (the <a
+
+    href="../../SticiGui/Text/gloss.htm#sample_size">sample
+
+    size</a>). <a href="../../SticiGui/Text/gloss.htm#s-squared">S<sup>2</sup></a>
+
+    is the sum of the squares of the deviations of a random sample from its sample
+
+    mean, divided by (sample size - 1).
+
+</p>
+
+
+
+<p>
+
+    Suppose we have a random sample of size <em>n</em>; denote the data by
+
+</p>
+
+<p align="center">
+
+    {X<sub>1</sub>, X<sub>2</sub>, ... , X<sub><em>n</em></sub>}.
+
+</p>
+
+<p>
+
+    Then the sample sum is
+
+</p>
+
+<p align="center">
+
+    X<sub>1</sub> + X<sub>2</sub> + ... + X<sub><em>n</em></sub>,
+
+</p>
+
+<p>
+
+   the sample mean is
+
+</p>
+
+<p align="center">
+
+   M = (X<sub>1</sub> + X<sub>2</sub> + ... + X<sub><em>n</em></sub>)/<em>n</em>,
+
+</p>
+
+<p>
+
+  and S<sup>2</sup> is
+
+</p>
+
+<p align="center">
+
+   S<sup>2</sup> = <big>(</big>
+
+       (X<sub>1</sub> - M)<sup>2</sup> + (X<sub>2</sub> - M)<sup>2</sup> + ... +
+
+       (X<sub><em>n</em></sub> - M)<sup>2</sup> <big>)</big>/(<em>n</em> - 1).
+
+</p>
+
+<p>
+
+    The <a href="../../SticiGui/Text/gloss.htm#sample_mean">sample mean</a>
+
+    is a <a href="../../SticiGui/Text/gloss.htm#statistic">statistic</a>
+
+    commonly used to estimate the mean of a population.
+
+    It is an <a href="../../SticiGui/Text/gloss.htm#unbiased">unbiased</a> estimator
+
+    of the population mean.
+
+    The square-root of
+
+    <a href="../../SticiGui/Text/gloss.htm#s-squared">S<sup>2</sup></a> is a
+
+    <a href="../../SticiGui/Text/gloss.htm#statistic">statistic</a>
+
+    commonly used to estimate the
+
+    <a href="../../SticiGui/Text/gloss.htm#sd">standard deviation</a> of a
+
+    population.
+
+    S<sup>2</sup> is an <a href="../../SticiGui/Text/gloss.htm#unbiased">unbiased</a>
+
+    estimator
+
+    of the square of the population <a href="../../SticiGui/Text/gloss.htm#sd">standard
+
+    deviation</a>; in general, (S<sup>2</sup>)<sup>&frac12;</sup> is a
+
+    <a href="../../SticiGui/Text/gloss.htm#biased">biased</a> estimator
+
+    of the population standard deviation.
+
+</p>
+
+
+
+<p>
+
+    The blue <a
+
+    href="../../SticiGui/Text/gloss.htm#histogram">histogram</a>
+
+    shows the distribution of the numbers in the box on the right,
+
+    which initially contains the five numbers 0, 1, 2, 3, and 4. When
+
+    you press the &quot;Take Sample&quot; button, the computer draws
+
+    a pseudo-random sample with replacement from the population,
+
+    computes the sum or mean of the sample, and plots the histogram
+
+    of the result in green. As you take more samples, the green
+
+    histogram will evolve, showing the distribution of the results.
+
+    The value of the sample sum or sample mean is random, because it
+
+    depends on the random sample. It is not the same every time a
+
+    sample is drawn. The default sample size is 1. Because the
+
+    average of one number is just that number, if you sample
+
+    repeatedly, you will reproduce the histogram of the population.
+
+    This is not terribly interesting.
+
+</p>
+
+
+
+<p>
+
+    What is more interesting is what happens when you increase the
+
+    <a href="../../SticiGui/Text/gloss.htm#sample_size">sample
+
+    size</a>. You can change the sample size (the number of numbers
+
+    in each sample) by typing a different number into the box labeled
+
+    &quot;Sample Size,&quot; then striking the &quot;enter&quot; or
+
+    &quot;return&quot; key. If you increase the sample size, the
+
+    variability of the sample mean will be smaller, and the shape of
+
+    the green histogram will look more nearly normal (as you sample
+
+    repeatedly). You can speed things up by taking more than one
+
+    sample at a time; this is controlled by the &quot;Take _____
+
+    samples&quot; box. Another box controls the number of bins in the
+
+    histograms. You will probably get the clearest impression of the
+
+    phenomena we are trying to see by using the maximum number of
+
+    bins.
+
+</p>
+
+
+
+<p><b>To Notice:</b> </p>
+
+
+
+<ul>
+
+    <li>
+
+        The average of the sample means gets close to the
+
+        population mean as you take more and more samples. This
+
+        illustrates that the sample mean is an <a
+
+        href="../../SticiGui/Text/gloss.htm#unbiased">unbiased</a>
+
+        <a href="../../SticiGui/Text/gloss.htm#estimator">estimator</a>
+
+        of the population mean.
+
+    </li>
+
+    <li>
+
+        The variability (as measured by the standard error or <a
+
+        href="../../SticiGui/Text/gloss.htm#se">SE</a>) of
+
+        the sample mean is smaller for larger sample sizes. It
+
+        shrinks like the square-root of the sample size. This is
+
+        an illustration of the <a
+
+        href="../../SticiGui/Text/gloss.htm#square_root_law">Square-root
+
+        Law</a>.
+
+    </li>
+
+    <li>
+
+        If the sample size is large, the histogram of the sample
+
+        mean and sample sum approach the <a
+
+        href="../../SticiGui/Text/gloss.htm#normal_curve">normal
+
+        curve</a> as you take more samples, even though the
+
+        histogram of the population isn't even vaguely shaped
+
+        like a normal curve. (Click the &quot;Show Normal
+
+        Curve&quot; button to superpose the corresponding normal
+
+        curve.) This is an illustration of the <a
+
+        href="../../SticiGui/Text/gloss.htm#clt">Central
+
+        Limit Theorem</a>.
+
+    </li>
+
+</ul>
+
+
+
+<h2 align="center">
+
+  More Detail
+
+</h2>
+
+
+
+<p>
+
+    The sample mean of a random sample from a population is an
+
+    estimator of the mean of the population. The sample mean is a
+
+    random variable, because its value depends on what the particular
+
+    random sample happens to be. The <a
+
+    href="../../SticiGui/Text/gloss.htm#expectation">expected
+
+    value</a> of the sample sum is the sample size times the
+
+    population mean (the average of the numbers in the box). The
+
+    standard error (<a href="../../SticiGui/Text/gloss.htm#se">SE</a>)
+
+    of the sample sum is the square-root of the sample size, times
+
+    the <a href="../../SticiGui/Text/gloss.htm#sd">standard
+
+    deviation</a> (SD) of the numbers in the box. The expected value
+
+    of the sample mean is the population mean, and the <a
+
+    href="../../SticiGui/Text/gloss.htm#se">SE</a> of the
+
+    sample mean is the <a
+
+    href="../../SticiGui/Text/gloss.htm#sd">SD</a> of the
+
+    population, divided by the square-root of the <a
+
+    href="../../SticiGui/Text/gloss.htm#sample_size">sample
+
+    size</a>.
+
+</p>
+
+
+
+<p>
+
+    This applet lets you type a population of numbers into a box,
+
+    then look at how the histogram of sample values of the sample
+
+    mean evolves as you take more and more samples. There are
+
+    controls for the sample size and the number of samples to take
+
+    each time the &quot;Take Sample&quot; button is pushed, as well
+
+    as a control for the number of bins in the histogram.
+
+</p>
+
+
+
+<p>
+
+    If the sample size is sufficiently large, the histogram of the
+
+    sampling distribution of the sample sum and sample mean,
+
+    converted to standard units, follow the <a
+
+    href="../../SticiGui/Text/gloss.htm#normal_curve">normal
+
+    curve</a> approximately. A button in the applet lets you
+
+    superpose the theoretical normal curve with the histogram of
+
+    observed values of the sample sum or mean. Two controls
+
+    (&quot;Highlight from&quot; and &quot;to&quot;) let you highlight
+
+    part of the histogram, and compare the area of that part of the
+
+    histogram with the area of the same part of the normal curve. For
+
+    large sample size, the areas should become close as you take more
+
+    and more samples of that fixed large size.
+
+</p>
+
+
+
+<p>
+
+    To replace the contents of the box, delete the numbers in the
+
+    box, type in the numbers you want, then click anywhere outside
+
+    the box. You should then see a blue histogram of the population
+
+    of numbers you typed into the box.
+
+</p>
+
+
+
+<p>
+
+    Press the &quot;Take Sample&quot; button a few times, using
+
+    the default sample size of one. You will see a histogram of
+
+    sample values emerge in green. As you take more and more samples,
+
+    the green histogram should get closer and closer to the blue one:
+
+    the sample mean of a random sample of size one has the same
+
+    distribution as the population. Increase the number of samples to
+
+    take to 100 by typing into the corresponding box (&quot;Take ____
+
+    samples&quot;) and striking the &quot;enter&quot; or
+
+    &quot;return&quot; key. Press the &quot;Take Sample&quot; button
+
+    a few times. The green and blue histograms should match pretty
+
+    well---the observed sampling of samples of size one converges to
+
+    the distribution of values of the population.
+
+</p>
+
+
+
+<p>
+
+    Now change the &quot;Take ____ samples&quot; control back to
+
+    one, and change the &quot;Sample Size&quot; to 50. This will
+
+    clear the green histogram. Every time you press the &quot;Take
+
+    Sample&quot; button now, you are computing the sample mean of a
+
+    random sample of size 50 from the population of numbers you put
+
+    into the box. The green histogram that evolves as you take more
+
+    and more samples will be concentrated nearer the population mean
+
+    than the blue histogram is. The values of the sample mean are
+
+    more finely divided than the values in the population, as well.
+
+    Change the &quot;Samples to Take&quot; to 100, and press the
+
+    &quot;Take Sample&quot; button a few more times. As you take more
+
+    and more samples, the mean of the green histogram that emerges
+
+    will tend to be closer and closer to the mean of the population.
+
+    The spread of the histogram, measured by its SE, will be about
+
+    the SD of the population, divided by the square-root of 50 (about
+
+    7). Press the &quot;Show Normal Curve&quot; button. The green
+
+    histogram should follow the normal curve pretty well. You can
+
+    compare areas under the histogram with the corresponding areas
+
+    under the normal curve with the &quot;Highlight from&quot; and
+
+    &quot;to&quot; controls.
+
+</p>
+
+
+
+<p>
+
+    Now set the sample size up to 200, the maximum,
+
+    and set the &quot;Samples to Take&quot; to 1. The
+
+    green histogram will clear again. Take a few samples of size 200
+
+    from your population. The values of the sample mean will be even
+
+    more finely divided than before, and will tend to be even closer
+
+    to the population mean. Slide the &quot;Samples to Take&quot;
+
+    control up to a large value, and press the &quot;Take
+
+    Sample&quot; button a few times. The green histogram should
+
+    follow the normal curve very well. It should &quot;balance&quot;
+
+    quite close to the population mean, and its width should be about
+
+    the SD of the population, divided by about 14 (the square-root of
+
+    200).
+
+</p>
+
+
+
+<p>
+
+    The histogram of values of the chi-squared statistic also is approximated
+
+    better and better by a normal curve as the sample size increases, if the
+
+    number of categories is not too small.
+
+    The histogram is approximated even better by the Chi-square curve with
+
+    (<em>k</em> - 1) degrees of freedom, where <em>k</em> is the number of
+
+    categories.
+
+</p>
+
+
+
+<p>
+
+    The histogram of values of S<sup>2</sup> also is approximated better and
+
+    better by the normal curve as the sample size increases, but
+
+    the transformation to
+
+    <a href="../../SticiGui/Text/gloss.htm#standard_units">standard units</a>
+
+    depends on the population in a complicated way,
+
+    unless the population has
+
+    a <a href="../../SticiGui/Text/gloss.htm#normal_distribution">normal distribution</a>.
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    var fStr = 'It depends on the <a href="../../SticiGui/Text/gloss.htm#moment">fourth ' +
+
+               'moment</a> of the population.  For a normal ' +
+
+               'distribution, the fourth moment has a simple expression in terms ' +
+
+               'of the second moment.';
+
+    writeFootnote(fCtr++, fCtr.toString(), fStr);
+
+// -->
+
+</script>
+
+    If it does, for moderate sample sizes, the chi-squared curve gives a better
+
+    approximation than the normal curve.
+
+    The chi-square curve needs to be scaled, in much the same way as
+
+    the normal approximation depends on transforming to standard units.
+
+    In particular, it is the distribution of (sd<sup>2</sup>/(<em>n</em>-1))&times;
+
+    S<sup>2</sup> that is approximated by the chi-squared curve with (<em>n</em>-1)
+
+    <a href="../../SticiGui/Text/gloss.htm#df">degrees of freedom</a>, where sd is the
+
+    <a href="../../SticiGui/Text/gloss.htm#sd">standard deviation</a> of the normal population.
+
+</p>
+
+
+
+<p>
+
+    This applet illustrates several important statistical
+
+    concepts:
+
+</p>
+
+
+
+<ol>
+
+    <li>
+
+        The <a href="../../SticiGui/Text/gloss.htm#sample_mean">sample
+
+        mean</a> of a <a href="../../SticiGui/Text/gloss.htm#simple_random_sample">simple
+
+        random sample</a> is an <a
+
+        href="../../SticiGui/Text/gloss.htm#unbiased">unbiased</a>
+
+        <a href="../../SticiGui/Text/gloss.htm#estimator">estimator</a>
+
+        of the population mean.
+
+    </li>
+
+    <li>
+
+        The SD of the sample mean shrinks in proportion to the
+
+        square-root of the sample size (the <a
+
+        href="../../SticiGui/Text/gloss.htm#square_root_law">Square-Root
+
+        Law</a>).
+
+    </li>
+
+    <li>
+
+        The distribution of the sample mean is nearly normal, for
+
+        large enough samples, no matter what the distribution of
+
+        the population is (the <a
+
+        href="../../SticiGui/Text/gloss.htm#clt">Central
+
+        Limit Theorem</a>).
+
+    </li>
+
+    <li>
+
+        The sample <a href="../../SticiGui/Text/gloss.htm#s-squared">S<sup>2</sup>
+
+        statistic</a>
+
+        of <a href="../../SticiGui/Text/gloss.htm#simple_random_sample">simple
+
+        random sample</a> is an
+
+        <a href="../../SticiGui/Text/gloss.htm#unbiased">unbiased</a> estimator
+
+        of the square of the population <a href="../../SticiGui/Text/gloss.htm#sd">SD</a>.
+
+    </li>
+
+</ol>
+
+
+
+<p>&nbsp;</p>
+
+
+
+<p>&nbsp;</p>
+
+
+
+<hr size="3" width="70%">
+
+
+
+<h2 align="center">
+
+  <a name="controls"></a><font color="#000000"><big>Explanation of Controls</big></font>
+
+</h2>
+
+
+
+<p>
+
+The choice box in
+
+the title area lets you select either the sample mean or the
+
+sample sum. Every time you press the &quot;Take Sample&quot;
+
+button in the title area, samples with replacement are drawn from
+
+the population of numbers in the box at the right hand side, and
+
+either the sum or mean of each sample is taken, corresponding to
+
+whichever is visible in the title. The &quot;Sample Size&quot;
+
+box controls how large each sample is, and the &quot;Take ____
+
+samples&quot; box controls how many samples of that size are
+
+taken each time you press the &quot;Take sample&quot; button. The
+
+mean and SD of the numbers in the box are displayed on the left,
+
+along with the SE of the sample mean or sample sum (corresponding
+
+to whichever is selected), and the number of sample valuesand
+
+histograms of the numbers in the box and of the sample values of
+
+the sample mean or sum are shown in the middle, in blue and
+
+green, respectively. You can superpose the normal curve on the
+
+histogram of sample values by clicking the &quot;Show Normal
+
+Curve&quot; button.
+
+</p>
+
+
+
+<p>
+
+The
+
+&quot;Highlight from&quot; and &quot;To&quot; boxes let you
+
+highlight a range of sample values in the histogram; the area of
+
+the highlighted range of sample values (the proportion of values
+
+of the sample mean or sample sum in the range) is then displayed,
+
+along with the corresponding area under the normal curve, if the
+
+normal curve is showing. When you switch between the sample sum
+
+and the sample mean, the &quot;Highlight from&quot; and
+
+&quot;To&quot; limits are transformed to correspond to the
+
+equivalent range of sample values. The &quot;Bins&quot; box
+
+controls the number of bins in the histograms. If you change the
+
+sample size, the history of sample values will be reset and green
+
+histogram will clear (you cannot mix sample sizes in the same
+
+plot). Changing the number of samples to take does not clear the
+
+history, nor does toggling back and forth between the sample sum
+
+and the sample mean.
+
+</p>
+
+
+
+<p>
+
+To change the
+
+numbers in the population box, either delete the numbers in the
+
+box using the backspace key and type in new values, or selecting
+
+the numbers in the box and type over them. Then click outside the
+
+population box to update the values. The display of the Ave(box),
+
+SD(box) and SE(mean) or SE(sum) (depending on which is displayed)
+
+will be updated to reflect the new contents of the box.
+
+</p>
+
+
+
+<p>
+
+To change the
+
+number in the &quot;Highlight From,&quot; &quot;To,&quot;
+
+&quot;Sample Size,&quot; &quot;Take ____ Samples,&quot; or
+
+&quot;Bins&quot; box, delete or select and type over the current
+
+number, then strike the &quot;enter&quot; or &quot;return&quot;
+
+key. The &quot;Highlight From&quot; and &quot;To&quot; values can
+
+also be changed using the neighboring scrollbars.
+
+</p>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" ><!--
+
+    writeMiscFooter('../../SticiGui');
+
+// -->
+
+</script>
+
+
+
+</body>
+
+</html>
+

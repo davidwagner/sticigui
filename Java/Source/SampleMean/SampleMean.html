@@ -1,0 +1,209 @@
+<HTML>
+<HEAD>
+<TITLE> Sampling Distribution of the Sample Mean </TITLE>
+</HEAD>
+<BODY>
+<h1 align=center>Sampling Distribution of the Sample Mean</h1>
+
+<p>
+<center><APPLET CODE="SampleMean.class" WIDTH=560 HEIGHT=400>
+<param name="n" value="5">
+<param name="sampleSum" value="false">
+<param name="showPopHist" value="false">
+<param name="binControls" value="true">
+<param name="normalControls" value="true">
+<param name="showNormal" value="false">
+<param name="boxHistControl" value="true">
+<param name="boxEditable" value="true">
+<param name="toggleMean" value="true">
+<param name="bins" value="50">
+<param name="boxContents" value="0,1,2,3,4">
+You need Java to see this.</APPLET>
+</center>
+</p>
+<p>
+The <a href="../Teach/S2/Notes/gloss.xht#sample_mean">Sample Mean</a>
+is the usual average of a
+<a href="../Teach/S2/Notes/gloss.xht#random_sample">random sample</a>
+ from a population:
+it is the sum of the numbers in the sample, divided by the number of numbers in the
+sample (the <a href="../Teach/S2/Notes/gloss.xht#sample_size">sample size</a>).
+The <a href="../Teach/S2/Notes/gloss.xht#sample_mean">sample mean</a> is a
+<a href="../Teach/S2/Notes/gloss.xht#statistic">statistic</a> that is often
+used to estimate the mean of a population.
+<p>
+The blue <a href="../Teach/S2/Notes/gloss.xht#histogram">histogram</a> is the
+histogram of a population that contains 5 numbers: {0, 1, 2, 3, 4}.
+When you press the "Take Sample" button, the computer draws a pseudo-random sample
+from the population, computes the mean of the sample, and plots the histogram
+of the result in green.
+As you take more samples, the green histogram will change, showing the distribution
+of the results.
+The default sample size is 1; because the average of one thing is just that thing,
+if you sample repeatedly, you will reproduce the histogram of the population.
+This is not terribly interesting.
+</p>
+<p>
+What is interesting is what happens when you increase the
+<a href="../Teach/S2/Notes/gloss.xht#sample_size">sample size</a>.
+You can change the sample size (the number of numbers in each sample) with
+the
+"Sample Size" scrollbar. If you increase the sample size, the
+variability of the sample
+mean will be smaller, and the shape of the green histogram will look more
+nearly
+normal (as you sample repeatedly).
+You can speed things up by taking more than one sample at a time; this is controlled
+by the "Samples to Take" scrollbar.
+Another scrollbar controls the number of bins in the histogram:
+play around with
+it to see how the appearance of the plot changes. You will probably get the clearest
+impression of the phenomena we are trying to see by using
+the maximum number of bins.
+</p>
+<p>
+<b>To Notice:</b>
+<ul>
+<li>
+The average of the sample means gets close to the population mean as you take more
+and more samples. This illustrates that the sample mean is an
+<a href="../Teach/S2/Notes/gloss.xht#unbiased">unbiased</a>
+<a href="../Teach/S2/Notes/gloss.xht#estimator">estimator</a> of the
+population mean.
+<li>
+The variability (as measured by the standard error or
+<a href="../Teach/S2/Notes/gloss.xht#se">SE</a>) of the sample
+mean is smaller for larger sample sizes.
+It shrinks like the square-root of the sample size.
+This is an illustration of the
+<a href="../Teach/S2/Notes/gloss.xht#square_root_law">Square-root Law</a>.
+</li>
+<li>
+If the sample size is large, the histogram of the sample mean approaches
+the <a href="../Teach/S2/gloss.xht#normal_curve">normal curve</a> as you take more
+samples, even though the histogram of
+the population isn't even vaguely shaped like a normal curve.
+(Click the "Show Normal Curve" button to superpose the corresponding
+normal curve.)
+This is an illustration of the
+<a href="../Teach/S2/Notes/gloss.xht#clt">Central Limit Theorem</a>.
+</li>
+</ul>
+</p>
+
+<h2 align=center>More Detail</h2>
+<p>The sample mean of a random sample from a population
+is an estimator of the mean of the population.
+The sample mean is a random variable, because its value depends on
+what the particular random sample happens to be.
+The expected value of the sample mean is the population mean, and the
+standard error (SE) of the sample mean is the SD of the population, divided
+by the square-root of the sample size.
+</p>
+<p>
+This applet lets you type a population of number into a box, then look at
+how the histogram of values of the sample mean evolves as you take more and
+more samples. There are slider controls for the sample size and the number of
+samples to take each time the "Take Sample" button is pushed, as well
+as a slider to control the bin width in the histogram.
+</p>
+<p>
+If the sample size is sufficiently large, the sampling distribution of the
+sample mean, converted to standard units, follows the Normal Curve approximately.
+A button in the applet lets you superpose the theoretical Normal Curve with
+the histogram of observed values of the sample mean. Two sliders let you
+hilight part of the histogram, and compare the area of that part of the histogram
+with the area of the same part of the Normal Curve.
+For large sample size, the areas should become close as you take more and
+more samples of that fixed large size.
+</p>
+<p>
+To get started, press the "Clear Box" button, then type the numbers you
+wish to be in the population into the box, separated by spaces and/or on
+separate lines.
+Then push the "Replace Box Contents" button.
+You will see a blue histogram of the population of numbers you typed into the
+box.
+</p>
+<p>
+Press the "Take Sample" button a few times, using the default sample size
+of one.
+You will see a histogram of sample values emerge in green.
+As you take more and more samples, the green histogram should get closer
+and closer to the blue one: the sample mean of a random sample of size one
+has the same distribution as the population.
+Move the slider for "Samples to Take" up to its maximum, and press the
+"Take Sample" button a few times. The green and blue histograms should
+match pretty well.
+</P>
+<p>
+Now slide the "Samples to Take" control back to one, and slide the
+"Sample Size" control to a moderate number, say 50.
+This will clear the green histogram.
+Every time you press the "Take Sample" button now, you are computing the
+sample mean of a random sample of size 50 from the population of numbers
+you put into the box.
+The green histogram that emerges as you take more and more
+samples will be more concentrated near the
+population mean than the blue histogram is. The values of the sample mean
+are more finely divided than the values in the population, as well.
+Move the "Samples to Take" slider back up to its maximum, and
+press the "Take Sample" button a few more times.
+As you take more and more samples, the mean of the
+green histogram that emerges will tend to be closer and closer to the
+mean of the population. The spread of the histogram, measured by its SD,
+will be about the SD of the population, divided by the square-root of 50
+(about 7).
+Press the "Show Normal" button. The green histogram should follow
+the normal curve pretty well. You can compare areas under the histogram with
+the corresponding areas under the normal curve with the "Hilight From: "
+and "To: " sliders.
+</p>
+<p>
+Now move the sample size up to 200, the maximum on the slider, and move the
+"Samples to Take" slider back to 1.
+The green histogram will clear again.
+Take a few samples of size 200 from your population.
+The values of the sample mean will be even more finely divided than before,
+and will tend to be even closer to the population mean.
+Slide the "Samples to Take" control up to a large value, and press the
+"Take Sample" button a few times. The green histogram should follow the
+normal curve very well.
+It should "balance" quite close to the population mean, and its width
+should be about the SD of the population, divided by about 14
+(the square-root of 200).
+</p>
+<p>
+This applet illustrates several important statistical concepts:
+<ol>
+<li>
+The <a href="../Teach/S2/Notes/gloss.xht#sample_mean">sample mean</a>
+ of a
+<a href="../Teach/S2/Notes/gloss.xht#simple_random_sample">simple random
+sample</a> is an
+<a href="../Teach/S2/Notes/gloss.xht#unbiased">unbiased</a>
+<a href="../Teach/S2/Notes/gloss.xht#estimator">estimator</a> of the
+population mean.
+</li>
+<li>
+The SD of the sample mean shrinks in proportion to the square-root of the
+sample size (the
+<a href="../Teach/S2/Notes/gloss.xht#square_root_law">Square-Root Law</a>).
+</li>
+<li>
+The distribution of the sample mean is nearly normal, for large enough samples,
+no matter what the distribution of the population is (the
+<a href="../Teach/S2/Notes/gloss.xht#clt">Central Limit
+Theorem</a>).
+</li>
+</ol>
+
+<p>
+<font size=-2><font color=red>
+&copy;1997, <a href=../index.html>P.B. Stark</a>.
+All rights reserved.</font><br />
+Last modified Feb. 9, 1997.
+
+</BODY>
+
+</HTML>

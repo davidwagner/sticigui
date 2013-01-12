@@ -1,0 +1,1 @@
+appletviewer -J-classpath -J.;C:\CAFE\BIN\..\JAVA\LIB\CLASSES.ZIP;C:\CAFE\BIN\..\JAVA\LIB\SYMCLASS.ZIP;C:\CAFE\PROJECTS SquARe.html
