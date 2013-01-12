@@ -1,9 +1,3 @@
-/*
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-*/
-
 // script irGrade:  interactive, real-time grading; html formatting; statistical functions,
 //                  linear algebra
 // copyright 1997-2013. P.B. Stark, statistics.berkeley.edu/~stark
@@ -12,7 +6,7 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/6/1704'; // modification date and time
+var irGradeModTime = '2013/1/12/0904'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var courseRelPath = '.';           // relative path to the instance of the course
@@ -1183,49 +1177,25 @@ function writeCourseOptions(inx) {  // DEBUG version
 }
 
 function getServerDate(url) {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-        try {
-            xmlhttp = new XMLHttpRequest();
-        } catch (e) {
-            alert('Error #1 in irGrade.getServerDate(): failed to create XMLHttpRequest');
-        }
-    } else if (window.ActiveXObject) {
-        try {
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (e) {
-            alert('Error #2 in irGrade.getServerDate(): Failed to create Microsoft.XMLHTTP request');
-        }
-    }
-    if (xmlhttp) {
-        try {
-            xmlhttp.open("HEAD", url, true);
-            xmlhttp.onreadystatechange=function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    var rh = xmlhttp.getResponseHeader('date');
-                    serverDate = new Date(rh);
-                }
-            }
-            xmlhttp.send(null);
-            return(serverDate);
-        } catch (e) {
-            alert('Error #3 in irGrade.getServerDate(): Unable to retrieve server time at this time. But that was then; this is now. ' +
-                  'Check back now and then.');
-            return(false);
-        }
-    } else {
-        alert('Error #4 in irGrade.getServerDate(): Unable to retrieve server time at this time. But that was then; this is now. ' +
-              'Check back now and then.');
-        return(false);
-    }
+      var now = false;
+      var geturl = $.ajax({
+                        type: "GET",
+                        url: url,
+                        success: function() {
+                            now = new Date(geturl.getResponseHeader('Date'));
+                        },
+                        error: function() {
+                            alert('error: failed to retrieve Berkeley Statistics homepage!');
+                        }
+                    });
+      return(now);
 }
 
 function getGrades(theForm) {
     if (validateLablet(theForm)) {
         mySID = theForm.sid.value;
-        document.getElementById('scores').innerHTML = '<p class="center">Retrieving scores for SID ' +
-                                                       mySID + '<blink>&hellip</blink></p>';
-        var xmlhttp;
+        $('#scores').text('<p class="center">Retrieving scores for SID ' +
+                                                       mySID + '<blink>&hellip</blink></p>');
         scoresURL = scoreBase + 'class=' + course + '&teacher=' + teacher + '&gpath=' + gPath + '&sids';
         getURL = $.ajax({
                           type: 'GET',
@@ -1240,9 +1210,6 @@ function getGrades(theForm) {
                                     myScores[k++] = rt[j];
                                 }
                             }
-                            scoreDiv = document.getElementById('scores');
-                            scoreDiv.style.visibility == 'visible'
-                            scoreDiv.innerHTML = '';
                             var ihtm = '<p class="center">Scores for SID ' + mySID + '</p><table class="dataTable">';
                             for (var j=0; j < myScores.length; j++) {
                                 ihtm += '<tr>';
@@ -1253,15 +1220,14 @@ function getGrades(theForm) {
                                 ihtm += '</tr>';
                             }
                             ihtm += '</table>';
-                            scoreDiv.innerHTML = ihtm;
+                            $('#scores').text(ithm)
+                                        .css('visibility', 'visible');
                        })
                        .fail(function() {
                             alert('failed to retrieve scores');
-                            scoreDiv = document.getElementById('scores');
-                            scoreDiv.style.visibility == 'visible';
-                            scoreDiv.innerHTML = '';
-                            scoreDiv.innerHTML = '<p>Unable to retrieve scores for SID ' +
-                                    mySID.toString() + ' at this time.</p>';
+                            $('#scores').text('<p>Unable to retrieve scores for SID ' +
+                                              mySID.toString() + ' at this time.</p>')
+                                        .css('visibility', 'visible');
                        });
             }
 }
@@ -1396,6 +1362,7 @@ var jsonRequestBusy = false;
 var jsonRequestUrl = 'http://www.willthatbeonthefinal.com:8088/direct/';
 
 function resolveUserEid(_callbackName) {
+/* REMOVED PBS 1/12/2013
     var userUrl = jsonRequestUrl + 'learnrepoActivityEvent/resolveUserEid.json';
     var userRequestId = '_userRequest';
     var userRequestElement = document.getElementById(userRequestId);
@@ -1408,6 +1375,7 @@ function resolveUserEid(_callbackName) {
     //ssanders: Defeat caching of JavaScript
     userRequestElement.src = userUrl + '?jsonRequestCallback=' + _callbackName + '&jsonRequestTime=' + jsonRequestTime++;
     document.body.appendChild(userRequestElement);
+*/
 }
 
 function performJsonRequest(_url) {

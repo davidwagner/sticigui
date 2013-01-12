@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "12 January 2013 9:40 PST";
+	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1/build/rollups/sha256.js"></script>
+
+
+
+<script language="JavaScript1.4" type="text/javascript" src="../Java/irGrade.js"></script>
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+function crypt256() {
+    var sid = "12345678";
+    var email = "nobody@nowhere.com";
+    var hashed = CryptoJS.SHA256(sid.toLowerCase() + ':' + email.toLowerCase());
+    $('#out').append('<p>Raw: ' + sid + ':' + email + '; hashed: ' + hashed + '</p>');
+}
+
+$(document).ready(function() {
+           $('#button').click(crypt256());
+});
+// -->
+</script>
+
+<form>
+<button id="button">encryptMe</button>
+<div id="out"></div>
+</body>
+</html>

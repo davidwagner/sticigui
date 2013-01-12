@@ -146,7 +146,7 @@
     }
     qStr += '</table>';
     document.writeln(qStr);
-    $(document).ready()(function() {
+    $(document).ready(function() {
             $.getScript('../../Java/Courses/s21-su13-due.js', function(data) {
                   if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
                       goodColor = 'lightgreen';
@@ -155,43 +155,41 @@
                       nullColor = '#eeeeee';
                   }
                   for (var j=0; j < assignmentTitles.length; j++) {
-                         var dueDiv = document.getElementById('set' + assignmentTitles[j][2] + 'Due');
-	                     var ansDiv = document.getElementById('set' + assignmentTitles[j][2] + 'Ans');
+                         var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
+	                     var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
                          var isAssigned = assign[assignmentTitles[j][2]];
                          if (isAssigned) {
 	    	                  var dueDate = new Date(assign[assignmentTitles[j][2]][0]);
-	    	                  var geturl;
 	    	                  var now;
-                              geturl = $.ajax({
+                              var geturl = $.ajax({
                                                type: "GET",
                                                 url: 'http://statistics.berkeley.edu',
                                                 success: function() {
                                                     now = new Date(geturl.getResponseHeader('Date'));
-                                                }
+                                                },
                                                 error: function() {
                                                     alert('error: failed to retrieve Berkeley Statistics homepage!');
                                                 }
                               });
 		                      var pastDue = dueDate < now;
-		                      dueDiv.innerHTML = dueDate.toLocaleString();
+		                      $(dueDiv).text(dueDate.toLocaleString())
+		                               .css('background-color', goodColor);
 		                      if (pastDue) {
-			                       dueDiv.style.backgroundColor = nullColor;
-		                      } else {
-			                       dueDiv.style.backgroundColor = goodColor;
-	                          }
+			                       $(dueDiv).css('background-color', nullColor);
+		                      }
 		                      if (assign[assignmentTitles[j][2]][1] == 'yes' ||
 		                             (assign[assignmentTitles[j][2]][1] == 'automatic' & pastDue)) {
-			                       ansDiv.innerHTML = 'yes';
-			                       ansDiv.style.backgroundColor = goodColor;
+			                       $(ansDiv).text('yes')
+			                                .css('background-color', goodColor);
 		                      } else {
-			                       ansDiv.innerHTML = 'no';
-			                       ansDiv.style.backgroundColor = nullColor;
+			                       $(ansDiv.text('no')
+			                               .css('background-color', nullColor);
 		                      }
 	                    } else {
-		                      dueDiv.innerHTML = 'not assigned';
-		                      dueDiv.style.backgroundColor = nullColor;
-		                      ansDiv.innerHTML = '---';
-		                      ansDiv.style.backgroundColor = nullColor;
+		                      $(dueDiv).text('not assigned')
+		                               .css('background-color', nullColor);
+		                      $(ansDiv).text('---')
+		                               .css('background-color', nullColor);
 	                    }
                     }
             });
