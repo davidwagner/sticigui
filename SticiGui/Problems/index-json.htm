@@ -25,7 +25,18 @@
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cName = "Assignments";
     writeChapterHead('SeEd',cName,'Online Assignments');
-    var theCourse = ["0","s2-x","Statistics 2.1x, Spring 2013, UC Berkeley","stark","Profs P.B. Stark and A. Adhikari","",5,4];
+    var theCourse = ["0",
+                     "s2-x",
+                     "Statistics 2.1x, Spring 2013, UC Berkeley",
+                     "stark",
+                     "Profs P.B. Stark and A. Adhikari",
+                     "",
+                     5,
+                     4,
+                     "http://statistics.berkeley.edu/~stark/Java/Courses/s21-su13-due.js",
+                     "http://statistics.berkeley.edu"
+                    ];
+    var assign = {};
 // -->
 </script>
 </head>
@@ -155,48 +166,46 @@
     qStr += '</table>';
     document.writeln(qStr);
     $(document).ready(function() {
-            alert('in ready()');
-            $.getScript('../../Java/Courses/s21-su13-due.js', function(data) {
-                  alert('read duefile');
-                  for (var j=0; j < assignmentTitles.length; j++) {
-                         var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
-	                     var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
-                         var isAssigned = assign[assignmentTitles[j][2]];
-                         if (isAssigned) {
-	    	                  var dueDate = new Date(assign[assignmentTitles[j][2]][0]);
-	    	                  var now;
-                              var geturl = $.ajax({
-                                               type: "GET",
-                                                url: 'http://statistics.berkeley.edu',
-                                                success: function() {
-                                                    now = new Date(geturl.getResponseHeader('Date'));
-                                                },
-                                                error: function() {
-                                                    alert('error: failed to retrieve Berkeley Statistics homepage!');
-                                                }
-                              });
-		                      var pastDue = dueDate < now;
-		                      $(dueDiv).text(dueDate.toLocaleString())
-		                               .css('background-color', goodColor);
-		                      if (pastDue) {
-			                       $(dueDiv).css('background-color', nullColor);
-		                      }
-		                      if (assign[assignmentTitles[j][2]][1] == 'yes' ||
-		                             (assign[assignmentTitles[j][2]][1] == 'automatic' & pastDue)) {
-			                       $(ansDiv).text('yes')
-			                                .css('background-color', goodColor);
-		                      } else {
-			                       $(ansDiv).text('no')
-			                               .css('background-color', nullColor);
-		                      }
-	                    } else {
-		                      $(dueDiv).text('not assigned')
-		                               .css('background-color', nullColor);
-		                      $(ansDiv).text('---')
-		                               .css('background-color', nullColor);
-	                    }
-                    }
-            });
+            $.getScript(theCourse[8], function() {
+                  $.each(assignList, function(index, value) {
+                         assign[value[0]] = value.slice(1);
+                       });
+                  var geturl = $.ajax(theCourse[9])
+                                .fail(function() {
+                                     alert('error: failed to retrieve date from ' + theCourse[9] + '!');
+                                })
+                                .done(function() {
+                                     var now = new Date(geturl.getResponseHeader('Date'));
+                                     $.each(assignmentTitles, function(j, value) {
+                                         var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
+                                         var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
+                                         var isAssigned = assign[assignmentTitles[j][2]];
+                                         if (isAssigned && (assign[assignmentTitles[j][2]][1] == 'ready')) {
+                                               var dueDate = new Date(assign[assignmentTitles[j][2]][0]);
+                                               var pastDue = (dueDate < now);
+                                               $(dueDiv).text(dueDate.toLocaleString())
+                                                        .css('background-color', goodColor);
+                                               if (pastDue) {
+                                                    $(dueDiv).css('background-color', nullColor);
+                                               }
+                                               if (assign[assignmentTitles[j][2]][2] == 'show_answers' ||
+                                                        (assign[assignmentTitles[j][2]][2] == 'automatic' & pastDue)) {
+                                                    $(ansDiv).text('yes')
+                                                             .css('background-color', goodColor);
+                                               } else {
+                                                    $(ansDiv).text('no')
+                                                             .css('background-color', nullColor);
+                                               }
+                                         } else {
+                                               $(dueDiv).text('not assigned')
+                                                        .css('background-color', nullColor);
+                                               $(ansDiv).text('---')
+                                                        .css('background-color', nullColor);
+                                         }
+                                    });
+                                });
+            })
+            .fail( function(jqxhr, settings, exception) {alert('failed to load due dates: ' + exception.toString());});
     });
 
     function isEnrolled() {
