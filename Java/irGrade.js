@@ -220,6 +220,8 @@ var cookieExpireDays = 7;          // days for the cookies to endure
 var theChapter = null;             // current chapter
 var theChapterTitle;               // title of the current chapter, if specified
 var theCourse;                     // course-specific data
+var openAssignNow;                 // server time when assignment page was opened
+var enrollList;                    // hashed enrollment list
 var newStyleAnswer = true;         // flag for pop-up versus inline
 var fCtr = 0;                      // counter for footnotes
 var figCtr = 1;                    // counter for figures
@@ -1746,24 +1748,21 @@ function validateLablet(theForm) {
         return(false);
     }
     var OK = false;
-    doneAccess = false;
-    var accessList = $.getJSON(accessURL, function() {
-            if (accessList.indexOf(CryptoJS.SHA256(trimToLowerCase(theForm.sid.value) + ',' +
-                                                   trimToLowerCase(theForm.email.value))) > -1) {
+    if (enrollList.indexOf(CryptoJS.SHA256(trimToLowerCase(theForm.sid.value) + ',' +
+       trimToLowerCase(theForm.email.value)).toString()) > -1) {
 // DEBUG
      alert('credentials OK');
-                  OK = true;
-                  theForm.lastName.value = trimBlanks(theForm.lastName.value);
-                  theForm.firstName.value = trimBlanks(theForm.firstName.value);
-                  theForm.email.value = trimToLowerCase(theForm.email.value);
-                  theForm.sid.value = trimBlanks(theForm.sid.value);
-            } else {
-                  alert('You do not seem to be enrolled; please check that you entered your ID and email ' +
-                        'address correctly and that this page is the correct assignment page for the class ' +
-                        'you are enrolled in.');
-            }
-    }).error(alert('Error #1 in validateLablet(): unable to retrieve access list!'));
-    return(OK && doneAccess);
+          OK = true;
+          theForm.lastName.value = trimBlanks(theForm.lastName.value);
+          theForm.firstName.value = trimBlanks(theForm.firstName.value);
+          theForm.email.value = trimToLowerCase(theForm.email.value);
+          theForm.sid.value = trimBlanks(theForm.sid.value);
+    } else {
+          alert('You do not seem to be enrolled; please check that you entered your ID and email ' +
+                'address correctly and that this page is the correct assignment page for the class ' +
+                'you are enrolled in.');
+    }
+    return(OK);
 }
 
 function saveResponses(setName,theForm,saveAns) {
