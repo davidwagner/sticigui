@@ -239,8 +239,6 @@ var mySID;
 var acccessURL;
 var dueURL;
 var timeURL;
-var doneAccess;
-var doneTime;
 var serverDate;                    // time according to the server
 var pbsURL = 'http://statistics.berkeley.edu/~stark';
                                    // P.B. Stark's URL
@@ -1035,27 +1033,6 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
-var waitForTimeIterationCount;
-var waitForTimeMaxIterationCount = 30;
-
-function waitForTime(_callback) {
-    if (doneTime) {
-        waitForTimeIterationCount = 0;
-         if(_callback) {
-            _callback();
-         }
-    } else if (waitForTimeIterationCount <= waitForTimeMaxIterationCount) {
-        waitForTimeIterationCount++;
-        setTimeout(function() { waitForTime(_callback); }, 1000);
-    } else  {
-        waitForTimeIterationCount = 0;
-        alert('Error #1 in irGrade.waitForTime(): Time failed to load in time. ');
-        if(_callback) {
-             _callback();
-        }
-    }
-}
-
 var waitForAppletsIterationCount;
 var waitForAppletsMaxIterationCount = 30;
 
@@ -1133,12 +1110,6 @@ function setCourseSpecs() {
     return(true);
 }
 
-function setDFile() {
-    setCourseSpecs(inx);
-    document.forms[0].elements["dFile"].value = dFile;
-    document.forms[0].elements["class"].value = theCourse[1];
-    return(true);
-}
 
 function getGrades(theForm) {
     if (validateLablet(theForm)) {
@@ -1218,11 +1189,12 @@ function spawnProblem(theForm,setName,relPath) {
             var instr = relPath + '/Problems/' + setName + 'i.htm';
             var appl  = relPath + '/Problems/' + setName + 'j.htm';
             lablet = open('','lablet','toolbar=no,location=no,directories=no,status=no,'+
-                'scrollbars=yes,resizable=yes');
+                'scrollbars=yes,resizable=yes,height=600,width=800');
             lablet.document.open();
             lablet.continueLab = cl;
-            var sAns = revealKey[setName]; // FIX ME!
-            var allowSubmit = allowSubmit[setName]; // FIX ME!
+            var pastDue = (new Date(assign[setName][0]) < new Date());
+            var sAns = assign[setName][2] == 'show_answers' || ((assign[setName][2] == 'automatic') && pastDue);
+            var allowSubmit = !pastDue && (assign[setName][1] == 'ready');
             lablet.sAns = sAns;
             lablet.allowSubmit = allowSubmit;
             lablet.dFile = dFile;
@@ -1355,6 +1327,10 @@ function enqueueJsonRequest(_url) {
     }
 */
 }
+
+//  set maximum wait for json callback
+  var jsonIterationCount;
+  var jsonMaxIterationCount = 200;
 
 function waitForJsonRequest(_callback) {
 /* REMOVED PBS 11/2/2012
@@ -1670,57 +1646,27 @@ function validateLabletSubmit(theForm){
         return(false);
     }
 }
-//  set maximum wait for json callback
-  var jsonIterationCount;
-  var jsonMaxIterationCount = 200;
 
 function labletSubmit(theForm) {
-     var doneTime = false;
      var OK = false;
-     waitForTimeIterationCount = 0;
-     doneTime = false;
-     var geturl = $.ajax(timeURL)
-                   .fail(function() {
-                        alert('error: failed to retrieve date from ' + timeUTRL+ '!');
-                      })
-                   .done(function() {
-                        var now = new Date(geturl.getResponseHeader('Date'));
-                        var dueDate = new Date(assign[assignmentTitles[assignmentNumbers[theChapter]][2]][0]);
-                        var pastDue = (dueDate < now);
-                        if (pastDue) {
-                            alert('Sorry, ' + theForm.firstName.value +
-                                  ': This assignment is past due; you cannot submit it now.');
-                            OK = false;
-                        } else {
-                            confirmStr = 'Your assignment is ready to submit, ' +
-                                    theForm.firstName.value + ' ' +
-                                    theForm.lastName.value +
-                                    '.\nPress "OK" to submit it now, or "Cancel" to return to the assignment.';
-                            if (confirm(confirmStr)) {
-                                 setExtraInputs(theForm);
-                                //ssanders: BEGIN: Added  Onsophic
-                                 pushAssignmentClosed(theForm.elements['score'].value);
-                                 jsonIterationCount = 0;
-                                 waitForJsonRequest(function() {    //ssanders: Have to wait, because the submit() replaces the DOM/JS
-                                //ssanders: END: Added Onsophic
-                                     setSubmitCookie(setNum.toString(),theForm,false);
-                                     document.forms[1].action = graderActionURL;
-                                     var s = collectResponses(theForm,true,true);
-                                     document.forms[1].elements['contents'].value = crypt(s,bigPi);
-                                     document.forms[1].submit();
-                                //ssanders: BEGIN: Added Onsophic
-                                 });
-                                //ssanders: END: Added Onsophic
-                                 OK = true;
-                            } else {
-                                alert('Your assignment has NOT been submitted.');
-                                OK = false;
-                            }
-                            doneTime = true;
-                        }
-                    });
-    waitForTime();
-    return(OK && doneTime);
+     confirmStr = 'Your assignment is ready to submit. \nPress "OK" to submit it, or "Cancel" to return to the assignment.';
+     if (confirm(confirmStr)) {
+         setExtraInputs(theForm);
+         pushAssignmentClosed(theForm.elements['score'].value);
+         jsonIterationCount = 0;
+         waitForJsonRequest(function() {    //ssanders: Have to wait, because the submit() replaces the DOM/JS
+             setSubmitCookie(setNum.toString(),theForm,false);
+             document.forms[1].action = graderActionURL;
+             var s = collectResponses(theForm,true,true);
+             document.forms[1].elements['contents'].value = crypt(s,bigPi);
+             document.forms[1].submit();
+         });
+         OK = true;
+     } else {
+        alert('Your assignment has NOT been submitted.');
+        OK = false;
+     }
+     return(OK);
 }
 
 function validateLablet(theForm) {
@@ -1749,9 +1695,7 @@ function validateLablet(theForm) {
     }
     var OK = false;
     if (enrollList.indexOf(CryptoJS.SHA256(trimToLowerCase(theForm.sid.value) + ',' +
-       trimToLowerCase(theForm.email.value)).toString()) > -1) {
-// DEBUG
-     alert('credentials OK');
+                trimToLowerCase(theForm.email.value)).toString()) > -1) {
           OK = true;
           theForm.lastName.value = trimBlanks(theForm.lastName.value);
           theForm.firstName.value = trimBlanks(theForm.firstName.value);
