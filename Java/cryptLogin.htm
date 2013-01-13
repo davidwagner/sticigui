@@ -6,36 +6,36 @@
 
 <head>
 <script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "12 January 2013 9:40 PST";
+	pageModDate = "12 January 2013 16:40 PST";
 	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
 <script type="text/javascript" src="../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1/build/rollups/sha256.js"></script>
 
-
-
-<script language="JavaScript1.4" type="text/javascript" src="../Java/irGrade.js"></script>
+</head>
+</body>
 
 <script language="JavaScript1.4" type="text/javascript"><!--
 function crypt256() {
     var sid = "12345678";
     var email = "nobody@nowhere.com";
     var hashed = CryptoJS.SHA256(sid.toLowerCase() + ',' + email.toLowerCase());
-    $('#out').text('<p>Raw: ' + sid + ',' + email + '; hashed: ' + hashed + '</p>');
+    $('#out').html('<p>Raw: ' + sid + ',' + email + '; hashed: ' + hashed + '</p>');
 }
 
 $(document).ready(function() {
-           $('#button').click(function() {crypt256();});
+           $('#doIt').click( function() {crypt256();});
 });
 // -->
 </script>
 
 <form>
-<button id="button">encryptMe</button>
+<a id="doIt">encryptMe</a>
 <div id="out"></div>
+</form>
+
 </body>
 </html>

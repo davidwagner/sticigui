@@ -6,7 +6,7 @@
 
 <head>
 <script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "11 January 2013 22:43 PST";
+	pageModDate = "12 January 2013 14:43 PST";
 	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
@@ -34,6 +34,7 @@
                      5,
                      4,
                      "http://statistics.berkeley.edu/~stark/Java/Courses/s21-su13-due.js",
+                     "http://statistics.berkeley.edu/~stark/Java/Courses/s21-su13-enroll.js",
                      "http://statistics.berkeley.edu"
                     ];
     var assign = {};
@@ -170,9 +171,9 @@
                   $.each(assignList, function(index, value) {
                          assign[value[0]] = value.slice(1);
                        });
-                  var geturl = $.ajax(theCourse[9])
+                  var geturl = $.ajax(theCourse[10])
                                 .fail(function() {
-                                     alert('error: failed to retrieve date from ' + theCourse[9] + '!');
+                                     alert('error: failed to retrieve date from ' + theCourse[10] + '!');
                                 })
                                 .done(function() {
                                      var now = new Date(geturl.getResponseHeader('Date'));
@@ -208,12 +209,6 @@
             .fail( function(jqxhr, settings, exception) {alert('failed to load due dates: ' + exception.toString());});
     });
 
-    function isEnrolled() {
-        var hash = CryptoJS.SHA256(document.forms[0].sid.value.toLowercase() +
-                      ':' + document.forms[0].email.value.toLowercase());
-       // check whether this is in the hashed access list
-
-    }
 // -->
 </script>
 

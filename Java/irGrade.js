@@ -6,7 +6,7 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/12/0904'; // modification date and time
+var irGradeModTime = '2013/1/12/1404'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var courseRelPath = '.';           // relative path to the instance of the course
@@ -233,6 +233,9 @@ var boxList = new Array();         // list of images for self-graded exercises
 var setNum;                        // current problem set number
 var isLab = false;                 // is this a problem set?
 var mySID;
+var acccessURL;
+var dueURL;
+var timeURL;
 var serverDate;                    // time according to the server
 var pbsURL = 'http://statistics.berkeley.edu/~stark';
                                    // P.B. Stark's URL
@@ -1027,15 +1030,25 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
-function setCourse(inx) {
-    if (typeof(inx) == 'undefined' || inx == null || inx.length == 0) {
-        inx = 1;
+var waitForTimeIterationCount;
+var waitForTimeMaxIterationCount = 30;
+
+function waitForTime(_callback) {
+    if (doneTime) {
+        waitForTimeIterationCount = 0;
+         if(_callback) {
+            _callback();
+         }
+    } else if (waitForTimeIterationCount <= waitForTimeMaxIterationCount) {
+        waitForTimeIterationCount++;
+        setTimeout(function() { waitForTime(_callback); }, 1000);
+    } else  {
+        waitForTimeIterationCount = 0;
+        alert('Error #1 in irGrade.waitForTime(): Time failed to load in time. ');
+        if(_callback) {
+             _callback();
+        }
     }
-    setCourseSpecs(inx);
-    document.applets[0].getSidFileByString(courseBase + courses[inx][1] + sFileBase);
-    document.applets[0].setBox(courseBase + courses[inx][1] + dFileBase);
-    setDueDates();
-    return(true);
 }
 
 var waitForAppletsIterationCount;
@@ -1045,7 +1058,8 @@ function waitForApplets(_callback) {
     var allActive = true;
     var apl = document.applets.length;
     for (var j = 0; j < apl; j++) {
-        if (document.applets[j].parentNode.parentNode.className != 'solution' && typeof(document.applets[j].isActive) != 'function') {
+        if (document.applets[j].parentNode.parentNode.className != 'solution' &&
+             typeof(document.applets[j].isActive) != 'function') {
             allActive = false;
         } else {
             allActive = allActive && document.applets[j].isActive();
@@ -1098,97 +1112,27 @@ function waitForApplet(appNum, _callback) {
 }
 
 
-function setDueDates(nullColor, goodColor) {
-    if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
-        goodColor = 'lightgreen';
-    }
-    if (typeof(nullColor) == 'undefined' || nullColor == null || nullColor.length == 0) {
-        nullColor = '#eeeeee';
-    }
-    for (var j=0; j < assignmentTitles.length; j++) {
-	var dueDiv = document.getElementById('set' + assignmentTitles[j][2] + 'Due');
-	var ansDiv = document.getElementById('set' + assignmentTitles[j][2] + 'Ans');
-        var isAssigned = document.applets[0].isAssigned(assignmentTitles[j][2]);
-        if (isAssigned) {
-	    	var dueDate = document.applets[0].getDueDate(assignmentTitles[j][2]);
-		    var pastDue = document.applets[0].pastDue(assignmentTitles[j][2]);
-		    dueDiv.innerHTML = dueDate.toLocaleString();
-		    if (pastDue) {
-			    dueDiv.style.backgroundColor = nullColor;
-		    } else {
-			    dueDiv.style.backgroundColor = goodColor;
-	        }
-		    if (document.applets[0].revealKey(assignmentTitles[j][2])) {
-			    ansDiv.innerHTML = 'yes';
-			    ansDiv.style.backgroundColor = goodColor;
-		    } else {
-			    ansDiv.innerHTML = 'no';
-			    ansDiv.style.backgroundColor = nullColor;
-		    }
-	    } else {
-		    dueDiv.innerHTML = 'not assigned';
-		    dueDiv.style.backgroundColor = nullColor;
-		    ansDiv.innerHTML = '---';
-		    ansDiv.style.backgroundColor = nullColor;
-	    }
-    }
-    return(true);
-}
-
-function setCourseSpecs(inx) {
-    course = courses[inx][1];
-    courseName = courses[inx][2];
-    teacher = courses[inx][3];
-    teacherName = courses[inx][4];
-    gPath = courses[inx][5];
-    maxSubmits = courses[inx][6];
-    showWrongAfterSubmits = courses[inx][7];
+function setCourseSpecs() {
+    course = theCourse[1];
+    courseName = theCourse[2];
+    teacher = theCourse[3];
+    teacherName = theCourse[4];
+    gPath = theCourse[5];
+    maxSubmits = theCourse[6];
+    showWrongAfterSubmits = theCourse[7];
+    assignURL = theCourse[8];
+    accessURL = theCourse[9];
+    timeURL = theCourse[10];
     dFile = cRoot + course + dFileBase;
     sFile = cRoot + course + sFileBase;
     return(true);
 }
 
-function setDFile(inx) {
+function setDFile() {
     setCourseSpecs(inx);
     document.forms[0].elements["dFile"].value = dFile;
-    document.forms[0].elements["class"].value = courses[inx][1];
+    document.forms[0].elements["class"].value = theCourse[1];
     return(true);
-}
-
-/*  BUG FIX 17/6/2012
-function writeCourseOptions(fun) {
-    document.writeln('<label><font color="red"><strong>Course:</strong></font> ' +
-                     '<select id="courseSelector" onchange="' + fun +
-                     '(options[selectedIndex].value);">');
-    for (var i=0; i < courses.length; i++ ) {
-        document.writeln('<option value="' + (courses[i][0]).toString() + '">' +
-            (courses[i][2]).toString() + '</option>');
-    }
-    document.writeln('</select></label>');
-    return(true);
-}
-*/
-
-function writeCourseOptions(inx) {  // DEBUG version
-    document.writeln('<label><font color="red"><strong>Course:</strong></font> ' +
-                     '<span id="courseSelector">' + courses[inx][2] + '</label>');
-    setCourse(inx);
-    return(true);
-}
-
-function getServerDate(url) {
-      var now = false;
-      var geturl = $.ajax({
-                        type: "GET",
-                        url: url,
-                        success: function() {
-                            now = new Date(geturl.getResponseHeader('Date'));
-                        },
-                        error: function() {
-                            alert('error: failed to retrieve Berkeley Statistics homepage!');
-                        }
-                    });
-      return(now);
 }
 
 function getGrades(theForm) {
@@ -1235,81 +1179,69 @@ function getGrades(theForm) {
 
 function spawnProblem(theForm,setName,relPath) {
     if (typeof(relPath) == 'undefined' || relPath == null || relPath.length == 0) {
-    	relPath = '..';
+        relPath = '..';
     }
     if (validateLablet(theForm)) {
         var ck = document.cookie;
         var fname = formStemName + assignmentNumbers[setName].toString();
-        var assigned = document.applets[0].isAssigned(setName);
+        var assigned = assign[setName] && (assign[setName][1] == 'ready');
         if (!assigned) {
                     alert('Error #1 in irGrade.spawnProblem(): This has not been assigned yet.\n Try again later.');
                     return(false);
-        }
-        var sstr =  crypt('sid' + theForm.sid.value, theForm.sid.value) + '=';
-        if (ck.indexOf(sstr) < 0){
-            var rs = (theForm.sid.value).toString();
-            if (rs.length < 10){
-                 rs += rs;
+        } else {
+            var sstr =  crypt('sid' + theForm.sid.value, theForm.sid.value) + '=';
+            if (ck.indexOf(sstr) < 0){
+                var rs = (theForm.sid.value).toString();
+                if (rs.length < 10){
+                     rs += rs;
+                }
+                randSeed = parseInt(rs.substr(0,Math.min(10,rs.length)));
+                setSubmitCookie('sid', theForm, true);
+                ck = document.cookie;
+                if (ck.indexOf(sstr) < 0) {
+                    alert('Error #2 in irGrade.spawnProblem()!\n' +
+                          'Make sure your browser is configured to accept cookies.\n' +
+                          'Clear existing cookies and try again.');
+                    return(false);
+                }
             }
-            randSeed = parseInt(rs.substr(0,Math.min(10,rs.length)));
-            setSubmitCookie('sid', theForm, true);
-            ck = document.cookie;
-            if (ck.indexOf(sstr) < 0) {
-                alert('Error #2 in irGrade.spawnProblem()!\n' +
-                      'Make sure your browser is configured to accept cookies.\n' +
-                      'Clear existing cookies and try again.');
-                return(false);
+            var ss = ck.substring(ck.indexOf(sstr) + sstr.length, ck.length);
+            if (ss.indexOf(';') > -1) {
+                ss = ss.substring(0,ss.indexOf(';'));
             }
-        }
-        var ss = ck.substring(ck.indexOf(sstr) + sstr.length, ck.length);
-        if (ss.indexOf(';') > -1) {
-            ss = ss.substring(0,ss.indexOf(';'));
-        }
-        var cl = crypt(ss, theForm.sid.value);
-        var instr = relPath + '/Problems/' + setName + 'i.htm';
-        var appl  = relPath + '/Problems/' + setName + 'j.htm';
-        lablet = open('','lablet','toolbar=no,location=no,directories=no,status=no,'+
-            'scrollbars=yes,resizable=yes');
-        lablet.document.open();
-        lablet.continueLab = cl;
-        var sAns = document.applets[0].revealKey(setName);
-        var allowSubmit = document.applets[0].allowSubmit(setName);
-        lablet.sAns = sAns;
-        lablet.allowSubmit = allowSubmit;
-        lablet.dFile = dFile;
-        lablet.course = course;
-        lablet.teacher = teacher;
-        lablet.maxSubmits = maxSubmits;
-        lablet.showWrongAfterSubmits = showWrongAfterSubmits;
-        lablet.theChapter = setName;
-        var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
-                               '<title>SticiGui Assignment ' + i.toString() + '</title>' +
-                               '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
-                               '</head>';
-        lablet.document.writeln('<frameset rows="*,300">');
-        lablet.document.writeln('<frame id="instrWin" src="' + instr + '"' +
-            ' frameborder="1" framespacing="0" border="1" />');
-        lablet.document.writeln('<frame id="appletWin" src="' + appl + '"' +
-            ' frameborder="1" framespacing="0" border="1" />');
-        lablet.document.writeln('</frameset></html>');
-        lablet.document.close();
-        return(true);
+            var cl = crypt(ss, theForm.sid.value);
+            var instr = relPath + '/Problems/' + setName + 'i.htm';
+            var appl  = relPath + '/Problems/' + setName + 'j.htm';
+            lablet = open('','lablet','toolbar=no,location=no,directories=no,status=no,'+
+                'scrollbars=yes,resizable=yes');
+            lablet.document.open();
+            lablet.continueLab = cl;
+            var sAns = document.applets[0].revealKey(setName); // FIX ME!
+            var allowSubmit = document.applets[0].allowSubmit(setName); // FIX ME!
+            lablet.sAns = sAns;
+            lablet.allowSubmit = allowSubmit;
+            lablet.dFile = dFile;
+            lablet.course = course;
+            lablet.teacher = teacher;
+            lablet.maxSubmits = maxSubmits;
+            lablet.showWrongAfterSubmits = showWrongAfterSubmits;
+            lablet.theChapter = setName;
+            var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
+                                   '<title>SticiGui Assignment ' + i.toString() + '</title>' +
+                                   '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
+                                   '</head>';
+            lablet.document.writeln('<frameset rows="*,300">');
+            lablet.document.writeln('<frame id="instrWin" src="' + instr + '"' +
+                ' frameborder="1" framespacing="0" border="1" />');
+            lablet.document.writeln('<frame id="appletWin" src="' + appl + '"' +
+                ' frameborder="1" framespacing="0" border="1" />');
+            lablet.document.writeln('</frameset></html>');
+            lablet.document.close();
+            return(true);
     } else {
         return(false);
     }
 }
-
-/* function getTimeOnline()  {
-   xmljs=new XMLHttpRequest();
-   xmljs.onreadystatechange=function() {
-      if (xmljs.readyState==4 && xmljs.status==200)  {
-
-      }
-   }
-   xmljs.open("GET","myJSfile.js",true);
-   xmljs.send();
-}
-*/
 
 // log headers entering and exiting
 
@@ -1331,8 +1263,7 @@ $(function() {
 //  login
    $(document).ready(function() {
         resolveUserEid('handleUserLoginCheck');
-
-    });
+   });
    $('#loginLink').hover(function() {
         $('#loginBox').slideDown(1000);
         return(true);
@@ -1738,31 +1669,49 @@ function validateLabletSubmit(theForm){
   var jsonMaxIterationCount = 200;
 
 function labletSubmit(theForm) {
-// [FIX ME!  Check that the due date hasn't passed]
-    confirmStr = 'Your assignment is ready to submit, ' +
-        theForm.firstName.value + ' ' +
-        theForm.lastName.value +
-        '.\nPress "OK" to submit it now, or "Cancel" to return to the assignment.';
-    if (confirm(confirmStr)){
-        setExtraInputs(theForm);
-        //ssanders: BEGIN: Added  Onsophic
-        pushAssignmentClosed(theForm.elements['score'].value);
-        jsonIterationCount = 0;
-        waitForJsonRequest(function() {    //ssanders: Have to wait, because the submit() replaces the DOM/JS
-        //ssanders: END: Added Onsophic
-            setSubmitCookie(setNum.toString(),theForm,false);
-            document.forms[1].action = graderActionURL;
-            var s = collectResponses(theForm,true,true);
-            document.forms[1].elements['contents'].value = crypt(s,bigPi);
-            document.forms[1].submit();
-        //ssanders: BEGIN: Added Onsophic
-        });
-        //ssanders: END: Added Onsophic
-        return(true);
-    } else {
-        alert('Your assignment has NOT been submitted.');
-        return(false);
-    }
+     var doneTime = false;
+     var OK = false;
+     // FIX ME!  set waitForTimeIterationCount
+     var geturl = $.ajax(timeURL)
+                   .fail(function() {
+                        alert('error: failed to retrieve date from ' + timeUTRL+ '!');
+                      })
+                   .done(function() {
+                        var now = new Date(geturl.getResponseHeader('Date'));
+                        var dueDate = new Date(FIX ME!);
+                        var pastDue = (dueDate < now);
+                        if (pastDue) {
+                            alert('Sorry, ' + theForm.firstName.value +
+                                  ': This assignment is past due; you cannot submit it now.');
+                            OK = false;
+                        } else {
+                            confirmStr = 'Your assignment is ready to submit, ' +
+                                    theForm.firstName.value + ' ' +
+                                    theForm.lastName.value +
+                                    '.\nPress "OK" to submit it now, or "Cancel" to return to the assignment.';
+                            if (confirm(confirmStr)) {
+                                 setExtraInputs(theForm);
+                                //ssanders: BEGIN: Added  Onsophic
+                                 pushAssignmentClosed(theForm.elements['score'].value);
+                                 jsonIterationCount = 0;
+                                 waitForJsonRequest(function() {    //ssanders: Have to wait, because the submit() replaces the DOM/JS
+                                //ssanders: END: Added Onsophic
+                                     setSubmitCookie(setNum.toString(),theForm,false);
+                                     document.forms[1].action = graderActionURL;
+                                     var s = collectResponses(theForm,true,true);
+                                     document.forms[1].elements['contents'].value = crypt(s,bigPi);
+                                     document.forms[1].submit();
+                                //ssanders: BEGIN: Added Onsophic
+                                 });
+                                //ssanders: END: Added Onsophic
+                                 OK = true;
+                            } else {
+                                alert('Your assignment has NOT been submitted.');
+                                OK = false;
+                            }
+                        }
+                    });
+    return(OK);
 }
 
 function validateLablet(theForm) {
@@ -1788,27 +1737,22 @@ function validateLablet(theForm) {
         alert('Email address is missing or invalid');
         theForm.email.focus();
         return(false);
-    } else if (!document.applets[0].acceptSid(theForm.sid.value)) {
-        alert('This SID is not enrolled, or the class has not started.\nDoes the form show the course you are enrolled in?');
-        theForm.sid.focus();
-        return(false);
-    } else if (!validSID(theForm.sid.value)) {
-        alert('Invalid password');
-        theForm.sid.focus();
-        return(false);
-    } else if (!document.applets[0].isOkPasswd(trimBlanks(theForm.sid.value),
-             trimToLowerCase(theForm.email.value))) {
-        alert('This email address is not enrolled, or does not match the SID.\n' +
-              'Does the form show the course you are enrolled in?');
-        theForm.email.focus();
-        return(false);
-    } else {
-        theForm.lastName.value = trimBlanks(theForm.lastName.value);
-        theForm.firstName.value = trimBlanks(theForm.firstName.value);
-        theForm.email.value = trimToLowerCase(theForm.email.value);
-        theForm.sid.value = trimBlanks(theForm.sid.value);
-        return(true);
     }
+    var OK = false;
+    var accessList = $.getJSON(accessURL, function() {
+            if (accessList.indexOf(CryptoJS.SHA256(trimToLowerCase(theForm.sid.value) + ',' +
+                                                   trimToLowerCase(theForm.email.value))) > -1) {
+                  OK = true;
+                  theForm.lastName.value = trimBlanks(theForm.lastName.value);
+                  theForm.firstName.value = trimBlanks(theForm.firstName.value);
+                  theForm.email.value = trimToLowerCase(theForm.email.value);
+                  theForm.sid.value = trimBlanks(theForm.sid.value);
+            } else {
+                  alert('You do not seem to be enrolled; please check that you entered your ID and email ' +
+                        'address correctly and that this page is the correct assignment page for the class ' +
+                        'you are enrolled in.');
+            }
+    }).error(alert('Error #1 in validateLablet(): unable to retrieve access list!'););
 }
 
 function saveResponses(setName,theForm,saveAns) {
@@ -2090,18 +2034,6 @@ function setExtraInputs(theForm) {
     }
     pushQuestionsWorked(questionsAndAnswers); // Onsophic
     theForm.elements['score'].value = roundToDig(100*nRight/(qCtr - 1),2).toString();
-    return(true);
-}
-
-function killApplets() { // dispose of applets when leaving the page
-    for (var i = 0; i < document.applets.length; i++) {
-        if(typeof(document.applets[i].stop) != 'undefined') {
-            document.applets[i].stop();
-        }
-        if(typeof(document.applets[i].destroy) != 'undefined') {
-            document.applets[i].destroy();
-        }
-    }
     return(true);
 }
 

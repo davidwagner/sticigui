@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:pref="http://www.w3.org/2002/Math/preference"
+      pref:renderer="css">
+
+<head>
+
+
+<script language="JavaScript1.4" type="text/javascript"><!--
+	pageModDate = "Saturday 12 January 2013 16:15:59 PST";
+	// copyright 2011&ndash;2013 by P.B. Stark, statistics.berkeley.edu/~stark.
+    // All rights reserved.
+// -->
+</script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1/build/rollups/sha256.js"></script>
+
+
+<script type="text/javascript"><!--
+    function cryptList() {
+        var stuff = $("#inbox").val().replace(/\n+/gi,'\n').split('\n');
+        var students = new Array();
+        $.each(stuff, function(i, theStuff) {
+            students.push(CryptoJS.SHA256(theStuff.toLowerCase()));
+        });
+        $('#outbox').val(students.join('\n'));
+    }
+// -->
+</script>
+
+<title>SticiGui Access Control List Encrypter</title>
+
+</head>
+
+<body>
+
+
+
+
+	<form action="#" method="get">
+		<fieldset>
+			<legend>Hasher</legend>
+			<div>
+			    <label for="inbox">[student ID],[email] with no spaces.</label><br />
+				<textarea rows="25" cols="80" id="inbox"></textarea>
+			</div>
+			<div>
+			   <label for="outbox">Hash:</label><br />
+			   <textarea rows="25" cols="80" id="outbox" ></textarea>
+			</div>
+			<div>
+			    <input type="button" id="hash"
+			       onclick="cryptList();"
+			       value="hash" />
+		    </div>
+		</fieldset>
+
+</form>
+
+
+<p>
+<small>P.B. Stark, <a href="statistics.berkeley.edu/~stark">statistics.berkeley.edu/~stark</a>.
+http://statistics.berkeley.edu/~stark/Java/Html/auditTools.htm
+Last modified 12 January 2013.</small>
+</p>
+
+</body>
+
+</html>
+
