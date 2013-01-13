@@ -1032,28 +1032,6 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
-var waitForIterationCount;
-var waitForMaxIterationCount = 30;
-
-function waitFor(doneFlag, _callback) {
-    if (doneFlag) {
-        waitForIterationCount = 0;
-         if(_callback) {
-            _callback();
-         }
-    } else if (waitForIterationCount <= waitForMaxIterationCount) {
-        waitForIterationCount++;
-        setTimeout(function() { waitFor(doneFlag, _callback); }, 1000);
-    } else  {
-        waitForIterationCount = 0;
-        alert('Error #1 in irGrade.waitFor(): Access control file failed to load in time. ');
-        if(_callback) {
-             _callback();
-        }
-    }
-}
-
-
 var waitForTimeIterationCount;
 var waitForTimeMaxIterationCount = 30;
 
@@ -1262,9 +1240,10 @@ function spawnProblem(theForm,setName,relPath) {
             lablet.document.writeln('</frameset></html>');
             lablet.document.close();
             return(true);
-    } else {
-        return(false);
     }
+  } else {
+     return(false);
+  }
 }
 
 // log headers entering and exiting
@@ -1703,7 +1682,7 @@ function labletSubmit(theForm) {
                       })
                    .done(function() {
                         var now = new Date(geturl.getResponseHeader('Date'));
-                        var dueDate = new Date(theForm.FIX ME!);
+                        var dueDate = new Date(assign[assignmentTitles[assignmentNumbers[theChapter]][2]][0]);
                         var pastDue = (dueDate < now);
                         if (pastDue) {
                             alert('Sorry, ' + theForm.firstName.value +
