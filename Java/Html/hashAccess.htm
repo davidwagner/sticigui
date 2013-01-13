@@ -25,7 +25,7 @@
         $.each(stuff, function(i, theStuff) {
             students.push(CryptoJS.SHA256(theStuff.toLowerCase()));
         });
-        $('#outbox').val(students.join('\n'));
+        $('#outbox').val('[' + students.join(',\n') + ']');
     }
 // -->
 </script>
@@ -47,14 +47,14 @@
 				<textarea rows="25" cols="80" id="inbox"></textarea>
 			</div>
 			<div>
-			   <label for="outbox">Hash:</label><br />
-			   <textarea rows="25" cols="80" id="outbox" ></textarea>
-			</div>
-			<div>
-			    <input type="button" id="hash"
+			    <input type="button" id="hash the list"
 			       onclick="cryptList();"
 			       value="hash" />
 		    </div>
+			<div>
+			   <label for="outbox">Hash:</label><br />
+			   <textarea rows="25" cols="80" id="outbox" ></textarea>
+			</div>
 		</fieldset>
 
 </form>

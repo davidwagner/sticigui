@@ -236,6 +236,8 @@ var mySID;
 var acccessURL;
 var dueURL;
 var timeURL;
+var doneAccess;
+var doneTime;
 var serverDate;                    // time according to the server
 var pbsURL = 'http://statistics.berkeley.edu/~stark';
                                    // P.B. Stark's URL
@@ -1030,6 +1032,27 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
+var waitForAccessIterationCount;
+var waitForAccessMaxIterationCount = 30;
+
+function waitForAccess(_callback) {
+    if (doneAccess) {
+        waitForAccessIterationCount = 0;
+         if(_callback) {
+            _callback();
+         }
+    } else if (waitForAccessIterationCount <= waitForAccessMaxIterationCount) {
+        waitForAccessIterationCount++;
+        setTimeout(function() { waitForAccess(_callback); }, 1000);
+    } else  {
+        waitForAccessIterationCount = 0;
+        alert('Error #1 in irGrade.waitForAccess(): Access control file failed to load in time. ');
+        if(_callback) {
+             _callback();
+        }
+    }
+}
+
 var waitForTimeIterationCount;
 var waitForTimeMaxIterationCount = 30;
 
@@ -1216,8 +1239,8 @@ function spawnProblem(theForm,setName,relPath) {
                 'scrollbars=yes,resizable=yes');
             lablet.document.open();
             lablet.continueLab = cl;
-            var sAns = document.applets[0].revealKey(setName); // FIX ME!
-            var allowSubmit = document.applets[0].allowSubmit(setName); // FIX ME!
+            var sAns = revealKey[setName]; // FIX ME!
+            var allowSubmit = allowSubmit[setName]; // FIX ME!
             lablet.sAns = sAns;
             lablet.allowSubmit = allowSubmit;
             lablet.dFile = dFile;
@@ -1671,14 +1694,15 @@ function validateLabletSubmit(theForm){
 function labletSubmit(theForm) {
      var doneTime = false;
      var OK = false;
-     // FIX ME!  set waitForTimeIterationCount
+     waitForTimeIterationCount = 0;
+     doneTime = false;
      var geturl = $.ajax(timeURL)
                    .fail(function() {
                         alert('error: failed to retrieve date from ' + timeUTRL+ '!');
                       })
                    .done(function() {
                         var now = new Date(geturl.getResponseHeader('Date'));
-                        var dueDate = new Date(FIX ME!);
+                        var dueDate = new Date(theForm.FIX ME!);
                         var pastDue = (dueDate < now);
                         if (pastDue) {
                             alert('Sorry, ' + theForm.firstName.value +
@@ -1709,9 +1733,11 @@ function labletSubmit(theForm) {
                                 alert('Your assignment has NOT been submitted.');
                                 OK = false;
                             }
+                            doneTime = true;
                         }
                     });
-    return(OK);
+    waitForTime();
+    return(OK && doneTime);
 }
 
 function validateLablet(theForm) {
@@ -1739,9 +1765,12 @@ function validateLablet(theForm) {
         return(false);
     }
     var OK = false;
+    doneAccess = false;
     var accessList = $.getJSON(accessURL, function() {
             if (accessList.indexOf(CryptoJS.SHA256(trimToLowerCase(theForm.sid.value) + ',' +
                                                    trimToLowerCase(theForm.email.value))) > -1) {
+// DEBUG
+     alert('credentials OK');
                   OK = true;
                   theForm.lastName.value = trimBlanks(theForm.lastName.value);
                   theForm.firstName.value = trimBlanks(theForm.firstName.value);
@@ -1753,6 +1782,7 @@ function validateLablet(theForm) {
                         'you are enrolled in.');
             }
     }).error(alert('Error #1 in validateLablet(): unable to retrieve access list!'););
+    return(OK && doneAccess);
 }
 
 function saveResponses(setName,theForm,saveAns) {
