@@ -219,6 +219,7 @@ for (var j=0; j < assignmentTitles.length; j++) {
 var cookieExpireDays = 7;          // days for the cookies to endure
 var theChapter = null;             // current chapter
 var theChapterTitle;               // title of the current chapter, if specified
+var theCourse;                     // course-specific data
 var newStyleAnswer = true;         // flag for pop-up versus inline
 var fCtr = 0;                      // counter for footnotes
 var figCtr = 1;                    // counter for figures
@@ -1761,7 +1762,7 @@ function validateLablet(theForm) {
                         'address correctly and that this page is the correct assignment page for the class ' +
                         'you are enrolled in.');
             }
-    }).error(alert('Error #1 in validateLablet(): unable to retrieve access list!'););
+    }).error(alert('Error #1 in validateLablet(): unable to retrieve access list!'));
     return(OK && doneAccess);
 }
 
