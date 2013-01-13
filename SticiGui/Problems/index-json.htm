@@ -37,6 +37,7 @@
                      "http://statistics.berkeley.edu/~stark/Java/Courses/s21-su13-enroll.js",
                      "http://statistics.berkeley.edu"
                     ];
+    setCourseSpecs();
     var assign = {};
 // -->
 </script>
@@ -150,7 +151,7 @@
 	           '<th id="col3"><p class="center"><strong>Answers posted?</strong></p></th></tr>';
      var upPath = '\'..\'';
      for (var j=0; j < assignmentTitles.length; j++) {
-          qStr += '<tr>' +
+          qStr += '<tr id="row' + assignmentTitles[j][2] + '">' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col0">' +
     	           j.toString() + '. ' + mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col1">' +
@@ -167,13 +168,13 @@
     qStr += '</table>';
     document.writeln(qStr);
     $(document).ready(function() {
-            $.getScript(theCourse[8], function() {
+            assign = $.getJSON(assignURL, function() {
                   $.each(assignList, function(index, value) {
                          assign[value[0]] = value.slice(1);
                        });
-                  var geturl = $.ajax(theCourse[10])
+                  var geturl = $.ajax(timeURL)
                                 .fail(function() {
-                                     alert('error: failed to retrieve date from ' + theCourse[10] + '!');
+                                     alert('error: failed to retrieve date from ' + timeURL + '!');
                                 })
                                 .done(function() {
                                      var now = new Date(geturl.getResponseHeader('Date'));

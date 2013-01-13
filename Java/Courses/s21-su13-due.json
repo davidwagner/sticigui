@@ -1,4 +1,4 @@
-var assignList = [
+[
           ['syllabus'              , '01/10/2013  00:10:30 GMT-8:00',    'ready', 'automatic'],
           ['prerequisites'         , '01/20/2013  00:10:45 GMT-8:00',    'ready', 'show_answers'],
           ['reasoning'             , '01/21/2013  00:10:00 GMT-8:00',    'ready', 'automatic'],
@@ -28,4 +28,4 @@ var assignList = [
           ['percentageTests'       , '03/10/2013  00:10:00 GMT-8:00',    'ready', 'hold'],
           ['zTest'                 , '03/10/2013  00:10:00 GMT-8:00',    'ready', 'hold'],
           ['chiSquare'             , '03/10/2013  00:10:00 GMT-8:00',    'ready', 'hold']
-        ];
+];

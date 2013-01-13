@@ -1032,26 +1032,27 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
-var waitForAccessIterationCount;
-var waitForAccessMaxIterationCount = 30;
+var waitForIterationCount;
+var waitForMaxIterationCount = 30;
 
-function waitForAccess(_callback) {
-    if (doneAccess) {
-        waitForAccessIterationCount = 0;
+function waitFor(doneFlag, _callback) {
+    if (doneFlag) {
+        waitForIterationCount = 0;
          if(_callback) {
             _callback();
          }
-    } else if (waitForAccessIterationCount <= waitForAccessMaxIterationCount) {
-        waitForAccessIterationCount++;
-        setTimeout(function() { waitForAccess(_callback); }, 1000);
+    } else if (waitForIterationCount <= waitForMaxIterationCount) {
+        waitForIterationCount++;
+        setTimeout(function() { waitFor(doneFlag, _callback); }, 1000);
     } else  {
-        waitForAccessIterationCount = 0;
-        alert('Error #1 in irGrade.waitForAccess(): Access control file failed to load in time. ');
+        waitForIterationCount = 0;
+        alert('Error #1 in irGrade.waitFor(): Access control file failed to load in time. ');
         if(_callback) {
              _callback();
         }
     }
 }
+
 
 var waitForTimeIterationCount;
 var waitForTimeMaxIterationCount = 30;
