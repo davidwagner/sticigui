@@ -33,9 +33,9 @@
                  "",
                  5,
                  4,
-                 "http://statistics.berkeley.edu/~stark/Java/Courses/s2x-s13-due.json",
-                 "http://statistics.berkeley.edu/~stark/Java/Courses/s2x-s13-enroll.json",
-                 "http://statistics.berkeley.edu"
+                 "../../Java/Courses/s2x-s13-due.json",
+                 "../../Java/Courses/s2x-s13-enroll.json",
+                 "/"
                 ];
     setCourseSpecs();
     var assign = {};
@@ -168,8 +168,8 @@
     qStr += '</table>';
     document.writeln(qStr);
     $(document).ready(function() {
-            assignList = $.getJSON(assignURL, function() {
-                  $.each(assignList, function(index, value) {
+            $.getJSON(assignURL, function(data) {
+                  $.each(data, function(index, value) {
                          assign[value[0]] = value.slice(1);
                        });
                   var geturl = $.ajax(timeURL)
