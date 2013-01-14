@@ -4142,8 +4142,7 @@ function vMinMax(list){ // returns min and max of list
         if (mn > list[i]) mn = list[i];
         if (mx < list[i]) mx = list[i];
     }
-    var vmnmx =  new Array(mn,mx);
-    return(vmnmx);
+    return(new Array(mn,mx));
 }
 
 function vMinMaxIndices(list){ // returns min, max, index of min, index of max
@@ -4161,8 +4160,7 @@ function vMinMaxIndices(list){ // returns min, max, index of min, index of max
             indMx = i;
         }
     }
-    var vmnmx =  new Array(mn,mx,indMn,indMx);
-    return(vmnmx);
+    return(new Array(mn,mx,indMn,indMx));
 }
 
 function vMinMaxAbs(list) {
@@ -4175,8 +4173,7 @@ function vMinMaxAbs(list) {
             if (mn > val) mn = val;
             if (mx < val) mx = val;
     }
-    var vmnmx =  new Array(mn,mx);
-    return(vmnmx);
+    return(new Array(mn,mx));
 }
 
 function randBoolean(p){ // random boolean value, prob p that it is true
