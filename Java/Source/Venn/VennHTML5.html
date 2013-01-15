@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {background-color : #fff;}
+      
+      #app {
+  width: 50%;
+  position:relative;
+  margin: 0 auto;
+      }
+ 
+      #container {
+  float: left;
+      }
+ 
+      #buttons {
+ 
+  float: left;
+      }
+ 
+      #scrollbars {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+      }
+ 
+      #psb1, #psb2 {
+  margin-left: 20px;
+  float: left;
+      }
+ 
+      .text {
+  float: left;
+      }
+ 
+      .pair {
+      }
+    </style>
+  </head>
+  <body>
+ 
+    <center><h1>SticiGui</h1>
+    <h5>Venn Diagrams</h5>
+    <br/></center>
+    <div id="app">
+  <div id="container"></div>
+  <div id="buttons">
+    <div class="pair">
+          <input id="A" type="radio" name="buttons">A</input>
+          <input id="B" type="radio" name="buttons">B</input>
+ 
+    </div>
+    <div class="pair">
+          <input id="C" type="radio" name="buttons">A or B</input>
+          <input id="D" type="radio" name="buttons">ABc</input>
+    </div>
+    <div class="pair">
+          <input id="E" type="radio" name="buttons">S</input>
+          <input id="F" type="radio" name="buttons">Ac</input>
+    </div>
+    <div class="pair">
+          <input id="G" type="radio" name="buttons">Bc</input>
+          <input id="H" type="radio" name="buttons">AB</input>
+    </div>
+    <div class="pair">
+          <input id="I" type="radio" name="buttons">AcB</input>
+          <input id="J" type="radio" name="buttons">{}</input>
+    </div>
+  
+  </div>
+    </div>
+  <div id="scrollbars">
+    <p>
+    <p id="psb1">P(A)(%)
+      <input id="sb1" type="range" min="1" max="100" step="1" value="30" />
+    </p>
+    <p id="psb2">P(B)(%)
+      <input id="sb2" type="range" min="1" max="100" step="1" value="30" />
+    </p>
+    </p>
+  </div>
+ 
+    <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.1-beta2.js"></script>
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script>
+ 
+      var scaleFactorX = .30;
+      var scaleFactorY = .30;
+ 
+var draw = (function draw() {
+ 
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 340,
+        height: 200
+      });
+ 
+      var messageLayer = new Kinetic.Layer();
+      var layer = new Kinetic.Layer();
+      var rectX = stage.getWidth() / 2 - 50;
+      var rectY = stage.getHeight() / 2 - 25;
+ 
+      var box0 = new Kinetic.Rect({
+        x: 10,
+        y: 10,
+        width: 320,
+        height: 180,
+        fill: '#C0C0C0',
+        stroke: 'black',
+        strokeWidth: 2,
+        draggable: false
+      });
+ 
+      var box1 = new Kinetic.Rect({
+        x: rectX - 32,
+        y: rectY - 16,
+        width: 320 * scaleFactorX,
+        height: 180 * scaleFactorY,
+        fill: 'none',
+        stroke: 'black',
+        strokeWidth: 2,
+        draggable: true
+      });
+ 
+      var box2 = new Kinetic.Rect({
+        x: rectX + 32,
+        y: rectY + 16,
+        width: 320 * scaleFactorX,
+        height: 180 * scaleFactorY,
+        fill: 'none',
+        stroke: 'black',
+        strokeWidth: 2,
+        draggable: true
+      });
+ 
+  // S
+      document.getElementById('E').addEventListener('click', function () {
+  box0.setFill('blue');
+  box1.setFill('none');
+  box2.setFill('none');
+  layer.draw()
+      });
+ 
+  // A
+      document.getElementById('A').addEventListener('click', function () {
+  box0.setFill('#C0C0C0');
+  box1.setFill('blue');
+  box2.setFill('none');
+  layer.draw()
+      });
+ 
+  // B
+      document.getElementById('B').addEventListener('click', function () {
+  box1.setFill('none');
+  box2.setFill('blue');
+  box0.setFill('#C0C0C0');
+  layer.draw()
+      });
+ 
+  // Ac
+      document.getElementById('F').addEventListener('click', function () {
+  box2.setFill('none');
+  box1.setFill('#C0C0C0');
+  box0.setFill('blue');
+  layer.draw()
+      });
+ 
+  // Bc
+      document.getElementById('G').addEventListener('click', function () {
+  box1.setFill('none');
+  box2.setFill('#C0C0C0');
+  box0.setFill('blue');
+  layer.draw()
+      });
+ 
+  // A or B -- NOT QUITE RIGHT
+      document.getElementById('C').addEventListener('click', function () {
+  box0.setFill('#C0C0C0');
+        box1.setFill('blue');
+        box2.setFill('blue');
+  layer.draw()
+      });
+ 
+      document.getElementById('J').addEventListener('click', function () {
+  box0.setFill('#C0C0C0');
+        box1.setFill('none');
+        box2.setFill('none');
+  layer.draw()
+      });
+ 
+      //box1.simulate('click');
+      //box2.simulate('click');
+ 
+      $('#sb1').change(function () {
+    box1.setWidth((320*this.value)/100);
+    box1.setHeight((180*this.value)/100);
+    layer.draw();
+  });
+  
+  $('#sb2').change(function () {
+    box2.setWidth((320*this.value)/100);
+    box2.setHeight((180*this.value)/100);
+    layer.draw();
+  });
+ 
+  // NEED TO COMPLETE AB, ABc, AcB, {}
+ 
+ 
+  //NEED CUSTOM EVENT ^^
+ 
+  //
+ 
+  // IF BOTH box1 AND box2 CLICKED, GROUP AND MOVE    // TOGETHER
+ 
+      layer.add(box0);
+      layer.add(box1);
+      layer.add(box2);
+ 
+      stage.add(layer);
+      stage.add(messageLayer);
+});
+ 
+draw();
+ 
+    </script>
+ 
+ 
+<br /> <br />
+ 
+<p class="text">
+ 
+      Venn diagrams are a way of visualizing sets.
+ 
+This applet lets you highlight the set A, the set B, the universal set S,
+ 
+the empty set {}, the complement of A (Ac), the complement of B (Bc),
+ 
+the intersection of A and B (AB), the union of A and B (A or B),
+ 
+the intersection of the complement of A with B (AcB), and
+ 
+the intersection of A with the
+ 
+complement of B (ABc).
+ 
+One can think of the relative area of a set to the area of S as a
+ 
+probability.
+ 
+The picture uses that analogy: the numbers P(A) and P(B) are proportional to
+ 
+the area of A and the area of B, respectively; P(AB) is the area of the
+ 
+intersection of A and B, and P(A or B) is the area of the union of A and B.
+ 
+</p>
+ 
+<p class="text">
+ 
+You can drag the <a href="../SticiGui/Text/gloss.htm#event">events</a>
+ 
+A and B around, which changes the probability of their intersection
+ 
+and of their union.
+ 
+When A and B do not overlap, they are said to be
+ 
+<a href="../SticiGui/Text/gloss.htm#disjoint">disjoint or mutually exclusive</a>.
+ 
+When the probability of the intersection of A and B
+ 
+equals the product
+ 
+of the probability of A and the probability of B (when P(AB) = P(A)&times;P(B)),
+ 
+A and B are
+ 
+<a href="../SticiGui/Text/gloss.htm#independent">independent</a>.
+ 
+Try to drag A or B to make P(AB) = P(A)&times;P(B);
+ 
+notice how hard it is to make the overlap just
+ 
+right: independence is a very special relationship between events.
+ 
+The scrollbars let you adjust the probability of A and the probability of
+ 
+B.
+ 
+</p>
+ 
+  </body>
+</html>
