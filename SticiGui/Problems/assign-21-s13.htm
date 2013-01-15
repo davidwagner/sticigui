@@ -6,14 +6,15 @@
 
 <head>
 <script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "20 September 2011 14:43 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+	pageModDate = "14 January 2013 14:43 PST";
+	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1/build/rollups/sha256.js"></script>
 
 
 
@@ -24,15 +25,28 @@
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cName = "Assignments";
     writeChapterHead('SeEd',cName,'Online Assignments');
+    theCourse = ["0",
+                 "s21-s13",
+                 "Statistics 21, Spring 2013, UC Berkeley",
+                 "stark",
+                 "Prof. Shobhana Murali Stoyanov",
+                 "",
+                 5,
+                 4,
+                 "../../Java/Courses/s21-s13-due.json",
+                 "../../Java/Courses/s21-s13-enroll.json",
+                 "/"
+                ];
+    setCourseSpecs();
+    var assign = {};
 // -->
 </script>
 </head>
 
-<body onload="setApplets();waitForAppletsIterationCount = 0;waitForApplets(function() {setCourse(1); document.getElementById('courseSelector').selectedIndex = 1;});"  
-       >
+<body>
 <script language="JavaScript1.4" type="text/javascript"><!--
     sticiRelPath = '..';
-    courseRelPath = '../../Teach/S21/Su11';
+    courseRelPath = '../../Teach/S21/S13';
     writeChapterTitle('Assignments');
     writeChapterNav('..');
 // -->
@@ -69,8 +83,8 @@
 	<legend>Login</legend>
 	<p>
 	<script language="JavaScript1.4" type="text/javascript"><!--
-		writeCourseOptions("setCourse");
-	// -->
+	document.writeln('<label><font color="red"><strong>Course:</strong></font> ' +
+                     '<span id="courseSelector">' + theCourse[2] + '</label>');// -->
 	</script>
 	</p>
 
@@ -86,13 +100,6 @@
 	</p>
 </fieldset>
 
-
-<p class="center">
-    <applet id="PsServe" code="PsServe.class" codebase="../../Java/" width="0" height="0"
-          archive="PbsGui.zip">
-        You must have Java enabled to access the assignments
-    </applet>
-</p>
 
 <div class="assignmentTable">
 <p class="center"><a id="grades"></a>
@@ -112,6 +119,13 @@
 	Assignment Schedule
 </h2>
 <script language="JavaScript1.4" type="text/javascript"><!--
+     if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
+          goodColor = 'lightgreen';
+     }
+     if (typeof(nullColor) == 'undefined' || nullColor == null || nullColor.length == 0) {
+          nullColor = '#eeeeee';
+     }
+
      var mapChapterToTitle = new Object;
      for (var j=0; j < chapterTitles.length; j++) {
          mapChapterToTitle[chapterTitles[j][1]] = chapterTitles[j][0];
@@ -137,14 +151,14 @@
 	           '<th id="col3"><p class="center"><strong>Answers posted?</strong></p></th></tr>';
      var upPath = '\'..\'';
      for (var j=0; j < assignmentTitles.length; j++) {
-          qStr += '<tr>' +
+          qStr += '<tr id="row' + assignmentTitles[j][2] + '">' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col0">' +
     	           j.toString() + '. ' + mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col1">' +
     	           '<a href="javascript://" onclick="spawnProblem(document.forms[0],\'' +
-    	                                             assignmentTitles[j][2] + '\',' + 
-                                                     upPath + '); return false">' + 
-                             assignmentTitles[j][1] + 
+    	                                             assignmentTitles[j][2] + '\',' +
+                                                     upPath + '); return false">' +
+                             assignmentTitles[j][1] +
                    '</a></td>' +
                 '<td headers="col2" id="set' + assignmentTitles[j][2] +
                    'Due" align="center"><em>updating . . .</em></td>' +
@@ -153,6 +167,54 @@
     }
     qStr += '</table>';
     document.writeln(qStr);
+    $(document).ready(function() {
+            $.getJSON(assignURL, function(data) {
+                  $.each(data, function(index, value) {
+                         assign[value[0]] = value.slice(1);
+                       });
+                  var geturl = $.ajax(timeURL)
+                                .fail(function() {
+                                     alert('error: failed to retrieve date from ' + timeURL + '!');
+                                })
+                                .done(function() {
+                                     openAssignNow = new Date(geturl.getResponseHeader('Date'));
+                                     $.each(assignmentTitles, function(j, value) {
+                                         var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
+                                         var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
+                                         var isAssigned = assign[assignmentTitles[j][2]];
+                                         if (isAssigned && (assign[assignmentTitles[j][2]][1] == 'ready')) {
+                                               var dueDate = new Date(assign[assignmentTitles[j][2]][0]);
+                                               var pastDue = (dueDate < openAssignNow);
+                                               $(dueDiv).text(dueDate.toLocaleString())
+                                                        .css('background-color', goodColor);
+                                               if (pastDue) {
+                                                    $(dueDiv).css('background-color', nullColor);
+                                               }
+                                               if (assign[assignmentTitles[j][2]][2] == 'show_answers' ||
+                                                        (assign[assignmentTitles[j][2]][2] == 'automatic' & pastDue)) {
+                                                    $(ansDiv).text('yes')
+                                                             .css('background-color', goodColor);
+                                               } else {
+                                                    $(ansDiv).text('no')
+                                                             .css('background-color', nullColor);
+                                               }
+                                         } else {
+                                               $(dueDiv).text('not assigned')
+                                                        .css('background-color', nullColor);
+                                               $(ansDiv).text('---')
+                                                        .css('background-color', nullColor);
+                                         }
+                                    });
+                                });
+            })
+            .fail( function(jqxhr, settings, exception) {alert('failed to load due dates: ' + exception.toString());});
+
+            $.getJSON(accessURL, function(data) {
+                 enrollList = data;
+            }).fail( function(jqxhr, settings, exception) {alert('failed to load enrollment list: ' + exception.toString());});
+
+    });
+
 // -->
 </script>
 
@@ -204,7 +266,7 @@ identifying information:
 <p>
 
 <p>
-   Click the &quot;OK&quot; button once only&mdash;if you double-click, it will submit 
+   Click the &quot;OK&quot; button once only&mdash;if you double-click, it will submit
    your answers twice and you will lose one of your chances to submit the assignment.
 </p>
 
@@ -221,26 +283,32 @@ identifying information:
    <strong>After the due date, there will be no &quot;submit&quot;
    button.</strong> If the submit button is missing, but the assignment
    is not yet due, the clock on your computer is mis-set.
-   Your computer's clock needs to be set to the time zone that the course is taught in 
+   Your computer's clock needs to be set to the time zone that the course is taught in
    (Pacific Time, if this is a UC Berkeley course),
    and to the correct day.
    If it is not, re-set the clock, clear the browser's cache, and re-start the browser.
    The submit button will come back.
+   (In Firefox 13 on the mac, to clear the cache go to the Firefox-&gt;Preferences-&gt;Privacy menu.
+	There's a link for &quot;clear all current history.&quot;
+    Click that link.
+    That brings up a dialog box with tic boxes.
+    Tic the boxes for cookies, cache, and offline website data, then the &quot;Clear Now&quot;
+    button.)
 </p>
 <p>
    <a href="#gradeQuery" target="_self">To see your grades</a>, you
    need to enter your name, email address, and SID, to protect your
-   privacy. 
+   privacy.
    Click the button just under the assignment list, near the
-   top of this page. 
+   top of this page.
    Also, if you go back to the assignment after the
    due date, you can see the correct answers to your unique version of
    the assignment.
 </p>
 
 <p>
-   Many of the questions and data in assignments have a random component. 
-   Different students get different questions and different data. 
+   Many of the questions and data in assignments have a random component.
+   Different students get different questions and different data.
    You are graded based on the questions and data you receive.
    Differences in question wording can be subtle: If you work with other students,
    be sure to answer your version of the question.
@@ -249,73 +317,73 @@ identifying information:
 <p>
    You can save intermediate results on the assignment using a button
    at the bottom of the instruction page&mdash;sort of.
-   The assignments also save themselves as a cookie on your computer when you submit them. 
+   The assignments also save themselves as a cookie on your computer when you submit them.
    Because the cookie is stored on <em>your</em> computer, you cannot access the
    answers from a different computer (or even a different browser on your computer).
-   <strong>Warning: Cookies are volatile, not reliable. 
+   <strong>Warning: Cookies are volatile, not reliable.
    Some events will cause or require your cookies to be
-   deleted. 
+   deleted.
    And they &quot;expire&quot; after a few days.
    Always write down your answers on paper in case the cookie is deleted.</strong>
    You've been warned.
 </p>
 
 <p>
-   You can use different computers for different assignments. 
-   After filling out the identifying information at the top of 
-   this page to access the assignments, your browser will look 
-   for a cookie with a record of your previous work on the assignment 
+   You can use different computers for different assignments.
+   After filling out the identifying information at the top of
+   this page to access the assignments, your browser will look
+   for a cookie with a record of your previous work on the assignment
    <strong>on your computer</strong>.
    If it finds a cookie, the assignment will fill in your previous answers.
    That is the <em>last</em> thing that happens when the assignment loads.
-   Be patient. 
+   Be patient.
    Do not scroll, click or type while the assignment page is still loading.
-   If the computers does not find a cookie, the answer fields will be blank. 
+   If the computers does not find a cookie, the answer fields will be blank.
 </p>
 
 
 <p>
-   <strong>Questions with multiple-choice answers.</strong> 
-   There are two types of questions with multiple-choice answers. 
-The first kind allows you to select only one response. 
-The second kind asks you to &quot;select all that apply.&quot; 
-How to select more than one answer depends on the computer operating 
-system and browser. 
+   <strong>Questions with multiple-choice answers.</strong>
+   There are two types of questions with multiple-choice answers.
+The first kind allows you to select only one response.
+The second kind asks you to &quot;select all that apply.&quot;
+How to select more than one answer depends on the computer operating
+system and browser.
 In Firefox on unix and linux systems, click each answer you want to select;
-clicking an answer again de-selects it. 
+clicking an answer again de-selects it.
 On Windows systems, hold down
 the control (ctrl) key while clicking each response to select more
-than one. 
+than one.
 On Macintosh systems, hold down the &quot;command&quot; key while you click
-to select multiple responses. 
+to select multiple responses.
    In such &quot;multiple-multiple-choice&quot;
    questions, if you select an answer that is not correct, or fail to
    select one that is correct, you will not receive credit&mdash;there is no
    partial credit.
 </p>
 <p>
-   <strong>Numerical answers.</strong> 
+   <strong>Numerical answers.</strong>
    The grader strips commas from
-   numbers, so you are free to punctuate numerical responses. 
+   numbers, so you are free to punctuate numerical responses.
    If your response includes a percent sign at the end, your numerical answer
-   will be converted to a percentage (divided by 100). 
+   will be converted to a percentage (divided by 100).
    Scientific notation (e.g., 4.23e-7 as shorthand for 0.000000423) will work; do
    not put a space between the digits and the letter &quot;e.&quot;
    Questions that do not have an exact numerical answer accept a small
-   range of answers as correct. 
-   The precision required depends on the problem statement. 
+   range of answers as correct.
+   The precision required depends on the problem statement.
    When in doubt, don't round off your final answer.
    In this class, there is no such thing as an answer that is &quot;too
-   precise.&quot; 
+   precise.&quot;
    <strong>Never round off intermediate calculations</strong>.
 </p>
 <p>
    The chapter exercises accept arithmetic expressions as answers, but these
-   submitted homework assignments, graded by the server, do not. 
-   For instance, if the answer is supposed to be 50%, the SticiGui in-chapter 
-   exercises will accept 50%, 0.5, 1/2, 50/100, 1/sqrt(4), etc., 
+   submitted homework assignments, graded by the server, do not.
+   For instance, if the answer is supposed to be 50%, the SticiGui in-chapter
+   exercises will accept 50%, 0.5, 1/2, 50/100, 1/sqrt(4), etc.,
    as correct.
-   But the homework assignments&mdash;the problems you access through this login page&mdash;will 
+   But the homework assignments&mdash;the problems you access through this login page&mdash;will
    only accept 50% or 0.5.
    The server will count 50/100 or 1/sqrt(4) as wrong answers.
 </p>
@@ -356,12 +424,12 @@ to select multiple responses.
 </p>
 
 <p>
-    <strong>If the submit button is missing but it is before the due date</strong>, 
-    the clock or calendar on your computer is set incorrectly. 
+    <strong>If the submit button is missing but it is before the due date</strong>,
+    the clock or calendar on your computer is set incorrectly.
     Your clock needs to be set to the time zone in which the problems are assigned (probably Pacific Time)
-    <em>and to the correct day</em>. 
-    If it is not, re-set the clock, clear the browser's cache, and re-start the browser. 
-    The submit button will come back. 
+    <em>and to the correct day</em>.
+    If it is not, re-set the clock, clear the browser's cache, and re-start the browser.
+    The submit button will come back.
 </p>
 
 <p>
@@ -371,7 +439,7 @@ to select multiple responses.
 </p>
 
 <p>
-   If, when you try to access the problem sets, you get an error message that starts like this, 
+   If, when you try to access the problem sets, you get an error message that starts like this,
    delete the cookies (see below):
 </p>
 
@@ -391,9 +459,9 @@ to select multiple responses.
 </h3>
 
 <p class="inline">
-   Cookies are small text files stored on your computer. 
+   Cookies are small text files stored on your computer.
    SticiGui uses cookies to store your answers to assignments to homework assignments
-   on your computer and to remember your student ID when you log in to do an 
+   on your computer and to remember your student ID when you log in to do an
    assignment or check your scores.
 </p>
 </div>
@@ -402,10 +470,10 @@ to select multiple responses.
    Cookies are not reliable: many things will cause them to be deleted or require them
    to be deleted.
    You might get an error message that you need to clear
-   the cookies in your browser. 
-   When you delete the cookies, the answers stored on your computer will be erased, 
-   but the server will still retain your submitted answers and your scores&mdash;only 
-   the record on your computer is affected. 
+   the cookies in your browser.
+   When you delete the cookies, the answers stored on your computer will be erased,
+   but the server will still retain your submitted answers and your scores&mdash;only
+   the record on your computer is affected.
    Current browsers allow you to delete cookies easily, but the command is in
    different menus in different browsers and on different operating systems.
 </p>

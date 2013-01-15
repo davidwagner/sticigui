@@ -23,9 +23,9 @@
         var stuff = $("#inbox").val().replace(/\n+/gi,'\n').split('\n');
         var students = new Array();
         $.each(stuff, function(i, theStuff) {
-            students.push(CryptoJS.SHA256(theStuff.toLowerCase()));
+            students.push('"' + CryptoJS.SHA256(theStuff.toLowerCase()) + '"');
         });
-        $('#outbox').val('[' + students.join(',\n') + ']');
+        $('#outbox').val('[\n' + students.join(',\n') + '\n]');
     }
 // -->
 </script>
