@@ -183,7 +183,7 @@
                                          var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
                                          var isAssigned = assign[assignmentTitles[j][2]];
                                          if (isAssigned && (assign[assignmentTitles[j][2]][1] == 'ready')) {
-                                               var dueDate = new Date(assign[assignmentTitles[j][2]][0])-slack;
+                                               var dueDate = new Date(new Date(assign[assignmentTitles[j][2]][0])-slack);
                                                var pastDue = (dueDate < openAssignNow);
                                                $(dueDiv).text(dueDate.toLocaleString())
                                                         .css('background-color', goodColor);
