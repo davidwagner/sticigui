@@ -28,12 +28,12 @@
 
 <h2>
     Course Description, Announcements, Topic Schedule and Assignment Instructions for Statistics
-        W21, Summer 2012
+        W21, Spring 2013
 </h2>
 
 <p>
-    This assignment checks that you read and understood the syllabus, the assignment instructions,
-    and the User Guide to the Onsophic system (the course portal).
+    This assignment checks that you have read and understood the syllabus,
+    and the assignment instructions.
 </p>
 
 
@@ -42,18 +42,14 @@
 <p>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
-    var qStr = '<span class="qSpan">The URL for the course portal is</span>';
+    var qStr = '<span class="qSpan">The course text is </span>';
     document.writeln(qStr);
-    var opt = ['http://www.willthatbeonthefinal.com:8088/portal',
-               'http://www.willthatbeonthefinal.com/portal',
-               'statistics.berkeley.edu/~stark/Teach/S21/Su11',
-               'statistics.berkeley.edu/~stark/Teach/S21/Su11/portal',
-               'statistics.berkeley.edu/portal',
-               'statistics.berkeley.edu/~stark/SticiGui',
-               'statistics.berkeley.edu/~stark/portal',
-               'statistics.berkeley.edu/~stark/SticiGui/portal'
+    var opt = ['Statistics, by Freedman, Pisani, and Purves',
+               'SticiGui - the interactive online text by Philip Stark',
+               'The Practice of Statistics for Business and Economics',
+               'There is no text for this course'
               ];
-    writeSelectExercise(false, qCtr++, opt, 'a');
+    writeSelectExercise(false, qCtr++, opt, 'b');
 // -->
 </script>
 </p>
@@ -64,14 +60,14 @@
 <p>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
-    var qStr = '<span class="qSpan">One should always access course materials (text, lectures, and problem sets)' +
-               'through the portal because (select all that apply)</span>';
+    var qStr = '<span class="qSpan">When selecting the course from the drop-down menu on ' +
+               'the assignment page, you should choose </span>';
     document.writeln(qStr);
-    var opt = ['It allows the graduate student instructors (GSIs) to give better advice and help',
-               'GSIs will not give help on material you have not accessed through the portal',
-               'The portal will help you keep track of due dates and what you have and have not done, helping you learn the material'
+    var opt = ['edX Stat 2.1x, Spring 2013',
+               'Statistics 21, Spring 2013',
+               'It doesn't matter, as long as you input your SID and Calnet email'
               ];
-    writeSelectExercise(true, qCtr++, opt, 'a&b&c');
+    writeSelectExercise(true, qCtr++, opt, 'b');
 // -->
 </script>
 </p>
@@ -87,9 +83,9 @@
     document.writeln(qStr);
     var opt = ['Any web browser',
                'Microsoft Internet Explorer',
-               'Moxilla Firefox version 13.x',
+               'Moxilla Firefox version 18.x',
                'Apple Safari',
-               'Google Chrome version 12.0'
+               'Google Chrome version 24.0'
               ];
     writeSelectExercise(true, qCtr++, opt, 'c');
 // -->
@@ -139,9 +135,9 @@
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">You may also need (select all that apply)</span>';
     document.writeln(qStr);
-    var opt = ['Adobe Flash version 11 to participate in online office hours.',
-               'An Adobe Flash-compatible headset to participate in the audio portion of online office hours.',
-               'An Adobe Flash-compatible webcam to participate in the video portion of online office hours'
+    var opt = ['A valid gmail address',
+               'A Google+ account.',
+               'The Google video chat plug in'
               ];
     writeSelectExercise(true, qCtr++, opt, 'a&b&c');
 // -->
@@ -156,7 +152,7 @@
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many online office hours may you attend per week?</span>';
     document.writeln(qStr);
-    writeTextExercise(8, qCtr++, numToRange(5));
+    writeTextExercise(8, qCtr++, numToRange(4));
 // -->
 </script>
 </p>
@@ -170,7 +166,7 @@
     var qStr = '<span class="qSpan">You may join online office hours </span>';
     document.writeln(qStr);
     var opt = ['whenever you want',
-               'only during the first 10 minutes of each session'
+               'only during the first 15 minutes of each session'
               ];
     writeSelectExercise(true, qCtr++, opt, 'b');
 // -->
@@ -203,11 +199,11 @@
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">The assignment and topic schedule is (select all that apply)</span>';
     document.writeln(qStr);
-    var opt = ['in the class bSpace site',
-               'in the course portal',
-               'in statistics.berkeley.edu/~stark/SticiGui/Problems, but it should be accessed through the course portal instead'
+    var opt = ['at the class Canvas site',
+               'at http://statistics.berkeley.edu/~shobhana/ ',
+               'at statistics.berkeley.edu/~stark/SticiGui/Problems'
               ];
-    writeSelectExercise(true, qCtr++, opt, 'b&c');
+    writeSelectExercise(true, qCtr++, opt, 'a&c');
 // -->
 </script>
 </p>
@@ -218,7 +214,7 @@
 <p>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
-    var qStr = 'To log into the class portal, you should use an email address as the user name. <span class="qSpan">One should use ' +
+    var qStr = 'To log into the assignments page, you need an email address. <span class="qSpan">One should use ' +
                '(select all that apply)</span>';
     document.writeln(qStr);
     var opt = ['your email address as recorded in CalNet at the beginning of the term',
@@ -240,7 +236,7 @@
 <p>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
-    var qStr = 'Suppose that <span class="qSpan">How can one see the correct answers to a problem set?</span>';
+    var qStr = ' How can one <span class="qSpan"> see the correct answers to a problem set?</span>';
     document.writeln(qStr);
     var opt = ['Ask the GSI',
                'Open the problem set after the due date'
@@ -676,14 +672,14 @@
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">The date of the final is</span>';
     document.writeln(qStr);
-    var opt = ['8 August','9 August','10 August','13 August', '14 August'];
-    writeSelectExercise(false, qCtr++, opt, 'c');
+    var opt = ['13 May','14 May','15 May','16 May', '17 May'];
+    writeSelectExercise(false, qCtr++, opt, 'a');
     var qStr = '<span class="qSpan">from</span>';
     document.writeln(qStr);
     var opt = ['8-11am','11am-2pm','1-4pm','5-8pm'];
     writeSelectExercise(false, qCtr++, opt, 'a');
     var opt = ['online',
-               'in two rooms yet to be announced; the room to go to depends on your last name',
+               'in a room yet to be announced.',
                '155 Dwinelle or 2050 Valley Life Science Building--you can choose either',
                '155 Dwinelle or 2050 Valley Life Science Building--you will be assigned to one'
                ];
@@ -918,7 +914,7 @@
                'call the instructor at home',
                'call the instructor in his office',
                'attend online or in-person office hours',
-               'post the question to the discussion board'
+               'post the question to Piazza'
           //     'go to the GSI\'s office hours',
           //     'approach the instructor before class',
           //     'approach the instructor after class',
@@ -945,8 +941,8 @@
                'call the instructor at home',
                'call the instructor in his office',
                'attend online or in-person office hours',
-               'post the question to the discussion board'
-         //      'go to any TA\'s office hours',
+               'post the question to Piazza'
+         //      'go to the GSI's office hours',
          //      'approach the instructor before class',
          //      'approach the instructor after class',
          //      'approach the instructor during break'
@@ -962,7 +958,7 @@
 <p>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
-    var qStr = '<span class="qSpan">Students should check the discussion board (forum)</span> (select all that apply)';
+    var qStr = '<span class="qSpan">Students should check Piazza </span> (select all that apply)';
     document.writeln(qStr);
     var opt = [
                    'hourly',
