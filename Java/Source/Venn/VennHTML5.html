@@ -5,33 +5,32 @@
       body {background-color : #fff;}
       
       #app {
-  width: 50%;
-  position:relative;
-  margin: 0 auto;
+        width: 50%;
+        position:relative;
+        margin: 0 auto;
       }
  
       #container {
-  float: left;
+        float: left;
       }
  
       #buttons {
- 
-  float: left;
+        float: left;
       }
  
       #scrollbars {
-  width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
       }
  
       #psb1, #psb2 {
-  margin-left: 20px;
-  float: left;
+        margin-left: 20px;
+        float: left;
       }
  
       .text {
-  float: left;
+        float: left;
       }
  
       .pair {
@@ -147,50 +146,50 @@ var draw = (function draw() {
  
   // S
       document.getElementById('E').addEventListener('click', function () {
-  box0.setFill('blue');
-  box1.setFill('none');
-  box2.setFill('none');
-  layer.draw()
+        box0.setFill('blue');
+        box1.setFill('none');
+        box2.setFill('none');
+        layer.draw()
       });
  
   // A
       document.getElementById('A').addEventListener('click', function () {
-  box0.setFill('#C0C0C0');
-  box1.setFill('blue');
-  box2.setFill('none');
-  layer.draw()
+        box0.setFill('#C0C0C0');
+        box1.setFill('blue');
+        box2.setFill('none');
+        layer.draw()
       });
  
   // B
       document.getElementById('B').addEventListener('click', function () {
-  box1.setFill('none');
-  box2.setFill('blue');
-  box0.setFill('#C0C0C0');
-  layer.draw()
+        box1.setFill('none');
+        box2.setFill('blue');
+        box0.setFill('#C0C0C0');
+        layer.draw()
       });
  
   // Ac
       document.getElementById('F').addEventListener('click', function () {
-  box2.setFill('none');
-  box1.setFill('#C0C0C0');
-  box0.setFill('blue');
-  layer.draw()
+        box2.setFill('none');
+        box1.setFill('#C0C0C0');
+        box0.setFill('blue');
+        layer.draw()
       });
  
   // Bc
       document.getElementById('G').addEventListener('click', function () {
-  box1.setFill('none');
-  box2.setFill('#C0C0C0');
-  box0.setFill('blue');
-  layer.draw()
+        box1.setFill('none');
+        box2.setFill('#C0C0C0');
+        box0.setFill('blue');
+        layer.draw()
       });
  
-  // A or B -- NOT QUITE RIGHT
+  // A or B -- NOT QUITE RIGHT need to group
       document.getElementById('C').addEventListener('click', function () {
-  box0.setFill('#C0C0C0');
+        box0.setFill('#C0C0C0');
         box1.setFill('blue');
         box2.setFill('blue');
-  layer.draw()
+        layer.draw()
       });
 
       // {}
@@ -232,16 +231,16 @@ var draw = (function draw() {
       //box2.simulate('click');
  
       $('#sb1').change(function () {
-    box1.setWidth((320*this.value)/100);
-    box1.setHeight((180*this.value)/100);
-    layer.draw();
-  });
-  
-  $('#sb2').change(function () {
-    box2.setWidth((320*this.value)/100);
-    box2.setHeight((180*this.value)/100);
-    layer.draw();
-  });
+        box1.setWidth((320*this.value)/100);
+        box1.setHeight((180*this.value)/100);
+        layer.draw();
+      });
+      
+      $('#sb2').change(function () {
+        box2.setWidth((320*this.value)/100);
+        box2.setHeight((180*this.value)/100);
+        layer.draw();
+      });
  
   // NEED TO COMPLETE AB, ABc, AcB, {}
  
