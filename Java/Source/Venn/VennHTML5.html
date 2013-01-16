@@ -5,9 +5,9 @@
       body {background-color : #fff;}
       
       #app {
-        width: 50%;
-        position:relative;
-        margin: 0 auto;
+        width: 450px;
+        margin-left: auto;
+        margin-right: auto;
       }
  
       #container {
@@ -19,13 +19,10 @@
       }
  
       #scrollbars {
-        width: 500px;
-        margin-left: auto;
-        margin-right: auto;
+        width: 400px;
       }
  
       #psb1, #psb2 {
-        margin-left: 20px;
         float: left;
       }
  
@@ -33,7 +30,8 @@
         float: left;
       }
  
-      .pair {
+      .buttons {
+        margin-left: auto;
       }
     </style>
   </head>
@@ -46,40 +44,45 @@
   <div id="container"></div>
   <div id="buttons">
     <div class="pair">
-          <input id="A" type="radio" name="buttons">A</input>
-          <input id="B" type="radio" name="buttons">B</input>
+          <input id="A" class="buttons" type="radio" name="buttons">A</input>
+          <input id="B" class="buttons" type="radio" name="buttons">B</input>
  
     </div>
     <div class="pair">
-          <input id="C" type="radio" name="buttons">A or B</input>
-          <input id="D" type="radio" name="buttons">ABc</input>
+          <input id="C" class="buttons" type="radio" name="buttons">A/B</input>
+          <input id="D" class="buttons" type="radio" name="buttons">ABc</input>
     </div>
     <div class="pair">
-          <input id="E" type="radio" name="buttons">S</input>
-          <input id="F" type="radio" name="buttons">Ac</input>
+          <input id="E" class="buttons" type="radio" name="buttons">S</input>
+          <input id="F" class="buttons" type="radio" name="buttons">Ac</input>
     </div>
     <div class="pair">
-          <input id="G" type="radio" name="buttons">Bc</input>
-          <input id="H" type="radio" name="buttons">AB</input>
+          <input id="G" class="buttons" type="radio" name="buttons">Bc</input>
+          <input id="H" class="buttons" type="radio" name="buttons">AB</input>
     </div>
     <div class="pair">
-          <input id="I" type="radio" name="buttons">AcB</input>
-          <input id="J" type="radio" name="buttons">{}</input>
+          <input id="I" class="buttons" type="radio" name="buttons">AcB</input>
+          <input id="J" class="buttons" type="radio" name="buttons">{}</input>
     </div>
   
   </div>
-    </div>
+
   <div id="scrollbars">
     <p>
-    <p id="psb1">P(A)(%)
-      <input id="sb1" type="range" min="1" max="100" step="1" value="30" />
+    <p id="psb1">
+      <input type="text" id="sb1t" value="30" size="2"></input>
+      P(A)(%)
+      <input id="sb1" onchange="$('#sb1t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 60px"/>
     </p>
-    <p id="psb2">P(B)(%)
-      <input id="sb2" type="range" min="1" max="100" step="1" value="30" />
+    <p id="psb2">
+      <input type="text" id="sb2t" value="30" size="2"></input>
+      P(B)(%)
+      <input id="sb2" onchange="$('#sb2t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 60px"/>
     </p>
     </p>
   </div>
  
+</div>
     <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.1-beta2.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script>
