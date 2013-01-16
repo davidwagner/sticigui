@@ -239,6 +239,7 @@ var mySID;
 var acccessURL;
 var dueURL;
 var timeURL;
+var slack = 11*60000;
 var serverDate;                    // time according to the server
 var pbsURL = 'http://statistics.berkeley.edu/~stark';
                                    // P.B. Stark's URL
