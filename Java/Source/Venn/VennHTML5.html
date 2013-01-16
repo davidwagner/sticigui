@@ -133,6 +133,17 @@ var draw = (function draw() {
         strokeWidth: 2,
         draggable: true
       });
+
+      var fillArea = new Kinetic.Rect({
+        x: rectX + 32,
+        y: rectY + 16,
+        width: 320 * scaleFactorX,
+        height: 180 * scaleFactorY,
+        fill: 'none',
+        stroke: 'black',
+        strokeWidth: 2,
+        draggable: false
+      })
  
   // S
       document.getElementById('E').addEventListener('click', function () {
@@ -181,12 +192,40 @@ var draw = (function draw() {
         box2.setFill('blue');
   layer.draw()
       });
- 
+
+      // {}
       document.getElementById('J').addEventListener('click', function () {
-  box0.setFill('#C0C0C0');
+        box0.setFill('#C0C0C0');
         box1.setFill('none');
         box2.setFill('none');
-  layer.draw()
+        layer.draw()
+      });
+
+      // AB -- FIX
+      document.getElementById('H').addEventListener('click', function () {
+        box0.setFill('#C0C0C0');
+        box1.setFill('none');
+        box2.setFill('none');
+        //fillArea.setPosition()
+        layer.draw()
+      });
+
+      // ABc
+      document.getElementById('D').addEventListener('click', function () {
+        box0.setFill('#C0C0C0');
+        box1.setFill('blue');
+        box2.setFill('#C0C0C0');
+        // fillArea.setPosition()
+        // fillArea.setFill('none');
+        layer.draw()
+      });
+
+      // AcB
+      document.getElementById('I').addEventListener('click', function () {
+        box0.setFill('#C0C0C0');
+        box2.setFill('blue');
+        box1.setFill('#C0C0C0');
+        layer.draw()
       });
  
       //box1.simulate('click');
@@ -216,6 +255,7 @@ var draw = (function draw() {
       layer.add(box0);
       layer.add(box1);
       layer.add(box2);
+      //layer.add(fillArea);
  
       stage.add(layer);
       stage.add(messageLayer);
