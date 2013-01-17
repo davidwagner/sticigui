@@ -110,7 +110,7 @@
       var scaleFactorX = .30;
       var scaleFactorY = .30;
  
-var draw = (function draw() {
+      var draw = (function draw() {
  
       var stage = new Kinetic.Stage({
         container: 'container',
@@ -122,6 +122,15 @@ var draw = (function draw() {
       var layer = new Kinetic.Layer();
       var rectX = stage.getWidth() / 2 - 50;
       var rectY = stage.getHeight() / 2 - 25;
+
+      // Groups for text label & each box.
+      var group1 = new Kinetic.Group({
+        draggable: true,
+      })
+
+      var group2 = new Kinetic.Group({
+        draggable:true,
+      })
  
       var box0 = new Kinetic.Rect({
         x: 10,
@@ -133,6 +142,15 @@ var draw = (function draw() {
         strokeWidth: 1,
         draggable: false
       });
+
+      var textBox0 = new Kinetic.Text({
+        x: 14,
+        y: 14,
+        text: 'S',
+        fontSize: 14,
+        fontFamily: 'sans-serif',
+        fill: 'black',
+      });
  
       var box1 = new Kinetic.Rect({
         x: rectX - 32,
@@ -142,8 +160,19 @@ var draw = (function draw() {
         fill: 'none',
         stroke: 'black',
         strokeWidth: 1,
-        draggable: true
       });
+
+      var textBox1 = new Kinetic.Text({
+        x: rectX - 28,
+        y: rectY - 14,
+        text: 'A',
+        fontSize: 14,
+        fontFamily: 'sans-serif',
+        fill: 'black',
+      });
+
+      group1.add(box1);
+      group1.add(textBox1);
  
       var box2 = new Kinetic.Rect({
         x: rectX + 32,
@@ -153,8 +182,19 @@ var draw = (function draw() {
         fill: 'none',
         stroke: 'black',
         strokeWidth: 1,
-        draggable: true
       });
+
+      var textBox2 = new Kinetic.Text({
+        x: rectX + 34,
+        y: rectY + 18,
+        text: 'B',
+        fontSize: 14,
+        fontFamily: 'sans-serif',
+        fill: 'black',
+      });
+
+      group2.add(box2);
+      group2.add(textBox2);
 
       var fillArea = new Kinetic.Rect({
         x: rectX + 32,
@@ -287,8 +327,9 @@ var draw = (function draw() {
   // IF BOTH box1 AND box2 CLICKED, GROUP AND MOVE    // TOGETHER
  
       layer.add(box0);
-      layer.add(box1);
-      layer.add(box2);
+      layer.add(textBox0);
+      layer.add(group1);
+      layer.add(group2);
       //layer.add(fillArea);
  
       stage.add(layer);
