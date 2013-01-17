@@ -2,7 +2,19 @@
 <html>
   <head>
     <style>
-      body {background-color : #fff;}
+      body {
+        background-color : #fff;
+        font-family: sans-serif;
+      }
+
+      header {
+        text-align: center;
+      }
+
+      header h1 {
+        margin-bottom: -25px;
+      }
+
       
       #app {
         width: 450px;
@@ -35,14 +47,16 @@
       }
     </style>
   </head>
+
   <body>
- 
-    <center><h1>SticiGui</h1>
-    <h5>Venn Diagrams</h5>
-    <br/></center>
+    <header>
+      <h1>SticiGui</h1>
+      <h5>Venn Diagrams</h5>
+    </header>
+
     <div id="app">
-  <div id="container"></div>
-  <div id="buttons">
+    <div id="container"></div>
+    <div id="buttons">
     <div class="pair">
           <input id="A" class="buttons" type="radio" name="buttons">A</input>
           <input id="B" class="buttons" type="radio" name="buttons">B</input>
@@ -84,7 +98,7 @@
  
 </div>
     <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.1-beta2.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script>
 
       $(document).ready(function () {
@@ -116,7 +130,7 @@ var draw = (function draw() {
         height: 180,
         fill: '#C0C0C0',
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 1,
         draggable: false
       });
  
@@ -127,7 +141,7 @@ var draw = (function draw() {
         height: 180 * scaleFactorY,
         fill: 'none',
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 1,
         draggable: true
       });
  
@@ -138,7 +152,7 @@ var draw = (function draw() {
         height: 180 * scaleFactorY,
         fill: 'none',
         stroke: 'black',
-        strokeWidth: 2,
+        strokeWidth: 1,
         draggable: true
       });
 
