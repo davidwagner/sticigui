@@ -1,12 +1,12 @@
 // script irGrade:  interactive, real-time grading; html formatting; statistical functions,
 //                  linear algebra
 // copyright 1997-2013. P.B. Stark, statistics.berkeley.edu/~stark
-// Version 2.2
+// Version 2.3
 // All rights reserved.
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/12/1404'; // modification date and time
+var irGradeModTime = '2013/1/16/2054'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var courseRelPath = '.';           // relative path to the instance of the course
@@ -1034,6 +1034,7 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
+/* Won't be needed after move to HTML5.  PBS, removed 16 January 2013
 var waitForAppletsIterationCount;
 var waitForAppletsMaxIterationCount = 30;
 
@@ -1094,6 +1095,7 @@ function waitForApplet(appNum, _callback) {
     }
 }
 
+*/
 
 function setCourseSpecs() {
     course = theCourse[1];
@@ -2193,11 +2195,7 @@ function setApplets() {
     }
     sectionContext += '\n$(".solution").hide();\n}';
     eval(sectionContext);
-    waitForAppletsIterationCount = 0;
-    for (var i=0; i < document.applets.length; i++) {
-        document.applets.id = 'Applet_' + i.toString();
-    }
-    waitForApplets(setSectionContext);
+    setSectionContext();
 }
 
 function writeProblemSetFooter() {

@@ -13,6 +13,7 @@
 
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -21,9 +22,13 @@
     writeChapterHead('SeEd',cNum);
 // -->
 </script>
+
+
+
+<link href="sticiGuiDefault.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body onload="setApplets()" >
+<body onload="setApplets()" onunload="killApplets()">
 <script language="JavaScript1.4" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
@@ -35,6 +40,7 @@
 <h1>
    Errors in Regression
 </h1>
+
 
 <p>
     The <span class="termOfArt">regression line</span>
@@ -51,7 +57,7 @@
     The <span class="termOfArt">rms</span> of the residuals has a simple relation to the 
     <span class="termOfArt">correlation coefficient</span>
     and the <span class="termOfArt">SD</span> of Y:
-    It is <span class="math">(1-r<sup>2</sup>)<sup>&frac12;</sup>&times;SD(Y)</span>.
+    It is <span class="math"><!--(1-r<sup>2</sup>)<sup>&frac12;</sup>&times;SD(Y)-->\( \sqrt{(1-r^2)} \times SD(Y)\) </span> .
 </p>
 
 <p>
@@ -90,98 +96,34 @@
     distance from the data to the <a class="glossRef" href="gloss.htm#regression">regression line</a>, that is,
     the typical error in estimating the value of Y by the height of the regression line. 
     A bit of algebra<script language="JavaScript1.4" type="text/javascript"><!--
-    var fStr = 'Let the data be pairs ' +
-           '<span class="math">(x<sub>i</sub>,y<sub>i</sub>), i=1, ' +
-           '&hellip; , ' +
-           'n</span>. The vertical residual of the<span class="math">i</span>th point is</p>' +
-           '<p class="math">y<sub>i</sub>&minus; (predicted y<sub>i</sub>) =   ' +
-           'y<sub>i</sub> &minus;  ' +
-           '(r&times;SD<sub>Y</sub>/SD<sub>X</sub> &times; x<sub>i' +
-           '</sub> + mean(Y) &minus;   ' +
-           'r&times;SD<sub>Y</sub>/SD<sub>X</sub> &times; mean(X))</p>   ' +
-           '<p class="math"> = (y<sub>i</sub>&minus; mean(Y)) &minus;  ' +
-           'r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub> &times; ' +
-           '(x<sub>i</sub> &minus; mean(X)). </p> <p> The square of the ' +
-           '<span class="math">i</span>th vertical ' +
-           'residual is </p> <p class="math"> [y<sub>i</sub>&minus; (predicted ' +
-           'y<sub>i</sub>) ]<sup>2</sup> = ' +
-           '[(y<sub>i</sub>&minus; mean(Y)) ' +
-           '&minus; r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub> &times;         ' +
-           '(x<sub>i</sub>&minus;mean(X))]<sup>2</sup></p><p class="math"> ' +
-           '= (y<sub>i</sub>&minus; mean(Y))<sup>2</sup> &minus;    ' +
-           '2&times;r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>&times;' +
-           '(x<sub>i</sub>&minus;mean(X))&times;(y<sub>i</sub>&minus; mean(Y)) +     ' +
-           '(r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>&times;(x<sub><em>i   ' +
-           '</em></sub> &minus; mean(X)))<sup>2</sup>. </p> <p> We want the sum of those    ' +
-           'squares for all <span class="math">n</span> data (<span class="math">i = 1, 2, ' +
-           '&hellip; , n</span>). Note      ' +
-           'that </p> <p class="math"> SD<sub>Y</sub> =                 ' +
-           '<big>[</big><big>[</big>(y<sub>1</sub>&minus; mean(Y))<sup>2</sup> +        ' +
-           '(y<sub>2</sub>&minus; mean(Y))<sup>2</sup> + &hellip; + ' +
-           '(y<sub>n</sub>&minus;     ' +
-           'mean(Y))<sup>2</sup> <big>]</big>/n<big>]</big>              ' +
-           '<sup>&frac12;</sup>, so<br /> (y<sub>1</sub>&minus; mean(Y))<sup>2</sup> +        ' +
-           '(y<sub>2</sub>&minus; mean(Y))<sup>2</sup> + &hellip; + ' +
-           '(y<sub>n</sub>&minus;     ' +
-           'mean(Y))<sup>2</sup> = n &times;(SD<sub>Y</sub>)<sup>2</sup>. </p>   ' +
-           '<p> Also note that </p> <p class="math"> r = <big>[</big>      ' +
-           '[(x<sub>1</sub>&minus;mean(X))/SD<sub>X</sub>]&times;[(y<sub>1</sub>&minus;      ' +
-           'mean(Y))/SD<sub>Y</sub>] +                            ' +
-           '[(x<sub>2</sub> &minus; mean(X))/SD<sub>X</sub>]&times;[(y<sub>2</sub>&minus;      ' +
-           'mean(Y))/SD<sub>Y</sub>] + &hellip; +                          ' +
-           '[(x<sub>n</sub>&minus;mean(X))/SD<sub>X</sub>]&times;[(y<sub>n' +
-           '</sub>&minus; mean(Y))/SD<sub>Y</sub>]<big>]</big>/n, </p>          ' +
-           '<p> so </p> <p class="math">                        ' +
-           '(x<sub>1</sub><em>&minus;</em>mean(X))&times;(y<sub>1</sub>&minus; mean(Y)) +         ' +
-           '(x<sub>2</sub><em>&minus;</em>mean(X))&times;(y<sub>2</sub>&minus; mean(Y)) + ' +
-           '&hellip; + ' +
-           '(x<em><sub>n</sub>&minus;</em>mean(X))&times;(y<sub>n</sub> &minus;      ' +
-           'mean(Y)) =                                    ' +
-           'r&times;n&times;SD<sub>X</sub>&times;SD<sub>Y</sub>.    ' +
-           '</p> <p> Now consider the first term in the square of the vertical        ' +
-           'residuals. Adding the corresponding terms for <span class="math">i = 1, ' +
-           '&hellip; ,       ' +
-           'n</span>, gives </p> <p class="math"> (y<sub>1</sub>&minus;             ' +
-           'mean(Y))<sup>2</sup> + (y<sub>2</sub>&minus; mean(Y))<sup>2</sup> + ' +
-           '&hellip; +       ' +
-           '(y<sub>n</sub>&minus; mean(Y))<sup>2</sup> = n            ' +
-           '&times;(SD<sub>Y</sub>)<sup>2</sup>. </p> <p> Similarly, the sum of the       ' +
-           'second terms for <span class="math">i = 1, &hellip; , ' +
-           'n</span>, gives</p> <p class="math">  ' +
-           '&minus;2&times;r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>&times;       ' +
-           '<big> [</big>(x<sub>1</sub><em>&minus;</em>mean(X))&times;(y<sub>1</sub>&minus;      ' +
-           'mean(Y)) + (x<sub>2</sub><em>&minus;</em>mean(X))&times;(y<sub>2</sub>&minus;         ' +
-           'mean(Y)) + &hellip; +                     ' +
-           '(x<em><sub>n</sub>&minus;</em>mean(X))&times;(y<sub>n</sub>&minus;           ' +
-           'mean(Y))<big>]</big><br /> =                            ' +
-           '&minus;2&times;(SD<sub>Y</sub>)<sup>2</sup>&times;r&times;n       ' +
-           '&times;r =                               ' +
-           '&minus;2&times;n&times;r<sup>2</sup>&times;(SD<sub>Y</sub>)       ' +
-           '<sup>2</sup>. </p> <p>The sum of the third terms for <span class="math"> = 1,      ' +
-           '&hellip; , n</span>, gives</p> <p class="math">   ' +
-           '(r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>)<sup>2</sup>&times; ' +
-           '<big>[</big>(x<sub>1</sub><em>&minus;</em>mean(X)))<sup>2</sup> +         ' +
-           '(x<sub>2</sub><em>&minus;</em>mean(X)))<sup>2</sup> + ' +
-           '&hellip; +             ' +
-           '(x<em><sub>n</sub>&minus;</em>mean(X)))<sup>2</sup><big>]</big><br /> =       ' +
-           '(r&times;SD<sub>Y</sub><em>/</em>SD<sub>X</sub>)<sup>2</sup>&times; ' +
-           'n &times; (SD<sub>X</sub>)<sup>2<br /> </sup>=            ' +
-           'n&times;r<sup>2</sup>&times;(SD<sub>Y</sub>)<sup>2</sup>. </p> ' +
-           '<p> The sum of the squares of the vertical residuals is thus </p> <p class="math">' +
-           'n &times;(SD<sub>Y</sub>)<sup>2</sup> &minus;          ' +
-           '2&times;n&times;r<sup>2</sup>&times;(SD<sub>Y</sub>)<sup>2</sup> + ' +
-           'n&times;r<sup>2</sup>&times;(SD<sub>Y</sub>)<sup>2</sup> = ' +
-           'n &times;(SD<sub>Y</sub>)<sup>2</sup>&times; (1 &minus;          ' +
-           '2&times;r<sup>2</sup> + r<sup>2</sup>)<br /> =  ' +
-           'n &times;(SD<sub>Y</sub>)<sup>2</sup>&times; (1 &minus;      ' +
-           'r<sup>2</sup>).</p> <p>To get from the sum of the squares of  ' +
+var fStr = 'Let the data be pairs ' +
+           '<span class="math">\\( (x_i y_i), i=1, \\dots n \\)</span>. ' +
+           'The vertical residual of the<span class="math">\\(i^{th}\\)</span> point is</p>' +
+           '<p class="math">\\( y_i-(predicted\\; y_i) = y_i-(\\frac{r \\times SD_Y}{SD_X} \\times x_i + mean(Y) - \\frac{r \\times SD_Y}{SD_X} \\times mean(X)) \\) </p>   ' +
+           '<p class="math">\\( = (y_i - mean(Y)) -  \\frac{r \\times SD_Y}{SD_X} \\times (x_i - mean(X)) \\)</p>' +
+           '<p> The square of the <span class="math">\\(i^{th}\\)</span> vertical ' +
+           'residual is </p> <p class="math">\\( [y_i - (predicted\\; y_i) ]^2 = \\left((y_i - mean(Y)) - ' +
+           '\\frac{r \\times SD_Y}{SD_X} \\times (x_i - mean(X))\\right)^2 \\)</p><p class="math"> ' +
+           '\\( = (y_i - mean(Y))^2 - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X)) \\times (y_i - mean(Y)) + \\left(r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X))\\right)^2 \\). </p> <p> We want the sum of those    ' +
+           'squares for all <span class="math">\\(n\\)</span> data <span class="math">\\( (i = 1, 2, \\dots , n )\\)</span>. ' +
+           'Note that </p> ' +
+           '<p class="math"> \\( SD_Y = \\sqrt{\\frac{(y_1 - mean(Y))^2 + (y_2 - mean(Y))^2 + \\dots + (y_n - mean(Y))^2}{n}}\\) </p>' +
+           '<p>and</p><p class="math"> \\( r = \\frac{\\left [ \\frac{x_1 - mean(X)}{SD_X} \\times \\frac{y_1 - mean(Y)}{SD_Y} \\right ] + \\left [\\frac{x_2 - mean(X)}{SD_X} \\times \\frac{y_2 - mean(Y)}{SD_Y} \\right ] + ' +
+           '\\dots + \\left [\\frac{x_n - mean(X)}{SD_X} \\times \\frac{y_n - mean(Y)}{SD_Y} \\right ]}{n} \\), </p> ' +
+           '<p> so </p> <p class="math">\\( (x_1 - mean(X)) \\times (y_1 - mean(Y)) +  (x_2 - mean(X)) \\times (y_2 - mean(Y)) + \\dots + (x_n - mean(X)) \\times (y_n - mean(Y)) =  r \\times n \\times SD_X \\times SD_Y \\).    ' +
+           '</p> <p> Now consider the first term in the square of the vertical ' +
+           'residuals. Adding the corresponding terms for <span class="math">\\( i = 1, \\dots , n\\)</span>, gives </p> ' +
+           '<p class="math">\\( (y_1 - mean(Y))^2 + (y_2 - mean(Y))^2 + \\dots + (y_n - mean(Y))^2 = n \\times (SD_Y)^2 \\). </p> ' +
+           '<p> Similarly, the sum of the second terms for <span class="math">\\( i = 1, \\dots , n\\)</span>, ' +
+           'gives</p> <p class="math">\\( - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times [(x_1 - mean(X)) \\times (y_1 - mean(Y)) + (x_2 - mean(X)) \\times (y_2 - mean(Y)) + \\dots + (x_n - mean(X)) \\times (y_n -  mean(Y))] \\)</p>' +
+           '<p class="math">\\( = - 2 \\times (SD_Y)^2 \times r \times n  \times r = - 2 \\times n \\times r^2 \\times (SD_Y) ^2\\). </p> <p>The sum of the third terms for <span class="math">\\( = 1, \\dots , n\\)</span>, gives</p>' +
+           '<p class="math"> \\( (r \\times \\frac{SD_Y}{SD_X})^2 \\times [(x_1 - mean(X)))^2 + (x_2 - mean(X)))^2 + \\dots + (x_n - mean(X)))^2]  = (r \\times \\frac{SD_Y}{SD_X})^2 \\times n \\times (SD_X)^2 = n \\times r^2 \\times (SD_Y)^2 \\). </p> ' +
+           '<p> The sum of the squares of the vertical residuals is thus </p> <p class="math">\\( n \\times (SD_Y)^2 - 2 \\times n \\times r^2 \\times (SD_Y)^2 + n \\times r^2 \\times (SD_Y)^2 = n  \\times (SD_Y)^2 \\times  (1 - 2 \\times r^2 + r^2) =  n  \\times (SD_Y)^2 \\times  (1 - r^2)\\).</p>' +
+           '<p>To get from the sum of the squares of  ' +
            'the vertical residuals to the rms of the vertical residuals, we divide  ' +
-           'by <span class="math">n</span> and take the square-root:</p> <p class="math">' +
-           'rms(vertical residuals) = <big>[</big>n           ' +
-           '&times;(SD<sub>Y</sub>)<sup>2</sup>&times; (1 &minus;                   ' +
-           'r<sup>2</sup>)/<em>n </em><big>]</big><sup>&frac12;</sup></p>' +
-           '<p class="math">' +
-           ' = SD<sub>Y</sub> &times; (1 &minus; r<sup>2</sup>)<sup>&frac12;</sup>.</p> ';
+           'by <span class="math">\\(n\\)</span> and take the square-root:</p> ' +
+           '<p class="math">\\( rms(vertical\\;\\; residuals) = \\sqrt{n \\times (SD_Y)^2 \\times \\frac{1 - r^2}{n}} ' +
+           ' = SD_Y \\times \\sqrt{1 - r^2} \\).</p> ';
     writeFootnote(fCtr++, fCtr.toString(), fStr);
 // -->
 </script>
@@ -194,23 +136,24 @@
 </div>
 
 <p class="math">
-    (1 &minus; r<sup>2</sup>)<sup>1/2</sup>&times;SD<sub>Y</sub>.
+	<!-- (1 &minus; r<sup>2</sup>)<sup>1/2</sup>&times;SD<sub>Y</sub>. -->
+	\( \sqrt{(1-r^2)} \times SD_Y \)
 </p>
 
 <p>
-    The rms error of regression is always between 0 and SD<sub>Y</sub>.
-    It is zero when <span class="math">r = &plusmn;1</span> and SD<sub>Y</sub> when 
-    <span class="math">r = 0</span>.
-    (Try substituting <span class="math">r = 1</span> and <span class="math">r = 0</span> into the expression above.)
-    When <span class="math">r = &plusmn;1</span>,
+    The rms error of regression is always between 0 and <span class="math">\( SD_Y \)</span>.
+    It is zero when <span class="math"><!-- r = &plusmn;1 and SD<sub>Y</sub> -->
+    \( r = \pm 1 \)</span> and <span class="math">\( SD_Y \)</span> when <span class="math">\(r = 0\)</span>.
+    (Try substituting <span class="math">\(r = 1\)</span> and <span class="math">\(r = 0\)</span> into the expression above.)
+    When <span class="math"><!--r = &plusmn;1-->\( r = \pm 1 \)</span>,
     the regression line accounts for all of the variability of Y, and the
     <a class="glossRef" href="gloss.htm#rms">rms</a> of the vertical residuals is zero.
-    When <span class="math">r = 0</span>, the
+    When <span class="math">\(r = 0\)</span>, the
     regression line does not &quot;explain&quot; any of the variability of Y: The regression
     line is a horizontal line at height mean(Y), so the rms of the vertical residuals from the
     regression line is the rms of the deviations of the values of Y from the mean of Y, which
     is, by definition, the SD of Y.
-    When <span class="math">r</span> is not zero,
+    When <span class="math">\(r\)</span> is not zero,
     the regression line accounts for some of the variability of Y, so the scatter
     around the regression line is less than the overall scatter in Y.
 </p>
@@ -225,8 +168,8 @@
 <p>
     Recall that the regression line is a smoothed version of the
     <a class="glossRef" href="gloss.htm#graph_of_averages">graph of averages</a>:
-    The height of the regression line at the point <span class="math">x</span> is an estimate of the
-    average of the values of Y  for individuals whose value of X is close to <span class="math">x</span>.
+    The height of the regression line at the point <span class="math">\(x\)</span> is an estimate of the
+    average of the values of Y  for individuals whose value of X is close to <span class="math">\(x\)</span>.
     If the scatterplot is <a class="glossRef" href="gloss.htm#football_shaped">football-shaped</a>,
     the regression line follows the graph of averages reasonably well:
     In each vertical slice, the deviations of the values of Y from their mean is
@@ -290,13 +233,11 @@
     document.writeln('</p>');
     var ansStr = 'The rms of the residuals for regressing of Verbal GMAT (VGMAT) on ' +
          'Quantitative GMAT (QGMAT) is </p><p class="math">' +
-         '(1&minus;r<sup>2</sup>)<sup>&frac12;</sup>' +
-         '&times;SD(VGMAT) = (1 &minus; 0.35<sup>2</sup>)<sup>&frac12;</sup>&times;6.22 = ' +
-         roundToDig(res,3) + '. </p><p>Similarly, the rms of the residuals for regressing ' +
+         '\\( \\sqrt{(1 - r^2)} \\times SD(VGMAT) = \\sqrt{(1 - 0.35^2)} \\times 6.22 = ' +
+         roundToDig(res,3) + '\\). </p><p>Similarly, the rms of the residuals for regressing ' +
          'QGMAT on VGMAT is </p><p class="math">' +
-         '(1&minus;r<sup>2</sup>)<sup>&frac12;</sup>' +
-         '&times;SD(QGMAT) = (1 &minus; 0.35<sup>2</sup>)<sup>&frac12;</sup>&times;6.77 = ' +
-         roundToDig(res2,3) + '. ';
+         '\\( \\sqrt{(1 - r^2} \\times SD(QGMAT) = \\sqrt{(1 - 0.35^2)} \\times 6.77 = ' +
+         roundToDig(res2,3) + '\\). ';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -474,7 +415,7 @@
     is above the mean of X are a subset of the population
     that tends to have larger than average values of Y; and the scatter of those
     values tends to be less than the scatter of Y for the entire population,
-    by the factor <span class="math">(1 &minus; r<sup>2</sup>)<sup>&frac12;</sup></span>.
+    by the factor <span class="math"><!--(1 &minus; r<sup>2</sup>)<sup>&frac12;</sup>-->\( \sqrt{(1 - r^2)} \)</span>.
     Individuals with a value of X that is smaller than the mean of X are a 
     subset of the population that tends to have smaller than average values of Y; 
     and the scatter of those values tends to be less than the overall scatter of
@@ -498,14 +439,14 @@
 </script>
     we saw that for football-shaped
     scatterplots the graph of averages is not as steep as the SD line,
-    unless <span class="math">r = &plusmn;1</span>: If 
-    <span class="math">0 &lt; r &lt; 1</span>, the average value of
-    Y for individuals whose values of X are about <span class="math">kSD<sub>X</sub></span>
-    above the mean(X) is less than <span class="math">kSD<sub>Y</sub></span> above the mean(Y).
-    Similarly, if <span class="math">&minus;1 &lt; r &lt; 0</span>, the average value of 
+    unless <span class="math"><!--r = &plusmn;1-->\( r = \pm1 \)</span>: If 
+    <span class="math"><!--0 &lt; r &lt; 1-->\( 0 < r < 1 \)</span>, the average value of
+    Y for individuals whose values of X are about <span class="math"><!--kSD<sub>X</sub>-->\(kSD_X\)</span>
+    above the mean(X) is less than <span class="math"><!--kSD<sub>Y</sub>-->\(kSD_Y\)</span> above the mean(Y).
+    Similarly, if <span class="math"><!--&minus;1 &lt; r &lt; 0-->\( -1 < r < 0 \)</span>, the average value of 
     Y for individuals whose
-    values of X are about <span class="math">kSD<sub>X</sub></span> above mean(X) is less than
-    <span class="math">kSD<sub>Y</sub></span> below mean(Y).
+    values of X are about <span class="math"><!--kSD<sub>X</sub>-->\( kSD_X \)</span> above mean(X) is less than
+    <span class="math"><!--kSD<sub>Y</sub>-->\( kSD_Y \)</span> below mean(Y).
 </p>
 
 <p>
@@ -524,26 +465,28 @@
     which is 50 points above average. 50 points is
 </p>
 <p class="math">
-    (3 <small>1/3</small>)&times;15points
-    = 3 <small>1/3</small> SD,
+    <!--(3 <small>1/3</small>)&times;15points
+    = 3 <small>1/3</small> SD,-->
+    \( 3 \tfrac{1}{3} \times 15 points = 3 \tfrac{1}{3} \)
 </p>
 
 <p>
     so we would estimate the husband's IQ to be
-    <span class="math">r&times;3<small>1/3</small> SD = 0.7&times;3 <small>1/3</small> SD</span> 
+    <span class="math"><!--r&times;3<small>1/3</small> SD = 0.7&times;3 <small>1/3</small> SD-->
+    \( r \times 3\tfrac{1}{3} SD = 0.7 \times 3\tfrac{1}{3} SD \)</span> 
     above average, or about
-    <span class="math">2 <small>1/3</small> SD</span> above average. 
-    Now <span class="math">2 <small>1/3</small> SD</span> is 35 points,
+    <span class="math"><!--2 <small>1/3</small> SD-->\( 2\tfrac{1}{3} SD \)</span> above average. 
+    Now <span class="math"><!--2 <small>1/3</small> SD-->\( 2\tfrac{1}{3} SD \)</span> is 35 points,
     so we expect the husband's IQ to be about 135, not nearly as &quot;smart&quot; as she is.
 </p>
 
 <p>
     Now let's predict the IQ of the wife of a man whose IQ is 135.
-    His IQ is <span class="math">2 <small>1/3</small> SD</span>
+    His IQ is <span class="math"><!--2 <small>1/3</small> SD-->\( 2\tfrac{1}{3} SD \)</span>
     above average, so we expect her IQ to be 
-    <span class="math">0.7&times;2 <small>1/3</small>
-    SD</span> above average. That's about 1.63 SD or 1.63&times;15 = 24&frac12;
-    points above average, or 124&frac12;,
+    <span class="math"><!--0.7&times;2 <small>1/3</small>
+    SD-->\( 0.7 \times 2\tfrac{1}{3} SD \)</span> above average. That's about 1.63 SD or <!--1.63&times;15 = 24&frac12;--> \( 1.63 \times 15 = 24\tfrac{1}{2} \)
+    points above average, or <!--124&frac12;-->\( 124\tfrac{1}{2} \),
     not as &quot;smart&quot; as he is.
     How can this be consistent?
 </p>
@@ -571,7 +514,7 @@
 </ul>
 
 <p>
-    If the scatterplot is football-shaped and <span class="math">r</span> is less than zero 
+    If the scatterplot is football-shaped and <span class="math">\(r\)</span> is less than zero 
     but greater than &minus;1:
 </p>
 
@@ -587,12 +530,12 @@
 </ul>
 
 <p>
-     Only if <span class="math">r</span> is &plusmn;1 does the regression line estimate the value
+     Only if <span class="math">\(r\)</span> is &plusmn;1 does the regression line estimate the value
      of Y to be as many SDs from the mean as the value of X is; otherwise, the
      regression line estimates the value of Y to be fewer SDs from the mean.
-     If <span class="math">r</span> is positive but less than 1, the regression line estimates
+     If <span class="math">\(r\)</span> is positive but less than 1, the regression line estimates
      Y to be above its mean if X is above its mean, but by fewer SDs.
-     If <span class="math">r</span> is negative but greater than &minus;1, the regression line estimates Y
+     If <span class="math">\(r\)</span> is negative but greater than &minus;1, the regression line estimates Y
      to be below its mean if X is above its mean, but by fewer SDs than X is
      above its mean.
      This is another way of expressing the regression effect.
@@ -724,21 +667,22 @@
 </p>
 
 <p class="math">
-    rms error of regression = (1 &minus; (r<sub>XY</sub>)<sup>2</sup>)<sup>&frac12;</sup>
-    &times;SD<sub>Y</sub>.
+    <!-- rms error of regression = (1 &minus; (r<sub>XY</sub>)<sup>2</sup>)<sup>&frac12;</sup>
+    &times;SD<sub>Y</sub>-->
+    \( \mbox{rms error of regression} = \sqrt{(1 - (r_{XY})^2)} \times SD_Y \)
 </p>
 
 <p>
-    If the correlation coefficient is &plusmn;1, the rms error of regression is zero:
+    If the correlation coefficient is <!--&plusmn;1-->\(\pm1\), the rms error of regression is zero:
     The regression line passes through all the data.
-    If <span class="math">r = 0</span>, the rms error of regression is SD<sub>Y</sub>:
+    If <span class="math">r = 0</span>, the rms error of regression is <!--SD<sub>Y</sub>-->\( SD_Y \):
     The regression line estimates Y no better than the mean of Y does&mdash;in fact,
-    when <span class="math">r = 0</span> the regression line is a horizontal line whose 
+    when <span class="math">\(r = 0\)</span> the regression line is a horizontal line whose 
     intercept is the mean of Y.
 </p>
 
 <p>
-    For football-shaped scatterplots, unless <span class="math">r = &plusmn;1</span> 
+    For football-shaped scatterplots, unless <span class="math"><!--r = &plusmn;1-->\(r = \pm 1\)</span> 
     the graph of averages
     is not as steep as the SD line: The average of Y in a vertical slice is fewer
     SDs from the mean than the value of X that defines the slice.
@@ -747,9 +691,9 @@
     This is called the regression effect, or regression towards the mean.
     The regression line estimates the value of the dependent variable to be
     on the same side of the mean as the value of the independent variable if 
-    <span class="math">r</span>
-    is positive, and on the opposite side of the mean if <span class="math">r</span> is negative.
-    (If <span class="math">r = 0</span>, it estimates that the value of the dependent variable
+    <span class="math">\(r\)</span>
+    is positive, and on the opposite side of the mean if <span class="math">\(r\)</span> is negative.
+    (If <span class="math">\(r = 0\)</span>, it estimates that the value of the dependent variable
     will equal the mean.)
     Ignoring the regression effect leads to the regression fallacy:
     inventing extrinsic causes for phenomena that are explained adequately by
