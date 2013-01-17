@@ -17,7 +17,8 @@
 
       
       #app {
-        width: 450px;
+        width: 500px;
+        height: 200px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -27,6 +28,8 @@
       }
  
       #buttons {
+        width: 160px;
+        margin-top: 25px;
         float: left;
       }
  
@@ -42,9 +45,13 @@
         float: left;
       }
  
-      .buttons {
-        margin-left: auto;
+      .button {
+        font-size: 12px;
+        float: left;
+        width: 80px;
+        margin-bottom: 10px;
       }
+
     </style>
   </head>
 
@@ -57,26 +64,55 @@
     <div id="app">
     <div id="container"></div>
     <div id="buttons">
-    <div class="pair">
-          <input id="A" class="buttons" type="radio" name="buttons">A</input>
-          <input id="B" class="buttons" type="radio" name="buttons">B</input>
- 
-    </div>
-    <div class="pair">
-          <input id="C" class="buttons" type="radio" name="buttons">A/B</input>
-          <input id="D" class="buttons" type="radio" name="buttons">ABc</input>
-    </div>
-    <div class="pair">
-          <input id="E" class="buttons" type="radio" name="buttons">S</input>
-          <input id="F" class="buttons" type="radio" name="buttons">Ac</input>
-    </div>
-    <div class="pair">
-          <input id="G" class="buttons" type="radio" name="buttons">Bc</input>
-          <input id="H" class="buttons" type="radio" name="buttons">AB</input>
-    </div>
-    <div class="pair">
-          <input id="I" class="buttons" type="radio" name="buttons">AcB</input>
-          <input id="J" class="buttons" type="radio" name="buttons">{}</input>
+      <div class="button">
+        <input id="A" type="radio" name="buttons"></input>
+        <label for="A">A</label>
+      </div>
+
+      <div class="button">
+        <input id="B" type="radio" name="buttons"></input>
+        <label for="B">B</label>
+      </div>
+
+      <div class="button">
+        <input id="C" type="radio" name="buttons"></input>
+        <label for="C">A/B</label>
+      </div>
+
+      <div class="button">
+        <input id="D" type="radio" name="buttons"></input>
+        <label for="D">ABc</label>
+      </div>
+
+      <div class="button">
+        <input id="E" type="radio" name="buttons"></input>
+        <label for="E">S</label>
+      </div>
+
+      <div class="button">
+        <input id="F" type="radio" name="buttons"></input>
+        <label for="F">Ac</label>
+      </div>
+
+      <div class="button">
+        <input id="G" type="radio" name="buttons"></input>
+        <label for="G">Bc</label>
+      </div>
+
+      <div class="button">
+        <input id="H" type="radio" name="buttons"></input>
+        <label for="H">AB</label>
+      </div>
+
+      <div class="button">
+        <input id="I" type="radio" name="buttons"></input>
+        <label for="I">AcB</label>
+      </div>
+
+      <div class="button">
+        <input id="J" type="radio" name="buttons" checked></input>
+        <label for="J">{}</label>
+      </div>
     </div>
   
   </div>
