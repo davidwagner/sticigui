@@ -15,7 +15,6 @@
         margin-bottom: -25px;
       }
 
-      
       #app {
         width: 500px;
         height: 200px;
@@ -34,11 +33,11 @@
       }
  
       #scrollbars {
-        width: 400px;
-      }
- 
-      #psb1, #psb2 {
-        float: left;
+        font-weight: bold;
+        width: 280px;
+        display: block;
+        font-size: 14px;
+        margin: 0 auto;
       }
  
       .text {
@@ -48,8 +47,17 @@
       .button {
         font-size: 12px;
         float: left;
-        width: 80px;
+        width: 70px;
         margin-bottom: 10px;
+      }
+
+      .scrollbar {
+        width: 140px;
+        float: left;
+      }
+
+      #sb1, #sb2 {
+        display: block;
       }
 
     </style>
@@ -62,77 +70,73 @@
     </header>
 
     <div id="app">
-    <div id="container"></div>
-    <div id="buttons">
-      <div class="button">
-        <input id="A" type="radio" name="buttons"></input>
-        <label for="A">A</label>
+      <div id="container"></div>
+      <div id="buttons">
+        <div class="button">
+          <input id="A" type="radio" name="buttons"></input>
+          <label for="A">A</label>
+        </div>
+
+        <div class="button">
+          <input id="B" type="radio" name="buttons"></input>
+          <label for="B">B</label>
+        </div>
+
+        <div class="button">
+          <input id="C" type="radio" name="buttons"></input>
+          <label for="C">A/B</label>
+        </div>
+
+        <div class="button">
+          <input id="D" type="radio" name="buttons"></input>
+          <label for="D">ABc</label>
+        </div>
+
+        <div class="button">
+          <input id="E" type="radio" name="buttons"></input>
+          <label for="E">S</label>
+        </div>
+
+        <div class="button">
+          <input id="F" type="radio" name="buttons"></input>
+          <label for="F">Ac</label>
+        </div>
+
+        <div class="button">
+          <input id="G" type="radio" name="buttons"></input>
+          <label for="G">Bc</label>
+        </div>
+
+        <div class="button">
+          <input id="H" type="radio" name="buttons"></input>
+          <label for="H">AB</label>
+        </div>
+
+        <div class="button">
+          <input id="I" type="radio" name="buttons"></input>
+          <label for="I">AcB</label>
+        </div>
+
+        <div class="button">
+          <input id="J" type="radio" name="buttons" checked></input>
+          <label for="J">{}</label>
+        </div>
       </div>
 
-      <div class="button">
-        <input id="B" type="radio" name="buttons"></input>
-        <label for="B">B</label>
+      <div id="scrollbars">
+        <div class="scrollbar" id="psb1">
+          <label for="sb1">P(A) (%)</label>
+          <input type="text" id="sb1t" onkeyup="$('#sb1').val(this.value)" value="30" size="2"></input>
+          <input id="sb1" onchange="$('#sb1t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 92px"/>
+        </div>
+        <div class="scrollbar" id="psb2">
+          <label for="sb2">P(B) (%)</label>
+          <input type="text" id="sb2t" onkeyup="$('#sb2').val(this.value)" value="30" size="2"></input>
+          <input id="sb2" onchange="$('#sb2t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 92px"/>
+        </div>
       </div>
-
-      <div class="button">
-        <input id="C" type="radio" name="buttons"></input>
-        <label for="C">A/B</label>
-      </div>
-
-      <div class="button">
-        <input id="D" type="radio" name="buttons"></input>
-        <label for="D">ABc</label>
-      </div>
-
-      <div class="button">
-        <input id="E" type="radio" name="buttons"></input>
-        <label for="E">S</label>
-      </div>
-
-      <div class="button">
-        <input id="F" type="radio" name="buttons"></input>
-        <label for="F">Ac</label>
-      </div>
-
-      <div class="button">
-        <input id="G" type="radio" name="buttons"></input>
-        <label for="G">Bc</label>
-      </div>
-
-      <div class="button">
-        <input id="H" type="radio" name="buttons"></input>
-        <label for="H">AB</label>
-      </div>
-
-      <div class="button">
-        <input id="I" type="radio" name="buttons"></input>
-        <label for="I">AcB</label>
-      </div>
-
-      <div class="button">
-        <input id="J" type="radio" name="buttons" checked></input>
-        <label for="J">{}</label>
-      </div>
-    </div>
-  
-  </div>
-
-  <div id="scrollbars">
-    <p>
-    <p id="psb1">
-      <input type="text" id="sb1t" onkeyup="$('#sb1').val(this.value)" value="30" size="2"></input>
-      P(A)(%)
-      <input id="sb1" onchange="$('#sb1t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 60px"/>
-    </p>
-    <p id="psb2">
-      <input type="text" id="sb2t" onkeyup="$('#sb2').val(this.value)" value="30" size="2"></input>
-      P(B)(%)
-      <input id="sb2" onchange="$('#sb2t').val(this.value)" type="range" min="1" max="100" step="1" value="30" style="width: 60px"/>
-    </p>
-    </p>
-  </div>
  
-</div>
+    </div>
     <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.1-beta2.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script>
@@ -173,7 +177,7 @@
         y: 10,
         width: 320,
         height: 180,
-        fill: '#C0C0C0',
+        fill: '#ddd',
         stroke: 'black',
         strokeWidth: 1,
         draggable: false
