@@ -6,7 +6,7 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/16/2054'; // modification date and time
+var irGradeModTime = '2013/1/17/0938'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var courseRelPath = '.';           // relative path to the instance of the course
@@ -1034,69 +1034,6 @@ function parseKey(s) {
     return([qTypeCode,answer,ansText]);
 }
 
-/* Won't be needed after move to HTML5.  PBS, removed 16 January 2013
-var waitForAppletsIterationCount;
-var waitForAppletsMaxIterationCount = 30;
-
-function waitForApplets(_callback) {
-    var allActive = true;
-    var apl = document.applets.length;
-    for (var j = 0; j < apl; j++) {
-        if (document.applets[j].parentNode.parentNode.className != 'solution' &&
-             typeof(document.applets[j].isActive) != 'function') {
-            allActive = false;
-        } else {
-            allActive = allActive && document.applets[j].isActive();
-        }
-    }
-    if (allActive) {
-        waitForAppletsIterationCount = 0;
-         if(_callback) {
-            _callback();
-         }
-    } else if (waitForAppletsIterationCount <= waitForAppletsMaxIterationCount) {
-        waitForAppletsIterationCount++;
-        setTimeout(function() { waitForApplets(_callback); }, 1000);
-    } else  {
-        waitForAppletsIterationCount = 0;
-        alert('Error #1 in irGrade.waitForApplets(): Applets failed to load in time. ' +
-              'Please navigate to a different page and then return to this page.');
-        if(_callback) {
-             _callback();
-        }
-    }
-}
-
-var waitForAppletIterationCount;
-var waitForAppletMaxIterationCount = 50;
-
-function waitForApplet(appNum, _callback) {
-    var active = true;
-    if (typeof(document.applets[appNum].isActive) != 'function') {
-            active = false;
-    } else {
-            active = document.applets[appNum].isActive();
-    }
-    if (active) {
-        waitForAppletIterationCount = 0;
-         if(_callback) {
-            _callback();
-         }
-    } else if (waitForAppletIterationCount <= waitForAppletMaxIterationCount) {
-        waitForAppletIterationCount++;
-        setTimeout(function() { waitForApplet(appNum, _callback); }, 1000);
-    } else  {
-        waitForAppletIterationCount = 0;
-        alert('Error #1 in irGrade.waitForApplet(): Applet ' + appNum.toString() + ' failed to load in time. ' +
-              'Please navigate to a different page and then return to this page.');
-        if(_callback) {
-             _callback();
-        }
-    }
-}
-
-*/
-
 function setCourseSpecs() {
     course = theCourse[1];
     courseName = theCourse[2];
@@ -1112,7 +1049,6 @@ function setCourseSpecs() {
     sFile = cRoot + course + sFileBase;
     return(true);
 }
-
 
 function getGrades(theForm) {
     if (validateLablet(theForm)) {
@@ -3821,7 +3757,7 @@ function incGamma( x,  a) {
     return(inc);
 }
 
-function poissonPmf( lambda, k) {
+function poissonPmf( lambda, k) {  // Poisson probability mass function
     var p = 0.0;
     if (k >= 0) {
         p = Math.exp(-lambda)*Math.pow(lambda,k)/factorial(k);
@@ -3829,7 +3765,7 @@ function poissonPmf( lambda, k) {
     return(p);
 }
 
-function poissonCdf( lambda, k) {
+function poissonCdf( lambda, k) {  // Poisson CDF
     var p = 0;
     var b = 0;
     var m = 0;
@@ -3840,8 +3776,16 @@ function poissonCdf( lambda, k) {
     return(p);
 }
 
-function poissonTail(lambda, k) {
+function poissonTail(lambda, k) {  // upper tail probability of the Poisson
     return(1.0-poissonCdf(lambda, k-1));
+}
+
+function expCdf(lambda, x) {   // exponential CDF
+        return(1-Math.exp(-x/lambda));
+    }
+
+function expPdf(lambda, x) {  // exponential density
+        return((1.0/lambda)*Math.exp(-x/lambda));
 }
 
 
