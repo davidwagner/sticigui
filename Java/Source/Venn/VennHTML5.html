@@ -244,19 +244,21 @@
         fill: 'black',
       });
 
-      // var fillArea = new Kinetic.Rect({
-      //   x: rectX + 32,
-      //   y: rectY + 16,
-      //   width: (320*scaleFactorX) - 64,
-      //   height: (180*scaleFactorY) - 32,
-      //   fill: 'none',
-      //   stroke: 'none',
-      //   strokeWidth: 1,
-      // });
+      var fillArea = new Kinetic.Rect({
+        x: rectX + 32,
+        y: rectY + 16,
+        width: (320*scaleFactorX) - 64,
+        height: (180*scaleFactorY) - 32,
+        fill: 'none',
+        stroke: 'black',
+        strokeWidth: 0.5,
+      });
 
       // fillArea.on('mousedown', function() {
       //   console.log('hi');
       // });
+
+      console.log(stage.getIntersection(box1));
 
 
       // S
@@ -269,7 +271,7 @@
         layer.draw()
       });
  
-  // A
+      // A
       document.getElementById('A').addEventListener('click', function () {
         box0.setFill('#eee');
         box1.setFill('blue');
@@ -278,7 +280,7 @@
         layer.draw()
       });
  
-  // B
+      // B
       document.getElementById('B').addEventListener('click', function () {
         box1.setFill('none');
         box0.setFill('#eee');
@@ -407,7 +409,7 @@
       layer.add(textBox0);
       layer.add(group1);
       layer.add(group2);
-      // layer.add(fillArea);
+      layer.add(fillArea);
  
       stage.add(layer);
       stage.add(messageLayer);
