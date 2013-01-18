@@ -3,6 +3,7 @@
   <head>
     <style>
       body {
+        padding-top: 20px;
         background-color : #fff;
         font-family: "Helvetica", sans-serif;
       }
@@ -159,8 +160,8 @@
         }
       });
         
-      var scaleFactorX = .30;
-      var scaleFactorY = .30;
+      var scaleFactorX = 0.3;
+      var scaleFactorY = 0.3;
  
       var draw = (function draw() {
  
@@ -223,8 +224,6 @@
         fill: 'black',
       });
 
-
- 
       var box2 = new Kinetic.Rect({
         x: rectX + 32,
         y: rectY + 16,
@@ -245,19 +244,19 @@
         fill: 'black',
       });
 
-      var fillArea = new Kinetic.Rect({
-        x: rectX + 32,
-        y: rectY + 16,
-        width: (320*scaleFactorX) - 64,
-        height: (180*scaleFactorY) - 32,
-        fill: 'none',
-        stroke: 'none',
-        strokeWidth: 1,
-      });
+      // var fillArea = new Kinetic.Rect({
+      //   x: rectX + 32,
+      //   y: rectY + 16,
+      //   width: (320*scaleFactorX) - 64,
+      //   height: (180*scaleFactorY) - 32,
+      //   fill: 'none',
+      //   stroke: 'none',
+      //   strokeWidth: 1,
+      // });
 
-      fillArea.on('mousedown', function() {
-        console.log('hi');
-      });
+      // fillArea.on('mousedown', function() {
+      //   console.log('hi');
+      // });
 
 
       // S
@@ -408,7 +407,7 @@
       layer.add(textBox0);
       layer.add(group1);
       layer.add(group2);
-      layer.add(fillArea);
+      // layer.add(fillArea);
  
       stage.add(layer);
       stage.add(messageLayer);
@@ -419,69 +418,65 @@ draw();
     </script>
  
  
-<br /> <br />
- 
-<p class="text">
- 
-      Venn diagrams are a way of visualizing sets.
- 
-This applet lets you highlight the set A, the set B, the universal set S,
- 
-the empty set {}, the complement of A (Ac), the complement of B (Bc),
- 
-the intersection of A and B (AB), the union of A and B (A or B),
- 
-the intersection of the complement of A with B (AcB), and
- 
-the intersection of A with the
- 
-complement of B (ABc).
- 
-One can think of the relative area of a set to the area of S as a
- 
-probability.
- 
-The picture uses that analogy: the numbers P(A) and P(B) are proportional to
- 
-the area of A and the area of B, respectively; P(AB) is the area of the
- 
-intersection of A and B, and P(A or B) is the area of the union of A and B.
- 
-</p>
- 
-<p class="text">
- 
-You can drag the <a href="../SticiGui/Text/gloss.htm#event">events</a>
- 
-A and B around, which changes the probability of their intersection
- 
-and of their union.
- 
-When A and B do not overlap, they are said to be
- 
-<a href="../SticiGui/Text/gloss.htm#disjoint">disjoint or mutually exclusive</a>.
- 
-When the probability of the intersection of A and B
- 
-equals the product
- 
-of the probability of A and the probability of B (when P(AB) = P(A)&times;P(B)),
- 
-A and B are
- 
-<a href="../SticiGui/Text/gloss.htm#independent">independent</a>.
- 
-Try to drag A or B to make P(AB) = P(A)&times;P(B);
- 
-notice how hard it is to make the overlap just
- 
-right: independence is a very special relationship between events.
- 
-The scrollbars let you adjust the probability of A and the probability of
- 
-B.
- 
-</p>
+    <p class="text">Venn diagrams are a way of visualizing sets.
+     
+    This applet lets you highlight the set A, the set B, the universal set S,
+     
+    the empty set {}, the complement of A (Ac), the complement of B (Bc),
+     
+    the intersection of A and B (AB), the union of A and B (A or B),
+     
+    the intersection of the complement of A with B (AcB), and
+     
+    the intersection of A with the
+     
+    complement of B (ABc).
+     
+    One can think of the relative area of a set to the area of S as a
+     
+    probability.
+     
+    The picture uses that analogy: the numbers P(A) and P(B) are proportional to
+     
+    the area of A and the area of B, respectively; P(AB) is the area of the
+     
+    intersection of A and B, and P(A or B) is the area of the union of A and B.
+     
+    </p>
+     
+    <p class="text">
+     
+    You can drag the <a href="../SticiGui/Text/gloss.htm#event">events</a>
+     
+    A and B around, which changes the probability of their intersection
+     
+    and of their union.
+     
+    When A and B do not overlap, they are said to be
+     
+    <a href="../SticiGui/Text/gloss.htm#disjoint">disjoint or mutually exclusive</a>.
+     
+    When the probability of the intersection of A and B
+     
+    equals the product
+     
+    of the probability of A and the probability of B (when P(AB) = P(A)&times;P(B)),
+     
+    A and B are
+     
+    <a href="../SticiGui/Text/gloss.htm#independent">independent</a>.
+     
+    Try to drag A or B to make P(AB) = P(A)&times;P(B);
+     
+    notice how hard it is to make the overlap just
+     
+    right: independence is a very special relationship between events.
+     
+    The scrollbars let you adjust the probability of A and the probability of
+     
+    B.
+     
+    </p>
  
   </body>
 </html>
