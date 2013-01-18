@@ -4,7 +4,7 @@
     <style>
       body {
         background-color : #fff;
-        font-family: sans-serif;
+        font-family: "Helvetica", sans-serif;
       }
 
       header {
@@ -13,6 +13,16 @@
 
       header h1 {
         margin-bottom: -25px;
+      }
+
+      p {
+        font-size: 16px;
+        text-align: justify;
+      }
+
+      a {
+        font-weight: bold;
+        text-decoration: none;
       }
 
       #app {
@@ -42,6 +52,8 @@
  
       .text {
         float: left;
+        padding-left: 15%;
+        padding-right: 15%;
       }
  
       .button {
@@ -78,28 +90,13 @@
         </div>
 
         <div class="button">
-          <input id="B" type="radio" name="buttons"></input>
-          <label for="B">B</label>
-        </div>
-
-        <div class="button">
-          <input id="C" type="radio" name="buttons"></input>
-          <label for="C">A/B</label>
-        </div>
-
-        <div class="button">
-          <input id="D" type="radio" name="buttons"></input>
-          <label for="D">ABc</label>
-        </div>
-
-        <div class="button">
-          <input id="E" type="radio" name="buttons"></input>
-          <label for="E">S</label>
-        </div>
-
-        <div class="button">
           <input id="F" type="radio" name="buttons"></input>
           <label for="F">Ac</label>
+        </div>
+
+        <div class="button">
+          <input id="B" type="radio" name="buttons"></input>
+          <label for="B">B</label>
         </div>
 
         <div class="button">
@@ -108,13 +105,28 @@
         </div>
 
         <div class="button">
+          <input id="C" type="radio" name="buttons"></input>
+          <label for="C">A or B</label>
+        </div>
+
+        <div class="button">
           <input id="H" type="radio" name="buttons"></input>
           <label for="H">AB</label>
         </div>
 
         <div class="button">
+          <input id="D" type="radio" name="buttons"></input>
+          <label for="D">ABc</label>
+        </div>
+
+        <div class="button">
           <input id="I" type="radio" name="buttons"></input>
           <label for="I">AcB</label>
+        </div>
+
+        <div class="button">
+          <input id="E" type="radio" name="buttons"></input>
+          <label for="E">S</label>
         </div>
 
         <div class="button">
@@ -227,6 +239,7 @@
       var textBox2 = new Kinetic.Text({
         x: rectX + 34,
         y: rectY + 18,
+        height: 20,
         text: 'B',
         fontSize: 14,
         fontFamily: 'sans-serif',
@@ -239,84 +252,99 @@
       var fillArea = new Kinetic.Rect({
         x: rectX + 32,
         y: rectY + 16,
-        width: 320 * scaleFactorX,
-        height: 180 * scaleFactorY,
+        width: (320*scaleFactorX) - 64,
+        height: (180*scaleFactorY) - 32,
         fill: 'none',
-        stroke: 'black',
-        strokeWidth: 2,
-        draggable: false
-      })
- 
+        stroke: 'none',
+        strokeWidth: 1,
+        listening: true,
+        draggable: true,
+      });
+
+      fillArea.on('mousedown', function() {
+        console.log('hi');
+      });
+
+
   // S
       document.getElementById('E').addEventListener('click', function () {
         box0.setFill('blue');
         box1.setFill('none');
         box2.setFill('none');
+        fillArea.setFill('blue');
         layer.draw()
       });
  
   // A
       document.getElementById('A').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box1.setFill('blue');
         box2.setFill('none');
+        fillArea.setFill('blue');
         layer.draw()
       });
  
   // B
       document.getElementById('B').addEventListener('click', function () {
         box1.setFill('none');
+        box0.setFill('#ddd');
+        fillArea.setFill('blue');
         box2.setFill('blue');
-        box0.setFill('#C0C0C0');
         layer.draw()
       });
  
   // Ac
       document.getElementById('F').addEventListener('click', function () {
         box2.setFill('none');
-        box1.setFill('#C0C0C0');
+        box1.setFill('#ddd');
         box0.setFill('blue');
+        fillArea.setFill('#ddd');
         layer.draw()
       });
  
   // Bc
       document.getElementById('G').addEventListener('click', function () {
         box1.setFill('none');
-        box2.setFill('#C0C0C0');
+        box2.setFill('#ddd');
         box0.setFill('blue');
+        fillArea.setFill('#ddd');
         layer.draw()
       });
  
   // A or B -- NOT QUITE RIGHT need to group
       document.getElementById('C').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box1.setFill('blue');
         box2.setFill('blue');
+        fillArea.setFill('blue');
         layer.draw()
       });
 
       // {}
       document.getElementById('J').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box1.setFill('none');
         box2.setFill('none');
+        fillArea.setFill('#ddd');
         layer.draw()
       });
 
       // AB -- FIX
       document.getElementById('H').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box1.setFill('none');
         box2.setFill('none');
+        fillArea.setFill('blue')
         //fillArea.setPosition()
         layer.draw()
       });
 
       // ABc
       document.getElementById('D').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box1.setFill('blue');
-        box2.setFill('#C0C0C0');
+        box2.setFill('#ddd');
+        fillArea.setFill('#ddd');
         // fillArea.setPosition()
         // fillArea.setFill('none');
         layer.draw()
@@ -324,9 +352,10 @@
 
       // AcB
       document.getElementById('I').addEventListener('click', function () {
-        box0.setFill('#C0C0C0');
+        box0.setFill('#ddd');
         box2.setFill('blue');
-        box1.setFill('#C0C0C0');
+        box1.setFill('#ddd');
+        fillArea.setFill('#ddd');
         layer.draw()
       });
  
@@ -336,24 +365,33 @@
       $('#sb1').change(function () {
         box1.setWidth((320*this.value)/100);
         box1.setHeight((180*this.value)/100);
+        fillArea.setWidth((320*this.value)/100-64);
+        fillArea.setHeight((180*this.value)/100-32);
+        fillArea.setPosition(0, 0);
         layer.draw();
       });
       
       $('#sb2').change(function () {
         box2.setWidth((320*this.value)/100);
         box2.setHeight((180*this.value)/100);
+        fillArea.setWidth((320*this.value)/100-64);
+        fillArea.setHeight((180*this.value)/100-32);
         layer.draw();
       });
       
       $('#sb1t').change(function () {
         box1.setWidth((320*this.value)/100);
         box1.setHeight((180*this.value)/100);
+        fillArea.setWidth((320*this.value)/100-64);
+        fillArea.setHeight((180*this.value)/100-32);
         layer.draw();
       });
       
       $('#sb2t').change(function () {
         box2.setWidth((320*this.value)/100);
         box2.setHeight((180*this.value)/100);
+        fillArea.setWidth((320*this.value)/100-64);
+        fillArea.setHeight((180*this.value)/100-32);
         layer.draw();
       });
 
@@ -370,7 +408,7 @@
       layer.add(textBox0);
       layer.add(group1);
       layer.add(group2);
-      //layer.add(fillArea);
+      layer.add(fillArea);
  
       stage.add(layer);
       stage.add(messageLayer);
