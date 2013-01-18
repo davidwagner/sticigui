@@ -6,7 +6,7 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/17/0938'; // modification date and time
+var irGradeModTime = '2013/1/18/1138'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var courseRelPath = '.';           // relative path to the instance of the course
@@ -1811,7 +1811,7 @@ function collectResponses(theForm,saveAs,saveId) {
 function labInstrSetUp(seed,sn) {
     isLab = false;
     dfStat = 'Tools for SticiGui Assignment ' + sn.toString();
-    sectionContext = 'function setSectionContext() { \n '
+    sectionContext = ''; // 'function setSectionContext() { \n '
     window.id= 'setj';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1823,7 +1823,7 @@ function labInstrSetUp(seed,sn) {
 function labSetUp(seed, sn) {
     isLab = true;
     dfStat = 'SticiGui Assignment ' + sn.toString();
-    sectionContext = 'function setSectionContext() { \n '
+    sectionContext = ''; //  'function setSectionContext() { \n '
     window.id= 'seti';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1989,7 +1989,7 @@ function writeChapterHead(seed, chTit, titStr, showSticiGui, relPath) {
     CA = (1==1);
     HI = false;
     randSeed = rand.getSeed();
-    sectionContext = 'function setSectionContext() { \n ';
+    sectionContext = ''; // 'function setSectionContext() { \n ';
     return(true);
 }
 
@@ -2090,7 +2090,7 @@ function writeChapterTitle(s) {
 function examSetUp(seed, sName, sn) {
     isLab = false;
     showQMarks = false;
-    sectionContext = 'function setSectionContext() { \n';
+   sectionContext = ''; // 'function setSectionContext() { \n';
     window.id= 'seti';
     examName = sName;
     examNum = sn;
@@ -2121,6 +2121,8 @@ function writeExamHeader(exNam, exVer, relPath) {
     return(true);
 }
 
+// * TESTING WITHOUT 1/18/2013
+/*
 function setApplets() {
     if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
             (document.forms.length > 0 ) && !isLab )  {
@@ -2133,6 +2135,19 @@ function setApplets() {
     eval(sectionContext);
     setSectionContext();
 }
+*/
+
+$(document).ready(function() {
+    eval(sectionContext);
+    if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
+            (document.forms.length > 0 ) && !isLab )  {
+        document.forms[0].reset();
+    }
+    if (isLab) {
+        recoverResponses();
+    }
+    $(".solution").hide();
+});
 
 function writeProblemSetFooter() {
     var qStr = '<div align="center"><center>';
