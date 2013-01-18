@@ -189,7 +189,7 @@
         y: 10,
         width: 320,
         height: 180,
-        fill: '#ddd',
+        fill: '#eee',
         stroke: 'black',
         strokeWidth: 1,
         draggable: false
@@ -223,8 +223,7 @@
         fill: 'black',
       });
 
-      group1.add(box1);
-      group1.add(textBox1);
+
  
       var box2 = new Kinetic.Rect({
         x: rectX + 32,
@@ -246,9 +245,6 @@
         fill: 'black',
       });
 
-      group2.add(box2);
-      group2.add(textBox2);
-
       var fillArea = new Kinetic.Rect({
         x: rectX + 32,
         y: rectY + 16,
@@ -257,8 +253,6 @@
         fill: 'none',
         stroke: 'none',
         strokeWidth: 1,
-        listening: true,
-        draggable: true,
       });
 
       fillArea.on('mousedown', function() {
@@ -266,18 +260,19 @@
       });
 
 
-  // S
+      // S
       document.getElementById('E').addEventListener('click', function () {
         box0.setFill('blue');
         box1.setFill('none');
         box2.setFill('none');
         fillArea.setFill('blue');
+        fillArea.setStroke('black');
         layer.draw()
       });
  
   // A
       document.getElementById('A').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box1.setFill('blue');
         box2.setFill('none');
         fillArea.setFill('blue');
@@ -287,7 +282,7 @@
   // B
       document.getElementById('B').addEventListener('click', function () {
         box1.setFill('none');
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         fillArea.setFill('blue');
         box2.setFill('blue');
         layer.draw()
@@ -296,24 +291,24 @@
   // Ac
       document.getElementById('F').addEventListener('click', function () {
         box2.setFill('none');
-        box1.setFill('#ddd');
+        box1.setFill('#eee');
         box0.setFill('blue');
-        fillArea.setFill('#ddd');
+        fillArea.setFill('#eee');
         layer.draw()
       });
  
   // Bc
       document.getElementById('G').addEventListener('click', function () {
         box1.setFill('none');
-        box2.setFill('#ddd');
+        box2.setFill('#eee');
         box0.setFill('blue');
-        fillArea.setFill('#ddd');
+        fillArea.setFill('#eee');
         layer.draw()
       });
  
   // A or B -- NOT QUITE RIGHT need to group
       document.getElementById('C').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box1.setFill('blue');
         box2.setFill('blue');
         fillArea.setFill('blue');
@@ -322,16 +317,16 @@
 
       // {}
       document.getElementById('J').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box1.setFill('none');
         box2.setFill('none');
-        fillArea.setFill('#ddd');
+        fillArea.setFill('#eee');
         layer.draw()
       });
 
       // AB -- FIX
       document.getElementById('H').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box1.setFill('none');
         box2.setFill('none');
         fillArea.setFill('blue')
@@ -341,10 +336,10 @@
 
       // ABc
       document.getElementById('D').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box1.setFill('blue');
-        box2.setFill('#ddd');
-        fillArea.setFill('#ddd');
+        box2.setFill('#eee');
+        fillArea.setFill('#eee');
         // fillArea.setPosition()
         // fillArea.setFill('none');
         layer.draw()
@@ -352,10 +347,10 @@
 
       // AcB
       document.getElementById('I').addEventListener('click', function () {
-        box0.setFill('#ddd');
+        box0.setFill('#eee');
         box2.setFill('blue');
-        box1.setFill('#ddd');
-        fillArea.setFill('#ddd');
+        box1.setFill('#eee');
+        fillArea.setFill('#eee');
         layer.draw()
       });
  
@@ -367,7 +362,6 @@
         box1.setHeight((180*this.value)/100);
         fillArea.setWidth((320*this.value)/100-64);
         fillArea.setHeight((180*this.value)/100-32);
-        fillArea.setPosition(0, 0);
         layer.draw();
       });
       
@@ -403,6 +397,12 @@
   //
  
   // IF BOTH box1 AND box2 CLICKED, GROUP AND MOVE    // TOGETHER
+
+      group1.add(box1);
+      group1.add(textBox1);
+
+      group2.add(box2);
+      group2.add(textBox2);
  
       layer.add(box0);
       layer.add(textBox0);
