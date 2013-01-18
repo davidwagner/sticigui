@@ -27,7 +27,7 @@ function s21SetUpBody(titStr,s21RelPath,sticiGuiRelPath) {
     if (typeof(s21RelPath) == 'undefined' || s21RelPath == null || s21RelPath.length == 0) {
         s21RelPath = '.';
     }
-    var qStr = '<body onload="setApplets()" onUnolad="killApplets()">' +
+    var qStr = '<body>' +
                '<div class="floatMenuTopSplitLeft" id="navMenu">' + '<a href="#firstContent" title="skip navigation" ' +
                    'target="_self">-</a>&nbsp;' +
                '<ul class="noBullet">' +
