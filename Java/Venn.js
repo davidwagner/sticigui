@@ -7,22 +7,20 @@ function Venn(container_id) {
 
   var canvas = jQuery('<div/>',{id:'canvas'});
   var buttons = jQuery('<div/>',{id:'buttons'});
-  app.append(canvas);
-  app.append(buttons);
+  var scrollbars = jQuery('<div/>',{id:'scrollbars'});
 
   var i = 0;
   var names = ["A", "B", "A or B", "ABc", "S", "Ac", "Bc", "AB", "AcB", "{}"]
-    while (i < 10) {
-      var button = jQuery('<div/>',{class:'button'});
-      buttons.append(button);
-      var letter = String.fromCharCode(65 + i);
-      var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
-      var label = jQuery('<label/>',{for:letter,innerHTML:names[i]})
-      button.append(inp)
-      button.append(label)
-      i++;
-    }
-  var scrollbars = jQuery('<div/>',{id:'scrollbars'});
+  while (i < 10) {
+    var button = jQuery('<div/>',{class:'button'});
+    buttons.append(button);
+    var letter = String.fromCharCode(65 + i);
+    var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
+    var label = jQuery('<label/>',{for:letter,innerHTML:names[i]})
+    button.append(inp)
+    button.append(label)
+    i++;
+  }
   var j = 1; 
   while (j <= 2) {
 
@@ -35,10 +33,13 @@ function Venn(container_id) {
     sb.append(lbl);
     sb.append(input);
     sb.append(input2);
+
     scrollbars.append(sb);
     j++;
   }
   app.append(scrollbars);
+  app.append(canvas);
+  app.append(buttons);
 
   var scaleFactorX = 0.3;
   var scaleFactorY = 0.3;
