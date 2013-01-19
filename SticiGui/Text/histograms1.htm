@@ -1372,14 +1372,14 @@
 
 <script>
 jQuery(function() {
-  Stici_HistHiLite('hist1', {
+  new Stici_HistHiLite('hist1', {
     data: ['../../Java/Data/gmat.json'],
     bins: 9,
   //  counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
   //  ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
     showUnivariateStats: false,
   });
-  Stici_HistHiLite('hist2', {
+  new Stici_HistHiLite('hist2', {
     bins: 9,
     counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
     ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
@@ -1696,17 +1696,16 @@ jQuery(function() {
 // -->
 </script>
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-   align="middle" width="620" height="380" archive="PbsGui.zip">
-     <param name="bins" value="9">
-     <param name="files" value="./Data/gravity.dat">
-     <param name="hiLiteHi" value="-44.2">
-     <param name="hiLiteLo" value="-152">
-     <param name="nFiles" value="1">
-     <param name="restrict" value="false">
-     <param name="univariateStats" value="false">
-   You need Java to see this.
-    </applet>
+  <div id="hist3" class="histogram"></div>
+  <script>
+    jQuery(function() {
+      new Stici_HistHiLite('hist3', {
+        data: ['../../Java/Data/gravity.dat.json'],
+        bins: 9,
+        showUnivariateStats: false
+      });
+    });
+  </script>
 </p>
 </div>
 
