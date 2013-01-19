@@ -3,7 +3,6 @@ function Venn(container_id) {
   this.env = jQuery('#' + container_id);
   var app = jQuery('<div/>',{id:'app'});
   this.env.append(app);
-  console.log(this.env);
 
   var container = jQuery('<div/>',{id:'container'});
   var buttons = jQuery('<div/>',{id:'buttons'});
@@ -141,7 +140,7 @@ function Venn(container_id) {
     //   console.log('hi');
     // });
 
-    console.log(stage.getIntersection(box1));
+    //console.log(stage.getIntersection(box1));
 
 
     // S
