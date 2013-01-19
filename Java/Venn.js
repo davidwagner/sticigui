@@ -37,9 +37,9 @@ function Venn(container_id) {
     scrollbars.append(sb);
     j++;
   }
-  app.append(scrollbars);
   app.append(canvas);
   app.append(buttons);
+  app.append(scrollbars);
 
   var scaleFactorX = 0.3;
   var scaleFactorY = 0.3;
