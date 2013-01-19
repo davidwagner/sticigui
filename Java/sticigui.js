@@ -30,8 +30,8 @@
 //  // The following two options can be use to manually configure the histogram
 //  // rather than having it loaded from a JSON data file. Note that if either
 //  // counts or ends are set, data cannot be set and showNormal,
-//  // showNormalButton, showUnivariateStats, and listData will all be
-//  // automatically set to false.
+//  // showNormalButton, showUnivariateStats, changeNumBins, and listData will
+//  // all be automatically set to false.
 //
 //  // Array of bin counts to use instead of parsing data.
 //  - counts: null
@@ -109,22 +109,26 @@ function Stici_HistHiLite(container_id, params) {
     self.options.showNormalButton = false;
     self.options.showUnivariateStats = false;
     self.options.listData = false;
+    self.options.changeNumBins = false;
   } else {
     this.dataSource = this.options.data[0];
   }
 
   // Reloads chart data from this.data_source
   this.reloadData = function() {
-    self.options.data = [];
     self.dataFields = [];
     self.dataValues = [];
 
-    if (self.dataSource !== null) {
+    if (self.options.data !== null) {
+      self.dataSource = self.dataSelect.val();
       jQuery.getJSON(self.dataSource, function(data) {
         self.dataFields = data[0];
         self.dataValues = data.slice(1);
         self.variableSelect.children().remove();
         jQuery.each(self.dataFields, function(i, field) {
+          if (field.indexOf('//') === 0)
+            return;
+
           self.variableSelect.append(
             jQuery('<option/>').attr('value', i).text(field)
           );
@@ -152,7 +156,7 @@ function Stici_HistHiLite(container_id, params) {
     var nBins = parseInt(self.binsInput.val(), 10);
     if (self.dataSource !== null) {
       var data = jQuery.map(self.dataValues, function(values) {
-        return values[self.variableSelect.val()];
+        return parseFloat(values[self.variableSelect.val()]);
       });
       self.data = data;
       self.binEnds = histMakeBins(nBins, data);
@@ -261,7 +265,7 @@ function Stici_HistHiLite(container_id, params) {
 
       var top = jQuery('<div/>').addClass('top_controls');
       top.append('Data: ').append(self.dataSelect);
-      jQuery.each(this.options.data, function(i, dataUrl) {
+      jQuery.each(self.options.data, function(i, dataUrl) {
         self.dataSelect.append(jQuery('<option/>')
                        .attr('value', dataUrl)
                        .text(dataUrl));
@@ -332,12 +336,12 @@ function Stici_HistHiLite(container_id, params) {
       slide: updateAreaFromInput,
       step: 0.001
     });
-    row1.append('Area from: ').append(areaFromInput).append(areaFromSlider);
+    row1.append('Area from: ').append(self.areaFromInput).append(self.areaFromSlider);
+
+    // Area to input/slider.
     self.areaToInput = jQuery('<input type="text" />').change(function() {
       self.areaToSlider.slider('value', self.areaToInput.val());
     });
-
-    // Area to input/slider.
     var updateAreaToInput = function() {
       self.areaToInput.val(self.areaToSlider.slider('value'));
       refreshSelectedAreaOverlay();
@@ -347,7 +351,7 @@ function Stici_HistHiLite(container_id, params) {
       slide: updateAreaToInput,
       step: 0.001
     });
-    row1.append(' to: ').append(areaToInput).append(areaToSlider);
+    row1.append(' to: ').append(self.areaToInput).append(self.areaToSlider);
 
     row1.append('Bins: ').append(self.binsInput);
 
@@ -396,25 +400,39 @@ function Stici_HistHiLite(container_id, params) {
         content: content
       };
     }
+    var lastListDataHeader = null;
     var listDataButton = createPopBox();
     listDataButton.button.text('List Data');
     listDataButton.button.click(function() {
       var rawHeader = '<tr>';
-      for (i = 0; i < self.dataFields.length; i++)
-        rawHeader += '<th>' + self.dataFields[i] + '</th>';
+      for (i = 0; i < self.dataFields.length; i++) {
+        var field = self.dataFields[i].toString();
+        if (field.indexOf('//') === 0)
+          rawHeader += '<th>' + field.substr(2) + '</th>';
+        else
+          rawHeader += '<th>' + field + '</th>';
+      }
       rawHeader += '</tr>';
+      if (lastListDataHeader !== null)
+        lastListDataHeader.remove();
       var header = jQuery('<table>' + rawHeader + '</table>');
       header.css('position', 'absolute')
             .css('top', '0px')
             .css('background-color', '#fff');
       header.insertAfter(listDataButton.content);
+      lastListDataHeader = header;
 
       var data = '<table>' + rawHeader;
       var i = 0;
       for (i = 0; i < self.dataValues.length; i++) {
         data += '<tr>';
-        for (var j = 0; j < self.dataValues[i].length; j++)
-          data += '<td>' + self.dataValues[i][j] + '</td>';
+        for (var j = 0; j < self.dataValues[i].length; j++) {
+          var val = self.dataValues[i][j].toString();
+          if (val.indexOf('//') === 0)
+            data += '<td>' + val.substr(2) + '</td>';
+          else
+            data += '<td>' + val + '</td>';
+        }
         data += '</tr>';
       }
       data += '</table>';
@@ -434,7 +452,7 @@ function Stici_HistHiLite(container_id, params) {
       jQuery.each(self.dataFields, function(i) {
         text += '<b>' + self.dataFields[i] + '</b><br />';
         var data = jQuery.map(self.dataValues, function(values) {
-          return values[i];
+          return parseFloat(values[i]);
         });
         text += 'Cases: ' + data.length + '<br />';
         text += 'Mean: ' + mean(data).fix(2) + '<br />';
@@ -480,7 +498,7 @@ function Stici_HistHiLite(container_id, params) {
 
 // script irGrade:  interactive, real-time grading; html formatting; statistical functions,
 //                  linear algebra
-// copyright 1997-2013. P.B. Stark, statistics.berkeley.edu/~stark
+// copyright 1997-2012. P.B. Stark, statistics.berkeley.edu/~stark
 // Version 2.2
 // All rights reserved.
 
@@ -2117,4 +2135,5 @@ function crypt(s,t) {
     }
     return(result);
 }
+
 
