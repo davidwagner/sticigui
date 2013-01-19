@@ -6,10 +6,9 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/18/1138'; // modification date and time
+var irGradeModTime = '2013/1/19/1217'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
-var courseRelPath = '.';           // relative path to the instance of the course
 var sticiRelPath = '.';            // relative path to the root of SticiGui
 var courseBase = './Courses/';     // base for looking for course-specific files
 var cssBase = '/Graphics/sticiGuiDefault.css';  // css file
@@ -229,8 +228,8 @@ var pCtr = 1;                      // counter for problems
 var qCtr = 1;                      // counter for questions
 var tCtr = 1;                      // counter for tables
 var xCtr = 1;                      // counter for examples
-var footnotes = new Array();       // array of footnotes
-var footnoteLabels = new Array();  // array of footnote labels
+// var footnotes = new Array();       // array of footnotes
+// var footnoteLabels = new Array();  // array of footnote labels
 var key = new Array();             // key for self-graded exercises
 var boxList = new Array();         // list of images for self-graded exercises
 var setNum;                        // current problem set number
@@ -1047,6 +1046,10 @@ function setCourseSpecs() {
     timeURL = theCourse[10];
     dFile = cRoot + course + dFileBase;
     sFile = cRoot + course + sFileBase;
+    $(document).ready(function() {
+            $("#courseSelector").text(courseName + ': ' + teacherName)
+                                .css('color', 'blue');
+    });
     return(true);
 }
 
@@ -1368,7 +1371,7 @@ function pushQuestionsWorked(_questionsAndAnswers) {
 	for (var questionNumber in _questionsAndAnswers) {
 		truth = _questionsAndAnswers[questionNumber];
 	    var anchorValue = 'Q' + questionNumber;
-    	    var questionInput = document.getElementById(anchorValue);
+    	    var questionInput = $(anchorValue);
 	    if (!questionInput) {
     	    for (var cnt = 0; cnt < frames.length; cnt++) {
         	    try {
@@ -1401,7 +1404,7 @@ function pushQuestionsWorked(_questionsAndAnswers) {
 
 function pushSolutionOpened(_questionNumber) {
     var anchorValue = 'solDivLink' + _questionNumber;
-    var solutionLink = document.getElementById(anchorValue);
+    var solutionLink = $(anchorValue);
     if (!solutionLink) {
         for (var cnt = 0; cnt < frames.length; cnt++) {
             try {
@@ -1514,28 +1517,24 @@ function isAnswered(qVal) { // checks whether the student answered a question
 
 
 function giveAnswer(number) {
- // display the answer to question[number] in a a visibility-controlled div, provided the student has
- // tried to answer the question
+ // display the answer to question[number] in a visibility-controlled div, provided the student has
+ // tried to answer the question; else display a warning
     ansText = parseKey(crypt(key[findNum(number)-1], randSeed.toString()))[2];
     var q = findNum(number);
-    var ansSpan = document.getElementById('ansSpan' + q.toString());
-    if (ansSpan.style.visibility == 'visible') {
-       ansSpan.style.visibility = 'hidden';
-       ansSpan.innerHTML = '';
-    } else {
-       var qStr = '<p>[<a href="javascript:void();" target="_self"' +
-                  ' onClick="document.getElementById(\'ansSpan' + q.toString() +
-                                                   '\').innerHTML = \'\';' +
-                  'document.getElementById(\'ansSpan' + q.toString() +
-                                                   '\').style.visibility = \'hidden\';return(false);">-</a>]';
+    var ansSpan = $('#ansSpan' + q.toString());
+    if ($(ansSpan).css('display') == 'block') {  // hide the answer
+           $(ansSpan).css('display','none')
+                     .html('');
+    } else {                                         // show the answer, or a warning if response is blank
+       var qStr = '<p>[<a onClick = "$(\'#ansSpan' + q.toString() + '\').css(\'display\',\'none\');">-</a>]';
        if (isAnswered(number)) {
            qStr += '<span class="correctSpan">Answer: ' + ansText + '</span>.';
        } else {
            qStr += '<span class="warnSpan">You must answer before you may see the solution.</span>';
        }
        qStr += '</p>';
-       ansSpan.innerHTML = qStr;
-       ansSpan.style.visibility = 'visible';
+       $(ansSpan).html(qStr)
+                 .css('display','block');
     }
     return(true);
 }
@@ -1811,7 +1810,7 @@ function collectResponses(theForm,saveAs,saveId) {
 function labInstrSetUp(seed,sn) {
     isLab = false;
     dfStat = 'Tools for SticiGui Assignment ' + sn.toString();
-    sectionContext = ''; // 'function setSectionContext() { \n '
+    sectionContext = '';
     window.id= 'setj';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1823,7 +1822,7 @@ function labInstrSetUp(seed,sn) {
 function labSetUp(seed, sn) {
     isLab = true;
     dfStat = 'SticiGui Assignment ' + sn.toString();
-    sectionContext = ''; //  'function setSectionContext() { \n '
+    sectionContext = '';
     window.id= 'seti';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1989,7 +1988,7 @@ function writeChapterHead(seed, chTit, titStr, showSticiGui, relPath) {
     CA = (1==1);
     HI = false;
     randSeed = rand.getSeed();
-    sectionContext = ''; // 'function setSectionContext() { \n ';
+    sectionContext = '';
     return(true);
 }
 
@@ -2090,7 +2089,7 @@ function writeChapterTitle(s) {
 function examSetUp(seed, sName, sn) {
     isLab = false;
     showQMarks = false;
-   sectionContext = ''; // 'function setSectionContext() { \n';
+   sectionContext = '';
     window.id= 'seti';
     examName = sName;
     examNum = sn;
@@ -2121,22 +2120,6 @@ function writeExamHeader(exNam, exVer, relPath) {
     return(true);
 }
 
-// * TESTING WITHOUT 1/18/2013
-/*
-function setApplets() {
-    if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
-            (document.forms.length > 0 ) && !isLab )  {
-        sectionContext += 'document.forms[0].reset();\n';
-    }
-    if (isLab) {
-        sectionContext += 'recoverResponses();\n';
-    }
-    sectionContext += '\n$(".solution").hide();\n}';
-    eval(sectionContext);
-    setSectionContext();
-}
-*/
-
 $(document).ready(function() {
     eval(sectionContext);
     if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
@@ -2147,6 +2130,24 @@ $(document).ready(function() {
         recoverResponses();
     }
     $(".solution").hide();
+    $(".solLink").click(function() {
+          $(this).next().toggle()
+          if ($(this).text() == '[+Solution]') {
+              $(this).text('[-Solution]');
+          } else {
+              $(this).text('[+Solution]');
+          }
+    });
+    $(".footnote").css('display','block')
+                  .hide();
+    $(".footnoteLink").click(function() {
+          $(this).parent().next().toggle()
+          if ($(this).text() == '[+]') {
+              $(this).text('[-]');
+          } else {
+              $(this).text('[+]');
+          }
+    });
 });
 
 function writeProblemSetFooter() {
@@ -2167,39 +2168,16 @@ function writeProblemSetFooter() {
 }
 
 function writeSolution(p,text,solFunc) {
-    document.writeln('<div class="solutionLink" id="solDivLink' + p.toString() + '">' + linkSolution(p, solFunc) + '</div>');
-    var qStr = '<div class="solution" id="solDivBody' + p.toString() + '"><p>';
+    var qStr = '<div class="solutionLink"><p><a class="solLink">[+Solution]</a> ' +
+               '<span class="solution">';
     if (typeof(text) != 'undefined') {
        qStr += text;
     }
-    qStr += '</p></div>';
+    qStr += '</span></p></div>';
     document.writeln(qStr);
     return(true);
 }
 
-function linkSolution(p, solFunc) {
-    var qStr = '<p>[<a class="solLink" href="javascript:void();" target="_self" ' +
-               'onClick="showSolution(' + p.toString() + ',' + solFunc + ');return(false);">+Solution</a>]</p>';
-    return(qStr);
-}
-
-function showSolution(p, solFunc) {
-    solDivLink = document.getElementById('solDivLink' + p.toString());
-    solDivBody = document.getElementById('solDivBody' + p.toString());
-    solDivBody.style.display = "block";
-    var qStr = '<p>[<a class="solLink" href="javascript:void();" target="_self"' +
-               ' onClick="document.getElementById(\'solDivBody' + p.toString() +
-                                                 '\').style.display = \'none\';' +
-                         'document.getElementById(\'solDivLink' + p.toString() +
-                                                 '\').innerHTML = linkSolution(' +
-                p.toString() + ',' + solFunc + ');return(false);">-Solution</a>]</p>';
-    solDivLink.innerHTML = qStr;
-    if (solFunc) {
-        solFunc();
-    }
-    pushSolutionOpened(p);
-    return(true);
-}
 
 function writeFootnote(p,label,text, print) {
     if (typeof(print) == 'undefined' || print == null) {
@@ -2212,10 +2190,8 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-    footnoteLabels[p] = label;
-    var qStr = '<span class="footnoteLink" id="fnSpanLink' + p.toString() + '">' +
-                     linkFootnote(p) + '</span></p><span class="footnote" id="fnDivBody' + p.toString() + '"><p>' +
-                     footnote + '</p></span><p class="inline">';
+    var qStr = '<sup><a class="footnoteLink">[+]</a></sup>' +
+               '<span class="footnote">' + footnote + '</span> ';
     if (print) {
        document.writeln(qStr);
        return(true);
@@ -2223,28 +2199,6 @@ function writeFootnote(p,label,text, print) {
        return(qStr);
     }
 }
-
-function linkFootnote(p) {
-    var qStr = '<sup><a class="fnLink" href="javascript:void();" target="_self" onClick="showFootnote(' +
-                      p.toString() + ');return(false);">[+' + footnoteLabels[p].toString() + ']</a></sup>';
-    return(qStr);
-}
-
-function showFootnote(p) {
-    fnDivLink = document.getElementById('fnSpanLink' + p.toString());
-    fnDivBody = document.getElementById('fnDivBody' + p.toString());
-    fnDivBody.style.display = "block";
-    qStr = '<sup><a class="fnLink" href="javascript:void();" target="_self"' +
-               ' onClick="document.getElementById(\'fnDivBody' + p.toString() +
-                                                 '\').style.display = \'none\';' +
-                         'document.getElementById(\'fnSpanLink' + p.toString() +
-                                                 '\').innerHTML = linkFootnote(' +
-                                   p.toString() + ');return(false);">[-' + footnoteLabels[p].toString() + ']</a></sup>';
-    fnDivLink.innerHTML = qStr;
-    pushFootnoteOpened(p);
-    return(true);
-}
-
 
 function writeChapterFooter(finalCommand, relPath) {
     if (typeof(relPath) == 'undefined' || relPath == null || relPath.length == 0) {
@@ -2294,7 +2248,7 @@ function sticiBottom(relPath) {
     }
     document.writeln('</p></div>');
     if (theChapter != null) {
-        var thisChapterLink = document.getElementById('chLink' + theChapter.toString());
+        var thisChapterLink = $('#chLink' + theChapter.toString());
         if (typeof(thisChapterLink) != null && thisChapterLink != null) {
             thisChapterLink.style.color = '#ffffff';
             thisChapterLink.style.backgroundColor = '#000000';

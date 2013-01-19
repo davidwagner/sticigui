@@ -12,7 +12,7 @@
 </script>
 
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -37,7 +37,7 @@
 </h1>
 
 <p>
-    This chapter studies whether <span class="termOfArt">regression</span> 
+    This chapter studies whether <span class="termOfArt">regression</span>
     is an appropriate summary of a given set bivariate data, and whether the regression line was computed correctly.
     Problems with regression are generally easier to see by plotting the <span class="termOfArt">residuals</span>
     rather than the original data.
@@ -64,7 +64,7 @@
 </h2>
 
 <p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=3652&end=3958" frameborder="0" allowfullscreen></iframe>
-</p>     
+</p>
 
 <p>
     <a id="residual_plot"></a>A <a class="glossRef" href="gloss.htm#residual">residual</a> is the
@@ -81,7 +81,7 @@
 </p>
 
 <p>
-    and that the equation of the regression line (see 
+    and that the equation of the regression line (see
 <script language="JavaScript1.4" type="text/javascript"><!--
     document.writeln(citeLinkChapter('regression','equation_of_regression_line') + ') ');
 // -->
@@ -112,7 +112,7 @@
 <p>
     and so on.
     The <span class="math">i</span><sup>th</sup> vertical residual is the amount by which the regression line at the
-    <span class="math"> i</span><sup>th</sup> value of 
+    <span class="math"> i</span><sup>th</sup> value of
     X misses the <span class="math">i</span><sup>th</sup> value of Y&mdash;the error in
     using the regression line to estimate the <span class="math">i</span><sup>th</sup> datum.
     (For regressing X on Y, a residual is the horizontal difference
@@ -184,7 +184,7 @@
 <p>
     Clicking <span class="appCtrlName">Plot Data</span> will toggle the display back
     to a scatterplot of the data; that button will then say &quot;Plot Residuals.&quot;
-    Clicking <span class="appCtrlName">Plot Residuals</span> will change the display 
+    Clicking <span class="appCtrlName">Plot Residuals</span> will change the display
     back to the residual plot.
     Notice that
     for the residual plot for quantitative GMAT versus verbal GMAT, there is (slight)
@@ -198,7 +198,7 @@
 </h2>
 
 <p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/EPrAKgawSnY?start=3958&end=4204" frameborder="0" allowfullscreen></iframe>
-</p>   
+</p>
 
 <p>
     Regression is a poor summary of data that have heteroscedasticity, nonlinear association, or outliers.
@@ -218,6 +218,7 @@
 </script>
 
 <p class="figure">
+<div id="hist1" class="scriptlet"></div>
 <applet code="Correlation.class" codebase="../../Java/" align="baseline"
     width="600" height="320" name="q1applet" archive="PbsGui.zip">
     <param name="addPoints" value="false">
@@ -238,18 +239,22 @@
     var data1 = fakeBivariateData(examplePoints,parms[0],
           parms[1],parms[2]);
     var appNum = (document.applets.length - 1).toString();
+//    $(document).ready(function() {
+//          sticiHistHilite('hist1', data1[0].join(),data1[1].join());
+//    });
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data1[0].join(),data1[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
+
 // -->
 </script>
 </p>
 </div>
 
 <p>
-    The heteroscedasticity is clearly evident&mdash;the vertical scatter is quite different 
+    The heteroscedasticity is clearly evident&mdash;the vertical scatter is quite different
     in different vertical strips, large in some slices and small in others.
-    Click <span class="appCtrlName">Plot Data</span> in 
+    Click <span class="appCtrlName">Plot Data</span> in
 <script language="JavaScript1.4" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
@@ -380,7 +385,7 @@
     while in other ranges, all the residuals are above the <span class="math">x</span> axis (positive).
     Nonlinear association between the variables shows up in a residual plot as
     a systematic pattern.
-    Toggle back and forth between plotting the data and plotting the residuals in 
+    Toggle back and forth between plotting the data and plotting the residuals in
 <script language="JavaScript1.4" type="text/javascript"><!--
     citeFig(figCtr-2);
     document.writeln(' and ');
@@ -431,22 +436,22 @@
     They can also help identify computational errors in calculating the regression line.
     At issue above was whether regression is a good summary of the data: whether regression is
     <em>appropriate</em>.
-    At issue here, in contrast, is whether the slope and intercept of the regression line 
+    At issue here, in contrast, is whether the slope and intercept of the regression line
     were <em>computed correctly</em>.
 </p>
 
 <div class="indent">
 <p class="inline">
     If the regression line is computed correctly, the vertical residuals
-    from regression line average to zero and the correlation between the 
+    from regression line average to zero and the correlation between the
     vertical residuals and X
     is zero.<script language="JavaScript1.4" type="text/javascript"><!--
        var fStr = 'This is directly analogous to the fact that the deviations from the mean average to zero.';
        writeFootnote(fCtr++, fCtr, fStr);
 // -->
 </script>
-    If the average of the residuals is not zero or the correlation between the 
-    residuals and X is not zero (i.e., if the residual plot shows a trend), 
+    If the average of the residuals is not zero or the correlation between the
+    residuals and X is not zero (i.e., if the residual plot shows a trend),
     there was a computational error.
     For example,
 <script language="JavaScript1.4" type="text/javascript"><!--
@@ -549,10 +554,10 @@
 <div class="indent">
 <p class="inline">
     If the regression line is computed correctly, then if we treat the residuals themselves as
-    data and compute another regression line for <em>them</em>&mdash;that is, if we 
+    data and compute another regression line for <em>them</em>&mdash;that is, if we
     regress the <em>residuals</em> against X&mdash;<em>that</em> regression line
-    will coincide with the <span class="math">x</span> axis 
-    (a horizontal line at height 
+    will coincide with the <span class="math">x</span> axis
+    (a horizontal line at height
     <span class="math">y = 0</span>).<script language="JavaScript1.4" type="text/javascript"> <!--
     var fStr = 'If the regression line is computed correctly, the mean ' +
         'of the residuals is zero, and the correlation between the residuals ' +
@@ -688,7 +693,7 @@
 
 <p>
     The following exercise  tests your ability to read residual plots for evidence of
-    heteroscedasticity, nonlinearity, or outliers, and to determine whether the 
+    heteroscedasticity, nonlinearity, or outliers, and to determine whether the
     regression line was computed correctly and appropriately.
 </p>
 
