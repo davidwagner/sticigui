@@ -5,7 +5,7 @@ function Venn(container_id) {
   this.env.append(app);
   console.log(this.env);
 
-  var canvas = jQuery('<div/>',{id:'canvas'});
+  var container = jQuery('<div/>',{id:'container'});
   var buttons = jQuery('<div/>',{id:'buttons'});
   var scrollbars = jQuery('<div/>',{id:'scrollbars'});
 
@@ -17,7 +17,7 @@ function Venn(container_id) {
     var letter = String.fromCharCode(65 + i);
     var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
     var label = jQuery('<label/>',{for:letter});
-    label.innerHTML = names[i];
+    label.html(names[i]);
     button.append(inp)
     button.append(label)
     i++;
@@ -28,7 +28,7 @@ function Venn(container_id) {
     var sb = jQuery('<div/>',{class:'scrollbar',id:'psb'+j.toString()});
 
     var lbl = jQuery('<label/>',{for:'sb'+j.toString()});
-    lbl.innerHTML = 'P(' + String.fromCharCode(64 + i)  + ') (%))';
+    lbl.html('P(' + String.fromCharCode(64 + i)  + ') (%))');
     var input = jQuery('<input/>',{type:'text',id:'sb'+j.toString()+'t',onkeyup:'$(\'#sb\' + '+ j.toString() +'\').val(this.value)',value:30,size:2});
     var input2 = jQuery('<input/>',{type:'range',id:'sb'+j.toString(),onchange:'$(\'#sb\' + '+ j.toString() +'\'t\').val(this.value)',min:1,max:100,step:1,value:30,style:'width: 92px'});
 
@@ -39,7 +39,7 @@ function Venn(container_id) {
     scrollbars.append(sb);
     j++;
   }
-  app.append(canvas);
+  app.append(container);
   app.append(buttons);
   app.append(scrollbars);
 
@@ -145,7 +145,7 @@ function Venn(container_id) {
 
 
     // S
-    $('#E').addEventListener('click', function () {
+    $('#E').click(function () {
       box0.setFill('blue');
       box1.setFill('none');
       box2.setFill('none');
@@ -155,7 +155,7 @@ function Venn(container_id) {
     });
 
     // A
-    $('#A').addEventListener('click', function () {
+    $('#A').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('none');
@@ -164,7 +164,7 @@ function Venn(container_id) {
     });
 
     // B
-    $('#B').addEventListener('click', function () {
+    $('#B').click(function () {
       box1.setFill('none');
       box0.setFill('#eee');
       fillArea.setFill('blue');
@@ -173,7 +173,7 @@ function Venn(container_id) {
     });
 
     // Ac
-    $('#F').addEventListener('click', function () {
+    $('#F').click(function () {
       box2.setFill('none');
       box1.setFill('#eee');
       box0.setFill('blue');
@@ -182,7 +182,7 @@ function Venn(container_id) {
     });
 
     // Bc
-    $('#G').addEventListener('click', function () {
+    $('#G').click(function () {
       box1.setFill('none');
       box2.setFill('#eee');
       box0.setFill('blue');
@@ -191,7 +191,7 @@ function Venn(container_id) {
     });
 
     // A or B -- NOT QUITE RIGHT need to group
-    $('#C').addEventListener('click', function () {
+    $('#C').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('blue');
@@ -200,7 +200,7 @@ function Venn(container_id) {
     });
 
     // {}
-    $('#J').addEventListener('click', function () {
+    $('#J').click(function () {
       box0.setFill('#eee');
       box1.setFill('none');
       box2.setFill('none');
@@ -209,7 +209,7 @@ function Venn(container_id) {
     });
 
     // AB -- FIX
-    $('#H').addEventListener('click', function () {
+    $('#H').click(function () {
       box0.setFill('#eee');
       box1.setFill('none');
       box2.setFill('none');
@@ -219,7 +219,7 @@ function Venn(container_id) {
     });
 
     // ABc
-    $('#D').addEventListener('click', function () {
+    $('#D').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('#eee');
@@ -230,7 +230,7 @@ function Venn(container_id) {
     });
 
     // AcB
-    $('#I').addEventListener('click', function () {
+    $('#I').click(function () {
       box0.setFill('#eee');
       box2.setFill('blue');
       box1.setFill('#eee');
@@ -272,15 +272,6 @@ function Venn(container_id) {
       fillArea.setHeight((180*this.value)/100-32);
       layer.draw();
     });
-
-    // NEED TO COMPLETE AB, ABc, AcB, {}
-
-
-    //NEED CUSTOM EVENT ^^
-
-    //
-
-    // IF BOTH box1 AND box2 CLICKED, GROUP AND MOVE    // TOGETHER
 
     group1.add(box1);
     group1.add(textBox1);
