@@ -16,7 +16,8 @@ function Venn(container_id) {
     buttons.append(button);
     var letter = String.fromCharCode(65 + i);
     var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
-    var label = jQuery('<label/>',{for:letter,innerHTML:names[i]})
+    var label = jQuery('<label/>',{for:letter});
+    label.innerHTML = names[i];
     button.append(inp)
     button.append(label)
     i++;
@@ -26,7 +27,8 @@ function Venn(container_id) {
 
     var sb = jQuery('<div/>',{class:'scrollbar',id:'psb'+j.toString()});
 
-    var lbl = jQuery('<label/>',{for:'sb'+j.toString(),innerHTML:'P(' + String.fromCharCode(64 + i)  + ') (%)'});
+    var lbl = jQuery('<label/>',{for:'sb'+j.toString()});
+    lbl.innerHTML = 'P(' + String.fromCharCode(64 + i)  + ') (%))';
     var input = jQuery('<input/>',{type:'text',id:'sb'+j.toString()+'t',onkeyup:'$(\'#sb\' + '+ j.toString() +'\').val(this.value)',value:30,size:2});
     var input2 = jQuery('<input/>',{type:'range',id:'sb'+j.toString(),onchange:'$(\'#sb\' + '+ j.toString() +'\'t\').val(this.value)',min:1,max:100,step:1,value:30,style:'width: 92px'});
 
@@ -37,9 +39,9 @@ function Venn(container_id) {
     scrollbars.append(sb);
     j++;
   }
-  app.append(scrollbars);
   app.append(canvas);
   app.append(buttons);
+  app.append(scrollbars);
 
   var scaleFactorX = 0.3;
   var scaleFactorY = 0.3;
