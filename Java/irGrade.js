@@ -6,10 +6,9 @@
 
 // !!!!Beginning of the code!!!!
 
-var irGradeModTime = '2013/1/18/1138'; // modification date and time
+var irGradeModTime = '2013/1/18/1838'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
-var courseRelPath = '.';           // relative path to the instance of the course
 var sticiRelPath = '.';            // relative path to the root of SticiGui
 var courseBase = './Courses/';     // base for looking for course-specific files
 var cssBase = '/Graphics/sticiGuiDefault.css';  // css file
@@ -1047,6 +1046,10 @@ function setCourseSpecs() {
     timeURL = theCourse[10];
     dFile = cRoot + course + dFileBase;
     sFile = cRoot + course + sFileBase;
+    $(document).ready(function() {
+            $("#courseSelector").text(courseName + ': ' + teacherName)
+                                .css('color', 'blue');
+    });
     return(true);
 }
 
@@ -1811,7 +1814,7 @@ function collectResponses(theForm,saveAs,saveId) {
 function labInstrSetUp(seed,sn) {
     isLab = false;
     dfStat = 'Tools for SticiGui Assignment ' + sn.toString();
-    sectionContext = ''; // 'function setSectionContext() { \n '
+    sectionContext = '';
     window.id= 'setj';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1823,7 +1826,7 @@ function labInstrSetUp(seed,sn) {
 function labSetUp(seed, sn) {
     isLab = true;
     dfStat = 'SticiGui Assignment ' + sn.toString();
-    sectionContext = ''; //  'function setSectionContext() { \n '
+    sectionContext = '';
     window.id= 'seti';
     setNum = sn;
     cNum = assignmentPrefix + setNum;
@@ -1989,7 +1992,7 @@ function writeChapterHead(seed, chTit, titStr, showSticiGui, relPath) {
     CA = (1==1);
     HI = false;
     randSeed = rand.getSeed();
-    sectionContext = ''; // 'function setSectionContext() { \n ';
+    sectionContext = '';
     return(true);
 }
 
@@ -2090,7 +2093,7 @@ function writeChapterTitle(s) {
 function examSetUp(seed, sName, sn) {
     isLab = false;
     showQMarks = false;
-   sectionContext = ''; // 'function setSectionContext() { \n';
+   sectionContext = '';
     window.id= 'seti';
     examName = sName;
     examNum = sn;
@@ -2120,22 +2123,6 @@ function writeExamHeader(exNam, exVer, relPath) {
     document.writeln(qStr);
     return(true);
 }
-
-// * TESTING WITHOUT 1/18/2013
-/*
-function setApplets() {
-    if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
-            (document.forms.length > 0 ) && !isLab )  {
-        sectionContext += 'document.forms[0].reset();\n';
-    }
-    if (isLab) {
-        sectionContext += 'recoverResponses();\n';
-    }
-    sectionContext += '\n$(".solution").hide();\n}';
-    eval(sectionContext);
-    setSectionContext();
-}
-*/
 
 $(document).ready(function() {
     eval(sectionContext);

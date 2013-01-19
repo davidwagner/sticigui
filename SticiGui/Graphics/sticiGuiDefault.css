@@ -644,12 +644,24 @@ span.termOfArt {
     color: #800080;
     font-size: 85%;
 }
+
 pre { 
     font-family: monospace; 
 }
 
 span.big {
     font-size:        120%;
+}
+
+/*  CSS for "scriptlets"   */
+
+.scriptlet {
+    border: solid #600060;
+    font-size: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 /*   CSS for drawing charts   */

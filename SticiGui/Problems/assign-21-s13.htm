@@ -6,7 +6,7 @@
 
 <head>
 <script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "16 January 2013 14:43 PST";
+	pageModDate = "18 January 2013 13:43 PST";
 	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
@@ -46,7 +46,6 @@
 <body>
 <script language="JavaScript1.4" type="text/javascript"><!--
     sticiRelPath = '..';
-    courseRelPath = '../../Teach/S21/S13';
     writeChapterTitle('Assignments');
     writeChapterNav('..');
 // -->
@@ -81,12 +80,7 @@
 
 <fieldset class="narrow">
 	<legend>Login</legend>
-	<p>
-	<script language="JavaScript1.4" type="text/javascript"><!--
-	document.writeln('<label><font color="red"><strong>Course:</strong></font> ' +
-                     '<span id="courseSelector">' + theCourse[2] + '</label>');// -->
-	</script>
-	</p>
+	<label><strong><font color="red">Course:</font> <span id="courseSelector"></span></strong></label>
 
 	<p>
 		<span class="qSpan">
@@ -153,7 +147,7 @@
      for (var j=0; j < assignmentTitles.length; j++) {
           qStr += '<tr id="row' + assignmentTitles[j][2] + '">' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col0">' +
-    	           j.toString() + '. ' + mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
+    	           mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
     	        '<td align="left" bgcolor="#eeeeee" headers="col1">' +
     	           '<a href="javascript://" onclick="spawnProblem(document.forms[0],\'' +
     	                                             assignmentTitles[j][2] + '\',' +
@@ -181,9 +175,10 @@
                                      $.each(assignmentTitles, function(j, value) {
                                          var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
                                          var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
+                                         var setRow = '#row' + assignmentTitles[j][2];
                                          var isAssigned = assign[assignmentTitles[j][2]];
                                          if (isAssigned && (assign[assignmentTitles[j][2]][1] == 'ready')) {
-                                               var dueDate = new Date(new Date(assign[assignmentTitles[j][2]][0])-slack);
+                                               var dueDate = new Date(new Date(assign[assignmentTitles[j][2]][0]) -slack);
                                                var pastDue = (dueDate < openAssignNow);
                                                $(dueDiv).text(dueDate.toLocaleString())
                                                         .css('background-color', goodColor);
@@ -203,6 +198,7 @@
                                                         .css('background-color', nullColor);
                                                $(ansDiv).text('---')
                                                         .css('background-color', nullColor);
+                                               $(setRow).css('display','none');
                                          }
                                     });
                                 });
