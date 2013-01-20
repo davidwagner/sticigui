@@ -103,15 +103,16 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-        align="baseline" width="640" height="380" archive="PbsGui.zip">
-    <param name="binControl" value="false">
-    <param name="bins" value="15">
-    <param name="files" value="./Data/gmat.dat">
-    <param name="nFiles" value="1">
-    <param name="univariateStats" value="true">
-    You need Java to see this.
-    </applet>
+    <div id="hist1" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist1', {
+          changeNumBins: false,
+          bins: 15,
+          data: ['./Data/gmat.dat.json'],
+        });
+      });
+    </script>
 </p>
 </div>
 
