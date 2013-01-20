@@ -2128,26 +2128,28 @@ $(document).ready(function() {
     $("div.solution").css('display','block')
                      .hide();
     $(".solLink").click(function() {
-          $(this).parent().next().toggle();
-          if ($(this).text() == '[+Solution]') {
-              $(this).text('[-Solution]');
-          } else {
-              $(this).text('[+Solution]');
-          }
-          return(false);
+                      $(this).parent().next().toggle();
+                      if ($(this).text() == '[+Solution]') {
+                          $(this).text('[-Solution]');
+                      } else {
+                          $(this).text('[+Solution]');
+                      }
+               //       pushSolutionOpened($(this));  // for analytics
+                      return(false);
     });
     $(".footnote").css('display','block')
                   .hide();
     $(".fnLink").click(function() {
-          $(this).parent.next().toggle();
-          if ($(this).text() == '[+]') {
-              $(this).text('[-]');
-          } else {
-              $(this).text('[+]');
-          }
-          pushFootnoteOpened($(this).id);
-          return(false);
-    });
+                      $(this).parent.next().toggle();
+                      if ($(this).text() == '[+]') {
+                          $(this).text('[-]');
+                      } else {
+                          $(this).text('[+]');
+                      }
+               //       pushFootnoteOpened($(this));  // for analytics
+                      return(false);
+                })
+                .css('vertical-align','super');
 });
 
 function writeProblemSetFooter() {
@@ -2168,12 +2170,12 @@ function writeProblemSetFooter() {
 }
 
 function writeSolution(p,text,solFunc) {
-    var qStr = '<div class="solutionLink"><p><a href="#" class="solLink">[+Solution]</a> ' +
+    var qStr = '<div class="solutionLink"><p><a href="#" class="solLink">[+Solution]</a></p> ' +
                '<div class="solution">';
     if (typeof(text) != 'undefined') {
        qStr += text;
     }
-    qStr += '</div></p></div>';
+    qStr += '</div></div>';
     document.writeln(qStr);
     return(true);
 }
@@ -2189,7 +2191,7 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-    var qStr = '<sup><a href="#" class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a></sup>' +
+    var qStr = '<a href="#" class="fnLink">[+]</a>' +
                '<div class="footnote"><p>' + footnote + '</p></div> ';
     if (print) {
        document.writeln(qStr);
