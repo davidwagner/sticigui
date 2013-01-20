@@ -2168,7 +2168,7 @@ function writeProblemSetFooter() {
 }
 
 function writeSolution(p,text,solFunc) {
-    var qStr = '<div class="solutionLink"><p><a class="solLink">[+Solution]</a> ' +
+    var qStr = '<div class="solutionLink"><p><a href="#" class="solLink">[+Solution]</a> ' +
                '<div class="solution">';
     if (typeof(text) != 'undefined') {
        qStr += text;
@@ -2193,7 +2193,6 @@ function writeFootnote(p,label,text, print) {
                '<div class="footnote"><p>' + footnote + '</p></div> ';
     if (print) {
        document.writeln(qStr);
-alert(qStr);
        return(true);
     } else {
        return(qStr);
