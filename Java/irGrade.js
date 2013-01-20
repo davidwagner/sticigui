@@ -2189,7 +2189,7 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-    var qStr = '<sup><a class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a></sup>' +
+    var qStr = '<sup><a href="#" class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a></sup>' +
                '<div class="footnote"><p>' + footnote + '</p></div> ';
     if (print) {
        document.writeln(qStr);
