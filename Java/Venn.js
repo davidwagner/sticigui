@@ -27,9 +27,11 @@ function Venn(container_id) {
     var sb = jQuery('<div/>',{class:'scrollbar',id:'psb'+j.toString()});
 
     var lbl = jQuery('<label/>',{for:'sb'+j.toString()});
-    lbl.html('P(' + String.fromCharCode(64 + i)  + ') (%))');
-    var input = jQuery('<input/>',{type:'text',id:'sb'+j.toString()+'t',onkeyup:'$(\'#sb\' + '+ j.toString() +'\').val(this.value)',value:30,size:2});
-    var input2 = jQuery('<input/>',{type:'range',id:'sb'+j.toString(),onchange:'$(\'#sb\' + '+ j.toString() +'\'t\').val(this.value)',min:1,max:100,step:1,value:30,style:'width: 92px'});
+    lbl.html('P(' + String.fromCharCode(64 + j)  + ') (%)');
+    var idFunc1 = "$('#sb" + j.toString() + "').val(this.value)";
+    var idFunc2 = "$('#sb" + j.toString() + "t').val(this.value)";
+    var input = jQuery('<input/>',{type:'text',id:'sb'+j.toString()+'t',onkeyup:idFunc1,value:30,size:2});
+    var input2 = jQuery('<input/>',{type:'range',id:'sb'+j.toString(),onchange:idFunc2,min:1,max:100,step:1,value:30,style:'width: 92px'});
 
     sb.append(lbl);
     sb.append(input);
