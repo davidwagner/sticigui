@@ -1363,22 +1363,11 @@
 
 
 <p class="figure">
-<div id="hist1" class="histogram">
-</div>
-
-<p class="figure">
 <div id="hist2" class="histogram">
 </div>
 
 <script>
 jQuery(function() {
-  new Stici_HistHiLite('hist1', {
-    data: ['../../Java/Data/gmat.json'],
-    bins: 9,
-  //  counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
-  //  ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
-    showUnivariateStats: false,
-  });
   new Stici_HistHiLite('hist2', {
     bins: 9,
     counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
