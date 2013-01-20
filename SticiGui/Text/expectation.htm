@@ -15,6 +15,11 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -1195,12 +1200,18 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-          align="baseline" width="600" archive="PbsGui.zip" height="320">
-    <param name="n" value="10">
-    <param name="normalControls" value="false">
-    <param name="p" value="0.5">You need Java to see this.
-    </applet>
+  <div id="hist" class="histogram">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      n: 10,
+      p: 0.5,
+      showNormalButton: false
+    });
+  });
+  </script>
 </p>
 </div>
 

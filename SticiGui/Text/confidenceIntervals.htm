@@ -15,6 +15,11 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -237,7 +242,7 @@
               '     newPop[0] = 0;\n' +
               ' }\n' +
               ' newPop = newPop.join();\n' +
-              ' document.applets[' + appNum + '].setBox(newPop,true);\n';
+              '//document.applets[' + appNum + '].setBox(newPop,true);\n';
 // -->
 </script>
 </p>
@@ -1198,7 +1203,7 @@
               '     newPop[0] = 0;\n' +
               ' }\n' +
               ' newPop = newPop.join();\n' +
-              ' document.applets[' + appNum + '].setBox(newPop,true);\n';
+              '//document.applets[' + appNum + '].setBox(newPop,true);\n';
 // -->
 </script>
 </p>
@@ -1551,7 +1556,7 @@
                            return function() {
                               waitForAppletIterationCount = 0;
                               waitForApplet(thisApplet1,
-                                            function(){document.applets[thisApplet1].setLimits((-ex2Lim).toString(),ex2Lim.toString())}
+                                            function(){/*document.applets[thisApplet1].setLimits((-ex2Lim).toString(),ex2Lim.toString())*/}
                                            );
                            }
                         }
@@ -1704,7 +1709,7 @@
            roundToDig(samMean + width,3).toString() + ' points ]</p> ';
     document.writeln(qStr);
     ex3AppletNum = document.applets.length - 1;
-    sectionContext += 'document.applets[ex3AppletNum].' +
+    sectionContext += '//document.applets[ex3AppletNum].' +
               'setLimits((-ex3Lim).toString(),ex3Lim.toString());\n';
 // -->
 </script>
@@ -2038,15 +2043,20 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-        align="baseline" width="600" height="320" archive="PbsGui.zip">
-    <param name="hiLiteHi" value="6.5">
-    <param name="hiLiteLo" value="3.5">
-    <param name="n" value="10">
-    <param name="normalControls" value="false">
-    <param name="p" value=".5">
-    You need Java to see this.
-    </applet>
+  <div id="hist1" class="histogram">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist1', {
+      n: 10,
+      p: .5,
+      showNormalButton: false,
+      hiLiteHi: 6.5,
+      hiLiteLo: 3.5
+    });
+  });
+  </script>
 </p>
 </div>
 
@@ -2101,13 +2111,21 @@
         'parameters <span class="math">n = ' + nVal1.toString() + '</span> and <span class="math">p = ' +
         '50%</span> is between ' + j.toString() + ' and ' + (nVal1-j).toString() +
         ', inclusive, which is ' + roundToDig(100*cl,1).toString() +
-        '%:</p><p class="figure"><applet code="HistHiLite.class" ' +
-        'codebase="../../Java/" align="baseline" width="600" height="320" ' +
-        'archive="PbsGui.zip"><param name="hiLiteHi" value="' +
-        limHi.toString() + '"><param name="hiLiteLo" value="' +
-        limLo.toString() + '"><param name="n" value="' + nVal1.toString() +
-        '"><param name="normalControls" value="false">' +
-        '<param name="p" value=".5">You need Java to see this.</applet></p>' +
+        '%:</p><p class="figure">' +
+        '<div id="hist2" class="histogram">' +
+        '</div>' +
+        '<script>' +
+        'jQuery(function() {' +
+        '  new Stici_HistHiLite(\'hist2\', {' +
+        '    n: ' + nVal1.toString() + ',' +
+        '    p: 0.5,' +
+        '    hiLiteHi: ' + limHi.toString() + ',' +
+        '    hiLiteLo: ' + limLo.toString() + ',' +
+        '    showNormalButton: false' +
+        '  });' +
+        '});' +
+        '</scr'+'ipt>' +
+        '</p>' +
         '<p>Thus the interval from the ' + ordinals[j] + ' smallest datum to the ' +
         ordinals[nVal1-j] + ' smallest datum is a ' +
         roundToDig(100*cl,1).toString() + '% confidence interval for the ' +

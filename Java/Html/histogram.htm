@@ -15,6 +15,12 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
 <script language="JavaScript1.4" type="text/javascript"><!--
     writeChapterHead('SeEd','','Histogram of Family Incomes, 1973',true,'../../SticiGui');
@@ -28,27 +34,20 @@
     writeChapterTitle();
 // -->
 </script><p align="center">
+  <div id="hist" class="histogram">
+  </div>
 
-<applet code="HistHiLite.class" align="middle" width="600" height="400" archive="PbsGui.zip" codebase=".." >
-
-    <param name="counts" value="1,2,3,4,5,5,5,15,26,26,8">
-
-    <param name="ends" value="0,1,2,3,4,5,6,7,10,15,25,50">
-
-    <param name="bins" value="11">
-
-    <param name="title" value="U.S. Family Income/$1000, 1973">
-
-    <param name="area" value="true">
-
-    <param name="hiLiteLo" value="11">
-
-    <param name="hiLiteHi" value="40">
-
-    Your browser must be running Java to view this histogram.
-
-</applet>
-
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      counts: [1,2,3,4,5,5,5,15,26,26,8],
+      ends: [0,1,2,3,4,5,6,7,10,15,25,50],
+      bins: 11,
+      hiLiteLo: 11,
+      hiLiteHi: 40
+    });
+  });
+  </script>
 </p>
 
 
