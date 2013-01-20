@@ -11,6 +11,14 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="../Graphics/sticiGuiDefault.css">
+
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
 <script language="JavaScript1.4" type="text/javascript"><!--
@@ -24,17 +32,20 @@
 
 
 <p align="center">
-    <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"
-          width="600" height="300" archive="PbsGui.zip" name="histogram">
-          <param name="binControl" value="false">
-          <param name="bins" value="30">
-          <param name="files" value="./Data/baseball98.dat">
-          <param name="nFiles" value="1">
-          <param name="restrict" value="false">
-          <param name="showNormal" value="false">
-          <param name="univariateStats" value="false">
-           You need Java to see this.
-    </applet>
+  <div id="hist" class="histogram">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      changeNumBins: false,
+      bins: 30,
+      data: ['../../Java/Data/baseball98.dat.json'],
+      showNormalButton: false,
+      showUnivariateStats: false
+    });
+  });
+  </script>
 </p>
 
 <p align="center">
