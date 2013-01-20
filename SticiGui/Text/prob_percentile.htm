@@ -101,10 +101,12 @@ The <em><a class="glossRef" href="gloss.xht#cdf">cumulative distribution functio
          'You need Java to see this.</applet></p>';
     document.writeln(ansStr);
     var appNum = (document.applets.length - 1).toString();
+    try {
     sectionContext += 'document.applets[' + appNum + '].' +
                 'setNP(nTosses1.toString(), (p1/100.0).toString());\n' +
               'document.applets[' + appNum + '].' +
                 'setLimits( (-0.5).toString(),(med1 + 0.5).toString());\n';
+    } catch (e) { /* ignore */ }
 // -->
 </script>
 

@@ -350,10 +350,11 @@
         '</applet></p></div>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-/*    sectionContext += 'document.applets[' + appNum +
+    try {
+    sectionContext += 'document.applets[' + appNum +
               '].setVariables("' +  fh.join() + '","' + fw.join() +
               '");\n' + 'document.applets[' + appNum + '].showPlot();\n';
-*/
+    } catch (e) { /* ignore */ }
     var qStr = '<p>The point of averages of these data is (' +
         roundToDig(avefh,2).toString() + ', ' + roundToDig(avefw,2).toString() +
         '). The SD of the heights is ' + roundToDig(sdfh,2).toString() +
@@ -554,10 +555,11 @@
            '<param name="y" value="1,2,3">You need Java to see this</applet>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-/*    sectionContext += 'document.applets[' + appNum + '].' +
+    try {
+    sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(temp.join().toString(), rain.join().toString());\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-*/
+    } catch (e) { /* ignore */ }
     var qStr = '</p><p><span class="qSpan">Computed from the data (not read from the ' +
            'scatterplot), the point of averages of these data is (';
     document.writeln(qStr);

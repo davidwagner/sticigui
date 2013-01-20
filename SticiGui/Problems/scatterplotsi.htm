@@ -371,9 +371,11 @@
   </applet>
 <script language="JavaScript1.4" type="text/javascript" ><!--
   appNum = document.applets.length - 1;
+    try {
   sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data1[0].join()' +
                     ', data1[1].join());' +
                     'document.applets[' + appNum.toString() + '].showPlot();';
+    } catch (e) { /* ignore */ }
   // -->
 </script>
 </p>
@@ -422,9 +424,11 @@
   </applet>
 <script language="JavaScript1.4" type="text/javascript" ><!--
   appNum = document.applets.length - 1;
+    try {
   sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data2[0].join()' +
                     ', data2[1].join());' +
                     'document.applets[' + appNum.toString() + '].showPlot();';
+    } catch (e) { /* ignore */ }
   // -->
 </script>
 </p>
@@ -473,9 +477,11 @@
   </applet>
 <script language="JavaScript1.4" type="text/javascript" ><!--
   appNum = document.applets.length - 1;
+    try {
   sectionContext += 'document.applets[' + appNum.toString() + '].setVariables(data3[0].join()' +
                     ', data3[1].join());' +
                     'document.applets[' + appNum.toString() + '].showPlot();';
+    } catch (e) { /* ignore */ }
   // -->
 </script>
 </p>

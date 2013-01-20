@@ -78,9 +78,11 @@
     CA = true;
     var defaultStatus="SticiGui Final";
     function setApplets() {
+    try {
         document.applets[q6AppletNum].setVariables((data6[0]).join().toString(),
             (data6[1]).join().toString());
         document.applets[q6AppletNum].showPlot();
+    } catch (e) { /* ignore */ }
     }
 // -->
 </script>

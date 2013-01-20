@@ -325,9 +325,11 @@
 </applet>
 <script language="JavaScript1.4" type="text/javascript" ><!--
     var appNum = (document.applets.length - 1).toString();
+    try {
     sectionContext += 'document.applets[' + appNum.toString() +
                       '].setVariables((husIQ.join().toString()),wifIQ.join().toString()); ' +
                       'document.applets[' + appNum + '].showPlot();';
+    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>

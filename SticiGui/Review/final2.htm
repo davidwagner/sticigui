@@ -24,6 +24,7 @@
     var defaultStatus="SticiGui Final";
 //
     function setApplets() {
+    try {
        document.applets[applet1num].setR(r1.toString());
        document.applets[applet2num].setVariables((data6[0]).join().toString(),
             (data6[1]).join().toString());
@@ -31,6 +32,7 @@
        document.applets[applet3num].setVariables((data5[0]).join().toString(),
             (data5[1]).join().toString());
        document.applets[applet3num].showPlot();
+    } catch (e) { /* ignore */ }
     }
 //
 // for census data questions

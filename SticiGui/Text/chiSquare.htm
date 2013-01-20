@@ -1542,12 +1542,14 @@
            '<param name="hiLiteHi" value="35">You need Java to see this.</applet></p>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
+    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setSampleSize(' + rolls.toString() + ');\n' +
               'document.applets[' + appNum + '].' +
               'setBars(\"' + chi2.toString() + '\", "35");\n' +
               'document.applets[' + appNum + '].setAreas();\n' +
               'document.applets[' + appNum + '].showPlot();\n';
+    } catch (e) { /* ignore */ }
     var tabArr = [sides, probVec];
     var header = ['side','probability'];
     var qStr = '<p>By the way, the actual probabilities of the six sides used to generate ' +
