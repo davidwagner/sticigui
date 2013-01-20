@@ -2131,23 +2131,25 @@ $(document).ready(function() {
     }
     $(".solution").hide();
     $(".solLink").click(function() {
-          $(this).next().toggle()
-          if ($(this).text() == '[+Solution]') {
-              $(this).text('[-Solution]');
-          } else {
-              $(this).text('[+Solution]');
-          }
-    });
+                           $(this).next().toggle()
+                           if ($(this).text() == '[+Solution]') {
+                               $(this).text('[-Solution]');
+                           } else {
+                               $(this).text('[+Solution]');
+                           }
+                })
+                .attr('title','show solution');
     $(".footnote").css('display','block')
                   .hide();
     $(".footnoteLink").click(function() {
-          $(this).parent().next().toggle()
-          if ($(this).text() == '[+]') {
-              $(this).text('[-]');
-          } else {
-              $(this).text('[+]');
-          }
-    });
+                           $(this).parent().next().toggle()
+                           if ($(this).text() == '[+]') {
+                               $(this).text('[-]');
+                           } else {
+                               $(this).text('[+]');
+                           }
+                           })
+                     .attr('title','show footnote');
 });
 
 function writeProblemSetFooter() {
@@ -2305,9 +2307,7 @@ function writeProblemSetBody() {
     qStr = '<h1><a id="firstContent"></a><a href="../index.htm" target="_new">SticiGui</a>: ' +
            assignmentTitles[assignmentNumbers[theChapter]][1] + '</h1>';
     document.writeln(qStr);
-    //ssanders: BEGIN: Added
     pushAssignmentOpened();
-    //ssanders: END: Added
     return(true);
 }
 
