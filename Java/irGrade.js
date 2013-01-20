@@ -2115,7 +2115,10 @@ function writeExamHeader(exNam, exVer, relPath) {
 }
 
 $(document).ready(function() {
-    eval(sectionContext);
+    try{
+       eval(sectionContext);
+    } catch(e) {
+    }
     if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
             (document.forms.length > 0 ) && !isLab )  {
         document.forms[0].reset();
