@@ -22,24 +22,24 @@ a {
   text-decoration: none;
 }
 
-#app {
+.app {
   width: 500px;
   height: 200px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#container {
+.container {
   float: left;
 }
 
-#buttons {
+.buttons {
   width: 160px;
   margin-top: 25px;
   float: left;
 }
 
-#scrollbars {
+.scrollbars {
   font-weight: bold;
   width: 280px;
   display: block;

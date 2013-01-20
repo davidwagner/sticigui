@@ -1,12 +1,12 @@
 function Venn(container_id) {
 
   this.env = jQuery('#' + container_id);
-  var app = jQuery('<div/>',{id:'app'});
+  var app = jQuery('<div/>',{id:container_id + 'app',class:'app'});
   this.env.append(app);
 
-  var container = jQuery('<div/>',{id:'container'});
-  var buttons = jQuery('<div/>',{id:'buttons'});
-  var scrollbars = jQuery('<div/>',{id:'scrollbars'});
+  var container = jQuery('<div/>',{id:container_id + 'container',class:'container'});
+  var buttons = jQuery('<div/>',{id:container_id + 'buttons',class:'buttons'});
+  var scrollbars = jQuery('<div/>',{id:container_id + 'scrollbars',class:'scrollbars'});
 
   var i = 0;
   var names = ["A", "B", "A or B", "ABc", "S", "Ac", "Bc", "AB", "AcB", "{}"];
@@ -14,7 +14,7 @@ function Venn(container_id) {
     var button = jQuery('<div/>',{class:'button'});
     buttons.append(button);
     var letter = String.fromCharCode(65 + i);
-    var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
+    var inp = jQuery('<input/>',{type:'radio',id:container_id + letter,name:'buttons'});
     var label = jQuery('<label/>',{for:letter});
     label.html(names[i]);
     button.append(inp);
@@ -24,14 +24,14 @@ function Venn(container_id) {
   var j = 1;
   while (j <= 2) {
 
-    var sb = jQuery('<div/>',{class:'scrollbar',id:'psb'+j.toString()});
+    var sb = jQuery('<div/>',{class:'scrollbar',id:container_id + 'psb' + j.toString()});
 
-    var lbl = jQuery('<label/>',{for:'sb'+j.toString()});
+    var lbl = jQuery('<label/>',{for:container_id + 'sb'+j.toString()});
     lbl.html('P(' + String.fromCharCode(64 + j)  + ') (%)');
-    var idFunc1 = "$('#sb" + j.toString() + "').val(this.value)";
-    var idFunc2 = "$('#sb" + j.toString() + "t').val(this.value)";
-    var input = jQuery('<input/>',{type:'text',id:'sb'+j.toString()+'t',onkeyup:idFunc1,value:30,size:2});
-    var input2 = jQuery('<input/>',{type:'range',id:'sb'+j.toString(),onchange:idFunc2,min:1,max:100,step:1,value:30,style:'width: 92px'});
+    var idFunc1 = "$('#" + container_id + "sb" + j.toString() + "').val(this.value)";
+    var idFunc2 = "$('#" + container_id + "sb" + j.toString() + "t').val(this.value)";
+    var input = jQuery('<input/>',{type:'text',id:container_id + 'sb'+j.toString()+'t',onkeyup:idFunc1,value:30,size:2});
+    var input2 = jQuery('<input/>',{type:'range',id:container_id + 'sb'+j.toString(),onchange:idFunc2,min:1,max:100,step:1,value:30,style:'width: 92px'});
 
     sb.append(lbl);
     sb.append(input);
@@ -50,7 +50,7 @@ function Venn(container_id) {
   function draw() {
 
     var stage = new Kinetic.Stage({
-      container: 'container',
+      container: container_id + 'container',
         width: 340,
         height: 200
     });
@@ -146,7 +146,7 @@ function Venn(container_id) {
 
 
     // S
-    $('#E').click(function () {
+    $('#' + container_id + 'E').click(function () {
       box0.setFill('blue');
       box1.setFill('none');
       box2.setFill('none');
@@ -156,7 +156,7 @@ function Venn(container_id) {
     });
 
     // A
-    $('#A').click(function () {
+    $('#' + container_id + 'A').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('none');
@@ -165,7 +165,7 @@ function Venn(container_id) {
     });
 
     // B
-    $('#B').click(function () {
+    $('#' + container_id + 'B').click(function () {
       box1.setFill('none');
       box0.setFill('#eee');
       fillArea.setFill('blue');
@@ -174,7 +174,7 @@ function Venn(container_id) {
     });
 
     // Ac
-    $('#F').click(function () {
+    $('#' + container_id + 'F').click(function () {
       box2.setFill('none');
       box1.setFill('#eee');
       box0.setFill('blue');
@@ -183,7 +183,7 @@ function Venn(container_id) {
     });
 
     // Bc
-    $('#G').click(function () {
+    $('#' + container_id + 'G').click(function () {
       box1.setFill('none');
       box2.setFill('#eee');
       box0.setFill('blue');
@@ -192,7 +192,7 @@ function Venn(container_id) {
     });
 
     // A or B -- NOT QUITE RIGHT need to group
-    $('#C').click(function () {
+    $('#' + container_id + 'C').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('blue');
@@ -201,7 +201,7 @@ function Venn(container_id) {
     });
 
     // {}
-    $('#J').click(function () {
+    $('#' + container_id + 'J').click(function () {
       box0.setFill('#eee');
       box1.setFill('none');
       box2.setFill('none');
@@ -210,7 +210,7 @@ function Venn(container_id) {
     });
 
     // AB -- FIX
-    $('#H').click(function () {
+    $('#' + container_id + 'H').click(function () {
       box0.setFill('#eee');
       box1.setFill('none');
       box2.setFill('none');
@@ -220,7 +220,7 @@ function Venn(container_id) {
     });
 
     // ABc
-    $('#D').click(function () {
+    $('#' + container_id + 'D').click(function () {
       box0.setFill('#eee');
       box1.setFill('blue');
       box2.setFill('#eee');
@@ -231,7 +231,7 @@ function Venn(container_id) {
     });
 
     // AcB
-    $('#I').click(function () {
+    $('#' + container_id + 'I').click(function () {
       box0.setFill('#eee');
       box2.setFill('blue');
       box1.setFill('#eee');
@@ -242,7 +242,7 @@ function Venn(container_id) {
     //box1.simulate('click');
     //box2.simulate('click');
 
-    $('#sb1').change(function () {
+    $('#' + container_id + 'sb1').change(function () {
       box1.setWidth((320*this.value)/100);
       box1.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -250,7 +250,7 @@ function Venn(container_id) {
       layer.draw();
     });
 
-    $('#sb2').change(function () {
+    $('#' + container_id + 'sb2').change(function () {
       box2.setWidth((320*this.value)/100);
       box2.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -258,7 +258,7 @@ function Venn(container_id) {
       layer.draw();
     });
 
-    $('#sb1t').change(function () {
+    $('#' + container_id + 'sb1t').change(function () {
       box1.setWidth((320*this.value)/100);
       box1.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -266,7 +266,7 @@ function Venn(container_id) {
       layer.draw();
     });
 
-    $('#sb2t').change(function () {
+    $('#' + container_id + 'sb2t').change(function () {
       box2.setWidth((320*this.value)/100);
       box2.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
