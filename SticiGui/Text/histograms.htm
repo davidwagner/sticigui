@@ -12,48 +12,25 @@
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
-<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="../../sticigui.css" rel="stylesheet" type="text/css" />
-<link href="../../popbox.css" rel="stylesheet" type="text/css" />
-<script src="http://d3js.org/d3.v2.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src="../../jquery.tinyscrollbar.js"></script>
-<script src="../../popbox.js"></script>
-<script src="../../sticigui.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
 
-<style>
-#chart {
-  width: 600px;
-  height: 400px;
-  border: 1px #000 solid;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/popbox.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
 <body>
 
-<div id="chart">
-</div>
 
-<script>
-jQuery(function() {
-  Stici_HistHiLite('chart', {
-    data: ['../../data/gmat.json'],
-    //showNormalButton: false,
-    bins: 10
-  });
-});
-</script>
-
-
-
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
-</script>
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cNum = "histograms";
     writeChapterHead('SeEd',cNum);
@@ -1383,16 +1360,33 @@ jQuery(function() {
      writeFigureCaption(qStr);
 // -->
 </script>
+
+
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-    align="middle" width="620" height="380" archive="PbsGui.zip">
-     <param name="bins" value="9">
-     <param name="counts" value="9,10,13,20,25,14,5,2,2">
-     <param name="ends" value="-160,-110,-90,-70,-40,-10,20,50,80,160">
-     <param name="univariateStats" value="false">
-     <param name="restrict" value="false">
-     <param name="title" value="Pinon Flat Gravity Data">You need Java to see this.
-    </applet>
+<div id="hist1" class="histogram">
+</div>
+
+<p class="figure">
+<div id="hist2" class="histogram">
+</div>
+
+<script>
+jQuery(function() {
+  new Stici_HistHiLite('hist1', {
+    data: ['../../Java/Data/gmat.json'],
+    bins: 9,
+  //  counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
+  //  ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
+    showUnivariateStats: false,
+  });
+  new Stici_HistHiLite('hist2', {
+    bins: 9,
+    counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
+    ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
+    showUnivariateStats: false,
+  });
+});
+</script>
 </p>
 </div>
 
@@ -1702,17 +1696,16 @@ jQuery(function() {
 // -->
 </script>
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-   align="middle" width="620" height="380" archive="PbsGui.zip">
-     <param name="bins" value="9">
-     <param name="files" value="./Data/gravity.dat">
-     <param name="hiLiteHi" value="-44.2">
-     <param name="hiLiteLo" value="-152">
-     <param name="nFiles" value="1">
-     <param name="restrict" value="false">
-     <param name="univariateStats" value="false">
-   You need Java to see this.
-    </applet>
+  <div id="hist3" class="histogram"></div>
+  <script>
+    jQuery(function() {
+      new Stici_HistHiLite('hist3', {
+        data: ['../../Java/Data/gravity.dat.json'],
+        bins: 9,
+        showUnivariateStats: false
+      });
+    });
+  </script>
 </p>
 </div>
 
