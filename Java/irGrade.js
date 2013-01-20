@@ -1138,6 +1138,7 @@ function spawnProblem(theForm,setName,relPath) {
             lablet.maxSubmits = maxSubmits;
             lablet.showWrongAfterSubmits = showWrongAfterSubmits;
             lablet.theChapter = setName;
+            lablet.assignmentname = setName;
             var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
                                    '<title>SticiGui Assignment ' + i.toString() + '</title>' +
                                    '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
@@ -1882,7 +1883,7 @@ function setExtraInputs(theForm) {
     theForm.elements['extrainfo'].value = escape('seed=' + randSeed.toString() +
                              '&irGradeVersion=' + irGradeModTime.toString() +
                              '&submitTime=' + (new Date()).toString() +
-                             '&assignmentname=' + assignmentTitles[assignmentNumbers[theChapter]][2]
+                             '&assignmentname=' + parent.assignmentname
                           );
     var nRight = 0;
     var qVal;
