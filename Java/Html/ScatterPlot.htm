@@ -15,6 +15,12 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
 <script language="JavaScript1.4" type="text/javascript"><!--
     writeChapterHead('SeEd','','Scatterplots',true,'../../SticiGui');
@@ -265,21 +271,20 @@ students were selected, nor do I know the year of the study. </p>
 
 
 <p align="center">
+  <div id="hist" class="histogram">
+  </div>
 
-    <applet code="HistHiLite.class" align="center" width="640"
-
-            height="400" archive="PbsGui.zip" codebase=".." >
-
-        <param name="nFiles" value="3">
-
-        <param name="files" value="./Data/cities.dat,./Data/cities47.dat,./Data/gmat.dat">
-
-        <param name="urlBox" value="true">
-
-        <param name="univariateStats" value="true">
-
-    </applet>
-
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      data: ['../../Java/Data/cities.dat.json',
+             '../../Java/Data/cities47.dat.json',
+             '../../Java/Data/gmat.dat.json'],
+      showNormalButton: false,
+      showUnivariateStats: true
+    });
+  });
+  </script>
 </p>
 
 

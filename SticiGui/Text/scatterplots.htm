@@ -16,6 +16,13 @@
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
+
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cNum = "scatterplots";
     writeChapterHead('SeEd',cNum);
@@ -103,15 +110,17 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-        align="baseline" width="640" height="380" archive="PbsGui.zip">
-    <param name="binControl" value="false">
-    <param name="bins" value="15">
-    <param name="files" value="./Data/gmat.dat">
-    <param name="nFiles" value="1">
-    <param name="univariateStats" value="true">
-    You need Java to see this.
-    </applet>
+    <div id="hist1" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist1', {
+          changeNumBins: false,
+          bins: 15,
+          data: ['../../Java/Data/gmat.dat.json'],
+          showNormalButton: false
+        });
+      });
+    </script>
 </p>
 </div>
 
