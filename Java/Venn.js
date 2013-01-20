@@ -9,7 +9,7 @@ function Venn(container_id) {
   var scrollbars = jQuery('<div/>',{id:'scrollbars'});
 
   var i = 0;
-  var names = ["A", "B", "A or B", "ABc", "S", "Ac", "Bc", "AB", "AcB", "{}"]
+  var names = ["A", "B", "A or B", "ABc", "S", "Ac", "Bc", "AB", "AcB", "{}"];
   while (i < 10) {
     var button = jQuery('<div/>',{class:'button'});
     buttons.append(button);
@@ -17,11 +17,11 @@ function Venn(container_id) {
     var inp = jQuery('<input/>',{type:'radio',id:letter,name:'buttons'});
     var label = jQuery('<label/>',{for:letter});
     label.html(names[i]);
-    button.append(inp)
-    button.append(label)
+    button.append(inp);
+    button.append(label);
     i++;
   }
-  var j = 1; 
+  var j = 1;
   while (j <= 2) {
 
     var sb = jQuery('<div/>',{class:'scrollbar',id:'psb'+j.toString()});
@@ -61,11 +61,11 @@ function Venn(container_id) {
     // Groups for text label & each box.
     var group1 = new Kinetic.Group({
       draggable: true,
-    })
+    });
 
     var group2 = new Kinetic.Group({
       draggable:true,
-    })
+    });
 
     var box0 = new Kinetic.Rect({
       x: 10,
@@ -282,7 +282,7 @@ function Venn(container_id) {
     layer.add(textBox0);
     layer.add(group1);
     layer.add(group2);
-    layer.add(fillArea);
+    //layer.add(fillArea);
 
     stage.add(layer);
     stage.add(messageLayer);
