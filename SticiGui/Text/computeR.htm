@@ -13,7 +13,8 @@
 </script>
 
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
@@ -68,7 +69,7 @@
 // -->
 </script>
     that the correlation coefficient measures
-    <a class="glossRef" href="gloss.htm#linear">linear</a> 
+    <a class="glossRef" href="gloss.htm#linear">linear</a>
     <a class="glossRef" href="gloss.htm#association">association</a>.
     We know that <span class="math">r</span> does not measure
     <a class="glossRef" href="gloss.htm#nonlinear">nonlinear</a> association.
@@ -100,50 +101,14 @@
     A datum that is above the mean by 2.5 times the SD is 2.5 in standard units.
 </p>
 
-<div align="center">
-<center>
-    <table border="0" cellspacing="1">
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td align="center">
-        <strong>original datum &minus; <a class="glossRef" href="gloss.htm#mean">mean</a> of original
-          data</strong>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">
-        <strong>datum in
-        <a class="glossRef" href="gloss.htm#standard_units">standard units</a></strong>
-        </td>
-        <td align="center">
-        <strong>=</strong>
-        </td>
-        <td align="center">
-        <strong>how many</strong> <a class="glossRef" href="gloss.htm#sd">SD</a>
-        <strong>the datum is above the mean</strong>
-        </td>
-        <td align="center">
-        <strong> =</strong>
-        </td>
-        <td align="center">
-        ----------------------------------------------
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td align="center">
-        <strong><a class="glossRef" href="gloss.htm#sd">SD</a> of original data</strong>
-        </td>
-    </tr>
-    </table>
-</center>
-</div>
+<p class="math">
+  datum in <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+        =
+   number of </strong> <a class="glossRef" href="gloss.htm#sd">SD</a>s the datum is above the mean
+   =  \( \frac{\mbox{original datum &minus; mean of original data}}{\mbox{SD of original data}} \).
+</p>
+
+
 
 <div class="indent">
 <p class="inline">
@@ -291,10 +256,10 @@
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,gravSu);
     document.writeln('</p>');
-    var ansStr = 'To convert to standard units, you must find how many SD the point is above ' +
+    var ansStr = '<p>To convert to standard units, you must find how many SD the point is above ' +
          'the mean. The mean is &minus;41.67, and the SD is 54.87, so the measurement ' +
          gravMeas + ' is (' + gravMeas + '+ 41.67)/54.87 = ' +
-         roundToDig(ans,3) + ' standard units.';
+         roundToDig(ans,3) + ' standard units.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -466,12 +431,12 @@
 
 <div class="indent">
 <p class="inline">
-    This is because the first step in calculating the 
+    This is because the first step in calculating the
     <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a> is to
     convert the two lists to standard units, and any of those changes (except the last)
-    produces two lists 
+    produces two lists
     that&mdash;after converting to standard
-    units&mdash;are the same as the original lists in standard 
+    units&mdash;are the same as the original lists in standard
     units.<script language="JavaScript1.4" type="text/javascript"> <!--
     var fStr = 'Equivalently, the correlation coefficient is unaffected by ' +
            '<a class="glossRef" href="gloss.htm#affine">affine transformations</a> of  both ' +
@@ -500,7 +465,7 @@
 // -->
 </script>
     The last transformation produces two lists that, after converting to standard units,
-    are the negatives of the original lists in standard units. 
+    are the negatives of the original lists in standard units.
     The two negative signs cancel when the corresponding elements of the lists are multiplied.
 </p>
 </div>
@@ -619,8 +584,8 @@
            '<th id="col3" align="center">Rain in SU</th>' +
            '<th id="col4" align="center">(Temp. in SU)&times;(Rain in SU)</th></tr>';
     document.writeln(qStr);
-    var ansStr = '';
-    var ansStrB = 'The correlation coefficient is the average product of ' +
+    var ansStr = '<p>';
+    var ansStrB = '<p>The correlation coefficient is the average product of ' +
           'corresponding pairs ' +
           'of measurements in standard units: the average of the numbers in the ' +
           'rightmost column of the table above.  There are 10 numbers, so their ' +
@@ -678,7 +643,7 @@
     var aVal = doubleToStr(Math.max(cc-0.05,-1),2)+  ":" + doubleToStr(Math.min(cc+0.05,1),2);
     writeTextExercise(6,qCtr++,aVal);
     document.writeln('</p>');
-    ansStrB = ansStrB.substr(0,ansStrB.length-2) + ')/10 = ' + roundToDig(cc,3);
+    ansStrB = ansStrB.substr(0,ansStrB.length-2) + ')/10 = ' + roundToDig(cc,3) + '</p>';
     writeSolution(pCtr-1,ansStrB);
 // -->
 </script>
@@ -694,11 +659,11 @@
     document.writeln(qStr);
     writeTextExercise(6,qCtr++,numToRange(theTempInSU*sdTemp + aveTemp,1));
     document.writeln('</p>');
-    var ansStr = 'The temperature in standard units is the number of standard deviations ' +
+    var ansStr = '<p>The temperature in standard units is the number of standard deviations ' +
          'above the mean, so the corresponding temperature in degrees is the ' +
          'mean temperature plus the measurement in standard units times the SD ' +
          'of temperature: ' + aveTstr + '&deg; + (' + theTempInSU + ')&times;(' +
-         sdTstr + '&deg;) = ' + roundToDig(theTempInSU*sdTemp + aveTemp,3) + '&deg.';
+         sdTstr + '&deg;) = ' + roundToDig(theTempInSU*sdTemp + aveTemp,3) + '&deg.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -808,7 +773,7 @@
 </div>
 
 <p>&nbsp;
-    
+
 </p>
 
 <div class="callout">

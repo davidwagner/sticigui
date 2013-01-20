@@ -222,14 +222,12 @@ var theCourse;                     // course-specific data
 var openAssignNow;                 // server time when assignment page was opened
 var enrollList;                    // hashed enrollment list
 var newStyleAnswer = true;         // flag for pop-up versus inline
-var fCtr = 0;                      // counter for footnotes
 var figCtr = 1;                    // counter for figures
 var pCtr = 1;                      // counter for problems
 var qCtr = 1;                      // counter for questions
 var tCtr = 1;                      // counter for tables
 var xCtr = 1;                      // counter for examples
-// var footnotes = new Array();       // array of footnotes
-// var footnoteLabels = new Array();  // array of footnote labels
+var fCtr = 0;                      // counter for footnotes
 var key = new Array();             // key for self-graded exercises
 var boxList = new Array();         // list of images for self-graded exercises
 var setNum;                        // current problem set number
@@ -342,14 +340,14 @@ var iteratives = ['no times','once','twice','thrice'];
 for (var i=4; i < cardinals.length; i++) {
     iteratives[i] = cardinals[i] + ' times';
 }
-var primes = [ 2,      3,      5,      7,     11,     13,     17,     19,     23,     29, 
-              31,     37,     41,     43,     47,     53,     59,     61,     67,     71, 
+var primes = [ 2,      3,      5,      7,     11,     13,     17,     19,     23,     29,
+              31,     37,     41,     43,     47,     53,     59,     61,     67,     71,
               73,     79,     83,     89,     97,    101,    103,    107,    109,    113,
-             127,    131,    137,    139,    149,    151,    157,    163,    167,    173,
-             179,    181,    191,    193,    197,    199,    211,    223,    227,    229,
-             233,    239,    241,    251,    257,    263,    269,    271,    277,    281,
-             283,    293,    307,    311,    313,    317,    331,    337,    347,    349,
-             353,    359,    367,    373,    379,    383,    389,    397,    401,    409];
+              127,    131,    137,    139,    149,    151,    157,    163,    167,    173,
+              179,    181,    191,    193,    197,    199,    211,    223,    227,    229,
+              233,    239,    241,    251,    257,    263,    269,    271,    277,    281,
+              283,    293,    307,    311,    313,    317,    331,    337,    347,    349,
+              353,    359,    367,    373,    379,    383,    389,    397,    401,    409];
 var nPrimes = [0, 0, 1, 2, 2, 3, 3, 4, 4, 4,           // 0-9
                4, 5, 5, 6, 6, 6, 6, 7, 7, 8,           // 10-19
                8, 8, 8, 9, 9, 9, 9, 9, 9, 10,          // 20-29
@@ -757,11 +755,6 @@ function startProblem(q) {  // writes html to start a problem, numbered q
     var linkStr = 'Q-' + q.toString();
     var s = '<a id="' + linkStr + '"/><p>&nbsp;</p><p><strong>' + ref + '.</strong>';
     return(s);
-}
-
-
-function startSolution(q) {  // html to start a solution, numbered q
-    return('<strong>Solution.</strong> ');
 }
 
 function writeSelectExercise(mult, q, opt, ans) {
@@ -2129,24 +2122,31 @@ $(document).ready(function() {
     if (isLab) {
         recoverResponses();
     }
-    $(".solution").hide();
+    $('#chLink' + theChapter.toString()).css('color','#ffffff')
+                                        .css('backgroundColor','#000000');
+//    $(".solution").hide();
+    $("div.solution").css('display','block')
+                     .hide();
     $(".solLink").click(function() {
-          $(this).next().toggle()
+          $(this).parent().next().toggle();
           if ($(this).text() == '[+Solution]') {
               $(this).text('[-Solution]');
           } else {
               $(this).text('[+Solution]');
           }
+          return(false);
     });
     $(".footnote").css('display','block')
                   .hide();
-    $(".footnoteLink").click(function() {
-          $(this).parent().next().toggle()
+    $(".fnLink").click(function() {
+          $(this).parent.next().toggle();
           if ($(this).text() == '[+]') {
               $(this).text('[-]');
           } else {
               $(this).text('[+]');
           }
+          pushFootnoteOpened($(this).id);
+          return(false);
     });
 });
 
@@ -2169,15 +2169,14 @@ function writeProblemSetFooter() {
 
 function writeSolution(p,text,solFunc) {
     var qStr = '<div class="solutionLink"><p><a class="solLink">[+Solution]</a> ' +
-               '<span class="solution">';
+               '<div class="solution">';
     if (typeof(text) != 'undefined') {
        qStr += text;
     }
-    qStr += '</span></p></div>';
+    qStr += '</div></p></div>';
     document.writeln(qStr);
     return(true);
 }
-
 
 function writeFootnote(p,label,text, print) {
     if (typeof(print) == 'undefined' || print == null) {
@@ -2190,10 +2189,11 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-    var qStr = '<sup><a class="footnoteLink">[+]</a></sup>' +
-               '<span class="footnote">' + footnote + '</span> ';
+    var qStr = '<sup><a class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a></sup>' +
+               '<div class="footnote"><p>' + footnote + '</p></div> ';
     if (print) {
        document.writeln(qStr);
+alert(qStr);
        return(true);
     } else {
        return(qStr);
@@ -2202,7 +2202,7 @@ function writeFootnote(p,label,text, print) {
 
 function writeChapterFooter(finalCommand, relPath) {
     if (typeof(relPath) == 'undefined' || relPath == null || relPath.length == 0) {
-    	relPath = '..';
+        relPath = '..';
     }
     if (typeof(finalCommand) == 'undefined' || finalCommand == null || finalCommand.length == 0) {
         finalCommand = 'sticiBottom("' + relPath.toString() + '")';
@@ -2243,17 +2243,10 @@ function sticiBottom(relPath) {
             theChapterLinkName = i.toString();
         }
         document.writeln('<a href="' + relPath + '/Text/' + chapterTitles[i][1] + '.htm" ' +
-                            'target="_self"><span id="chLink' + i.toString() + '">' +
-                            theChapterLinkName + '</span></a> |');
+                            'target="_self" class="pageIndex" id="chLink' + i.toString() + '">' +
+                            theChapterLinkName + '</a> |');
     }
     document.writeln('</p></div>');
-    if (theChapter != null) {
-        var thisChapterLink = $('#chLink' + theChapter.toString());
-        if (typeof(thisChapterLink) != null && thisChapterLink != null) {
-            thisChapterLink.style.color = '#ffffff';
-            thisChapterLink.style.backgroundColor = '#000000';
-        }
-    }
 }
 
 function writeProblemSetHead(sn) {

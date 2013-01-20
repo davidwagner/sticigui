@@ -714,7 +714,7 @@
     var sqtn = Math.sqrt(samSize);
     var seBnd = fpc*.5/sqtn;
     var width = chebFac*seBnd;
-    var ansStr = 'By Chebychev\'s inequality, the chance that the sample percentage ' +
+    var ansStr = '<p>By Chebychev\'s inequality, the chance that the sample percentage ' +
          '<span class="math">&phi;</span> is within ' +
          '<span class="math">&plusmn; ' + roundToDig(chebFac,2).toString() +
          ' &times; SE(&phi;)</span> of the population percentage <span class="math">p</span> ' +
@@ -751,7 +751,7 @@
          'The true confidence level of this interval is at least ' + cl.toString() + '%, but ' +
          'the probability that the interval contains the population percentage ' +
          'is either zero or one&mdash;there is nothing random left after the sample ' +
-         'is taken.';
+         'is taken.</p>';
      var qStr = 'The entering class at North Southcentral University contains ' +
         popSize.toString() +
         ' students.  The dean\'s office seeks to determine the percentage of ' +
@@ -1238,14 +1238,14 @@
 <div class="problem">
 <script language="JavaScript1.4" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
-   var ansStr = 'This is not a simple random sample. The sample is one of convenience, ' +
+   var ansStr = '<p>This is not a simple random sample. The sample is one of convenience, ' +
         'and probably is biased by how it was selected; for example, students ' +
         'who do not have campus email accounts have no chance of being in the ' +
         'sample. It is not possible to calculate an approximate 95% confidence ' +
         'interval from these data, but since the parameter of interest is a population percentage, ' +
         'it must be between 0% and 100%.  The data do not narrow that down much: All we know is that ' +
         'the population percentage is at least <span class="math">3/(# undergrads)</span> ' +
-        'and at most <span class="math">(# undergrads - 97)/(# undergrads)</span>.';
+        'and at most <span class="math">(# undergrads - 97)/(# undergrads)</span>.</p>';
     var qStr = 'I would like to know the fraction of UC Berkeley undergraduates who ' +
            'commute to school from their parents\' homes. I send email to students ' +
            'with campus computer accounts until 100 have responded; 3 of the ' +
@@ -1362,7 +1362,7 @@
    var width = fac*seBnd;
    var lo = pHat - width;
    var hi = pHat + width;
-   var ansStr = 'The sample percentage is </p><p class="math">' +
+   var ansStr = '<p>The sample percentage is </p><p class="math">' +
         '(#tickets labeled &quot;1&quot;)/(#tickets in sample) = ' + nOk.toString() +
         '/' + samSize.toString() + ' = ' + pHatStr + '.</p><p> ' +
         'The sample size is so small that the bootstrap estimate of the SD of ' +
@@ -1482,7 +1482,7 @@
    var hit = normInv(p);
    var hitStr = roundToDig(hit,3).toString();
    var width = s*hit/Math.sqrt(samSize);
-   var ansStr = 'The sample percentage is the number who respond positively, ' +
+   var ansStr = '<p>The sample percentage is the number who respond positively, ' +
         'divided by the sample size: ' + nOk.toString() + '/' +
         samSize.toString() + ' = ' + pctStr + '. The standard deviation of the sample ' +
         '(the bootstrap estimate of the SD of the population) is </p><p class="math">' +
@@ -1504,7 +1504,7 @@
         pctStr + ' + ' + hitStr + '&times;' + sStr + '/(' +
         samSize.toString() + ')<sup>&frac12;</sup>] = ' +
         '[ ' + roundToDig(100*(nOk/samSize - width),2).toString() + '%, ' +
-        roundToDig(100*(nOk/samSize + width),2).toString() + '%].';
+        roundToDig(100*(nOk/samSize + width),2).toString() + '%].</p>';
     var qStr = 'A restauranteur plans to change the menu in her restaurant, ' +
            'which specializes in game meats. She is trying to decide whether or not ' +
            'to offer venison goulash on the new menu. ' +
@@ -1747,7 +1747,7 @@
     document.writeln(' <span class="qSpan">thousand hours (low) to</span> ');
     writeTextExercise(8, qCtr++, numToRange(samMean + width));
     document.writeln(' <span class="qSpan">thousand hours (high)</span></p>.');
-    var ansStr = 'The sample size (' + samSize.toString() +
+    var ansStr = '<p>The sample size (' + samSize.toString() +
            ') is a sufficiently small fraction of the population size (' +
            commify(popSize) + ') that treating the sample as if it were drawn with ' +
            'replacement is reasonable.  The sample size is sufficiently large that ' +
@@ -2094,7 +2094,7 @@
    var cl = 1-oldTail;
    var limLo = (j-0.5);
    var limHi = (nVal1-j+0.5);
-   var ansStr = 'The probability that at least ' + (j-1).toString() + ' of the ' +
+   var ansStr = '<p>The probability that at least ' + (j-1).toString() + ' of the ' +
         nVal1.toString() + ' data are less than the median and that at least ' +
         (j-1).toString() + ' data are above the median is at least ' +
         'the probability that a variable with the binomial distribution with ' +
@@ -2111,7 +2111,7 @@
         '<p>Thus the interval from the ' + ordinals[j] + ' smallest datum to the ' +
         ordinals[nVal1-j] + ' smallest datum is a ' +
         roundToDig(100*cl,1).toString() + '% confidence interval for the ' +
-        'population median.';
+        'population median.</p>';
     var qStr = 'Consider finding a ' + roundToDig(100*cl,1) +
            '% confidence interval for the median of a population from a random ' +
            'sample with replacement of size ' + nVal1.toString() + '.</p><p>' +

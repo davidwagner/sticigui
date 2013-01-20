@@ -12,48 +12,25 @@
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script> -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
-<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="../../sticigui.css" rel="stylesheet" type="text/css" />
-<link href="../../popbox.css" rel="stylesheet" type="text/css" />
-<script src="http://d3js.org/d3.v2.js"></script>
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-<script src="../../jquery.tinyscrollbar.js"></script>
-<script src="../../popbox.js"></script>
-<script src="../../sticigui.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.tinyscrollbar.js"></script>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/sticigui.js"></script>
 
-<style>
-#chart {
-  width: 600px;
-  height: 400px;
-  border: 1px #000 solid;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
+<script language="JavaScript1.4" type="text/javascript" src="../../Java/popbox.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="../../Java/CSS/popbox.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
 <body>
 
-<div id="chart">
-</div>
 
-<script>
-jQuery(function() {
-  Stici_HistHiLite('chart', {
-    data: ['../../data/gmat.json'],
-    //showNormalButton: false,
-    bins: 10
-  });
-});
-</script>
-
-
-
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
-</script>
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cNum = "histograms";
     writeChapterHead('SeEd',cNum);
@@ -432,7 +409,7 @@ jQuery(function() {
     }
     qStr = '</table></center></div>';
     document.writeln(qStr);
-    var ansStr = '(Selected questions.) The type of tree is a categorical variable without ' +
+    var ansStr = '<p>(Selected questions.) The type of tree is a categorical variable without ' +
         'a natural order&mdash;it does not make sense to say that &quot;Elm&quot; is ' +
         'larger than &quot;Oak.&quot; Per-capita incomes in different countries ' +
         'could be viewed as a discrete or continuous quantitative variable. ' +
@@ -447,7 +424,7 @@ jQuery(function() {
         'is in the range 100 lbs to 200 lbs. weighs more than someone whose weight ' +
         'is less than 100 lbs. Weight to the nearest pound is an integer, so that ' +
         'variable is discrete. There is a smallest unit of currency in every ' +
-        'country, so bank account balances are discrete.';
+        'country, so bank account balances are discrete.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -714,9 +691,9 @@ jQuery(function() {
     writeTextExercise(8,qCtr++,'0.704:0.705');
     document.writeln('</p>');
     writeSolution(pCtr-1,
-    ' WD and WBH have 93 customers in common, and WD has 132 customers ' +
+    ' <p>WD and WBH have 93 customers in common, and WD has 132 customers ' +
     ' in all, so the percentage of WD customers who are customers of ' +
-    ' WBH is 93/132&times;100% = 70.45%. ');
+    ' WBH is 93/132&times;100% = 70.45%.</p>');
 // -->
 </script>
 </div>
@@ -730,9 +707,9 @@ jQuery(function() {
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,'0.06:0.061');
     document.writeln('</p>');
-    var ansStr = 'WD has 8 customers outside the Bay Area, and 132 customers ' +
+    var ansStr = '<p>WD has 8 customers outside the Bay Area, and 132 customers ' +
     ' overall, so the (decimal) fraction that are outside the Bay Area ' +
-    ' is 8/132 = 0.0606.';
+    ' is 8/132 = 0.0606.</p>';
     writeSolution(pCtr-1,ansStr);
 // -->
 </script>
@@ -747,7 +724,7 @@ jQuery(function() {
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,'.9999:1.0001');
     document.writeln('</p>');
-    var ansStr = 'All 8 of WD\'s customers outside the Bay Area are WBH customers: 100%.';
+    var ansStr = '<p>All 8 of WD\'s customers outside the Bay Area are WBH customers: 100%.</p>';
     writeSolution(pCtr-1,ansStr);
 // -->
 </script>
@@ -775,13 +752,13 @@ jQuery(function() {
     writeTextExercise(8,qCtr++,numToRange(3217,.0001));
     var qStr = '</td><td headers="col2,row1" align="center">0</td></tr></table></center></div>';
     document.writeln(qStr);
-    var ansStr = 'The number of customers WD and WBH have in common is 93, so that is ' +
+    var ansStr = '<p>The number of customers WD and WBH have in common is 93, so that is ' +
     ' the first entry in the table. The number of customers of WD who ' +
     ' are not customers of WBH is 132&minus;93 = 39, so 39 is the second ' +
     ' entry in the first row of the table. WBH has 3310 customers in ' +
     ' all, of whom 93 are customers of WD, so the number of customers ' +
     ' of WBH who are not customers of WD is 3310&minus;93 = 3217, so 3217 is ' +
-    ' the first entry in the second row of the table. ';
+    ' the first entry in the second row of the table.</p> ';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1094,7 +1071,7 @@ jQuery(function() {
     var qStr = '</td></tr><tr><td headers="col0">80 to 160</td>' +
       '<td headers="col1" align="right">2%</td></tr></table></center></div>';
     document.writeln(qStr);
-    var ansStr = 'The first missing entry is the percentage of values between &minus;90 and &minus;70. ' +
+    var ansStr = '<p>The first missing entry is the percentage of values between &minus;90 and &minus;70. ' +
     ' There are 13 data in that range: </p><p class="math">{&minus;89, &minus;87, &minus;86, &minus;83, ' +
     ' &minus;83, &minus;80, &minus;80, &minus;79, &minus;74 , &minus;74 , &minus;74 , &minus;71, &minus;71}.</p><p>Thirteen is 13% ' +
     ' of 100, so the entry in the frequency table for the range &minus;90 to &minus;70 is 13%. ' +
@@ -1108,7 +1085,7 @@ jQuery(function() {
     ' As a double check, we can add together all the percentages in the' +
     ' frequency table: they should total 100%. We have</p> ' +
     ' <p class="math">9% + 10% + 13% + 20% + 25% + 14% ' +
-    ' + 5% + 2% + 2% = 100%.';
+    ' + 5% + 2% + 2% = 100%.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1383,16 +1360,22 @@ jQuery(function() {
      writeFigureCaption(qStr);
 // -->
 </script>
+
+
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-    align="middle" width="620" height="380" archive="PbsGui.zip">
-     <param name="bins" value="9">
-     <param name="counts" value="9,10,13,20,25,14,5,2,2">
-     <param name="ends" value="-160,-110,-90,-70,-40,-10,20,50,80,160">
-     <param name="univariateStats" value="false">
-     <param name="restrict" value="false">
-     <param name="title" value="Pinon Flat Gravity Data">You need Java to see this.
-    </applet>
+<div id="hist1" class="histogram">
+</div>
+
+<script>
+jQuery(function() {
+  new Stici_HistHiLite('hist1', {
+    bins: 9,
+    counts: [9, 10, 13, 20, 25, 14, 5, 2, 2],
+    ends: [-160, -110, -90, -70, -40, -10, 20, 50, 80, 160],
+    showUnivariateStats: false,
+  });
+});
+</script>
 </p>
 </div>
 
@@ -1475,8 +1458,8 @@ jQuery(function() {
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,'79%:79.2%');
     document.writeln('</p>');
-    var ansStr = 'The answer is 79.1%: just type the endpoints into the boxes in the ' +
-    'histogram applet.';
+    var ansStr = '<p>The answer is 79.1%: just type the endpoints into the boxes in the ' +
+    'histogram tool.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1490,7 +1473,7 @@ jQuery(function() {
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,'49.9%:50.1%');
     document.writeln('</p>');
-    var ansStr = 'The answer is 50%: type the endpoints into the boxes in the histogram applet.';
+    var ansStr = '<p>The answer is 50%: type the endpoints into the boxes in the histogram tool.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1601,7 +1584,7 @@ jQuery(function() {
     writeTextExercise(8,qCtr++,numToRange(19));
     var qStr = '</td></tr></table></center></div>';
     document.writeln(qStr);
-    var ansStr = ' &minus;80 is the smallest number that at least 25% of the ' +
+    var ansStr = '<p> &minus;80 is the smallest number that at least 25% of the ' +
     ' data are less than or equal to. (In fact, 26% of the data are ' +
     ' less than or equal to &minus;80.) Thus &minus;80 is the 25th percentile of ' +
     ' the data. &minus;47 is the smallest number that at least 50% of the ' +
@@ -1610,7 +1593,7 @@ jQuery(function() {
     numToOrdinal(questPctile) + ' percentile.  &minus;12 is the 75th percentile ' +
     ' (it is every percentile between the 74th and 76th). The 90th ' +
     ' percentile is 18. The smallest number such that at least 90.5% of ' +
-    ' the data are less than or equal to it is 19. ';
+    ' the data are less than or equal to it is 19.</p> ';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1702,17 +1685,16 @@ jQuery(function() {
 // -->
 </script>
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-   align="middle" width="620" height="380" archive="PbsGui.zip">
-     <param name="bins" value="9">
-     <param name="files" value="./Data/gravity.dat">
-     <param name="hiLiteHi" value="-44.2">
-     <param name="hiLiteLo" value="-152">
-     <param name="nFiles" value="1">
-     <param name="restrict" value="false">
-     <param name="univariateStats" value="false">
-   You need Java to see this.
-    </applet>
+  <div id="hist3" class="histogram"></div>
+  <script>
+    jQuery(function() {
+      new Stici_HistHiLite('hist3', {
+        data: ['../../Java/Data/gravity.dat.json'],
+        bins: 9,
+        showUnivariateStats: false
+      });
+    });
+  </script>
 </p>
 </div>
 
@@ -1771,13 +1753,13 @@ jQuery(function() {
     writeTextExercise(8,qCtr++,'18.4:18.8');
     var qStr = '</td></tr></table></center></div>';
     document.writeln(qStr);
-    var ansStr = 'The area under the histogram between &minus;160 and &minus;79.5 ' +
+    var ansStr = '<p>The area under the histogram between &minus;160 and &minus;79.5 ' +
     ' is 25%, so &minus;79.5 is the estimate of the lower quartile (25th ' +
     ' percentile) from the histogram. The area under the histogram ' +
     ' between &minus;160 and &minus;30.5 is 60%, so &minus;30.5 is the estimate of the ' +
     ' 60th percentile from the histogram. The area under the histogram ' +
     ' between &minus;160 and 18.5 is 90%, so 18.5 is the estimate of the 90th ' +
-    ' percentile from the histogram. ';
+    ' percentile from the histogram.</p> ';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>

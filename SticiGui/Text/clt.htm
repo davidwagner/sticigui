@@ -186,7 +186,7 @@
     and dividing by its <a class="glossRef" href="gloss.htm#se">standard error SE(X)</a>:
 </p>
 <p>&nbsp;
-    
+
 </p>
 <div align="center">
 <center>
@@ -426,7 +426,7 @@
 </p>
 
 <p>&nbsp;
-    
+
 </p>
 
 <p>
@@ -996,7 +996,7 @@
     var thresh1Lo = (sumThreshLo-0.5 - eSum)/seSum;
     var thresh1Hi = (sumThreshHi+0.5 - eSum)/seSum;
     var prob1 = normCdf(thresh1Hi) - normCdf(thresh1Lo);
-    var ansStr = 'The sample sum of ' + nDraws.toString() + ' draws with replacement ' +
+    var ansStr = '<p>The sample sum of ' + nDraws.toString() + ' draws with replacement ' +
          'from this box has a binomial distribution with parameters <span class="math">n = ' +
          nDraws.toString() + '</span> and <span class="math">p = ' +
          (roundToDig(100*p,2)).toString() + '%<span>. The expected value of the sum of ' +
@@ -1027,7 +1027,7 @@
          'the sum of ' + nDraws.toString() + ' draws from this box is between ' +
          roundToDig(sumThreshLo,3).toString() + ' and ' +
          roundToDig(sumThreshHi,3).toString() + ' is about ' +
-         roundToDig(100*prob1,1).toString() + '%. ';
+         roundToDig(100*prob1,1).toString() + '%.</p>';
     var qStr = 'A box contains ' + cardinals[nTickets] + ' tickets of which ' +
         cardinals[nOnes] + ' are labeled &quot;1;&quot; the rest are ' +
         'labeled &quot;0.&quot; <span class="qSpan">The normal approximation ' +
@@ -1069,7 +1069,7 @@
     var sumThresh = Math.floor(eSum + thresh2*seSum);
     var thresh2 = (sumThresh-0.5 - eSum)/seSum;
     var tailProb = 1 - normCdf(thresh2);
-    var ansStr = 'The average of the labels on the tickets in the box is ' +
+    var ansStr = '<p>The average of the labels on the tickets in the box is ' +
            roundToDig(meanTick,3).toString()   + ', and the SD of the labels ' +
            'on the tickets is ' + roundToDig(sdTick,3).toString() +
            '. The <a class="glossRef" href="gloss.htm#expectation">expected value</a> of the sum of ' +
@@ -1093,7 +1093,7 @@
            'width="600" archive="PbsGui.zip" height="320">You need Java to see this. ' +
            '</applet></p><p>Thus the chance that the sum of ' + nDraws.toString() +
            ' draws from this box is at least ' + roundToDig(sumThresh,3).toString() +
-           ' is about ' + roundToDig(100*tailProb,1).toString() + '%. ';
+           ' is about ' + roundToDig(100*tailProb,1).toString() + '%.</p>';
     var qStr = 'A box contains ' + cardinals[nTickets] + ' tickets, labeled with the numbers ' +
            tickList   + '. <span class="qSpan">The normal approximation to the chance ' +
            'that the sum of ' + nDraws.toString() +
