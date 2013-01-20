@@ -2140,7 +2140,7 @@ $(document).ready(function() {
     $(".footnote").css('display','block')
                   .hide();
     $(".fnLink").click(function() {
-                      $(this).parent.next().toggle();
+                      $(this).parent().next().toggle();
                       if ($(this).text() == '[+]') {
                           $(this).text('[-]');
                       } else {
@@ -2191,7 +2191,7 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-    var qStr = '<a href="#" class="fnLink">[+]</a>' +
+    var qStr = '<a href="#" class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a>' +
                '<div class="footnote"><p>' + footnote + '</p></div> ';
     if (print) {
        document.writeln(qStr);
