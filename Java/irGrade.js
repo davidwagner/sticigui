@@ -2128,28 +2128,6 @@ $(document).ready(function() {
     $("div.solution").css('display','block')
                      .hide();
     $(".solLink").click(function() {
-<<<<<<< HEAD
-                           $(this).next().toggle()
-                           if ($(this).text() == '[+Solution]') {
-                               $(this).text('[-Solution]');
-                           } else {
-                               $(this).text('[+Solution]');
-                           }
-                })
-                .attr('title','show solution');
-    $(".footnote").css('display','block')
-                  .hide();
-    $(".footnoteLink").click(function() {
-                           $(this).parent().next().toggle()
-                           if ($(this).text() == '[+]') {
-                               $(this).text('[-]');
-                           } else {
-                               $(this).text('[+]');
-                           }
-                           })
-                     .attr('title','show footnote');
-=======
-                      $(this).parent().next().toggle();
                       if ($(this).text() == '[+Solution]') {
                           $(this).text('[-Solution]');
                       } else {
@@ -2171,7 +2149,6 @@ $(document).ready(function() {
                       return(false);
                 })
                 .css('vertical-align','super');
->>>>>>> assignments
 });
 
 
@@ -2214,13 +2191,8 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
-<<<<<<< HEAD
-    var qStr = '<sup><a class="footnoteLink">[+]</a></sup>' +
-               '<div class="footnote">' + footnote + '</div> ';
-=======
     var qStr = '<a href="#" class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a>' +
                '<div class="footnote"><p>' + footnote + '</p></div> ';
->>>>>>> assignments
     if (print) {
        document.writeln(qStr);
        return(true);
