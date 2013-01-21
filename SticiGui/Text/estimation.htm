@@ -5,22 +5,21 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "3 August 2011 15:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/Courses/titlesTopics.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/Courses/titlesTopics.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "estimation";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -28,7 +27,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -42,7 +41,7 @@
 
 <p>
     In
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('sampling') + ', ');
 // -->
 </script>
@@ -66,7 +65,7 @@
     population.
     After introducing measures that summarize the accuracy of estimates, we use results
     from
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('counting') + ', ' +
                      citeLinkChapter('probabilityPhilosophy') + ', ' +
                      citeLinkChapter('sets') + ', ' +
@@ -239,7 +238,7 @@
     In most problems, there is no estimator that is guaranteed to give the right answer,
     because the value of
     the estimator typically depends on the sample.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'There are trivial exceptions.  For example, suppose we seek to estimate ' +
            'the population mean using the sample mean, and every unit has the same value ' +
            'of the variable.  Then the sample mean is always the same, and always ' +
@@ -290,7 +289,7 @@
     difference between the estimator and the true value of the parameter.
     The <a class="glossRef" href="gloss.htm#mse">mean-squared error</a>
     in fact can be written in terms of the bias and SE:
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'The <a class="glossRef" href="gloss.htm#mse">MSE</a> of an ' +
        '<a class="glossRef" href="gloss.htm#estimator">estimator</a> X of a ' +
        '<a class="glossRef" href="gloss.htm#parameter">parameter</a> ' +
@@ -347,7 +346,7 @@
 <div class="indent">
 <p class="inline">
     Estimating from a sample is like shooting a rifle.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Which reminds me of a joke: Three statisticians go deer hunting together. ' +
            'They spot a deer close by.  The first statistician takes aim and shoots. ' +
            'His shot is a yard to the left of the deer.  The second statistician ' +
@@ -399,7 +398,7 @@
     of a particular parameter they might choose the estimator that has the smallest
     <a class="glossRef" href="gloss.htm#mse">MSE</a>.
     MSE is a common measure of accuracy, but certainly not the only one.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Other common measures of accuracy include the expected value of the ' +
            'absolute value of the error, the probability that a fixed-length ' +
            'interval centered at the estimator includes the parameter, <em>etc</em>. ' +
@@ -454,7 +453,7 @@
 <div class="indent">
 <p class="inline">
     We saw in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('expectation') + ', ');
 // -->
 </script>
@@ -463,7 +462,7 @@
     of the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
     of <span class="math">n</span> random draws with or without replacement from a box is
     equal to the population mean, the average of the numbers on the tickets in the box.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Here is a recapitulation of the argument that the expected value of the sample ' +
            'mean is the population mean, for sampling without replacement. ' +
            'Let <span class="math">{x<sub>1</sub>, x<sub>2</sub>, &hellip; , ' +
@@ -509,7 +508,7 @@
     <span class="math">&phi;</span>
     is an unbiased estimator of the
     <a class="glossRef" href="gloss.htm#sample_percentage">population percentage</a>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'This also follows from what we already know about the ' +
        '<a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric distribution</a> ' +
        'and properties of the <a class="glossRef" href="gloss.htm#expectation">expected value</a>: ' +
@@ -538,14 +537,14 @@
    the population percentage.
    Because the sample mean and sample percentage are unbiased, their MSEs are the
    squares of their SEs, which we studied in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('standardError') + '. ');
 // -->
 </script>
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -556,7 +555,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Sampling distribution of the sample mean for simple random sampling.';
     writeFigureCaption(qStr);
 // -->
@@ -580,7 +579,7 @@
     </applet>
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var randBoxContents = listOfRandInts(20,0,50).join(',');
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'document.applets[' + appNum + '].' +
@@ -591,7 +590,7 @@
 
 <p>
     Whenever you load this chapter, the box in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
 </script>
@@ -690,7 +689,7 @@
     (if <span class="math">N &gt;&gt; n</span>), there is not much difference
     between sampling with replacement and sampling without replacement,
     no matter how many ones or zeros are in the list,
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'The difference between sampling with replacement and without replacement is small ' +
                'if the chance is small that a sample drawn with replacement would draw any element more ' +
                'than once&mdash;because <em>demanding</em> that the <span class="math">n</span> members be ' +
@@ -739,7 +738,7 @@
 // -->
 </script>
     and the finite population correction is nearly unity&mdash;see
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('standardError') + '. ');
 // -->
 </script>
@@ -802,7 +801,7 @@
 <div class="indent">
 <p class="inline">
     no matter how many ones or zeros are in the list.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Recall that the SD of a list of zeros and ones, with a fraction ' +
         '<span class="math">p</span> of ones, is</p><p class="math">' +
         '<big>(</big>p&times;(1 &minus; p) <big>)</big><sup>&frac12;</sup>.' +
@@ -954,7 +953,7 @@
 <!-- ================================= START PROBLEM =================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var nums = listOfDistinctRandInts(2,1,9).sort(numberLessThan);
     var N = 1000*nums[1]
@@ -1056,7 +1055,7 @@
     <a class="glossRef" href="gloss.htm#mean">mean</a> as the number from
     which the <a class="glossRef" href="gloss.htm#rms">rms</a> of the
     <a class="glossRef" href="gloss.htm#deviation">deviations</a> is smallest&mdash;see
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('location') + '. ');
 // -->
 </script>
@@ -1159,7 +1158,7 @@
     For sampling <em>with</em> replacement,
     <span class="math">s<sup>2</sup></span> is an <a class="glossRef" href="gloss.htm#unbiased">unbiased</a>
     estimator of the square of the SD of the box.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'It is not clear why this should be desirable: Typically, it is the ' +
            'SD of the box that is of interest, not the square of the SD (the population ' +
            'variance).  Moreover, for sampling without replacement, <span class="math">s<sup>2</sup></span> ' +
@@ -1249,7 +1248,7 @@
     <span class="math">(E(X))<sup>2</sup></span>),
     nor is <span class="math">s<sup>2</sup></span> an unbiased estimator of the square
     of the SD of the box when the sample is drawn without replacement.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'In sampling without replacement, <span class="math">s<sup>2</sup></span> is an unbiased ' +
            'estimator of the sum of the squares of the deviations of the population ' +
            'values from the population mean, divided by <span class="math">N&minus;1</span> instead of ' +
@@ -1269,7 +1268,7 @@
 </div>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -1278,7 +1277,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Sampling distribution of the sample variance <span class="math">s<sup>2</sup></span>';
     writeFigureCaption(qStr);
 // -->
@@ -1302,7 +1301,7 @@
     </applet>
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'document.applets[' + appNum + '].' +
               'setBox(randBoxContents,true);\n';
@@ -1312,7 +1311,7 @@
 
 <p>
     Use
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
 </script>
@@ -1389,14 +1388,14 @@
 </p>
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Estimating a Population Mean and the SE of the Estimate';
     writeExampleCaption(qStr);
 // -->
 </script>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var sizes = listOfDistinctRandInts(2,2,6).sort(numberLessThan);
     var popSize = 1000*sizes[1];
     var samSize = 4*sizes[0];
@@ -1459,7 +1458,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var sizes = listOfDistinctRandInts(2,2,6).sort(numberLessThan);
     var popSize = 1000*sizes[1];
@@ -1558,7 +1557,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var seatPop = 1000*(listOfRandInts(1,5,10))[0];
    var seatSam = 100*(listOfRandInts(1,1,3))[0];
@@ -1631,7 +1630,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var smalln = 10*(listOfRandInts(1,5,15))[0];
    var popSize = smalln*(listOfRandInts(1,10,20))[0];
@@ -1691,7 +1690,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var pctTol = (listOfRandInts(1,1,4))[0];
     var pctCtn = (listOfRandInts(1,90,99))[0];
@@ -1809,7 +1808,7 @@
     For example, if the sample is drawn at random in such a way that every unit in
     the population has the same chance of being in the sample, the sample mean will be
     an unbiased estimator of the population mean.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'It is straightforward to calculate the expected value of the sample ' +
            'mean when every unit has the same chance of being in the sample. ' +
            'Let <span class="math">p</span> denote the (common) chance that each unit is in the ' +
@@ -2008,7 +2007,7 @@
 
 </form>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

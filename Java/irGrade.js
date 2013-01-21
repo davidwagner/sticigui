@@ -1,12 +1,34 @@
-// script irGrade:  interactive, real-time grading; html formatting; statistical functions,
-//                  linear algebra
-// copyright 1997-2013. P.B. Stark, statistics.berkeley.edu/~stark
-// Version 2.3
-// All rights reserved.
+///////////////////////////////////////////////////////////////////////////////
+/* script irGrade:
 
-// !!!!Beginning of the code!!!!
+interactive, real-time grading; html formatting; statistical functions, linear algebra
 
-var irGradeModTime = '2013/1/19/1217'; // modification date and time
+///////////////////////////////////////////////////////////////////////////////
+
+ copyright (c) 1997-2013. P.B. Stark, statistics.berkeley.edu/~stark
+ Version 2.3
+
+///////////////////////////////////////////////////////////////////////////////
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+    <http://www.gnu.org/licenses/>.
+
+///////////////////////////////////////////////////////////////////////////////
+
+ Dependencies: jQuery, jQuery.bullseye
+
+ !!!!Beginning of the code!!!!
+*/
+
+var irGradeModTime = '2013/1/21/0917'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var sticiRelPath = '.';            // relative path to the root of SticiGui
@@ -1147,7 +1169,7 @@ function spawnProblem(theForm,setName,relPath) {
             lablet.assignmentname = setName;
             var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
                                    '<title>SticiGui Assignment ' + i.toString() + '</title>' +
-                                   '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
+                                   '<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>' +
                                    '</head>';
             lablet.document.writeln('<frameset rows="*,300"><frame id="instrWin" src="' + instr + '"' +
                 ' frameborder="1" framespacing="0" border="1" /><frame id="appletWin" src="' + appl + '"' +

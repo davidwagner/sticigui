@@ -5,19 +5,18 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "25 July 2011 15:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "percentageTests";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -25,7 +24,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -39,12 +38,12 @@
 </h1>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('testing') + ', ');
 // -->
 </script>
     introduced a conceptual framework for statistical hypothesis testing.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('experiments') + ', ');
 // -->
 </script>
@@ -284,7 +283,7 @@
     If the alternative hypothesis <span class="math">&mu;&nbsp;&gt;&nbsp;0</span> is true,
     <span class="math">X<sub>t</sub></span> tends to
     be larger than it would if the null hypothesis is true,
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Technically, it is <em>stochastically larger</em>: for every <span class="math">x</span>, ' +
            'the chance that <span class="math">X<sub>t</sub>&nbsp;&gt;&nbsp;x</span> is at least as large ' +
            'if the alternative hypothesis is true as it is if the null hypothesis is true.';
@@ -382,7 +381,7 @@
     Recall that we want to test the null hypothesis at significance level 5%.
     The area under the <a class="glossRef" href="gloss.htm#normal_curve">normal curve</a>
     to the right of 1.645 standard units is 5%,
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Here is the picture:</p><div class="figure"><p class="figure">' +
            '<applet code="NormHiLite.class" codebase="../../Java/" align="baseline" ' +
            'width="600" archive="PbsGui.zip" height="320">' +
@@ -432,7 +431,7 @@
     hypothesis that targeting increases the fraction of consumers who buy.
     This is the <em>normal approximation to Fisher's exact test</em>; <span class="math">Z</span> is called the
     <em>Z-statistic</em>, and the observed value of <span class="math">Z</span> is called the <em>z-score</em>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('zTest') + ', ');
 // -->
 </script>
@@ -458,20 +457,20 @@
     is <span class="math">&alpha;</span>.
     For example, <span class="math">z<sub>50%</sub>  =  0</span>, because the area under the normal curve
     to the left of zero is 50%.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeTable();
 // -->
 </script>
     shows other commonly used quantiles of the normal curve.
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Commonly Used Quantiles of the Normal Curve.';
     writeTableCaption(qStr);
 // -->
 </script>
 
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var header = ['<span class="math">&alpha;</span>', '<span class="math">z<sub>&alpha;</sub></span>'];
     var listPct = ['0.5%', '1%', '2.5%', '5%', '10%', '50%', '90%', '95%', '97.5%', '99%', '99.5%'];
     var listZ = [-2.576, -2.326, -1.960, -1.645, -1.282, 0.000, 1.282, 1.645, 1.960, 2.326, 2.576];
@@ -524,7 +523,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     document.writeln(startProblem(pCtr++));
     var N = 1000*listOfRandInts(1,8,14)[0];
     var sdt = Math.sqrt(N)/2;
@@ -705,7 +704,7 @@
     <span class="math">N</span>, <span class="math">G</span>,  and <span class="math">n<sub>t</sub></span> if the null
     hypothesis is true.
     This is proved in a footnote,
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var fStr = 'The conditional distribution of <span class="math">X<sub>t</sub></span> given ' +
            '<span class="math">G</span> is hypergeometric. If the null hypothesis is true, <span class="math">G</span> ' +
            'is the number of successes in ' +
@@ -1051,7 +1050,7 @@
     Then, the actual significance level of the <em>z</em> test can be very different from its 
     nominal significance level,
     and we need to be more circumspect; see 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('zTest') + '. ');
 // -->
 </script>
@@ -1063,7 +1062,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     document.writeln(startProblem(pCtr++));
     var tosses = listOfDistinctRandInts(2, 10, 20);
     var tossCoin = 10*tosses[0];
@@ -1225,7 +1224,7 @@
 </p>
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var qStr = 'Approximate Tests that Two Percentages are Equal, ' +
                'Using Dependent and Independent Samples';
     writeExampleCaption(qStr);
@@ -1566,7 +1565,7 @@
 </ul>
 
 </form>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

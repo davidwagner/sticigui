@@ -1,7 +1,7 @@
 /* class NormHiLite extends Applet
 @author P.B. Stark http://statistics.berkeley.edu/~stark/
 @version 0.9
-@copyright 1997-2001 by P.B. Stark. All rights reserved.
+@copyright 1997--2013 by P.B. Stark. All rights reserved.
 
 
 Plots the standard normal curve, the Student-t density, or the chi-square density.

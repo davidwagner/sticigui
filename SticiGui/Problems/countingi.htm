@@ -1,19 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "13 June 2011 15:24 PST";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "counting";
     labSetUp("SeEd",cNum);
 // -->
@@ -21,7 +20,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeProblemSetBody();
 // -->
 </script>
@@ -33,7 +32,7 @@
 
 <p>
     A certain baseball team has
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
   var nPlayers = (listOfRandInts(1, 15, 25))[0];
   document.write(nPlayers.toString() + " ");
   // -->
@@ -48,7 +47,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var nField = roundToDig(binomialCoef(nPlayers,9),0);
     var qStr = '<span class="qSpan">How may ways are there to select nine of the ' +
@@ -64,7 +63,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var nOrder = roundToDig(factorial(9),0);
     var qStr = '<span class="qSpan">How many ways are there to assign field positions ' +
@@ -79,7 +78,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many ways are there to fill the nine field ' +
                'positions from among the ' + nPlayers.toString() + ' players (taking ' +
@@ -97,7 +96,7 @@
       outfield position, the infielders (1st base, 2nd base, 3rd base, short stop) can
       play any infield position, the pitchers can only pitch, and the catchers can only
       catch. Suppose a certain team has
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
       var theInts = listOfDistinctRandInts(4,3,7);
       theInts.sort(numberLessThan);
       var nCatch = theInts[0];
@@ -117,7 +116,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many ways can the team assign field ' +
                'positions to 9 of the ' + nPlayers.toString() + ' players, putting ' +
@@ -142,7 +141,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var nBases = (listOfRandInts(1,6,12))[0];
     var qStr = '<span class="qSpan"> How many distinct DNA sequences of ' + nBases.toString() + 
@@ -251,7 +250,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var nPaths = roundToDig(2*((4*3) + (6*3) + 4),0);
     var qStr = '<span class="qSpan">How many different ways are there to choose from ' +
@@ -268,7 +267,7 @@
 <p>
   A computer hacker is trying to break into a computer system by
   guessing the system administrator's password. The hacker can try
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
   var theInts = listOfRandInts(2,5,15);
   var triesPerMin = theInts[0];
   var minPerDay = theInts[1];
@@ -289,7 +288,7 @@
 </script>
   passwords a minute,
   but if he tries unsuccessfully for more than
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
   document.writeln(minPerDay.toString() + " ");
   // -->
 </script>
@@ -297,7 +296,7 @@
   limits his attempts to less time each day, he will not get caught.
   The hacker knows that the
   administrator's password is at least
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
   document.writeln(minChars.toString() + " and at most " + maxChars.toString() + " ");
   // -->
 </script>
@@ -310,7 +309,7 @@
 
 <!-- ==================================START PROBLEM=================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many passwords are there that start with a ' +
                'letter, contain only numbers and upper and lowercase letters, and ' +
@@ -324,7 +323,7 @@
 
 <!-- ==================================START PROBLEM=================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many passwords are there that start with ' +
                'a letter, contain only numbers and upper and lowercase letters, and ' +
@@ -338,7 +337,7 @@
 
 <!-- ==================================START PROBLEM=================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many passwords are there that start with ' +
                'a letter, contain only numbers and upper and lowercase letters, and ' +
@@ -354,7 +353,7 @@
 
 <!-- ==================================START PROBLEM=================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">What fraction of the passwords that start with ' +
                'a letter, contain only numbers and upper and lowercase letters, ' +
@@ -369,7 +368,7 @@
 </script>
 </div>
 
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     writeProblemSetFooter();
 // -->
 </script>
