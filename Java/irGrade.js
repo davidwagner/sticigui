@@ -28,7 +28,7 @@ interactive, real-time grading; html formatting; statistical functions, linear a
  !!!!Beginning of the code!!!!
 */
 
-var irGradeModTime = '2013/1/21/0917'; // modification date and time
+var irGradeModTime = '2013/1/21/1334'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var sticiRelPath = '.';            // relative path to the root of SticiGui
@@ -1129,7 +1129,7 @@ function spawnProblem(theForm,setName,relPath) {
         } else {
             var sstr =  crypt('sid' + theForm.sid.value, theForm.sid.value) + '=';
             if (ck.indexOf(sstr) < 0){
-                var rs = (theForm.sid.value).toString();
+                var rs = (theForm.sid.value).toString().replace(/[^0-9]/g, '7');
                 if (rs.length < 10){
                      rs += rs;
                 }
@@ -2959,8 +2959,7 @@ function corr(list1, list2) {
 
 function percentile(list,p) { // finds the pth percentile of list
     var n = list.length;
-    var sList = new Array(n);
-    for (var i=0; i < n; i++) sList[i] = list[i].valueOf();
+    var sList = list.slice(0);
     sList.sort(numberLessThan);
     var ppt = Math.max(Math.ceil(p*n/100),1);
     return(sList[ppt-1]);
