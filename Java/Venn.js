@@ -128,15 +128,7 @@ function Venn(container_id) {
         fill: 'black',
     });
 
-    var fillArea = new Kinetic.Rect({
-      x: rectX + 32,
-        y: rectY + 16,
-        width: (320*scaleFactorX) - 64,
-        height: (180*scaleFactorY) - 32,
-        fill: 'none',
-        stroke: 'black',
-        strokeWidth: 0.5,
-    });
+	
 
     // fillArea.on('mousedown', function() {
     //   console.log('hi');
@@ -243,14 +235,16 @@ function Venn(container_id) {
     //box2.simulate('click');
 
     $('#' + container_id + 'sb1').change(function () {
+		var data = getInfo();
       box1.setWidth((320*this.value)/100);
       box1.setHeight((180*this.value)/100);
-      fillArea.setWidth((320*this.value)/100-64);
-      fillArea.setHeight((180*this.value)/100-32);
+      fillArea.setWidth(data[2]);
+      fillArea.setHeight(data[3]);
       layer.draw();
     });
 
     $('#' + container_id + 'sb2').change(function () {
+		var data = getInfo();
       box2.setWidth((320*this.value)/100);
       box2.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -259,6 +253,7 @@ function Venn(container_id) {
     });
 
     $('#' + container_id + 'sb1t').change(function () {
+		var data = getInfo();
       box1.setWidth((320*this.value)/100);
       box1.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -267,6 +262,7 @@ function Venn(container_id) {
     });
 
     $('#' + container_id + 'sb2t').change(function () {
+		var data = getInfo();
       box2.setWidth((320*this.value)/100);
       box2.setHeight((180*this.value)/100);
       fillArea.setWidth((320*this.value)/100-64);
@@ -284,11 +280,54 @@ function Venn(container_id) {
     layer.add(textBox0);
     layer.add(group1);
     layer.add(group2);
-    //layer.add(fillArea);
+	
+	var data = getInfo();
+    var fillArea = new Kinetic.Rect({
+        x: data[0],
+        y: data[1],
+        width: data[2],
+        height: data[3],
+        fill: 'blue',
+        stroke: 'black',
+        strokeWidth: 0.5,
+    });
+	
+    layer.add(fillArea);
 
     stage.add(layer);
     stage.add(messageLayer);
+	
+	function doIntersect(rect1, rect2) {
+		var rect1pos = rect1.getPosition(),
+			rect2pos = rect2.getPosition(),
+			rect1width = rect1.getWidth(),
+			rect1height = rect1.getHeight(),
+			rect2width = rect2.getWidth(),
+			rect2height = rect2.getHeight();
+		
+		return !(rect2pos.x > rect1pos.x + rect1width || rect2pos.x + rect2width < rect1pos.x || rect2pos.y > rect1pos.y + rect1height || rect2pos.y + rect2height < rect1pos.y);
+	}
+	
+	function getInfo() {
+		
+		var result = new Array();
+		
+		if (doIntersect(box1, box2)) {
+			
+			var box1pos = box1.getPosition(),
+				box2pos = box2.getPosition(),
+				box1width = box1.getWidth(),
+				box1height = box1.getHeight(),
+				box2width = box2.getWidth(),
+				box2height = box2.getHeight();
+				
+				//Intersection code
+					
+	  		console.log(result);
+		}
+		return result;
+	}
+  
   }
-
   draw();
 }

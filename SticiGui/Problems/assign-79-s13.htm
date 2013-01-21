@@ -5,24 +5,23 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "18 January 2013 13:43 PST";
-	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.1/build/rollups/sha256.js"></script>
 
 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/Courses/course.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/Courses/course.js"></script>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cName = "Assignments";
     writeChapterHead('SeEd',cName,'Online Assignments');
     theCourse = ["0",
@@ -35,7 +34,8 @@
                  4,
                  "../../Java/Courses/s79-s13-due.json",
                  "../../Java/Courses/s79-s13-enroll.json",
-                 "/"
+                 "/",
+                 "../../Java/Courses/s79-s13-assign.json"
                 ];
     setCourseSpecs();
     var assign = {};
@@ -44,7 +44,7 @@
 </head>
 
 <body>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     sticiRelPath = '..';
     writeChapterTitle('Assignments');
     writeChapterNav('..');
@@ -112,7 +112,7 @@
 <h2>
 	Assignment Schedule
 </h2>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
      if (typeof(goodColor) == 'undefined' || goodColor == null || goodColor.length == 0) {
           goodColor = 'lightgreen';
      }
@@ -120,91 +120,78 @@
           nullColor = '#eeeeee';
      }
 
-     var mapChapterToTitle = new Object;
-     for (var j=0; j < chapterTitles.length; j++) {
-         mapChapterToTitle[chapterTitles[j][1]] = chapterTitles[j][0];
-     }
-
-     var mapAssignmentToReading = new Array(assignmentTitles.length);
-     for (var j=0; j < assignmentTitles.length; j++) {
-         var readings = assignmentTitles[j][3].split(',');
-         var links = '';
-         for (var i=0; i < readings.length; i++) {
-             links += '<a href="' + sticiRelPath + '/Text/' + readings[i] + '.htm" target="_new">' +
-                      mapChapterToTitle[readings[i]] + '</a>, ';
-         }
-         mapAssignmentToReading[assignmentTitles[j][2]] = links.substr(0, links.length-2);
-     }
-
      var qStr = '<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=3 BGCOLOR="#dddddd" ' +
-	           'summary="table of assignments and due dates">' +
+	           'summary="table of assignments and due dates" id="assignmentTable">' +
 	           '<tr>' +
 	           '<th id="col0"><p class="center"><strong>Reading</strong></p></th>' +
 	           '<th id="col1"><p class="center"><strong>Assignment</strong></p></th>' +
 	           '<th id="col2"><p class="center"><strong>Due date</strong></p></th>' +
-	           '<th id="col3"><p class="center"><strong>Answers posted?</strong></p></th></tr>';
-     var upPath = '\'..\'';
-     for (var j=0; j < assignmentTitles.length; j++) {
-          qStr += '<tr id="row' + assignmentTitles[j][2] + '">' +
-    	        '<td align="left" bgcolor="#eeeeee" headers="col0">' +
-    	           mapAssignmentToReading[assignmentTitles[j][2]] + '</td>' +
-    	        '<td align="left" bgcolor="#eeeeee" headers="col1">' +
-    	           '<a href="javascript://" onclick="spawnProblem(document.forms[0],\'' +
-    	                                             assignmentTitles[j][2] + '\',' +
-                                                     upPath + '); return false">' +
-                             assignmentTitles[j][1] +
-                   '</a></td>' +
-                '<td headers="col2" id="set' + assignmentTitles[j][2] +
-                   'Due" align="center"><em>updating . . .</em></td>' +
-                '<td headers="col3" id="set' + assignmentTitles[j][2] +
-                    'Ans" align="center"><em>updating . . .</em></td></tr>';
-    }
-    qStr += '</table>';
+	           '<th id="col3"><p class="center"><strong>Answers posted?</strong></p></th></tr>' +
+               '</table>';
     document.writeln(qStr);
+    var upPath = '..';
     $(document).ready(function() {
             $.getJSON(assignURL, function(data) {
+                  assignments = data;
+                  var i = 0;
                   $.each(data, function(index, value) {
-                         assign[value[0]] = value.slice(1);
-                       });
-                  var geturl = $.ajax(timeURL)
-                                .fail(function() {
-                                     alert('error: failed to retrieve date from ' + timeURL + '!');
-                                })
-                                .done(function() {
-                                     openAssignNow = new Date(geturl.getResponseHeader('Date'));
-                                     $.each(assignmentTitles, function(j, value) {
-                                         var dueDiv = '#set' + assignmentTitles[j][2] + 'Due';
-                                         var ansDiv = '#set' + assignmentTitles[j][2] + 'Ans';
-                                         var setRow = '#row' + assignmentTitles[j][2];
-                                         var isAssigned = assign[assignmentTitles[j][2]];
-                                         if (isAssigned && (assign[assignmentTitles[j][2]][1] == 'ready')) {
-                                               var dueDate = new Date(new Date(assign[assignmentTitles[j][2]][0]) -slack);
-                                               var pastDue = (dueDate < openAssignNow);
-                                               $(dueDiv).text(dueDate.toLocaleString())
-                                                        .css('background-color', goodColor);
-                                               if (pastDue) {
-                                                    $(dueDiv).css('background-color', nullColor);
-                                               }
-                                               if (assign[assignmentTitles[j][2]][2] == 'show_answers' ||
-                                                        (assign[assignmentTitles[j][2]][2] == 'automatic' & pastDue)) {
-                                                    $(ansDiv).text('yes')
-                                                             .css('background-color', goodColor);
-                                               } else {
-                                                    $(ansDiv).text('no')
-                                                             .css('background-color', nullColor);
-                                               }
-                                         } else {
-                                               $(dueDiv).text('not assigned')
-                                                        .css('background-color', nullColor);
-                                               $(ansDiv).text('---')
-                                                        .css('background-color', nullColor);
-                                               $(setRow).css('display','none');
-                                         }
-                                    });
-                                });
-            })
-            .fail( function(jqxhr, settings, exception) {alert('failed to load due dates: ' + exception.toString());});
-
+                      var newRow = '<tr id="row' + value[0] + '">' +
+    	                             '<td align="left" bgcolor="#eeeeee" headers="col0">' + value[1].join(',') + '</td>' +
+    	                             '<td align="left" bgcolor="#eeeeee" headers="col1">' +
+    	                                     '<input type="button" id="set' + value[0] + 'Assign" goto="' + value[0] +
+    	                                      '"value="assignment"/></td>' +
+    	                             '<td align="left" bgcolor="#eeeeee" headers="col2" id="set' + value[0] + 'Due"></td>' +
+    	                             '<td align="left" bgcolor="#eeeeee" headers="col3" id="set' + value[0] + 'Ans"></td></tr>';
+    	              $('#assignmentTable').append(newRow);
+    	              $('#set' + value[0] + 'Assign').click(function() {
+    	                                               spawnProblem(document.forms[0], $(this).attr('goto'), upPath);
+    	                                               return(false);
+    	                                             });
+    	          });
+    	    }).done(function() {
+                        $.getJSON(dueURL, function(data) {
+                              $.each(data, function(index, value) {
+                                     assign[value[0]] = value.slice(1);
+                                   });
+                              var geturl = $.ajax(timeURL)
+                                            .fail(function() {
+                                                 alert('error: failed to retrieve date from ' + timeURL + '!');
+                                            })
+                                            .done(function() {
+                                                 openAssignNow = new Date(geturl.getResponseHeader('Date'));
+                                                 $.each(assignments, function(j, value) {
+                                                     var dueDiv = '#set' + value[0] + 'Due';
+                                                     var ansDiv = '#set' + value[0] + 'Ans';
+                                                     var setRow = '#row' + value[0];
+                                                     var isAssigned = assign[value[0]];
+                                                     if (isAssigned && (assign[value[0]][1] == 'ready')) {
+                                                           var dueDate = new Date(new Date(assign[value[0]][0]) -slack);
+                                                           var pastDue = (dueDate < openAssignNow);
+                                                           $(dueDiv).text(dueDate.toLocaleString())
+                                                                    .css('background-color', goodColor);
+                                                           if (pastDue) {
+                                                                $(dueDiv).css('background-color', nullColor);
+                                                           }
+                                                           if (assign[value[0]][2] == 'show_answers' ||
+                                                                    (assign[value[0]][2] == 'automatic' & pastDue)) {
+                                                                $(ansDiv).text('yes')
+                                                                         .css('background-color', goodColor);
+                                                           } else {
+                                                                $(ansDiv).text('no')
+                                                                         .css('background-color', nullColor);
+                                                           }
+                                                     } else {
+                                                           $(dueDiv).text('not assigned')
+                                                                    .css('background-color', nullColor);
+                                                           $(ansDiv).text('---')
+                                                                    .css('background-color', nullColor);
+                                                           $(setRow).css('display','none');
+                                                     }
+                                                });
+                                            });
+                        })
+                        .fail( function(jqxhr, settings, exception) {alert('failed to load due dates: ' + exception.toString());});
+            }).fail( function(jqxhr, settings, exception) {alert('failed to load assignments: ' + exception.toString());});
             $.getJSON(accessURL, function(data) {
                  enrollList = data;
             }).fail( function(jqxhr, settings, exception) {alert('failed to load enrollment list: ' + exception.toString());});
@@ -456,7 +443,7 @@ to select multiple responses.
 
 
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter('','..');
 // -->
 </script>

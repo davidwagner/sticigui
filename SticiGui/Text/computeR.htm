@@ -5,20 +5,21 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "19 September 2011 16:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "computeR";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -26,7 +27,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -63,12 +64,12 @@
 
 <p>
     We saw in chapter
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('correlation'));
 // -->
 </script>
     that the correlation coefficient measures
-    <a class="glossRef" href="gloss.htm#linear">linear</a> 
+    <a class="glossRef" href="gloss.htm#linear">linear</a>
     <a class="glossRef" href="gloss.htm#association">association</a>.
     We know that <span class="math">r</span> does not measure
     <a class="glossRef" href="gloss.htm#nonlinear">nonlinear</a> association.
@@ -89,7 +90,11 @@
    <a id="standard_units"></a>Standard units
 </h3>
 
-<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=3389&end=3470" frameborder="0" allowfullscreen></iframe></p>
+<p class="video">
+   <iframe width="420" height="315" src="http://www.youtube.com/embed/k6YkcX6e8OU?start=3389&end=3470" frameborder="0" allowfullscreen>
+   </iframe>
+</p>
+
 <p>
     <a class="glossRef" href="gloss.htm#standard_units">Standard units</a> are a way of
     putting different kinds of observations on the same scale.
@@ -100,68 +105,32 @@
     A datum that is above the mean by 2.5 times the SD is 2.5 in standard units.
 </p>
 
-<div align="center">
-<center>
-    <table border="0" cellspacing="1">
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td align="center">
-        <strong>original datum &minus; <a class="glossRef" href="gloss.htm#mean">mean</a> of original
-          data</strong>
-        </td>
-    </tr>
-    <tr>
-        <td align="center">
-        <strong>datum in
-        <a class="glossRef" href="gloss.htm#standard_units">standard units</a></strong>
-        </td>
-        <td align="center">
-        <strong>=</strong>
-        </td>
-        <td align="center">
-        <strong>how many</strong> <a class="glossRef" href="gloss.htm#sd">SD</a>
-        <strong>the datum is above the mean</strong>
-        </td>
-        <td align="center">
-        <strong> =</strong>
-        </td>
-        <td align="center">
-        ----------------------------------------------
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td align="center">
-        <strong><a class="glossRef" href="gloss.htm#sd">SD</a> of original data</strong>
-        </td>
-    </tr>
-    </table>
-</center>
-</div>
+<p class="math">
+  datum in <a class="glossRef" href="gloss.htm#standard_units">standard units</a>
+        =
+   number of </strong> <a class="glossRef" href="gloss.htm#sd">SD</a>s the datum is above the mean
+   =  \( \frac{\mbox{original datum &minus; mean of original data}}{\mbox{SD of original data}} \).
+</p>
+
+
 
 <div class="indent">
 <p class="inline">
     When a list is transformed to standard units,
     the <a class="glossRef" href="gloss.htm#mean">mean</a> of the new list is zero,
     and the <a class="glossRef" href="gloss.htm#sd">SD</a> of the new list is one:
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = '<strong>The mean and SD of a list in standard units.</strong> ' +
            'Recall from ' + citeLinkChapter('location') + ', that the mean ' +
-           'of a list tranformed by the affine function a&times;x + b is ' +
-           'a&times;mean(X) + b, and the SD of such a list is ' +
-           '|a|&times;SD<sub>X</sub>. The transformation to standard units is an ' +
-           'affine transformation with a = 1/SD<sub>X</sub> and b = ' +
-           '-mean(X)/SD<sub>X</sub>, so the mean of the list after changing to ' +
-           'standard units is </p> <p class="math"> 1/SD<sub>X</sub>&times;mean(X) ' +
-           '&minus; mean(X)/SD<sub>X</sub> = 0, </p> <p> and the SD of the list after ' +
-           'changing to standard units is </p> <p class="math"> |1/SD<sub>X</sub>| ' +
-           '&times; SD<sub>X</sub> = 1.';
+           'of a list tranformed by the affine function \\(a \\times x + b \\) is ' +
+           '\\( a \\times mean(X) + b \\), and the SD of such a list is ' +
+           '\\(|a| \\times SD_X\\). The transformation to standard units is an ' +
+           'affine transformation with \\(a = 1/SD_X\\) and \\(b = ' +
+           '-mean(X)/SD_X\\), so the mean of the list after changing to ' +
+           'standard units is </p> <p class="math">\\( \\frac{1}{SD_X} \\times mean(X) ' +
+           '- \\frac{mean(X)}{SD_X} = 0 \\), </p> <p> and the SD of the list after ' +
+           'changing to standard units is </p> <p class="math"> \\( \\left | \\frac{1}{SD_X} \\right | ' +
+           '\\times SD_X = 1. \\)';
     writeFootnote(fCtr++, fCtr.toString(), fStr);
 // -->
 </script>
@@ -190,7 +159,7 @@
     Note that both the transformation from original units to standard units and
     the transformation from standard units to original units are
     <a class="glossRef" href="gloss.htm#affine">affine transformations</a>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeExample();
 // -->
 </script>
@@ -200,14 +169,14 @@
 
 <div class="example">
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Converting to standard units and back to original units.';
     writeExampleCaption(qStr);
 // -->
 </script>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var avWt = 170 + 10*(listOfRandInts(1,-2,2)[0]);
     var sdWt = listOfRandInts(1,10,20)[0];
     var wtSu1 = roundToDig(6*(rand.next()-.5),1);
@@ -278,7 +247,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln('<p>' + startProblem(pCtr++));
     var qStr = 'The <a href="ch1.htm#gravity_data">gravity data</a> have ' +
            '<a class="glossRef" href="gloss.htm#mean">mean</a> &minus;41.67 and ' +
@@ -291,10 +260,10 @@
     document.writeln(qStr);
     writeTextExercise(8,qCtr++,gravSu);
     document.writeln('</p>');
-    var ansStr = 'To convert to standard units, you must find how many SD the point is above ' +
+    var ansStr = '<p>To convert to standard units, you must find how many SD the point is above ' +
          'the mean. The mean is &minus;41.67, and the SD is 54.87, so the measurement ' +
          gravMeas + ' is (' + gravMeas + '+ 41.67)/54.87 = ' +
-         roundToDig(ans,3) + ' standard units.';
+         roundToDig(ans,3) + ' standard units.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -314,7 +283,7 @@
     <em>same individual.</em>
     The order in which you multiply doesn't matter, but you should not change the
     order of one set of measurements relative to the other.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeExample();
 // -->
 </script>
@@ -322,7 +291,7 @@
 </p>
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var qStr = 'Computing <span class="math">r</span>.';
     writeExampleCaption(qStr);
     var n = 10;
@@ -381,9 +350,10 @@
         '</applet></p></div>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    sectionContext += 'document.applets[' + appNum +
+/*    sectionContext += 'document.applets[' + appNum +
               '].setVariables("' +  fh.join() + '","' + fw.join() +
               '");\n' + 'document.applets[' + appNum + '].showPlot();\n';
+*/
     var qStr = '<p>The point of averages of these data is (' +
         roundToDig(avefh,2).toString() + ', ' + roundToDig(avefw,2).toString() +
         '). The SD of the heights is ' + roundToDig(sdfh,2).toString() +
@@ -466,13 +436,13 @@
 
 <div class="indent">
 <p class="inline">
-    This is because the first step in calculating the 
+    This is because the first step in calculating the
     <a class="glossRef" href="gloss.htm#correlation_coef">correlation coefficient</a> is to
     convert the two lists to standard units, and any of those changes (except the last)
-    produces two lists 
+    produces two lists
     that&mdash;after converting to standard
-    units&mdash;are the same as the original lists in standard 
-    units.<script language="JavaScript1.4" type="text/javascript"> <!--
+    units&mdash;are the same as the original lists in standard
+    units.<script language="JavaScript1.8" type="text/javascript"> <!--
     var fStr = 'Equivalently, the correlation coefficient is unaffected by ' +
            '<a class="glossRef" href="gloss.htm#affine">affine transformations</a> of  both ' +
            'variables if the multiplicative constants in the transformations ' +
@@ -500,7 +470,7 @@
 // -->
 </script>
     The last transformation produces two lists that, after converting to standard units,
-    are the negatives of the original lists in standard units. 
+    are the negatives of the original lists in standard units.
     The two negative signs cancel when the corresponding elements of the lists are multiplied.
 </p>
 </div>
@@ -533,7 +503,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln('<p>' + startProblem(pCtr++));
     var r3 = roundToDig(-.1 - 0.8*(rand.next()),1);
     var n = 10;
@@ -584,9 +554,10 @@
            '<param name="y" value="1,2,3">You need Java to see this</applet>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    sectionContext += 'document.applets[' + appNum + '].' +
+/*    sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(temp.join().toString(), rain.join().toString());\n' +
               'document.applets[' + appNum + '].showPlot();\n';
+*/
     var qStr = '</p><p><span class="qSpan">Computed from the data (not read from the ' +
            'scatterplot), the point of averages of these data is (';
     document.writeln(qStr);
@@ -607,7 +578,7 @@
 </div>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln('<p>' + startProblem(pCtr++));
     var qStr = 'Let &quot;SU&quot; stand for &quot;standard units.&quot; ' +
            '<span class="qSpan">Complete the following table for the Rain and ' +
@@ -619,8 +590,8 @@
            '<th id="col3" align="center">Rain in SU</th>' +
            '<th id="col4" align="center">(Temp. in SU)&times;(Rain in SU)</th></tr>';
     document.writeln(qStr);
-    var ansStr = '';
-    var ansStrB = 'The correlation coefficient is the average product of ' +
+    var ansStr = '<p>';
+    var ansStrB = '<p>The correlation coefficient is the average product of ' +
           'corresponding pairs ' +
           'of measurements in standard units: the average of the numbers in the ' +
           'rightmost column of the table above.  There are 10 numbers, so their ' +
@@ -669,7 +640,7 @@
 </div>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln('<p>' + startProblem(pCtr++));
     var qStr = '<span class="qSpan">The correlation coefficient of annual average ' +
            'temperature and rainfall is</span>';
@@ -678,14 +649,14 @@
     var aVal = doubleToStr(Math.max(cc-0.05,-1),2)+  ":" + doubleToStr(Math.min(cc+0.05,1),2);
     writeTextExercise(6,qCtr++,aVal);
     document.writeln('</p>');
-    ansStrB = ansStrB.substr(0,ansStrB.length-2) + ')/10 = ' + roundToDig(cc,3);
+    ansStrB = ansStrB.substr(0,ansStrB.length-2) + ')/10 = ' + roundToDig(cc,3) + '</p>';
     writeSolution(pCtr-1,ansStrB);
 // -->
 </script>
 </div>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln('<p>' + startProblem(pCtr++));
     var qStr = '<span class="qSpan">The temperature in &deg;F corresponding to a ' +
            'temperature of ';
@@ -694,11 +665,11 @@
     document.writeln(qStr);
     writeTextExercise(6,qCtr++,numToRange(theTempInSU*sdTemp + aveTemp,1));
     document.writeln('</p>');
-    var ansStr = 'The temperature in standard units is the number of standard deviations ' +
+    var ansStr = '<p>The temperature in standard units is the number of standard deviations ' +
          'above the mean, so the corresponding temperature in degrees is the ' +
          'mean temperature plus the measurement in standard units times the SD ' +
          'of temperature: ' + aveTstr + '&deg; + (' + theTempInSU + ')&times;(' +
-         sdTstr + '&deg;) = ' + roundToDig(theTempInSU*sdTemp + aveTemp,3) + '&deg.';
+         sdTstr + '&deg;) = ' + roundToDig(theTempInSU*sdTemp + aveTemp,3) + '&deg.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -721,7 +692,7 @@
 
 <p>
     For example,
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -732,7 +703,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'GMAT data averaged for each school to illustrate ecological correlation.';
     writeFigureCaption(qStr);
 // -->
@@ -771,7 +742,7 @@
 
 <div class="example">
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Ecological Correlation.';
     writeExampleCaption(qStr);
 // -->
@@ -808,7 +779,7 @@
 </div>
 
 <p>&nbsp;
-    
+
 </p>
 
 <div class="callout">
@@ -890,7 +861,7 @@
 
 </form>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

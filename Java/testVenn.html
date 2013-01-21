@@ -5,25 +5,30 @@
     <script src="http://www.html5canvastutorials.com/libraries/kinetic-v4.3.1-beta2.js"></script>
     <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <link rel="stylesheet" href="Venn.css" />
+    <style type="text/css">
+	.venn {
+  	    float: left;
+	}
+    </style>
 </head>
 
 <body>
-	<script src="Venn.js"></script>
+    <script src="Venn.js"></script>
     <script type="text/javascript">
-		jQuery(function() {
-			var i = 1;
-			while (i <= 6) {
-				new Venn('venn' + i.toString());
-				i++;
-			}
-		});
-	</script>
+	jQuery(function() {
+		var i = 1;
+		while (i <= 6) {
+			new Venn('venn' + i.toString());
+			i++;
+		}
+	});
+    </script>
 
-	<div id="venn1"></div>
-    <div id="venn2"></div>
-    <div id="venn3"></div>
-    <div id="venn4"></div>
-    <div id="venn5"></div>
-    <div id="venn6"></div>
+    <div id="venn1" class="venn"></div>
+    <div id="venn2" class="venn"></div>
+    <div id="venn3" class="venn"></div>
+    <div id="venn4" class="venn"></div>
+    <div id="venn5" class="venn"></div>
+    <div id="venn6" class="venn"></div>
 </body>
 </html>

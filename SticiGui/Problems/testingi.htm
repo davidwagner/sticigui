@@ -1,20 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "5 August 2012 15:24 PST";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = 'testing';
     labSetUp('SeEd',cNum);
 // -->
@@ -22,7 +21,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeProblemSetBody();
 // -->
 </script>
@@ -34,7 +33,7 @@
 
 <!-- ================================= START PROBLEM =================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = 'A man is on trial for murder.  <span class="qSpan">The jury is, in ' +
                'effect, testing the null hypothesis that the man </span>';
@@ -57,7 +56,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <p>
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    var rolls = 10*listOfRandInts(1,3,5)[0];
    var eOnes = rolls/6;
    var seOnes = Math.sqrt((5/6)*(1/6)*rolls);
@@ -93,18 +92,18 @@
     The experimenter decides to test the null hypothesis that the die is
     fair against the alternative hypothesis that it is not fair, using the
     following test. The die will be rolled
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( rolls.toString()  + ' ');
 // -->
 </script>
     times, independently.
     If the die lands with one spot showing
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( up.toString()   + ' ');
 // -->
 </script>
     times or more, or
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( down.toString() + timeWord + ', ');
 // -->
 </script>
@@ -113,7 +112,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">Under the null hypothesis, the distribution ' +
                'of the number of times the die lands showing one spot is</span> ';
@@ -129,7 +128,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">Under the null hypothesis, the expected number of times the die ' +
               'lands showing one spot is </span>';
@@ -147,7 +146,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan"> The significance level of this test is </span>';
     document.writeln(qStr);
@@ -160,7 +159,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var alt = roundToDig(100*rand.next()*1/3,2);
     var alt2 = roundToDig(100*1/3 - alt,2);
@@ -179,7 +178,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var alt = roundToDig(100*rand.next()*1/3,2);
     var alt2 = roundToDig(100*1/3 - alt,2);
@@ -202,7 +201,7 @@
     the experimenter decides to base the test on the maximum
     number of times any face shows, instead of just the number of times one spot shows.
     That is, she will roll the die
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( rolls.toString()   + ' ');
     var up = Math.ceil(rolls/3);
     var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
@@ -243,7 +242,7 @@
 <p>
     She will reject the null hypothesis if the largest (maximum) of
     those 6 random numbers is greater than
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( up.toString()   + '. ');
 // -->
 </script>
@@ -251,7 +250,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">Under the null hypothesis, the distribution of ' +
                'the maximum number of times any face shows is </span>';
@@ -267,7 +266,7 @@
 
 
 <p>
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     var draws = 100;
     var rawOpt = ['a good lot is discarded',
                 'a good lot is not discarded',
@@ -286,7 +285,7 @@
     A manufacturer of computer memory chips produces chips in lots
     of 1000. If nothing has gone wrong in the manufacturing process,
     at most
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln( nullBad.toString()   + ' ');
 // -->
 </script>
@@ -298,7 +297,7 @@
     a given lot on the basis of the number of defective chips in a simple
     random sample.
     They decide they can afford to test
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(  draws.toString()  + ' ');
 // -->
 </script>
@@ -313,7 +312,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '(Continues previous problem.) <span class="qSpan">A type I error occurs if</span>';
     document.writeln(qStr);
@@ -325,7 +324,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    document.writeln(startProblem(pCtr++));
    var qStr = '(Continues previous problem.) <span class="qSpan">A type II error occurs if</span>';
    document.writeln(qStr);
@@ -337,7 +336,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    document.writeln(startProblem(pCtr++));
    var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
    var optPerm = randPermutation(rawOpt,'inverse');
@@ -374,7 +373,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var alpha = listOfRandInts(1,1,3)[0];
     var pBlo = 0;
@@ -399,7 +398,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    document.writeln(startProblem(pCtr++));
     var power = (1-hyperGeoCdf(1000,altBad,draws,up-1));
     var aVal = numToRange(power,0.005);
@@ -415,7 +414,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '(Continues previous problem.) <span class="qSpan">In the long run, ' +
              'the fraction of lots with ' +
@@ -432,7 +431,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var powerBad = nullBad;
     var pBlo = 1-alpha/100;
@@ -454,7 +453,7 @@
 
 
 <p>
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     var pctGood = listOfRandInts(1,90,99)[0];
     var fracPass = (1-alphaAttain)*pctGood/100 + (1-power)*(1-pctGood/100);
     var fracBadInPass = (1-power)*(1-pctGood/100)/fracPass;
@@ -474,7 +473,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    document.writeln(startProblem(pCtr++));
    var rawOpt = ['binomial','geometric','hypergeometric','negative binomial','normal'];
    var optPerm = randPermutation(rawOpt,'inverse');
@@ -526,7 +525,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
    document.writeln(startProblem(pCtr++));
    var qStr = '(Continues previous problem.) ' +
               '<span class="qSpan">The expected number of lots the manufacturer ' +
@@ -542,7 +541,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '(Continues previous problem.) ' +
                '<span class="qSpan">With this test and this mix of good and bad ' +
@@ -559,7 +558,7 @@
 
 
 
-<script language="JavaScript1.4" type="text/javascript" ><!--
+<script language="JavaScript1.8" type="text/javascript" ><!--
     writeProblemSetFooter();
 // -->
 </script>

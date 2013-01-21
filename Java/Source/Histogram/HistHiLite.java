@@ -1,5 +1,5 @@
 /* public class HistHiLite extends Applet
-@copyright 1997-2009 by P.B. Stark, stark AT stat.berkeley.edu. All rights reserved.
+@copyright 1997--2013 by P.B. Stark, stark AT stat.berkeley.edu. All rights reserved.
 
 Applet to show a histogram of data with fixed or variable-width bins, or a binomial
 probability histogram.

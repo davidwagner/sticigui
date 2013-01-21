@@ -5,15 +5,14 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "9 August 2012 14:45 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -21,9 +20,9 @@
 <script type="text/javascript" src="../../Java/sticigui.js"></script>
 <link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "confidenceIntervals";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -31,7 +30,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -51,7 +50,7 @@
     <a class="glossRef" href="gloss.htm#parameter">parameters</a> from
     <a class="glossRef" href="gloss.htm#random_sample">random samples</a>.
     In
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('estimation') + ', ');
 // -->
 </script>
@@ -149,7 +148,7 @@
     percentage <span class="math">p</span>,
     and the <a class="glossRef" href="gloss.htm#se">SE</a> of the sample percentage
     <span class="math">&phi;</span> is
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = citeLinkChapter('expectation') +
                ', shows that the expected value of the sample percentage is <span class="math">E(&phi;) = p</span>. ' +
                citeLinkChapter('standardError') + ' shows that shows that ' +
@@ -186,7 +185,7 @@
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -216,7 +215,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Conservative Confidence Interval for the Population Percentage';
     writeFigureCaption(qStr);
 // -->
@@ -233,7 +232,7 @@
     <param name="boxContents" value="0,0,0,1,1,1">
     You need Java to see this.
     </applet>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'var newPop = listOfRandInts(6,0,1);\n' +
               'if (vSum(newPop) == 0) {\n' +
@@ -324,7 +323,7 @@
     <span class="math">&plusmn;2&times;f&times;50%/n<sup>&frac12;</sup></span> of the
     population percentage <span class="math">p</span>
     converges to a number that is 75% or larger.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'More precisely, there is a number <span class="math">q</span> that is 75% or larger, ' +
            'such that for any number <span class="math">e</span> &gt; 0, the chance that the fraction ' +
            'of intervals that contain the population percentage is within ' +
@@ -385,7 +384,7 @@
 
 <p>
     Change the <span class="appCtrlName">Intervals: &plusmn;</span> value in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
 </script>
@@ -477,7 +476,7 @@
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('estimation') + ', ');
 // -->
 </script>
@@ -502,7 +501,7 @@
     the parameter in repeated sampling, but for any particular sample, the
     confidence interval either will or will not contain the parameter&mdash;and
     we will not know which unless we know the true value of the parameter.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Let <span class="math">X</span> denote the square of the difference between the estimator ' +
            'and the parameter. The MSE is the expected value of <span class="math">X</span>, the ' +
            'long-run average value of <span class="math">X</span> in repeated sampling. ' +
@@ -546,7 +545,7 @@
     chance that an interval will contain <span class="math">p</span>.
     The shorter the intervals, the smaller the chance that an interval will contain <span class="math">p</span>.
     In particular, if we choose <span class="math">k</span> so
-    that<script language="JavaScript1.4" type="text/javascript"><!--
+    that<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'We can solve for the appropriate value of <span class="math">k</span>: ' +
            '</p><p class="math">1&nbsp;&minus;&nbsp;1/k<sup>2</sup> = ' +
            'P% </p><p class="math">1/k<sup>2</sup>  = ' +
@@ -708,7 +707,7 @@
 
 <!-- ==============================     START PROBLEM    ================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var samSize = 5*(listOfRandInts(1,3,20)[0]);
     var popSize = 5*(listOfRandInts(1,3,10)[0])*samSize;
@@ -719,7 +718,7 @@
     var sqtn = Math.sqrt(samSize);
     var seBnd = fpc*.5/sqtn;
     var width = chebFac*seBnd;
-    var ansStr = 'By Chebychev\'s inequality, the chance that the sample percentage ' +
+    var ansStr = '<p>By Chebychev\'s inequality, the chance that the sample percentage ' +
          '<span class="math">&phi;</span> is within ' +
          '<span class="math">&plusmn; ' + roundToDig(chebFac,2).toString() +
          ' &times; SE(&phi;)</span> of the population percentage <span class="math">p</span> ' +
@@ -756,7 +755,7 @@
          'The true confidence level of this interval is at least ' + cl.toString() + '%, but ' +
          'the probability that the interval contains the population percentage ' +
          'is either zero or one&mdash;there is nothing random left after the sample ' +
-         'is taken.';
+         'is taken.</p>';
      var qStr = 'The entering class at North Southcentral University contains ' +
         popSize.toString() +
         ' students.  The dean\'s office seeks to determine the percentage of ' +
@@ -828,7 +827,7 @@
     For instance, suppose we know that the numbers on the tickets in the box are all between
     <span class="math">a</span> and <span class="math">b</span>, with <span class="math">a &le; b</span>.
     Then <span class="math">SD(box)</span> is at most <span class="math">(b &minus; a)/2</span>.
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var fStr = 'Proving this requires calculus; it is beyond the scope of this class.';
     writeFootnote(fCtr++, fCtr.toString(), fStr);
     // -->
@@ -962,7 +961,7 @@
 <p class="inline">
     How much shorter could the interval be, or how large a confidence level could we claim?
     It is possible to figure these things out precisely,
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var fStr = 'For example, one can invert a family of <em>most powerful hypothesis tests</em> ' +
                'to construct much shorter confidence intervals; they are not of the form ' +
                '<span class="math">&phi;&nbsp;&plusmn;&nbsp;e</span> unless <span class="math">&phi;=50%</span>.';
@@ -1002,7 +1001,7 @@
     <a class="glossRef" href="gloss.htm#finite_population_correction">finite population correction</a>
     and act as if the tickets in the sample were drawn independently.
     (See
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('standardError') + '.) ');
 // -->
 </script>
@@ -1088,7 +1087,7 @@
     the sample determines the center of <span class="math">I</span>, but to find the
     length of <span class="math">I</span> we need to know <span class="math">p&times;(1&minus;p)</span>,
     which is tantamount to knowing <span class="math">p</span>.
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var fStr = 'For a <span class="termOfArt">0-1 box</span>, if SD(box) is known, ' +
                'there are only two possible values of <span class="math">p</span>.  ' +
                'For a 0-1 box, </p><p class="math">SD(box) = ' +
@@ -1151,7 +1150,7 @@
 
 <p>
     Figure
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -1176,7 +1175,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Approximate confidence intervals for the population mean and percentage';
     writeFigureCaption(qStr);
 // -->
@@ -1194,7 +1193,7 @@
     <param name="boxContents" value="0,0,0,1,1">
     You need Java to see this.
     </applet>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'var newPop = listOfRandInts(5,0,1);\n' +
               'if (vSum(newPop) == 0) {\n' +
@@ -1241,16 +1240,16 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
-   var ansStr = 'This is not a simple random sample. The sample is one of convenience, ' +
+   var ansStr = '<p>This is not a simple random sample. The sample is one of convenience, ' +
         'and probably is biased by how it was selected; for example, students ' +
         'who do not have campus email accounts have no chance of being in the ' +
         'sample. It is not possible to calculate an approximate 95% confidence ' +
         'interval from these data, but since the parameter of interest is a population percentage, ' +
         'it must be between 0% and 100%.  The data do not narrow that down much: All we know is that ' +
         'the population percentage is at least <span class="math">3/(# undergrads)</span> ' +
-        'and at most <span class="math">(# undergrads - 97)/(# undergrads)</span>.';
+        'and at most <span class="math">(# undergrads - 97)/(# undergrads)</span>.</p>';
     var qStr = 'I would like to know the fraction of UC Berkeley undergraduates who ' +
            'commute to school from their parents\' homes. I send email to students ' +
            'with campus computer accounts until 100 have responded; 3 of the ' +
@@ -1271,7 +1270,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var pct = listOfRandInts(1,6,10)[0];
    var cl = 80 + 2*listOfRandInts(1,0,9)[0];
@@ -1353,7 +1352,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var samSize = 5*listOfRandInts(1,2,5)[0];
    var nOk = listOfRandInts(1,1,Math.floor(samSize/2))[0];
@@ -1367,7 +1366,7 @@
    var width = fac*seBnd;
    var lo = pHat - width;
    var hi = pHat + width;
-   var ansStr = 'The sample percentage is </p><p class="math">' +
+   var ansStr = '<p>The sample percentage is </p><p class="math">' +
         '(#tickets labeled &quot;1&quot;)/(#tickets in sample) = ' + nOk.toString() +
         '/' + samSize.toString() + ' = ' + pHatStr + '.</p><p> ' +
         'The sample size is so small that the bootstrap estimate of the SD of ' +
@@ -1472,7 +1471,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var popSize = 100*listOfRandInts(1,5,10)[0];
    var samSize = 20*listOfRandInts(1,5,10)[0];
@@ -1487,7 +1486,7 @@
    var hit = normInv(p);
    var hitStr = roundToDig(hit,3).toString();
    var width = s*hit/Math.sqrt(samSize);
-   var ansStr = 'The sample percentage is the number who respond positively, ' +
+   var ansStr = '<p>The sample percentage is the number who respond positively, ' +
         'divided by the sample size: ' + nOk.toString() + '/' +
         samSize.toString() + ' = ' + pctStr + '. The standard deviation of the sample ' +
         '(the bootstrap estimate of the SD of the population) is </p><p class="math">' +
@@ -1509,7 +1508,7 @@
         pctStr + ' + ' + hitStr + '&times;' + sStr + '/(' +
         samSize.toString() + ')<sup>&frac12;</sup>] = ' +
         '[ ' + roundToDig(100*(nOk/samSize - width),2).toString() + '%, ' +
-        roundToDig(100*(nOk/samSize + width),2).toString() + '%].';
+        roundToDig(100*(nOk/samSize + width),2).toString() + '%].</p>';
     var qStr = 'A restauranteur plans to change the menu in her restaurant, ' +
            'which specializes in game meats. She is trying to decide whether or not ' +
            'to offer venison goulash on the new menu. ' +
@@ -1645,7 +1644,7 @@
     For any fixed population (box), the approximation improves as the sample size
     <span class="math">n</span> increases, for random sampling with replacement.
     Example
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeExample();
 // -->
 </script>
@@ -1654,14 +1653,14 @@
 </p>
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Approximate Confidence Interval for the Population Mean';
     writeExampleCaption(qStr);
 // -->
 </script>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cl = 80+ 2*listOfRandInts(1,0,9)[0];
     var popSize = listOfRandInts(1,10,20)[0];
     var samSize = 10*listOfRandInts(1,10,popSize)[0];
@@ -1726,7 +1725,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var cl = 80+ 2*listOfRandInts(1,0,9)[0];
     var popSize = listOfRandInts(1,10,20)[0];
@@ -1752,7 +1751,7 @@
     document.writeln(' <span class="qSpan">thousand hours (low) to</span> ');
     writeTextExercise(8, qCtr++, numToRange(samMean + width));
     document.writeln(' <span class="qSpan">thousand hours (high)</span></p>.');
-    var ansStr = 'The sample size (' + samSize.toString() +
+    var ansStr = '<p>The sample size (' + samSize.toString() +
            ') is a sufficiently small fraction of the population size (' +
            commify(popSize) + ') that treating the sample as if it were drawn with ' +
            'replacement is reasonable.  The sample size is sufficiently large that ' +
@@ -1837,12 +1836,12 @@
     We will construct a confidence interval for <span class="math">p</span> by looking at the values
     of <span class="math">p</span> that are plausible, given the observed value of <span class="math">X</span>.
     The approach is similar to the approach we took in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('montyHallTest') + ', ');
 // -->
 </script>
     and very closely related to hypothesis testing, discussed in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('testing') + '. ');
 // -->
 </script>
@@ -1925,7 +1924,7 @@
     And this approach also leads to
     <em>exact</em> confidence intervals:
     The nominal coverage probability is equal
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Essentially.  Some values of the confidence level cannot be attained exactly using ' +
                'this approach, because the binomial distribution is discrete. ';
     writeFootnote(fCtr++, fCtr.toString(), fStr);
@@ -2029,14 +2028,14 @@
      population median is at least as large as the probability of observing
      4, 5, or 6 successes in 10 independent trials with probability 50% of succeess
      in each trial&mdash;the highlighted area in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>:
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Binomial probability histogram';
     writeFigureCaption(qStr);
 // -->
@@ -2063,7 +2062,7 @@
 <p>
     The interval from the fourth-smallest datum to the seventh-smallest datum is
     therefore a
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cl = roundToDig(100*(binomialCdf(10,.5,6) - binomialCdf(10,.5,3)),1).toString();
     document.writeln( cl + '% ');
 // -->
@@ -2091,7 +2090,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var nVal1 = listOfRandInts(1,11,20)[0];
    var tailProb = 0;
@@ -2104,7 +2103,7 @@
    var cl = 1-oldTail;
    var limLo = (j-0.5);
    var limHi = (nVal1-j+0.5);
-   var ansStr = 'The probability that at least ' + (j-1).toString() + ' of the ' +
+   var ansStr = '<p>The probability that at least ' + (j-1).toString() + ' of the ' +
         nVal1.toString() + ' data are less than the median and that at least ' +
         (j-1).toString() + ' data are above the median is at least ' +
         'the probability that a variable with the binomial distribution with ' +
@@ -2129,7 +2128,7 @@
         '<p>Thus the interval from the ' + ordinals[j] + ' smallest datum to the ' +
         ordinals[nVal1-j] + ' smallest datum is a ' +
         roundToDig(100*cl,1).toString() + '% confidence interval for the ' +
-        'population median.';
+        'population median.</p>';
     var qStr = 'Consider finding a ' + roundToDig(100*cl,1) +
            '% confidence interval for the median of a population from a random ' +
            'sample with replacement of size ' + nVal1.toString() + '.</p><p>' +
@@ -2332,7 +2331,7 @@
 
 </form>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

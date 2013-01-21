@@ -5,22 +5,21 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "3 August 2011 15:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/Courses/titlesTopics.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/Courses/titlesTopics.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "estimation";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -28,7 +27,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -41,32 +40,32 @@
 </h1>
 
 <p>
-    In 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    In
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('sampling') + ', ');
 // -->
 </script>
     we studied ways of collecting data about
     subsets of a <a class="glossRef" href="gloss.htm#population">population</a> to estimate
     <a class="glossRef" href="gloss.htm#parameter">parameters</a> of the population.
-    That chapter asserted that the error in estimating a 
+    That chapter asserted that the error in estimating a
     <a class="glossRef" href="gloss.htm#parameter">parameter</a>
     from a <a class="glossRef" href="gloss.htm#statistic">statistic</a> computed from a
     <a class="glossRef" href="gloss.htm#probability_sample">probability sample</a> can be quantified,
     while the error in estimating a parameter from other kinds of samples generally
     cannot be determined.
     This chapter studies sampling quantitatively, focusing on the error estimating a parameter
-    using a statistic computed from a 
+    using a statistic computed from a
     <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sample</a>:
-    a sample of size <span class="math">n</span> drawn from a population of 
+    a sample of size <span class="math">n</span> drawn from a population of
     <span class="math">N</span> units in such a way that
     each of the <span class="math"><sub>N</sub>C<sub>n</sub></span> such subsets is equally likely
     to result.
     We assume that the <a class="glossRef" href="gloss.htm#frame">frame</a> is identical to the
     population.
     After introducing measures that summarize the accuracy of estimates, we use results
-    from 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    from
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('counting') + ', ' +
                      citeLinkChapter('probabilityPhilosophy') + ', ' +
                      citeLinkChapter('sets') + ', ' +
@@ -97,12 +96,12 @@
     is an assignment of a number (the estimate of the parameter) to each
     possible random sample of size <span class="math">n</span> from the population.
     For example, the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
-    assigns to each sample of size <span class="math">n</span> the average of the 
+    assigns to each sample of size <span class="math">n</span> the average of the
     <span class="math">n</span> values in the sample.
     The rule that assigns values to samples is called the <span class="termOfArt">estimator</span>,
     and the value that is assigned to any particular random sample is the
     <span class="termOfArt">estimate</span>.
-    An estimator is a special case of a <span class="termOfArt">statistic</span>, 
+    An estimator is a special case of a <span class="termOfArt">statistic</span>,
     a number computed from a sample.
 </p>
 
@@ -167,7 +166,7 @@
 
 <p class="math">
     <a class="glossRef" href="gloss.htm#expectation">E</a>(estimator) =
-    <a class="glossRef" href="gloss.htm#parameter">parameter</a> + 
+    <a class="glossRef" href="gloss.htm#parameter">parameter</a> +
         <a class="glossRef" href="gloss.htm#bias">bias</a>.
 </p>
 
@@ -194,7 +193,7 @@
 
 <p>
     The average of the chance variability
-    across all <span class="math"><sub>N</sub>C<sub>n</sub></span> samples of size 
+    across all <span class="math"><sub>N</sub>C<sub>n</sub></span> samples of size
     <span class="math">n</span>
     is zero: In the long run in repeated sampling, the chance variability tends to
     average out.
@@ -239,7 +238,7 @@
     In most problems, there is no estimator that is guaranteed to give the right answer,
     because the value of
     the estimator typically depends on the sample.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'There are trivial exceptions.  For example, suppose we seek to estimate ' +
            'the population mean using the sample mean, and every unit has the same value ' +
            'of the variable.  Then the sample mean is always the same, and always ' +
@@ -290,7 +289,7 @@
     difference between the estimator and the true value of the parameter.
     The <a class="glossRef" href="gloss.htm#mse">mean-squared error</a>
     in fact can be written in terms of the bias and SE:
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'The <a class="glossRef" href="gloss.htm#mse">MSE</a> of an ' +
        '<a class="glossRef" href="gloss.htm#estimator">estimator</a> X of a ' +
        '<a class="glossRef" href="gloss.htm#parameter">parameter</a> ' +
@@ -347,7 +346,7 @@
 <div class="indent">
 <p class="inline">
     Estimating from a sample is like shooting a rifle.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Which reminds me of a joke: Three statisticians go deer hunting together. ' +
            'They spot a deer close by.  The first statistician takes aim and shoots. ' +
            'His shot is a yard to the left of the deer.  The second statistician ' +
@@ -399,7 +398,7 @@
     of a particular parameter they might choose the estimator that has the smallest
     <a class="glossRef" href="gloss.htm#mse">MSE</a>.
     MSE is a common measure of accuracy, but certainly not the only one.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Other common measures of accuracy include the expected value of the ' +
            'absolute value of the error, the probability that a fixed-length ' +
            'interval centered at the estimator includes the parameter, <em>etc</em>. ' +
@@ -453,8 +452,8 @@
 </p>
 <div class="indent">
 <p class="inline">
-    We saw in 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    We saw in
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('expectation') + ', ');
 // -->
 </script>
@@ -463,7 +462,7 @@
     of the <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a>
     of <span class="math">n</span> random draws with or without replacement from a box is
     equal to the population mean, the average of the numbers on the tickets in the box.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Here is a recapitulation of the argument that the expected value of the sample ' +
            'mean is the population mean, for sampling without replacement. ' +
            'Let <span class="math">{x<sub>1</sub>, x<sub>2</sub>, &hellip; , ' +
@@ -505,11 +504,11 @@
     estimator of the population mean.
     Because a percentage is the mean of a list that consists of
     only zeros and ones, the
-    <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage</a> 
+    <a class="glossRef" href="gloss.htm#sample_percentage">sample percentage</a>
     <span class="math">&phi;</span>
     is an unbiased estimator of the
     <a class="glossRef" href="gloss.htm#sample_percentage">population percentage</a>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'This also follows from what we already know about the ' +
        '<a class="glossRef" href="gloss.htm#hypergeometric_distrib">hypergeometric distribution</a> ' +
        'and properties of the <a class="glossRef" href="gloss.htm#expectation">expected value</a>: ' +
@@ -538,14 +537,14 @@
    the population percentage.
    Because the sample mean and sample percentage are unbiased, their MSEs are the
    squares of their SEs, which we studied in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('standardError') + '. ');
 // -->
 </script>
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -556,7 +555,7 @@
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Sampling distribution of the sample mean for simple random sampling.';
     writeFigureCaption(qStr);
 // -->
@@ -580,7 +579,7 @@
     </applet>
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var randBoxContents = listOfRandInts(20,0,50).join(',');
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'document.applets[' + appNum + '].' +
@@ -591,7 +590,7 @@
 
 <p>
     Whenever you load this chapter, the box in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
 </script>
@@ -690,7 +689,7 @@
     (if <span class="math">N &gt;&gt; n</span>), there is not much difference
     between sampling with replacement and sampling without replacement,
     no matter how many ones or zeros are in the list,
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'The difference between sampling with replacement and without replacement is small ' +
                'if the chance is small that a sample drawn with replacement would draw any element more ' +
                'than once&mdash;because <em>demanding</em> that the <span class="math">n</span> members be ' +
@@ -738,8 +737,8 @@
     writeFootnote(fCtr++, fCtr.toString(), fStr);
 // -->
 </script>
-    and the finite population correction is nearly unity&mdash;see 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    and the finite population correction is nearly unity&mdash;see
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('standardError') + '. ');
 // -->
 </script>
@@ -802,7 +801,7 @@
 <div class="indent">
 <p class="inline">
     no matter how many ones or zeros are in the list.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Recall that the SD of a list of zeros and ones, with a fraction ' +
         '<span class="math">p</span> of ones, is</p><p class="math">' +
         '<big>(</big>p&times;(1 &minus; p) <big>)</big><sup>&frac12;</sup>.' +
@@ -856,7 +855,7 @@
     f = <big>(</big>(N &minus; n)/(N &minus; 1)<big>)</big><sup>&frac12;</sup>
 </p>
 
-<p> 
+<p>
     is the <span class="termOfArt">finite population correction</span>.
 </p>
 
@@ -954,7 +953,7 @@
 <!-- ================================= START PROBLEM =================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var nums = listOfDistinctRandInts(2,1,9).sort(numberLessThan);
     var N = 1000*nums[1]
@@ -966,7 +965,7 @@
     var seBnd = fpc*.5*oneOverSqrtn;
     var sdHat = Math.sqrt(ph*(1.0-ph));
     var seBoot = fpc*oneOverSqrtn*sdHat;
-    var ansStr = 'The sample percentage <span class="math">&phi;</span> is an unbiased estimate of the ' +
+    var ansStr = '<p>The sample percentage <span class="math">&phi;</span> is an unbiased estimate of the ' +
          'population percentage, so we would estimate the population percentage ' +
          'to be ' + pHat.toString() + '%.  The conservative estimate of the ' +
          'standard error of the sample percentage uses the fact that the SD of ' +
@@ -992,7 +991,7 @@
          'of corporations, so even though the sample results are ' +
          'likely to be representative of the frame, there is no reason to suppose ' +
          'that they are representative of the general population of line officers ' +
-         'of U.S. corporations';
+         'of U.S. corporations.</p>';
     document.writeln('A simple random sample of size ' + n.toString() + ' is taken from a ' +
     'collection of ' + commify(N) + ' line officers of U.S. corporations. ' +
     'Within the sample, ' + pHat.toString() + '% have salaries above $200,000. ' +
@@ -1055,15 +1054,15 @@
     The bias can be understood from the characterization of the
     <a class="glossRef" href="gloss.htm#mean">mean</a> as the number from
     which the <a class="glossRef" href="gloss.htm#rms">rms</a> of the
-    <a class="glossRef" href="gloss.htm#deviation">deviations</a> is smallest&mdash;see 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    <a class="glossRef" href="gloss.htm#deviation">deviations</a> is smallest&mdash;see
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('location') + '. ');
 // -->
-</script>    
+</script>
     The rms of the deviations of the data from their own (sample) mean never is larger than,
     and typically is smaller than, the rms of the deviations of the data from the mean of the
     labels on all the tickets in the box (the population mean).
-    The expected value of <span class="math">s<sup>*</sup></span> 
+    The expected value of <span class="math">s<sup>*</sup></span>
     is the average of the possible values of <span class="math">s<sup>*</sup></span>,
     weighted by their probabilities.
     Each possible value is at most the rms of the deviations of the sample from the
@@ -1077,12 +1076,12 @@
     For that reason, it is common to estimate the SD of the box using an estimator
     that takes a slightly larger value than <span class="math">s<sup>*</sup></span>, no matter what
     the sample happens to be.
-    This more common estimator, called the <span class="termOfArt">sample standard deviation 
+    This more common estimator, called the <span class="termOfArt">sample standard deviation
     <span class="math">s</span></span>, differs
-    only slightly from <span class="math">s<sup>*</sup></span>: 
+    only slightly from <span class="math">s<sup>*</sup></span>:
     <span class="math">s<sup>*</sup></span> divides by <span class="math">n</span>
     before taking the square root to form the rms of the residuals,
-    while <span class="math">s</span> divides by <span class="math">n&minus;1</span> 
+    while <span class="math">s</span> divides by <span class="math">n&minus;1</span>
     before taking the square root.
 </p>
 
@@ -1137,7 +1136,7 @@
 <p>
     so <span class="math">s</span> is always larger than <span class="math">s<sup>*</sup></span>, by a fraction that
     is negligable when the sample size <span class="math">n</span> is large.
-    Note that <span class="math">s<sup>*</sup></span> is the 
+    Note that <span class="math">s<sup>*</sup></span> is the
     <span class="termOfArt">standard deviation of the sample</span>,
     while <span class="math">s</span> is the <span class="termOfArt">sample standard deviation</span>.
     For samples that contain only zeros and ones,
@@ -1159,7 +1158,7 @@
     For sampling <em>with</em> replacement,
     <span class="math">s<sup>2</sup></span> is an <a class="glossRef" href="gloss.htm#unbiased">unbiased</a>
     estimator of the square of the SD of the box.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'It is not clear why this should be desirable: Typically, it is the ' +
            'SD of the box that is of interest, not the square of the SD (the population ' +
            'variance).  Moreover, for sampling without replacement, <span class="math">s<sup>2</sup></span> ' +
@@ -1245,11 +1244,11 @@
 // -->
 </script>
     However, that does not imply that <span class="math">s</span> is an unbiased estimator of SD(box)
-    (recall that <span class="math">E(X<sup>2</sup>)</span> typically is not equal to 
+    (recall that <span class="math">E(X<sup>2</sup>)</span> typically is not equal to
     <span class="math">(E(X))<sup>2</sup></span>),
     nor is <span class="math">s<sup>2</sup></span> an unbiased estimator of the square
     of the SD of the box when the sample is drawn without replacement.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'In sampling without replacement, <span class="math">s<sup>2</sup></span> is an unbiased ' +
            'estimator of the sum of the squares of the deviations of the population ' +
            'values from the population mean, divided by <span class="math">N&minus;1</span> instead of ' +
@@ -1269,16 +1268,16 @@
 </div>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
-    shows a tool to study the sampling distribution of the sample variance 
+    shows a tool to study the sampling distribution of the sample variance
     <span class="math">s<sup>2</sup></span>.
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Sampling distribution of the sample variance <span class="math">s<sup>2</sup></span>';
     writeFigureCaption(qStr);
 // -->
@@ -1302,7 +1301,7 @@
     </applet>
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'document.applets[' + appNum + '].' +
               'setBox(randBoxContents,true);\n';
@@ -1312,7 +1311,7 @@
 
 <p>
     Use
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(figCtr-1);
 // -->
 </script>
@@ -1389,14 +1388,14 @@
 </p>
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Estimating a Population Mean and the SE of the Estimate';
     writeExampleCaption(qStr);
 // -->
 </script>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var sizes = listOfDistinctRandInts(2,2,6).sort(numberLessThan);
     var popSize = 1000*sizes[1];
     var samSize = 4*sizes[0];
@@ -1459,7 +1458,7 @@
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var sizes = listOfDistinctRandInts(2,2,6).sort(numberLessThan);
     var popSize = 1000*sizes[1];
@@ -1493,7 +1492,7 @@
     writeTextExercise(10,qCtr++,numToRange(fpc*sampleSd(wts)/Math.sqrt(samSize)));
     var qStr = '<span class="qSpan"> hundred hours.</span></p>';
     document.writeln(qStr);
-    var ansStr = 'The sample mean is our estimate of the average lifetime within the ' +
+    var ansStr = '<p>The sample mean is our estimate of the average lifetime within the ' +
          'population.  The sample mean is the sum of the measured values, divided ' +
          'by the sample size, ' + samSize.toString() + '; namely, ' +
          roundToDig(wtMean,3).toString() + '. The sample standard deviation ' +
@@ -1525,7 +1524,7 @@
     population, then the <a class="glossRef" href="gloss.htm#finite_population_correction">finite population
     correction</a> is close to one, and the <a class="glossRef" href="gloss.htm#se">SE</a> of the
     <a class="glossRef" href="gloss.htm#sample_mean">sample mean</a> essentially
-    depends only on the sample size <span class="math">n</span>, and not the 
+    depends only on the sample size <span class="math">n</span>, and not the
     population size <span class="math">N</span>.
 </p>
 
@@ -1558,7 +1557,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var seatPop = 1000*(listOfRandInts(1,5,10))[0];
    var seatSam = 100*(listOfRandInts(1,1,3))[0];
@@ -1568,7 +1567,7 @@
    var fStr = (roundToDig(100*fDef,2)).toString();
    var SEfBoot = Math.sqrt((seatPop - seatSam)/(seatPop-1))*Math.sqrt(fDef*(1-fDef)/seatSam);
    var SEfBnd =  Math.sqrt((seatPop - seatSam)/((seatPop-1)*seatSam))*0.5;
-   var ansStr = 'The sample percentage <span class="math">&phi;</span> is an estimator used to estimate ' +
+   var ansStr = '<p>The sample percentage <span class="math">&phi;</span> is an estimator used to estimate ' +
         'the percentage of defective seats manufactured that year; the seats ' +
         'manufactured that year comprise the population. ' +
         'The sample percentage <span class="math">&phi;</span>  of defectives is the same as the ' +
@@ -1592,7 +1591,7 @@
         seatSam.toString() + ')/(' + seatPop.toString() + ' &minus; 1)<big>)</big><sup>' +
         '&frac12;</sup> &times; <big>(</big>&frac12; &times;(1 &minus; &frac12;)' +
         ')/' + seatSam.toString() + '<big>)</big><sup>&frac12;</sup> = '
-        + (roundToDig(100*SEfBnd,2)).toString() + '%. ';
+        + (roundToDig(100*SEfBnd,2)).toString() + '%.</p> ';
     var qStr = 'A consumer advocacy group is concerned about the safety of child seats ' +
            'made by a particular manufacturer.  The group takes a simple random ' +
            'sample of ' + seatSam.toString() + ' of the ' + seatPop.toString() +
@@ -1631,12 +1630,12 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var smalln = 10*(listOfRandInts(1,5,15))[0];
    var popSize = smalln*(listOfRandInts(1,10,20))[0];
    var halfSize = Math.ceil(popSize/(popSize/(4*smalln) + 0.75));
-   var ansStr = 'The SE of the sample percentage for a simple random sample of size ' +
+   var ansStr = '<p>The SE of the sample percentage for a simple random sample of size ' +
         '<span class="math">n</span> from a population of ' + popSize.toString() + ' is</p>' +
         '<p class="math"><big>(</big>(' + popSize.toString() +
         ' &minus; n)/(' + popSize.toString() + ' &minus; 1)<big>)</big><sup>&frac12;</sup>' +
@@ -1673,7 +1672,7 @@
         (roundToDig(Math.ceil(popSize/(popSize/(4*smalln) + 0.75)),0)).toString() +
         '. Note that this is considerably less than four times the sample size of ' +
         smalln.toString() + ', which is the sample size we would need to halve ' +
-        'the SE if the sample were taken <em>with</em> replacement.';
+        'the SE if the sample were taken <em>with</em> replacement.</p>';
     var qStr = 'I wish to estimate a population percentage using the sample percentage ' +
            'computed from a simple random sample. The population consists of ' +
         popSize.toString()  + ' units. </p><p><span class="qSpan">How large a ' +
@@ -1691,7 +1690,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var pctTol = (listOfRandInts(1,1,4))[0];
     var pctCtn = (listOfRandInts(1,90,99))[0];
@@ -1709,7 +1708,7 @@
     // sqrt(n) > sqrt(1/(1-pCtn))*.5/pTol;
     var chebySam = Math.pow(chebyBnd*.5/(pctTol/100),2);
     var chebySamInt = Math.ceil(chebySam);
-    var ansStr = 'The population of registered voters is quite large. If ' +
+    var ansStr = '<p>The population of registered voters is quite large. If ' +
         'it turns out that the sample size we infer we would need on the ' +
         'assumption that the sampling is without replacement is small, then there ' +
         'would not have been much difference between sampling with and without ' +
@@ -1770,7 +1769,7 @@
         'if the sample size is at least ' + chebySamInt + ', the chance that the ' +
         'sample percentage is within ' + pctTol.toString() + '% of the population ' +
         'percentage is at least ' + pctCtn.toString() + '%. Probably this is ' +
-        'extremely conservative. ';
+        'extremely conservative.</p>';
     var qStr = 'I wish to use a simple random sample to estimate the percentage of ' +
            'registered US voters who believe that the United States should pay the ' +
            'United Nations what it owes in back dues. <span class="qSpan">' +
@@ -1809,7 +1808,7 @@
     For example, if the sample is drawn at random in such a way that every unit in
     the population has the same chance of being in the sample, the sample mean will be
     an unbiased estimator of the population mean.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'It is straightforward to calculate the expected value of the sample ' +
            'mean when every unit has the same chance of being in the sample. ' +
            'Let <span class="math">p</span> denote the (common) chance that each unit is in the ' +
@@ -1849,13 +1848,13 @@
 </h2>
 
 <p>
-    An <span class="termOfArt">estimator</span> is a 
+    An <span class="termOfArt">estimator</span> is a
     <a class="glossRef" href="gloss.htm#statistic">statistic</a>,
-    a number calculated from a sample to estimate a population 
+    a number calculated from a sample to estimate a population
     <a class="glossRef" href="gloss.htm#parameter">parameter</a>.
     Consider an estimator <span class="math">X</span> of a parameter <span class="math">t</span> calculated from a
     <a class="glossRef" href="gloss.htm#probability_sample">random sample</a>.
-    The <span class="termOfArt">bias</span> of the estimator <span class="math">X</span> is the 
+    The <span class="termOfArt">bias</span> of the estimator <span class="math">X</span> is the
     <a class="glossRef" href="gloss.htm#expectation">expected value</a>
     of <span class="math">(X&minus;t)</span>, the expected
     difference between the estimator and the parameter it is intended to estimate.
@@ -1870,7 +1869,7 @@
     is the <a class="glossRef" href="gloss.htm#se">SE</a> of the estimator.
     The SE measures the long-run scatter of the estimator in repeated sampling.
     Estimators can be compared using summaries of their expected error.
-    One common summary of the error of estimators is the 
+    One common summary of the error of estimators is the
     <a class="glossRef" href="gloss.htm#mse">mean squared error
     (MSE)</a>, <span class="math">E( (X&minus;t)<sup>2</sup> )</span>, the expected value of the square of the
     difference between an estimator and the parameter it is intended to estimate.
@@ -1899,7 +1898,7 @@
     Because the SD of a <a class="glossRef" href="gloss.htm#0_1_box">0-1 box</a>
     is <span class="math">(p(1&minus;p))<sup>&frac12;</sup></span>, where
     <span class="math">p</span> is the fraction of tickets in the box labeled &quot;1,&quot; the SE of the
-    sample percentage <span class="math">&phi;</span> of a simple random sample of size 
+    sample percentage <span class="math">&phi;</span> of a simple random sample of size
     <span class="math">n</span> from a box
     of <span class="math">N</span> tickets labeled with numbers is
 </p>
@@ -1923,7 +1922,7 @@
     formulae are not directly useful.
     However, there are ways to estimate SD(box).
     For any 0-1 box, SD(box)&le;50%, which gives convenient upper bounds on
-    SE(<span class="math">&phi;</span>): For 
+    SE(<span class="math">&phi;</span>): For
     <a class="glossRef" href="gloss.htm#simple_random_sample">simple random sampling</a>,
     <span class="math">SE(&phi;)&le;f&times;50%/n<sup>&frac12;</sup></span>,
     and for <a class="glossRef" href="gloss.htm#random_sample">random sampling with replacement</a>,
@@ -1932,7 +1931,7 @@
     There is no upper bound on the SD of an arbitrary list of numbers,
     and thus no upper bound on the SE of the sample mean of random draws from an arbitrary box.
     However, SD(box) can be estimated from the sample if the sample size is large.
-    The <span class="termOfArt">bootstrap estimate</span> of SD(box) is 
+    The <span class="termOfArt">bootstrap estimate</span> of SD(box) is
     <span class="math">s<sup>*</sup></span>, the SD of the sample.
     For 0-1 boxes, the SD of the sample is
     <span class="math">s<sup>*</sup>=(&phi;(1&minus;&phi;))<sup>&frac12;</sup></span>, where
@@ -1946,7 +1945,7 @@
     The <span class="termOfArt">sample standard deviation</span>
     <span class="math">s=s<sup>*</sup>&times;(n/(n&minus;1))<sup>&frac12;</sup></span>
     is a bit larger than the SD of the sample.
-    When the sample size <span class="math">n</span> is large, <span class="math">s</span> and 
+    When the sample size <span class="math">n</span> is large, <span class="math">s</span> and
     <span class="math">s<sup>*</sup></span>
     are almost equal.
     For random sampling with replacement, <span class="math">s<sup>2</sup></span>
@@ -2008,7 +2007,7 @@
 
 </form>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

@@ -4,20 +4,19 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "11 July 2011 10:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "regressionErrors";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -29,7 +28,7 @@
 </head>
 
 <body>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -47,7 +46,7 @@
     generally does not go through all the data: approximating the
     data using the regression line entails some error.
     As discussed in chapter
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('regressionDiagnostics') + ',' );
 // -->
 </script>
@@ -71,7 +70,9 @@
    The RMS Error of Regression
 </h2>
 
-<p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=990&end=1645" frameborder="0" allowfullscreen></iframe>
+<p class="video">
+   <iframe width="420" height="315" src="http://www.youtube.com/embed/VsF3MsUUu3E?start=990&end=1645"
+      frameborder="0" allowfullscreen></iframe>
 </p>
 
 <p>
@@ -95,30 +96,44 @@
     vertical <a class="glossRef" href="gloss.htm#residual">residuals</a> is a measure of the typical vertical
     distance from the data to the <a class="glossRef" href="gloss.htm#regression">regression line</a>, that is,
     the typical error in estimating the value of Y by the height of the regression line.
-    A bit of algebra<script language="JavaScript1.4" type="text/javascript"><!--
-var fStr = 'Let the data be pairs ' +
+    A bit of algebra<script language="JavaScript1.8" type="text/javascript"><!--
+var fStr = '<p>Let the data be pairs ' +
            '<span class="math">\\( (x_i y_i), i=1, \\dots n \\)</span>. ' +
-           'The vertical residual of the<span class="math">\\(i^{th}\\)</span> point is</p>' +
-           '<p class="math">\\( y_i-(predicted\\; y_i) = y_i-(\\frac{r \\times SD_Y}{SD_X} \\times x_i + mean(Y) - \\frac{r \\times SD_Y}{SD_X} \\times mean(X)) \\) </p>   ' +
-           '<p class="math">\\( = (y_i - mean(Y)) -  \\frac{r \\times SD_Y}{SD_X} \\times (x_i - mean(X)) \\)</p>' +
+           'The vertical residual of the <span class="math">\\(i^{th}\\)</span> point is</p>' +
+           '<p class="math">\\( y_i-(predicted\\; y_i) = y_i-(\\frac{r \\times SD_Y}{SD_X} ' +
+           '\\times x_i + mean(Y) - \\frac{r \\times SD_Y}{SD_X} \\times mean(X)) \\) </p>   ' +
+           '<p class="math">\\( = (y_i - mean(Y)) -  \\frac{r \\times SD_Y}{SD_X} \\times (x_i - mean(X)) \\).</p>' +
            '<p> The square of the <span class="math">\\(i^{th}\\)</span> vertical ' +
            'residual is </p> <p class="math">\\( [y_i - (predicted\\; y_i) ]^2 = \\left((y_i - mean(Y)) - ' +
            '\\frac{r \\times SD_Y}{SD_X} \\times (x_i - mean(X))\\right)^2 \\)</p><p class="math"> ' +
-           '\\( = (y_i - mean(Y))^2 - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X)) \\times (y_i - mean(Y)) + \\left(r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X))\\right)^2 \\). </p> <p> We want the sum of those    ' +
+           '\\( = (y_i - mean(Y))^2 - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X)) ' +
+           '\\times (y_i - mean(Y)) + \\left(r \\times \\frac{SD_Y}{SD_X} \\times (x_i - mean(X))\\right)^2 \\). </p>' +
+           ' <p> We want the sum of those    ' +
            'squares for all <span class="math">\\(n\\)</span> data <span class="math">\\( (i = 1, 2, \\dots , n )\\)</span>. ' +
            'Note that </p> ' +
            '<p class="math"> \\( SD_Y = \\sqrt{\\frac{(y_1 - mean(Y))^2 + (y_2 - mean(Y))^2 + \\dots + (y_n - mean(Y))^2}{n}}\\) </p>' +
            '<p>and</p><p class="math"> \\( r = \\frac{\\left [ \\frac{x_1 - mean(X)}{SD_X} \\times \\frac{y_1 - mean(Y)}{SD_Y} \\right ] + \\left [\\frac{x_2 - mean(X)}{SD_X} \\times \\frac{y_2 - mean(Y)}{SD_Y} \\right ] + ' +
            '\\dots + \\left [\\frac{x_n - mean(X)}{SD_X} \\times \\frac{y_n - mean(Y)}{SD_Y} \\right ]}{n} \\), </p> ' +
-           '<p> so </p> <p class="math">\\( (x_1 - mean(X)) \\times (y_1 - mean(Y)) +  (x_2 - mean(X)) \\times (y_2 - mean(Y)) + \\dots + (x_n - mean(X)) \\times (y_n - mean(Y)) =  r \\times n \\times SD_X \\times SD_Y \\).    ' +
-           '</p> <p> Now consider the first term in the square of the vertical ' +
-           'residuals. Adding the corresponding terms for <span class="math">\\( i = 1, \\dots , n\\)</span>, gives </p> ' +
+           '<p> so </p> <p class="math">\\( (x_1 - mean(X)) \\times (y_1 - mean(Y)) +  ' +
+           '(x_2 - mean(X)) \\times (y_2 - mean(Y)) + \\dots + (x_n - mean(X)) \\times ' +
+           '(y_n - mean(Y)) =  r \\times n \\times SD_X \\times SD_Y \\). </p> ' +
+           '<p> Now consider the first term in the square of the vertical residuals. Adding the corresponding ' +
+           'terms for <span class="math">\\( i = 1, \\dots , n\\)</span>, gives </p> ' +
            '<p class="math">\\( (y_1 - mean(Y))^2 + (y_2 - mean(Y))^2 + \\dots + (y_n - mean(Y))^2 = n \\times (SD_Y)^2 \\). </p> ' +
            '<p> Similarly, the sum of the second terms for <span class="math">\\( i = 1, \\dots , n\\)</span>, ' +
-           'gives</p> <p class="math">\\( - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times [(x_1 - mean(X)) \\times (y_1 - mean(Y)) + (x_2 - mean(X)) \\times (y_2 - mean(Y)) + \\dots + (x_n - mean(X)) \\times (y_n -  mean(Y))] \\)</p>' +
-           '<p class="math">\\( = - 2 \\times (SD_Y)^2 \times r \times n  \times r = - 2 \\times n \\times r^2 \\times (SD_Y) ^2\\). </p> <p>The sum of the third terms for <span class="math">\\( = 1, \\dots , n\\)</span>, gives</p>' +
-           '<p class="math"> \\( (r \\times \\frac{SD_Y}{SD_X})^2 \\times [(x_1 - mean(X)))^2 + (x_2 - mean(X)))^2 + \\dots + (x_n - mean(X)))^2]  = (r \\times \\frac{SD_Y}{SD_X})^2 \\times n \\times (SD_X)^2 = n \\times r^2 \\times (SD_Y)^2 \\). </p> ' +
-           '<p> The sum of the squares of the vertical residuals is thus </p> <p class="math">\\( n \\times (SD_Y)^2 - 2 \\times n \\times r^2 \\times (SD_Y)^2 + n \\times r^2 \\times (SD_Y)^2 = n  \\times (SD_Y)^2 \\times  (1 - 2 \\times r^2 + r^2) =  n  \\times (SD_Y)^2 \\times  (1 - r^2)\\).</p>' +
+           'gives</p> <p class="math">\\( - 2 \\times r \\times \\frac{SD_Y}{SD_X} \\times ' +
+           '[(x_1 - mean(X)) \\times (y_1 - mean(Y)) + (x_2 - mean(X)) \\times (y_2 - mean(Y)) + ' +
+           '\\dots + (x_n - mean(X)) \\times (y_n -  mean(Y))] \\)</p>' +
+           '<p class="math">\\( = - 2 \\times (SD_Y)^2 \\times r \\times n  \\times r = ' +
+           '- 2 \\times n \\times r^2 \\times (SD_Y) ^2\\). </p> <p>The sum of the third terms for ' +
+           '<span class="math">\\( = 1, \\dots , n\\)</span>, gives</p>' +
+           '<p class="math"> \\( (r \\times \\frac{SD_Y}{SD_X})^2 \\times [(x_1 - mean(X)))^2 + (x_2 - mean(X)))^2 + ' +
+           '\\dots + (x_n - mean(X)))^2]  = (r \\times \\frac{SD_Y}{SD_X})^2 \\times n \\times ' +
+           '(SD_X)^2 = n \\times r^2 \\times (SD_Y)^2 \\). </p> ' +
+           '<p> The sum of the squares of the vertical residuals is thus </p> ' +
+           '<p class="math">\\( n \\times (SD_Y)^2 - 2 \\times n \\times r^2 \\times (SD_Y)^2 + ' +
+           'n \\times r^2 \\times (SD_Y)^2 = n  \\times (SD_Y)^2 \\times  (1 - 2 \\times r^2 + r^2) =  ' +
+           'n  \\times (SD_Y)^2 \\times  (1 - r^2)\\).</p>' +
            '<p>To get from the sum of the squares of  ' +
            'the vertical residuals to the rms of the vertical residuals, we divide  ' +
            'by <span class="math">\\(n\\)</span> and take the square-root:</p> ' +
@@ -210,7 +225,7 @@ var fStr = 'Let the data be pairs ' +
     The following exercises check your ability to calculate the rms error of
     regression and your understanding of its use as a summary.
     Use
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig(1);
 // -->
 </script>
@@ -218,7 +233,7 @@ var fStr = 'Let the data be pairs ' +
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">What is the rms of the residuals from the regression ' +
            'line for regressing Verbal GMAT on Quantitative GMAT? </span>';
@@ -231,20 +246,20 @@ var fStr = 'Let the data be pairs ' +
     var res2 = Math.sqrt(1 - (.35)*(.35))*6.77;
     writeTextExercise(6,qCtr++,numToRange(res2,.1));
     document.writeln('</p>');
-    var ansStr = 'The rms of the residuals for regressing of Verbal GMAT (VGMAT) on ' +
+    var ansStr = '<p>The rms of the residuals for regressing of Verbal GMAT (VGMAT) on ' +
          'Quantitative GMAT (QGMAT) is </p><p class="math">' +
          '\\( \\sqrt{(1 - r^2)} \\times SD(VGMAT) = \\sqrt{(1 - 0.35^2)} \\times 6.22 = ' +
          roundToDig(res,3) + '\\). </p><p>Similarly, the rms of the residuals for regressing ' +
          'QGMAT on VGMAT is </p><p class="math">' +
          '\\( \\sqrt{(1 - r^2} \\times SD(QGMAT) = \\sqrt{(1 - 0.35^2)} \\times 6.77 = ' +
-         roundToDig(res2,3) + '\\). ';
+         roundToDig(res2,3) + '\\).</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
 </div>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
 // this exercise tests computing the rms error of regression, and inferring
 // from a scatterplot whether or not it is a good summary of the scatter in vertical strips.
@@ -350,7 +365,7 @@ var fStr = 'Let the data be pairs ' +
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeFig();
 // -->
 </script>
@@ -365,7 +380,7 @@ var fStr = 'Let the data be pairs ' +
 </p>
 
 <div class="figure">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Superposed Histograms of GMAT Data with and without Restrictions';
     writeFigureCaption(qStr);
 // -->
@@ -386,7 +401,7 @@ var fStr = 'Let the data be pairs ' +
 
 <p>
     We first superposed histograms to study association in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('scatterplots') + '. ');
 // -->
 </script>
@@ -433,7 +448,7 @@ var fStr = 'Let the data be pairs ' +
 
 <p>
     In
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('regression') + ', ');
 // -->
 </script>
@@ -618,7 +633,7 @@ var fStr = 'Let the data be pairs ' +
 </p>
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var ch = listOfRandInts(2,0,1);
     var qStr = 'Consider a large statistics class. <span class="qSpan">Because of the ' +
@@ -732,7 +747,7 @@ var fStr = 'Let the data be pairs ' +
 
 </form>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

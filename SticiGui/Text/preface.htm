@@ -4,19 +4,18 @@
 	  xmlns:pref="http://www.w3.org/2002/Math/preference"
       pref:renderer="css">
 
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "10 August 2011 23:24 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "preface";
     writeChapterHead('SeEd',cNum,'Preface');
 // -->
@@ -24,7 +23,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle('Preface');
 // -->
@@ -35,7 +34,7 @@
     <dd><a href="#overview" target="_self">Overview</a></dd>
       <dd><a href="#prerequisites" target="_self">Prerequisites</a> </dd>
       <dd><a href="#design" target="_self">Design criteria and implementation</a> </dd>
-      <dd><a href="#javaAdvantages" target="_self">Advantages of Java over proprietary
+      <dd><a href="#javaAdvantages" target="_self">Advantages of Javascript over proprietary
     Statistics Packages</a> </dd>
       <dd><a href="#evaluating" target="_self">Suggestions for evaluating the materials</a> </dd>
   <dt><a href="#aboutPBS" target="_self">About the Author</a></dt>
@@ -51,13 +50,13 @@
 <div class="indent">
 <p class="inline">
     This text was written for a &quot;terminal&quot;
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Rumors to the contrary notwithstanding, most students survive the class.';
     writeFootnote(fCtr++, fCtr.toString(), fStr);
     // -->
 </script>
-       introductory class in Statistics suitable students in Business, Communications, 
-       Economics, Psychology, 
+       introductory class in Statistics suitable students in Business, Communications,
+       Economics, Psychology,
        Social Science, or liberal arts;
        that is, this is the first and last class in Statistics for most students who take it.
        It also covers logic and reasoning at a level suitable for a general education course.
@@ -123,14 +122,14 @@
     textbook&mdash;but logical reasoning is key to both theoretical and empirical work.
     The text goes further with counting arguments and combinatorics than most
     elementary textbooks do; it also goes further with logic and with data analysis.
-    The applets incorporated into the materials enable students to analyze
+    The tools incorporated into the materials enable students to analyze
     real datasets (the largest has 913
     observations of 5 variables) without the pedagogical overhead of
     teaching students to use a proprietary statistics package.
     Students also reproduce numerical
     experiments that demonstrate key concepts, such as sampling distributions,
     confidence intervals, and the Law of Large Numbers.
-    Using applets also
+    Using JavaScript based tools also
     eliminates the need to teach students to read arcane tables associated with
     different distributions; instead, students type the relevant parameters into
     textboxes, highlight a range of values, and read off the probability.
@@ -177,7 +176,7 @@
     approximations to the probability histograms of discrete random variables, not as
     probability densities of continuous random variables.
     These curves are motivated
-    by interactive experiments using applets that show empirically that the sampling
+    by interactive experiments using JavaScript tools that show empirically that the sampling
     distributions of some random variables converge to the curves.
     Probability is
     developed by counting; inference is developed using counting and sampling
@@ -207,7 +206,7 @@
 	They are the basis of the first fully online course offered
 	by UC Berkeley, Statistics N21, Summer 2007.
         They have been used at other schools, including Bard College, City University of New York,
-        John Jay College of Criminal Justice, 
+        John Jay College of Criminal Justice,
         University of California Santa Cruz, San Jose State University,
         and Laney College.
 </p>
@@ -290,8 +289,7 @@
         correctness than multiple choice or numerical responses.
     </li>
     <li>
-        <a href="../Problems/index.htm">online, machine-graded assignments</a>
-        (using forms and applets),
+        <a href="../Problems/index.htm">online, machine-graded assignments</a>,
         constructed so that each student gets a different version of the assignment.
         Grades are
         posted automatically to the class website, and solutions are available
@@ -333,7 +331,7 @@
 </h3>
 
 <p>
-    These materials are comprised of XHTML, CSS, Java, and JavaScript.
+    These materials are comprised of XHTML, CSS, and JavaScript.
     As of 19 June 2011, they consisted of
     217 XHTML files containing over 136,000
     lines of XHTML and JavaScript,
@@ -357,11 +355,10 @@
     operating system (unix, linux, Windows 9x and NT, Mac OS), because Mozilla, Opera and/or
     Microsoft have versions of their browsers that run on those operating systems.
     Browsers come installed on all new personal computers, so this material is
-    immediately accessible to new computer owners. (Installing Java might be necessary.)
+    immediately accessible to new computer owners.
     I have made a considerable effort to make the materials function well with screen reader
     software for visually impaired students&mdash;but there is more work to be done.
-    (MathML seems to be the solution to the remaining problems, but as of this writing, only
-    Firefox can render MathML directly.)
+    Converting the mathematics to MathML using MathJax is underway.
   </li>
   <li>
     Maximize interactivity and minimize technological barriers.
@@ -372,7 +369,7 @@
     no hidden menus, consistent GUI, <em>etc</em>.).
   </li>
   <li>
-    Minimize bandwidth and maximize speed. Using Java allows the figures and plots to be
+    Minimize bandwidth and maximize speed. Using JavaScript allows the figures and plots to be
     generated on the client-side. The code and data download to the client, then the client
     computes and creates the figures. This is by far the most efficient way to get dynamic
     interaction with the data.
@@ -404,8 +401,8 @@
     database when a student submits an assignment, and allow students and instructors to query
     the database for grades over the Internet.
     As an alternative to perl cgi, assignment due
-    dates can be controlled by modifying a simple ascii text file that is queried by a Java
-    applet, and assignment grades can be redirected to an email address instead of a database.
+    dates can be controlled by modifying a simple ascii text file that is queried by an AJAX
+    call, and assignment grades can be redirected to an email address instead of a database.
   </li>
   <li>
     Maximize portability on the server side.
@@ -413,8 +410,7 @@
     Microsoft active server pages (.asp pages) or server-side JavaScript, the &quot;back
     end&quot; is a collection of perl cgi routines that access a standard
     database file.
-    The server only needs to support perl scripts and serve static XHTML, JavaScript, text, CSS and
-    Java class files.
+    The server only needs to support perl scripts and serve static XHTML, JavaScript, text, and CSS.
     This makes the package
     platform-independent on the server side as well as the client side: there is public-domain
     software allowing perl cgi to run with every common web server, and there are
@@ -424,7 +420,7 @@
 </ol>
 
 <p>
-    Using XHTML with Java, JavaScript and CSS allowed me to make the content dynamic: many of the
+    Using XHTML with JavaScript and CSS allowed me to make the content dynamic: many of the
     examples and exercises in the text change whenever the page is reloaded, so students can
     get unlimited practice at certain kinds of problems. Similarly, each student gets a
     different version of each assignment and exam, but can see the solutions to his/her
@@ -432,12 +428,12 @@
 </p>
 
 <h3>
-    <a id="javaAdvantages"></a>Advantages of Java over standard
+    <a id="javaAdvantages"></a>Advantages of JavaScript over standard
     Statistical Packages
 </h3>
 
 <p>
-    There are a number of advantages to using Java applets rather than an integrated
+    There are a number of advantages to using JavaScript rather than an integrated
     statistical package:
 </p>
 
@@ -453,7 +449,7 @@
   <li>
     Some of the demonstrations would be extremely difficult, if not impossible, to code in a
     standard statistical package.
-    For example, see the Venn Diagram applet.
+    For example, see the Venn Diagram tool.
   </li>
   <li>
     If a standard package were used, the figures/demonstrations/calculations could not be
@@ -482,8 +478,8 @@
 
 <p>
     I would recommend that instructors who wish to evaluate these materials
-    for possible adoption look first at 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    for possible adoption look first at
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('scatterplots') + ', ' +
                      citeLinkChapter('correlation') + ', and ' +
                      citeLinkChapter('regression') + '. ');
@@ -491,11 +487,11 @@
 </script>
     Those chapters illustrate several aspects of the text:
     dynamic exercises, the use of real data in examples and exercises,
-    the histogram and scatterplot applets, and the gradual introduction of new
-    functionality (buttons and displayed statistics) into the applets as students
+    the histogram and scatterplot tools, and the gradual introduction of new
+    functionality (buttons and displayed statistics) into the tools as students
     learn new concepts.
-    For example, when the scatterplot applet arrives in 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    For example, when the scatterplot tool arrives in
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('scatterplots') + ', ');
 // -->
 </script>
@@ -506,51 +502,51 @@
     (Selecting a row in the data listing highlights the corresponding point
     in the scatterplot.)
     In
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('correlation') + ', ');
 // -->
-</script> 
-    the scatterplot applet
+</script>
+    the scatterplot tool
     acquires the correlation coefficient, and a button to show graphically
     the standard deviations of the two variables plotted; it is also invoked to
     display randomly generated data that attain a given value of the correlation
     coefficient.
     It also starts to allow students to add points by clicking on the plot,
     to see the effect of additional data on the correlation coefficient.
-    In 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    In
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('regression') + ', ');
 // -->
 </script>
-    the same applet gains buttons to show the
+    the same tool gains buttons to show the
     graph of averages, the SD line, and the regression line.
 </p>
 
 <p>
-    After those chapters, I would recommend looking at the collection of Java applets to see
-    how various concepts are presented graphically; in particular, be sure to see the applets
+    After those chapters, I would recommend looking at the collection of interactive tools to see
+    how various concepts are presented graphically; in particular, be sure to see the tools
     for <a href="../../Java/Html/Venn.htm" target="lablet">Venn diagrams</a>, <a
     href="../../Java/Html/SampleMean.htm" target="lablet">sampling distributions</a>, <a
     href="../../Java/Html/Ci.htm" target="lablet">confidence intervals</a>, and the <a
     href="../../Java/Html/lln.htm" target="lablet">Law of Large Numbers</a>.
     To see how tables of
-    probabilities are eliminated, see the applets for the <a href="../../Java/Html/NormHiLite.htm"
+    probabilities are eliminated, see the tools for the <a href="../../Java/Html/NormHiLite.htm"
     target="lablet">Normal Distribution</a>,
     <a href="../../Java/Html/tHiLite.htm" target="lablet">Student's
     t-Distribution</a>, and the <a href="../../Java/Html/chiHiLite.htm" target="lablet">Chi-square
     Distribution</a>.
-    I would recommend then looking at 
-<script language="JavaScript1.4" type="text/javascript"><!--
-    document.writeln(citeLinkChapter('montyHall') + ', ' + 
-                     citeLinkChapter('montyHallTest') +  ', ' + 
+    I would recommend then looking at
+<script language="JavaScript1.8" type="text/javascript"><!--
+    document.writeln(citeLinkChapter('montyHall') + ', ' +
+                     citeLinkChapter('montyHallTest') +  ', ' +
                      citeLinkChapter('experiments') + ', and ' +
                      citeLinkChapter('percentageTests') + '. '
                      );
 // -->
-</script>    
+</script>
     Instructors with an interest in logic or who teach general education courses might
-    enjoy 
-<script language="JavaScript1.4" type="text/javascript"><!--
+    enjoy
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('logic') + ', and ' + citeLinkChapter('fallacies') + '. ');
 // -->
 </script>
@@ -563,7 +559,7 @@
 </h3>
 
 <p>
-    Philip B. Stark is Professor of Statistics at the University
+    Philip B. Stark is Professor and Chair of Statistics at the University
     of California, Berkeley, where he has been on the faculty since 1988.
     He received his bachelor's degree in Philosophy from Princeton University in 1980,
     and his PhD in Earth Science from the Scripps Institution of Oceanography in 1986.
@@ -605,33 +601,39 @@
     He has testified to the U.S. House of Representatives Subcommittee on the Census,
     to the California State Senate, the California State Assembly,
     and the California Department of Fish and Game.
-    He has consulted for the U.S. Department of Justice, the Federal Trade Commission,
+    He has consulted for the U.S. Department of Justice,
     the U.S. Department of Agriculture, the U.S. Census Bureau,
     the U.S. Department of Housing and Urban Development,
     the U.S. Attorney's Office of the Northern District of California,
-    the U.S. Department of Veterans Affairs, the Secretary of State of California,
+    the U.S. Department of Veterans Affairs,
+    the Federal Trade Commission,
     the Los Angeles County Superior Court,
-    the National Solar Observatory, the California Secretary of State, public utilities,
+    the National Solar Observatory, the California Secretary of State,
+    the Colorado Secretary of State, public utilities,
     major corporations, and numerous law firms, including about half of the 25 largest.
     He won the Chancellor's Award for Public Service for Research in the Public Interest in 2011
     for his work on election auditing, and he is currently working with the Secretary of State
-    of California and the Secretary of State of Colorado to implement risk-limiting election 
+    of California and the Secretary of State of Colorado to implement risk-limiting election
     audits.
 </p>
 
 <p>
-    Philip has served on the Technical Advisory Boards of two online publishing
-    firms, an online data mining company and a photo search engine.
-    He was the Faculty Assistant for
+    Philip was the Faculty Assistant for
     Educational Technology at The University of California, Berkeley, from
     2001&ndash;2003 and chaired the U.C. Berkeley Educational Technology Committee from
     2001&ndash;2005.
+    He taught UC Berkeley's first official online course, in 2007, and developed one of
+    the first courses to be offered through UC Online Education, and co-developed (with Ani Adhikari)
+    the first introductory statistics course offered through edX.
+</p>
+
+<p>
     Philip does not like to be called &quot;Phil.&quot;
     He likes open-source software, dislikes email attachments,
     runs 100 mile endurance trail races, roasts his own coffee,
     and thinks this book is proof that obsessive-compulsive disorder is a job qualification.
-    Philip lives in Berkeley, California, with a laptop, an iPhone, an Olympia Cremina,
-    Porlex and Zassenhaus hand mills, muddy homemade huaraches, and an embarrassing 
+    Philip lives in Berkeley, California, with a laptop, an iPhone, a Bacchi Espresso,
+    Porlex and Zassenhaus hand mills, muddy homemade huaraches, and an embarrassing
     number of LED flashlights.
 </p>
 </div>
@@ -657,14 +659,14 @@
     My friend and mentor David A. Freedman, and the excellent &quot;dead-tree
     book&quot; <em>Statistics</em> by Freedman, Pisani, and Purves, were inspirational.
     Aviva Shimelman worked <em>all</em> the exercises and was instrumental in streamlining
-    the prose and visual style. 
+    the prose and visual style.
     Deirdre Lynch made several valuable suggestions regarding the user interface, and
     Sydney Jones was extremely helpful in identifying problems with flow, organization,
     consistency, and prose.
-    Faculty who taught from these materials and made valuable 
+    Faculty who taught from these materials and made valuable
     suggestions include Ani Adhikari, L. Jay Citron, Yehuda Klein, Mark Lindeman,
     Aviva Shimelman and Margaret Smith.
-    I am grateful for their help and their courage to experiment with a new 
+    I am grateful for their help and their courage to experiment with a new
     medium and new mode of teaching.
     Many students have found typos over the years: Thank you!
 </p>
@@ -675,7 +677,7 @@
 </p>
 
 <p>&nbsp;</p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>

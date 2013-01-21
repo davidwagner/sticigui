@@ -5,15 +5,14 @@
       pref:renderer="css">
 
 <head>
-<script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "8 October 2011 15:24 PST";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+<script language="JavaScript1.8" type="text/javascript"><!--
+	pageModDate = "21 January 2013 08:37 PST";
+	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
 <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -21,9 +20,9 @@
 <script type="text/javascript" src="../../Java/sticigui.js"></script>
 <link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "testing";
     writeChapterHead('SeEd',cNum);
 // -->
@@ -31,7 +30,7 @@
 </head>
 
 <body >
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterNav('..');
     writeChapterTitle();
 // -->
@@ -49,7 +48,7 @@
     addresses the problem of making decisions&mdash;such as choosing between two competing
     hypotheses about the world&mdash;on the basis of uncertain data.
     In 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(citeLinkChapter('montyHallTest') + ', ');
 // -->
 </script>
@@ -234,7 +233,7 @@
     There is a tradeoff between Type I and Type II errors: within a given &quot;technology&quot;
     for testing hypotheses, decreasing the rate of Type I errors increases the rate of
     Type II errors, and <em>vice versa</em>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'In rare exceptions, an hypothesis test can have significance level 0 ' +
            'and power 100%: let <span class="math">B</span> be the set of ' +
            'possible values of the data when the null hypothesis is true, and ' +
@@ -291,7 +290,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var qStr = 'The highway patrol sometimes use a <em>speed trap</em> to catch ' +
            'drivers who exceed the speed limit.  In speed traps, officers ' +
@@ -336,7 +335,7 @@
     The <a class="glossRef" href="gloss.htm#significance">significance level</a> of an hypothesis
     test is the chance that it makes a Type I error&mdash;the chance that it rejects a true
     <a class="glossRef" href="gloss.htm#null_hypothesis">null hypothesis</a>.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'The Grammar of Conditional and Counterfactual Statements. ' +
             'In this chapter and later chapters on hypothesis testing, we study ' +
             'hypothetical situations. I use conditional statements, such as ' +
@@ -424,7 +423,7 @@
     One way statisticians develop hypothesis tests is to consider all tests with
     a given significance level, and choose the one with the largest power against
     all plausible alternatives
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Such a test is called <em>uniformly most powerful</em>. Uniformly most ' +
                'powerful tests exist in many common problems.  We do not worry about such ' +
                'niceties in this text, although several of the tests we study in this text ' +
@@ -438,7 +437,7 @@
 
 <div class="example">
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Testing Whether a Gun Is Loaded.';
     writeExampleCaption(qStr);
 // -->
@@ -448,7 +447,7 @@
 <p class="inline">
         A statistician of dubious judgement wants to determine whether a revolver
         that can hold six cartridges is loaded.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'An ammunition cartridge has four principal components: the <em>bullet</em> ' +
            '(the part that does the dirty work, usually made of lead or lead '+
            'covered with copper); the <em>powder</em> or <em>propellant</em>, whose ' +
@@ -534,7 +533,7 @@
     exactly the desired significance level; in that case, one should choose the rejection
     region so that the chance of rejecting the null hypothesis if it be true is as
     large as possible without exceeding the significance level.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'Some more advanced courses present methods for constructing a test with ' +
            'desired significance level.  Those methods can require auxiliary randomization: ' +
            'for some values of the test statistic, one might need to toss a coin, for ' +
@@ -549,7 +548,7 @@
 <p class="inline">
     Suppose we have a family of tests that let us test the null hypothesis
     at any significance level <span class="math">p</span> between 0 and 100%.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'There is another technical condition: The <span class="termOfArt">rejection regions</span> ' +
                'for the tests must nest.  That is, if the significance level <span class="math">p</span> ' +
                'test would reject the null hypothesis on the basis of a particular set of data, then all the ' +
@@ -598,7 +597,7 @@
 
 <p>
     In
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeExample(xCtr-1);
 // -->
 </script>, which tests whether a gun is loaded, the test statistic is the number
@@ -610,7 +609,7 @@
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeExample(xCtr);
 // -->
 </script>
@@ -620,7 +619,7 @@
 
 
 <div class="example">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Testing an Hypothesis about the Population Percentage Using the ' +
                'Sample Sum of a Simple Random Sample';
     writeExampleCaption(qStr);
@@ -628,7 +627,7 @@
 </script>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"> <!--
+<script language="JavaScript1.8" type="text/javascript"> <!--
     var nPop = listOfRandInts(1, 20, 50)[0];
     var nSam = listOfRandInts(1, 10, nPop)[0];
     nPop *= 10;
@@ -751,7 +750,7 @@
 
 <div class="example">
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Testing ESP using Zener Cards';
     writeExampleCaption(qStr);
 // -->
@@ -825,7 +824,7 @@
     permutations of the cards.
     The test statistic will be the number <span class="math">X</span> of cards that are
     in the same place in the psychic's permutation as they are in the shuffled deck.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'There is another way to interpret the calculation we will do, corresponding ' +
            'to a slightly different null hypothesis. Namely, we can think of the ' +
            'shuffled deck as being a fixed permutation, and compare ' +
@@ -863,7 +862,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">In testing whether the psychic has ESP, ' +
            'the null hypothesis is </span>';
@@ -937,7 +936,7 @@
 <div class="indent">
 <p class="inline">
     Calculating the probability distribution is complicated; the calculation appears in a footnote.
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var fStr = 'We shall calculate the probability distribution of <span class="math">X</span>. The ' +
            'possible values of <span class="math">X</span> are 0, 1, 2, 3, and 5. <span class="math">X</span> cannot ' +
            'equal 4 because, as we noted above, if four of the cards are in the ' +
@@ -1024,7 +1023,7 @@
 // -->
 </script>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeTable();
 // -->
 </script>
@@ -1032,7 +1031,7 @@
 </p>
 </div>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Probability Distribution of X, the Number of Zener Cards the ' +
                'Psychic Identifies Correctly, Assuming the Null Hypothesis Is True.';
     writeTableCaption(qStr);
@@ -1082,7 +1081,7 @@
 
 <!-- ==================================START PROBLEM==================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var qStr = 'Suppose we reject the null hypothesis if the psychic determines ' +
            '3 or more cards correctly. <span class="qSpan">The significance level of ' +
@@ -1310,7 +1309,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var ansStr = '(a) We can think of the null hypothesis as the hypothesis that the chance ' +
     'this coin lands heads when it is tossed is 50%. The alternative hypothesis is ' +
@@ -1482,7 +1481,7 @@
 <!-- ==================================START PROBLEM==================================== -->
 
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
    document.writeln(startProblem(pCtr++));
    var ansStr = '(a) If the list contains 100 numbers, and                  ' +
      '     no two of them are equal, and the 75th percentile of the list is 10,     ' +
@@ -1643,7 +1642,7 @@
 </p>
 
 <p>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeTable();
     var qStr = ' through ';
     document.writeln(qStr);
@@ -1654,7 +1653,7 @@
     employees, broken down by whether or not they were terminated involuntarily (fired).
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by Gender';
     writeTableCaption(qStr);
 // -->
@@ -1693,7 +1692,7 @@
 
 <p>&nbsp;</p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by <a href="#ethnicity_list">Ethnicity</a>: ' +
                'White versus Other';
     writeTableCaption(qStr);
@@ -1733,7 +1732,7 @@
 
 <p>&nbsp;</p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by <a href="#ethnicity_list">Ethnicity</a>: ' +
                'All Ethnicity Categories';
     writeTableCaption(qStr);
@@ -1786,7 +1785,7 @@
 
 <p>&nbsp;</p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by Age Group: Under 40 Versus 40 and Over';
     writeTableCaption(qStr);
 // -->
@@ -1825,7 +1824,7 @@
 
 <p>&nbsp;</p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by Gender and Age Group';
     writeTableCaption(qStr);
 // -->
@@ -1879,7 +1878,7 @@
 
 <p>&nbsp;</p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = 'Termination by Gender and <a href="#ethnicity_list">Ethnicity</a>';
     writeTableCaption(qStr);
 // -->
@@ -2153,7 +2152,7 @@
     It is my understanding that in discrimination cases, the threshold probability for
     inferring that discrimination has taken place is at most 5%.
     The results are as shown in
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     citeTable();
 // -->
 </script>.
@@ -2161,7 +2160,7 @@
     simple random sample of 24 employees.
 </p>
 
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     var qStr = '<span class="math">P</span-values for Null Hypotheses of No ' +
                'Discrimination&mdash;that Terminations Were Random.';
     writeTableCaption(qStr);
@@ -2228,7 +2227,7 @@
 
 <!-- ================================= START PROBLEM =================================== -->
 <div class="problem">
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     document.writeln(startProblem(pCtr++));
     var gore = 2912253;
     var bush = 2912790;
@@ -2779,7 +2778,7 @@
 </ul>
 
 </form>
-<script language="JavaScript1.4" type="text/javascript"><!--
+<script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterFooter();
 // -->
 </script>
