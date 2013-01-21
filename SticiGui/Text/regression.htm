@@ -1124,11 +1124,9 @@
            'You need Java to see this.</applet></p>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables((husIQ.join().toString()),wifIQ.join().toString());\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>

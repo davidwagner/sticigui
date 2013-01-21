@@ -583,10 +583,8 @@
 <script language="JavaScript1.4" type="text/javascript"><!--
     var randBoxContents = listOfRandInts(20,0,50).join(',');
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setBox(randBoxContents,true);\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>
@@ -1306,10 +1304,8 @@
 
 <script language="JavaScript1.4" type="text/javascript"><!--
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setBox(randBoxContents,true);\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>

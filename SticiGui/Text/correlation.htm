@@ -303,9 +303,7 @@
            '<param name="r" value=".5">You need Java to see this.</applet></p>';
      document.writeln(qStr);
      var appNum = (document.applets.length - 1).toString();
-    try {
      sectionContext += 'document.applets[' + appNum + '].setR(r1);\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>
@@ -334,9 +332,7 @@
            '<param name="r" value=".5">You need Java to see this.</applet></p>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].setR(r2);\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>

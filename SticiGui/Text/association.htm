@@ -475,11 +475,9 @@
            'see this</applet>';
      document.writeln(qStr);
      appNum = (document.applets.length - 1).toString();
-    try {
      sectionContext += 'document.applets[' + appNum + '].' +
                'setVariables(data1[0].join(),data1[1].join() );\n' +
                'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>

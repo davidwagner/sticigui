@@ -595,10 +595,8 @@
                 '</applet>\n';
      document.writeln(qStr);
      var appNum = (document.applets.length - 1).toString();
-    try {
      sectionContext += // 'document.applets[' + appNum + '].setN(' + nPoints.toString() + ');\n' +
                        'document.applets[' + appNum + '].setR(' + r1.toString() + ');\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>
@@ -1516,12 +1514,10 @@
                'You need Java to see this</applet>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].setVariables(\"' +
                       (data6[0]).join() + '\",\"' +
                       (data6[1]).join() + '\");\n' +
                       'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>
@@ -1695,12 +1691,10 @@
                      '<param name="y" value="' + (data5[1]).join() + '">' +
                      'You need Java to see this</applet>');
    var appNum = (document.applets.length - 1).toString();
-    try {
    sectionContext += 'document.applets[' + appNum + '].setVariables("' +
                      (data5[0]).join() + '","' +
                      (data5[1]).join() + '");\n' +
                      'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>

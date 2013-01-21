@@ -242,11 +242,10 @@
 //    $(document).ready(function() {
 //          sticiHistHilite('hist1', data1[0].join(),data1[1].join());
 //    });
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data1[0].join(),data1[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
+
 // -->
 </script>
 </p>
@@ -363,11 +362,9 @@
     var parms = [["polynomial", .5, rand.next(),-.5,.25], 8, 5];
     var data2 = fakeBivariateData(examplePoints,parms[0], parms[1],parms[2]);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data2[0].join(),data2[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>
@@ -500,11 +497,9 @@
     var data4 = fakeBivariateData(examplePoints,parms[0],
         parms[1],parms[2]);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data4[0].join(),data4[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>
@@ -538,11 +533,9 @@
     var parms = [["polynomial", 10*(1+rand.next()), 5*rand.next()], 1, 5];
     var data3 = fakeBivariateData(examplePoints,parms[0], parms[1],parms[2]);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data3[0].join(),data3[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </p>
@@ -769,11 +762,9 @@
            'You need Java to see this</applet></p>';
     document.writeln(qStr);
     var appNum = (document.applets.length - 1).toString();
-    try {
     sectionContext += 'document.applets[' + appNum + '].' +
               'setVariables(data5[0].join(),data5[1].join() );\n' +
               'document.applets[' + appNum + '].showPlot();\n';
-    } catch (e) { /* ignore */ }
 // -->
 </script>
 </div>
