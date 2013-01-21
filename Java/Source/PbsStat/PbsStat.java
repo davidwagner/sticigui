@@ -4,7 +4,7 @@ public class PbsStat extends Object
 
 @author P.B. Stark stark@stat.berkeley.edu
 @version 0.1
-@copyright 1997-2007 by P.B. Stark. All rights reserved.
+@copyright 1997--2013 by P.B. Stark. All rights reserved.
 
 Last modified 14 May 2007
 .
