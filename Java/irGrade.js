@@ -2150,6 +2150,7 @@ $(document).ready(function() {
     $("div.solution").css('display','block')
                      .hide();
     $(".solLink").click(function() {
+                      $(this).parent().next().toggle();
                       if ($(this).text() == '[+Solution]') {
                           $(this).text('[-Solution]');
                       } else {
