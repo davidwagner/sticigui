@@ -36,13 +36,13 @@ function statCalc(container_id, params) {
                     "1", "2", "3", "-", "Sqrt", "x^2",
                     "0", "+/-", ".", "+", "1/x", "x^y",
                     "=", "CE", "C", "exp(x)", "log(x)", "log_y(x)"
-                  ];
+                    ];
     var buttonType = [ "num", "num", "num", "bin", "una", "bin",
                     "num", "num", "num", "bin", "una", "una",
                     "num", "num", "num", "bin", "una", "una",
                     "num", "chs", "num", "bin", "una", "bin",
                     "eq",  "CE",  "una", "una", "una", "bin"
-                  ];
+                    ];
     self.numberVec = new Array(self.decimals);
     self.decimal = false;
     self.update = true;
@@ -73,8 +73,73 @@ function statCalc(container_id, params) {
 //  action functions
 
     function buttonClick(v, opType) {
-        case opType:
+        try {
+            switch(opType) {
+               case 'num':
+                   var t = self.theDisplay.val().replace(/[a-z, *+\/]+/gi,'');
+                   t = (t=='0') ? t+v : v;
+                   self.theDisplay.val(t);
+                   break;
+               case 'una':
+                   switch(v) {
+                      case '+/-':
+                         var t = self.theDisplay.val().replace(/[a-z, *+\/]+/gi,'');
+                         t = (t.indexOf('-') > -1) ? t.substring(1) : t;
+                         self.theDisplay.val(t);
+                         break;
+                      case '!':
+                         var t = self.theDisplay.val().replace(/[a-z, *+\/]+/gi,'');
+                         var ans = factorial(t);
+                         self.theDisplay.val(t.toString());
+                         break;
+                      case 'sqrt':
+                         var t = self.theDisplay.val().replace(/[a-z, *\-+\/]+/gi,'');
+                         var ans = Math.sqrt(t);
+                         self.theDisplay.val(t.toString());
+                         break;
+                      case 'x^2':
+                         var t = self.theDisplay.val().replace(/[a-z, *\-+\/]+/gi,'');
+                         var ans = x*x;
+                         self.theDisplay.val(t.toString());
+                         break;
+                      case 'exp(x)':
+                         var t = self.theDisplay.val().replace(/[a-z, *\-+\/]+/gi,'');
+                         var ans = Math.exp(x);
+                         self.theDisplay.val(t.toString());
+                         break;
+                      case '1/x':
+                         var t = self.theDisplay.val().replace(/[a-z, *\-+\/]+/gi,'');
+                         var ans = 1/x;
+                         self.theDisplay.val(t.toString());
+                         break;
+                      case 'U[0,1]':
+                         self.theDisplay.val(rand.next());
+                         break;
+                      case 'CE':
+                         self.theDisplay.val('');
+                         break;
+                      case 'C':
+                         self.x = 0;
+                         self.y = 0;
+                         self.theDisplay.val('0')
+                    }
+                    break;
+                default:
+                    console.log('unexpected button in statCalc');
+            }
+        } catch(e) {
+           console.log(e);
+           self.theDisplay.val('NaN');
+        }
     }
+
+
+    $(document).ready(function() {
+         $('.calcButton.num').click(function() {
+
+               });
+    });
+
 }
 
 /*
