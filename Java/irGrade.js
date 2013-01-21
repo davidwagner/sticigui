@@ -2130,7 +2130,6 @@ $(document).ready(function() {
     $("div.solution").css('display','block')
                      .hide();
     $(".solLink").click(function() {
-<<<<<<< HEAD
                       $(this).parent().next().toggle();
                       if ($(this).text() == '[+Solution]') {
                           $(this).text('[-Solution]');
@@ -2153,28 +2152,8 @@ $(document).ready(function() {
                       return(false);
                 })
                 .css('vertical-align','super');
-=======
-                           $(this).next().toggle()
-                           if ($(this).text() == '[+Solution]') {
-                               $(this).text('[-Solution]');
-                           } else {
-                               $(this).text('[+Solution]');
-                           }
-                })
-                .attr('title','show solution');
-    $(".footnote").css('display','block')
-                  .hide();
-    $(".footnoteLink").click(function() {
-                           $(this).parent().next().toggle()
-                           if ($(this).text() == '[+]') {
-                               $(this).text('[-]');
-                           } else {
-                               $(this).text('[+]');
-                           }
-                           })
-                     .attr('title','show footnote');
->>>>>>> master
 });
+
 
 function writeProblemSetFooter() {
     var qStr = '<div align="center"><center>';
