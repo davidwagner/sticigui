@@ -215,6 +215,7 @@ for (var j=0; j < assignmentTitles.length; j++) {
     assignmentNumbers[assignmentTitles[j][2]] = j;
 }
 
+var pureAssign = true;             // assignments based only on the chapters-to-assignment mapping
 var cookieExpireDays = 7;          // days for the cookies to endure
 var theChapter = null;             // current chapter
 var theChapterTitle;               // title of the current chapter, if specified
@@ -222,14 +223,12 @@ var theCourse;                     // course-specific data
 var openAssignNow;                 // server time when assignment page was opened
 var enrollList;                    // hashed enrollment list
 var newStyleAnswer = true;         // flag for pop-up versus inline
-var fCtr = 0;                      // counter for footnotes
 var figCtr = 1;                    // counter for figures
 var pCtr = 1;                      // counter for problems
 var qCtr = 1;                      // counter for questions
 var tCtr = 1;                      // counter for tables
 var xCtr = 1;                      // counter for examples
-// var footnotes = new Array();       // array of footnotes
-// var footnoteLabels = new Array();  // array of footnote labels
+var fCtr = 0;                      // counter for footnotes
 var key = new Array();             // key for self-graded exercises
 var boxList = new Array();         // list of images for self-graded exercises
 var setNum;                        // current problem set number
@@ -342,14 +341,14 @@ var iteratives = ['no times','once','twice','thrice'];
 for (var i=4; i < cardinals.length; i++) {
     iteratives[i] = cardinals[i] + ' times';
 }
-var primes = [ 2,      3,      5,      7,     11,     13,     17,     19,     23,     29, 
-              31,     37,     41,     43,     47,     53,     59,     61,     67,     71, 
+var primes = [ 2,      3,      5,      7,     11,     13,     17,     19,     23,     29,
+              31,     37,     41,     43,     47,     53,     59,     61,     67,     71,
               73,     79,     83,     89,     97,    101,    103,    107,    109,    113,
-             127,    131,    137,    139,    149,    151,    157,    163,    167,    173,
-             179,    181,    191,    193,    197,    199,    211,    223,    227,    229,
-             233,    239,    241,    251,    257,    263,    269,    271,    277,    281,
-             283,    293,    307,    311,    313,    317,    331,    337,    347,    349,
-             353,    359,    367,    373,    379,    383,    389,    397,    401,    409];
+              127,    131,    137,    139,    149,    151,    157,    163,    167,    173,
+              179,    181,    191,    193,    197,    199,    211,    223,    227,    229,
+              233,    239,    241,    251,    257,    263,    269,    271,    277,    281,
+              283,    293,    307,    311,    313,    317,    331,    337,    347,    349,
+              353,    359,    367,    373,    379,    383,    389,    397,    401,    409];
 var nPrimes = [0, 0, 1, 2, 2, 3, 3, 4, 4, 4,           // 0-9
                4, 5, 5, 6, 6, 6, 6, 7, 7, 8,           // 10-19
                8, 8, 8, 9, 9, 9, 9, 9, 9, 10,          // 20-29
@@ -759,11 +758,6 @@ function startProblem(q) {  // writes html to start a problem, numbered q
     return(s);
 }
 
-
-function startSolution(q) {  // html to start a solution, numbered q
-    return('<strong>Solution.</strong> ');
-}
-
 function writeSelectExercise(mult, q, opt, ans) {
     document.writeln(selectExerciseString(mult, q, opt, ans));
     return(true);
@@ -1041,9 +1035,13 @@ function setCourseSpecs() {
     gPath = theCourse[5];
     maxSubmits = theCourse[6];
     showWrongAfterSubmits = theCourse[7];
-    assignURL = theCourse[8];
+    dueURL = theCourse[8];
     accessURL = theCourse[9];
     timeURL = theCourse[10];
+    if (theCourse[11]) {
+        pureAssign = false;
+        assignURL = theCourse[11];
+    }
     dFile = cRoot + course + dFileBase;
     sFile = cRoot + course + sFileBase;
     $(document).ready(function() {
@@ -1101,7 +1099,7 @@ function spawnProblem(theForm,setName,relPath) {
     }
     if (validateLablet(theForm)) {
         var ck = document.cookie;
-        var fname = formStemName + assignmentNumbers[setName].toString();
+//        var fname = formStemName + assignmentNumbers[setName].toString();
         var assigned = assign[setName] && (assign[setName][1] == 'ready');
         if (!assigned) {
                     alert('Error #1 in irGrade.spawnProblem(): This has not been assigned yet.\n Try again later.');
@@ -1146,6 +1144,7 @@ function spawnProblem(theForm,setName,relPath) {
             lablet.showWrongAfterSubmits = showWrongAfterSubmits;
             lablet.formname = setName;
             lablet.theChapter = setName;
+            lablet.assignmentname = setName;
             var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
                                    '<title>SticiGui Assignment ' + i.toString() + '</title>' +
                                    '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
@@ -1606,23 +1605,15 @@ function labletSubmit(theForm) {
 }
 
 function validateLablet(theForm) {
-    if (theForm.lastName.value == null || theForm.lastName.value.length == 0 ||
-             allBlanks(theForm.lastName.value) ) {
-        alert('Last Name is missing');
-        theForm.lastName.focus();
-        return(false);
-    } else if (!allLetters(theForm.lastName.value) ) {
-        alert('Illegal character(s) in Last Name');
-        theForm.lastName.focus();
-        return(false);
-    } else if (theForm.firstName.value == null ||
+    if (theForm.firstName.value == null ||
           theForm.firstName.value.length == 0 || allBlanks(theForm.firstName.value)) {
         alert('First Name is missing');
         theForm.firstName.focus();
         return(false);
-    } else if (!allLetters(theForm.firstName.value) ) {
-        alert('Illegal character(s) in First Name');
-        theForm.firstName.focus();
+    } else if (theForm.lastName.value == null || theForm.lastName.value.length == 0 ||
+             allBlanks(theForm.lastName.value) ) {
+        alert('Last Name is missing');
+        theForm.lastName.focus();
         return(false);
     } else if ( !validEmail(theForm.email.value)) {
         alert('Email address is missing or invalid');
@@ -2119,7 +2110,10 @@ function writeExamHeader(exNam, exVer, relPath) {
 }
 
 $(document).ready(function() {
-    eval(sectionContext);
+    try{
+       eval(sectionContext);
+    } catch(e) {
+    }
     if (  (typeof(document.forms) != 'undefined') && (document.forms != null) &&
             (document.forms.length > 0 ) && !isLab )  {
         document.forms[0].reset();
@@ -2127,8 +2121,14 @@ $(document).ready(function() {
     if (isLab) {
         recoverResponses();
     }
-    $(".solution").hide();
+    try {
+         $('#chLink' + theChapter.toString()).css('color','#ffffff')
+                                             .css('backgroundColor','#000000');
+    } catch(e) {}
+    $("div.solution").css('display','block')
+                     .hide();
     $(".solLink").click(function() {
+<<<<<<< HEAD
                            $(this).next().toggle()
                            if ($(this).text() == '[+Solution]') {
                                $(this).text('[-Solution]');
@@ -2148,7 +2148,32 @@ $(document).ready(function() {
                            }
                            })
                      .attr('title','show footnote');
+=======
+                      $(this).parent().next().toggle();
+                      if ($(this).text() == '[+Solution]') {
+                          $(this).text('[-Solution]');
+                      } else {
+                          $(this).text('[+Solution]');
+                      }
+               //       pushSolutionOpened($(this));  // for analytics
+                      return(false);
+    });
+    $(".footnote").css('display','block')
+                  .hide();
+    $(".fnLink").click(function() {
+                      $(this).parent().next().toggle();
+                      if ($(this).text() == '[+]') {
+                          $(this).text('[-]');
+                      } else {
+                          $(this).text('[+]');
+                      }
+               //       pushFootnoteOpened($(this));  // for analytics
+                      return(false);
+                })
+                .css('vertical-align','super');
+>>>>>>> assignments
 });
+
 
 function writeProblemSetFooter() {
     var qStr = '<div align="center"><center>';
@@ -2168,16 +2193,15 @@ function writeProblemSetFooter() {
 }
 
 function writeSolution(p,text,solFunc) {
-    var qStr = '<div class="solutionLink"><p><a class="solLink">[+Solution]</a> ' +
-               '<span class="solution">';
+    var qStr = '<div class="solutionLink"><p><a href="#" class="solLink">[+Solution]</a></p> ' +
+               '<div class="solution">';
     if (typeof(text) != 'undefined') {
        qStr += text;
     }
-    qStr += '</span></p></div>';
+    qStr += '</div></div>';
     document.writeln(qStr);
     return(true);
 }
-
 
 function writeFootnote(p,label,text, print) {
     if (typeof(print) == 'undefined' || print == null) {
@@ -2190,8 +2214,13 @@ function writeFootnote(p,label,text, print) {
        }
     }
     footnote = chStr + label + ':</strong> ' + text ;
+<<<<<<< HEAD
     var qStr = '<sup><a class="footnoteLink">[+]</a></sup>' +
                '<div class="footnote">' + footnote + '</div> ';
+=======
+    var qStr = '<a href="#" class="fnLink" id="footnote' + fCtr.toString() + '">[+]</a>' +
+               '<div class="footnote"><p>' + footnote + '</p></div> ';
+>>>>>>> assignments
     if (print) {
        document.writeln(qStr);
        return(true);
@@ -2202,7 +2231,7 @@ function writeFootnote(p,label,text, print) {
 
 function writeChapterFooter(finalCommand, relPath) {
     if (typeof(relPath) == 'undefined' || relPath == null || relPath.length == 0) {
-    	relPath = '..';
+        relPath = '..';
     }
     if (typeof(finalCommand) == 'undefined' || finalCommand == null || finalCommand.length == 0) {
         finalCommand = 'sticiBottom("' + relPath.toString() + '")';
@@ -2243,17 +2272,10 @@ function sticiBottom(relPath) {
             theChapterLinkName = i.toString();
         }
         document.writeln('<a href="' + relPath + '/Text/' + chapterTitles[i][1] + '.htm" ' +
-                            'target="_self"><span id="chLink' + i.toString() + '">' +
-                            theChapterLinkName + '</span></a> |');
+                            'target="_self" class="pageIndex" id="chLink' + i.toString() + '">' +
+                            theChapterLinkName + '</a> |');
     }
     document.writeln('</p></div>');
-    if (theChapter != null) {
-        var thisChapterLink = $('#chLink' + theChapter.toString());
-        if (typeof(thisChapterLink) != null && thisChapterLink != null) {
-            thisChapterLink.style.color = '#ffffff';
-            thisChapterLink.style.backgroundColor = '#000000';
-        }
-    }
 }
 
 function writeProblemSetHead(sn) {

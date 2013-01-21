@@ -13,7 +13,7 @@
 </script>
 
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
-<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -559,7 +559,7 @@
     document.writeln(qStr);
     writeTextExercise(8, qCtr++, numToRange(prob2) );
     document.writeln('</p>');
-    var ansStr = 'The numbers of red, black, and green outcomes in ' + spins.toString() +
+    var ansStr = '<p>The numbers of red, black, and green outcomes in ' + spins.toString() +
          ' independent spins of the wheel have a multinomial joint distribution ' +
          'with parameters ' +
          '<em>n</em> = ' + spins.toString() + ', <em>p</em><sub>1</sub> = (18/38), ' +
@@ -582,7 +582,7 @@
           (spins-i).toString() + '</sup> +';
     }
     ansStr = ansStr.substring(0, ansStr.length-1);
-    ansStr += ' = ' + roundToDig(100*prob2, 2).toString() + '%. ';
+    ansStr += ' = ' + roundToDig(100*prob2, 2).toString() + '%.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1052,7 +1052,7 @@
     document.writeln(qStr);
     writeTextExercise(8, qCtr++, numToRange(chi2));
     document.writeln('</p>');
-    var ansStr = 'The expected number of times the ball lands in a red space is equal to ' +
+    var ansStr = '<p>The expected number of times the ball lands in a red space is equal to ' +
          'the number of trials times the probability that it lands in a red ' +
          'space in each trial: ' + spins.toString() + ' &times; (18/38) = ' +
          roundToDig(eOutcomes[0], 2).toString() + '. The expected number of times ' +
@@ -1070,7 +1070,7 @@
          ')<sup>2</sup>/' + roundToDig(eOutcomes[1], 2).toString() + ' + ' +
          '(' + outcomes[2].toString() + ' - ' + roundToDig(eOutcomes[2], 2).toString() +
          ')<sup>2</sup>/' + roundToDig(eOutcomes[2], 2).toString() + ' = ' +
-         roundToDig(chi2, 3).toString() + '. ';
+         roundToDig(chi2, 3).toString() + '.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1397,10 +1397,10 @@
     document.writeln(qStr);
     writeTextExercise(8, qCtr++, numToRange(pctile));
     document.writeln('</p>');
-    var ansStr = 'To find the area, just plug the appropriate values into the chi-square ' +
+    var ansStr = '<p>To find the area, just plug the appropriate values into the chi-square ' +
          'curve tool.  To find the percentile, use trial and error in the tool, ' +
          'with the lower limit set to zero and the degrees of freedom set to ' +
-         df.toString() + '.';
+         df.toString() + '.</p>';
     writeSolution(pCtr-1, ansStr);
 // -->
 </script>
@@ -1790,7 +1790,7 @@
     }
     writeSelectExercise(false, qCtr++, opt, aVal);
     document.writeln('</p>');
-    var ansStr = 'Under the null hypothesis, the expected number of ' +
+    var ansStr = '<p>Under the null hypothesis, the expected number of ' +
          'jurors in each ethnic group is ' + jurors.toString() + ' times the ' +
          'fraction of jurors of that ethnicity in the pool.  This gives </p>';
     var header = ['Ethnicity','Expected number of jurors'];
@@ -1818,7 +1818,7 @@
           'null hypothesis at significance level ' + sig.toString() + '%.';
     } else {
        ansStr += 'larger than ' + sig.toString() + '%, so we would not reject the ' +
-          'null hypothesis at significance level ' + sig.toString() + '%.';
+          'null hypothesis at significance level ' + sig.toString() + '%.</p>';
     }
     writeSolution(pCtr-1, ansStr);
 // -->

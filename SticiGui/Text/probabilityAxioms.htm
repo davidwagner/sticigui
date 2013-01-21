@@ -6,11 +6,15 @@
 
 <head>
 <script language="JavaScript1.4" type="text/javascript"><!--
-	pageModDate = "4 June 2011 21:37 PDT";
-	// copyright 1997-2011 by P.B. Stark, statistics.berkeley.edu/~stark.
+	pageModDate = "20 January 2013 16:37 PST";
+	// copyright 1997-2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
+
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
@@ -37,7 +41,7 @@
 <script language="JavaScript1.4" type="text/javascript"><!--
     document.writeln(citeLinkChapter('probabilityPhilosophy') + ', ');
 // -->
-</script> 
+</script>
     discussed how the mathematical theory of probability is connected to the world
     through philosophical
     <a class="glossRef" href="gloss.htm#probability_theories">theories of probability</a>.
@@ -182,16 +186,16 @@
 </script>
 
 <p>
-    Let <span class="math"><strong>S</strong></span> be a set containing 
+    Let <span class="math"><strong>S</strong></span> be a set containing
     <span class="math">n&gt;0</span> elements, for example,
     <span class="math"><strong>S</strong>= {1, 2, &hellip; , n}</span>.
-    For any subset <span class="math">A</span> of <span class="math"><strong>S</strong></span>, 
+    For any subset <span class="math">A</span> of <span class="math"><strong>S</strong></span>,
     define <span class="math">#A</span>
     to be the number of elements of <span class="math">A</span>.
-    For example,  <span class="math">#{} = 0, #{1, 2} = 2</span>, and 
+    For example,  <span class="math">#{} = 0, #{1, 2} = 2</span>, and
     <span class="math">#{n, n&minus;1, n&minus;2} = 3</span>.
-    The function # is called the <span class="termOfArt">cardinality function</span> and  
-    <span class="math">#A</span> is called the 
+    The function # is called the <span class="termOfArt">cardinality function</span> and
+    <span class="math">#A</span> is called the
     <em>cardinality of</em> <span class="math">A</span>.
 </p>
 
@@ -216,7 +220,7 @@
 <p>
     Let <span class="math">P(A) = #A/n</span>, the number of elements in the
     subset <span class="math">A</span>, divided by the total number of elements in <span class="math"><strong>S</strong></span>.
-    Then the function <span class="math">P</span> is called 
+    Then the function <span class="math">P</span> is called
     <span class="termOfArt">the uniform probability distribution on</span>
     <span class="math"><strong>S</strong></span>.
     The function <span class="math">P</span> satisfies the axioms of probability.
@@ -226,7 +230,7 @@
 <ol>
     <li>
         <p>
-            The number of elements in any subset <span class="math">A</span> of 
+            The number of elements in any subset <span class="math">A</span> of
             <span class="math"><strong>S</strong></span> is at least
             zero (<span class="math">#A&ge;0</span>), so <span class="math">P(A) &ge; 0/n = 0</span>.
             Thus <span class="math">P</span> satisfies Axiom 1.
@@ -234,14 +238,14 @@
     </li>
     <li>
         <p>
-            <span class="math">P(<strong>S</strong>) = 
+            <span class="math">P(<strong>S</strong>) =
              #<strong>S</strong>/n = n/n = 100%</span>.
             Thus <span class="math">P</span> satisfies Axiom 2.
         </p>
     </li>
     <li>
         <p>
-            If <span class="math">A</span> and <span class="math">B</span> are disjoint, 
+            If <span class="math">A</span> and <span class="math">B</span> are disjoint,
             then the number of elements in the
             union <span class="math">A&cup;B</span>
             is the number of elements in <span class="math">A</span> plus the number
@@ -312,7 +316,7 @@
     Consider a random trial that can result in failure or success.
     Let 0 stand for failure, and let 1 stand for success.
     Then we can consider the outcome space to be <span class="math"><strong>S</strong> = {0, 1}</span>.
-    For any number <span class="math">p</span> between 0 and 100%, define the 
+    For any number <span class="math">p</span> between 0 and 100%, define the
     function <span class="math">P</span> as follows:
 </p>
 
@@ -332,25 +336,25 @@
 </ul>
 
 <p>
-    Then <span class="math">P</span> is a probability distribution on 
+    Then <span class="math">P</span> is a probability distribution on
     <span class="math"><strong>S</strong></span>, as we can verify
     by checking that it satisfies the axioms:
 </p>
 
 <ol>
     <li>
-        <p>Because <span class="math">p</span> is between 0 and 100%, so is 
+        <p>Because <span class="math">p</span> is between 0 and 100%, so is
           <span class="math">100% &minus; p</span>.
-        The outcome space <span class="math"><strong>S</strong></span> has but four subsets: 
+        The outcome space <span class="math"><strong>S</strong></span> has but four subsets:
          <span class="math">{}, {0}, {1}</span>, and <span class="math">{0, 1}</span>.
-        The values assigned to them by <span class="math">P</span> are 
+        The values assigned to them by <span class="math">P</span> are
         <span class="math">0, 1 &minus; p, p,</span> and <span class="math">100%</span>,
         respectively.
         All these numbers are at zero or larger, so <span class="math">P</span> satisfies Axiom 1.
         </p>
     </li>
     <li>
-        <p>By definition, <span class="math">P(<strong>S</strong>) = 100%</span>, so 
+        <p>By definition, <span class="math">P(<strong>S</strong>) = 100%</span>, so
            <span class="math">P</span> satisfies Axiom 2.</p>
     </li>
     <li>
@@ -434,7 +438,7 @@
     it is much easier to calculate the probability that <span class="math">A</span> does not
     occur than to calculate the probability that <span class="math">A</span> does occur.
     The complement rule can be derived from the axioms: the union of <span class="math">A</span>
-    and its complement <span class="math">A<sup>c</sup></span> is 
+    and its complement <span class="math">A<sup>c</sup></span> is
     <span class="math"><strong>S</strong></span>
     (either <span class="math">A</span> happens or it does not,
     and there is no other possibility), so
@@ -448,9 +452,9 @@
 <p>
     by axiom 2.
     The event <span class="math">A</span> and its complement are disjoint (if
-    &quot;<span class="math">A</span> does not happen&quot; happens, 
+    &quot;<span class="math">A</span> does not happen&quot; happens,
     <span class="math">A</span> does not happen;
-    if <span class="math">A</span> happens, &quot;<span class="math">A</span> 
+    if <span class="math">A</span> happens, &quot;<span class="math">A</span>
     does not happen&quot; does not happen), so
 </p>
 
@@ -470,7 +474,7 @@
 
 <p>
     Subtracting <span class="math">P(A)</span> from both sides of this equation yields
-    what we sought: 
+    what we sought:
 </p>
 
 <p class="math">
@@ -506,7 +510,7 @@
     of 10 heads and/or tails, so the probability of any particular
     sequence is 100%/(total number of sequences).
     By the <a class="glossRef" href="gloss.htm#fundamental_rule_of_counting">Fundamental Rule of Counting</a>,
-    there are 
+    there are
 </p>
 
 <p class="math">
@@ -519,7 +523,7 @@
 
 <p>
     One of those sequences is (tails, tails, &hellip; , tails), so the probability that
-    the coin lands tails in all 10 tosses is 
+    the coin lands tails in all 10 tosses is
 </p>
 
 <p class="math">
@@ -528,7 +532,7 @@
 
 <p>
     By the complement rule, the probability that the coin lands heads at
-    least once is therefore 
+    least once is therefore
 </p>
 
 <p class="math">
@@ -538,13 +542,13 @@
 
 <p>
     A special case of the Complement Rule is that the probability of the empty set
-    is always zero <span class="math">(P({}) = 0%)</span>,  because 
+    is always zero <span class="math">(P({}) = 0%)</span>,  because
     <span class="math">P(<strong>S</strong>) = 100%</span>, and
     <span class="math"><strong>S</strong><sup>c</sup>= {}</span>.
 </p>
 
 <p>
-    An event <span class="math">A</span> whose probability is 100% is said to be 
+    An event <span class="math">A</span> whose probability is 100% is said to be
     <span class="termOfArt">certain</span> or <span class="termOfArt">sure</span>.
     <span class="math"><strong>S</strong></span> is certain.
 </p>
@@ -573,15 +577,15 @@
 
 <ul>
     <li>
-        Elements of <span class="math">A</span> that are not in <span class="math">B</span> 
+        Elements of <span class="math">A</span> that are not in <span class="math">B</span>
         (<span class="math">AB<sup>c</sup></span>)
     </li>
     <li>
-        Elements of <span class="math">B</span> that are not in <span class="math">A</span> 
+        Elements of <span class="math">B</span> that are not in <span class="math">A</span>
         (<span class="math">A<sup>c</sup>B</span>)
     </li>
     <li>
-        Elements of both <span class="math">A</span> and 
+        Elements of both <span class="math">A</span> and
         <span class="math">B</span> (<span class="math">AB</span>)
     </li>
 </ul>
@@ -622,7 +626,7 @@
 </p>
 
 <p>
-    because <span class="math">AB<sup>c</sup></span> and <span class="math">AB</span> are disjoint. 
+    because <span class="math">AB<sup>c</sup></span> and <span class="math">AB</span> are disjoint.
     Similarly,
 </p>
 
@@ -732,7 +736,7 @@
     </p>
     <ul>
         <li><span class="math">P({}) = 0</span>.</li>
-        <li>For any event <span class="math">A</span>, 
+        <li>For any event <span class="math">A</span>,
             <span class="math">P(A<sup>c</sup>) = 100% &minus; P(A)</span>.</li>
         <li>
             If <span class="math"><strong>S</strong> = { A<sub>1</sub>, A<sub>2</sub>,
@@ -816,9 +820,9 @@
     dartboard.
     The experiment consists of throwing a dart at the board once.
     The event <span class="math">A</span> occurs if the dart sticks in the set <span class="math">A</span>.
-    The event <span class="math">AB</span> occurs if the dart sticks in both 
+    The event <span class="math">AB</span> occurs if the dart sticks in both
     <span class="math">A</span> and <span class="math">B</span> on that one toss.
-    Clearly, <span class="math">AB</span> cannot occur unless <span class="math">A</span> and 
+    Clearly, <span class="math">AB</span> cannot occur unless <span class="math">A</span> and
     <span class="math">B</span> overlap&mdash;the
     dart cannot stick in two places at once.
     <span class="math">A&cup;B</span> occurs if the dart
@@ -831,21 +835,21 @@
 <p>
     This analogy is also useful for thinking about the connection between
     Set Theory and logical implication.
-    If <span class="math">A</span> is a subset of <span class="math">B</span>, the 
+    If <span class="math">A</span> is a subset of <span class="math">B</span>, the
     occurrence of <span class="math">A</span>
     <a class="glossRef" href="gloss.htm#implies">implies</a>
     the occurrence of <span class="math">B</span>; We shall sometimes say that <span class="math">A</span>
     implies <span class="math">B</span>.
     In the dartboard model, the dart cannot stick in <span class="math">A</span>
-    without sticking in <span class="math">B</span> as well, so if 
+    without sticking in <span class="math">B</span> as well, so if
     <span class="math">A</span> occurs, <span class="math">B</span> must occur also.
-    If <span class="math">A</span> implies <span class="math">B</span>, <span class="math">AB=A</span>, 
+    If <span class="math">A</span> implies <span class="math">B</span>, <span class="math">AB=A</span>,
     so <span class="math">P(AB)=P(A)</span>.
-    If <span class="math">AB = {}</span>, 
+    If <span class="math">AB = {}</span>,
     <span class="math">A</span> implies <span class="math">B<sup>c</sup></span> and
     <span class="math">B</span> implies <span class="math">A<sup>c</sup></span>: If the dart sticks
     in <span class="math">A</span> it did not stick in <span class="math">B</span>, and vice versa.
-    If <span class="math">A</span> implies <span class="math">B</span>, 
+    If <span class="math">A</span> implies <span class="math">B</span>,
     then if <span class="math">B</span> does not occur <span class="math">A</span> cannot
     occur either:
     <span class="math">B<sup>c</sup></span> implies <span class="math">A<sup>c</sup></span>,
@@ -1097,12 +1101,12 @@
 </p>
 
 <p>
-    The conditional probability of <span class="math">A</span> given <span class="math">B</span>, 
+    The conditional probability of <span class="math">A</span> given <span class="math">B</span>,
     <span class="math">P(A | B)</span>,
     is the probability of the
     event <span class="math">A</span>, updated on the basis of the knowledge that the event <span class="math">B</span>
     occurred.
-    Suppose that <span class="math">AB = {}</span> 
+    Suppose that <span class="math">AB = {}</span>
     (<span class="math">A</span> and <span class="math">B</span> are disjoint).
     Then if we learn that <span class="math">B</span> occurred, we know <span class="math">A</span> did not occur,
     so we should revise the probability of <span class="math">A</span> to be zero
@@ -1147,7 +1151,7 @@
 <p>
     Why does this formula make sense?
     First of all, note that it does agree with the intuitive answers we
-    found above: if <span class="math">AB = {}</span>, then 
+    found above: if <span class="math">AB = {}</span>, then
     <span class="math">P(AB) = 0</span>, so
 </p>
 
@@ -1185,9 +1189,9 @@
     rest of <span class="math"><strong>S</strong></span>, so we have a new outcome space that is just <span class="math">B</span>.
     We need P(B) = 100% to consider <span class="math">B</span> an outcome space; we
     can make this happen by dividing all probabilities by <span class="math">P(B)</span>.
-    For <span class="math">A</span> to have occurred in addition to 
+    For <span class="math">A</span> to have occurred in addition to
     <span class="math">B</span> requires that <span class="math">AB</span> occurred,
-    so the conditional probability of <span class="math">A</span> given <span class="math">B</span> is 
+    so the conditional probability of <span class="math">A</span> given <span class="math">B</span> is
     <span class="math">P(AB)/P(B)</span>,
     just as we defined it above.
 </p>
@@ -1249,10 +1253,10 @@
     <li><span class="math">P(A | B) &ge; 0</span>.</li>
     <li><span class="math">P(B | B) = 100%</span>.</li>
     <li><span class="math">P(A&cup;C | B)
-          = P(A | B)  + P(C | B)</span> if 
+          = P(A | B)  + P(C | B)</span> if
          <span class="math">ABC = {}</span>.
     </li>
-    <li><span class="math">P(A<sup>c</sup> | B) = 
+    <li><span class="math">P(A<sup>c</sup> | B) =
          100% &minus; P(A | B)</span>.</li>
     <li><span class="math">P({} | B) = 0</span>.</li>
     <li><span class="math">P(A&cup;C | B) =
@@ -1280,15 +1284,15 @@
 <p class="video"> <iframe width="420" height="315" src="http://www.youtube.com/embed/6LwpGO7nrP8?start=4182&end=4858" frameborder="0" allowfullscreen></iframe>
 </p>
 
-<p>Two events are <span class="termOfArt">independent</span> if learning that one occurred gives us 
+<p>Two events are <span class="termOfArt">independent</span> if learning that one occurred gives us
     no information about whether the other occurred.
     That is, <span class="math">A</span> and <span class="math">B</span> are independent
-    if <span class="math">P(A | B) = P(A)</span> and 
+    if <span class="math">P(A | B) = P(A)</span> and
     <span class="math">P(B | A) = P(B)</span>.
-    A slightly more general way to write this is that 
+    A slightly more general way to write this is that
     <span class="math">A</span> and <span class="math">B</span> are independent
     if <span class="math">P(AB) = P(A)&times;P(B)</span>.
-    (This covers the cases that <span class="math">P(A)</span>, 
+    (This covers the cases that <span class="math">P(A)</span>,
     <span class="math">P(B)</span> or both are equal to zero,
     while the definition of independence in terms of conditional probability requires the
     probability in the denominator to be different from zero.)
@@ -1303,7 +1307,7 @@
     In fact, the only way two events can be both
     <a class="glossRef" href="gloss.htm#disjoint">mutually exclusive</a> and
     <a class="glossRef" href="gloss.htm#independent">independent</a> is if at least one of them has probability equal to zero.
-    If <span class="math">A</span> and <span class="math">B</span>  are mutually exclusive, 
+    If <span class="math">A</span> and <span class="math">B</span>  are mutually exclusive,
     learning that <span class="math">B</span> happened
     tells us that <span class="math">A</span> did not happen.
     This is clearly informative: The conditional probability of <span class="math">A</span> given
@@ -1755,10 +1759,10 @@
          '(1/27)<sup>24</sup>.  Thus the chance a monkey fails in a given try is ' +
          '(100% &minus; (1/27)<sup>24</sup>), and the chance that all the monkeys fail in ' +
          'every try is </p>' +
-         '<p class="math">(100% &minus; (1/27)<sup>24</sup>)<sup>' + 
+         '<p class="math">(100% &minus; (1/27)<sup>24</sup>)<sup>' +
          commify(roundToDig(totTries,0)) + '</sup>.</p>' +
          '<p>The number we seek is </p>' +
-         '<p class="math">1 &minus; (1 &minus; (1/27)<sup>24</sup>)<sup>' + commify(roundToDig(totTries,0)) + 
+         '<p class="math">1 &minus; (1 &minus; (1/27)<sup>24</sup>)<sup>' + commify(roundToDig(totTries,0)) +
          '</sup>.</p><p> Now we use the hint:</p><p class="math">' +
          '1 &minus; (1 &minus; (1/27)<sup>24</sup>)<sup>' + commify(roundToDig(totTries,0)) +
          '</sup>&nbsp; is approximately ' + commify(roundToDig(totTries,0)) +
@@ -1980,8 +1984,8 @@
 
 <p>
     Bayes' Rule is a formula that expresses <span class="math">P(A | B)</span> in terms of
-    <span class="math">P(B | A)</span>, 
-    <span class="math">P(B | A<sup>c</sup>)</span>, 
+    <span class="math">P(B | A)</span>,
+    <span class="math">P(B | A<sup>c</sup>)</span>,
     <span class="math">P(A)</span>,
     and <span class="math">P(A<sup>c</sup>)</span>:
 </p>
@@ -1996,7 +2000,7 @@
 <p class="inline">
     The numerator on the right is <span class="math">P(AB)</span>, computed using the
     Multiplication Rule.
-    The denominator is just <span class="math">P(B)</span>, computed by 
+    The denominator is just <span class="math">P(B)</span>, computed by
     <a class="glossRef" href="gloss.htm#partition">partitioning</a> <span class="math">B</span>
     into the mutually exclusive sets <span class="math">AB</span> and <span class="math">A<sup>c</sup>B</span>,
     and finding the probability of each of those pieces using the
@@ -2068,7 +2072,7 @@
 <p>
     <strong>Solution</strong>:
     We shall combine several things we have learned.
-    Let <span class="math">D</span> be the event that the person has the disease, and let 
+    Let <span class="math">D</span> be the event that the person has the disease, and let
     <span class="math">T</span> be
     the event that the person tests positive for the disease.
     The problem statement told us that:
@@ -2151,23 +2155,23 @@
 </div>
 
 <p>
-   The <a class="glossRef" href="gloss.htm#base_rate_fallacy">Base Rate Fallacy</a> 
+   The <a class="glossRef" href="gloss.htm#base_rate_fallacy">Base Rate Fallacy</a>
    consists of ignoring <span class="math">P(A)</span>
    or <span class="math">P(B)</span>
-   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and 
+   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and
    <span class="math">P(A | B<sup>c</sup>)</span>.
    For instance, in the example above, the base rate for chronic benign flatulence is 10%.
    The test is 90% accurate (both for false positives and for false negatives).
    The base rate fallacy is to conclude that since the test is 90% accurate, it must be true that 90% of people
    who test positive in fact have the disease&mdash;ignoring the base rate of the disease in the population
    and the frequency of false positive test results.
-   We just saw that that conclusion is wrong: if people are tested at random, of those who test positive, 
+   We just saw that that conclusion is wrong: if people are tested at random, of those who test positive,
    only 50% have the disease, on average.
 </p>
 
 <div class="indent">
 <p class="inline">
-   The <a class="glossRef" href="gloss.htm#prosecutors_fallacy">Prosecutor's Fallacy</a> 
+   The <a class="glossRef" href="gloss.htm#prosecutors_fallacy">Prosecutor's Fallacy</a>
    consists of confusing
    <span class="math">P(B | A)</span> with <span class="math">P(A | B)</span>.
    For instance, <span class="math">P(A | B)</span> might be the probability of some evidence
@@ -2225,7 +2229,7 @@
          'every positive test result is correct, and the vast majority&mdash;indeed, the totality&ndash;' +
          'of the positive test results are true positives.  At the other extreme, if no one in the ' +
          'population uses narcotics, then every positive test result is a false positive: none of the ' +
-         'people who test positive actually uses narcotics.';    
+         'people who test positive actually uses narcotics.';
     writeSolution(pCtr-1,ansStr);
 // -->
 </script>
@@ -2408,7 +2412,7 @@
     For example, how should we update the probability of the event <span class="math">A</span>
     if we learn that the event <span class="math">B</span> occurs?
     The updated probability is the <em>conditional probability of</em>
-    <span class="math">A</span> <em>given</em> <span class="math">B</span>, 
+    <span class="math">A</span> <em>given</em> <span class="math">B</span>,
     which is equal to the probability
     that <span class="math">A</span> and <span class="math">B</span>
     both occur, divided by the probability that <span class="math">B</span> occurs,
@@ -2425,15 +2429,15 @@
     Two events are <em>independent</em> if the occurrence of one is
     uninformative with respect to the occurrence of the other:
     if <span class="math">P(A | B) = P(A)</span>.
-    A slightly more general definition is that <span class="math">A</span> and 
+    A slightly more general definition is that <span class="math">A</span> and
     <span class="math">B</span> are independent
     if <span class="math">P(AB) = P(A)&times;P(B)</span>.
 </p>
 
 <p>
     Bayes' Rule expresses <span class="math">P(A | B)</span> in terms
-    of <span class="math">P(B | A)</span>, 
-    <span class="math">P(B | A<sup>c</sup>)</span>, and 
+    of <span class="math">P(B | A)</span>,
+    <span class="math">P(B | A<sup>c</sup>)</span>, and
     <span class="math">P(A)</span>,
     which in some problems are easier to calculate than <span class="math">P(A | B)</span>.
     Bayes' Rule says that
@@ -2450,7 +2454,7 @@
 <p>
    The <em>base rate fallacy</em> consists of ignoring <span class="math">P(A)</span>
    or <span class="math">P(B)</span>
-   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and 
+   in computing <span class="math">P(B | A)</span> from <span class="math">P(A | B)</span> and
    <span class="math">P(A | B<sup>c</sup>)</span>.
    The <em>prosecutor's fallacy</em> consists of confusing <span class="math">P(A | B)</span>
    for <span class="math">P(B | A)</span>.
