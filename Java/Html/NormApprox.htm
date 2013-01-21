@@ -15,6 +15,12 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
 <script language="JavaScript1.4" type="text/javascript"><!--
     writeChapterHead('SeEd','','Normal Approximation to Data',true,'../../SticiGui');
@@ -70,27 +76,23 @@ Piñon Flat Observatory</a>.
 
 
 <p align="center">
+  <div id="hist" class="histogram">
+  </div>
 
-<applet archive="PbsGui.zip" codebase=".."  code="HistHiLite.class" align="middle"
-
-    width="600" height="320">
-
-    <param name="bins" value="10">
-
-    <param name="counts" value="6,14,21,17,21,16,3,1,0,1">
-
-    <param name="ends" value="-2.04,-1.45,-.87,-0.29,0.3,0.82,1.46,2.05,2.63,3.21,3.8">
-
-    <param name="hiLiteHi" value="2">
-
-    <param name="hiLiteLo" value="-2"><param name="mean" value="0"><param name="SD" value="1">
-
-    <param name="title" value="Pinon Flat g data in Standard Units">
-
-    You need Java to see this.
-
-</applet>
-
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      counts: [6,14,21,17,21,16,3,1,0,1],
+      ends: [-2.04,-1.45,-.87,-0.29,0.3,0.82,1.46,2.05,2.63,3.21,3.8],
+      bins: 10,
+      hiLiteHi: 2,
+      hiLiteLo: -2,
+      mu: 0,
+      sd: 1,
+      showNormal: true
+    });
+  });
+  </script>
 </p>
 
 

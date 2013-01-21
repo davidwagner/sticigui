@@ -15,6 +15,12 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
 <script language="JavaScript1.4" type="text/javascript"><!--
@@ -1324,17 +1330,20 @@
     '  chance that we reject when the null hypothesis is true is at most 10%.)  ' +
     '  We can find the region from the binomial histogram with parameters       ' +
     '  <span class="math">n=30</span> and <span class="math">p=50%</span>:</p> <p class="figure">         ' +
-    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
-    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
-    '    <param name="hiLiteHi" value="19.5">                   ' +
-    '    <param name="hiLiteLo" value="10.5">                   ' +
-    '    <param name="n" value="30">                        ' +
-    '    <param name="normalControls" value="false">                ' +
-    '    <param name="p" value="0.5">                       ' +
-    '    <param name="showNormal" value="false">                ' +
-    '    <param name="toggleNormal" value="false">                  ' +
-    '    You need Java to see this.                         ' +
-    '  </applet></p><p>                             ' +
+    '   <div id="hist3" class="histogram">' +
+    '   </div>' +
+    '   <script>' +
+    '   jQuery(function() {' +
+    '     new Stici_HistHiLite(\'hist3\', {' +
+    '       hiLiteHi: 19.5,' +
+    '       hiLiteLo: 10.5,' +
+    '       n: 30,' +
+    '       p: 0.5,' +
+    '       showNormalButton: false' +
+    '     });' +
+    '   });' +
+    '   </scr'+'ipt>' +
+    '</p><p>                             ' +
     '  The chance of between 11 and 19 heads in 30 tosses is 90.1% if the       ' +
     '  chance of heads is 50% in each toss. Thus if we reject whenever the      ' +
     '  number of heads is less than 11, or greater than 18, the chance of falsely ' +
@@ -1346,17 +1355,20 @@
     '  from the binomial probability histogram with parameters <span class="math">n=30</span> ' +
     '  and <span class="math">p=45%</span> or <span class="math">p=55%</span>: </p> <p>&nbsp;</p>         ' +
     '  <p class="figure">                               ' +
-    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
-    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
-    '    <param name="hiLiteHi" value="19.5">                   ' +
-    '    <param name="hiLiteLo" value="10.5">                   ' +
-    '    <param name="n" value="30">                        ' +
-    '    <param name="normalControls" value="false">                ' +
-    '    <param name="p" value="0.45">                      ' +
-    '    <param name="showNormal" value="false">                ' +
-    '    <param name="toggleNormal" value="false">                  ' +
-    '    You need Java to see this.                         ' +
-    '  </applet></p><p>The chance of fewer than 11 or more than 19 heads would  ' +
+    '   <div id="hist4" class="histogram">' +
+    '   </div>' +
+    '   <script>' +
+    '   jQuery(function() {' +
+    '     new Stici_HistHiLite(\'hist4\', {' +
+    '       hiLiteHi: 19.5,' +
+    '       hiLiteLo: 10.5,' +
+    '       n: 30,' +
+    '       p: 0.45,' +
+    '       showNormalButton: false' +
+    '     });' +
+    '   });' +
+    '   </scr'+'ipt>' +
+    '  </p><p>The chance of fewer than 11 or more than 19 heads would  ' +
     '  be <span class="math">100%&minus;85.1% = 14.9%</span> if the chance of heads were 45% or 55% in each     ' +
     '  trial. The power against these two alternatives is thus 14.9%.</p> ' +
     '  <p>(d) To have power 50% against those two alternatives, we need to use ' +
@@ -1371,42 +1383,51 @@
     '  expected number of heads, 135.) Thus rejecting the null hypothesis if    ' +
     '  the number of heads in 270 tosses is less than 122 or more than 148      ' +
     '  gives a significance level 10% test.</p><p class="figure"> ' +
-    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
-    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
-    '    <param name="hiLiteHi" value="148.5">                  ' +
-    '    <param name="hiLiteLo" value="121.5">                  ' +
-    '    <param name="n" value="270">                       ' +
-    '    <param name="normalControls" value="false">                ' +
-    '    <param name="p" value="0.5">                       ' +
-    '    <param name="showNormal" value="false">                ' +
-    '    <param name="toggleNormal" value="false">                  ' +
-    '    You need Java to see this.                         ' +
-    '  </applet></p><p>                             ' +
+    '   <div id="hist5" class="histogram">' +
+    '   </div>' +
+    '   <script>' +
+    '   jQuery(function() {' +
+    '     new Stici_HistHiLite(\'hist5\', {' +
+    '       hiLiteHi: 148.5,' +
+    '       hiLiteLo: 121.5,' +
+    '       n: 270,' +
+    '       p: 0.5,' +
+    '       showNormalButton: false' +
+    '     });' +
+    '   });' +
+    '   </scr'+'ipt>' +
+    '  </p><p>' +
     '  On the other hand, if the true chance of heads were 45% or 55% (rather   ' +
     '  than 50%), the chances that this test would not reject the null      ' +
     '  hypothesis are the areas highlighted below:</p><p class="figure">    ' +
-    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
-    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
-    '    <param name="hiLiteHi" value="148.5">                  ' +
-    '    <param name="hiLiteLo" value="121.5">                  ' +
-    '    <param name="n" value="270">                       ' +
-    '    <param name="normalControls" value="false">                ' +
-    '    <param name="p" value="0.45">                      ' +
-    '    <param name="showNormal" value="false">                ' +
-    '    <param name="toggleNormal" value="false">                  ' +
-    '    You need Java to see this.                         ' +
-    '  </applet></p><p class="figure">   ' +
-    '  <applet code="HistHiLite.class" codebase="../../Java/"           ' +
-    '    align="baseline" width="600" height="360" archive="PbsGui.zip">    ' +
-    '    <param name="hiLiteHi" value="148.5">                  ' +
-    '    <param name="hiLiteLo" value="121.5">                  ' +
-    '    <param name="n" value="270">                       ' +
-    '    <param name="normalControls" value="false">                ' +
-    '    <param name="p" value="0.55">                      ' +
-    '    <param name="showNormal" value="false">                ' +
-    '    <param name="toggleNormal" value="false">                  ' +
-    '    You need Java to see this.                         ' +
-    '  </applet></p><p>                             ' +
+    '   <div id="hist6" class="histogram">' +
+    '   </div>' +
+    '   <script>' +
+    '   jQuery(function() {' +
+    '     new Stici_HistHiLite(\'hist6\', {' +
+    '       hiLiteHi: 148.5,' +
+    '       hiLiteLo: 121.5,' +
+    '       n: 270,' +
+    '       p: 0.45,' +
+    '       showNormalButton: false' +
+    '     });' +
+    '   });' +
+    '   </scr'+'ipt>' +
+    '  </p><p class="figure">   ' +
+    '   <div id="hist7" class="histogram">' +
+    '   </div>' +
+    '   <script>' +
+    '   jQuery(function() {' +
+    '     new Stici_HistHiLite(\'hist7\', {' +
+    '       hiLiteHi: 148.5,' +
+    '       hiLiteLo: 121.5,' +
+    '       n: 270,' +
+    '       p: 0.55,' +
+    '       showNormalButton: false' +
+    '     });' +
+    '   });' +
+    '   </scr'+'ipt>' +
+    '  </p><p>' +
     '  The chance of correctly rejecting the null hypothesis            ' +
     '  is thus 100%&minus;49.9% = 50.1%, so this test has the power against the       ' +
     '  alternatives <span class="math">p=45%</span>      ' +
@@ -1486,34 +1507,40 @@
      '     the sample that are less than or equal to 10 is less than 68, which      ' +
      '     gives a test with significance level 4.5%:                   ' +
      '   </p><p class="figure">                             ' +
-     '   <applet code="HistHiLite.class" codebase="../../Java/"             ' +
-     '       align="baseline" width="600" height="360" archive="PbsGui.zip">        ' +
-     '       <param name="hiLiteHi" value="67.5">                       ' +
-     '       <param name="hiLiteLo" value="-0.5">                       ' +
-     '       <param name="n" value="100">                           ' +
-     '       <param name="normalControls" value="false">                ' +
-     '       <param name="p" value="0.75">                          ' +
-     '       <param name="showNormal" value="false">                    ' +
-     '       <param name="toggleNormal" value="false">                  ' +
-     '       You need Java to see this.                         ' +
-     '   </applet></p><p>                                   ' +
+     '   <div id="hist1" class="histogram">' +
+     '   </div>' +
+     '   <script>' +
+     '   jQuery(function() {' +
+     '     new Stici_HistHiLite(\'hist1\', {' +
+     '       hiLiteHi: 67.5,' +
+     '       hiLiteLo: -0.5,' +
+     '       n: 100,' +
+     '       p: 0.75,' +
+     '       showNormalButton: false' +
+     '     });' +
+     '   });' +
+     '   </scr'+'ipt>' +
+     '   </p><p>' +
      '     (d) If 10 were in fact the 60th percentile of the list, the chance that      ' +
      '     each draw would result in a number less than or equal to 10 would be     ' +
      '     60%. The chance of correctly rejecting the null hypothesis is the        ' +
      '     chance of fewer than 68 successes in 100 independent trials with         ' +
      '     probability 60% of success in each trial:                    ' +
      '   </p><p class="figure">                             ' +
-     '   <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"    ' +
-     '       width="600" height="360" archive="PbsGui.zip">             ' +
-     '       <param name="hiLiteHi" value="67.5">                   ' +
-     '       <param name="hiLiteLo" value="-0.5">                   ' +
-     '       <param name="n" value="100">                       ' +
-     '       <param name="normalControls" value="false">                ' +
-     '       <param name="p" value="0.6">                       ' +
-     '       <param name="showNormal" value="false">                ' +
-     '       <param name="toggleNormal" value="false">                  ' +
-     '       You need Java to see this.                         ' +
-     '   </applet></p><p>The power against that alternative is 93.8%';
+     '   <div id="hist2" class="histogram">' +
+     '   </div>' +
+     '   <script>' +
+     '   jQuery(function() {' +
+     '     new Stici_HistHiLite(\'hist2\', {' +
+     '       hiLiteHi: 67.5,' +
+     '       hiLiteLo: -0.5,' +
+     '       n: 100,' +
+     '       p: 0.6,' +
+     '       showNormalButton: false' +
+     '     });' +
+     '   });' +
+     '   </scr'+'ipt>' +
+     '   </p><p>   The power against that alternative is 93.8%';
     var qStr = 'I wish to test the hypothesis that the 75th percentile of a particular ' +
            'list of 100 numbers is equal to 10, against the alternative hypothesis ' +
            'that it is greater than 10, at significance level 5%. I know that no ' +

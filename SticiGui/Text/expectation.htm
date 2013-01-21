@@ -15,6 +15,11 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -741,9 +746,9 @@
         list[2][i] = roundToDig(list[0][i]*list[1][i],5);
     }
     header[2] = '<span class="math">x&times;P(X=x)</span>';
-    ansStr = 'The computation is given by the sum of the rightmost column of the following ' +
+    ansStr = '<p>The computation is given by the sum of the rightmost column of the following ' +
          'table:</p>' + listToTable(header,list,"transpose","right",false) +
-         '<p>which is ' + roundToDig(eX,3) + '. ';
+         '<p>which is ' + roundToDig(eX,3) + '.</p>';
     writeSolution(pCtr-1,ansStr);
 // -->
 </script>
@@ -1060,7 +1065,7 @@
     var nDraws = listOfRandInts(1,2,nTickets-1)[0];
     var boxMean = mean(theTickets);
     var aVal = numToRange(nDraws*boxMean);
-    var ansStr = 'The expected value of the sum of the numbers on the tickets in ' +
+    var ansStr = '<p>The expected value of the sum of the numbers on the tickets in ' +
          '<em>n</em> draws with replacement from a box of ' +
          'numbered tickets is <em>n</em>&times;(average of the numbers on the ' +
          'tickets).  The average of the numbers on the tickets in this box is ' +
@@ -1195,12 +1200,18 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-          align="baseline" width="600" archive="PbsGui.zip" height="320">
-    <param name="n" value="10">
-    <param name="normalControls" value="false">
-    <param name="p" value="0.5">You need Java to see this.
-    </applet>
+  <div id="hist" class="histogram">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      n: 10,
+      p: 0.5,
+      showNormalButton: false
+    });
+  });
+  </script>
 </p>
 </div>
 
@@ -1221,7 +1232,7 @@
     var nNums = [4,20,13];
     var eNum = nNums[theHand]*handSize/deckSize;
     var aVal = numToRange(eNum,.05);
-    var ansStr = 'There are ' + nNums[theHand].toString() + ' ' + hands[theHand] +
+    var ansStr = '<p>There are ' + nNums[theHand].toString() + ' ' + hands[theHand] +
          ' in the deck. ' +
          'The number of ' + hands[theHand] + ' in a hand of ' + handSize.toString() +
          ' cards dealt from a well-shuffled deck has an hypergeometric distribution with ' +
@@ -1232,7 +1243,7 @@
          ' are labeled &quot;1&quot; and the rest are labeled &quot;0.&quot;. ' +
          'The expected value of such a ' +
          'random variable is <em>n</em>&times;<em>G</em>/<em>N</em> = ' +
-         roundToDig(eNum,2).toString() + ' ' + hands[theHand] + '. ';
+         roundToDig(eNum,2).toString() + ' ' + hands[theHand] + '.</p> ';
     var qStr = 'Consider dealing a hand of ' + handSize.toString() +
            ' cards from a well shuffled standard deck of playing cards. ' +
            '<span class="qSpan">The expected value of the number of ' +
@@ -1679,12 +1690,12 @@
      var pOil = listOfRandInts(1,1,5)[0];
      var nHits = listOfRandInts(1,1,10)[0];
      var aVal = numToRange(100*nHits/pOil,.05);
-     var ansStr = 'Under the stated assumptions, the number of wells that must be drilled ' +
+     var ansStr = '<p>Under the stated assumptions, the number of wells that must be drilled ' +
           'has a negative binomial distribution with parameters <em>p</em> = ' +
           pOil.toString() + '% and <em>r</em> = ' + nHits.toString() +
           '.  The expected value of such a random variable is ' +
           '<em>r</em>/<em>p</em> = ' + roundToDig(100*nHits/pOil,2).toString() +
-          ' wells. ';
+          ' wells.</p> ';
      var qStr = 'Suppose that in a certain part of the world, a well drilled in a random ' +
         'location will strike oil with probability ' + pOil.toString() +
         '%. <span class="qSpan">The expected number of wells that must be drilled ' +
@@ -1708,14 +1719,14 @@
     var eOneRoll = oneProb + (2+3+4+5)/6 + 6*sixProb;
     var eSpots= nRolls*eOneRoll;
     var aVal = numToRange(eSpots);
-    var ansStr = 'The expected number of spots that show in a single roll of this die is ' +
+    var ansStr = '<p>The expected number of spots that show in a single roll of this die is ' +
          '</p><p class="math">1&times;' + oneProb +
          ' + 2&times;(1/6) + 3&times;(1/6) + 4&times;(1/6) + 5&times;(1/6) + ' +
          '6&times;' + sixProb + ' = ' + roundToDig(eOneRoll,2).toString() +
          '.</p><p>By the properties of the expected value, the expected number ' +
          'of spots that show in ' + nRolls.toString() + ' rolls ' +
          ' is ' + nRolls.toString() + '&times (expected number that show in ' +
-         'one roll) = ' + roundToDig(eSpots,2).toString() + ' spots. ';
+         'one roll) = ' + roundToDig(eSpots,2).toString() + ' spots.</p> ';
     var qStr = 'A particular die is &quot;loaded&quot; (weighted) in such a way that ' +
            'the chance of rolling a one is ' + oneProb.toString() +
            ', the chance of rolling a 6 is ' + sixProb.toString() +
@@ -1756,7 +1767,7 @@
     if (eWin2 == 0) {
        isFair2 = true;
     }
-    var ansStr = '(a) We need to find the expected payoff of the bet, taking into account ' +
+    var ansStr = '<p>(a) We need to find the expected payoff of the bet, taking into account ' +
         'the ante. The assumptions imply that the 36 possible pairs of die rolls are ' +
         'equally likely. Let <strong>D</strong> denote the absolute value of the ' +
         'difference in the number of spots that show on the two dice.  Here is a ' +
@@ -1847,6 +1858,7 @@
     } else {
        ansStr += 'a fair bet. ';
     }
+    ansStr += '</p>';
     var qStr = 'Consider rolling two fair dice independently. </p><p>' +
            '(a) I offer you the following bet: I will pay you $' +  bucks[1].toString() +
            ' if the absolute value of the difference between the number of spots ' +
@@ -1916,7 +1928,7 @@
     document.writeln(qStr);
     writeTextExercise(8, qCtr++, aVal);
     document.writeln('</p>');
-    var ansStr = 'The expected number of spots that show when one rolls a fair die is</p>' +
+    var ansStr = '<p>The expected number of spots that show when one rolls a fair die is</p>' +
          '<p class="math">1&times;1/6 + 2&times;1/6 + 3&times;1/6 + 4&times;1/6 + ' +
          '5&times;1/6 + 6&times;1/6 = 3&frac12;.</p>\n' +
          '<p>Thus on the average, the second stage will involve rolling 3&frac12; dice. ' +
@@ -2053,7 +2065,7 @@
          '(3&frac12;)&times;1/6 + 2&times;(3&frac12;)&times;1/6 + ' +
          '&hellip; + ' +
          '6&times;(3&frac12;)&times;1/6 <br /> = (3&frac12;)&times;(1+2+3+4+5+6)/6 <br />' +
-         '= (3&frac12;)&times;(3&frac12;) = 12 1/4,</p><p>as we had guessed.</p>\n';
+         '= (3&frac12;)&times;(3&frac12;) = 12 1/4,</p><p>as we had guessed.</p>';
     writeSolution(pCtr-1,ansStr);
 // -->
 </script>

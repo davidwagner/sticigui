@@ -1,3 +1,9 @@
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 The <em><a class="glossRef" href="gloss.xht#cdf">cumulative distribution function</a></em>
     (<a class="glossRef" href="gloss.xht#cdf">cdf</a>)
     of a random variable X, denoted F<sub>X</sub>(<em>x</em>), is
@@ -93,12 +99,20 @@ The <em><a class="glossRef" href="gloss.xht#cdf">cumulative distribution functio
          ' and <em>p</em>&nbsp;=&nbsp;' + p1.toString() +
          '%. The median of the probability distribution is thus ' +
          med1.toString() + ':</p><p align="center">' +
-         '<applet width="600" height="400" code="HistHiLite.class" ' +
-         'codebase="../../Java/" archive="PbsGui.zip"><param name="n" value="' +
-         nTosses1.toString() + '"><param name="normalControls" value="false">' +
-         '<param name="p" value="0.5"><param name="hiLiteLo" value="-0.5">' +
-         '<param name="hiLiteHi" value="1.5">' +
-         'You need Java to see this.</applet></p>';
+         '<div id="hist" class="histogram">' +
+         '</div>' +
+         '<script>' +
+         'jQuery(function() {' +
+         '  new Stici_HistHiLite(\'hist\', {' +
+         '    n: ' + nTosses1.toString() + ',' +
+         '    p: 0.5,' +
+         '    hiLiteHi: 1.5' +
+         '    hiLiteLo: -0.5' +
+         '    showNormalButton: false' +
+         '  });' +
+         '});' +
+         '</scr'+'ipt>' +
+         '</p>';
     document.writeln(ansStr);
     var appNum = (document.applets.length - 1).toString();
     sectionContext += 'document.applets[' + appNum + '].' +

@@ -1,5 +1,5 @@
 /* default style file for SticiGui text.
-   Copyright 2006-2013 P.B. Stark, statistics.berkeley.edu/~stark 1/9/2013.
+   Copyright 2006-2013 P.B. Stark, statistics.berkeley.edu/~stark 1/20/2013.
    All rights reserved.
 */
 
@@ -358,7 +358,7 @@ div.figure {
 
 div.solution {
     font-family: helvetica, arial, 'sans serif';
-    font-size: 85%;
+    font-size: 100%;
     color: #000099;
     margin-left: 0%;
     margin-right: 0%;
@@ -366,6 +366,15 @@ div.solution {
 }
 
 div.solutionLink {
+    font-family: helvetica, arial, 'sans serif';
+    font-size: 85%;
+    color: #000099;
+    margin-left: 0%;
+    margin-right: 0%;
+    display: block;
+}
+
+div.solLink {
     font-family: helvetica, arial, 'sans serif';
     font-size: 85%;
     color: #000099;
@@ -645,12 +654,18 @@ span.termOfArt {
     font-size: 85%;
 }
 
+.fnLink {
+    font-family: helvetica, arial, 'sans serif';
+    color: #800080;
+    font-size: 85%;
+}
+
 pre { 
     font-family: monospace; 
 }
 
 span.big {
-    font-size:        120%;
+   font-size:        120%;
 }
 
 /*  CSS for "scriptlets"   */
