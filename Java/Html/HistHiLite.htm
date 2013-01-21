@@ -14,6 +14,11 @@
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.min.js"></script>
 <script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
 <script language="JavaScript1.4" type="text/javascript" src="../irGrade.js"></script>
 <script language="JavaScript1.4" type="text/javascript"><!--
@@ -28,21 +33,20 @@
     writeChapterTitle();
 // -->
 </script><p align="center">
+  <div id="hist" class="histogram">
+  </div>
 
-    <applet code="HistHiLite.class" align="middle"
-
-        width="600" height="400" name="hist" archive="PbsGui.zip" codebase=".." >
-
-      <param name="files" value="./Data/gmat.dat,./Data/cities.dat,./Data/baseball98.dat">
-
-      <param name="urlBox" value="true">
-
-      <param name="univariateStats" value="true">
-
-        Your browser must be running Java to view this histogram.
-
-    </applet>
-
+  <script>
+  jQuery(function() {
+    new Stici_HistHiLite('hist', {
+      data: ['../../Java/Data/gmat.dat.json',
+             '../../Java/Data/baseball98.dat.json',
+             '../../Java/Data/cities.dat.json'],
+      showNormalButton: false,
+      showUnivariateStats: true
+    });
+  });
+  </script>
 </p>
 
 

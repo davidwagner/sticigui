@@ -16,6 +16,13 @@
 
 <script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js">
 </script>
+
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
+
 <script language="JavaScript1.4" type="text/javascript"><!--
     var cNum = "location";
     writeChapterHead('SeEd',cNum);
@@ -815,13 +822,16 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-       align="middle" width="600" height="320" archive="PbsGui.zip">
-    <param name="counts" value="10,2,10,2,10">
-    <param name="bins" value="5">
-    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
-    <param name="title" value="Histogram of data with mean zero">You need Java to see this.
-    </applet>
+    <div id="hist1" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist1', {
+          counts: [10, 2, 10, 2, 10],
+          bins: 5,
+          ends: [-2.5, -1.5, -.5, .5, 1.5, 2.5]
+        });
+      });
+    </script>
 </p>
 </div>
 
@@ -834,13 +844,16 @@
 // -->
 </script>
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-      align="middle" width="600" height="320" archive="PbsGui.zip">
-    <param name="bins" value="5">
-    <param name="counts" value="1,2,3,2,1">
-    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
-    <param name="title" value="Another">You need Java to see this.
-    </applet>
+    <div id="hist2" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist2', {
+          counts: [1, 2, 3, 2, 1],
+          bins: 5,
+          ends: [-2.5, -1.5, -.5, .5, 1.5, 2.5]
+        });
+      });
+    </script>
 </p>
 </div>
 
@@ -853,13 +866,16 @@
 // -->
 </script>
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/"
-      align="middle" width="600" height="320" archive="PbsGui.zip">
-    <param name="bins" value="5">
-    <param name="counts" value="0,0,1,0,0">
-    <param name="ends" value="-2.5,-1.5,-.5,.5,1.5,2.5">
-    <param name="title" value="And Another">You need Java to see this.
-    </applet>
+    <div id="hist3" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist3', {
+          counts: [0, 0, 1, 0, 0],
+          bins: 5,
+          ends: [-2.5, -1.5, -.5, .5, 1.5, 2.5]
+        });
+      });
+    </script>
 </p>
 </div>
 
@@ -1360,17 +1376,17 @@
 </script>
 
 <p class="figure">
-    <applet code="HistHiLite.class" codebase="../../Java/" align="baseline"
-     width="600" height="300" archive="PbsGui.zip">
-     <param name="binControl" value="false">
-     <param name="bins" value="30">
-     <param name="files" value="./Data/gravity.dat">
-     <param name="nFiles" value="1">
-     <param name="restrict" value="false">
-     <param name="showNormal" value="false">
-     <param name="univariateStats" value="true">
-     You need Java to see this.
-    </applet>
+    <div id="hist4" class="histogram"></div>
+    <script>
+      jQuery(function() {
+        new Stici_HistHiLite('hist4', {
+          changeNumBins: false,
+          bins: 30,
+          data: ['../../Java/Data/gravity.dat.json'],
+          showNormalButton: false
+        });
+      });
+    </script>
 </p>
 </div>
 
