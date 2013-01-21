@@ -5,5 +5,5 @@
           ["probabilityAxioms"     , "02/18/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
           ["conditioning"          , "02/20/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
           ["binomial"              , "02/24/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["reading1"              , "02/26/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
+          ["riskReading1"          , "02/26/2013  00:10:00 GMT-8:00",    "ready", "automatic"]
 ]

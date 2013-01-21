@@ -162,7 +162,7 @@
     qStr += '</table>';
     document.writeln(qStr);
     $(document).ready(function() {
-            $.getJSON(assignURL, function(data) {
+            $.getJSON(dueURL, function(data) {
                   $.each(data, function(index, value) {
                          assign[value[0]] = value.slice(1);
                        });

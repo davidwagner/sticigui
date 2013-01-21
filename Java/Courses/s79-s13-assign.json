@@ -1,9 +1,23 @@
 [
-          ["counting"              , "<a href="http://statistics.berkeley/edu],
-          ["probabilityPhilosophy" , "02/12/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["sets"                  , "02/13/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["probabilityAxioms"     , "02/18/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["conditioning"          , "02/20/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["binomial"              , "02/24/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
-          ["reading1"              , "02/26/2013  00:10:00 GMT-8:00",    "ready", "automatic"],
+          ["counting",
+            ["<a href=\"../Text/counting.htm\">SticiGui: counting</a>"]
+          ],
+          ["probabilityPhilosophy",
+            ["<a href=\"../Text/probabilityPhilosophy.htm\">SticiGui: philosophy of probability</a>"]
+          ],
+          ["sets",
+            ["<a href=\"../Text/sets.htm\">SticiGui: set theory</a>"]
+          ],
+          ["probabilityAxioms",
+            ["<a href=\"../Text/probabilityPhilosophy.htm\">SticiGui: axioms of probability</a>"]
+          ],
+          ["conditioning",
+            ["<a href=\"../Text/montyHall.htm\">SticiGui: The Monty Hall problem</a>"]
+          ],
+          ["binomial",
+            ["<a href=\"../Text/montyHallTest.htm\">SticiGui: Probability meets Data</a>"]
+          ],
+          ["riskReading1",
+            ["Risk: A Very Short Introduction, chapters 1&ndash;4"]
+          ]
 ]

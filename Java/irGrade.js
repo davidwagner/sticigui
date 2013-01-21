@@ -215,6 +215,7 @@ for (var j=0; j < assignmentTitles.length; j++) {
     assignmentNumbers[assignmentTitles[j][2]] = j;
 }
 
+var pureAssign = true;             // assignments based only on the chapters-to-assignment mapping
 var cookieExpireDays = 7;          // days for the cookies to endure
 var theChapter = null;             // current chapter
 var theChapterTitle;               // title of the current chapter, if specified
@@ -1034,9 +1035,13 @@ function setCourseSpecs() {
     gPath = theCourse[5];
     maxSubmits = theCourse[6];
     showWrongAfterSubmits = theCourse[7];
-    assignURL = theCourse[8];
+    dueURL = theCourse[8];
     accessURL = theCourse[9];
     timeURL = theCourse[10];
+    if (theCourse[11]) {
+        pureAssign = false;
+        assignURL = theCourse[11];
+    }
     dFile = cRoot + course + dFileBase;
     sFile = cRoot + course + sFileBase;
     $(document).ready(function() {
@@ -1094,7 +1099,7 @@ function spawnProblem(theForm,setName,relPath) {
     }
     if (validateLablet(theForm)) {
         var ck = document.cookie;
-        var fname = formStemName + assignmentNumbers[setName].toString();
+//        var fname = formStemName + assignmentNumbers[setName].toString();
         var assigned = assign[setName] && (assign[setName][1] == 'ready');
         if (!assigned) {
                     alert('Error #1 in irGrade.spawnProblem(): This has not been assigned yet.\n Try again later.');
@@ -1602,23 +1607,15 @@ function labletSubmit(theForm) {
 }
 
 function validateLablet(theForm) {
-    if (theForm.lastName.value == null || theForm.lastName.value.length == 0 ||
-             allBlanks(theForm.lastName.value) ) {
-        alert('Last Name is missing');
-        theForm.lastName.focus();
-        return(false);
-    } else if (!allLetters(theForm.lastName.value) ) {
-        alert('Illegal character(s) in Last Name');
-        theForm.lastName.focus();
-        return(false);
-    } else if (theForm.firstName.value == null ||
+    if (theForm.firstName.value == null ||
           theForm.firstName.value.length == 0 || allBlanks(theForm.firstName.value)) {
         alert('First Name is missing');
         theForm.firstName.focus();
         return(false);
-    } else if (!allLetters(theForm.firstName.value) ) {
-        alert('Illegal character(s) in First Name');
-        theForm.firstName.focus();
+    } else if (theForm.lastName.value == null || theForm.lastName.value.length == 0 ||
+             allBlanks(theForm.lastName.value) ) {
+        alert('Last Name is missing');
+        theForm.lastName.focus();
         return(false);
     } else if ( !validEmail(theForm.email.value)) {
         alert('Email address is missing or invalid');
@@ -2126,9 +2123,10 @@ $(document).ready(function() {
     if (isLab) {
         recoverResponses();
     }
-    $('#chLink' + theChapter.toString()).css('color','#ffffff')
-                                        .css('backgroundColor','#000000');
-//    $(".solution").hide();
+    try {
+         $('#chLink' + theChapter.toString()).css('color','#ffffff')
+                                             .css('backgroundColor','#000000');
+    } catch(e) {}
     $("div.solution").css('display','block')
                      .hide();
     $(".solLink").click(function() {
