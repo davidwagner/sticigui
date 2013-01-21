@@ -1144,17 +1144,15 @@ function spawnProblem(theForm,setName,relPath) {
             lablet.teacher = teacher;
             lablet.maxSubmits = maxSubmits;
             lablet.showWrongAfterSubmits = showWrongAfterSubmits;
+            lablet.formname = setName;
             lablet.theChapter = setName;
             var qStr = startXHT + '<head>' + metaTagXHT + styleSheetRef(relPath) +
                                    '<title>SticiGui Assignment ' + i.toString() + '</title>' +
                                    '<script language="JavaScript1.4" type="text/javascript" src="../../Java/irGrade.js"></script>' +
                                    '</head>';
-            lablet.document.writeln('<frameset rows="*,300">');
-            lablet.document.writeln('<frame id="instrWin" src="' + instr + '"' +
-                ' frameborder="1" framespacing="0" border="1" />');
-            lablet.document.writeln('<frame id="appletWin" src="' + appl + '"' +
-                ' frameborder="1" framespacing="0" border="1" />');
-            lablet.document.writeln('</frameset></html>');
+            lablet.document.writeln('<frameset rows="*,300"><frame id="instrWin" src="' + instr + '"' +
+                ' frameborder="1" framespacing="0" border="1" /><frame id="appletWin" src="' + appl + '"' +
+                ' frameborder="1" framespacing="0" border="1" /></frameset></html>');
             lablet.document.close();
             return(true);
     }
@@ -1889,7 +1887,7 @@ function setExtraInputs(theForm) {
     theForm.elements['extrainfo'].value = escape('seed=' + randSeed.toString() +
                              '&irGradeVersion=' + irGradeModTime.toString() +
                              '&submitTime=' + (new Date()).toString() +
-                             '&assignmentname=' + assignmentTitles[assignmentNumbers[theChapter]][2]
+                             '&assignmentname=' + parent.assignmentname
                           );
     var nRight = 0;
     var qVal;
@@ -2193,7 +2191,7 @@ function writeFootnote(p,label,text, print) {
     }
     footnote = chStr + label + ':</strong> ' + text ;
     var qStr = '<sup><a class="footnoteLink">[+]</a></sup>' +
-               '<span class="footnote">' + footnote + '</span> ';
+               '<div class="footnote">' + footnote + '</div> ';
     if (print) {
        document.writeln(qStr);
        return(true);
