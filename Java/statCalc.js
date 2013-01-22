@@ -19,13 +19,14 @@ function statCalc(container_id, params) {
 
 // default options
     this.options = {
-                    buttons: [ ["7","num"], ["8","num"],   ["9","num"], ["/","bin"], ["!","una"], ["nCk","bin"],
-                               ["4","num"], ["5","num"],   ["6","num"], ["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"],
-                               ["1","num"], ["2","num"],   ["3","num"], ["-","bin"], ["Sqrt","una"], ["x^2","una"],
-                               ["0","num"], ["+/-","una"], [".","num"], ["+","bin"], ["1/x","una"], ["x^y","bin"],
-                               ["=","eq"],  ["CE","una"],  ["C","una"] //, "exp(x)", "log(x)", "log_y(x)"
+                    buttons: [ ["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"],
+                               ["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"], ["exp(x)","una"],
+                               ["-","bin"], ["Sqrt","una"], ["x^2","una"], ["log(x)","una"],
+                               ["+","bin"], ["1/x","una"], ["x^y","bin"],  ["log_y(x)", "bin"],
+                               ["=","eq"],  ["CE","una"],  ["C","una"]
                               ],
                     digits: 20,
+                    numbers: [ 7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.'],
                     buttonsPerRow: 6
     };
 
@@ -44,15 +45,29 @@ function statCalc(container_id, params) {
         me.append(self.theDisplay);
         // buttons
         self.buttonDiv = $('<div />').addClass('buttonDiv');
-        self.buttonTable = $('<table />').addClass('buttonTable');
-        self.buttonDiv.append(self.buttonTable);
+        self.numButtonDiv = $('<div />').addClass('numButtonDiv');
+        self.fnButtonDiv = $('<div />').addClass('fnButtonDiv');
+        self.numButtonTable = $('<table />').addClass('numButtonTable');
+        self.fnButtonTable = $('<table />').addClass('fnButtonTable');
+        self.numButtonDiv.append(self.numButtonTable);
+        self.fnButtonDiv.append(self.fnButtonTable);
+        self.buttonDiv.append(self.numButtonDiv);
+        self.buttonDiv.append(self.fnButtonDiv);
+        $.each(self.options['numbers'], function(i, v) {
+                newBut = $('<input type="button" value=' + v + '>')
+                              .button()
+                              .addClass("num")
+                              .addClass('calcButton')
+                              .click( function() {buttonClick(v,"num")});
+                self.numButtonTable.append(newBut);
+        })
         $.each(self.options['buttons'], function(i, v) {
                 newBut = $('<input type="button" value=' + v[0] + '>')
                               .button()
                               .addClass(v[1])
                               .addClass('calcButton')
                               .click( function() {buttonClick(v[0], v[1])});
-                self.buttonTable.append(newBut);
+                self.fnButtonTable.append(newBut);
         })
         me.append(self.buttonDiv);
     }
@@ -157,6 +172,9 @@ function statCalc(container_id, params) {
                      break;
                  case 'nCk':
                      res = binomialCoef(x, y);
+                     break;
+                 case 'nPk':
+                     res = permutations(x, y);
                      break;
                  default:
                      console.log('unexpected binary function in statCalc ' + op);
