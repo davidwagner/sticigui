@@ -22,7 +22,7 @@ function statCalc(container_id, params) {
                     keys: [ [["7","num"],["8","num"],["9","num"],["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"]],
                             [["4","num"],["5","num"],["6","num"],["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"]],
                             [["1","num"],["2","num"],["3","num"],["-","bin"], ["Sqrt","una"], ["x^2","una"]],
-                            [["0","0"],null,[".","."],["+","bin"], ["1/x","una"], ["x^y","bin"]],
+                            [["0","num"],[".","num"],["+/-","una"],["+","bin"], ["1/x","una"], ["x^y","bin"]],
                             [["=","eq"],  ["CE","una"],  ["C","una"], ["exp(x)","una"], ["log(x)","una"],  ["log_y(x)", "bin"]]
                            ],
                     digits: 20,
@@ -75,7 +75,7 @@ function statCalc(container_id, params) {
 //  action functions
 
     function buttonClick(v, opType) {
-        var t = self.theDisplay.val().replace(/[^0-9e.]+/gi,'').replace(/^0+/,'');
+        var t = self.theDisplay.val().replace(/[^0-9e.-]+/gi,'').replace(/^0+/,'');
         try {
             switch(opType) {
                case 'num':
@@ -85,7 +85,7 @@ function statCalc(container_id, params) {
                case 'una':
                    switch(v) {
                       case '+/-':
-                         t = (t.indexOf('-') > -1) ? t.substring(1) : '-'+t;
+                         t = (t.indexOf('-') == 0) ? t.substring(1) : '-'+t;
                          self.theDisplay.val(t);
                          break;
                       case '!':
