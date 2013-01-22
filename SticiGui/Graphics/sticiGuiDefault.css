@@ -850,24 +850,29 @@ div.histogram {
 }
 
 #calc {
-  width: 600px;
+  width: 400px;
   margin-left: 5%;
   margin-right: 5%;
 }
-
 #calc table {
   margin-left: 0;
   margin-right: 0;
-  width: 600px;
+  border-spacing: 0px;
 }
 #calc input[type="text"] {
-  width: 100%;
+  width: 395px;
+  margin-left: auto;
+  margin-right: auto;
 }
 #calc input[type="button"] {
-  width: 80px;
-  font-size: 14px;
+  width: 100%;
+  font-size: 12px;
+  margin: 0 0 0 0;
 }
 #calc {
   margin-left: auto;
   margin-right: auto;
+}
+#calc td {
+  width: 75px;
 }
