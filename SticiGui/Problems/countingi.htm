@@ -2,13 +2,13 @@
 <html>
 <head>
 <script language="JavaScript1.8" type="text/javascript"><!--
-	pageModDate = "21 January 2013 08:37 PST";
+	pageModDate = "21 January 2013 11:51 PST";
 	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
 <script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
 </script>
@@ -131,7 +131,7 @@
 
 <p>
   Our genetic material, DNA, is formed from a 4 letter &quot;alphabet&quot; of bases: A,
-  T, G, C (adenine, thymine, guanine, and cytosine). 
+  T, G, C (adenine, thymine, guanine, and cytosine).
   The order in which the letters are
   arranged is important, but because a molecule can move, there is no difference between a
   sequence and the same sequence reversed. For example, the sequence (A, A, T, A, G, A, T)
@@ -144,7 +144,7 @@
 <script language="JavaScript1.8" type="text/javascript" ><!--
     document.writeln(startProblem(pCtr++));
     var nBases = (listOfRandInts(1,6,12))[0];
-    var qStr = '<span class="qSpan"> How many distinct DNA sequences of ' + nBases.toString() + 
+    var qStr = '<span class="qSpan"> How many distinct DNA sequences of ' + nBases.toString() +
                ' bases are there?</span>';
     document.writeln(qStr);
     var halfBases = Math.floor(nBases/2);
@@ -158,14 +158,6 @@
     document.writeln('</p>');
 // -->
 </script>
-<p>
-  (You can use exponential notation here, and in any other
-  question in these assignments.
-  For example, you can write 1.23456789e20
-  for 1.23456789&times;10<sup>20</sup> = 123,456,789,000,000,000,000.  
-  Do not leave a space between the last digit and the "e."
-  The answer to this particular question needs to be correct to one part in ten million.)
-</p>
 </div>
 
 
@@ -265,8 +257,6 @@
 
 
 <p>
-  A computer hacker is trying to break into a computer system by
-  guessing the system administrator's password. The hacker can try
 <script language="JavaScript1.8" type="text/javascript" ><!--
   var theInts = listOfRandInts(2,5,15);
   var triesPerMin = theInts[0];
@@ -282,29 +272,23 @@
         numTot += nLett*Math.pow(nAlphanum,i);
   }
   var years = (listOfRandInts(1,5,10))[0];
-  document.writeln(triesPerMin.toString() + " ");
+  var qStr = 'A computer hacker is trying to break into a computer system by ' +
+             'guessing the system administrator\'s password. The hacker can try ' +
+             triesPerMin.toString() + 'passwords a minute, but if he tries ' +
+             'unsuccessfully for more than ' + minPerDay.toString() +
+             'minutes a day, he will get caught. If he limits his attempts to less than ' +
+             minPerDay.toString() + ' minutes each day, he will not get caught. ' +
+             'The hacker knows that the administrator\'s password is at least ' +
+             minChars.toString() + ' and at most ' + maxChars.toString() +
+             'characters long, does not contain any character that is not a number, an ' +
+             'uppercase letter, or a lowercase letter (no special characters such as spaces, ' +
+             'punctuation marks, dollar signs, <em>etc.</em>), and that the first character ' +
+             'is a letter. Case matters, and characters can be repeated.';
+  document.writeln(qStr);
   var yearFrac = triesPerMin*minPerDay*years*365.25/numTot;
   // -->
 </script>
-  passwords a minute,
-  but if he tries unsuccessfully for more than
-<script language="JavaScript1.8" type="text/javascript" ><!--
-  document.writeln(minPerDay.toString() + " ");
-  // -->
-</script>
-  minutes a day, he will get caught. If he
-  limits his attempts to less time each day, he will not get caught.
-  The hacker knows that the
-  administrator's password is at least
-<script language="JavaScript1.8" type="text/javascript" ><!--
-  document.writeln(minChars.toString() + " and at most " + maxChars.toString() + " ");
-  // -->
-</script>
-  characters long, does not contain any character that is not a
-  number, an uppercase letter, or a lowercase letter (no special characters such as spaces,
-  punctuation marks, dollar signs, <em>etc.</em>), and that the first character is a letter.
-  Case matters, and characters can be repeated.
-  </p>
+</p>
 
 
 <!-- ==================================START PROBLEM=================================== -->
@@ -341,7 +325,7 @@
     document.writeln(startProblem(pCtr++));
     var qStr = '<span class="qSpan">How many passwords are there that start with ' +
                'a letter, contain only numbers and upper and lowercase letters, and ' +
-               'are at least ' + minChars.toString() + ' and at most ' + 
+               'are at least ' + minChars.toString() + ' and at most ' +
                 maxChars.toString() + ' characters long?</span>';
     document.writeln(qStr);
     writeTextExercise(14,qCtr++,numToRange(numTot));
