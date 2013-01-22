@@ -12,11 +12,16 @@
 // -->
 </script>
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script>
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../Java/sticigui.js"></script>
+<link href="../../Java/CSS/sticigui.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
-</script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/statCalc.js"></script>
 <script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "counting";
     writeChapterHead('SeEd',cNum);
@@ -1347,10 +1352,15 @@
 </script>
 
 <p class="figure">
-    <applet code="StatCalc.class" codebase="../../Java/" align="middle"
-    width="320" height="180" archive="PbsGui.zip">
-    You need Java to see this
-    </applet>
+  <div id="calc" class="calculator">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new statCalc('calc', {
+      });
+  });
+  </script>
 </p>
 </div>
 
