@@ -867,3 +867,7 @@ div.histogram {
   width: 80px;
   font-size: 14px;
 }
+#calc {
+  margin-left: auto;
+  margin-right: auto;
+}
