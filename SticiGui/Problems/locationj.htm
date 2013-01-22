@@ -18,8 +18,8 @@
 
 <link rel="stylesheet" type="text/css" href="../Graphics/sticiGuiDefault.css">
 
-<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
-</script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/statCalc.js"></script>
 <script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "location";
     labInstrSetUp('SeEd',cNum);
@@ -48,10 +48,15 @@
 </p>
 
 <p align="center">
-<applet code="StatCalc.class" codebase="../../Java/"
-         align="baseline" width="320" height="180" archive="PbsGui.zip">
-         You need Java to see this.
-</applet>
+  <div id="calc" class="calculator">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new statCalc('calc', {
+      });
+  });
+  </script>
 </p>
 
 <script language="JavaScript1.8" type="text/javascript" ><!--
