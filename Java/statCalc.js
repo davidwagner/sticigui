@@ -19,14 +19,13 @@ function statCalc(container_id, params) {
 
 // default options
     this.options = {
-                    buttons: [ ["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"],
-                               ["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"], ["exp(x)","una"],
-                               ["-","bin"], ["Sqrt","una"], ["x^2","una"], ["log(x)","una"],
-                               ["+","bin"], ["1/x","una"], ["x^y","bin"],  ["log_y(x)", "bin"],
-                               ["=","eq"],  ["CE","una"],  ["C","una"]
-                              ],
+                    keys: [ [["7","7"],["8","8"],["9","9"],["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"]],
+                            [["4","4"],["5","5"],["6","6"],["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"], ["exp(x)","una"]],
+                            [["1","1"],["2","2"],["3","3"],["-","bin"], ["Sqrt","una"], ["x^2","una"], ["log(x)","una"]],
+                            [["0","0"],["+","bin"], ["1/x","una"], ["x^y","bin"],  ["log_y(x)", "bin"]],
+                            [[".","."],["=","eq"],  ["CE","una"],  ["C","una"]]
+                           ],
                     digits: 20,
-                    numbers: [ 7, 8, 9, 4, 5, 6, 1, 2, 3, 0, '.'],
                     buttonsPerRow: 6
     };
 
@@ -53,22 +52,49 @@ function statCalc(container_id, params) {
         self.fnButtonDiv.append(self.fnButtonTable);
         self.buttonDiv.append(self.numButtonDiv);
         self.buttonDiv.append(self.fnButtonDiv);
-        $.each(self.options['numbers'], function(i, v) {
-                newBut = $('<input type="button" value=' + v + '>')
+        $.each(self.options['keys'][0], function(i, v) {
+                newBut = $('<input type="button" value=' + v[0] + '>')
                               .button()
                               .addClass("num")
                               .addClass('calcButton')
                               .click( function() {buttonClick(v,"num")});
                 self.numButtonTable.append(newBut);
-        })
-        $.each(self.options['buttons'], function(i, v) {
+                })
+
+          // start a new TR here ... this should be CSS, but I'm too
+          // tired to deal with that... tables will suffice for now
+        $.each(self.options['keys'][1], function(i, v) {
                 newBut = $('<input type="button" value=' + v[0] + '>')
                               .button()
-                              .addClass(v[1])
+                              .addClass("num")
                               .addClass('calcButton')
-                              .click( function() {buttonClick(v[0], v[1])});
-                self.fnButtonTable.append(newBut);
-        })
+                              .click( function() {buttonClick(v,"num")});
+                self.numButtonTable.append(newBut);
+                })
+        $.each(self.options['keys'][2], function(i, v) {
+                newBut = $('<input type="button" value=' + v[0] + '>')
+                              .button()
+                              .addClass("num")
+                              .addClass('calcButton')
+                              .click( function() {buttonClick(v,"num")});
+                self.numButtonTable.append(newBut);
+                })
+        $.each(self.options['keys'][3], function(i, v) {
+                newBut = $('<input type="button" value=' + v[0] + '>')
+                              .button()
+                              .addClass("num")
+                              .addClass('calcButton')
+                              .click( function() {buttonClick(v,"num")});
+                self.numButtonTable.append(newBut);
+                })
+        $.each(self.options['keys'][4], function(i, v) {
+                newBut = $('<input type="button" value=' + v[0] + '>')
+                              .button()
+                              .addClass("num")
+                              .addClass('calcButton')
+                              .click( function() {buttonClick(v,"num")});
+                self.numButtonTable.append(newBut);
+                })
         me.append(self.buttonDiv);
     }
     initCalc();
