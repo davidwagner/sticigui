@@ -19,11 +19,11 @@ function statCalc(container_id, params) {
 
 // default options
     this.options = {
-                    keys: [ [["7","7"],["8","8"],["9","9"],["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"]],
-                            [["4","4"],["5","5"],["6","6"],["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"], ["exp(x)","una"]],
-                            [["1","1"],["2","2"],["3","3"],["-","bin"], ["Sqrt","una"], ["x^2","una"], ["log(x)","una"]],
-                            [["0","0"],["+","bin"], ["1/x","una"], ["x^y","bin"],  ["log_y(x)", "bin"]],
-                            [[".","."],["=","eq"],  ["CE","una"],  ["C","una"]]
+                    keys: [ [["7","num"],["8","num"],["9","num"],["/","bin"], ["!","una"], ["nCk","bin"], ["nPk","bin"]],
+                            [["4","num"],["5","num"],["6","num"],["*","bin"], ["U[0,1]","una"], ["N(0,1)","una"]],
+                            [["1","num"],["2","num"],["3","num"],["-","bin"], ["Sqrt","una"], ["x^2","una"]],
+                            [["0","0"],null,[".","."],["+","bin"], ["1/x","una"], ["x^y","bin"]],
+                            [["=","eq"],  ["CE","una"],  ["C","una"], ["exp(x)","una"], ["log(x)","una"],  ["log_y(x)", "bin"]]
                            ],
                     digits: 20,
                     buttonsPerRow: 6
@@ -52,49 +52,22 @@ function statCalc(container_id, params) {
         self.fnButtonDiv.append(self.fnButtonTable);
         self.buttonDiv.append(self.numButtonDiv);
         self.buttonDiv.append(self.fnButtonDiv);
-        $.each(self.options['keys'][0], function(i, v) {
-                newBut = $('<input type="button" value=' + v[0] + '>')
-                              .button()
-                              .addClass("num")
-                              .addClass('calcButton')
-                              .click( function() {buttonClick(v,"num")});
-                self.numButtonTable.append(newBut);
-                })
-
-          // start a new TR here ... this should be CSS, but I'm too
-          // tired to deal with that... tables will suffice for now
-        $.each(self.options['keys'][1], function(i, v) {
-                newBut = $('<input type="button" value=' + v[0] + '>')
-                              .button()
-                              .addClass("num")
-                              .addClass('calcButton')
-                              .click( function() {buttonClick(v,"num")});
-                self.numButtonTable.append(newBut);
-                })
-        $.each(self.options['keys'][2], function(i, v) {
-                newBut = $('<input type="button" value=' + v[0] + '>')
-                              .button()
-                              .addClass("num")
-                              .addClass('calcButton')
-                              .click( function() {buttonClick(v,"num")});
-                self.numButtonTable.append(newBut);
-                })
-        $.each(self.options['keys'][3], function(i, v) {
-                newBut = $('<input type="button" value=' + v[0] + '>')
-                              .button()
-                              .addClass("num")
-                              .addClass('calcButton')
-                              .click( function() {buttonClick(v,"num")});
-                self.numButtonTable.append(newBut);
-                })
-        $.each(self.options['keys'][4], function(i, v) {
-                newBut = $('<input type="button" value=' + v[0] + '>')
-                              .button()
-                              .addClass("num")
-                              .addClass('calcButton')
-                              .click( function() {buttonClick(v,"num")});
-                self.numButtonTable.append(newBut);
-                })
+        $.each(self.options['keys'], function(j, rowKeys) {
+          var row = $('<tr>');
+          self.numButtonTable.append(row);
+          $.each(rowKeys, function(i, v) {
+            if (null === v) {
+              row.append($('<td/>'));
+              return;
+            }
+            newBut = $('<input type="button" value=' + v[0] + '>')
+              .button()
+              .addClass("num")
+              .addClass('calcButton')
+              .click( function() {buttonClick(v[0], v[1])});
+            row.append($('<td/>').append(newBut));
+          })
+        });
         me.append(self.buttonDiv);
     }
     initCalc();
