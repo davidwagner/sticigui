@@ -848,3 +848,21 @@ div.histogram {
     display: inline;
   }
 }
+
+#calc {
+  width: 600px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+#calc table {
+  margin-left: 0;
+  margin-right: 0;
+  width: 600px;
+}
+#calc input[type="text"] {
+  width: 100%;
+}
+#calc input[type="button"] {
+  width: 80px;
+}
