@@ -76,7 +76,7 @@ function statCalc(container_id, params) {
 //  action functions
 
     function buttonClick(v, opType) {
-        var t = self.theDisplay.val().replace(/[a-z, *+\/]+/gi,'').replace(/^0+/,'');
+        var t = self.theDisplay.val().replace(/[^0-9e.]+/gi,'').replace(/^0+/,'');
         try {
             switch(opType) {
                case 'num':
@@ -114,7 +114,7 @@ function statCalc(container_id, params) {
                          self.theDisplay.val(rNorm());
                          break;
                       case 'CE':
-                         self.theDisplay.val('');
+                         self.theDisplay.val('0');
                          break;
                       case 'C':
                          self.x = 0;
@@ -130,7 +130,7 @@ function statCalc(container_id, params) {
                         self.theDisplay.val(self.x);
                    } else {
                         self.x = t;
-                        self.theDisplay.val('');
+                        self.theDisplay.val('?');
                         self.inProgress = true;
                    }
                    self.currentOp = v;
@@ -159,22 +159,22 @@ function statCalc(container_id, params) {
          try {
              switch(op) {
                  case '+':
-                     res = x+y;
+                     res = parseFloat(x)+parseFloat(y);
                      break;
                  case '-':
-                     res = x-y;
+                     res = parseFloat(x)-parseFloat(y);
                      break;
                  case '*':
-                     res = x*y;
+                     res = parseFloat(x)*parseFloat(y);
                      break
                  case 'x^y':
-                     res = x^y;
+                     res = parseFloat(x)^parseFloat(y);
                      break;
                  case 'nCk':
-                     res = binomialCoef(x, y);
+                     res = binomialCoef(parseInt(x), parseInt(y));
                      break;
                  case 'nPk':
-                     res = permutations(x, y);
+                     res = permutations(parseInt(x), parseInt(y));
                      break;
                  default:
                      console.log('unexpected binary function in statCalc ' + op);
