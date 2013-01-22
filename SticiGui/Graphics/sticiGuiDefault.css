@@ -865,4 +865,5 @@ div.histogram {
 }
 #calc input[type="button"] {
   width: 80px;
+  font-size: 14px;
 }
