@@ -15,6 +15,7 @@
 
 
 <script language="JavaScript1.8" type="text/javascript" src="../irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/statCalc.js"></script>
 <script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterHead('SeEd','','A Statistical Calculator',true,'../../SticiGui');
 // -->
@@ -33,15 +34,15 @@
 
 
 <p align="center">
+  <div id="calc" class="calculator">
+  </div>
 
-<applet code="StatCalc.class" align="center"
-
-         width="300" height="180" archive="PbsGui.zip" codebase="..">
-
-     You need Java to see this.
-
-</applet>
-
+  <script>
+  jQuery(function() {
+    new statCalc('calc', {
+      });
+  });
+  </script>
 </p>
 
 
