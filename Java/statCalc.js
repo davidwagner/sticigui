@@ -62,7 +62,7 @@ function statCalc(container_id, params) {
             }
             newBut = $('<input type="button" value=' + v[0] + '>')
               .button()
-              .addClass("num")
+              .addClass(v[1])
               .addClass('calcButton')
               .click( function() {buttonClick(v[0], v[1])});
             row.append($('<td/>').append(newBut));
