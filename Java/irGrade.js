@@ -1077,7 +1077,7 @@ function getGrades(theForm) {
     if (validateLablet(theForm)) {
         mySID = theForm.sid.value;
         $('#scores').html('<p class="center">Retrieving scores for SID ' +
-                                                       mySID + '<blink>&hellip</blink></p>');
+                                                       mySID + '<blink>&hellip;</blink></p>');
         scoresURL = scoreBase + 'class=' + course + '&teacher=' + teacher + '&gpath=' + gPath + '&sids';
         getURL = $.ajax({
                           type: 'GET',

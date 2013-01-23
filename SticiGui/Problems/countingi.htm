@@ -90,6 +90,22 @@
 </script>
 </div>
 
+<!-- ==================================START PROBLEM==================================== -->
+<div class="problem">
+<script language="JavaScript1.8" type="text/javascript" ><!--
+    document.writeln(startProblem(pCtr++));
+    var qStr = '<span class="qSpan">How many ways are there to fill either ' +
+               'the pitcher or catcher field position (but not both) from ' +
+               'among the ' + nplayers.toString() +
+               ' players (leaving the other field positions empty)?</span>';
+    document.writeln(qStr);
+    writeTextExercise(14,qCtr++,numToRange(2*nPlayers));
+    document.writeln('</p>');
+// -->
+</script>
+</div>
+
+
 <p>
       Now suppose that not every player can play in every position.
       The outfielders (left field, center field, right field) can play any
@@ -274,9 +290,9 @@
   var years = (listOfRandInts(1,5,10))[0];
   var qStr = 'A computer hacker is trying to break into a computer system by ' +
              'guessing the system administrator\'s password. The hacker can try ' +
-             triesPerMin.toString() + 'passwords a minute, but if he tries ' +
+             triesPerMin.toString() + ' passwords a minute, but if he tries ' +
              'unsuccessfully for more than ' + minPerDay.toString() +
-             'minutes a day, he will get caught. If he limits his attempts to less than ' +
+             ' minutes a day, he will get caught. If he limits his attempts to less than ' +
              minPerDay.toString() + ' minutes each day, he will not get caught. ' +
              'The hacker knows that the administrator\'s password is at least ' +
              minChars.toString() + ' and at most ' + maxChars.toString() +
