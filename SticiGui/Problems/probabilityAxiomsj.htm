@@ -10,8 +10,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
 
-<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js">
-</script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/statCalc.js"></script>
 <script language="JavaScript1.8" type="text/javascript"><!--
     var cNum = "probabilityAxioms";
     labInstrSetUp('SeEd',cNum);
@@ -27,10 +27,16 @@
      You need Java to see this.
 </applet> </p>
 <p align="center">
-<applet code="StatCalc.class" codebase="../../Java/"
-      align="baseline" width="320" height="180" archive="PbsGui.zip">
-You need Java to see this.
-</applet> </p>
+  <div id="calc" class="calculator">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new statCalc('calc', {
+      });
+  });
+  </script>
+</p>
 
 
 <script language="JavaScript1.8" type="text/javascript" ><!--

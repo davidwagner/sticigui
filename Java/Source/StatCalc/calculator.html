@@ -6,9 +6,15 @@ Basic Statistical Calculator
 <body>
 <p>
 <center>
-<applet code="StatCalc.class" width=400
-height=200 align=center>You need Java to see this.</applet>
-</center>
+  <div id="calc" class="calculator">
+  </div>
+
+  <script>
+  jQuery(function() {
+    new statCalc('calc', {
+      });
+  });
+  </script>
 </p>
 </body>
 </html>
