@@ -147,37 +147,6 @@
 </script>
 </div>
 
-<p>
-  Our genetic material, DNA, is formed from a 4 letter &quot;alphabet&quot; of bases: A,
-  T, G, C (adenine, thymine, guanine, and cytosine).
-  The order in which the letters are
-  arranged is important, but because a molecule can move, there is no difference between a
-  sequence and the same sequence reversed. For example, the sequence (A, A, T, A, G, A, T)
-  is the same as the sequence (T, A, G, A, T, A, A).
-  (In reality, DNA molecules have identifiable ends, but ignore that in this problem.)
-</p>
-
-<!-- ==================================START PROBLEM==================================== -->
-<div class="problem">
-<script language="JavaScript1.8" type="text/javascript" ><!--
-    document.writeln(startProblem(pCtr++));
-    var nBases = (listOfRandInts(1,6,12))[0];
-    var qStr = '<span class="qSpan"> How many distinct DNA sequences of ' + nBases.toString() +
-               ' bases are there?</span>';
-    document.writeln(qStr);
-    var halfBases = Math.floor(nBases/2);
-    var nSeqSym = Math.pow(4,halfBases);   // symmetrical sequences for even number of bases
-    if (halfBases != nBases/2) {        // even number of bases
-       nSeqSym = 4*nSeqSym;
-    }
-    var nSeqAsym = Math.pow(4,nBases) - nSeqSym;
-    var nSeq = roundToDig(nSeqAsym/2 + nSeqSym,0);
-    writeTextExercise(18,qCtr++,numToRange(nSeq,1.e-8*nSeq));
-    document.writeln('</p>');
-// -->
-</script>
-</div>
-
 
 <p>
   To get her BA in Statistics, a student at the University of California at Berkeley must
