@@ -19,14 +19,23 @@ function statCalc(container_id, params) {
 
 // default options
     this.options = {
+                    keys: [ [["7","num"],["8","num"],["9","num"],["/","bin"], ["nCk","bin"]],
+                            [["4","num"],["5","num"],["6","num"],["*","bin"], ["nPk","bin"]],
+                            [["1","num"],["2","num"],["3","num"],["-","bin"], ["!","una"]],
+                            [["0","num"],[".","num"],["+/-","una"],["+","bin"], ["1/x","una"]],
+                            [["=","eq"],  ["CE","una"],  ["C","una"], ["Sqrt","una"], ["x^2","una"]]
+                          ],
+                    buttonsPerRow: 5,
+/*      Full set of keys:
                     keys: [ [["7","num"],["8","num"],["9","num"],["/","bin"], ["nCk","bin"], ["nPk","bin"]],
                             [["4","num"],["5","num"],["6","num"],["*","bin"], ["!","una"], ["U[0,1]","una"]],
                             [["1","num"],["2","num"],["3","num"],["-","bin"], ["Sqrt","una"], ["x^2","una"]],
                             [["0","num"],[".","num"],["+/-","una"],["+","bin"], ["1/x","una"], ["x^y","bin"]],
                             [["=","eq"],  ["CE","una"],  ["C","una"], ["exp(x)","una"], ["log(x)","una"],  ["log_y(x)", "bin"]]
                           ],
-                    digits: 20,
                     buttonsPerRow: 6
+*/
+                    digits: 18,
     };
 
 // Extend options
