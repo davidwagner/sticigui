@@ -1083,31 +1083,18 @@ function getGrades(theForm) {
                           type: 'GET',
                           url:   scoresURL
                         })
-                        .done(function() {
+                        .done(function(data) {
+                            $('#scores').html('<p class="center">Scores for SID ' + mySID + '</p>');
                             var rt = data.split('\n');
-                            var myScores = new Array();
-                            var k=0;
-                            for (var j=0; j < rt.length; j++) {
-                                if (!rt[j].match('#') && (rt[j].match(mySID.toString()) || rt[j].match('Set'))) {
-                                    myScores[k++] = rt[j];
-                                }
-                            }
-                            var ihtm = '<p class="center">Scores for SID ' + mySID + '</p><table class="dataTable">';
-                            for (var j=0; j < myScores.length; j++) {
-                                ihtm += '<tr>';
-                                var dum = myScores[j].replace(/ +/gm,' ').split(' ');
-                                for (var k=0; k < dum.length; k++) {
-                                    ihtm += '<td>' + dum[k] + '</td>';
-                                }
-                                ihtm += '</tr>';
-                            }
-                            ihtm += '</table>';
-                            $('#scores').text(ithm)
-                                        .css('visibility', 'visible');
+                            $.each(rt, function(i, r) {
+                                  if (!r.match('#') && (r.match(mySID.toString()) || r.match('Set'))) {
+                                      $('#scores').append('<p>' + r.replace(/ +/gm,' ').split(' ').join('\t') + '</p>');
+                                  }
+                            })
                        })
                        .fail(function() {
                             alert('failed to retrieve scores');
-                            $('#scores').text('<p>Unable to retrieve scores for SID ' +
+                            $('#scores').html('<p>Unable to retrieve scores for SID ' +
                                               mySID.toString() + ' at this time.</p>')
                                         .css('visibility', 'visible');
                        });
