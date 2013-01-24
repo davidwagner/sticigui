@@ -35,7 +35,7 @@ function statCalc(container_id, params) {
                           ],
                     buttonsPerRow: 6
 */
-                    digits: 18,
+                    digits: 16,
     };
 
 // Extend options

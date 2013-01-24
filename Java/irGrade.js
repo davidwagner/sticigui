@@ -2027,7 +2027,7 @@ function writeChapterNav(relPath) {
                    'target="_self">Tools &amp; Demos&nbsp;&raquo;</a>' +
                      '<ul>' +
     			  '<li><a href="' + relPath + '/../Java/Html/BinHist.htm" target="lablet">Binomial Histogram</a></li>' +
-                          '<li><a href="' + relPath + '/../Java/Html/StatCalc.htm" target="lablet">Calculator</a></li>' +
+                          '<li><a href="' + relPath + '/../Java/Html/SimpleStatCalc.htm" target="lablet">Calculator</a></li>' +
                           '<li><a href="' + relPath + '/../Java/Html/chiHiLite.htm" target="lablet">Chi-square distribution</a></li>' +
                           '<li><a href="' + relPath + '/../Java/Html/HistControl.htm" target="lablet">Controlling for variables</a></li>' +
                           '<li><a href="' + relPath + '/../Java/Html/Ci.htm" target="lablet">Confidence Intervals</a></li>' +
