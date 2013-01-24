@@ -6,15 +6,20 @@
 
 <head>
 <script language="JavaScript1.8" type="text/javascript"><!--
-	pageModDate = "21 January 2013 08:37 PST";
+	pageModDate = "23 January 2013 19:57 PST";
 	// copyright 1997--2013 by P.B. Stark, statistics.berkeley.edu/~stark.
     // All rights reserved.
 // -->
 </script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script><script type="text/javascript" src="../../Java/Jquery/Current/jquery.bullseye-1.0.min.js"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
 
-<script language="JavaScript1.8" type="text/javascript" src="../irGrade.js"></script>
+
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/irGrade.js"></script>
+<script language="JavaScript1.8" type="text/javascript" src="../../Java/probCalc.js"></script>
+
 <script language="JavaScript1.8" type="text/javascript"><!--
     writeChapterHead('SeEd','','Probability Calculator',true,'../../SticiGui');
 // -->
@@ -31,12 +36,14 @@
 
 <p align="center">
 
-<applet code="DistCalc.class" align="middle" width="680" height="300"
+<div id="prob"></div>
 
-archive="PbsGui.zip" codebase=".." >You need Java to see this.
-
-</applet>
-
+<script language="JavaScript1.8" type="text/javascript"><!--
+ $(function() {
+    new probCalc('prob', {});
+  });
+// -->
+</script>
 </p>
 
 

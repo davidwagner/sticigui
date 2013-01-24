@@ -23,12 +23,12 @@ interactive, real-time grading; html formatting; statistical functions, linear a
 
 ///////////////////////////////////////////////////////////////////////////////
 
- Dependencies: jQuery, jQuery.bullseye
+ Dependencies: jQuery, jQuery.bullseye, jQuery-ui
 
  !!!!Beginning of the code!!!!
 */
 
-var irGradeModTime = '2013/1/21/1334'; // modification date and time
+var irGradeModTime = '2013/1/23/2008'; // modification date and time
 var today = (new Date()).toLocaleString();
 var copyYr = '1997&ndash;2013. ';  // copyright years
 var sticiRelPath = '.';            // relative path to the root of SticiGui
@@ -1085,12 +1085,18 @@ function getGrades(theForm) {
                         })
                         .done(function(data) {
                             $('#scores').html('<p class="center">Scores for SID ' + mySID + '</p>');
+                            var scTab = $('<table />');
                             var rt = data.split('\n');
                             $.each(rt, function(i, r) {
                                   if (!r.match('#') && (r.match(mySID.toString()) || r.match('Set'))) {
-                                      $('#scores').append('<p>' + r.replace(/ +/gm,' ').split(' ').join('\t') + '</p>');
+                                      row = $('<tr />');
+                                      $.each(r.replace(/ +/gm,' ').split(' '), function(j, el) {
+                                           $('<td />' ).html(el).appendTo(row);
+                                      });
+                                      row.appendTo(scTab);
                                   }
-                            })
+                            });
+                            $('#scores').append(scTab);
                        })
                        .fail(function() {
                             alert('failed to retrieve scores');
